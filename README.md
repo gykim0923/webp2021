@@ -22,7 +22,7 @@ SWAIG 프로젝트(가제)
 * * *
 ## History
 - 2021.06.26
-  - [윤주현] 연습용 페이지 및 DAO DTO 제작
+  - [윤주현] 연습용 페이지 및 DAO DTO 제작, 마리아 디비 연결
 - 2021.06.24
   - [윤주현] 기본 프로젝트 핵심 코드 이식 및 작성, 각종 버전 Update 및 플랫폼 변경 (JavaEE6 -> JavaEE8, mysql -> mariaDB10.5, bootstrap4.0 -> bootstrap5.0), readme 작성, 프로젝트 github에 공개 (교수님 허락 받음.)
 - 2021.06.23
