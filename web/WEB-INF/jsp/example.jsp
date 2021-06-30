@@ -13,9 +13,14 @@
 <html>
 <head>
     <title>연습용 페이지 입니다.</title>
+<%--    Bootstrap--%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<%--    jQuery--%>
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<%--    Bootstrap Table--%>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -228,6 +233,27 @@
     </div>
 
     <div class="b-example-divider"></div>
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <table class="boardtable" id="table1"  data-toggle="table"
+                   data-pagination="true" data-toolbar="#toolbar"
+                   data-search="true" data-side-pagination="true" data-click-to-select="true" data-height="460"
+                   data-page-list="[10]">
+                <thead>
+                <tr>
+                    <th data-field="action">설정</th>
+                    <th data-field="oid" data-sortable="true">oid</th>
+                    <th data-field="title" data-sortable="true">title</th>
+                    <th data-field="content" data-sortable="true">content</th>
+                    <th data-field="date" data-sortable="true">date</th>
+                </tr>
+                </thead>
+
+            </table>
+        </div>
+    </div>
+
 </main>
 
 <footer class="text-muted py-5">
@@ -243,6 +269,7 @@
 <script>
     $(document).ready(function(){
         makeExampleAll();
+        callSetupTableView();
     })
     function makeExampleAll(){
         var makeExampleAll = <%=exampleData%>;
@@ -338,6 +365,27 @@
         list.html(text);//누를때마다 modalReset 내용이 초기화됨.
     }
 
+    function callSetupTableView(){
+        $('#table1').bootstrapTable('load',tableData());
+        // $('#table1').bootstrapTable('append',data());
+        $('#table1').bootstrapTable('refresh');
+    }
+    function tableData(){
+        var makeExampleAll = <%=exampleData%>;
+        var rows = [];
+        for(var i=0;i<makeExampleAll.length;i++){
+            var example=makeExampleAll[i];
+            rows.push({
+                oid: example.oid,
+                title: example.title,
+                content: example.content,
+                date: example.date,
+                action : '<button class="btn btn-danger" type="button" onclick="deleteExampleData('+i+')">삭제</button>'
+            });
+        }
+        // alert(rows);
+        return rows;
+    }
 
 </script>
 </html>
