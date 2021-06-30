@@ -41,9 +41,9 @@ public class Controller extends HttpServlet{
 
         String classPath = prop.getProperty(command);
 
-        System.out.println(command + " ------ " + fullPath);
+//        System.out.println(command + " ------ " + fullPath);
         try{
-            System.out.println(classPath);
+//            System.out.println(classPath);
             Class<?> url = Class.forName(classPath);
 
             action = (Action) url.newInstance();

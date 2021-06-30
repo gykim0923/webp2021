@@ -11,6 +11,10 @@ public class ExampleAction implements Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Gson gson = new Gson();
+
+        String dataByGetType = request.getParameter("data");
+        request.setAttribute("dataByGetType", gson.toJson(dataByGetType));
+
         request.setAttribute("ExampleData", gson.toJson(ExampleDAO.getInstance().getAllExampleData()));
         return "RequestDispatcher:jsp/example.jsp";
     }

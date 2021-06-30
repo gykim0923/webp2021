@@ -29,7 +29,8 @@ public class ExampleDAO {
         try {
             QueryRunner queryRunner = new QueryRunner();
             listOfMaps = queryRunner.query(conn, "SELECT * FROM `Example`", new MapListHandler());
-            System.out.println(listOfMaps);
+//            System.out.println("예제 데이터 불러옴");
+//            System.out.println(listOfMaps);
         } catch (SQLException se) {
             se.printStackTrace();
         } finally {
@@ -39,5 +40,43 @@ public class ExampleDAO {
         ArrayList<ExampleDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<ExampleDTO>>() {
         }.getType()); //위에서 불러온 DB를 ExampleDTO 타입으로 만들어서 return 해줌
         return selectedList;
+    }
+
+    public String deleteExampleData(String data) {
+        String oid = data;
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn, "DELETE FROM `Example` WHERE oid=?", new MapListHandler(), oid);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "";
+    }
+
+    public String addExampleData(String data) {
+        String arr[]=data.split("-/-/-"); // title+'-/-/-'+content+'-/-/-'+date;
+        String title = arr[0];
+        String content = arr[1];
+        String date = arr[2];
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.query(conn, "INSERT `Example` SET title=?, content=?, date=?", new MapListHandler(), title, content, date);
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM `Example` WHERE title=? AND content=? AND date=?", new MapListHandler(), title, content, date);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<ExampleDTO> result = null;
+        result = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<ExampleDTO>>() {
+        }.getType());
+        return result.get(0).getOid();
     }
 }
