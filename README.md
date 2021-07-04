@@ -194,4 +194,6 @@ SWAIG 프로젝트(가제)
   > https://m.blog.naver.com/acornedu/221128616501
 - Ajax는 왜 필요한가?
   > https://www.youtube.com/watch?v=_Kh5Kdha3Ww
+- js, jQuery, Ajax에 관한 설명
+  > https://www.nextree.co.kr/p9521/
 * * *
