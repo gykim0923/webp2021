@@ -197,3 +197,10 @@ SWAIG 프로젝트(가제)
 - js, jQuery, Ajax에 관한 설명
   > https://www.nextree.co.kr/p9521/
 * * *
+
+## log 기록
+2021년 7월 5일
+- 데이터베이스 테이블 생성<user, usertype, major, menu_pages, menu_tabs> by 김가영, 박선애, 박소영, 박의진
+- header.jsp 작성 by 윤주현
+- LoginAction, LoginPageAction, LogoutAction, login.jsp 작성 by 박선애, 김가영
+- RegisterAction.java execute메소드 작성, register.jsp 회원가입 레이아웃 작성(중복확인 로직 수정해야함) by 박소영, 박의진
