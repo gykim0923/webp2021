@@ -76,4 +76,16 @@ public class UserDAO {
             return null;
     }
 
+    public void whoIsLogIn(String id) {
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"UPDATE user SET last_login = now() WHERE id = ?;", id);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+    }
+
 }

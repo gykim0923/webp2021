@@ -35,7 +35,7 @@
                 <div class="d-flex">
 <%--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">--%>
 
-                    <a href="login.kgu" class="btn btn-outline-success" onclick="letsSubmit()" style = "text-decoration: none;">
+                    <a href="loginPage.kgu" class="btn btn-outline-success" onclick="" style = "text-decoration: none;">
                         <div class="login_btn">
                             LOGIN
                         </div>
