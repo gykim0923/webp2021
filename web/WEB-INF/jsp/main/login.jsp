@@ -38,7 +38,13 @@
     .cs_logo{
         margin-bottom: 20px;
     }
-    .
+    .btn{
+        display: flex;
+    }
+    .btn-primary{
+        align-items: center;
+        text-align: center;
+    }
 </style>
 
 
@@ -67,8 +73,16 @@
             </label>
         </div>
         <div class="btn">
-            <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">회원가입</button>
+            <a href="main.kgu" class="w-100 btn btn-lg btn-primary" onclick="letsSubmit()" style = "text-decoration: none;">
+                <div class="login_btn">
+                    로그인
+                </div>
+            </a>
+            <a href="register.kgu" class="w-100 btn btn-lg btn-primary" style = "text-decoration:none;">
+                <div class="login_btn">
+                    회원가입
+                </div>
+            </a>
         </div>
     </form>
 </main>
