@@ -3,12 +3,14 @@ package kr.ac.kyonggi.swaig.handler.dao.user;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import kr.ac.kyonggi.swaig.common.sql.Config;
+import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserTypeDTO;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -54,5 +56,24 @@ public class UserDAO {
         return null;
     }
 
+    public UserDTO getUser(String id) {
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn,"SELECT * FROM user WHERE id = ?;", new MapListHandler(), id);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<UserDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<UserDTO>>() {}.getType());
+        if(selected.size()>0) {
+            return selected.get(0);
+        }
+        else
+            return null;
+    }
 
 }

@@ -142,5 +142,5 @@ public class UserDTO {
         this.gender = gender;
     }
 
-    private String major, per_id, grade, state, gender;
+    public String major, per_id, grade, state, gender;
 }
