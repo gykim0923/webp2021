@@ -22,8 +22,8 @@ public class AjaxAction implements Action {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Gson gson = new Gson();
         String req = request.getParameter("req"); //JSP에서 넘겨준 req
-        String data = request.getParameter("data"); //JSP에서 넘겨준 data
         HttpSession session = request.getSession(); //Session에 있는 정보로 뭔가 해야할 때 사용
+        String data = request.getParameter("data"); //JSP에서 넘겨준 data
         String result=null;
         switch(req) {
             case "deleteExampleData":   //테스트용

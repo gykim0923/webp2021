@@ -36,4 +36,12 @@ CREATE TABLE menu_pages(
 INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('1', 'information.kgu', '학과소개', '1', '11', '1', '0');
 INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('2', 'curriculum.kgu', '교육과정', '2', '11', '1', '0');
 
+CREATE TABLE usertype(
+    `type_name` varchar(45) NOT NULL,
+    `class_type` VARCHAR(45) NOT NULL,
+    `board_level` int NOT NULL,
+    `for_header` varchar(45) NOT NULL,
+     PRIMARY KEY(`type_name`)
+);
 
+INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('Admin', '관리자', '0', '관리자');
