@@ -45,3 +45,23 @@ CREATE TABLE usertype(
 );
 
 INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('Admin', '관리자', '0', '관리자');
+
+CREATE TABLE user(
+    `id` VARCHAR(45) NOT NULL,
+    `password` VARCHAR(100) NOT NULL DEFAULT '-',
+    `name` VARCHAR(45) NOT NULL DEFAULT '-',
+    `gender` VARCHAR(10) NOT NULL DEFAULT '-',
+    `birth` VARCHAR(45) NOT NULL DEFAULT '-',
+    `type` VARCHAR(45) NOT NULL DEFAULT '-',
+    `email` VARCHAR(100) NOT NULL DEFAULT '-',
+    `phone` VARCHAR(45) NOT NULL DEFAULT '-',
+    `last_login` DATETIME NOT NULL DEFAULT '2000-01-01 00:00:00',
+    `hope_type` VARCHAR(45) NOT NULL DEFAULT '-',
+    `reg_date` DATETIME NOT NULL DEFAULT '2000-01-01 00:00:00',
+    `major` VARCHAR(45) NOT NULL DEFAULT '-',
+    `per_id` VARCHAR(45) NOT NULL DEFAULT '-',
+    `grade` VARCHAR(10) NOT NULL DEFAULT '-',
+    `state` VARCHAR(10) NOT NULL DEFAULT '-',
+    `myhomeid` VARCHAR(45) NOT NULL DEFAULT '-',
+    PRIMARY KEY (`id`)
+);
