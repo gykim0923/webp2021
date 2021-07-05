@@ -18,28 +18,145 @@
     <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
 </head>
 <body>
+<div class="container">
     <main>
-        <div class="container marketing">
-            <div>회원 가입 구분 선택</div>
-            <!-- Three columns of text below the carousel -->
-            <div class="row">
-                <div class="col-lg-4">
-                    <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+        <div id="title">
+            <div><a href="Index"><img src="img/cs_logo.png"></a></div>
+        </div>
+        <div class="row g-5">
+        <div class="col-md-7 col-lg-8">
+            <h4 class="mb-3">회원 가입</h4>
+            <div class="needs-validation" novalidate>
+                <div class="row g-3">
+                    <div class="col-sm-6">
+                        <label for="id" class="form-label">학번(교번)</label>
+                        <input type="text" class="form-control" id="id" placeholder="학번이나 교번을 입력해주세요." value="" required>
+                        <button>중복확인</button>
+                        <div class="invalid-feedback">
+                          학번을 입력해 주세요.
+                        </div>
+                    </div>
 
-                    <h2>학번 혹은 교번이 있어요!</h2>
-                    <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
-                    <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-                </div><!-- /.col-lg-4 -->
-                <div class="col-lg-4">
-                    <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                    <div class="col-12">
+                        <label for="pwd" class="form-label">비밀번호(가능한 특수문자: !,@,#,$,%,^,&,*,(,))</label>
+                        <div class="input-group has-validation">
+                            <input type="text" class="form-control" id="pwd" placeholder="8 글자 이상으로 해주세요." required>
+                            <div class="invalid-feedback">
+                                비밀번호를 입력해주세요
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="pwdCheck" class="form-label">비밀번호 확인</label>
+                        <div class="input-group has-validation">
+                            <input type="text" class="form-control" id="pwdCheck" placeholder="똑같이 입력해주세요." required>
+                            <div class="invalid-feedback">
+                                비밀번호를 확인해 주세요.
+                            </div>
+                        </div>
+                    </div>
 
-                    <h2>학번 혹은 교번이 없어요!</h2>
-                    <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
-                    <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-                </div><!-- /.col-lg-4 -->
-                <div>학번이나 교번이 있는 유저는 관리자 승인 후 구분이 결정됩니다!</div>
-            </div><!-- /.row -->
+                    <div class="col-12">
+                        <label for="name" class="form-label">이름 <span class="text-muted"></span></label>
+                        <input type="email" class="form-control" id="name" placeholder="이름을 입력해주세요">
+                        <div class="invalid-feedback">
+                          이름을 입력해주세요
+                        </div>
+                    </div>
+                    <h4 class="mb-3">성별</h4>
+
+                    <div class="my-3">
+                        <div class="form-check">
+                            <input id="male" name="paymentMethod" type="radio" class="form-check-input" checked required>
+                            <label class="form-check-label" for="male">남</label>
+                        </div>
+                        <div class="form-check">
+                            <input id="female" name="paymentMethod" type="radio" class="form-check-input" required>
+                            <label class="form-check-label" for="female">여</label>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="date" class="form-control" id="exampleDate" placeholder="date">
+                        <label for="exampleDate">Date</label>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="email" class="form-label">E-mail</label>
+                        <input type="email" class="form-control" id="email" placeholder="이메일을 입력해주세요.">
+                        <div class="invalid-feedback">
+                            이메일을 입력해주세요.
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="phone" class="form-label">전화번호</label>
+                        <input type="text" class="form-control" id="phone" placeholder="-포함해서 적어주세요." required>
+                        <div class="invalid-feedback">
+                            전화번호를 입력해주세요.
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <label for="sel1" class="form-label">희망구분</label>
+                        <select class="form-select" id="sel1" required>
+                            <option value="학부생">학부생</option>
+                            <option>교수1</option>
+                            <option>조교</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            희망구분을 선택해 주세요.
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="sel2" class="form-label">학과</label>
+                        <select class="form-select" id="sel2" required>
+                            <option value="컴퓨터공학부">컴퓨터공학부</option>
+                            <option>컴퓨터공학부</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            학과를 선택해 주세요
+                        </div>
+                    </div>
+                </div>
+                <hr class ="my-4">
+                <div class="w-100 btn btn-primary btn-lg" type="submit">가입하기</div>
+            </div>
+        </div>
         </div>
     </main>
+    </div>
+  <br>
 </body>
 </html>
+<script>
+    function checkID(){
+        var id = $('#InputID').val();
+        $.ajax({
+            url:"ajax.do",
+            type:"post",
+            data:{
+                req:"checkid",
+                data: id
+            },
+            success:function(data){
+                var result = data;
+                if(data == 'dup'){
+                    ischeckID = 0;
+                    $('#warningID').html('*중복된 ID입니다');
+                    $('#warningID').css('color', 'red');
+                    $('#warningID').css('font-size', '11px');
+                    $('#warningID').css('margin-left', '10px');
+
+                }
+                else{
+                    ischeckID = 1;
+                    $('#warningID').html('*사용가능한 ID입니다');
+                    $('#warningID').css('color', 'blue');
+                    $('#warningID').css('font-size', '11px');
+                    $('#warningID').css('margin-left', '10px');
+                }
+            }
+        })
+    }
+</script>
