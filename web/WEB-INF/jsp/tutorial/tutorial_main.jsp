@@ -61,7 +61,6 @@
         </div>
     </div>
 
-
     <div class="b-example-divider"></div>
 
     <div class="album py-5 bg-light">
@@ -96,7 +95,6 @@
                     <th data-field="date" data-sortable="true">date</th>
                 </tr>
                 </thead>
-
             </table>
         </div>
     </div>

@@ -1,0 +1,724 @@
+/*
+ * Nanum Gothic (Korean) http://www.google.com/fonts/earlyaccess
+ */
+@font-face {
+    font-family: 'Nanum Gothic';
+    font-style: normal;
+    font-weight: 400;
+    src: url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.eot);
+    src: url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.eot?#iefix) format('embedded-opentype'),
+    url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff2) format('woff2'),
+    url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff) format('woff'),
+    url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Nanum Gothic';
+    font-style: normal;
+    font-weight: 700;
+    src: url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Bold.eot);
+    src: url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Bold.eot?#iefix) format('embedded-opentype'),
+    url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Bold.woff2) format('woff2'),
+    url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Bold.woff) format('woff'),
+    url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Bold.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Nanum Gothic';
+    font-style: normal;
+    font-weight: 800;
+    src: url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-ExtraBold.eot);
+    src: url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-ExtraBold.eot?#iefix) format('embedded-opentype'),
+    url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-ExtraBold.woff2) format('woff2'),
+    url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-ExtraBold.woff) format('woff'),
+    url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-ExtraBold.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'NanumSquare';
+    font-weight: 400;
+    src: url(../font/NanumSquareR.eot);
+    src: url(../font/NanumSquareR.eot?#iefix) format('embedded-opentype'),
+    url(../font/NanumSquareR.woff) format('woff'),
+    url(../font/NanumSquareR.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'NanumSquare';
+    font-weight: 700;
+    src: url(../font/NanumSquareB.eot);
+    src: url(../font/NanumSquareB.eot?#iefix) format('embedded-opentype'),
+    url(../font/NanumSquareB.woff) format('woff'),
+    url(../font/NanumSquareB.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'NanumSquare';
+    font-weight: 800;
+    src: url(../font/NanumSquareEB.eot);
+    src: url(../font/NanumSquareEB.eot?#iefix) format('embedded-opentype'),
+    url(../font/NanumSquareEB.woff) format('woff'),
+    url(../font/NanumSquareEB.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'NanumSquare';
+    font-weight: 300;
+    src: url(../font/NanumSquareL.eot);
+    src: url(../font/NanumSquareL.eot?#iefix) format('embedded-opentype'),
+    url(../font/NanumSquareL.woff) format('woff'),
+    url(../font/NanumSquareL.ttf) format('truetype');
+}
+
+html {
+    font-family: 돋음, Dotum, Verdana, Geneva, sans-serif, 굴림, Gulim, 'Nanum Gothic', '나눔고딕';
+}
+
+header {
+    min-width: 1000px;
+    background-color: #303666;
+}
+
+img{
+  border: none;
+}
+
+#header {
+    min-width: 1000px;
+    background-color: white;
+}
+
+#tab li {
+    border-bottom: 1px solid gainsboro;
+}
+
+input[type=file]{
+	font-size : 13px;
+	line-height : normal;
+}
+
+#headercontainer {
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 13px;
+}
+
+a{
+	text-decoration : none;
+}
+#headercontainer a {
+    text-decoration: none;
+    color: white;
+}
+#headercontainer a:hover {
+	text-decoration : none;
+	color : #92efe5;
+}
+
+#dropcontainer {
+    border-bottom: 1px solid #303666;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    width: 100%;
+    min-width : 1000px;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease-out;
+    top: 106px;
+    left: 0;
+    background-color: rgba(255, 255, 255, 1);
+    z-index: 2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+}
+
+#no-padding {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+#no-padding > div {
+    margin-left: 190px;
+    margin-right: 0;
+}
+
+#no-padding.dropdowncontents {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#no-padding > div > ul {
+    padding: 12px;
+    padding-top: 0px;
+    padding-bottom: 5px;
+    width: 114px;
+    float: left;
+    margin-top: 0;
+}
+
+#no-padding > div > ul > li {
+    text-align: center;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-size: 12px;
+}
+
+#no-padding > div > ul > li > a {
+    color: black;
+}
+
+#no-padding li {
+    border-bottom: 1px solid gainsboro;
+}
+
+body {
+    min-width: 1000px;
+    background-color: white;
+    margin: 0;
+}
+
+#headercontainer {
+    font-family: 'NanumSquare', sans-serif;
+    background-color: #303666;
+    display: flex;
+    align-content: center;
+    height: 35px;
+}
+
+.menubuttoncontainer {
+    width: 250px;
+    margin-left: 0;
+    margin-right: auto;
+}
+
+#logo_container {
+}
+
+#logo_container img {
+	height : 70px;
+	padding-top: 13px;
+    padding-bottom: 13px;
+}
+
+#headercontainer > div {
+    margin-top: 10.5px;
+    margin-bottom: auto;
+}
+
+#member a {
+
+}
+
+#headercontainer2 {
+    margin: 0 auto;
+    width: 1000px;
+    padding-right: 10px;
+    font-family: 'NanumSquare', sans-serif;
+    background-color: white;
+    display: flex;
+    align-content: center;
+    height: 70px;
+    color: black;
+}
+
+#headermenu {
+    display: flex;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+#headermenu a {
+    color: black;
+    font-size: 17px;
+}
+
+#headermenu > div {
+    width: 110px;
+    text-align: center;
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 25.5px;
+    margin-bottom: auto;
+}
+
+#headermenu a:hover {
+    font-weight: bold;
+    text-decoration : none;
+}
+
+#dropcontainer a:hover{
+	color : #303666;
+}
+
+#headermenu:hover ~ #dropcontainer {
+    max-height: 700px;
+    transition: max-height 0.35s ease-in;
+}
+
+#dropcontainer:hover {
+    max-height: 700px;
+    transition: max-height 1s ease-in;
+}
+
+#member {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 0;
+    margin-left: auto;
+}
+
+#member > div {
+    padding-left: 20px;
+}
+
+/*#member > div > a:hover {
+    text-decoration: underline
+}*/
+
+#search {
+    visibility: visible;
+    background-color: transparent;
+    position: absolute;
+    width: 1000px;
+    height: 200px;
+    margin: 0 auto;
+    top: 100px;
+    max-width: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+#search:hover {
+    max-width: 500px;
+    transition: max-width 0.35s ease-in;
+    z-index: 1000;
+}
+
+#search > div {
+    background-color: white;
+    margin: auto;
+    color: black;
+    width: 520px;
+    border-radius: 5px;
+}
+
+#searchdiv {
+    width: 500px;
+    margin: 10px auto;
+}
+
+#searchbox {
+    border: 2px solid #303666;
+}
+
+#searchbox {
+    padding: 0;
+    width: 500px;
+    font-size: 20px;
+}
+
+#search_submit {
+    margin-left: 5px;
+    background-color: #37474F;
+    height: 30px;
+    width: 30px;
+}
+
+#search_submit > img {
+    padding: 5px;
+    width: 20px;
+}
+
+.main {
+    width: 1000px;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 30px;
+    display: flex;
+}
+
+#main_1 {
+    width: 742px;
+    border: 1px solid gainsboro;
+    background-size: cover;
+}
+
+.main2 {
+    width: 1000px;
+    height: 343px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    display: flex;
+}
+
+.main_right {
+    width: 244px;
+    margin-left: 10px;
+    background-color: white;
+    border: 1px solid gainsboro;
+}
+
+.main_left {
+    display: flex;
+    width: 744px;
+}
+
+.main2_left {
+    display: flex;
+    width: 744px;
+}
+
+.main2_left div {
+    width: 367px;
+    background-color: white;
+}
+
+.main2_left > div > div{
+	width:365px;
+}
+.main2_left > div:nth-child(1) {
+    margin-right: 10px;
+}
+
+.main div {
+    background-color: transparent;
+}
+
+.main2 div {
+
+}
+
+.list_select {
+    border-bottom: 1px solid gainsboro;
+}
+
+.list2_select {
+    border-bottom: 1px solid gainsboro;
+}
+
+.list_select div {
+    font-family: 'NanumSquare', sans-serif;
+    width: auto;
+    padding-left: 6px;
+    padding-right: 6px;
+    height: 45px;
+    display: inline-block;
+    text-align: center;
+    line-height: 45px;
+}
+
+.list_num1 {
+    color: #4955B3;
+    font-weight: bold;
+
+    display: block;
+}
+
+.list_num2 {
+    color: grey;
+    display: none;
+}
+
+.list_num3 {
+    color: grey;
+}
+
+.list_body_num1 {
+    display: block;
+}
+
+.list_body_num2 {
+    display: none;
+}
+
+.list_body_num3 {
+    display: none;
+}
+
+.list2_body_num1 {
+    display: block;
+}
+
+.list2_body_num2 {
+    display: none;
+}
+
+.notice_list {
+    padding: 5px;
+}
+
+.list2_select div {
+    font-family: 'NanumSquare', sans-serif;
+    width: auto;
+    padding-left: 6px;
+    padding-right: 6px;
+    height: 45px;
+    display: inline-block;
+    text-align: center;
+    line-height: 45px;
+}
+
+.list_select div:hover {
+    cursor: pointer;
+}
+
+.list2_select div:hover {
+    
+}
+
+.list2_num1 {
+    color: #4955B3;
+    font-weight: bold;
+    display: block;
+}
+
+.list2_num2 {
+    color: grey;
+    display: none;
+}
+
+.notice_list2 {
+    padding:5px;
+    width:365px;
+}
+
+.notice_list li {
+    font-size: 15px;
+    font-family: 'Nanum Gothic', sans-serif;
+    padding-top: 5.5px;
+    padding-bottom: 5.5px;
+    border: none;
+}
+
+.notice_list2 li {
+    font-size: 15px;
+    font-family: 'Nanum Gothic', sans-serif;
+    padding-top: 5.5px;
+    padding-bottom: 5.5px;
+    border: none;
+}
+
+.more {
+    margin: auto 0;
+    max-width: 50px;
+    float: right;
+}
+
+.date {
+    float: right;
+    font-size: 13px;
+    color: grey;
+}
+
+.site_banner {
+    display: flex;
+    overflow: hidden;
+    height: 49.7px;
+    padding: 0;
+}
+
+
+footer {
+    background-color: #303666;
+}
+
+#footercontainer {
+    max-width: 1000px;
+    display: flex;
+    background-color: #303666;
+    margin: 0 auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 13px;
+    color: white;
+}
+
+#footerlogocontainer {
+    margin-top: 8px;
+    margin-right: 0;
+    margin-left: auto;
+}
+
+#footerlogocontainer > img {
+    width: 200px;
+}
+
+#footercontainer > div > p {
+    font-size: 11px;
+    margin: 8px;
+}
+
+#login {
+    width: 90px;
+    top: 35px;
+    max-height: 0;
+    position: absolute;
+    overflow: hidden;
+    color: black;
+    z-index: -1;
+}
+
+/*형제 고르려면 ~ 붙여야 함... 그냥 띄어쓰기는 자식만. +는 인접 선택자*/
+
+#login:hover {
+    max-height: 500px;
+    transition: max-height 0.35s ease-in;
+    z-index: 1000;
+}
+
+#login > div {
+    border: 1px solid gainsboro;
+    background-color: white;
+    color: black;
+    width: 100px;
+    margin-top: 0;
+}
+
+ul > li > ul > li > ul > li {
+    border: 0;
+}
+
+.dropbtn {
+    cursor: pointer;
+}
+
+.menubuttoncontainer img {
+    width: 17px;
+}
+
+#member > div > img {
+    width: 17px;
+}
+
+#searchdiv {
+    display: flex;
+}
+
+#shadow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    max-width: 0;
+    overflow: hidden;
+    z-index: -1;
+    background: rgba(0, 0, 0, 0.4);
+    height: 100%;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+#blur {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+headermenu .divide{
+  margin-top: 26.5px;
+}
+
+.divide {
+    width: 4px;
+    font-size: 15px;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: gainsboro;
+    font-family: NanumSquare;
+}
+
+.content_container {
+    border: 1px solid gainsboro;
+}
+
+#banner1 {
+    background-image: url(../img/banner_kgu_ai.png);
+}
+
+#banner2 {
+    background-image: url(../img/banner_kguenter_ai.png);
+}
+
+#banner3 {
+    background-image: url(../img/banner_facebook_ai.png);
+}
+
+#banner4 {
+    background-image: url(../img/banner_lms_ai.png);
+}
+
+#banner5 {
+    background-image: url(../img/banner_kutis_ai.png);
+}
+
+#banner_link {
+    background-image: url(../img/banner_link_ai.png);
+}
+#banner6 {
+    background-image: url(../img/banner_home_ai.png);
+}
+#banner_research {
+    padding-left: 4px;
+    height: 46px;
+    color: #4955B3;
+    font-weight: bold;
+    font-family: 'NanumSquare', sans-serif;
+}
+
+#banner_research div {
+    line-height: 45px;
+    width: 244px;
+}
+
+.swiper-container {
+    margin: 0;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    z-index: 1
+}
+
+.research_banner {
+    display: flex;
+    overflow: hidden;
+    height: 48px;
+    padding: 0;
+}
+
+.site_banner a {
+    background-size: cover;
+
+}
+
+footer a {
+    color: white;
+    text-decoration : none;
+}
+
+footer a:hover{
+	color : #92efe5;
+	text-decoration : none;
+}
+
+.footer_menu {
+    width: 1000px;
+    font-size: 13px;
+}
+
+.schedule {
+    font-family: "Nanum Gothic";
+    padding-top: 14px;
+    padding-bottom: 15px;
+}
+
+.schedule_date {
+    color: #303666;
+    font-weight: 600;
+}

@@ -1,5 +1,9 @@
 package kr.ac.kyonggi.swaig.common.filter;
 
+import com.google.gson.Gson;
+import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
+import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +25,20 @@ public class SFilter implements Filter {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setHeader("P3P","CP='CAO PSA CONI OTR OUR DEM ONL'");
+
+
+//        if(session.getAttribute("type") == null) {
+//            Gson gson = new Gson();
+////            session.setAttribute("type", gson.toJson(UserDAO.getInstance().getType("게스트")));
+//            session.setAttribute("headermenulist", gson.toJson(HomeDAO.getInstance().getHeaderMenu()));
+//            session.setAttribute("menulist", gson.toJson(HomeDAO.getInstance().getMenu()));
+////            response.sendRedirect("Index");
+//            return;
+//        }
+
         chain.doFilter(request, response);
+
+
     }
 
     @Override
