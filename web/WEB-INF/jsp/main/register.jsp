@@ -28,10 +28,10 @@
             <h4 class="mb-3">회원 가입</h4>
             <div class="needs-validation" novalidate>
                 <div class="row g-3">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <label for="id" class="form-label">학번(교번)</label>
-                        <input type="text" class="form-control" id="id" placeholder="학번이나 교번을 입력해주세요." value="" required>
-                        <button>중복확인</button>
+                            <input type="text" class="form-control" id="id" placeholder="학번이나 교번을 입력해주세요." value="" required>
+                        <div class="my-2"><button type="button" class="btn btn-primary">중복확인</button></div>
                         <div class="invalid-feedback">
                           학번을 입력해 주세요.
                         </div>
@@ -57,27 +57,32 @@
                     </div>
 
                     <div class="col-12">
-                        <label for="name" class="form-label">이름 <span class="text-muted"></span></label>
+                        <label for="name" class="form-label">이름</label>
                         <input type="email" class="form-control" id="name" placeholder="이름을 입력해주세요">
                         <div class="invalid-feedback">
                           이름을 입력해주세요
                         </div>
                     </div>
-                    <h4 class="mb-3">성별</h4>
+                    <%--<h4 class="mb-3">성별</h4> --%>
 
                     <div class="my-3">
-                        <div class="form-check">
-                            <input id="male" name="paymentMethod" type="radio" class="form-check-input" checked required>
-                            <label class="form-check-label" for="male">남</label>
-                        </div>
-                        <div class="form-check">
-                            <input id="female" name="paymentMethod" type="radio" class="form-check-input" required>
-                            <label class="form-check-label" for="female">여</label>
+                        <label for="gender" class="form-label">성별</label>
+                        <div id="gender">
+                            <div class="form-check">
+                                <input id="male" name="paymentMethod" type="radio" class="form-check-input" checked required>
+                                <label class="form-check-label" for="male">남</label>
+                            </div>
+                            <div class="form-check">
+                                <input id="female" name="paymentMethod" type="radio" class="form-check-input" required>
+                                <label class="form-check-label" for="female">여</label>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="date" class="form-control" id="exampleDate" placeholder="date">
-                        <label for="exampleDate">Date</label>
+                    <div class="col-12">
+                        <label for="birth">생년월일<span> (비밀번호 초기시 생년월일로 초기화됩니다.)</span></label>
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" id="birth" placeholder="date">
+                        </div>
                     </div>
 
                     <div class="col-12">
@@ -97,7 +102,7 @@
                     </div>
 
                     <div class="col-md-5">
-                        <label for="sel1" class="form-label">희망구분</label>
+                        <label for="sel1" class="form-label">희망구분<span> (관리자 승인후 변경됩니다.)</span></label>
                         <select class="form-select" id="sel1" required>
                             <option value="학부생">학부생</option>
                             <option>교수1</option>
@@ -112,7 +117,7 @@
                         <label for="sel2" class="form-label">학과</label>
                         <select class="form-select" id="sel2" required>
                             <option value="컴퓨터공학부">컴퓨터공학부</option>
-                            <option>컴퓨터공학부</option>
+                            <option>AI인공지능</option>
                         </select>
                         <div class="invalid-feedback">
                             학과를 선택해 주세요
