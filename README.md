@@ -204,3 +204,5 @@ SWAIG 프로젝트(가제)
 - header.jsp 작성 by 윤주현
 - LoginAction, LoginPageAction, LogoutAction, login.jsp 작성 by 박선애, 김가영
 - RegisterAction.java execute메소드 작성, register.jsp 회원가입 레이아웃 작성(중복확인 로직 수정해야함) by 박소영, 박의진
+
+확인
