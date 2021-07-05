@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+
     <%--    Bootstrap--%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -20,6 +21,7 @@
 <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
+
     .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -27,7 +29,6 @@
         -moz-user-select: none;
         user-select: none;
     }
-
     @media (min-width: 768px) {
         .bd-placeholder-img-lg {
             font-size: 3.5rem;
@@ -37,22 +38,22 @@
 
 
 <!-- Custom styles for this template -->
-<link href="signin.css" rel="stylesheet">
+<link href="css/login.css" rel="stylesheet">
 </head>
 <body class="text-center">
 
 <main class="form-signin">
     <form>
-        <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <img class="cs_logo" src="img/cs_logo.png" alt="" width="72" height="57">
+        <h1 class="h3 mb-3 fw-normal">로그인</h1>
 
         <div class="form-floating">
             <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Email address</label>
+            <label for="floatingInput">아이디</label>
         </div>
         <div class="form-floating">
             <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Password</label>
+            <label for="floatingPassword">비밀번호</label>
         </div>
 
         <div class="checkbox mb-3">
@@ -60,8 +61,9 @@
                 <input type="checkbox" value="remember-me"> Remember me
             </label>
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">회원가입</button>
+
     </form>
 </main>
 
