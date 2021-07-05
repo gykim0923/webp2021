@@ -65,3 +65,13 @@ CREATE TABLE user(
     `myhomeid` VARCHAR(45) NOT NULL DEFAULT '-',
     PRIMARY KEY (`id`)
 );
+CREATE TABLE major(
+    `oid` int(50) NOT NULL,
+    `major_id` VARCHAR(50) NOT NULL,
+    `major_name` VARCHAR(100) NOT NULL,
+    `major_color1` VARCHAR(100) NOT NULL,
+    `major_color2` VARCHAR(100) NOT NULL,
+    `major_color3` VARCHAR(100) NOT NULL,
+     PRIMARY KEY (`oid`)
+
+);
