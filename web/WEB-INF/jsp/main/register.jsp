@@ -20,11 +20,11 @@
 <body>
 <div class="container">
     <main>
-        <div id="title">
-            <div><a href="Index"><img src="img/cs_logo.png"></a></div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-4 col-lg-6"><a href="Index"><img src="img/cs_logo.png" class="img-fluid"></a></div>
         </div>
-        <div class="row g-5">
-        <div class="col-md-7 col-lg-8">
+        <div class="row justify-content-md-center"><!--class="row g-5"-->
+        <div class="col-md-4 col-lg-8">
             <h4 class="mb-3">회원 가입</h4>
             <div class="needs-validation" novalidate>
                 <div class="row g-3">
