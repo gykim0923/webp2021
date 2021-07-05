@@ -67,6 +67,9 @@ CREATE TABLE user(
 );
 
 INSERT INTO user(id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state,myhomeid) VALUE('10001', '5761272faafb37a8513e92dfbe0b5300284dda87321652164b9a7b914ca2d8e5', 'test1', '남', '2021-07-05', '학부생', 'test1@test.com','010-0000-0001','2021-07-05','-','2021-07-05','컴퓨터공학부','10001','-','-','-');
+INSERT INTO user(id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state,myhomeid) VALUE('201713919', '6ab7108f5c8ab980a584f1e2b98b2991b087af4907864575e6905edf2b759ae8', '윤주현', '남', '1996-03-25', '학부생', 'test1@test.com','010-0000-0001','2021-07-05','-','2021-07-05','컴퓨터공학부','10001','-','-','-');
+
+
 
 CREATE TABLE major(
     `oid` int(50) NOT NULL,

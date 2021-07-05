@@ -19,18 +19,6 @@ SWAIG 프로젝트(가제)
   > github@soyoung125
 - 박의진(201912072)
   > github@jinny-park
-* * *
-## History
-- 2021.07.01
-  - [윤주현] 연습용 페이지에 Bootstrap Table 예제 넣음
-- 2021.06.30
-  - [윤주현] 연습용 페이지에 각종 예제 탑재 (데이터 받아오기, 데이터 추가하기, 데이터 삭제하기, get방식으로 임시데이터 주고받기, 부트스트랩 모달페이지, 부트스트랩 탭전환)
-- 2021.06.26
-  - [윤주현] 연습용 페이지 및 DAO DTO 제작, 마리아 디비 연결
-- 2021.06.24
-  - [윤주현] 기본 프로젝트 핵심 코드 이식 및 작성, 각종 버전 Update 및 플랫폼 변경 (JavaEE6 -> JavaEE8, mysql -> mariaDB10.5, bootstrap4.0 -> bootstrap5.0), readme 작성, 프로젝트 github에 공개 (교수님 허락 받음.)
-- 2021.06.23
-  - [전 체] 프로젝트 인수 인계
 
 * * *
 ## Rules of Project development
@@ -47,7 +35,6 @@ SWAIG 프로젝트(가제)
 
 * * *
 ## Project Structure
-
 
 * .idea
   > IntelliJ 관련 설정. 컴퓨터마다 환경이 달라질 수 있습니다.
@@ -199,10 +186,26 @@ SWAIG 프로젝트(가제)
 * * *
 
 ## log 기록
-2021년 7월 5일
-- 데이터베이스 테이블 생성<user, usertype, major, menu_pages, menu_tabs> by 김가영, 박선애, 박소영, 박의진
-- header.jsp 작성 by 윤주현
-- LoginAction, LoginPageAction, LogoutAction, login.jsp 작성 by 박선애, 김가영
-- RegisterAction.java execute메소드 작성, register.jsp 회원가입 레이아웃 작성(중복확인 로직 수정해야함) by 박소영, 박의진
+
+- 2021.07.06
+  - [박소영] 회원가입 레이아웃 수정
+  - [윤주현] 로그인 기능 활성화(form 방식, sha256 적용)
+  - [박의진] 중복확인버튼 수정이랑 생년월일 희망구분 성별 학과 레이아웃 수정
+- 2021.07.05
+  - [공 동] ERP으로 DB 계획 작성 및 
+  - [박선애, 김가영, 박의진, 박소영] 데이터베이스 테이블 생성<user, usertype, major, menu_pages, menu_tabs>
+  - [윤주현] header 작성 및 탭 DB 연동, 로그인 관련 로직 제작 (기존 AI 관련 기능 전부 삭제. 버튼 연결은 하지 않음)
+  - [박선애, 김가영] 로그인 페이지 레이아웃 작성 및 페이지 연결
+  - [박의진, 박소영] 회원가입 레이아웃 작성
+- 2021.07.01
+  - [윤주현] 연습용 페이지에 Bootstrap Table 예제 넣음
+- 2021.06.30
+  - [윤주현] 연습용 페이지에 각종 예제 탑재 (데이터 받아오기, 데이터 추가하기, 데이터 삭제하기, get방식으로 임시데이터 주고받기, 부트스트랩 모달페이지, 부트스트랩 탭전환)
+- 2021.06.26
+  - [윤주현] 연습용 페이지 및 DAO DTO 제작, 마리아 디비 연결
+- 2021.06.24
+  - [윤주현] 기본 프로젝트 핵심 코드 이식 및 작성, 각종 버전 Update 및 플랫폼 변경 (JavaEE6 -> JavaEE8, mysql -> mariaDB10.5, bootstrap4.0 -> bootstrap5.0), readme 작성, 프로젝트 github에 공개 (교수님 허락 받음.)
+- 2021.06.23
+  - [전 체] 프로젝트 인수 인계
 
 확인
