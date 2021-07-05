@@ -34,7 +34,12 @@
                 <ul class="navbar-nav me-auto mb-2 mb-md-0" id="headerMenu"></ul>
                 <div class="d-flex">
 <%--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">--%>
-                    <button class="btn btn-outline-success" >LOGIN</button>
+
+                    <a href="login.kgu" class="btn btn-outline-success" onclick="letsSubmit()" style = "text-decoration: none;">
+                        <div class="login_btn">
+                            LOGIN
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
