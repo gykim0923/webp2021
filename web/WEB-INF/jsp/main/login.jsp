@@ -20,6 +20,7 @@
 
 <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
+
 <style>
 
     .bd-placeholder-img {
@@ -34,6 +35,10 @@
             font-size: 3.5rem;
         }
     }
+    .cs_logo{
+        margin-bottom: 20px;
+    }
+    .
 </style>
 
 
@@ -44,7 +49,7 @@
 
 <main class="form-signin">
     <form>
-        <img class="cs_logo" src="img/cs_logo.png" alt="" width="72" height="57">
+        <img class="cs_logo" src="img/cs_logo.png" alt="" width="300" height=75>
         <h1 class="h3 mb-3 fw-normal">로그인</h1>
 
         <div class="form-floating">
@@ -61,9 +66,10 @@
                 <input type="checkbox" value="remember-me"> Remember me
             </label>
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">회원가입</button>
-
+        <div class="btn">
+            <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">회원가입</button>
+        </div>
     </form>
 </main>
 
