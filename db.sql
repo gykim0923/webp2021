@@ -78,3 +78,5 @@ CREATE TABLE major(
      PRIMARY KEY (`oid`)
 
 );
+
+INSERT INTO major(oid,major_id,major_name,major_color1,major_color2,major_color3) VALUE('10001','10001','test1','#000000','#000000','#000000')
