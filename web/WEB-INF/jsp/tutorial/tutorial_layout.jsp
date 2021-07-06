@@ -11,14 +11,14 @@
   <title>Title</title>
 </head>
 <body>
-<%@include file="../main/header.jsp"%>
+<%@include file="common/tutorial_header.jsp"%>
 <main>
   <div class="container py-4">
 
     <div class="row align-items-md-stretch">
       <div class="col-lg-12 py-2">
         <div class=" h-100 p-5 bg-light border">
-          페이지 명
+          <h2><strong>페이지 명</strong></h2>
         </div>
       </div>
     </div>
