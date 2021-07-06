@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import kr.ac.kyonggi.swaig.common.sql.Config;
 import kr.ac.kyonggi.swaig.handler.dto.settings.HeaderMenuDTO;
+import kr.ac.kyonggi.swaig.handler.dto.settings.MajorDTO;
 import kr.ac.kyonggi.swaig.handler.dto.settings.MenuDTO;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
@@ -55,4 +56,19 @@ public class HomeDAO {
         return selectedList;
     }
 
+    public ArrayList<MajorDTO> getMajor(String major) {
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM `major` WHERE `major_id`=?;", new MapListHandler(), major);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<MajorDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<MajorDTO>>() {}.getType());
+        return selectedList;
+    }
 }

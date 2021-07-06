@@ -11,15 +11,17 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.Action;
+import kr.ac.kyonggi.swaig.common.controller.CustomAction;
 import kr.ac.kyonggi.swaig.common.controller.LoginManager;
 import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserTypeDTO;
 
-public class LoginAction implements Action {
+public class LoginAction extends CustomAction {
 
 
    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+      super.execute(request,response);
       LoginManager manager = LoginManager.getInstance();
       String id = request.getParameter("id");
       String password = request.getParameter("password_hash");
@@ -35,13 +37,6 @@ public class LoginAction implements Action {
             System.out.println("로그인 성공");
             manager.setSession(request.getSession(), id); //세션 설정하기
             UserTypeDTO type = dao.getType(it.type);
-//            String path = "kr.ac.kyonggi.cs.handler.vo.user."+ type.class_type;
-//            Class<?> t = Class.forName(path);
-//            UserDTO who = (UserDTO)t.newInstance();
-//            if(who.getClass().getName().equals("kr.ac.kyonggi.cs.handler.vo.user.BigUser"))
-//               copy2(who,it);
-//            else
-//               copy1(who, it);
             dao.whoIsLogIn(id);
             File log = new File(request.getServletContext().getRealPath("/WEB-INF"), "log.txt");
             BufferedWriter bufWriter = new BufferedWriter(new FileWriter(log, true));
@@ -50,7 +45,8 @@ public class LoginAction implements Action {
             session.setAttribute("user", gson.toJson(it));
             session.setAttribute("type", gson.toJson(type));
             session.setAttribute("miss", 0);
-            return "RequestDispatcher:jsp/main/main.jsp";
+            response.sendRedirect("/"); //요청이 끝나면 메인페이지로 이동시켜줌 (깔끔한 URL 정리를 위해 이걸로 대체함)
+            return "";
          }
       }
       System.out.println("로그인 실패");

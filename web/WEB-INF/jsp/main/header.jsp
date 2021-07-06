@@ -11,6 +11,9 @@
     String menulist = (String)session.getAttribute("menulist");
     String user =  (String)session.getAttribute("user");
     String type =  (String)session.getAttribute("type");
+    String major = (String)request.getAttribute("major");
+    String main_url = "main.kgu?major="+major.substring(1, major.length()-1);
+    String majorInfo = (String)request.getAttribute("majorInfo");
 %>
 <head>
     <%--    Bootstrap--%>
@@ -34,8 +37,8 @@
     </div>
     <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container header-title">
-            <a href="#" class="navbar-brand d-flex align-items-center">
-                <strong>학과이름은 DB에서 연동예정</strong>
+            <a href=<%=main_url%> class="navbar-brand d-flex align-items-center">
+                <strong id="majorTitle"></strong>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -74,28 +77,37 @@
         list.append(text);
     }
 
-
-
-
-
-
 </script>
 <script>
-    var user =<%=user%>;
-    var type =<%=type%>;
-    var it = $('#member');
-    var graduation = '';
-    if(user == null){
-        var text = '<div class=""><a href="loginPage.kgu" title="로그인">LOGIN</a></div>';
+    $(document).ready(function(){
+        makeHeaderInfo();
+        makeHeaderTitle();
+    })
+    function makeHeaderTitle(){
+        var majorInfo =<%=majorInfo%>;
+        var title = $('#majorTitle');
+        title.append(majorInfo[0].major_name);
     }
-    else{ //임시
-        var text = '<div>안녕하세요. ' + user.name + ' (for_header)님. <a href="#">마이페이지</a> <a href="logout.kgu" title=LOGOUT>LOGOUT</a></div>';
+
+    function makeHeaderInfo(){
+        var user =<%=user%>;
+        var type =<%=type%>;
+        var it = $('#member');
+        var graduation = '';
+        if(user == null){
+            var text = '<div class=""><a href="loginPage.kgu" title="로그인">LOGIN</a></div>';
+        }
+        else{ //임시
+            var text = '<div>안녕하세요. ' + user.name + ' (for_header)님. <a href="#">마이페이지</a> <a href="logout.kgu" title=LOGOUT>LOGOUT</a></div>';
+        }
+        // else if(type.board_level == 0){
+        //     var text = '<div id="login_info">안녕하세요. ' + user.name + ' ('+type.for_header+')님</div><div><a href="admin.do?num=81" title="관리페이지">관리페이지</a></div><div><a href="logout.do" title=LOGOUT>LOGOUT</a></div>';
+        // }
+        // else{
+        //     var text = '<div id="login_info">안녕하세요. ' + user.name + ' ('+type.for_header+')님</div><div><a href="goMyPage.do">마이페이지</a></div><div><a href="logout.do" title=LOGOUT>LOGOUT</a></div>';
+        // }
+        it.append(text);
     }
-    // else if(type.board_level == 0){
-    //     var text = '<div id="login_info">안녕하세요. ' + user.name + ' ('+type.for_header+')님</div><div><a href="admin.do?num=81" title="관리페이지">관리페이지</a></div><div><a href="logout.do" title=LOGOUT>LOGOUT</a></div>';
-    // }
-    // else{
-    //     var text = '<div id="login_info">안녕하세요. ' + user.name + ' ('+type.for_header+')님</div><div><a href="goMyPage.do">마이페이지</a></div><div><a href="logout.do" title=LOGOUT>LOGOUT</a></div>';
-    // }
-    it.append(text);
+
+
 </script>
