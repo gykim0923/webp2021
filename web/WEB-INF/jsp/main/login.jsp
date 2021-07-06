@@ -104,7 +104,7 @@
         </div>
         <div class="btn">
             <a href="#" class="w-100 btn btn-lg btn-primary" onclick="letsSubmit()" style = "text-decoration: none;">
-                <div class="login_btn">
+                <div class="login_btn" >
                     로그인
                 </div>
             </a>

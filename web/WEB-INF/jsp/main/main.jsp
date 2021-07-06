@@ -91,14 +91,14 @@
 
         <div class="row align-items-md-stretch">
 
-            <div class="col-lg-5">
+            <div class="col-lg">
                 <div class=" h-100 p-5 bg-light border">
                     <h2><strong>영역 1</strong></h2>
                     <hr>
                 </div>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg">
                 <div class=" h-100 p-5 bg-light border">
                     <h2><strong>영역 2</strong></h2>
                     <hr>
