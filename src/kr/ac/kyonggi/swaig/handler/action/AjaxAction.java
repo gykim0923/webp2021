@@ -3,7 +3,7 @@ package kr.ac.kyonggi.swaig.handler.action;
 
 import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.Action;
-import kr.ac.kyonggi.swaig.handler.dao.ExampleDAO;
+import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,10 +27,10 @@ public class AjaxAction implements Action {
         String result=null;
         switch(req) {
             case "deleteExampleData":   //테스트용
-                result = ExampleDAO.getInstance().deleteExampleData(data); //삭제할 oid를 넘겨줍니다.
+                result = TutorialDAO.getInstance().deleteExampleData(data); //삭제할 oid를 넘겨줍니다.
                 break;
             case "addExampleData":
-                result = ExampleDAO.getInstance().addExampleData(data); //추가할 데이터 정보를 넘겨줍니다.
+                result = TutorialDAO.getInstance().addExampleData(data); //추가할 데이터 정보를 넘겨줍니다.
         }
         return result;
     }

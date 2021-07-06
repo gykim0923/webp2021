@@ -1,13 +1,13 @@
-package kr.ac.kyonggi.swaig.handler.action;
+package kr.ac.kyonggi.swaig.handler.action.tutorial;
 
 import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.Action;
-import kr.ac.kyonggi.swaig.handler.dao.ExampleDAO;
+import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ExampleAction implements Action {
+public class TutorialAction implements Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Gson gson = new Gson();
@@ -26,7 +26,7 @@ public class ExampleAction implements Action {
         /**
          * db에서 데이터를 요청하는 작업
          * */
-        request.setAttribute("ExampleData", gson.toJson(ExampleDAO.getInstance().getAllExampleData()));
+        request.setAttribute("ExampleData", gson.toJson(TutorialDAO.getInstance().getAllExampleData()));
 
         /**
          * return할 url을 미리 제작해줌.
@@ -44,6 +44,9 @@ public class ExampleAction implements Action {
         }
         else if(tutorial.equals("bootstrap")){
             return url;  //"RequestDispatcher:jsp/tutorial/tutorial_bootstrap.jsp"
+        }
+        else if(tutorial.equals("layout")){
+            return url;  //"RequestDispatcher:jsp/tutorial/tutorial_layout.jsp"
         }
         else{ //예상 외의 요청이 들어오는 경우에는 error 페이지를 돌려준다.
             return "RequestDispatcher:jsp/main/error.jsp";

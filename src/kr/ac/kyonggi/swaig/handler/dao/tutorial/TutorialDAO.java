@@ -1,9 +1,9 @@
-package kr.ac.kyonggi.swaig.handler.dao;
+package kr.ac.kyonggi.swaig.handler.dao.tutorial;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import kr.ac.kyonggi.swaig.common.sql.Config;
-import kr.ac.kyonggi.swaig.handler.dto.ExampleDTO;
+import kr.ac.kyonggi.swaig.handler.dto.tutorial.TutorialDTO;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
@@ -14,16 +14,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ExampleDAO {
-    public static ExampleDAO it;
+public class TutorialDAO {
+    public static TutorialDAO it;
 
-    public static ExampleDAO getInstance() { //인스턴스 생성
+    public static TutorialDAO getInstance() { //인스턴스 생성
         if (it == null)
-            it = new ExampleDAO();
+            it = new TutorialDAO();
         return it;
     }
 
-    public ArrayList<ExampleDTO> getAllExampleData() { //모든 Example 데이터를 받아오기
+    public ArrayList<TutorialDTO> getAllExampleData() { //모든 Example 데이터를 받아오기
         List<Map<String, Object>> listOfMaps = null;
         Connection conn = Config.getInstance().sqlLogin();
         try {
@@ -37,7 +37,7 @@ public class ExampleDAO {
             DbUtils.closeQuietly(conn);
         }
         Gson gson = new Gson();
-        ArrayList<ExampleDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<ExampleDTO>>() {
+        ArrayList<TutorialDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<TutorialDTO>>() {
         }.getType()); //위에서 불러온 DB를 ExampleDTO 타입으로 만들어서 return 해줌
         return selectedList;
     }
@@ -74,8 +74,8 @@ public class ExampleDAO {
             DbUtils.closeQuietly(conn);
         }
         Gson gson = new Gson();
-        ArrayList<ExampleDTO> result = null;
-        result = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<ExampleDTO>>() {
+        ArrayList<TutorialDTO> result = null;
+        result = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<TutorialDTO>>() {
         }.getType());
         return result.get(0).getOid();
     }

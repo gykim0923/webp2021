@@ -189,7 +189,7 @@
         var tutorial = <%=tutorial%>;
         alert(tutorial);
         var data=$('#dataForGet').val();
-        window.location.href="example.kgu?tutorial="+tutorial+"&&data="+data;
+        window.location.href="tutorial.kgu?tutorial="+tutorial+"&&data="+data;
         //파라미터 여러개 보낼 때 &&을 씀
     }
 

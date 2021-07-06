@@ -1,4 +1,4 @@
-package kr.ac.kyonggi.swaig.handler.action.main.menu;
+package kr.ac.kyonggi.swaig.handler.action.main.account;
 
 import kr.ac.kyonggi.swaig.common.controller.Action;
 

@@ -1,4 +1,4 @@
-package kr.ac.kyonggi.swaig.handler.action.main.menu;
+package kr.ac.kyonggi.swaig.handler.action.main.account;
 
 import java.util.Enumeration;
 
@@ -18,9 +18,9 @@ public class LoginPageAction implements Action{
 		session.setAttribute("miss", miss);
 		String result;
 		if(session.getAttribute("user") == null)
-			result = "RequestDispatcher:jsp/main/login.jsp";
+			result = "RequestDispatcher:jsp/account/login.jsp";
 		else
-			result = "RequestDispatcher:jsp/main/main.jsp";
+			result = "RequestDispatcher:jsp/main/error.jsp";
 		return result;
 	}
 

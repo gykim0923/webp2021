@@ -1,6 +1,6 @@
-package kr.ac.kyonggi.swaig.handler.dto;
+package kr.ac.kyonggi.swaig.handler.dto.tutorial;
 
-public class ExampleDTO {
+public class TutorialDTO {
     private String oid;
     private String title;
     private String content;

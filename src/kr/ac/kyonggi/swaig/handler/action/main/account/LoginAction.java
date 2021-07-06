@@ -1,4 +1,4 @@
-package kr.ac.kyonggi.swaig.handler.action.main.menu;
+package kr.ac.kyonggi.swaig.handler.action.main.account;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -55,7 +55,7 @@ public class LoginAction implements Action {
       }
       System.out.println("로그인 실패");
       session.setAttribute("miss",(Integer)session.getAttribute("miss")+1);
-      return "RequestDispatcher:jsp/main/login.jsp";
+      return "RequestDispatcher:jsp/account/login.jsp";
    }
 
 //
