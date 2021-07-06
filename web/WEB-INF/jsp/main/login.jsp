@@ -61,13 +61,13 @@
     .cs_logo{
         margin-bottom: 20px;
     }
-    .btn{
-        display: flex;
-    }
-    .btn-primary{
-        align-items: center;
-        text-align: center;
-    }
+    /*.btn{*/
+    /*    display: flex;*/
+    /*}*/
+    /*.btn-primary{*/
+    /*    align-items: center;*/
+    /*    text-align: center;*/
+    /*}*/
 </style>
 
 
@@ -102,12 +102,8 @@
                 </a>
             </label>
         </div>
-        <div class="btn">
-            <a href="#" class="w-100 btn btn-lg btn-primary" onclick="letsSubmit()" style = "text-decoration: none;">
-                <div class="login_btn" >
-                    로그인
-                </div>
-            </a>
+        <div style="width: 100%">
+            <a href="#" class="w-100 btn btn-lg btn-primary text-center" onclick="letsSubmit()" style = "text-decoration: none; display: flex;">로그인</a>
         </div>
     </form>
 </main>

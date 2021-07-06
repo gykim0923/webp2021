@@ -21,25 +21,19 @@
     <%--    Bootstrap Table--%>
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
     <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+    <style>
+        .header-title {
+            height: 4rem;
+        }
+    </style>
 </head>
 
 <header>
-<%--    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">--%>
-<%--        <div class="container-fluid">--%>
-<%--            <a class="navbar-brand" href="#">전공이름(DB로 연동예정)</a>--%>
-<%--            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">--%>
-<%--                <span class="navbar-toggler-icon"></span>--%>
-<%--            </button>--%>
-<%--            <div class="collapse navbar-collapse" id="navbarCollapse">--%>
-<%--                <ul class="navbar-nav me-auto mb-2 mb-md-0" id="headerMenu"></ul>--%>
-<%--                <div class="d-flex">--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </nav>--%>
+    <div class="bg-secondary">
+        <div class="container text-end text-white" id="member" ></div>
+    </div>
     <div class="navbar navbar-dark bg-dark shadow-sm">
-        <div class="col-12" id="member"></div>
-        <div class="container">
+        <div class="container header-title">
             <a href="#" class="navbar-brand d-flex align-items-center">
                 <strong>학과이름은 DB에서 연동예정</strong>
             </a>
@@ -92,10 +86,10 @@
     var it = $('#member');
     var graduation = '';
     if(user == null){
-        var text = '<div><a href="loginPage.kgu" title="로그인">LOGIN</a></div>';
+        var text = '<div class=""><a href="loginPage.kgu" title="로그인">LOGIN</a></div>';
     }
     else{ //임시
-        var text = '<div id="login_info text-white">안녕하세요. ' + user.name + ' (for_header)님</div><div><a href="#">마이페이지</a></div><div><a href="logout.kgu" title=LOGOUT>LOGOUT</a></div>';
+        var text = '<div>안녕하세요. ' + user.name + ' (for_header)님. <a href="#">마이페이지</a> <a href="logout.kgu" title=LOGOUT>LOGOUT</a></div>';
     }
     // else if(type.board_level == 0){
     //     var text = '<div id="login_info">안녕하세요. ' + user.name + ' ('+type.for_header+')님</div><div><a href="admin.do?num=81" title="관리페이지">관리페이지</a></div><div><a href="logout.do" title=LOGOUT>LOGOUT</a></div>';

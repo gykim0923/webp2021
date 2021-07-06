@@ -13,7 +13,7 @@ public class LogoutAction implements Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		response.sendRedirect("Index");
+		response.sendRedirect("/");
 		
 		return null;
 

@@ -18,9 +18,9 @@
 <%@include file="./header.jsp"%>
 <body>
 <main>
-    <div class="container">
-        <div class="row align-items-md-stretch py-4">
-            <div class="col-lg-9">
+    <div class="container py-4">
+        <div class="row align-items-md-stretch">
+            <div class="col-lg-9 py-2">
                 <div id="myCarousel" class="carousel slide"
                      data-bs-ride="carousel" style="margin-bottom : 0px;">
                     <div class="carousel-indicators">
@@ -80,7 +80,7 @@
                     </button>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 py-2">
                 <div class=" h-100 p-5 bg-light border">
                     <h2><strong>바로가기</strong></h2>
                 </div>
@@ -91,21 +91,21 @@
 
         <div class="row align-items-md-stretch">
 
-            <div class="col-lg">
+            <div class="col-lg py-2">
                 <div class=" h-100 p-5 bg-light border">
                     <h2><strong>영역 1</strong></h2>
                     <hr>
                 </div>
             </div>
 
-            <div class="col-lg">
+            <div class="col-lg py-2">
                 <div class=" h-100 p-5 bg-light border">
                     <h2><strong>영역 2</strong></h2>
                     <hr>
                 </div>
             </div>
 
-            <div class="col-lg-3">
+            <div class="col-lg-3 py-2">
                 <div class=" h-100 p-5 bg-light border">
                     <h2><strong>일정</strong></h2>
                 </div>
