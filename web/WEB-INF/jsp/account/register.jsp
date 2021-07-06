@@ -24,14 +24,20 @@
             <div class="col-md-4 col-lg-6"><a href="Index"><img src="img/cs_logo.png" class="img-fluid"></a></div>
         </div>
         <div class="row justify-content-md-center"><!--class="row g-5"-->
-        <div class="col-md-4 col-lg-8">
+        <div class="col-lg-8">
             <h4 class="mb-3">회원 가입</h4>
             <div class="needs-validation" novalidate>
                 <div class="row g-3">
-                    <div class="col-sm-12">
+                    <div class="">
                         <label for="id" class="form-label">학번(교번)</label>
-                            <input type="text" class="form-control" id="id" placeholder="학번이나 교번을 입력해주세요." value="" required>
-                        <div class="my-2"><button type="button" class="btn btn-primary">중복확인</button></div>
+                        <div class="row align-items-md-stretch">
+                            <div class="col-10">
+                                <input type="text" class="form-control" id="id" placeholder="학번이나 교번을 입력해주세요." value="" required>
+                            </div>
+                            <div class="col-2">
+                                <button type="button" class="btn btn-primary">중복확인</button>
+                            </div>
+                        </div>
                         <div class="invalid-feedback">
                           학번을 입력해 주세요.
                         </div>
@@ -101,7 +107,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-5">
+                    <div class="col-md-8">
                         <label for="sel1" class="form-label">희망구분<span> (관리자 승인후 변경됩니다.)</span></label>
                         <select class="form-select" id="sel1" required>
                             <option value="학부생">학부생</option>
