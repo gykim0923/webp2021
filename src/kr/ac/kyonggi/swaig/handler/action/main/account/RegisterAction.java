@@ -13,7 +13,7 @@ public class RegisterAction implements Action {
         if(session.getAttribute("user") != null)
             return "RequestDispatcher:jsp/main/error.jsp";
         String result;
-        result = "RequestDispatcher:jsp/main/register.jsp";
+        result = "RequestDispatcher:jsp/account/register.jsp";
         return result;
     }
 

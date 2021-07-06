@@ -103,7 +103,7 @@
             </label>
         </div>
         <div style="width: 100%">
-            <a href="#" class="w-100 btn btn-lg btn-primary text-center" onclick="letsSubmit()" style = "text-decoration: none; display: flex;">로그인</a>
+            <a href="#" class="w-100 btn btn-lg btn-primary text-center" onclick="letsSubmit()" style = "text-decoration: none;">로그인</a>
         </div>
     </form>
 </main>
