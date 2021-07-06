@@ -10,6 +10,7 @@
 <head>
     <title>ERROR</title>
 </head>
+<%@include file="./header.jsp"%>
 <body>
 ERROR PAGE!
 </body>
