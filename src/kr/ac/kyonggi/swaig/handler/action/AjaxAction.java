@@ -37,6 +37,7 @@ public class AjaxAction implements Action {
                 break;
             case "addExampleData":
                 result = TutorialDAO.getInstance().addExampleData(data); //추가할 데이터 정보를 넘겨줍니다.
+                break;
             case "checkId":      //권한 확인 필요 없음(회원가입 중복아이디 체크)
                 if (UserDAO.getInstance().checkID(data))
                     result = "";

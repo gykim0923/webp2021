@@ -44,7 +44,7 @@
                                 <input type="text" class="form-control" id="id" placeholder="학번이나 교번을 입력해주세요." value="" required>
                             </div>
                             <div class="col-4">
-                                <button type="button" class="btn btn-primary">중복확인</button>
+                                <div class="btn btn-primary" onclick="checkID()">중복확인</div>
                             </div>
                         </div>
                         <div class="invalid-feedback">
@@ -64,7 +64,7 @@
                     <div class="col-12">
                         <label for="pwdCheck" class="form-label">비밀번호 확인</label><span id="warningPwd"></span>
                         <div class="input-group has-validation">
-                            <input type="text" class="form-control" id="pwdCheck" placeholder="똑같이 입력해주세요." required>
+                            <input type="text" class="form-control" id="pwdCheck" onkeyup="checkPassword()" placeholder="똑같이 입력해주세요." required>
                             <div class="invalid-feedback">
                                 비밀번호를 확인해 주세요.
                             </div>
@@ -140,7 +140,7 @@
                     </div>
                 </div>
                 <hr class ="my-4">
-                <div class="w-100 btn btn-primary btn-lg" type="submit" onclick="regist()">가입하기</div>
+                <div class="w-100 btn btn-primary btn-lg" type="submit" onclick="LetsRegisterBig()">가입하기</div>
             </div>
         </div>
         </div>
@@ -150,200 +150,132 @@
 </body>
 </html>
 <script>
-    // var ischeckID = 0;
-    // var ischeckPassword = 0;
-    // var isSafePassword = 0;
-    // var pattern = [];
-    // var pattern1 = '0123456789';
-    // pattern2 = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    // pattern3 = '!@#$%^&*()';
-    // pattern.push(pattern1);
-    // pattern.push(pattern2);
-    // pattern.push(pattern3);
-    //
-    // function checkPattern(password){ //
-    //     isSafePassword = 0 ;
-    //     var isOK1 = 0;
-    //     var isOK2 = 0;
-    //     var isOK3 = 0;
-    //     for(var i = 0; i < password.length ; ++i){
-    //         if(pattern[0].indexOf(password[i]) >= 0)
-    //             isOK1 = 1;
-    //         if(pattern[1].indexOf(password[i]) >= 0)
-    //             isOK2 = 1;
-    //         if(pattern[2].indexOf(password[i]) >= 0)
-    //             isOK3 = 1;
-    //     }
-    //     if(isOK1 == 1 && isOK2 == 1 && isOK3 == 1)
-    //         isSafePassword = 1 ;
-    // }
-    // function checkID(){ //중북확인
-    //     var id = $('#id').val();
-    //     $.ajax({
-    //         url:"ajax.do",
-    //         type:"post",
-    //         data:{
-    //             req:"checkid",
-    //             data: id
-    //         },
-    //         success:function(data){
-    //             var result = data;
-    //             if(data == 'dup'){
-    //                 ischeckID = 0;
-    //                 $('#warningID').html('*중복된 ID입니다');
-    //                 $('#warningID').css('color', 'red');
-    //                 $('#warningID').css('font-size', '11px');
-    //                 $('#warningID').css('margin-left', '10px');
-    //
-    //             }
-    //             else{
-    //                 ischeckID = 1;
-    //                 $('#warningID').html('*사용가능한 ID입니다');
-    //                 $('#warningID').css('color', 'blue');
-    //                 $('#warningID').css('font-size', '11px');
-    //                 $('#warningID').css('margin-left', '10px');
-    //             }
-    //         }
-    //     })
-    // }
-    // function checkPassword(){
-    //     checkPattern($('#pwd').val());
-    //     if($('#pwd').val().length < 8 || isSafePassword != 1){
-    //         ischeckPassword = 0;
-    //         $('#warningPwd').html('8자 이상, 영문과 숫자, 특수문자의 조합');
-    //         $('#warningPwd').css('color', 'red');
-    //         $('#warningPwd').css('font-size', '11px');
-    //         $('#warningPwd').css('margin-left', '10px');
-    //     }
-    //     else if($('#pwd').val() == $('#pwdCheck').val()){
-    //         ischeckPassword = 1;
-    //         $('#warningPwd').html('비밀번호가 일치합니다');
-    //         $('#warningPwd').css('color', 'blue');
-    //         $('#warningPwd').css('font-size', '11px');
-    //         $('#warningPwd').css('margin-left', '10px');
-    //     }
-    //     else{
-    //         ischeckPassword = 0;
-    //         $('#warningPwd').html('비밀번호가 일치하지 않습니다');
-    //         $('#warningPwd').css('color', 'red');
-    //         $('#warningPwd').css('font-size', '11px');
-    //         $('#warningPwd').css('margin-left', '10px');
-    //     }
-    // }
-    // function LetsRegisterBig(){
-    //     if(ischeckID == 1){
-    //         if(ischeckPassword == 1){
-    //             var id =$('#InputID').val();
-    //             var password = $('#InputPassword').val();
-    //             var forsha = id+password;
-    //             var name = $('#InputName').val();
-    //             var gender = $('input[name=gender]:checked').val();
-    //             var birth = $('#InputBirth').val();
-    //             var email = $('#InputEmail').val();
-    //             var phone = $('#InputPhone').val();
-    //             var type = $('#InputType').val();
-    //             var major = $('#InputMajor').val();
-    //             var perID = id;
-    //             var why = $('#InputWhy').val();
-    //             if(name!='' && gender!='' && birth!='' && email!='' && phone!='' && major !='' && perID != ''){
-    //                 var update = id+"-/-/-"+SHA256(forsha)+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+phone+"-/-/-"+type+"-/-/-"+major+"-/-/-"+perID;
-    //                 $.ajax({
-    //                     url:"ajax.do",
-    //                     type:"post",
-    //                     data:{
-    //                         req:"registerbigid",
-    //                         data: update
-    //                     },
-    //                     success:function(data){
-    //                         if(data == 'success'){
-    //                             $('#information').html('회원가입 완료');
-    //                             var inputPanel = $('#inputPanel');
-    //                             inputPanel.empty();
-    //                             var a = '';
-    //                             a += '<div style = "font : 12px; margin-left : 35px;">구분은 관리자 승인 후 변경됩니다</div>';
-    //                             a += '<a href="loginpage.do" class="loginBtn" style = "text-decoration: none; text-align : center; margin : 25px 25px"><div id="login_btn">로그인하기</div></a>';
-    //                             inputPanel.html(a);
-    //                         }
-    //                         else
-    //                             alert('SERVER ERROR, Please try again later');
-    //                     }
-    //                 })
-    //             }
-    //             else{
-    //                 alert("빈칸을 채워주세요");
-    //             }
-    //         }
-    //         else{
-    //             alert("비밀번호를 일치시켜주세요.");
-    //         }
-    //     }
-    //     else
-    //         alert("아이디 중복확인을 해주세요");
-    // }
-    function regist(){
-                    var id =$('#id').val();
-                    var password = $('#pwd').val();
-                    var forsha = id+password;
-                    var name = $('#name').val();
-                    var gender = $('input[name=gender]:checked').val();
-                    var birth = $('#birth').val();
-                    var email = $('#email').val();
-                    var phone = $('#phone').val();
-                    var type = $('#type').val();
-                    var major = $('#major').val();
-                    var perID = id;
+    var ischeckID = 0;
+    var ischeckPassword = 0;
+    var isSafePassword = 0;
+    var pattern = [];
+    var pattern1 = '0123456789';
+    pattern2 = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    pattern3 = '!@#$%^&*()';
+    pattern.push(pattern1);
+    pattern.push(pattern2);
+    pattern.push(pattern3);
 
-                     if(name!='' && gender!='' && birth!='' && email!='' && phone!='' && major !='' && perID != ''){
-                            var update = id+"-/-/-"+SHA256(forsha)+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+
-                                email+"-/-/-"+phone+"-/-/-"+type+"-/-/-"+major+"-/-/-"+perID;
-                            $.ajax({
-                                url:"ajax.do",
-                                type:"post",
-                                data:{
-                                    req:"registerbigid",
-                                    data: update
-                                },
-                                success:function(data){
-                                    if(data == 'success'){
-                                        alert("회원가입 성공");
-                                    }
-                                    else
-                                        alert('SERVER ERROR, Please try again later');
-                                }
-                            })
-                        }
-                        else{
-                            alert("빈칸을 채워주세요");
-                        }
-        function checkID(){
-            var id = $('#InputID').val();
-            $.ajax({
-                url:"ajax.do",
-                type:"post",
-                data:{
-                    req:"checkid",
-                    data: id
-                },
-                success:function(data){
-                    var result = data;
-                    if(data == 'dup'){
-                        ischeckID = 0;
-                        $('#warningID').html('*중복된 ID입니다');
-                        $('#warningID').css('color', 'red');
-                        $('#warningID').css('font-size', '11px');
-                        $('#warningID').css('margin-left', '10px');
-
-                    }
-                    else{
-                        ischeckID = 1;
-                        $('#warningID').html('*사용가능한 ID입니다');
-                        $('#warningID').css('color', 'blue');
-                        $('#warningID').css('font-size', '11px');
-                        $('#warningID').css('margin-left', '10px');
-                    }
-                }
-            })
+    function checkPattern(password){ //
+        isSafePassword = 0 ;
+        var isOK1 = 0;
+        var isOK2 = 0;
+        var isOK3 = 0;
+        for(var i = 0; i < password.length ; ++i){
+            if(pattern[0].indexOf(password[i]) >= 0)
+                isOK1 = 1;
+            if(pattern[1].indexOf(password[i]) >= 0)
+                isOK2 = 1;
+            if(pattern[2].indexOf(password[i]) >= 0)
+                isOK3 = 1;
         }
+        if(isOK1 == 1 && isOK2 == 1 && isOK3 == 1)
+            isSafePassword = 1 ;
+    }
+    function checkID(){ //중북확인
+        var id = $('#id').val();
+        alert(id);
+        $.ajax({
+            url:"ajax.do",
+            type:"post",
+            data:{
+                req:"checkId",
+                data: id
+            },
+            success:function(data){
+                var result = data;
+                if(data == 'dup'){
+                    ischeckID = 0;
+                    $('#warningID').html('*중복된 ID입니다');
+                    $('#warningID').css('color', 'red');
+                    $('#warningID').css('font-size', '11px');
+                    $('#warningID').css('margin-left', '10px');
+
+                }
+                else{
+                    ischeckID = 1;
+                    alert(id);
+                    $('#warningID').html('*사용가능한 ID입니다');
+                    $('#warningID').css('color', 'blue');
+                    $('#warningID').css('font-size', '11px');
+                    $('#warningID').css('margin-left', '10px');
+                }
+            }
+        })
+    }
+    function checkPassword(){
+        checkPattern($('#pwd').val());
+        if($('#pwd').val().length < 8 || isSafePassword != 1){
+            ischeckPassword = 0;
+            $('#warningPwd').html('8자 이상, 영문과 숫자, 특수문자의 조합');
+            $('#warningPwd').css('color', 'red');
+            $('#warningPwd').css('font-size', '11px');
+            $('#warningPwd').css('margin-left', '10px');
+        }
+        else if($('#pwd').val() == $('#pwdCheck').val()){
+            ischeckPassword = 1;
+            $('#warningPwd').html('비밀번호가 일치합니다');
+            $('#warningPwd').css('color', 'blue');
+            $('#warningPwd').css('font-size', '11px');
+            $('#warningPwd').css('margin-left', '10px');
+        }
+        else{
+            ischeckPassword = 0;
+            $('#warningPwd').html('비밀번호가 일치하지 않습니다');
+            $('#warningPwd').css('color', 'red');
+            $('#warningPwd').css('font-size', '11px');
+            $('#warningPwd').css('margin-left', '10px');
+        }
+    }
+    function LetsRegisterBig(){
+        if(ischeckID == 1){
+            if(ischeckPassword == 1){
+                var id =$('#id').val();
+                var password = $('#pwd').val();
+                var forsha = id+password;
+                var name = $('#name').val();
+                var gender = $('input[name=gender]:checked').val();
+                var birth = $('#birth').val();
+                var email = $('#email').val();
+                var phone = $('#phone').val();
+                var type = $('#type').val();
+                var major = $('#major').val();
+                var perID = id;
+
+                if(name!='' && gender!='' && birth!='' && email!='' && phone!='' && major !='' && perID != ''){
+                    var update = id+"-/-/-"+SHA256(forsha)+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+
+                        email+"-/-/-"+phone+"-/-/-"+type+"-/-/-"+major+"-/-/-"+perID;
+                    $.ajax({
+                        url:"ajax.do",
+                        type:"post",
+                        data:{
+                            req:"register",
+                            data: update
+                        },
+                        success:function(data){
+                            if(data == 'success'){
+                                alert("회원가입 성공");
+                            }
+                            else
+                                alert('SERVER ERROR, Please try again later');
+                        }
+                    })
+                }
+                else{
+                    alert("빈칸을 채워주세요");
+                }
+            }
+            else{
+                alert("비밀번호를 일치시켜주세요.");
+            }
+        }
+        else
+            alert("아이디 중복확인을 해주세요");
     }
 
 </script>
