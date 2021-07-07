@@ -98,7 +98,7 @@
             var text = '<div class=""><a href="loginPage.kgu" title="로그인">LOGIN</a></div>';
         }
         else{ //임시
-            var text = '<div>안녕하세요. ' + user.name + ' (for_header)님. <a href="#">마이페이지</a> <a href="logout.kgu" title=LOGOUT>LOGOUT</a></div>';
+            var text = '<div>안녕하세요. ' + user.name + ' (for_header)님. <a href="mypage.kgu">마이페이지</a> <a href="logout.kgu" title=LOGOUT>LOGOUT</a></div>';
         }
         // else if(type.board_level == 0){
         //     var text = '<div id="login_info">안녕하세요. ' + user.name + ' ('+type.for_header+')님</div><div><a href="admin.do?num=81" title="관리페이지">관리페이지</a></div><div><a href="logout.do" title=LOGOUT>LOGOUT</a></div>';
