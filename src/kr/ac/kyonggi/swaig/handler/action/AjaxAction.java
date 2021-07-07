@@ -24,6 +24,7 @@ public class AjaxAction implements Action {
      * 따라서 마지막으로 받는 메소드는 항상 split해줘야 하는지 고민해야 합니다.
      * */
 
+
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Gson gson = new Gson();
         String req = request.getParameter("req"); //JSP에서 넘겨준 req

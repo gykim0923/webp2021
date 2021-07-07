@@ -114,6 +114,7 @@ public class UserDAO {
             return "fail";
         boolean result = false;
 
+
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
