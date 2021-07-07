@@ -108,7 +108,7 @@ public class UserDAO {
         else
             return false;
     }
-    public String registerSmallID(String text) {
+    public String registerBigID(String text) {
         String arr[] = text.split("-/-/-");//id+"-/-/-"+password+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+phone+"-/-/-"+type+"-/-/-"+major+"-/-/-"+perId;
         if(!checking(text))
             return "fail";

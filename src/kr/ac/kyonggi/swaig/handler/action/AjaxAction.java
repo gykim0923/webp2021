@@ -45,13 +45,13 @@ public class AjaxAction implements Action {
                     result = "dup";
                 break;
             case "register":
-                String small[] = data.split("-/-/-");
-                if (UserDAO.getInstance().checkID(small[0]))
-                    result = UserDAO.getInstance().registerSmallID(data);
+                String big[] = data.split("-/-/-");
+                if (UserDAO.getInstance().checkID(big[0]))
+                    result = UserDAO.getInstance().registerBigID(data);
                 if (result.equals("success")) {
                     File log = new File(request.getServletContext().getRealPath("/WEB-INF"), "log.txt");
                     BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(log, true));
-                    bufferedWriter.write(new Date().toString() + "] 회원가입! " + "ID : " + small[0] + " 이름 :" + small[2]  + "\r\n");
+                    bufferedWriter.write(new Date().toString() + "] 회원가입! " + "ID : " + big[0] + " 이름 :" + big[2]  + "\r\n");
                     bufferedWriter.close();
                 } else
                     result = "fail";
