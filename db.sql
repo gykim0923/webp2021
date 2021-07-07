@@ -127,3 +127,11 @@ CREATE TABLE club(
                          PRIMARY KEY (`id`)
 );
 
+CREATE TABLE laboratory(
+    `id` int(50) NOT NULL AUTO_INCREMENT,
+    `lab_img` VARCHAR (100) NOT NULL,
+    `lab_name` VARCHAR (100) NOT NULL,
+    `lab_location` VARCHAR (100) NOT NULL,
+    `lab_homepage` VARCHAR (200) NOT NULL,
+    PRIMARY KEY (`id`)
+);
