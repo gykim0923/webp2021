@@ -141,7 +141,7 @@
                     </div>
                 </div>
                 <hr class ="my-4">
-                <a href="loginPage.kgu"><div class="w-100 btn btn-primary btn-lg" type="submit" onclick="LetsRegisterBig()">가입하기</div></a>
+                <div class="w-100 btn btn-primary btn-lg" type="submit" onclick="LetsRegisterBig()">가입하기</div>
             </div>
         </div>
         </div>
@@ -261,6 +261,8 @@
                         success:function(data){
                             if(data == 'success'){
                                 alert("회원가입 성공");
+                                window.location.href = "loginPage.kgu";
+
                             }
                             else
                                 alert('SERVER ERROR, Please try again later');
@@ -291,5 +293,6 @@
     function registerInit(){
         window.location.href = "register.kgu";
     }
+
 
 </script>
