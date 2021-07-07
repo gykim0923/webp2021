@@ -21,15 +21,22 @@
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
     <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
         <script src='js/sha256.js'></script>
+        <style>
+            .my-2{
+
+            }
+        </style>
 </head>
 <body>
 <div class="container">
     <main>
         <div class="row justify-content-md-center">
-            <div class="col-md-4 col-lg-6">
+            <div class="row">
                 <a href="<%=main_url%>">
                     <img src="<%=img_login_logo%>" class="img-fluid">
                 </a>
+                <a href="#" class="btn btn-primary my-2 col-6" onclick="registerInit()">경기인 회원가입</a>
+                <a href="#" class="btn btn-primary my-2 col-6" onclick="registerReset()">외부인 회원가입</a>
             </div>
         </div>
         <div class="row justify-content-md-center"><!--class="row g-5"-->
@@ -39,7 +46,6 @@
                 <div class="row g-3">
                     <div class="">
                         <label for="id" class="form-label">학번(교번)</label><span id="warningID"></span>
-                        <button type="button" class="btn btn-primary" onclick="registerReset()">외부인 회원가입</button>
                         <div class="row align-items-md-stretch">
                             <div class="col-8">
                                 <input type="text" class="form-control" id="id" placeholder="학번이나 교번을 입력해주세요." value="" required>
@@ -333,10 +339,7 @@
     function registerReset(){
         var list=$('#registerReset');
         var text='';
-        text+='<input type="date" class="form-control" value="날짜를 입력하세요" placeholder="Date">'
-            +'<button type="button" class="btn btn-primary" onclick="registerInit()">경기인 회원가입</button>'
-            +'<input type="text" class="form-control" value="텍스트를 입력하세요">'
-            +'<select class="form-control"><option value="1">1</option>';
+        text+='';
         list.html(text);// 외부인,경기대 선택시 내용이 바뀜
     }
     function registerInit(){
