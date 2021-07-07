@@ -39,8 +39,8 @@
                 <a href="#" class="btn btn-primary my-2 col-6" onclick="registerReset()">외부인 회원가입</a>
             </div>
         </div>
-        <div class="row justify-content-md-center"><!--class="row g-5"-->
-        <div class="col-lg-8" id="registerReset">
+        <div class="row justify-content-md-center" id="registerReset"><!--class="row g-5"-->
+        <div class="col-lg-8">
             <h4 class="mb-3">회원 가입</h4>
             <div class="needs-validation" novalidate>
                 <div class="row g-3">
@@ -301,7 +301,7 @@
                 var phone = $('#phone').val();
                 var hopetype = $('#hope_type').val();
                 if(name!=''&& gender!='' && birth!='' && email!='' && phone!=''){
-                    var update = id+"-/-/-"+SHA256(forsha)+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+phone+"-/-/-"+hopetype;
+                    var update = id+"-/-/-"+SHA256(forsha)+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+hopetype+"-/-/-"+email+"-/-/-"+phone;
                     $.ajax({
                         url:"ajax.kgu",
                         type:"post",
@@ -311,12 +311,8 @@
                         },
                         success:function(data){
                             if(data == "success"){
-                                $('#information').html('회원가입 완료');
-                                var inputPanel = $('#inputPanel');
-                                inputPanel.empty();
-                                var a = '';
-                                a += '<a href="loginpage.do" class="loginBtn" style = "text-decoration: none; text-align : center; margin : 25px 25px"><div id="login_btn">로그인하기</div></a>';
-                                inputPanel.html(a);
+                                alert("회원가입 성공");
+                                window.location.href = "loginPage.kgu";
                             }
                             else{
                                 alert('SERVER ERROR, Please try again later');
@@ -339,13 +335,14 @@
     function registerReset(){
         var list=$('#registerReset');
         var text='';
-        text+='<div class="col-lg-8" id="registerReset"> <h4 class="mb-3">회원 가입</h4>'
+        text+='<div class="row justify-content-md-center"  id="registerReset">'
+            +'<div class="col-lg-8" > <h4 class="mb-3">회원 가입</h4>'
             +'<div class="needs-validation" novalidate> <div class="row g-3">'
-            +'<div class=""></div>'
+            +'<div class="">'
             +'<label for="id" class="form-label">아이디</label><span id="warningID"></span>'
             +'<div class="row align-items-md-stretch"><div class="col-8">'
             +'<input type="text" class="form-control" id="id" placeholder="아이디를 입력해주세요." value="" required>'
-            +'</div><div class="col-4"> <div class="btn btn-primary" onclick="checkID()">중복확인</div> </div> </div> <div class="invalid-feedback">학번을 입력해 주세요. </div> </div>'
+            +'</div><div class="col-4"> <div class="btn btn-primary" onclick="checkID()">중복확인</div> </div> </div> <div class="invalid-feedback">아이디를 입력해 주세요. </div> </div>'
             +'<div class="col-12"> <label for="pwd" class="form-label">비밀번호<span > (가능한 특수문자: !,@,#,$,%,^,&,*,(,) )</span></label>'
             +'<div class="input-group has-validation"><input type="password" class="form-control" id="pwd" placeholder="8 글자 이상으로 해주세요." required>'
             +'<div class="invalid-feedback">비밀번호를 입력해주세요</div></div></div><div class="col-12">'
@@ -360,9 +357,9 @@
             +'<input type="date" class="form-control" id="birth" placeholder="date"></div></div><div class="col-12"><label for="email" class="form-label">E-mail</label>'
             +'<input type="email" class="form-control" id="email" placeholder="이메일을 입력해주세요."><div class="invalid-feedback">이메일을 입력해주세요.</div></div><div class="col-12">'
             +'<label for="phone" class="form-label">전화번호</label><input type="text" class="form-control" id="phone" placeholder="-포함해서 적어주세요." required><div class="invalid-feedback">전화번호를 입력해주세요.</div></div>'
-            +'<div class="col-md-8"> <label for="hope_type" class="form-label">희망구분<span> (관리자 승인후 변경됩니다.)</span></label> <select class="form-select" id="hope_type" required> <option value="학부생">학부생</option> <option>교수1</option> <option>조교</option>'
-            +' </select> <div class="invalid-feedback">희망구분을 선택해 주세요. </div> </div> </div> <hr class ="my-4"> <div class="w-100 btn btn-primary btn-lg" type="submit" onclick="LetsRegisterBig()">가입하기</div></div>'
-            +' </div> </div> </main> </div>';
+            +'<div class="col-md-12"> <label for="hope_type" class="form-label">희망구분<span> (관리자 승인후 변경됩니다.)</span></label> <select class="form-select" id="hope_type" required> <option value="학부모">학부모</option> <option>기타</option>'
+            +' </select> <div class="invalid-feedback">희망구분을 선택해 주세요. </div> </div> </div> <hr class ="my-4"> <div class="w-100 btn btn-primary btn-lg" type="submit" onclick="LetsRegisterSmall()">가입하기</div></div>'
+            +' </div> </div>';
         list.html(text);// 외부인,경기대 선택시 내용이 바뀜
     }
     function registerInit(){
