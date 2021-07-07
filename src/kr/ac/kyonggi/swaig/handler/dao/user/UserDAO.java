@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserDAO {
 
@@ -86,6 +88,86 @@ public class UserDAO {
         } finally {
             DbUtils.closeQuietly(conn);
         }
+    }
+    public boolean checkID(String id) {
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn,"SELECT * FROM user WHERE id = ?;", new MapListHandler(), id);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<UserDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<UserDTO>>() {}.getType());
+        if(selected.size()==0) {
+            return true;
+        }
+        else
+            return false;
+    }
+    public String registerSmallID(String text) {
+        String arr[] = text.split("-/-/-");//id+"-/-/-"+password+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+phone+"-/-/-"+major+"-/-/-"+perId;
+        if(!checking(text))
+            return "fail";
+        boolean result = false;
+
+
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"INSERT INTO user(id,password,name,gender,birth,email,phone,major,perId) VALUES (?,?,?,?,?,?,?,?,?);", arr[0],arr[1],arr[2],arr[3],arr[4],arr[5],arr[6],arr[7],arr[8]);
+            result = true;
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        if(result)
+            return "success";
+        else
+            return "fail";
+    }
+    private boolean checking(String content) {
+        Pattern SCRIPTS = Pattern.compile("<(no)?script[^>]*>.*?</(no)?script>", Pattern.DOTALL);
+        Pattern STYLE = Pattern.compile("<style[^>]*>.*</style>", Pattern.DOTALL);
+        Pattern TAGS = Pattern.compile("<(\"[^\"]*\"|\'[^\']*\'|[^\'\">])*>");
+        //Pattern nTAGS = Pattern.compile("<\\w+\\s+[^<]*\\s*>");
+        Pattern ENTITY_REFS = Pattern.compile("&[^;]+;");
+        Pattern WHITESPACE = Pattern.compile("\\s\\s+");
+        Pattern WHITE = Pattern.compile("<!--");
+        Pattern ON = Pattern.compile("(on)+[a-z]*=");
+        Pattern SQL = Pattern.compile("[`';=]");
+
+        Matcher m;
+
+        m = SCRIPTS.matcher(content);
+        if(m.find())
+            return false;
+        m = STYLE.matcher(content);
+        if(m.find())
+            return false;
+        m = TAGS.matcher(content);
+        if(m.find())
+            return false;
+        m = ENTITY_REFS.matcher(content);
+        if(m.find())
+            return false;
+        m = WHITESPACE.matcher(content);
+        if(m.find())
+            return false;
+        m = WHITE.matcher(content);
+        if(m.find())
+            return false;
+        m = ON.matcher(content);
+        if(m.find())
+            return false;
+        m = SQL.matcher(content);
+        if(m.find())
+            return false;
+        return true;
     }
 
 }

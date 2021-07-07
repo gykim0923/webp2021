@@ -8,6 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Integer miss = (Integer) session.getAttribute("miss");
+    String main_url = "main.kgu";
+    String img_login_logo = "img/cs_logo.png";
 %>
 <html>
 <head>
@@ -78,7 +80,9 @@
 
 <main class="form-signin">
     <form method="POST" action="login.kgu" id="login_form">
-        <img class="cs_logo" src="img/cs_logo.png" alt="" width="300" height=75>
+        <a href="<%=main_url%>">
+            <img class="cs_logo" src="<%=img_login_logo%>" alt="" width="300" height=75>
+        </a>
         <h1 class="h3 mb-3 fw-normal">로그인</h1>
 
         <div class="form-floating">

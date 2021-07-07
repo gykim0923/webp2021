@@ -4,10 +4,15 @@ package kr.ac.kyonggi.swaig.handler.action;
 import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.Action;
 import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
+import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.Date;
 
 public class AjaxAction implements Action {
     /**
@@ -18,6 +23,7 @@ public class AjaxAction implements Action {
      * data의 경우에는 "일반적으로" JS가 여러 데이터 값을 한줄로 합쳐놓은 상태입니다.
      * 따라서 마지막으로 받는 메소드는 항상 split해줘야 하는지 고민해야 합니다.
      * */
+
 
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Gson gson = new Gson();
@@ -31,6 +37,25 @@ public class AjaxAction implements Action {
                 break;
             case "addExampleData":
                 result = TutorialDAO.getInstance().addExampleData(data); //추가할 데이터 정보를 넘겨줍니다.
+            case "checkId":      //권한 확인 필요 없음(회원가입 중복아이디 체크)
+                if (UserDAO.getInstance().checkID(data))
+                    result = "";
+                else
+                    result = "dup";
+                break;
+            case "register":
+                String small[] = data.split("-/-/-");
+                if (UserDAO.getInstance().checkID(small[0]))
+                    result = UserDAO.getInstance().registerSmallID(data);
+                if (result.equals("success")) {
+                    File log = new File(request.getServletContext().getRealPath("/WEB-INF"), "log.txt");
+                    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(log, true));
+                    bufferedWriter.write(new Date().toString() + "] 회원가입! " + "ID : " + small[0] + " 이름 :" + small[2]  + "\r\n");
+                    bufferedWriter.close();
+                } else
+                    result = "fail";
+                break;
+
         }
         return result;
     }
