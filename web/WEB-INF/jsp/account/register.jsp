@@ -339,7 +339,30 @@
     function registerReset(){
         var list=$('#registerReset');
         var text='';
-        text+='';
+        text+='<div class="col-lg-8" id="registerReset"> <h4 class="mb-3">회원 가입</h4>'
+            +'<div class="needs-validation" novalidate> <div class="row g-3">'
+            +'<div class=""></div>'
+            +'<label for="id" class="form-label">아이디</label><span id="warningID"></span>'
+            +'<div class="row align-items-md-stretch"><div class="col-8">'
+            +'<input type="text" class="form-control" id="id" placeholder="아이디를 입력해주세요." value="" required>'
+            +'</div><div class="col-4"> <div class="btn btn-primary" onclick="checkID()">중복확인</div> </div> </div> <div class="invalid-feedback">학번을 입력해 주세요. </div> </div>'
+            +'<div class="col-12"> <label for="pwd" class="form-label">비밀번호<span > (가능한 특수문자: !,@,#,$,%,^,&,*,(,) )</span></label>'
+            +'<div class="input-group has-validation"><input type="password" class="form-control" id="pwd" placeholder="8 글자 이상으로 해주세요." required>'
+            +'<div class="invalid-feedback">비밀번호를 입력해주세요</div></div></div><div class="col-12">'
+            +'<label for="pwdCheck" class="form-label">비밀번호 확인</label><span id="warningPwd"></span><div class="input-group has-validation">'
+            +'<input type="password" class="form-control" id="pwdCheck" onkeyup="checkPassword()" placeholder="똑같이 입력해주세요." required>'
+            + '<div class="invalid-feedback">비밀번호를 확인해 주세요. </div> </div> </div> <div class="col-12"> <label for="name" class="form-label">이름</label>'
+            + '<input type="email" class="form-control" id="name" placeholder="이름을 입력해주세요"> <div class="invalid-feedback">이름을 입력해주세요 </div> </div>'
+            + '<div class="my-3"><label for="gender" class="form-label">성별</label><div id="gender"><div class="form-check">'
+            +'<input id="male" name="gender" type="radio" class="form-check-input" value="남" checked required><label class="form-check-label" for="male">남</label>'
+            +'</div> <div class="form-check"> <input id="female" name="gender" type="radio" class="form-check-input" value="여" required> <label class="form-check-label" for="female">여</label> </div> </div> </div>'
+            + '<div class="col-12"><label for="birth">생년월일<span> (비밀번호 초기시 생년월일로 초기화됩니다.)</span></label><div class="form-floating mb-3">'
+            +'<input type="date" class="form-control" id="birth" placeholder="date"></div></div><div class="col-12"><label for="email" class="form-label">E-mail</label>'
+            +'<input type="email" class="form-control" id="email" placeholder="이메일을 입력해주세요."><div class="invalid-feedback">이메일을 입력해주세요.</div></div><div class="col-12">'
+            +'<label for="phone" class="form-label">전화번호</label><input type="text" class="form-control" id="phone" placeholder="-포함해서 적어주세요." required><div class="invalid-feedback">전화번호를 입력해주세요.</div></div>'
+            +'<div class="col-md-8"> <label for="hope_type" class="form-label">희망구분<span> (관리자 승인후 변경됩니다.)</span></label> <select class="form-select" id="hope_type" required> <option value="학부생">학부생</option> <option>교수1</option> <option>조교</option>'
+            +' </select> <div class="invalid-feedback">희망구분을 선택해 주세요. </div> </div> </div> <hr class ="my-4"> <div class="w-100 btn btn-primary btn-lg" type="submit" onclick="LetsRegisterBig()">가입하기</div></div>'
+            +' </div> </div> </main> </div>';
         list.html(text);// 외부인,경기대 선택시 내용이 바뀜
     }
     function registerInit(){
