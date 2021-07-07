@@ -33,12 +33,13 @@
             </div>
         </div>
         <div class="row justify-content-md-center"><!--class="row g-5"-->
-        <div class="col-lg-8">
+        <div class="col-lg-8" id="registerReset">
             <h4 class="mb-3">회원 가입</h4>
             <div class="needs-validation" novalidate>
                 <div class="row g-3">
                     <div class="">
                         <label for="id" class="form-label">학번(교번)</label><span id="warningID"></span>
+                        <button type="button" class="btn btn-primary" onclick="registerReset()">외부인 회원가입</button>
                         <div class="row align-items-md-stretch">
                             <div class="col-8">
                                 <input type="text" class="form-control" id="id" placeholder="학번이나 교번을 입력해주세요." value="" required>
@@ -276,6 +277,19 @@
         }
         else
             alert("아이디 중복확인을 해주세요");
+    }
+
+    function registerReset(){
+        var list=$('#registerReset');
+        var text='';
+        text+='<input type="date" class="form-control" value="날짜를 입력하세요" placeholder="Date">'
+            +'<button type="button" class="btn btn-primary" onclick="registerInit()">경기인 회원가입</button>'
+            +'<input type="text" class="form-control" value="텍스트를 입력하세요">'
+            +'<select class="form-control"><option value="1">1</option>';
+        list.html(text);// 외부인,경기대 선택시 내용이 바뀜
+    }
+    function registerInit(){
+        window.location.href = "register.kgu";
     }
 
 </script>
