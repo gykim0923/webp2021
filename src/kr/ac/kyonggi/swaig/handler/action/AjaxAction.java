@@ -5,12 +5,14 @@ import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.Action;
 import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
 import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
-import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
-import kr.ac.kyonggi.swaig.handler.dto.user.UserTypeDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.Date;
 
 public class AjaxAction implements Action {
     /**
@@ -27,8 +29,6 @@ public class AjaxAction implements Action {
         String req = request.getParameter("req"); //JSP에서 넘겨준 req
         HttpSession session = request.getSession(); //Session에 있는 정보로 뭔가 해야할 때 사용
         String data = request.getParameter("data"); //JSP에서 넘겨준 data
-        UserDTO user = gson.fromJson((String)session.getAttribute("user"), UserDTO.class);
-        UserTypeDTO type = gson.fromJson((String)session.getAttribute("type"), UserTypeDTO.class);
         String result=null;
         switch(req) {
             case "deleteExampleData":   //테스트용
@@ -36,13 +36,25 @@ public class AjaxAction implements Action {
                 break;
             case "addExampleData":
                 result = TutorialDAO.getInstance().addExampleData(data); //추가할 데이터 정보를 넘겨줍니다.
-                break;
-            case "checkid":      //권한 확인 필요 없음(회원가입 중복아이디 체크)
+            case "checkId":      //권한 확인 필요 없음(회원가입 중복아이디 체크)
                 if (UserDAO.getInstance().checkID(data))
                     result = "";
                 else
                     result = "dup";
                 break;
+            case "register":
+                String small[] = data.split("-/-/-");
+                if (UserDAO.getInstance().checkID(small[0]))
+                    result = UserDAO.getInstance().registerSmallID(data);
+                if (result.equals("success")) {
+                    File log = new File(request.getServletContext().getRealPath("/WEB-INF"), "log.txt");
+                    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(log, true));
+                    bufferedWriter.write(new Date().toString() + "] 회원가입! " + "ID : " + small[0] + " 이름 :" + small[2]  + "\r\n");
+                    bufferedWriter.close();
+                } else
+                    result = "fail";
+                break;
+
         }
         return result;
     }

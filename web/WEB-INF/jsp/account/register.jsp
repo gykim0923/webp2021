@@ -313,5 +313,34 @@
                         else{
                             alert("빈칸을 채워주세요");
                         }
+        function checkID(){
+            var id = $('#InputID').val();
+            $.ajax({
+                url:"ajax.do",
+                type:"post",
+                data:{
+                    req:"checkid",
+                    data: id
+                },
+                success:function(data){
+                    var result = data;
+                    if(data == 'dup'){
+                        ischeckID = 0;
+                        $('#warningID').html('*중복된 ID입니다');
+                        $('#warningID').css('color', 'red');
+                        $('#warningID').css('font-size', '11px');
+                        $('#warningID').css('margin-left', '10px');
+
+                    }
+                    else{
+                        ischeckID = 1;
+                        $('#warningID').html('*사용가능한 ID입니다');
+                        $('#warningID').css('color', 'blue');
+                        $('#warningID').css('font-size', '11px');
+                        $('#warningID').css('margin-left', '10px');
+                    }
+                }
+            })
+        }
     }
 </script>
