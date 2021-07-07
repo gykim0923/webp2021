@@ -9,6 +9,6 @@ public class mypageAction extends CustomAction {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         super.execute(request,response);
-        return "RequestDispatcher:jsp/page/mypage.jsp";
+        return "RequestDispatcher:jsp/account/mypage.jsp";
     }
 }

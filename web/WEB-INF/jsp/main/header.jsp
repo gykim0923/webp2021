@@ -63,7 +63,7 @@
         var text = '';
 
         for(var i=0; i<headermenulist.length; i++){
-            text+= '<div class="col-lg-2 py-4">'
+            text+= '<div class="col-lg py-4">'
                 +'<h4 class="text-white">'+headermenulist[i].tab_title+'</h4>'
                 +'<ul class="list-unstyled">'
                 +'';
