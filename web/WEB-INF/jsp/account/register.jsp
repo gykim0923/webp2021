@@ -29,12 +29,12 @@
             <div class="needs-validation" novalidate>
                 <div class="row g-3">
                     <div class="">
-                        <label for="id" class="form-label">학번(교번)</label>
+                        <label for="id" class="form-label">학번(교번)</label><span id="warningID"></span>
                         <div class="row align-items-md-stretch">
-                            <div class="col-10">
+                            <div class="col-8">
                                 <input type="text" class="form-control" id="id" placeholder="학번이나 교번을 입력해주세요." value="" required>
                             </div>
-                            <div class="col-2">
+                            <div class="col-4">
                                 <button type="button" class="btn btn-primary">중복확인</button>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="col-12">
-                        <label for="pwd" class="form-label">비밀번호(가능한 특수문자: !,@,#,$,%,^,&,*,(,))</label>
+                        <label for="pwd" class="form-label">비밀번호<span > (가능한 특수문자: !,@,#,$,%,^,&,*,(,))</span></label>
                         <div class="input-group has-validation">
                             <input type="text" class="form-control" id="pwd" placeholder="8 글자 이상으로 해주세요." required>
                             <div class="invalid-feedback">
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <label for="pwdCheck" class="form-label">비밀번호 확인</label>
+                        <label for="pwdCheck" class="form-label">비밀번호 확인</label><span id="warningPwd"></span>
                         <div class="input-group has-validation">
                             <input type="text" class="form-control" id="pwdCheck" placeholder="똑같이 입력해주세요." required>
                             <div class="invalid-feedback">
@@ -131,7 +131,7 @@
                     </div>
                 </div>
                 <hr class ="my-4">
-                <div class="w-100 btn btn-primary btn-lg" type="submit" onclick="LetsRegisterBig">가입하기</div>
+                <div class="w-100 btn btn-primary btn-lg" type="submit" onclick="regist()">가입하기</div>
             </div>
         </div>
         </div>
@@ -152,7 +152,7 @@
     // pattern.push(pattern2);
     // pattern.push(pattern3);
     //
-    // function checkPattern(password){
+    // function checkPattern(password){ //
     //     isSafePassword = 0 ;
     //     var isOK1 = 0;
     //     var isOK2 = 0;
@@ -168,8 +168,8 @@
     //     if(isOK1 == 1 && isOK2 == 1 && isOK3 == 1)
     //         isSafePassword = 1 ;
     // }
-    // function checkID(){
-    //     var id = $('#InputID').val();
+    // function checkID(){ //중북확인
+    //     var id = $('#id').val();
     //     $.ajax({
     //         url:"ajax.do",
     //         type:"post",
@@ -198,27 +198,27 @@
     //     })
     // }
     // function checkPassword(){
-    //     checkPattern($('#InputPassword').val());
-    //     if($('#InputPassword').val().length < 8 || isSafePassword != 1){
+    //     checkPattern($('#pwd').val());
+    //     if($('#pwd').val().length < 8 || isSafePassword != 1){
     //         ischeckPassword = 0;
-    //         $('#warningPassword').html('8자 이상, 영문과 숫자, 특수문자의 조합');
-    //         $('#warningPassword').css('color', 'red');
-    //         $('#warningPassword').css('font-size', '11px');
-    //         $('#warningPassword').css('margin-left', '10px');
+    //         $('#warningPwd').html('8자 이상, 영문과 숫자, 특수문자의 조합');
+    //         $('#warningPwd').css('color', 'red');
+    //         $('#warningPwd').css('font-size', '11px');
+    //         $('#warningPwd').css('margin-left', '10px');
     //     }
-    //     else if($('#InputPassword').val() == $('#InputPasswordCheck').val()){
+    //     else if($('#pwd').val() == $('#pwdCheck').val()){
     //         ischeckPassword = 1;
-    //         $('#warningPassword').html('비밀번호가 일치합니다');
-    //         $('#warningPassword').css('color', 'blue');
-    //         $('#warningPassword').css('font-size', '11px');
-    //         $('#warningPassword').css('margin-left', '10px');
+    //         $('#warningPwd').html('비밀번호가 일치합니다');
+    //         $('#warningPwd').css('color', 'blue');
+    //         $('#warningPwd').css('font-size', '11px');
+    //         $('#warningPwd').css('margin-left', '10px');
     //     }
     //     else{
     //         ischeckPassword = 0;
-    //         $('#warningPassword').html('비밀번호가 일치하지 않습니다');
-    //         $('#warningPassword').css('color', 'red');
-    //         $('#warningPassword').css('font-size', '11px');
-    //         $('#warningPassword').css('margin-left', '10px');
+    //         $('#warningPwd').html('비밀번호가 일치하지 않습니다');
+    //         $('#warningPwd').css('color', 'red');
+    //         $('#warningPwd').css('font-size', '11px');
+    //         $('#warningPwd').css('margin-left', '10px');
     //     }
     // }
     // function LetsRegisterBig(){
@@ -284,8 +284,9 @@
                     var major = $('#major').val();
                     var perID = id;
 
-        if(name!='' && gender!='' && birth!='' && email!='' && phone!='' && major !='' && perID != ''){
-                            var update = id+"-/-/-"+SHA256(forsha)+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+phone+"-/-/-"+type+"-/-/-"+major+"-/-/-"+perID;
+                     if(name!='' && gender!='' && birth!='' && email!='' && phone!='' && major !='' && perID != ''){
+                            var update = id+"-/-/-"+SHA256(forsha)+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+
+                                email+"-/-/-"+phone+"-/-/-"+type+"-/-/-"+major+"-/-/-"+perID;
                             $.ajax({
                                 url:"ajax.do",
                                 type:"post",
