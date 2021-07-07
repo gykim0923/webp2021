@@ -54,9 +54,9 @@
                     </div>
 
                     <div class="col-12">
-                        <label for="pwd" class="form-label">비밀번호<span > (가능한 특수문자: !,@,#,$,%,^,&,*,(,))</span></label>
+                        <label for="pwd" class="form-label">비밀번호<span > (가능한 특수문자: !,@,#,$,%,^,&,*,(,) )</span></label>
                         <div class="input-group has-validation">
-                            <input type="text" class="form-control" id="pwd" placeholder="8 글자 이상으로 해주세요." required>
+                            <input type="password" class="form-control" id="pwd" placeholder="8 글자 이상으로 해주세요." required>
                             <div class="invalid-feedback">
                                 비밀번호를 입력해주세요
                             </div>
@@ -65,7 +65,7 @@
                     <div class="col-12">
                         <label for="pwdCheck" class="form-label">비밀번호 확인</label><span id="warningPwd"></span>
                         <div class="input-group has-validation">
-                            <input type="text" class="form-control" id="pwdCheck" onkeyup="checkPassword()" placeholder="똑같이 입력해주세요." required>
+                            <input type="password" class="form-control" id="pwdCheck" onkeyup="checkPassword()" placeholder="똑같이 입력해주세요." required>
                             <div class="invalid-feedback">
                                 비밀번호를 확인해 주세요.
                             </div>
@@ -85,11 +85,11 @@
                         <label for="gender" class="form-label">성별</label>
                         <div id="gender">
                             <div class="form-check">
-                                <input id="male" name="paymentMethod" type="radio" class="form-check-input" checked required>
+                                <input id="male" name="gender" type="radio" class="form-check-input" value="남" checked required>
                                 <label class="form-check-label" for="male">남</label>
                             </div>
                             <div class="form-check">
-                                <input id="female" name="paymentMethod" type="radio" class="form-check-input" required>
+                                <input id="female" name="gender" type="radio" class="form-check-input" value="여" required>
                                 <label class="form-check-label" for="female">여</label>
                             </div>
                         </div>
@@ -118,8 +118,8 @@
                     </div>
 
                     <div class="col-md-8">
-                        <label for="type" class="form-label">희망구분<span> (관리자 승인후 변경됩니다.)</span></label>
-                        <select class="form-select" id="type" required>
+                        <label for="hope_type" class="form-label">희망구분<span> (관리자 승인후 변경됩니다.)</span></label>
+                        <select class="form-select" id="hope_type" required>
                             <option value="학부생">학부생</option>
                             <option>교수1</option>
                             <option>조교</option>
@@ -141,7 +141,7 @@
                     </div>
                 </div>
                 <hr class ="my-4">
-                <div class="w-100 btn btn-primary btn-lg" type="submit" onclick="LetsRegisterBig()">가입하기</div>
+                <a href="loginPage.kgu"><div class="w-100 btn btn-primary btn-lg" type="submit" onclick="LetsRegisterBig()">가입하기</div></a>
             </div>
         </div>
         </div>
@@ -182,7 +182,7 @@
         var id = $('#id').val();
         alert(id);
         $.ajax({
-            url:"ajax.do",
+            url:"ajax.kgu",
             type:"post",
             data:{
                 req:"checkId",
@@ -244,15 +244,15 @@
                 var birth = $('#birth').val();
                 var email = $('#email').val();
                 var phone = $('#phone').val();
-                var type = $('#type').val();
+                var hopetype = $('#hope_type').val();
                 var major = $('#major').val();
                 var perID = id;
 
-                if(name!='' && gender!='' && birth!='' && email!='' && phone!='' && major !='' && perID != ''){
-                    var update = id+"-/-/-"+SHA256(forsha)+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+
-                        email+"-/-/-"+phone+"-/-/-"+type+"-/-/-"+major+"-/-/-"+perID;
+                if(name!='' && gender!='' && birth!='' && email!='' && phone!=''  && perID != ''){
+                    var update = id+"-/-/-"+SHA256(forsha)+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+hopetype+"-/-/-"+
+                        email+"-/-/-"+phone+"-/-/-"+major+"-/-/-"+perID;
                     $.ajax({
-                        url:"ajax.do",
+                        url:"ajax.kgu",
                         type:"post",
                         data:{
                             req:"register",

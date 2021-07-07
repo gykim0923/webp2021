@@ -109,7 +109,7 @@ public class UserDAO {
             return false;
     }
     public String registerSmallID(String text) {
-        String arr[] = text.split("-/-/-");//id+"-/-/-"+password+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+phone+"-/-/-"+major+"-/-/-"+perId;
+        String arr[] = text.split("-/-/-");//id+"-/-/-"+password+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+phone+"-/-/-"+type+"-/-/-"+major+"-/-/-"+perId;
         if(!checking(text))
             return "fail";
         boolean result = false;
@@ -118,7 +118,7 @@ public class UserDAO {
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn,"INSERT INTO user(id,password,name,gender,birth,email,phone,major,perId) VALUES (?,?,?,?,?,?,?,?,?);", arr[0],arr[1],arr[2],arr[3],arr[4],arr[5],arr[6],arr[7],arr[8]);
+            queryRunner.update(conn,"INSERT INTO user(id,password,name,gender,birth,hope_type,email,phone,major,per_id) VALUES (?,?,?,?,?,?,?,?,?,?);", arr[0],arr[1],arr[2],arr[3],arr[4],arr[5],arr[6],arr[7],arr[8],arr[9]);
             result = true;
         } catch(SQLException se) {
             se.printStackTrace();
