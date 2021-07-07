@@ -130,6 +130,30 @@ public class UserDAO {
         else
             return "fail";
     }
+
+    public String registerSmallID(String text) {
+        String arr[] = text.split("-/-/-");//id+"-/-/-"+password+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+phone+"-/-/-"+type+"-/-/-"+major+"-/-/-"+perId;
+        if(!checking(text))
+            return "fail";
+        boolean result = false;
+
+
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"INSERT INTO user(id,password,name,gender,birth,hope_type,email,phone) VALUES (?,?,?,?,?,?,?,?);", arr[0],arr[1],arr[2],arr[3],arr[4],arr[5],arr[6],arr[7]);
+            result = true;
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        if(result)
+            return "success";
+        else
+            return "fail";
+    }
+
     private boolean checking(String content) {
         Pattern SCRIPTS = Pattern.compile("<(no)?script[^>]*>.*?</(no)?script>", Pattern.DOTALL);
         Pattern STYLE = Pattern.compile("<style[^>]*>.*</style>", Pattern.DOTALL);

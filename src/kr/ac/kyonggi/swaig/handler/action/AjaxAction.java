@@ -44,7 +44,7 @@ public class AjaxAction implements Action {
                 else
                     result = "dup";
                 break;
-            case "register":
+            case "registerBig":
                 String big[] = data.split("-/-/-");
                 if (UserDAO.getInstance().checkID(big[0]))
                     result = UserDAO.getInstance().registerBigID(data);
@@ -56,7 +56,18 @@ public class AjaxAction implements Action {
                 } else
                     result = "fail";
                 break;
-
+            case "registerSmall":
+                String small[] = data.split("-/-/-");
+                if (UserDAO.getInstance().checkID(small[0]))
+                    result = UserDAO.getInstance().registerSmallID(data);
+                if (result.equals("success")) {
+                    File log = new File(request.getServletContext().getRealPath("/WEB-INF"), "log.txt");
+                    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(log, true));
+                    bufferedWriter.write(new Date().toString() + "] 회원가입! " + "ID : " + small[0] + " 이름 :" + small[2]  + "\r\n");
+                    bufferedWriter.close();
+                } else
+                    result = "fail";
+                break;
         }
         return result;
     }

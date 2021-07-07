@@ -245,17 +245,15 @@
                 var email = $('#email').val();
                 var phone = $('#phone').val();
                 var hopetype = $('#hope_type').val();
-                var major = $('#major').val();
-                var perID = id;
 
-                if(name!='' && gender!='' && birth!='' && email!='' && phone!=''  && perID != ''){
+                if(name!='' && gender!='' && birth!='' && email!='' && phone!=''){
                     var update = id+"-/-/-"+SHA256(forsha)+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+hopetype+"-/-/-"+
-                        email+"-/-/-"+phone+"-/-/-"+major+"-/-/-"+perID;
+                        email+"-/-/-"+phone+"-/-/-";
                     $.ajax({
                         url:"ajax.kgu",
                         type:"post",
                         data:{
-                            req:"register",
+                            req:"registerBig",
                             data: update
                         },
                         success:function(data){
@@ -266,6 +264,56 @@
                             }
                             else
                                 alert('SERVER ERROR, Please try again later');
+                        }
+                    })
+                }
+                else{
+                    alert("빈칸을 채워주세요");
+                }
+            }
+            else{
+                alert("비밀번호를 일치시켜주세요.");
+            }
+        }
+        else
+            alert("아이디 중복확인을 해주세요");
+    }
+
+    function LetsRegisterSmall(){
+        if(ischeckID == 1){
+            if(ischeckPassword == 1){
+                var id =$('#id').val();
+                var password = $('#pwd').val();
+                var forsha = id+password;
+                var name = $('#name').val();
+                var gender = $('input[name=gender]:checked').val();
+                var birth = $('#birth').val();
+                var email = $('#email').val();
+                var phone = $('#phone').val();
+                var hopetype = $('#hope_type').val();
+                var major = $('#major').val();
+                var perID = id;
+                if(name!=''&& gender!='' && birth!='' && email!='' && phone!=''){
+                    var update = id+"-/-/-"+SHA256(forsha)+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+phone+"-/-/-"+type;
+                    $.ajax({
+                        url:"ajax.do",
+                        type:"post",
+                        data:{
+                            req:"registerSmall",
+                            data: update
+                        },
+                        success:function(data){
+                            if(data == "success"){
+                                $('#information').html('회원가입 완료');
+                                var inputPanel = $('#inputPanel');
+                                inputPanel.empty();
+                                var a = '';
+                                a += '<a href="loginpage.do" class="loginBtn" style = "text-decoration: none; text-align : center; margin : 25px 25px"><div id="login_btn">로그인하기</div></a>';
+                                inputPanel.html(a);
+                            }
+                            else{
+                                alert('SERVER ERROR, Please try again later');
+                            }
                         }
                     })
                 }
