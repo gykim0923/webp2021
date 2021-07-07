@@ -6,6 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String img_login_logo = "img/cs_logo.png";
+    String main_url = "main.kgu";
+%>
 <html>
 <head>
     <%--    Bootstrap--%>
@@ -21,7 +25,11 @@
 <div class="container">
     <main>
         <div class="row justify-content-md-center">
-            <div class="col-md-4 col-lg-6"><a href="Index"><img src="img/cs_logo.png" class="img-fluid"></a></div>
+            <div class="col-md-4 col-lg-6">
+                <a href="<%=main_url%>">
+                    <img src="<%=img_login_logo%>" class="img-fluid">
+                </a>
+            </div>
         </div>
         <div class="row justify-content-md-center"><!--class="row g-5"-->
         <div class="col-lg-8">
