@@ -51,6 +51,8 @@ INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('학부�
 INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('복전생', 'Student', '2', '학생');
 INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('타과생', 'Student', '2', '학생');
 INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('학부모', 'Etc', '3', '기타');
+INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('조교', 'Studend', '2', '학생');
+INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('입학예정자', 'Etc', '3', '기타');
 INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('기타', 'Etc', '3', '기타');
 
 CREATE TABLE user(
