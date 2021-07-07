@@ -44,7 +44,14 @@ CREATE TABLE usertype(
      PRIMARY KEY(`type_name`)
 );
 
-INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('Admin', '관리자', '0', '관리자');
+INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('홈페이지관리자', 'Admin', '0', '관리자');
+INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('교수', 'Professor', '1', '교수');
+INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('대학원생', 'Student', '2', '학생');
+INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('학부생', 'Student', '2', '학생');
+INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('복전생', 'Student', '2', '학생');
+INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('타과생', 'Student', '2', '학생');
+INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('학부모', 'Etc', '3', '기타');
+INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('기타', 'Etc', '3', '기타');
 
 CREATE TABLE user(
     `id` VARCHAR(45) NOT NULL,
