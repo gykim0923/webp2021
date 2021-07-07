@@ -25,29 +25,23 @@
 
     <div class="row align-items-md-stretch">
 
-      <div class="col-lg-2 py-2">
-        <div class=" h-100 p-5 bg-light border">
+      <div class="col-lg-3 py-2">
+        <div class=" h-100 py-5 px-2 bg-light border text-center">
           <h2><strong>소메뉴 리스트</strong></h2>
           <hr>
-          <div class="row">
-            <div class="col-5"></div>
-            <div class="col-7">
-
-            </div>
-          </div>
         </div>
       </div>
 
-      <div class="col-lg-10 py-2">
+      <div class="col-lg-9 py-2">
         <div class=" h-100 p-5 bg-light border">
           <h2><strong>회원정보</strong></h2>
           <hr>
+          <div class="row">
+            <div id="text"></div>
+          </div>
         </div>
       </div>
-
     </div>
-
-
   </div>
 </main>
 </body>
