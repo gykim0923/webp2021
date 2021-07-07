@@ -224,7 +224,7 @@
             $('#warningPwd').css('margin-left', '10px');
         }
         else{
-            ischeckPassword = 0;
+            ischeckPassword = 2;
             $('#warningPwd').html('비밀번호가 일치하지 않습니다');
             $('#warningPwd').css('color', 'red');
             $('#warningPwd').css('font-size', '11px');
@@ -272,7 +272,10 @@
                 }
             }
             else{
-                alert("비밀번호를 일치시켜주세요.");
+                if(ischeckPassword == 0)
+                    alert("8자 이상으로 영문,숫자,특수문자를 모두 사용하여 입력해주세요.")
+                else
+                    alert("비밀번호를 일치시켜주세요.");
             }
         }
         else
