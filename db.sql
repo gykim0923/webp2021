@@ -83,3 +83,12 @@ CREATE TABLE major(
 );
 
 INSERT INTO major(oid,major_id,major_name,major_color1,major_color2,major_color3) VALUE('0','main','융합데이터공학전공','#000000','#000000','#000000');
+
+CREATE TABLE documents(
+                      `oid` int(50) NOT NULL AUTO_INCREMENT,
+                      `title` VARCHAR(250) NOT NULL,
+                      `contents` TEXT NOT NULL,
+                      PRIMARY KEY (`oid`)
+);
+
+INSERT INTO documents(oid, title, contents) VALUE('0','메인페이지','게시글내용');

@@ -16,6 +16,7 @@
         <a href="tutorial.kgu?tutorial=main" class="btn btn-secondary my-2">데이터 관련 예시</a>
         <a href="tutorial.kgu?tutorial=bootstrap" class="btn btn-secondary my-2">부트스트랩 예시</a>
         <a href="tutorial.kgu?tutorial=layout" class="btn btn-secondary my-2">페이지 레이아웃</a>
+        <a href="tutorial.kgu?tutorial=documents_view&&article=0" class="btn btn-secondary my-2">Document</a>
       </p>
     </div>
   </div>
