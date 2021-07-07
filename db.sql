@@ -101,3 +101,21 @@ CREATE TABLE documents(
 );
 
 INSERT INTO documents(oid, title, contents) VALUE('0','메인페이지','게시글내용');
+
+CREATE TABLE text(
+    `id` int(50) NOT NULL,
+    `content` TEXT NOT NULL,
+    PRIMARY KEY(`id`)
+);
+
+CREATE TABLE professor(
+    `id` int(50) NOT NULL AUTO_INCREMENT,
+    `prof_img` VARCHAR (100) NOT NULL,
+    `prof_name` VARCHAR (100) NOT NULL,
+    `prof_email` VARCHAR (100) NOT NULL,
+    `prof_lecture` VARCHAR (200) NOT NULL,
+    `prof_location` VARCHAR (100) NOT NULL,
+    `prof_call` VARCHAR (100) NOT NULL,
+    PRIMARY KEY (`id`)
+)
+
