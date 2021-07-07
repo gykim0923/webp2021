@@ -180,7 +180,6 @@
     }
     function checkID(){ //중북확인
         var id = $('#id').val();
-        alert(id);
         $.ajax({
             url:"ajax.kgu",
             type:"post",
@@ -200,7 +199,6 @@
                 }
                 else{
                     ischeckID = 1;
-                    alert(id);
                     $('#warningID').html('*사용가능한 ID입니다');
                     $('#warningID').css('color', 'blue');
                     $('#warningID').css('font-size', '11px');
@@ -245,10 +243,12 @@
                 var email = $('#email').val();
                 var phone = $('#phone').val();
                 var hopetype = $('#hope_type').val();
+                var major = $('#major').val();
+                var perID = id;
 
                 if(name!='' && gender!='' && birth!='' && email!='' && phone!=''){
                     var update = id+"-/-/-"+SHA256(forsha)+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+hopetype+"-/-/-"+
-                        email+"-/-/-"+phone+"-/-/-";
+                        email+"-/-/-"+phone+"-/-/-"+major+"-/-/-"+perID;
                     $.ajax({
                         url:"ajax.kgu",
                         type:"post",
@@ -291,12 +291,10 @@
                 var email = $('#email').val();
                 var phone = $('#phone').val();
                 var hopetype = $('#hope_type').val();
-                var major = $('#major').val();
-                var perID = id;
                 if(name!=''&& gender!='' && birth!='' && email!='' && phone!=''){
-                    var update = id+"-/-/-"+SHA256(forsha)+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+phone+"-/-/-"+type;
+                    var update = id+"-/-/-"+SHA256(forsha)+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+phone+"-/-/-"+hopetype;
                     $.ajax({
-                        url:"ajax.do",
+                        url:"ajax.kgu",
                         type:"post",
                         data:{
                             req:"registerSmall",
