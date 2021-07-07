@@ -117,5 +117,13 @@ CREATE TABLE professor(
     `prof_location` VARCHAR (100) NOT NULL,
     `prof_call` VARCHAR (100) NOT NULL,
     PRIMARY KEY (`id`)
-)
+);
+
+CREATE TABLE club(
+                     `id` INT(50)  NOT NULL,
+                     `clubname` VARCHAR (45)  NOT NULL,
+                     `clubcontent` text  NOT NULL,
+                     `clubaddr` text,
+                         PRIMARY KEY (`id`)
+);
 
