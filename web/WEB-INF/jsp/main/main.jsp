@@ -21,7 +21,7 @@
     <div class="container py-4">
         <div class="row align-items-md-stretch">
             <div class="col-lg-9 py-2">
-                <div id="myCarousel" class="carousel slide"
+                <div id="myCarousel" class="carousel slide  shadow rounded"
                      data-bs-ride="carousel" style="margin-bottom : 0px;">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
@@ -81,7 +81,7 @@
                 </div>
             </div>
             <div class="col-lg-3 py-2">
-                <div class=" h-100 p-5 bg-light border">
+                <div class=" h-100 p-5 bg-light border  shadow rounded">
                     <h2><strong>바로가기</strong></h2>
                 </div>
             </div>
@@ -92,21 +92,21 @@
         <div class="row align-items-md-stretch">
 
             <div class="col-lg py-2">
-                <div class=" h-100 p-5 bg-light border">
+                <div class=" h-100 p-5 bg-light border shadow rounded">
                     <h2><strong>영역 1</strong></h2>
                     <hr>
                 </div>
             </div>
 
             <div class="col-lg py-2">
-                <div class=" h-100 p-5 bg-light border">
+                <div class=" h-100 p-5 bg-light border shadow rounded">
                     <h2><strong>영역 2</strong></h2>
                     <hr>
                 </div>
             </div>
 
             <div class="col-lg-3 py-2">
-                <div class=" h-100 p-5 bg-light border">
+                <div class=" h-100 p-5 bg-light border shadow rounded">
                     <h2><strong>일정</strong></h2>
                 </div>
             </div>

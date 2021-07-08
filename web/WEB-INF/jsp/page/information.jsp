@@ -17,20 +17,18 @@
 
     <div class="row align-items-md-stretch">
       <div class="col-lg-12 py-2">
-        <div class=" h-100 p-5 bg-light border" id="page_title"></div>
+        <div class=" h-100 p-5 bg-light border shadow rounded" id="page_title"></div>
       </div>
     </div>
 
     <div class="row align-items-md-stretch">
 
       <div class="col-lg-2 py-2">
-        <div class=" h-100 p-5 bg-light border"  id="page_menu">
-          <hr>
-        </div>
+        <div class=" h-100 p-5 bg-light border shadow rounded"  id="page_menu"></div>
       </div>
 
       <div class="col-lg-10 py-2">
-        <div class=" h-100 p-5 bg-light border">
+        <div class=" h-100 p-5 bg-light border shadow rounded">
           <h2><strong>본문</strong></h2>
           <hr>
         </div>

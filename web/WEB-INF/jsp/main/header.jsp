@@ -80,7 +80,7 @@
     }
 
 </script>
-<script> //전공 제목 및 로그인 정보 작성
+<script> //헤더 제어
     $(document).ready(function(){
         makeHeaderInfo();
         makeHeaderTitle();
@@ -115,8 +115,9 @@
 </script>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function(){ //본문 제어
         makePageHeader();
+        makePageMenu();
     })
 
     function makePageHeader() {
@@ -129,20 +130,14 @@
                 page_title=pageMenu[i].page_title;
             }
         }
-        list.append(page_title);
+        var text='<h2><strong>'+page_title+'</strong></h2>';
+        list.append(text);
     }
-</script>
-
-<script>
-    $(document).ready(function(){
-        makePageMenu();
-    })
 
     function makePageMenu() {
         var list = $('#page_menu');
         var text='';
         var pageMenu = <%=pageMenu%>;
-        // alert(pageMenu);
         for (var i = 0; i < pageMenu.length; i++) {
             text+='<div><span class="deco_dot">●</span><a href="'+pageMenu[i].page_path+'?num='+pageMenu[i].page_id+'">'+ pageMenu[i].page_title + '</div>';
         }
