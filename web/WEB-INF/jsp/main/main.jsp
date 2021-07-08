@@ -113,7 +113,5 @@
         </div>
     </div>
 </main>
-main 페이지의 내용<br>
-<a href="tutorial.kgu?tutorial=main">연습 페이지로 이동하기</a>
 </body>
 </html>

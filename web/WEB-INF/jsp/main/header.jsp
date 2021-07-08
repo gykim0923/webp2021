@@ -99,7 +99,7 @@
         else{ //임시
             var text = '<div>안녕하세요. ' + user.name + ' ('+type.for_header+')님. ';
             if(type.for_header=='관리자'){
-                text +='<a href="admin.kgu?admin=main">관리페이지</a>';
+                text +='<a href="admin.kgu?admin=main"> 관리페이지 </a> <a href="tutorial.kgu?tutorial=main"> 튜토리얼 </a>';
             }
             else{
                 text +=' <a href="mypage.kgu">마이페이지</a> ';
