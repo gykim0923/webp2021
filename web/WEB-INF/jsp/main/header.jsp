@@ -7,8 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%
-    String headermenulist = (String)session.getAttribute("headermenulist");
-    String menulist = (String)session.getAttribute("menulist");
+    String num=(String)request.getAttribute("num");
+    String headermenulist = (String)request.getAttribute("headermenulist");
+    String menulist = (String)request.getAttribute("menulist");
+    String pageMenu = (String)request.getAttribute("pageMenu");
     String user =  (String)session.getAttribute("user");
     String type =  (String)session.getAttribute("type");
     String major = (String)request.getAttribute("major");
@@ -51,7 +53,7 @@
         </div>
     </div>
 </header>
-<script>
+<script> //Header Menu 제작
     $(document).ready(function(){
         makeHeaderMenu();
     })
@@ -69,7 +71,7 @@
                 +'';
             for(var j=0; j<menulist.length; j++){
                 if(headermenulist[i].tab_id==menulist[j].tab_id){
-                    text+='<li><a href="'+menulist[j].page_path+'" class="text-white">'+menulist[j].page_title+'</a></li>'
+                    text+='<li><a href="'+menulist[j].page_path+'?num='+menulist[i].page_id+'" class="text-white">'+menulist[j].page_title+'</a></li>'
                 }
             }
             text+='</ul></div>';
@@ -78,7 +80,7 @@
     }
 
 </script>
-<script>
+<script> //전공 제목 및 로그인 정보 작성
     $(document).ready(function(){
         makeHeaderInfo();
         makeHeaderTitle();
@@ -93,16 +95,16 @@
         var user =<%=user%>;
         var type =<%=type%>;
         var it = $('#member');
-        if(user == null){
+        if(user == null){ //Geust
             var text = '<div class=""><a href="loginPage.kgu" title="로그인">LOGIN</a></div>';
         }
-        else{ //임시
+        else{ //로그인 시
             var text = '<div>안녕하세요. ' + user.name + ' ('+type.for_header+')님. ';
             if(type.for_header=='관리자'){
-                text +='<a href="admin.kgu?admin=main"> 관리페이지 </a> <a href="tutorial.kgu?tutorial=main"> 튜토리얼 </a>';
+                text +='<a href="admin.kgu?num=90"> 관리페이지 </a> <a href="tutorial.kgu?tutorial=main"> 튜토리얼 </a>';
             }
             else{
-                text +=' <a href="mypage.kgu">마이페이지</a> ';
+                text +=' <a href="mypage.kgu?num=80">마이페이지</a> ';
             }
             text += '  <a href="logout.kgu" title=LOGOUT>LOGOUT</a></div>';
         }
@@ -110,4 +112,40 @@
     }
 
 
+</script>
+
+<script>
+    $(document).ready(function(){
+        makePageHeader();
+    })
+
+    function makePageHeader() {
+        var num = <%=num%>;
+        var list = $('#page_title');
+        var pageMenu = <%=pageMenu%>;
+        var page_title='';
+        for (var i = 0; i < pageMenu.length; i++) {
+            if(pageMenu[i].page_id==num){
+                page_title=pageMenu[i].page_title;
+            }
+        }
+        list.append(page_title);
+    }
+</script>
+
+<script>
+    $(document).ready(function(){
+        makePageMenu();
+    })
+
+    function makePageMenu() {
+        var list = $('#page_menu');
+        var text='';
+        var pageMenu = <%=pageMenu%>;
+        // alert(pageMenu);
+        for (var i = 0; i < pageMenu.length; i++) {
+            text+='<div><span class="deco_dot">●</span><a href="'+pageMenu[i].page_path+'?num='+pageMenu[i].page_id+'">'+ pageMenu[i].page_title + '</div>';
+        }
+        list.append(text);
+    }
 </script>

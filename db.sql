@@ -38,29 +38,29 @@ CREATE TABLE menu_pages(
     `min_level` INT(10)  NOT NULL DEFAULT '0', PRIMARY KEY(`page_id`)
 );
 
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('1', 'information.kgu', '학과소개', '1', '11', '1', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('2', 'information.kgu', '연혁', '1', '11', '2', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('3', 'information.kgu', '교육환경', '1', '11', '3', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('4', 'information.kgu', '교육목표', '1', '11', '4', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('5', 'curriculum.kgu', '교육과정', '2', '11', '1', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('6', 'information.kgu', '학습활동', '2', '11', '2', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('7', 'information.kgu', '동아리 소개', '2', '11', '3', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('8', 'professor.kgu', '교수진', '3', '11', '1', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('9', 'laboratory.kgu', '연구실', '3', '11', '2', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('10', 'notice_article_list.kgu', '전체공지', '4', '11', '1', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('11', 'notice_article_list.kgu', '학과공지', '4', '11', '2', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('12', 'notice_article_list.kgu', '수업공지', '4', '11', '3', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('13', 'notice_article_list.kgu', '취업공지', '4', '11', '4', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('14', 'notice_article_list.kgu', '신청하기', '5', '11', '1', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('15', 'notice_article_list.kgu', '학과자료실', '5', '11', '2', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('16', 'webzine_list.kgu', '학과소식', '6', '11', '1', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('17', 'webzine_list.kgu', '우수작품전', '6', '11', '2', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('18', 'webzine_list.kgu', '칼럼', '6', '11', '3', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('19', 'notice_article_list.kgu', '전공게시판', '7', '11', '1', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('20', 'gallery_board_list.kgu', '갤러리', '7', '11', '2', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('21', 'mypage.kgu', '마이페이지', '8', '11', '1', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('22', 'admin_main.kgu', '홈페이지관리', '9', '11', '1', '0');
-INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('23', 'admin_user.kgu', '회원관리', '9', '11', '2', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('10', 'information.kgu', '학과소개', '1', '11', '0', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('11', 'information.kgu', '연혁', '1', '11', '1', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('12', 'information.kgu', '교육환경', '1', '11', '2', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('13', 'information.kgu', '교육목표', '1', '11', '3', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('20', 'curriculum.kgu', '교육과정', '2', '11', '0', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('21', 'information.kgu', '학습활동', '2', '11', '1', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('22', 'information.kgu', '동아리 소개', '2', '11', '2', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('30', 'professor.kgu', '교수진', '3', '11', '0', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('31', 'laboratory.kgu', '연구실', '3', '11', '1', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('40', 'notice_article_list.kgu', '전체공지', '4', '11', '0', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('41', 'notice_article_list.kgu', '학과공지', '4', '11', '1', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('42', 'notice_article_list.kgu', '수업공지', '4', '11', '2', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('43', 'notice_article_list.kgu', '취업공지', '4', '11', '3', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('50', 'notice_article_list.kgu', '신청하기', '5', '11', '0', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('51', 'notice_article_list.kgu', '학과자료실', '5', '11', '1', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('60', 'webzine_list.kgu', '학과소식', '6', '11', '0', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('61', 'webzine_list.kgu', '우수작품전', '6', '11', '1', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('62', 'webzine_list.kgu', '칼럼', '6', '11', '2', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('70', 'notice_article_list.kgu', '전공게시판', '7', '11', '0', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('71', 'gallery_board_list.kgu', '갤러리', '7', '11', '1', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('80', 'mypage.kgu', '마이페이지', '8', '11', '0', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('90', 'admin_main.kgu', '홈페이지관리', '9', '11', '0', '0');
+INSERT INTO menu_pages(page_id,page_path,page_title,tab_id,max_level,orderNum,min_level) VALUE('91', 'admin_user.kgu', '회원관리', '9', '11', '1', '0');
 
 
 

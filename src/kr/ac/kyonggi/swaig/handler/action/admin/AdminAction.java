@@ -10,11 +10,12 @@ public class AdminAction extends CustomAction {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         super.execute(request,response);
         String admin= request.getParameter("admin");
-        if(admin!=null){
-            if(admin.equals("main")){
+        String num= request.getParameter("num");
+        if(num!=null){
+            if(num.equals("90")){
                 return "RequestDispatcher:jsp/admin/admin_main.jsp";
             }
-            else if(admin.equals("user")){
+            else if(num.equals("91")){
                 return "RequestDispatcher:jsp/admin/admin_user.jsp";
             }
             else {

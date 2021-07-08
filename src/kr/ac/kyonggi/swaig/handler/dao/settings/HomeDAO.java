@@ -10,6 +10,7 @@ import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class HomeDAO {
         ArrayList<HeaderMenuDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<HeaderMenuDTO>>() {}.getType());
         return selectedList;
     }
+
     public ArrayList<MenuDTO> getMenu(){
         List<Map<String, Object>> listOfMaps = null;
         Connection conn = Config.getInstance().sqlLogin();
@@ -55,6 +57,35 @@ public class HomeDAO {
         ArrayList<MenuDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<MenuDTO>>() {}.getType());
         return selectedList;
     }
+
+    public ArrayList<MenuDTO> getPageMenu(String num){
+        /**
+         * id가 3자리인 경우는 tab_id가 2자리라고 가정하고 설계함.
+         * 예를들어 num=110이 들어온다면
+         * tab_id는 11, orderNum은 0
+         * 으로 해석됨.
+         * */
+
+        String tab_id=num.substring(0,num.length()-1);
+        String orderNum=num.substring(num.length()-1, num.length());
+//        System.out.println(tab_id+" "+orderNum);
+
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM `menu_pages` WHERE `tab_id`=? ORDER BY `orderNum` ASC ;", new MapListHandler(), tab_id);
+            System.out.println(listOfMaps);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<MenuDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<MenuDTO>>() {}.getType());
+        return selectedList;
+    }
+
 
     public ArrayList<MajorDTO> getMajor(String major) {
         List<Map<String, Object>> listOfMaps = null;

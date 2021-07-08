@@ -26,8 +26,8 @@
     <div class="row align-items-md-stretch">
 
       <div class="col-lg-3 py-2">
-        <div class=" h-100 py-5 px-2 bg-light border text-center">
-          <h2><strong>소메뉴 리스트</strong></h2>
+        <div class=" h-100 py-5 px-3 bg-light border text-center" id="page_menu">
+<%--          <h2><strong>소메뉴 리스트</strong></h2>--%>
           <hr>
         </div>
       </div>
