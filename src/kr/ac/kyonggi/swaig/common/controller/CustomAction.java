@@ -7,6 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Header를 사용하려는 Action은 반드시 이 클래스를 상속받아야합니다.
+ * 여기에 있는 설정들이 있어야 Header가 제대로 동작합니다.
+ * */
+
 public class CustomAction implements Action{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
