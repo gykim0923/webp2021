@@ -12,6 +12,6 @@ public class mypageAction extends CustomAction {
         super.execute(request,response);
         Gson gson = new Gson();
         request.setAttribute("jsp", gson.toJson("mypage")); //mypage.jsp
-        return "RequestDispatcher:jsp/account/page.jsp";
+        return "RequestDispatcher:jsp/main/page.jsp";
     }
 }

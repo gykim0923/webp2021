@@ -34,16 +34,16 @@
       <div class="col-lg-10 py-2">
         <div class=" h-100 p-5 bg-light border shadow rounded">
           <c:if test="${jsp == '\"information\"'}">
-            <%@include file="/WEB-INF/jsp/page/information.jsp"%>
+            <%@include file="/WEB-INF/jsp/page/menu/information.jsp"%>
           </c:if>
           <c:if test="${jsp == '\"admin_main\"'}">
-            <%@include file="/WEB-INF/jsp/admin/admin_main.jsp"%>
+            <%@include file="/WEB-INF/jsp/page/admin/admin_main.jsp"%>
           </c:if>
           <c:if test="${jsp == '\"admin_user\"'}">
-            <%@include file="/WEB-INF/jsp/admin/admin_user.jsp"%>
+            <%@include file="/WEB-INF/jsp/page/admin/admin_user.jsp"%>
           </c:if>
           <c:if test="${jsp == '\"mypage\"'}">
-            <%@include file="/WEB-INF/jsp/account/mypage.jsp"%>
+            <%@include file="/WEB-INF/jsp/page/user/mypage.jsp"%>
           </c:if>
         </div>
       </div>
