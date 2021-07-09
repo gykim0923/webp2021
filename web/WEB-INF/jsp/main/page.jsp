@@ -42,6 +42,9 @@
           <c:if test="${jsp == '\"admin_user\"'}">
             <%@include file="/WEB-INF/jsp/admin/admin_user.jsp"%>
           </c:if>
+          <c:if test="${jsp == '\"mypage\"'}">
+            <%@include file="/WEB-INF/jsp/account/mypage.jsp"%>
+          </c:if>
         </div>
       </div>
 
