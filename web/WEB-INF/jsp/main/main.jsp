@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
@@ -108,6 +109,11 @@
             <div class="col-lg-3 py-2">
                 <div class=" h-100 p-5 bg-light border shadow rounded">
                     <h2><strong>일정</strong></h2>
+<%--                    아래는 taglib의 예시로, major!="main"일때만 특정한 jsp를 삽입하겠다는 예시임--%>
+                    <c:if test="${major ne '\"main\"'}">
+                        <div><%=major%></div>
+                        <%@include file="/WEB-INF/jsp/tutorial/common/tutorial_section.jsp"%>
+                    </c:if>
                 </div>
             </div>
         </div>
