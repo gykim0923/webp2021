@@ -2,6 +2,8 @@ package kr.ac.kyonggi.swaig.handler.action.admin;
 
 import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.CustomAction;
+import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
+import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +21,7 @@ public class AdminAction extends CustomAction {
             }
             else if(num.equals("91")){
                 request.setAttribute("jsp", gson.toJson("admin_user")); //information.jsp
+                request.setAttribute("getAllUser", gson.toJson(UserDAO.getInstance().getAllUser()));
                 return "RequestDispatcher:jsp/main/page.jsp";
             }
             else {

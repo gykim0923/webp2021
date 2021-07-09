@@ -78,6 +78,22 @@ public class UserDAO {
             return null;
     }
 
+    public ArrayList<UserDTO> getAllUser() {
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn,"SELECT * FROM user;", new MapListHandler());
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<UserDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<UserDTO>>() {}.getType());
+        return selected;
+    }
+
     public void whoIsLogIn(String id) {
         Connection conn = Config.getInstance().sqlLogin();
         try {
