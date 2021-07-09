@@ -7,15 +7,30 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%
+    /**
+     * [공통] url 제어
+     * */
+    String major = (String)request.getAttribute("major");
     String num=(String)request.getAttribute("num");
+
+    /**
+     * [공통] 헤더 제어
+     * */
     String headermenulist = (String)request.getAttribute("headermenulist");
     String menulist = (String)request.getAttribute("menulist");
-    String pageMenu = (String)request.getAttribute("pageMenu");
-    String user =  (String)session.getAttribute("user");
-    String type =  (String)session.getAttribute("type");
-    String major = (String)request.getAttribute("major");
     String main_url = "main.kgu?major="+major.substring(1, major.length()-1);
     String majorInfo = (String)request.getAttribute("majorInfo");
+
+    /**
+     * [공통] 로그인 정보 제어
+     * */
+    String user =  (String)session.getAttribute("user");
+    String type =  (String)session.getAttribute("type");
+
+    /**
+     * [일부] 페이지 메뉴 제어
+     * */
+    String pageMenu = (String)request.getAttribute("pageMenu");
 %>
 <head>
     <%--    Bootstrap--%>
