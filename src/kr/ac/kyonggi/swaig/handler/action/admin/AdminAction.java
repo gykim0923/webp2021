@@ -1,5 +1,6 @@
 package kr.ac.kyonggi.swaig.handler.action.admin;
 
+import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.CustomAction;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,14 +10,16 @@ public class AdminAction extends CustomAction {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         super.execute(request,response);
-        String admin= request.getParameter("admin");
+        Gson gson = new Gson();
         String num= request.getParameter("num");
         if(num!=null){
             if(num.equals("90")){
-                return "RequestDispatcher:jsp/admin/admin_main.jsp";
+                request.setAttribute("jsp", gson.toJson("admin_main")); //information.jsp
+                return "RequestDispatcher:jsp/main/page.jsp";
             }
             else if(num.equals("91")){
-                return "RequestDispatcher:jsp/admin/admin_user.jsp";
+                request.setAttribute("jsp", gson.toJson("admin_user")); //information.jsp
+                return "RequestDispatcher:jsp/main/page.jsp";
             }
             else {
                 return "RequestDispatcher:jsp/main/error.jsp";

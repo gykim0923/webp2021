@@ -59,8 +59,8 @@ INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,mi
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('70', '7', '0', 'notice_article_list.kgu', '전공게시판', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('71', '7', '1', 'gallery_board_list.kgu', '갤러리', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('80', '8', '0', 'mypage.kgu', '마이페이지', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('90', '9', '0', 'admin_main.kgu', '홈페이지관리', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('91', '9', '1', 'admin_user.kgu', '회원관리', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('90', '9', '0', 'admin.kgu', '홈페이지관리', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('91', '9', '1', 'admin.kgu', '회원관리', '11', '0');
 
 CREATE TABLE usertype(
     `type_name` varchar(45) NOT NULL,
