@@ -27,10 +27,6 @@
     String user =  (String)session.getAttribute("user");
     String type =  (String)session.getAttribute("type");
 
-    /**
-     * [일부] 페이지 메뉴 제어
-     * */
-    String pageMenu = (String)request.getAttribute("pageMenu");
 %>
 <head>
     <%--    Bootstrap--%>
@@ -76,6 +72,7 @@
     function makeHeaderMenu(){
         var headermenulist = <%=headermenulist%>;
         var menulist = <%=menulist%>;
+        var major=<%=major%>;
         var list = $('#headerMenu');
         var text = '';
 
@@ -86,7 +83,7 @@
                 +'';
             for(var j=0; j<menulist.length; j++){
                 if(headermenulist[i].tab_id==menulist[j].tab_id){
-                    text+='<li><a href="'+menulist[j].page_path+'?num='+menulist[i].page_id+'" class="text-white">'+menulist[j].page_title+'</a></li>'
+                    text+='<li><a href="'+menulist[j].page_path+'?major='+major+'&&num='+menulist[i].page_id+'" class="text-white">'+menulist[j].page_title+'</a></li>'
                 }
             }
             text+='</ul></div>';
@@ -97,7 +94,7 @@
 </script>
 <script> //헤더 제어
     $(document).ready(function(){
-        makeHeaderInfo();
+        makeHeaderUserInfo();
         makeHeaderTitle();
     })
     function makeHeaderTitle(){
@@ -106,7 +103,8 @@
         title.append('경기대학교 '+majorInfo[0].major_name);
     }
 
-    function makeHeaderInfo(){
+    function makeHeaderUserInfo(){
+        var major=<%=major%>;
         var user =<%=user%>;
         var type =<%=type%>;
         var it = $('#member');
@@ -119,7 +117,7 @@
                 text +='<a href="admin.kgu?num=90"> 관리페이지 </a> <a href="tutorial.kgu?tutorial=main"> 튜토리얼 </a>';
             }
             else{
-                text +=' <a href="mypage.kgu?num=80">마이페이지</a> ';
+                text +=' <a href="mypage.kgu?major='+major+'&&num=80">마이페이지</a> ';
             }
             text += '  <a href="logout.kgu" title=LOGOUT>LOGOUT</a></div>';
         }
@@ -127,35 +125,4 @@
     }
 
 
-</script>
-
-<script>
-    $(document).ready(function(){ //본문 제어
-        makePageHeader();
-        makePageMenu();
-    })
-
-    function makePageHeader() {
-        var num = <%=num%>;
-        var list = $('#page_title');
-        var pageMenu = <%=pageMenu%>;
-        var page_title='';
-        for (var i = 0; i < pageMenu.length; i++) {
-            if(pageMenu[i].page_id==num){
-                page_title=pageMenu[i].page_title;
-            }
-        }
-        var text='<h2><strong>'+page_title+'</strong></h2>';
-        list.append(text);
-    }
-
-    function makePageMenu() {
-        var list = $('#page_menu');
-        var text='';
-        var pageMenu = <%=pageMenu%>;
-        for (var i = 0; i < pageMenu.length; i++) {
-            text+='<div><span class="deco_dot">●</span><a href="'+pageMenu[i].page_path+'?num='+pageMenu[i].page_id+'">'+ pageMenu[i].page_title + '</div>';
-        }
-        list.append(text);
-    }
 </script>

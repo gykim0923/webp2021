@@ -121,6 +121,7 @@ CREATE TABLE major(
 );
 
 INSERT INTO major(oid,major_id,major_name,major_color1,major_color2,major_color3) VALUE('0','main','K-WITH 융합교육원','#000000','#000000','#000000');
+INSERT INTO major(oid,major_id,major_name,major_color1,major_color2,major_color3) VALUE('1','major1','전공1','#000000','#000000','#000000');
 
 CREATE TABLE documents(
                       `oid` int(50) NOT NULL AUTO_INCREMENT,

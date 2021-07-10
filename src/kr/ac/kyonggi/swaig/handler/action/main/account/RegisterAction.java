@@ -1,6 +1,9 @@
 package kr.ac.kyonggi.swaig.handler.action.main.account;
 
+import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.Action;
+import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
+import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,9 +15,11 @@ public class RegisterAction implements Action {
         HttpSession session = request.getSession();
         if(session.getAttribute("user") != null)
             return "RequestDispatcher:jsp/main/error.jsp";
-        String result;
-        result = "RequestDispatcher:jsp/account/register.jsp";
-        return result;
+        Gson gson = new Gson();
+        request.setAttribute("getAllMajor", gson.toJson(HomeDAO.getInstance().getAllMajor()));
+        request.setAttribute("getAllType", gson.toJson(UserDAO.getInstance().getAllType()));
+
+        return "RequestDispatcher:jsp/account/register.jsp";
     }
 
 }

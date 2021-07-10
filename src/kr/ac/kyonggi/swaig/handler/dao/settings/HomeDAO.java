@@ -75,7 +75,7 @@ public class HomeDAO {
         try {
             QueryRunner queryRunner = new QueryRunner();
             listOfMaps = queryRunner.query(conn, "SELECT * FROM `menu_pages` WHERE `tab_id`=? ORDER BY `orderNum` ASC ;", new MapListHandler(), tab_id);
-            System.out.println(listOfMaps);
+//            System.out.println(listOfMaps);
         } catch (SQLException se) {
             se.printStackTrace();
         } finally {
@@ -100,6 +100,9 @@ public class HomeDAO {
         }
         Gson gson = new Gson();
         ArrayList<MajorDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<MajorDTO>>() {}.getType());
+        if(selectedList.size()==0){
+            return null;
+        }
         return selectedList;
     }
 

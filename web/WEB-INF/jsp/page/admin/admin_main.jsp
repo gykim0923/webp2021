@@ -54,10 +54,15 @@
                 major_color1: major.major_color1,
                 major_color2: major.major_color2,
                 major_color3: major.major_color3,
-                action : '<button class="btn btn-danger" type="button" onclick="foo('+i+')">버튼튼</button>'
+                action : '<button class="btn btn-danger" type="button" onclick="majorManager('+i+')">관리</button>'
             });
         }
         // alert(rows);
         return rows;
     }
+
+    function majorManager(i){
+
+    }
 </script>
+

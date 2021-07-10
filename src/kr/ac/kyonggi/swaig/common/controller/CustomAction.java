@@ -42,7 +42,11 @@ public class CustomAction implements Action{
             major="main";
         }
         request.setAttribute("major", gson.toJson(major));
+        if(HomeDAO.getInstance().getMajor(major)==null){
+            major="main";
+        }
         request.setAttribute("majorInfo", gson.toJson(HomeDAO.getInstance().getMajor(major)));
+        request.setAttribute("majorAllInfo", gson.toJson(HomeDAO.getInstance().getAllMajor()));
         return null;
     }
 }

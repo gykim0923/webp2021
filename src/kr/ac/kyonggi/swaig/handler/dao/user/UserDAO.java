@@ -57,6 +57,22 @@ public class UserDAO {
         }
         return null;
     }
+    public ArrayList<UserTypeDTO> getAllType(){
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM usertype WHERE board_level>0 AND board_level<3 ORDER BY board_level ASC;", new MapListHandler());
+        } catch(Exception se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<UserTypeDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<UserTypeDTO>>() {}.getType());
+
+        return selected;
+    }
 
     public UserDTO getUser(String id) {
         List<Map<String, Object>> listOfMaps = null;

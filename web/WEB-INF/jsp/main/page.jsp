@@ -9,6 +9,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
   String jsp=(String)request.getAttribute("jsp");
+    /**
+     * [일부] 페이지 메뉴 제어
+     * */
+    String pageMenu = (String)request.getAttribute("pageMenu");
 %>
 <html>
 <head>
@@ -33,18 +37,26 @@
 
       <div class="col-lg-10 py-2">
         <div class=" h-100 p-5 bg-light border shadow rounded">
-          <c:if test="${jsp == '\"information\"'}">
-            <%@include file="/WEB-INF/jsp/page/menu/information.jsp"%>
-          </c:if>
-          <c:if test="${jsp == '\"admin_main\"'}">
-            <%@include file="/WEB-INF/jsp/page/admin/admin_main.jsp"%>
-          </c:if>
-          <c:if test="${jsp == '\"admin_user\"'}">
-            <%@include file="/WEB-INF/jsp/page/admin/admin_user.jsp"%>
-          </c:if>
-          <c:if test="${jsp == '\"mypage\"'}">
-            <%@include file="/WEB-INF/jsp/page/user/mypage.jsp"%>
-          </c:if>
+          <c:choose>
+<%--            menu--%>
+            <c:when test="${jsp == '\"information\"'}">
+              <%@include file="/WEB-INF/jsp/page/menu/information.jsp"%>
+            </c:when>
+<%--            admin--%>
+            <c:when test="${jsp == '\"admin_main\"'}">
+              <%@include file="/WEB-INF/jsp/page/admin/admin_main.jsp"%>
+            </c:when>
+            <c:when test="${jsp == '\"admin_user\"'}">
+              <%@include file="/WEB-INF/jsp/page/admin/admin_user.jsp"%>
+            </c:when>
+<%--            user--%>
+            <c:when test="${jsp == '\"mypage\"'}">
+              <%@include file="/WEB-INF/jsp/page/user/mypage.jsp"%>
+            </c:when>
+            <c:otherwise>
+              <div>잘못된 jsp 변수가 넘어왔습니다.</div>
+            </c:otherwise>
+          </c:choose>
         </div>
       </div>
 
@@ -55,3 +67,34 @@
 </main>
 </body>
 </html>
+<script>
+    $(document).ready(function(){ //본문 제어
+        makePageHeader();
+        makePageMenu();
+    })
+
+    function makePageHeader() {
+        var num = <%=num%>;
+        var list = $('#page_title');
+        var pageMenu = <%=pageMenu%>;
+        var page_title='';
+        for (var i = 0; i < pageMenu.length; i++) {
+            if(pageMenu[i].page_id==num){
+                page_title=pageMenu[i].page_title;
+            }
+        }
+        var text='<h2><strong>'+page_title+'</strong></h2>';
+        list.append(text);
+    }
+
+    function makePageMenu() {
+        var list = $('#page_menu');
+        var text='';
+        var pageMenu = <%=pageMenu%>;
+        var major=<%=major%>;
+        for (var i = 0; i < pageMenu.length; i++) {
+            text+='<div><span class="deco_dot">●</span><a href="'+pageMenu[i].page_path+'?major='+major+'&&num='+pageMenu[i].page_id+'">'+ pageMenu[i].page_title + '</div>';
+        }
+        list.append(text);
+    }
+</script>
