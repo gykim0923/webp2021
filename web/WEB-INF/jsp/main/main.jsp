@@ -91,7 +91,7 @@
             <div class="col-lg-3 py-2" id="main1_right">
                 <div class=" h-100 p-5 bg-light border  shadow rounded">
                     <h2><strong>바로가기</strong></h2>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Toggle bottom offcanvas</button>
+                    <button class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">전공 홈페이지 바로가기</button>
 
                 </div>
             </div>
