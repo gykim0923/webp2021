@@ -6,6 +6,8 @@ import kr.ac.kyonggi.swaig.common.sql.Config;
 import kr.ac.kyonggi.swaig.handler.dto.settings.HeaderMenuDTO;
 import kr.ac.kyonggi.swaig.handler.dto.settings.MajorDTO;
 import kr.ac.kyonggi.swaig.handler.dto.settings.MenuDTO;
+import kr.ac.kyonggi.swaig.handler.dto.settings.TextDTO;
+import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
@@ -120,5 +122,25 @@ public class HomeDAO {
         Gson gson = new Gson();
         ArrayList<MajorDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<MajorDTO>>() {}.getType());
         return selectedList;
+    }
+
+    public TextDTO getText(String major, String num) {
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn,"SELECT * FROM text WHERE major = ? AND id =?;", new MapListHandler(), major, num);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<TextDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<TextDTO>>() {}.getType());
+        if(selected.size()>0) {
+            return selected.get(0);
+        }
+        else
+            return null;
     }
 }

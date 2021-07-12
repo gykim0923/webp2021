@@ -80,6 +80,7 @@ INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('학부�
 INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('조교', 'Student', '2', '학생');
 INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('입학예정자', 'Etc', '3', '기타');
 INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('기타', 'Etc', '3', '기타');
+INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('게스트', 'Etc', '3', '기타');
 
 CREATE TABLE user(
     `id` VARCHAR(45) NOT NULL,
@@ -134,9 +135,16 @@ INSERT INTO documents(oid, title, contents) VALUE('0','메인페이지','게시�
 
 CREATE TABLE text(
     `id` int(50) NOT NULL,
+    `major` VARCHAR(50) NOT NULL,
     `content` TEXT NOT NULL,
-    PRIMARY KEY(`id`)
+    PRIMARY KEY(`id`,`major`)
 );
+INSERT INTO text(id, major, content) VALUE('10','main','10-main');
+INSERT INTO text(id, major, content) VALUE('10','major1','10-major1');
+INSERT INTO text(id, major, content) VALUE('11','main','11-main');
+INSERT INTO text(id, major, content) VALUE('11','major1','11-major1');
+
+
 
 CREATE TABLE professor(
     `id` int(50) NOT NULL AUTO_INCREMENT,

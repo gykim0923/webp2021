@@ -27,14 +27,14 @@ public class SFilter implements Filter {
         response.setHeader("P3P","CP='CAO PSA CONI OTR OUR DEM ONL'");
 
 
-//        if(session.getAttribute("type") == null) {
-//            Gson gson = new Gson();
-////            session.setAttribute("type", gson.toJson(UserDAO.getInstance().getType("게스트")));
+        if(session.getAttribute("type") == null) {
+            Gson gson = new Gson();
+            session.setAttribute("type", gson.toJson(UserDAO.getInstance().getType("기타")));
 //            session.setAttribute("headermenulist", gson.toJson(HomeDAO.getInstance().getHeaderMenu()));
 //            session.setAttribute("menulist", gson.toJson(HomeDAO.getInstance().getMenu()));
-////            response.sendRedirect("Index");
+//            response.sendRedirect("Index");
 //            return;
-//        }
+        }
 
         chain.doFilter(request, response);
 

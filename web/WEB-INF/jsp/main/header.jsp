@@ -37,7 +37,10 @@
     <%--    Bootstrap Table--%>
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
     <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
-    <style>
+<%--        ckeditor--%>
+        <script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+
+        <style>
         #headerTitle {
             height: 4rem;
         }
