@@ -24,7 +24,7 @@
 <main>
     <div class="container py-4">
         <div class="row align-items-md-stretch">
-            <div class="col-lg-9 py-2">
+            <div class="col-lg-9 py-2" id="main1_left">
                 <div id="myCarousel" class="carousel slide  shadow rounded"
                      data-bs-ride="carousel" style="margin-bottom : 0px;">
                     <div class="carousel-indicators">
@@ -84,9 +84,11 @@
                     </button>
                 </div>
             </div>
-            <div class="col-lg-3 py-2">
-                <div class=" h-100 p-5 bg-light border  shadow rounded" id="majorInfo">
+            <div class="col-lg-3 py-2" id="main1_right">
+                <div class=" h-100 p-5 bg-light border  shadow rounded">
                     <h2><strong>바로가기</strong></h2>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Toggle bottom offcanvas</button>
+
                 </div>
             </div>
         </div>
@@ -95,21 +97,21 @@
 
         <div class="row align-items-md-stretch">
 
-            <div class="col-lg py-2">
+            <div class="col-lg py-2" id="main2_left">
                 <div class=" h-100 p-5 bg-light border shadow rounded">
                     <h2><strong>영역 1</strong></h2>
                     <hr>
                 </div>
             </div>
 
-            <div class="col-lg py-2">
+            <div class="col-lg py-2" id="main2_center">
                 <div class=" h-100 p-5 bg-light border shadow rounded">
                     <h2><strong>영역 2</strong></h2>
                     <hr>
                 </div>
             </div>
 
-            <div class="col-lg-3 py-2">
+            <div class="col-lg-3 py-2" id="main2_right">
                 <div class=" h-100 p-5 bg-light border shadow rounded">
                     <h2><strong>일정</strong></h2>
                 </div>
@@ -118,6 +120,13 @@
     </div>
 </main>
 </body>
+<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasBottomLabel">전공 홈페이지로 이동하기</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body small" id="majorInfo"></div>
+</div>
 </html>
 
 <script>
