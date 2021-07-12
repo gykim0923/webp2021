@@ -69,11 +69,11 @@
 </html>
 <script>
     $(document).ready(function(){ //본문 제어
-        makePageHeader();
+        makePageTitle();
         makePageMenu();
     })
 
-    function makePageHeader() {
+    function makePageTitle() {
         var num = <%=num%>;
         var list = $('#page_title');
         var pageMenu = <%=pageMenu%>;

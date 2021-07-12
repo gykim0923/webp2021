@@ -26,8 +26,8 @@ public class CustomAction implements Action{
         /**
         * Header 제작하기
         * */
-        request.setAttribute("menuTabList", gson.toJson(HomeDAO.getInstance().getMenuTabs()));
-        request.setAttribute("menuPageList", gson.toJson(HomeDAO.getInstance().getMenuPages()));
+        request.setAttribute("menuTabList", gson.toJson(HomeDAO.getInstance().getHeaderMenuTabs()));
+        request.setAttribute("menuPageList", gson.toJson(HomeDAO.getInstance().getHeaderMenuPages()));
 
         /**
         * pageMenu 제작하기

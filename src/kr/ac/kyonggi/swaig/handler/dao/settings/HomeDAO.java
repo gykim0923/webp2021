@@ -26,7 +26,7 @@ public class HomeDAO {
         return it;
     }
 
-    public ArrayList<HeaderMenuDTO> getMenuTabs(){
+    public ArrayList<HeaderMenuDTO> getHeaderMenuTabs(){
         List<Map<String, Object>> listOfMaps = null;
         Connection conn = Config.getInstance().sqlLogin();
         try {
@@ -42,7 +42,7 @@ public class HomeDAO {
         return selectedList;
     }
 
-    public ArrayList<MenuDTO> getMenuPages(){
+    public ArrayList<MenuDTO> getHeaderMenuPages(){
         List<Map<String, Object>> listOfMaps = null;
         Connection conn = Config.getInstance().sqlLogin();
         try {
@@ -60,10 +60,10 @@ public class HomeDAO {
 
     public ArrayList<MenuDTO> getPageMenu(String num){
         /**
+         * page.jsp의 좌측 메뉴를 불러오는 녀석
          * id가 3자리인 경우는 tab_id가 2자리라고 가정하고 설계함.
          * 예를들어 num=110이 들어온다면
-         * tab_id는 11, orderNum은 0
-         * 으로 해석됨.
+         * tab_id는 11, orderNum은 0으로 해석됨.
          * */
 
         String tab_id=num.substring(0,num.length()-1);
