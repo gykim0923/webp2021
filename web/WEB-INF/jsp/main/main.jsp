@@ -17,6 +17,10 @@
         .carousel-item {
             height: 32rem;
         }
+        .container .major {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
     </style>
 </head>
 <%@include file="./header.jsp"%>
@@ -120,12 +124,19 @@
     </div>
 </main>
 </body>
-<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel" style="height: auto;">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasBottomLabel">전공 홈페이지로 이동하기</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body small" id="majorInfo"></div>
+    <div class="offcanvas-body small">
+        <div class="container">
+            <div class="row" id="majorInfo">
+
+            </div>
+        </div>
+
+    </div>
 </div>
 </html>
 
@@ -139,8 +150,18 @@
         var info = $('#majorInfo');
         var text='';
         for(var i=0; i<majorAllInfo.length;i++){
-            text+='<div><a href="main.kgu?major='+majorAllInfo[i].major_id+'">'+majorAllInfo[i].major_name+'</a></div>';
+            text+='<div class="col-lg major">'
+                +'<svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>'
+                +'<h2>'+majorAllInfo[i].major_name+'</h2>'
+                +'<p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>'
+                +'<p><a class="btn btn-secondary" href="main.kgu?major='+majorAllInfo[i].major_id+'">이동하기</a></p>'
+                +'</div>';
         }
         info.append(text);
     }
 </script>
+
+
+
+
+

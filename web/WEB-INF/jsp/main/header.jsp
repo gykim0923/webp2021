@@ -86,7 +86,7 @@
                 +'';
             for(var j=0; j<menuPageList.length; j++){
                 if(menuTabList[i].tab_id==menuPageList[j].tab_id){
-                    text+='<li><a href="'+menuPageList[j].page_path+'?major='+major+'&&num='+menuPageList[i].page_id+'" class="text-white">'+menuPageList[j].page_title+'</a></li>'
+                    text+='<li><a href="'+menuPageList[j].page_path+'?major='+major+'&&num='+menuPageList[j].page_id+'" class="text-white">'+menuPageList[j].page_title+'</a></li>'
                 }
             }
             text+='</ul></div>';

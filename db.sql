@@ -143,6 +143,10 @@ INSERT INTO text(id, major, content) VALUE('10','main','10-main');
 INSERT INTO text(id, major, content) VALUE('10','major1','10-major1');
 INSERT INTO text(id, major, content) VALUE('11','main','11-main');
 INSERT INTO text(id, major, content) VALUE('11','major1','11-major1');
+INSERT INTO text(id, major, content) VALUE('12','main','12-main');
+INSERT INTO text(id, major, content) VALUE('12','major1','12-major1');
+INSERT INTO text(id, major, content) VALUE('13','main','13-main');
+INSERT INTO text(id, major, content) VALUE('13','major1','13-major1');
 
 
 
