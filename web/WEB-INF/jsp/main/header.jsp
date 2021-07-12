@@ -16,8 +16,8 @@
     /**
      * [공통] 헤더 제어
      * */
-    String headermenulist = (String)request.getAttribute("headermenulist");
-    String menulist = (String)request.getAttribute("menulist");
+    String menuTabList = (String)request.getAttribute("menuTabList");
+    String menuPageList = (String)request.getAttribute("menuPageList");
     String main_url = "main.kgu?major="+major.substring(1, major.length()-1);
     String majorInfo = (String)request.getAttribute("majorInfo");
 
@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
     <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
     <style>
-        .header-title {
+        #headerTitle {
             height: 4rem;
         }
     </style>
@@ -46,11 +46,11 @@
 
 <header>
     <div class="bg-secondary">
-        <div class="container text-end text-white" id="member" ></div>
+        <div class="container text-end text-white" id="user"></div>
     </div>
     <div class="navbar navbar-dark bg-dark shadow-sm">
-        <div class="container header-title">
-            <a href=<%=main_url%> class="navbar-brand d-flex align-items-center">
+        <div class="container" id="headerTitle">
+            <a class="navbar-brand d-flex align-items-center" href=<%=main_url%>>
                 <h3><strong id="majorTitle"></strong></h3>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,7 +60,7 @@
     </div>
     <div class="collapse bg-dark" id="navbarHeader">
         <div class="container">
-            <div class="row" id="headerMenu"></div>
+            <div class="row" id="headerContent"></div>
         </div>
     </div>
 </header>
@@ -70,20 +70,20 @@
     })
 
     function makeHeaderMenu(){
-        var headermenulist = <%=headermenulist%>;
-        var menulist = <%=menulist%>;
+        var menuTabList = <%=menuTabList%>;
+        var menuPageList = <%=menuPageList%>;
         var major=<%=major%>;
-        var list = $('#headerMenu');
+        var list = $('#headerContent');
         var text = '';
 
-        for(var i=0; i<headermenulist.length; i++){
+        for(var i=0; i<menuTabList.length; i++){
             text+= '<div class="col-lg py-4">'
-                +'<h4 class="text-white">'+headermenulist[i].tab_title+'</h4>'
+                +'<h4 class="text-white">'+menuTabList[i].tab_title+'</h4>'
                 +'<ul class="list-unstyled">'
                 +'';
-            for(var j=0; j<menulist.length; j++){
-                if(headermenulist[i].tab_id==menulist[j].tab_id){
-                    text+='<li><a href="'+menulist[j].page_path+'?major='+major+'&&num='+menulist[i].page_id+'" class="text-white">'+menulist[j].page_title+'</a></li>'
+            for(var j=0; j<menuPageList.length; j++){
+                if(menuTabList[i].tab_id==menuPageList[j].tab_id){
+                    text+='<li><a href="'+menuPageList[j].page_path+'?major='+major+'&&num='+menuPageList[i].page_id+'" class="text-white">'+menuPageList[j].page_title+'</a></li>'
                 }
             }
             text+='</ul></div>';
@@ -107,7 +107,7 @@
         var major=<%=major%>;
         var user =<%=user%>;
         var type =<%=type%>;
-        var it = $('#member');
+        var it = $('#user');
         if(user == null){ //Geust
             var text = '<div class=""><a href="loginPage.kgu" title="로그인">LOGIN</a></div>';
         }

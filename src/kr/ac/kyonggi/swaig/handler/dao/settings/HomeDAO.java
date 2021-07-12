@@ -26,7 +26,7 @@ public class HomeDAO {
         return it;
     }
 
-    public ArrayList<HeaderMenuDTO> getHeaderMenu(){
+    public ArrayList<HeaderMenuDTO> getMenuTabs(){
         List<Map<String, Object>> listOfMaps = null;
         Connection conn = Config.getInstance().sqlLogin();
         try {
@@ -42,7 +42,7 @@ public class HomeDAO {
         return selectedList;
     }
 
-    public ArrayList<MenuDTO> getMenu(){
+    public ArrayList<MenuDTO> getMenuPages(){
         List<Map<String, Object>> listOfMaps = null;
         Connection conn = Config.getInstance().sqlLogin();
         try {
