@@ -50,4 +50,35 @@
         });
     }
 
+    function back(){
+        var a='';
+        a+=information.content;
+        $('#information_content').html(a);
+        var b='<div id="write_post" class="col-xs-13 text-right" style = "margin : 2px;"><button type="button" class="btn btn-default" onclick="modify()">수정</button></div>';
+        $('#modify_button').html(b);
+    }
+    function modifyInfo(){
+        var content = CKEDITOR.instances.editor.getData();
+        var modify=information.id+"-/-/-"+information.major+"-/-/-"+content;
+
+        $.ajax({
+            url: 'ajax.kgu',
+            type : 'post',
+            data :{
+                req : "modifyInfo",
+                data : modify
+            },
+            dataType:"json",
+            success : function(data){
+                if(data != 'fail'){
+                    alert("수정완료");
+                    window.location.reload();
+                }
+                else
+                    alert('SERVER ERROR, Please try again later');
+            }
+        })
+    }
+
+
 </script>

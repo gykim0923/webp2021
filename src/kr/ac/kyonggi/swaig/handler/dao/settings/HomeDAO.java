@@ -143,4 +143,26 @@ public class HomeDAO {
         else
             return null;
     }
+
+    public String modifyInfo(String data) {
+        String arr[]=data.split("-/-/-");// information.id+"-/-/-"+information.major+"-/-/-"+content;
+        String id=arr[0];
+        String major=arr[1];
+        String content=arr[2];
+        Connection conn = Config.getInstance().sqlLogin();
+        List<Map<String, Object>> listOfMaps = null;
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"UPDATE text SET content=? WHERE id=? AND major=?;",content,id, major);
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM text WHERE id=? AND major=? ;",new MapListHandler(),id, major);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            return "fail";
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<TextDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<TextDTO>>() {}.getType());
+        return gson.toJson(selectedList.get(0));
+    }
 }

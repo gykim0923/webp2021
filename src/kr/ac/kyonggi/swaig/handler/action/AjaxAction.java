@@ -3,8 +3,11 @@ package kr.ac.kyonggi.swaig.handler.action;
 
 import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.Action;
+import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
 import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
 import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
+import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
+import kr.ac.kyonggi.swaig.handler.dto.user.UserTypeDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +33,8 @@ public class AjaxAction implements Action {
         String req = request.getParameter("req"); //JSP에서 넘겨준 req
         HttpSession session = request.getSession(); //Session에 있는 정보로 뭔가 해야할 때 사용
         String data = request.getParameter("data"); //JSP에서 넘겨준 data
+        UserDTO user = gson.fromJson((String)session.getAttribute("user"), UserDTO.class);
+        UserTypeDTO type = gson.fromJson((String)session.getAttribute("type"), UserTypeDTO.class);
         String result=null;
         switch(req) {
             case "deleteExampleData":   //테스트용
@@ -68,6 +73,14 @@ public class AjaxAction implements Action {
                 } else
                     result = "fail";
                 break;
+
+            case "modifyInfo":
+                if (type.board_level != 0)
+                    return "fail";
+                result = HomeDAO.getInstance().modifyInfo(data);
+                break;
+
+
         }
         return result;
     }
