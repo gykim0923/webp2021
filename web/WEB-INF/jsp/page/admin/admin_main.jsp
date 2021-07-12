@@ -12,22 +12,35 @@
 <div>
     <div class="album py-5 bg-light">
         <div class="container">
-            <table class="boardtable" id="table1"  data-toggle="table"
-                   data-pagination="true" data-toolbar="#toolbar"
-                   data-search="true" data-side-pagination="true" data-click-to-select="true" data-height="460"
-                   data-page-list="[10]">
-                <thead>
-                <tr>
-                    <th data-field="action">설정</th>
-                    <th data-field="oid" data-sortable="true">oid</th>
-                    <th data-field="major_id" data-sortable="true">major_id</th>
-                    <th data-field="major_name" data-sortable="true">major_name</th>
-                    <th data-field="major_color1" data-sortable="true">major_color1</th>
-                    <th data-field="major_color2" data-sortable="true">major_color2</th>
-                    <th data-field="major_color3" data-sortable="true">major_color3</th>
-                </tr>
-                </thead>
-            </table>
+            <div class="">
+                <label><h2><strong>전공 관리</strong></h2></label>
+                <table class="boardtable" id="table1"  data-toggle="table"
+                       data-pagination="true" data-toolbar="#toolbar"
+                       data-search="true" data-side-pagination="true" data-click-to-select="true" data-height="460"
+                       data-page-list="[10]">
+                    <thead>
+                    <tr>
+                        <th data-field="action">설정</th>
+                        <th data-field="oid" data-sortable="true">oid</th>
+                        <th data-field="major_id" data-sortable="true">major_id</th>
+                        <th data-field="major_name" data-sortable="true">major_name</th>
+                        <th data-field="major_color1" data-sortable="true">major_color1</th>
+                        <th data-field="major_color2" data-sortable="true">major_color2</th>
+                        <th data-field="major_color3" data-sortable="true">major_color3</th>
+                    </tr>
+                    </thead>
+                </table>
+                <button>전공 추가</button>
+                <hr>
+            </div>
+            <div>
+                <label><h2><strong>일정 관리</strong></h2></label>
+                <hr>
+            </div>
+            <div>
+                <label><h2><strong>대문 관리</strong></h2></label>
+                <hr>
+            </div>
         </div>
     </div>
 
