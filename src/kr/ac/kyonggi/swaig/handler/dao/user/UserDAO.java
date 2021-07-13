@@ -226,4 +226,23 @@ public class UserDAO {
         return true;
     }
 
+
+    public String deleteUser(String data) { //id+"-/-/-"+name
+        String arr[] = data.split("-/-/-");
+        String id = arr[0];
+        String name = arr[1];
+//        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.query(conn, "DELETE FROM `user` WHERE id=? AND name=?", new MapListHandler(), id, name);
+//            System.out.println(id+" "+name);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+
+        return null;
+    }
 }

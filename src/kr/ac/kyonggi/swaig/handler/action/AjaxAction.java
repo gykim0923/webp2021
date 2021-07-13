@@ -80,6 +80,11 @@ public class AjaxAction implements Action {
                 result = HomeDAO.getInstance().modifyInfo(data);
                 break;
 
+            case "deleteUser":
+                if (type.board_level != 0)
+                    return "fail";
+                result=UserDAO.getInstance().deleteUser(data);
+                break;
 
         }
         return result;
