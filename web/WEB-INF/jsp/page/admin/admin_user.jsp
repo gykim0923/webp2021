@@ -58,10 +58,31 @@
                 type: user.type,
                 hope_type: user.hope_type,
                 myhomeid: user.myhomeid,
-                action : '<button class="btn btn-danger" type="button" onclick="foo('+i+')">버튼튼</button>'
+                action : '<button class="btn btn-secondary" type="button" onclick="deleteUser('+i+')">회원삭제</button>'
             });
         }
         // alert(rows);
         return rows;
+    }
+
+    function deleteUser(i){
+        var makeUserAll = <%=getAllUser%>;
+        var id = makeUserAll[i].id;
+        var name = makeUserAll[i].name;
+        var check = confirm("[중요] 정말로 "+id+"["+name+"]를 삭제하시나요? 되돌릴 수 없습니다.");
+        if (check) {
+            $.ajax({
+                url: "ajax.kgu", //AjaxAction에서
+                type: "post",
+                data: {
+                    req: "deleteUser",
+                    data: id+"-/-/-"+name  //이중 검사용으로 DB를 두개 넘깁니다.
+                },
+                success: function (data) { //성공 시
+                    alert("해당 회원이 삭제되었습니다.");
+                    location.reload();
+                }
+            })
+        }
     }
 </script>
