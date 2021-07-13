@@ -101,21 +101,21 @@
 
         <div class="row align-items-md-stretch">
 
-            <div class="col-lg py-2" id="main2_left">
+            <div class="col-lg py-2" id="main2_left"  style="height : 400px;">
                 <div class=" h-100 p-5 bg-light border shadow rounded">
                     <h2><strong>영역 1</strong></h2>
                     <hr>
                 </div>
             </div>
 
-            <div class="col-lg py-2" id="main2_center">
+            <div class="col-lg py-2" id="main2_center"  style="height : 400px;">
                 <div class=" h-100 p-5 bg-light border shadow rounded">
                     <h2><strong>영역 2</strong></h2>
                     <hr>
                 </div>
             </div>
 
-            <div class="col-lg-3 py-2" id="main2_right">
+            <div class="col-lg-3 py-2" id="main2_right" style="height : 400px;">
                 <div class=" h-100 p-5 bg-light border shadow rounded">
                     <h2><strong>일정</strong></h2>
                 </div>
@@ -124,6 +124,7 @@
     </div>
 </main>
 </body>
+<%@include file="./footer.jsp"%>
 <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel" style="height: auto;">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasBottomLabel">전공 홈페이지로 이동하기</h5>
