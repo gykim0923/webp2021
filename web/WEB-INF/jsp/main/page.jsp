@@ -39,6 +39,11 @@
         <div class=" h-100 p-5 bg-light border shadow rounded">
           <c:choose>
 <%--            menu--%>
+              <%--              laboratory--%>
+              <c:when test="${jsp == '\"laboratory\"'}">
+                  <%@include file="/WEB-INF/jsp/page/menu/laboratory.jsp"%>
+              </c:when>
+              <%--              information--%>
             <c:when test="${jsp == '\"information\"'}">
               <%@include file="/WEB-INF/jsp/page/menu/information.jsp"%>
             </c:when>
