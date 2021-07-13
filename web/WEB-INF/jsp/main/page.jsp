@@ -42,6 +42,9 @@
             <c:when test="${jsp == '\"information\"'}">
               <%@include file="/WEB-INF/jsp/page/menu/information.jsp"%>
             </c:when>
+            <c:when test="${jsp == '\"curriculum\"'}">
+              <%@include file="/WEB-INF/jsp/page/menu/curriculum.jsp"%>
+            </c:when>
 <%--            admin--%>
             <c:when test="${jsp == '\"admin_main\"'}">
               <%@include file="/WEB-INF/jsp/page/admin/admin_main.jsp"%>

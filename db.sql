@@ -147,6 +147,8 @@ INSERT INTO text(id, major, content) VALUE('12','main','12-main');
 INSERT INTO text(id, major, content) VALUE('12','major1','12-major1');
 INSERT INTO text(id, major, content) VALUE('13','main','13-main');
 INSERT INTO text(id, major, content) VALUE('13','major1','13-major1');
+INSERT INTO text(id, major, content) VALUE('20','main','20-main');
+INSERT INTO text(id, major, content) VALUE('20','major1','20-major1');
 
 
 
@@ -177,3 +179,15 @@ CREATE TABLE laboratory(
     `lab_homepage` VARCHAR (200) NOT NULL,
     PRIMARY KEY (`id`)
 );
+
+CREATE TABLE curriculum(
+    `major` VARCHAR(50) NOT NULL,
+    `year` INT(10) NOT NULL,
+    `curriculum_img` VARCHAR(100) NOT NULL,
+    `edu_img` VARCHAR(100) NOT NULL,
+    PRIMARY KEY (`major`, `year`)
+);
+
+INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('main',2020,'/img/cs_logo.png','#');
+INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('main',2021,'#','/img/cs_logo.png');
+INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('major1',2021,'/img/cs_logo.png','#');
