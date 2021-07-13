@@ -144,7 +144,7 @@ public class HomeDAO {
             return null;
     }
 
-    public String modifyInfo(String data) {
+    public String modifyText(String data) {
         String arr[]=data.split("-/-/-");// information.id+"-/-/-"+information.major+"-/-/-"+content;
         String id=arr[0];
         String major=arr[1];

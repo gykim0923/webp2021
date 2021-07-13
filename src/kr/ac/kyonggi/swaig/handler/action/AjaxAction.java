@@ -74,10 +74,10 @@ public class AjaxAction implements Action {
                     result = "fail";
                 break;
 
-            case "modifyInfo":
+            case "modifyText":
                 if (type.board_level != 0)
                     return "fail";
-                result = HomeDAO.getInstance().modifyInfo(data);
+                result = HomeDAO.getInstance().modifyText(data);
                 break;
 
             case "deleteUser":

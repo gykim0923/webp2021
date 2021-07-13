@@ -40,7 +40,7 @@
         var a='';
         modify_button.empty();
         a+='<textarea id="editor">'+information.content+'</textarea>';
-        a+='<div id="write_post" class="col-xs-13 text-right"><button type="button" class="btn btn-default" style = "margin : 2px;" onclick="modifyInfo()">수정</button>';
+        a+='<div id="write_post" class="col-xs-13 text-right"><button type="button" class="btn btn-default" style = "margin : 2px;" onclick="modifyText()">수정</button>';
         a+='<button type="button" class="btn btn-default" style = "margin : 2px;" onclick="back()">뒤로</button></div></div>';
         $('#information_content').html(a);
         CKEDITOR.replace('editor', {
@@ -57,7 +57,7 @@
         var b='<div id="write_post" class="col-xs-13 text-right" style = "margin : 2px;"><button type="button" class="btn btn-default" onclick="modify()">수정</button></div>';
         $('#modify_button').html(b);
     }
-    function modifyInfo(){
+    function modifyText(){
         var content = CKEDITOR.instances.editor.getData();
         var modify=information.id+"-/-/-"+information.major+"-/-/-"+content;
 
@@ -65,7 +65,7 @@
             url: 'ajax.kgu',
             type : 'post',
             data :{
-                req : "modifyInfo",
+                req : "modifyText",
                 data : modify
             },
             dataType:"json",
