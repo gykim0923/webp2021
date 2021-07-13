@@ -81,9 +81,10 @@
         for (var i = 0; i < pageMenu.length; i++) {
             if(pageMenu[i].page_id==num){
                 page_title=pageMenu[i].page_title;
+                break;
             }
         }
-        var text='<h2><strong>'+page_title+'</strong></h2>';
+        var text='<h2><i class="bi bi-info-circle-fill"></i><strong>  '+page_title+'</strong></h2>';
         list.append(text);
     }
 
