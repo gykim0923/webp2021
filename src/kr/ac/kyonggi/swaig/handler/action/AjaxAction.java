@@ -81,8 +81,8 @@ public class AjaxAction implements Action {
                 break;
 
             case "deleteUser":
-                String arr1[] = data.split("-/-/-");
-                if (type.board_level == 0 || arr1[0].equals(user.id)){
+                String delete[] = data.split("-/-/-");
+                if (type.board_level == 0 || delete[0].equals(user.id)){
                     result=UserDAO.getInstance().deleteUser(data);
                     break;
                 }
@@ -110,6 +110,18 @@ public class AjaxAction implements Action {
                 break;
 
 
+            case "checkPassword":
+                if (UserDAO.getInstance().checkPassword(data))
+                    result = "true";
+                else
+                    result = "false";
+                break;
+            case "modifyPwd":
+                String modifyPwd[] = data.split("-/-/-");
+                if (!modifyPwd[0].equals(user.id))
+                    return "fail";
+                result = UserDAO.getInstance().modifypw(data);
+                break;
         }
         return result;
     }

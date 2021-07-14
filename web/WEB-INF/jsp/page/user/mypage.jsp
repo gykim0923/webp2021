@@ -11,7 +11,7 @@
     String userForMyPage = (String)session.getAttribute("user");
 %>
 <div id="text"></div>
-<div id="modify_button" class="d-grid justify-content-md-end"></div>
+<div id="modify_button" class="d-grid gap-2 d-md-flex justify-content-md-end"></div>
 
 <script>
     var user = <%=userForMyPage%>;
@@ -39,15 +39,16 @@
         $('#text').empty();
         $('#text').append(a);
         $('#modify_button').empty();
-        $('#modify_button').append('<button type="button" class="btn btn-outline-secondary" onclick="setModify()">수정</button> <button type="button" class="btn btn-outline-secondary" onclick="deleteUser()">탈퇴</button>');
+        $('#modify_button').append('<button type="button" class="btn btn-outline-secondary" onclick="setModify()">수정</button>');
+        $('#modify_button').append('<button type="button" class="btn btn-outline-secondary" onclick="deleteUser()">탈퇴</button>');
     }
 
     function setModify(){
         var a = '<div id="panel">';
         a += '<div id="panel2" class="row"><div>안녕하세요 '+user.name+'님, 오늘은 가입한 지 <span style="color : red;">'+ (parseInt(betweenDay)+1) +'</span>일째입니다.</div><hr>';
-        a += '<div class="col-4 border-end">전화번호</div><div class="col-8"><input type="text" name = "phone" placeholder="변경할 번호를 입력해주세요" value="' + user.phone + '"></div>';
-        a += '<div class="col-4 border-end">생년월일</div><div class="col-8"><input type="date" name="birth" value="' + formatDate(user.birth) + '"></div>';
-        a += '<div class="col-4 border-end">이메일</div><div class="col-8"><input type="text" name = "email" placeholder="변경할 이메일을 입력해주세요" value="' + user.email + '"></div>';
+        a += '<div class="col-4 border-end">전화번호</div><div class="col-8"><input class="form-control" type="text" name = "phone" placeholder="변경할 번호를 입력해주세요" value="' + user.phone + '"></div>';
+        a += '<div class="col-4 border-end">생년월일</div><div class="col-8"><input class="form-control" type="date" name="birth" value="' + formatDate(user.birth) + '"></div>';
+        a += '<div class="col-4 border-end">이메일</div><div class="col-8"><input class="form-control" type="text" name = "email" placeholder="변경할 이메일을 입력해주세요" value="' + user.email + '"></div>';
         a += '<div class="col-4 border-end">구분</div><div class="col-8">'+ user.type+'</div>';
         if(type.class_type == 'Student' || type.class_type == 'Professor'){
             a += '<div class="col-4 border-end">학과</div><div class="col-8">'+user.major+'</div>';

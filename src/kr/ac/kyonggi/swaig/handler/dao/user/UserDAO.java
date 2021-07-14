@@ -264,4 +264,42 @@ public class UserDAO {
         }
         return "";
     }
+
+    public boolean checkPassword(String data) {
+        String arr[] = data.split("-/-/-");//password, id
+        if(!checking(arr[1]))
+            return false;
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn,"SELECT * FROM user WHERE id = ?;", new MapListHandler(), arr[1]);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<UserDTO> results = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<UserDTO>>() {}.getType());
+        if(results.get(0).password.equals(arr[0]))
+            return true;
+        else
+            return false;
+    }
+
+    public String modifypw(String data) {
+        String arr[] = data.split("-/-/-");
+        String result = "fail";
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"UPDATE user SET password = ? WHERE id = ?;", arr[1], arr[0]);
+            result = "success";
+        }catch(Exception se) {
+            se.printStackTrace();
+        }finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return result;
+    }
 }
