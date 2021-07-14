@@ -94,6 +94,22 @@ public class AjaxAction implements Action {
                 result = UserDAO.getInstance().modifydata(data);
                 session.setAttribute("user", gson.toJson(UserDAO.getInstance().getUser(arr[0])));
                 break;
+
+            case "addMajor":
+                if (type.board_level != 0){
+                    return "fail";
+                }
+                result=HomeDAO.getInstance().addMajor(data);
+                break;
+
+            case "modifyMajor":
+                if (type.board_level != 0){
+                    return "fail";
+                }
+                result=HomeDAO.getInstance().modifyMajor(data);
+                break;
+
+
         }
         return result;
     }

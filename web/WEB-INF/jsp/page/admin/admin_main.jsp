@@ -27,14 +27,21 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body" id="modalReset">
-                                    <input type="text" class="form-control" id="major_id" name="new_table" value="" placeholder="major_id">
-                                    <input type="text" class="form-control" id="major_name" name="new_table" value="" placeholder="major_name">
-                                    <input type="text" class="form-control" id="major_color1" name="new_table" value="" placeholder="major_color1">
-                                    <input type="text" class="form-control" id="major_color2" name="new_table" value="" placeholder="major_color2">
+                                    <div>전공 아이디 (영문/숫자 혼용 가능) <mark>한번 생성하신 아이디는 수정하실 수 없습니다.</mark></div>
+                                    <input type="text" class="form-control" id="add_major_id" name="new_table" value="" placeholder="major_id">
+                                    <div>전공 이름</div>
+                                    <input type="text" class="form-control" id="add_major_name" name="new_table" value="" placeholder="major_name">
+                                    <div>전공 색상1</div>
+                                    <input type="color" class="form-control" id="add_major_color1" name="new_table" value="" placeholder="major_color1">
+                                    <div>전공 색상2</div>
+                                    <input type="color" class="form-control" id="add_major_color2" name="new_table" value="" placeholder="major_color2">
+                                    <div>전공 색상3</div>
+                                    <input type="color" class="form-control" id="add_major_color3" name="new_table" value="" placeholder="major_color3">
+
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                    <button type="button" class="btn btn-primary" onclick="foo()">추가</button>
+                                    <button type="button" class="btn btn-primary" onclick="addMajor()">추가</button>
                                 </div>
                             </div>
                         </div>
@@ -60,8 +67,6 @@
                 </table>
             </div>
 
-
-
             <hr>
             </div>
 
@@ -83,7 +88,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">관리하기</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">수정하기</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id = "myModalbody"></div>
@@ -118,20 +123,87 @@
                 major_color1: major.major_color1,
                 major_color2: major.major_color2,
                 major_color3: major.major_color3,
-                action : '<button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="majorManager('+i+')">관리</button>'
+                action : '<button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyMajorModal('+i+')">수정</button>'
             });
         }
         // alert(rows);
         return rows;
     }
 
-    function majorManager(i){
+    function makeModifyMajorModal(i){
         var list = $('#myModalbody');
-        var a = '<label for="name" class="form-label">전공 이름</label><input type="text" class="form-control" id="name" placeholder="전공 이름을 입력해주세요">';
-        a += '<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>'
-        a += '<button type="button" class="btn btn-dark pull-right" data-dismiss="modal" aria-label="Close" onclick="foo()">완료</button>';
-        list.html(a);
+        var a ='';
+        // a+= '<div>전공 아이디 (영문)</div><input type="text" class="form-control" id="modify_major_id" name="new_table" value="" placeholder="major_id">'
+        a+='<div>전공 이름</div><input type="text" class="form-control" id="modify_major_name" name="new_table" value="" placeholder="major_name">'
+            +'<div>전공 색상1</div><input type="color" class="form-control" id="modify_major_color1" name="new_table" value="" placeholder="major_color1">'
+            +'<div>전공 색상2</div><input type="color" class="form-control" id="modify_major_color2" name="new_table" value="" placeholder="major_color2">'
+            +'<div>전공 색상3</div><input type="color" class="form-control" id="modify_major_color3" name="new_table" value="" placeholder="major_color3">'
+            a += '<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>'
+            a += '<button type="button" class="btn btn-dark pull-right" data-dismiss="modal" aria-label="Close" onclick="modifyMajor('+i+')">완료</button>';
+            list.html(a);
     }
+
+    function modifyMajor(i){
+        var major = <%=getAllMajor%>;
+        var target_oid=major[i].oid;
+        // var major_id=$('#modify_major_id').val();
+        var major_name=$('#modify_major_name').val();
+        var major_color1=$('#modify_major_color1').val();
+        var major_color2=$('#modify_major_color2').val();
+        var major_color3=$('#modify_major_color3').val();
+        // var data=target_id+'-/-/-'+major_id+'-/-/-'+major_name+'-/-/-'+major_color1+'-/-/-'+major_color2+'-/-/-'+major_color3;
+        var data=target_oid+'-/-/-'+major_name+'-/-/-'+major_color1+'-/-/-'+major_color2+'-/-/-'+major_color3;
+        var check = confirm("전공 "+data+"를 수정하시겠습니까?");
+        if (check) {
+            $.ajax({
+                url: "ajax.kgu", //AjaxAction에서
+                type: "post", //post 방식으로
+                data: {
+                    req: "modifyMajor", //이 메소드를 찾아서
+                    data: data //이 데이터를 파라미터로 넘겨줍니다.
+                },
+                success: function (data) { //성공 시
+                    if(data=='success'){
+                        alert("해당 전공이 수정되었습니다.");
+                        location.reload();
+                    }
+                    else{
+                        alert('권한이 부족합니다.');
+                    }
+                }
+            })
+        }
+    }
+
+    function addMajor(){
+        var major_id=$('#add_major_id').val();
+        var major_name=$('#add_major_name').val();
+        var major_color1=$('#add_major_color1').val();
+        var major_color2=$('#add_major_color2').val();
+        var major_color3=$('#add_major_color3').val();
+        var data=major_id+'-/-/-'+major_name+'-/-/-'+major_color1+'-/-/-'+major_color2+'-/-/-'+major_color3;
+        var check = confirm("전공 "+data+"를 추가하시겠습니까?");
+        if (check) {
+            $.ajax({
+                url: "ajax.kgu", //AjaxAction에서
+                type: "post", //post 방식으로
+                data: {
+                    req: "addMajor", //이 메소드를 찾아서
+                    data: data //이 데이터를 파라미터로 넘겨줍니다.
+                },
+                success: function (data) { //성공 시
+                    if(data=='success'){
+                        alert("해당 전공이 추가되었습니다.");
+                        location.reload();
+                    }
+                    else{
+                        alert('권한이 부족합니다.');
+                    }
+                }
+            })
+        }
+    }
+
 
 </script>
 

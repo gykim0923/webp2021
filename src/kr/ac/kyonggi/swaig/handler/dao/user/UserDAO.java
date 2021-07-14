@@ -80,7 +80,7 @@ public class UserDAO {
         try {
             QueryRunner queryRunner = new QueryRunner();
             listOfMaps = queryRunner.query(conn,"SELECT * FROM user WHERE id = ?;", new MapListHandler(), id);
-            System.out.println(listOfMaps);
+//            System.out.println(listOfMaps);
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {
@@ -88,11 +88,11 @@ public class UserDAO {
         }
         Gson gson = new Gson();
         ArrayList<UserDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<UserDTO>>() {}.getType());
-        System.out.println(selected);
+//        System.out.println(selected);
         if(selected.size()>0) {
-            System.out.println(selected.get(0).birth);
-            System.out.println(selected.get(0).email);
-            System.out.println(selected.get(0).phone);
+//            System.out.println(selected.get(0).birth);
+//            System.out.println(selected.get(0).email);
+//            System.out.println(selected.get(0).phone);
             return selected.get(0);
         }
         else

@@ -113,7 +113,7 @@ INSERT INTO user(id,password,name,gender,birth,type,email,phone,last_login,hope_
 
 
 CREATE TABLE major(
-    `oid` int(50) NOT NULL,
+    `oid` int(50) NOT NULL AUTO_INCREMENT,
     `major_id` VARCHAR(50) NOT NULL,
     `major_name` VARCHAR(100) NOT NULL,
     `major_color1` VARCHAR(100) NOT NULL,
@@ -123,8 +123,8 @@ CREATE TABLE major(
 
 );
 
-INSERT INTO major(oid,major_id,major_name,major_color1,major_color2,major_color3) VALUE('0','main','K-WITH 융합교육원','#000000','#000000','#000000');
-INSERT INTO major(oid,major_id,major_name,major_color1,major_color2,major_color3) VALUE('1','major1','전공1','#000000','#000000','#000000');
+INSERT INTO major(oid,major_id,major_name,major_color1,major_color2,major_color3) VALUE('1','main','K-WITH 융합교육원','#000000','#000000','#000000');
+INSERT INTO major(major_id,major_name,major_color1,major_color2,major_color3) VALUE('major1','전공1','#000000','#000000','#000000');
 
 CREATE TABLE documents(
                       `oid` int(50) NOT NULL AUTO_INCREMENT,
