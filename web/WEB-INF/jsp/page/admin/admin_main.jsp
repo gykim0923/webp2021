@@ -14,6 +14,34 @@
         <div class="container">
             <div class="">
                 <label><h2><strong>전공 관리</strong></h2></label>
+                <div>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">전공 추가</button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel1">전공 추가하기</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="modalReset">
+                                    <input type="text" class="form-control" id="major_id" name="new_table" value="" placeholder="major_id">
+                                    <input type="text" class="form-control" id="major_name" name="new_table" value="" placeholder="major_name">
+                                    <input type="text" class="form-control" id="major_color1" name="new_table" value="" placeholder="major_color1">
+                                    <input type="text" class="form-control" id="major_color2" name="new_table" value="" placeholder="major_color2">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                    <button type="button" class="btn btn-primary" onclick="foo()">추가</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%--modal end--%>
+                </div>
+
                 <table class="boardtable" id="table1"  data-toggle="table"
                        data-pagination="true" data-toolbar="#toolbar"
                        data-search="true" data-side-pagination="true" data-click-to-select="true" data-height="460"
@@ -30,9 +58,15 @@
                     </tr>
                     </thead>
                 </table>
-                <button>전공 추가</button>
-                <hr>
             </div>
+
+
+
+            <hr>
+            </div>
+
+
+
             <div>
                 <label><h2><strong>일정 관리</strong></h2></label>
                 <hr>

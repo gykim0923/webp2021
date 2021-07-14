@@ -10,7 +10,7 @@
 <%
     String majorAllInfo = (String)request.getAttribute("majorAllInfo");
 %>
-<html>
+<html class="fontawesome-i2svg-active fontawesome-i2svg-complete">
 <head>
     <title>Title</title>
     <style>

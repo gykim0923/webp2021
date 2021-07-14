@@ -58,7 +58,7 @@
                 type: user.type,
                 hope_type: user.hope_type,
                 myhomeid: user.myhomeid,
-                action : '<button class="btn btn-secondary" type="button" onclick="deleteUser('+i+')">회원삭제</button>'
+                action : '<button class="btn btn-secondary" type="button" onclick="deleteUser('+i+')">회원삭제</button>'+'<button class="btn btn-secondary" type="button" onclick="passwordReset('+i+')">PW초기화</button>'
             });
         }
         // alert(rows);
@@ -89,5 +89,9 @@
                 }
             })
         }
+    }
+
+    function passwordReset(i){
+
     }
 </script>
