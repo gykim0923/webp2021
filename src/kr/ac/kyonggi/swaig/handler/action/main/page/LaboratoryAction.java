@@ -17,8 +17,6 @@ public class LaboratoryAction extends CustomAction {
         //http://localhost:8080/information.kgu?major=main&&num=10
         String major=request.getParameter("major");
         String num=request.getParameter("num");
-
-        //request.setAttribute("laboratory", gson.toJson(HomeDAO.getInstance().getText(major,num)));
         request.setAttribute("getLaboratoryList", gson.toJson(LaboratoryDAO.getInstance().getLaboratory()));
         request.setAttribute("jsp", gson.toJson("laboratory")); //laboratory.jsp
         return "RequestDispatcher:jsp/main/page.jsp";

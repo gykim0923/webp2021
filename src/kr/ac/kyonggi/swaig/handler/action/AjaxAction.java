@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.Action;
 import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.ProfessorDAO;
+import kr.ac.kyonggi.swaig.handler.dao.settings.LaboratoryDAO;
 import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
 import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
@@ -137,6 +138,19 @@ public class AjaxAction implements Action {
                 result = ProfessorDAO.getInstance().modifyProfessor(data);
                 session.setAttribute("professor", gson.toJson(ProfessorDAO.getInstance().getOneProfessor(arr[0])));
                 break;*/
+            case "getOneLaboratory":   //직접 권한 확인
+                if (type.board_level == 0)
+                    result = gson.toJson(LaboratoryDAO.getInstance().getOneLaboratory(data));
+                break;
+            case "modifyLaboratory":      //직접 권한 확인
+                if (type.board_level == 0)
+                    result = LaboratoryDAO.getInstance().modifyLaboratory(data);
+                break;
+            case "deleteLaboratory":      //직접 권한 확인
+                if (type.board_level == 0)
+                    result = LaboratoryDAO.getInstance().deleteLaboratory(data);
+                break;
+
         }
         return result;
     }
