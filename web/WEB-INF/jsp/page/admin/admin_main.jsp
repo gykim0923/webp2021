@@ -8,10 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String getAllMajor = (String)request.getAttribute("getAllMajor");
+    String getSchedule = (String)request.getAttribute("getSchedule");
 %>
 <div>
     <div class="album py-5 bg-light">
         <div class="container">
+            <%--전공 관리--%>
             <div class="">
                 <label><h2><strong>전공 관리</strong></h2></label>
                 <div>
@@ -66,18 +68,30 @@
                     </thead>
                 </table>
             </div>
-
             <hr>
-            </div>
-
-
-
-            <div>
-                <label><h2><strong>일정 관리</strong></h2></label>
+                <div class="">
+                    <%--일정 관리--%>
+                    <label><h2><strong>일정 관리</strong></h2></label>
+                        <table class="boardtable" id="table2"  data-toggle="table"
+                               data-pagination="true" data-toolbar="#toolbar"
+                               data-search="true" data-side-pagination="true" data-click-to-select="true" data-height="460"
+                               data-page-list="[10]">
+                            <thead>
+                            <tr>
+                                <th data-field="action">설정</th>
+                                <th data-field="date" data-sortable="true">date</th>
+                                <th data-field="content" data-sortable="true">content</th>
+                            </tr>
+                            </thead>
+                        </table>
+                </div>
                 <hr>
-            </div>
-            <div>
-                <label><h2><strong>대문 관리</strong></h2></label>
+
+                <div class="">
+                    <%--대문 관리--%>
+
+                    <label><h2><strong>대문 관리</strong></h2></label>
+                </div>
                 <hr>
             </div>
         </div>
@@ -107,11 +121,16 @@
     })
 
     function callSetupTableView(){
-        $('#table1').bootstrapTable('load',tableData());
+        $('#table1').bootstrapTable('load',tableData1());
         // $('#table1').bootstrapTable('append',data());
         $('#table1').bootstrapTable('refresh');
+
+        $('#table2').bootstrapTable('load',tableData2());
+        // $('#table1').bootstrapTable('append',data());
+        $('#table2').bootstrapTable('refresh');
+
     }
-    function tableData(){
+    function tableData1(){
         var makeAllMajor = <%=getAllMajor%>;
         var rows = [];
         for(var i=0;i<makeAllMajor.length;i++){
@@ -202,6 +221,25 @@
                 }
             })
         }
+    }
+
+    function tableData2(){
+        var getSchedule = <%=getSchedule%>;
+        var rows = [];
+        for(var i=0;i<getSchedule.length;i++){
+            var schedule=getSchedule[i];
+            rows.push({
+                id: schedule.id,
+                date: schedule.date,
+                content: schedule.content,
+                action : '<button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="modifySchedule'+i+')">수정</button>'
+            });
+        }
+        return rows;
+    }
+
+    function modifySchedule(i){
+
     }
 
 

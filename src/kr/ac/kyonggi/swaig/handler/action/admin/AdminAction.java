@@ -19,6 +19,7 @@ public class AdminAction extends CustomAction {
             if(num.equals("90")){
                 request.setAttribute("jsp", gson.toJson("admin_main")); //admin_main.jsp
                 request.setAttribute("getAllMajor", gson.toJson(HomeDAO.getInstance().getAllMajor()));
+                request.setAttribute("getSchedule", gson.toJson(HomeDAO.getInstance().getSchedule()));
                 return "RequestDispatcher:jsp/main/page.jsp";
             }
             else if(num.equals("91")){

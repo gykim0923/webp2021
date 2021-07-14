@@ -197,3 +197,11 @@ INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('main',2020,'
 INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('main',2021,'#','/img/cs_logo.png');
 INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('major1',2021,'/img/cs_logo.png','#');
 
+CREATE TABLE schedule(
+                           `id` INT(10) NOT NULL AUTO_INCREMENT,
+                           `date` DATE NOT NULL,
+                           `content` VARCHAR(100) NOT NULL,
+                           PRIMARY KEY (`id`)
+);
+INSERT INTO schedule(id, date, content) VALUE ('0', '2021-08-01', '프로젝트 마감');
+

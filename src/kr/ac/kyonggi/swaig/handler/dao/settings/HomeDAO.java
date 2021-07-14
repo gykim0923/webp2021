@@ -3,10 +3,7 @@ package kr.ac.kyonggi.swaig.handler.dao.settings;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import kr.ac.kyonggi.swaig.common.sql.Config;
-import kr.ac.kyonggi.swaig.handler.dto.settings.HeaderMenuDTO;
-import kr.ac.kyonggi.swaig.handler.dto.settings.MajorDTO;
-import kr.ac.kyonggi.swaig.handler.dto.settings.MenuDTO;
-import kr.ac.kyonggi.swaig.handler.dto.settings.TextDTO;
+import kr.ac.kyonggi.swaig.handler.dto.settings.*;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
@@ -204,5 +201,21 @@ public class HomeDAO {
         }
         return "success";
 
+    }
+
+    public ArrayList<ScheduleDTO> getSchedule() {
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM `schedule`;", new MapListHandler());
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<ScheduleDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<ScheduleDTO>>() {}.getType());
+        return selectedList;
     }
 }
