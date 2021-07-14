@@ -9,6 +9,7 @@ import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
 import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserTypeDTO;
+import kr.ac.kyonggi.swaig.handler.dto.settings.ProfessorDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -122,6 +123,14 @@ public class AjaxAction implements Action {
                 if (!modifyPwd[0].equals(user.id))
                     return "fail";
                 result = UserDAO.getInstance().modifypw(data);
+                break;
+            case "modifypro":   //직접 권한 확인
+                if (type.board_level == 0)
+                    result = ProfessorDAO.getInstance().modifyProfessor(data);
+                break;
+            case "getoneprofessor":   //직접 권한 확인
+                if (type.board_level == 0)
+                    result = gson.toJson(ProfessorDAO.getInstance().getOneProfessor(data));
                 break;
            /* case "deleteProfessor":
                 String arr2[] = data.split("-/-/-");//0:id 1:phone 2:birth 3:email
