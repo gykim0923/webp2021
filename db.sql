@@ -180,6 +180,9 @@ CREATE TABLE laboratory(
     PRIMARY KEY (`id`)
 );
 
+INSERT INTO laboratory(id, lab_img,lab_name, lab_location, lab_homepage) VALUE (0,'/img/laboratory/testLab0.png','테스트 연구실1','8501','http://rtos.kyonggi.ac.kr/rtos/home.jsp');
+INSERT INTO laboratory(lab_img,lab_name, lab_location, lab_homepage) VALUE ('/img/laboratory/testLab0.png','테스트 연구실2','8502','http://rtos.kyonggi.ac.kr/rtos/home.jsp');
+
 CREATE TABLE curriculum(
     `major` VARCHAR(50) NOT NULL,
     `year` INT(10) NOT NULL,
@@ -191,3 +194,4 @@ CREATE TABLE curriculum(
 INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('main',2020,'/img/cs_logo.png','#');
 INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('main',2021,'#','/img/cs_logo.png');
 INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('major1',2021,'/img/cs_logo.png','#');
+
