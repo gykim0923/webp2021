@@ -8,6 +8,7 @@ import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,7 +23,6 @@ public class LaboratoryDAO {
             it = new LaboratoryDAO();
         return it;
     }
-
 
     public ArrayList<LaboratoryDTO> getLaboratory() {
         List<Map<String, Object>> listOfMaps = null;
@@ -78,7 +78,7 @@ public class LaboratoryDAO {
     public String deleteLaboratory(String data) {
         Connection conn = Config.getInstance().sqlLogin();
 
-        try {
+        try { //DB에서 연구실 정보 삭제
             QueryRunner queryRunner = new QueryRunner();
             queryRunner.update(conn,"DELETE FROM laboratory WHERE id=?;", data);
         } catch(SQLException se) {
@@ -86,7 +86,13 @@ public class LaboratoryDAO {
         } finally {
             DbUtils.closeQuietly(conn);
         }
-
+       /* try {
+            String path = request.getSession().getServletContext().getRealPath("/");
+            File deleteFile = new File(path, it.lab_img);
+            deleteFile.delete();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }*/
         return "";
     }
 
