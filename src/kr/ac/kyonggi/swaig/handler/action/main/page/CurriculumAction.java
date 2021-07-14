@@ -19,7 +19,9 @@ public class CurriculumAction extends CustomAction {
         request.setAttribute("curriculum", gson.toJson(HomeDAO.getInstance().getText(major,num)));
         request.setAttribute("getCurriculums", gson.toJson(CurriculumDAO.getInstance().getCurriculums(major)));
 
+
         request.setAttribute("jsp", gson.toJson("curriculum")); //curriculum.jsp
+
         return "RequestDispatcher:jsp/main/page.jsp";
     }
 }

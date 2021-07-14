@@ -197,6 +197,7 @@ INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('main',2020,'
 INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('main',2021,'#','/img/cs_logo.png');
 INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('major1',2021,'/img/cs_logo.png','#');
 
+INSERT INTO professor(id, prof_img,prof_name, prof_email,prof_lecture,prof_location,prof_call) VALUE(1,'/img/professor/20180209095754-권기현.jpeg','권기현','khkwon@kyonggi.ac.kr','이산수학','8209호',' 031-249-9666');
 CREATE TABLE schedule(
                            `id` INT(10) NOT NULL AUTO_INCREMENT,
                            `date` DATE NOT NULL,

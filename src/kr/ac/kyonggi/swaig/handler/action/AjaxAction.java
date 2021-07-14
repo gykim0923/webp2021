@@ -4,6 +4,7 @@ package kr.ac.kyonggi.swaig.handler.action;
 import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.Action;
 import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
+import kr.ac.kyonggi.swaig.handler.dao.settings.ProfessorDAO;
 import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
 import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
@@ -122,6 +123,20 @@ public class AjaxAction implements Action {
                     return "fail";
                 result = UserDAO.getInstance().modifypw(data);
                 break;
+           /* case "deleteProfessor":
+                String arr2[] = data.split("-/-/-");//0:id 1:phone 2:birth 3:email
+                if (!arr[0].equals(user.id))
+                    return "fail";
+                result = ProfessorDAO.getInstance().deleteProfessor(data);
+                session.setAttribute("professor", gson.toJson(ProfessorDAO.getInstance().getProfessor(arr[0])));
+                break;
+            case "modifyProfessor":
+                String arr[] = data.split("-/-/-");//0:id 1:phone 2:birth 3:email
+                if (!arr[0].equals(user.id))
+                    return "fail";
+                result = ProfessorDAO.getInstance().modifyProfessor(data);
+                session.setAttribute("professor", gson.toJson(ProfessorDAO.getInstance().getOneProfessor(arr[0])));
+                break;*/
         }
         return result;
     }

@@ -1,0 +1,12 @@
+html,
+
+.profile {
+
+    width: 125px;
+    vertical-align: top;
+}
+
+.form-control {
+    width: 300px;
+    /*display: -webkit-inline-box;*/
+}
