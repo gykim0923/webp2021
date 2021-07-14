@@ -44,7 +44,7 @@ INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,mi
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('13', '1', '3', 'information.kgu', '교육목표', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('20', '2', '0', 'curriculum.kgu', '교육과정',  '11',  '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('21', '2', '1', 'information.kgu', '학습활동',  '11',  '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('22', '2', '2', 'information.kgu', '동아리 소개', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('22', '2', '2', 'club.kgu', '동아리 소개', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('30', '3', '0', 'professor.kgu', '교수진', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('31', '3', '1', 'laboratory.kgu', '연구실', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('40', '4', '0', 'notice_article_list.kgu', '전체공지', '11', '0');
@@ -151,7 +151,8 @@ INSERT INTO text(id, major, content) VALUE('13','main','13-main');
 INSERT INTO text(id, major, content) VALUE('13','major1','13-major1');
 INSERT INTO text(id, major, content) VALUE('20','main','20-main');
 INSERT INTO text(id, major, content) VALUE('20','major1','20-major1');
-
+INSERT INTO text(id, major, content) VALUE('22','main','20-main');
+INSERT INTO text(id, major, content) VALUE('22','major1','20-major1');
 
 
 CREATE TABLE professor(
@@ -166,7 +167,7 @@ CREATE TABLE professor(
 );
 
 CREATE TABLE club(
-                     `id` INT(50)  NOT NULL,
+                     `id` INT(50)  NOT NULL AUTO_INCREMENT,
                      `clubname` VARCHAR (45)  NOT NULL,
                      `clubcontent` text  NOT NULL,
                      `clubaddr` text,
@@ -201,6 +202,9 @@ INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('main',2020,'
 INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('main',2021,'#','/img/cs_logo.png');
 INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('major1',2021,'/img/cs_logo.png','#');
 
+
+
+
 INSERT INTO professor(id, prof_img,prof_name, prof_email,prof_lecture,prof_location,prof_call) VALUE(1,'professor1.jpeg','권기현','khkwon@kyonggi.ac.kr','이산수학','8209호',' 031-249-9666');
 CREATE TABLE schedule(
                            `id` INT(10) NOT NULL AUTO_INCREMENT,
@@ -209,4 +213,6 @@ CREATE TABLE schedule(
                            PRIMARY KEY (`id`)
 );
 INSERT INTO schedule(id, date, content) VALUE ('0', '2021-08-01', '프로젝트 마감');
+
+INSERT INTO club(id, clubname, clubcontent, clubaddr) VALUE('0','club0','<p>동아리0 소개</p>','http');
 

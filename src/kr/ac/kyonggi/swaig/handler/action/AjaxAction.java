@@ -3,6 +3,7 @@ package kr.ac.kyonggi.swaig.handler.action;
 
 import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.Action;
+import kr.ac.kyonggi.swaig.handler.dao.settings.ClubDAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.ProfessorDAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.LaboratoryDAO;
@@ -159,7 +160,18 @@ public class AjaxAction implements Action {
                 if (type.board_level == 0)
                     result = LaboratoryDAO.getInstance().deleteLaboratory(data);
                 break;
-
+            case "deleteclub":   //직접 권한 확인
+                if (type.board_level == 0)
+                    result = ClubDAO.getInstance().deleteclub(data);
+                break;
+            case "modifyclub":   //직접 권한 확인
+                if (type.board_level == 0)
+                    result = ClubDAO.getInstance().modifyclub(data);
+                break;
+            case "insertclub":   //직접 권한 확인
+                if (type.board_level == 0)
+                    result = ClubDAO.getInstance().insertclub(data);
+                break;
         }
         return result;
     }
