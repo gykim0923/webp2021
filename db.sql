@@ -208,7 +208,7 @@ INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('major1',2021
 INSERT INTO professor(id, prof_img,prof_name, prof_email,prof_lecture,prof_location,prof_call) VALUE(1,'professor1.jpeg','권기현','khkwon@kyonggi.ac.kr','이산수학','8209호',' 031-249-9666');
 CREATE TABLE schedule(
                            `id` INT(10) NOT NULL AUTO_INCREMENT,
-                           `date` DATE NOT NULL,
+                           `date` VARCHAR(45) NOT NULL,
                            `content` VARCHAR(100) NOT NULL,
                            PRIMARY KEY (`id`)
 );

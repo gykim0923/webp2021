@@ -84,7 +84,29 @@
                             </tr>
                             </thead>
                         </table>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end"> <div class="col-md-10"></div>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#insertSchedule" class="btn btn-secondary" onclick="insertSch()">추가</button>
+                            <button type="button" class="btn btn-secondary" onclick="updateSch()">갱신</button>
+                        </div>
                 </div>
+                <!-- Modal -->
+                <div class="modal fade" id="insertSchedule" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="">일정관리</h5> <%--staticBackdropLabel--%>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="schModalbody"> <%--staticBackdropLabel--%>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
+                                <button type="button" class="btn btn-secondary" onclick="modalReset()">완료</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%--일정 추가 모달 끝--%>
                 <hr>
 
                 <div class="">
@@ -113,6 +135,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 <script>
@@ -232,16 +255,41 @@
                 id: schedule.id,
                 date: schedule.date,
                 content: schedule.content,
-                action : '<button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="modifySchedule'+i+')">수정</button>'
+                action : '<button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#insertSchedule" onclick="modifySchedule('+i+')">수정</button>'
             });
         }
         return rows;
     }
 
     function modifySchedule(i){
-
+        var getSchedule = <%=getSchedule%>;
+        var schedule = getSchedule[i];
+        alert(schedule.date +" "+schedule.content);
+        var list = $('#schModalbody');
+        var a = '';
+        a += '<div><label for="InputDate">날짜</label><input class="form-control" id="InputDate" type="date" name="schDate" value="'+formatDate(schedule.date)+'"></div>';
+        a += '<br><div><input class="form-control" id="content" value="'+schedule.content+'"></div><br/>';
+        list.html(a);
     }
 
+    function insertSch(){
+        var list = $('#schModalbody');
+        var a = '';
+        a += '<div><label for="InputDate">날짜</label><input class="form-control" id="InputDate" type="date" name="schDate" value="' + formatDate(new Date()) + '"></div>';
+        a += '<br><div><input class="form-control" id="content" placeholder="내용을 입력해주세요"></div>';
+        list.html(a);
+    }
 
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
 </script>
 
