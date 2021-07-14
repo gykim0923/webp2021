@@ -12,7 +12,7 @@
     String getCurriculums = (String)request.getAttribute("getCurriculums");
 %>
 <div id="curriculum_content"></div>
-<div id="modify_button"></div>
+<div id="modify_button" class="d-grid justify-content-md-end"></div>
 <div id="curriculum_btn"></div>
 <div id="curriculum_view"></div>
 
@@ -34,7 +34,7 @@
 
         if(typeForInformation.for_header=='관리자'){
             var button = $('#modify_button');
-            button.append('<button onclick="modify()">수정</button>');
+            button.append('<button type="button" class="btn btn-outline-secondary" onclick="modify()">수정</button>');
         }
 
         var yearCount = curriculumList.length;
@@ -52,8 +52,8 @@
         var a='';
         modify_button.empty();
         a+='<textarea id="editor">'+curriculum.content+'</textarea>';
-        a+='<div id="write_post" class="col-xs-13 text-right"><button type="button" class="btn btn-default" style = "margin : 2px;" onclick="modifyText()">수정</button>';
-        a+='<button type="button" class="btn btn-default" style = "margin : 2px;" onclick="back()">뒤로</button></div></div>';
+        a+='<div id="write_post" class="d-grid gap-2 d-md-flex justify-content-md-end"><button type="button" class="btn btn-outline-secondary" onclick="modifyText()">수정</button>';
+        a+='<button type="button" class="btn btn-outline-secondary" onclick="back()">뒤로</button></div></div>';
         $('#curriculum_content').html(a);
         CKEDITOR.replace('editor', {
             allowedContent: true,
@@ -66,7 +66,7 @@
         var a='';
         a+=curriculum.content;
         $('#curriculum_content').html(a);
-        var b='<div id="write_post" class="col-xs-13 text-right" style = "margin : 2px;"><button type="button" class="btn btn-default" onclick="modify()">수정</button></div>';
+        var b='<div id="write_post" class="col-xs-13 text-right" style = "margin : 2px;"><button type="button" class="btn btn-outline-secondary" onclick="modify()">수정</button></div>';
         $('#modify_button').html(b);
     }
 

@@ -80,6 +80,7 @@ public class UserDAO {
         try {
             QueryRunner queryRunner = new QueryRunner();
             listOfMaps = queryRunner.query(conn,"SELECT * FROM user WHERE id = ?;", new MapListHandler(), id);
+            System.out.println(listOfMaps);
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {
@@ -87,7 +88,11 @@ public class UserDAO {
         }
         Gson gson = new Gson();
         ArrayList<UserDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<UserDTO>>() {}.getType());
+        System.out.println(selected);
         if(selected.size()>0) {
+            System.out.println(selected.get(0).birth);
+            System.out.println(selected.get(0).email);
+            System.out.println(selected.get(0).phone);
             return selected.get(0);
         }
         else
@@ -244,5 +249,19 @@ public class UserDAO {
         }
 
         return null;
+    }
+
+    public String modifydata(String data) {
+        String arr[] = data.split("-/-/-");//0:id 1:phone 2:birth 3:email
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"UPDATE user SET phone=?,birth=?,email=? WHERE id = ?;",arr[1],arr[2],arr[3],arr[0]);
+        }catch(SQLException se) {
+            se.printStackTrace();
+        }finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "";
     }
 }

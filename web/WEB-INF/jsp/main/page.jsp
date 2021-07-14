@@ -61,6 +61,12 @@
             <c:when test="${jsp == '\"mypage\"'}">
               <%@include file="/WEB-INF/jsp/page/user/mypage.jsp"%>
             </c:when>
+            <c:when test="${jsp == '\"changePwd\"'}">
+              <%@include file="/WEB-INF/jsp/page/user/changePwd.jsp"%>
+            </c:when>
+            <c:when test="${jsp == '\"whatIDo\"'}">
+              <%@include file="/WEB-INF/jsp/page/user/whatIDo.jsp"%>
+            </c:when>
             <c:otherwise>
               <div>잘못된 jsp 변수가 넘어왔습니다.</div>
             </c:otherwise>

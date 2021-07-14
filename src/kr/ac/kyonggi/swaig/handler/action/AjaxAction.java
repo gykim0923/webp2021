@@ -81,11 +81,19 @@ public class AjaxAction implements Action {
                 break;
 
             case "deleteUser":
-                if (type.board_level != 0)
+                String arr1[] = data.split("-/-/-");
+                if (type.board_level == 0 || arr1[0].equals(user.id)){
+                    result=UserDAO.getInstance().deleteUser(data);
+                    break;
+                }
+                return "fail";
+            case "modifyuserdata":
+                String arr[] = data.split("-/-/-");//0:id 1:phone 2:birth 3:email
+                if (!arr[0].equals(user.id))
                     return "fail";
-                result=UserDAO.getInstance().deleteUser(data);
+                result = UserDAO.getInstance().modifydata(data);
+                session.setAttribute("user", gson.toJson(UserDAO.getInstance().getUser(arr[0])));
                 break;
-
         }
         return result;
     }
