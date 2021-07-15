@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import kr.ac.kyonggi.swaig.common.sql.Config;
 import kr.ac.kyonggi.swaig.handler.dto.settings.ScheduleDTO;
+import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
@@ -11,6 +12,7 @@ import org.apache.commons.dbutils.handlers.MapListHandler;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -68,7 +70,8 @@ public class AdminDAO {
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            listOfMaps = queryRunner.query(conn, "SELECT * FROM `schedule`;", new MapListHandler());
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM `schedule` ORDER BY `date` ASC;", new MapListHandler());
+            System.out.println(listOfMaps);
         } catch (SQLException se) {
             se.printStackTrace();
         } finally {
@@ -76,6 +79,75 @@ public class AdminDAO {
         }
         Gson gson = new Gson();
         ArrayList<ScheduleDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<ScheduleDTO>>() {}.getType());
+        System.out.println(selectedList);
         return selectedList;
+    }
+
+    public String modifySchedule(String data) {
+        String arr[] = data.split("-/-/-"); // target_id+'-/-/-'+date+'-/-/-'+content;
+        String schedule_id = arr[0];
+        String schedule_date = arr[1];
+        String schedule_content = arr[2];
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"UPDATE schedule SET date=?, content=? WHERE id=?;", schedule_date, schedule_content, schedule_id);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
+    }
+
+    public String addSchedule(String data) {
+        String arr[] = data.split("-/-/-"); // date+'-/-/-'+content;
+        String schedule_date = arr[0];
+        String schedule_content = arr[1];
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"INSERT INTO schedule(date, content) VALUE(?,?);", schedule_date,schedule_content);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
+    }
+
+    public String updateSchedule() {
+        Date today = new Date();
+        Connection conn = Config.getInstance().sqlLogin();
+        ArrayList<ScheduleDTO> selectedList = this.getSchedule();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            for (ScheduleDTO S : selectedList) {
+                System.out.println(S.content);
+                if (((S.getDate().getTime() - today.getTime()) / (24 * 60 * 60 * 1000)) < 0) {
+                    queryRunner.update(conn, "DELETE FROM `schedule` WHERE `id`=?;", S.id);
+                }
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
+    }
+
+    public String deleteSchedule(String data) {
+        String arr[] = data.split("-/-/-"); // id+'-/-/-'+date+'-/-/-'+content;
+        String schedule_id = arr[0];
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"DELETE FROM `schedule` WHERE `id`=?;", schedule_id);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
     }
 }

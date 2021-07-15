@@ -1,7 +1,10 @@
 package kr.ac.kyonggi.swaig.handler.dto.settings;
 
+import java.util.Date;
+
 public class ScheduleDTO {
-    public String id, date, content;
+    public String id, content;
+    public Date date;
 
     public String getId() {
         return id;
@@ -11,11 +14,9 @@ public class ScheduleDTO {
         this.id = id;
     }
 
-    public String getDate() {
-        return date;
-    }
+    public Date getDate() { return date; }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

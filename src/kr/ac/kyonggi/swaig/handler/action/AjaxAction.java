@@ -170,11 +170,22 @@ public class AjaxAction implements Action {
                     result = ClubDAO.getInstance().insertclub(data);
                 break;
 
-//            case "addSchedule":
-//                if (type.board_level == 0)
-//                    result=HomeDAO.getInstance().addSchedule(data);
-//                break;
-
+            case "addSchedule":
+                if (type.board_level == 0)
+                    result=AdminDAO.getInstance().addSchedule(data);
+                break;
+            case "modifySchedule":
+                if (type.board_level == 0)
+                    result=AdminDAO.getInstance().modifySchedule(data);
+                break;
+            case "updateSchedule":
+                if (type.board_level == 0)
+                    result=AdminDAO.getInstance().updateSchedule();
+                break;
+            case "deleteSchedule":
+                if (type.board_level == 0)
+                    result=AdminDAO.getInstance().deleteSchedule(data);
+                break;
         }
         return result;
     }
