@@ -8,10 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="">
   <label><h2><strong>전공 관리</strong></h2></label>
-  <div>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeAddMajorModal()">전공 추가</button>
-  </div>
 
   <table class="boardtable" id="table1"  data-toggle="table"
          data-pagination="true" data-toolbar="#toolbar"
@@ -30,7 +26,10 @@
     </thead>
   </table>
 </div>
-
+<div>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeAddMajorModal()">전공 추가</button>
+</div>
 <script>
   $(document).ready(function(){
     callSetupTableView1();

@@ -217,3 +217,11 @@ CREATE TABLE schedule(
 );
 INSERT INTO schedule(id, date, content) VALUE ('0', '2021-08-01', '프로젝트 마감');
 
+CREATE TABLE slider(
+                         `id` INT(10) NOT NULL AUTO_INCREMENT,
+                         `real_name` DATETIME NOT NULL,
+                         `original_name` VARCHAR(100) NOT NULL,
+                         PRIMARY KEY (`id`)
+);
+
+

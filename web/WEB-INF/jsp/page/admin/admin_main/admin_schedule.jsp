@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="">
+<div class="py-5">
   <%--일정 관리--%>
   <label><h2><strong>일정 관리</strong></h2></label>
   <table class="boardtable" id="table2"  data-toggle="table"
