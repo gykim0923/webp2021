@@ -153,6 +153,10 @@ public class AjaxAction implements Action {
                 if (type.board_level == 0)
                     result = LaboratoryDAO.getInstance().modifyLaboratory(data);
                 break;
+            case "insertLaboratory":      //직접 권한 확인
+                if (type.board_level == 0)
+                    result = LaboratoryDAO.getInstance().insertLaboratory(data);
+                break;
             case "deleteLaboratory":      //직접 권한 확인
                 if (type.board_level == 0)
                     result = LaboratoryDAO.getInstance().deleteLaboratory(data);
