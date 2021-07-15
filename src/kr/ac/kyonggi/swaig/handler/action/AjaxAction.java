@@ -3,10 +3,7 @@ package kr.ac.kyonggi.swaig.handler.action;
 
 import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.Action;
-import kr.ac.kyonggi.swaig.handler.dao.settings.ClubDAO;
-import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
-import kr.ac.kyonggi.swaig.handler.dao.settings.ProfessorDAO;
-import kr.ac.kyonggi.swaig.handler.dao.settings.LaboratoryDAO;
+import kr.ac.kyonggi.swaig.handler.dao.settings.*;
 import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
 import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
@@ -103,14 +100,14 @@ public class AjaxAction implements Action {
                 if (type.board_level != 0){
                     return "fail";
                 }
-                result=HomeDAO.getInstance().addMajor(data);
+                result=AdminDAO.getInstance().addMajor(data);
                 break;
 
             case "modifyMajor":
                 if (type.board_level != 0){
                     return "fail";
                 }
-                result=HomeDAO.getInstance().modifyMajor(data);
+                result=AdminDAO.getInstance().modifyMajor(data);
                 break;
 
 
@@ -172,6 +169,12 @@ public class AjaxAction implements Action {
                 if (type.board_level == 0)
                     result = ClubDAO.getInstance().insertclub(data);
                 break;
+
+//            case "addSchedule":
+//                if (type.board_level == 0)
+//                    result=HomeDAO.getInstance().addSchedule(data);
+//                break;
+
         }
         return result;
     }

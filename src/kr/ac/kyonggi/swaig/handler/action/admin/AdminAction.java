@@ -2,6 +2,7 @@ package kr.ac.kyonggi.swaig.handler.action.admin;
 
 import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.CustomAction;
+import kr.ac.kyonggi.swaig.handler.dao.settings.AdminDAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
 import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
 import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
@@ -19,7 +20,7 @@ public class AdminAction extends CustomAction {
             if(num.equals("90")){
                 request.setAttribute("jsp", gson.toJson("admin_main")); //admin_main.jsp
                 request.setAttribute("getAllMajor", gson.toJson(HomeDAO.getInstance().getAllMajor()));
-                request.setAttribute("getSchedule", gson.toJson(HomeDAO.getInstance().getSchedule()));
+                request.setAttribute("getSchedule", gson.toJson(AdminDAO.getInstance().getSchedule()));
                 return "RequestDispatcher:jsp/main/page.jsp";
             }
             else if(num.equals("91")){
