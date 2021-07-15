@@ -3,6 +3,7 @@ package kr.ac.kyonggi.swaig.handler.dao.tutorial;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import kr.ac.kyonggi.swaig.common.sql.Config;
+import kr.ac.kyonggi.swaig.handler.dao.DAO;
 import kr.ac.kyonggi.swaig.handler.dto.tutorial.DocumentDTO;
 import kr.ac.kyonggi.swaig.handler.dto.tutorial.TutorialDTO;
 import org.apache.commons.dbutils.DbUtils;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class TutorialDAO {
+public class TutorialDAO implements DAO {
     public static TutorialDAO it;
 
     public static TutorialDAO getInstance() { //인스턴스 생성
@@ -97,5 +98,11 @@ public class TutorialDAO {
         ArrayList<DocumentDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<DocumentDTO>>() {
         }.getType()); //위에서 불러온 DB를 ExampleDTO 타입으로 만들어서 return 해줌
         return selectedList;
+    }
+
+
+    @Override
+    public void insertFile(String uploadFile, String newFileName) {
+
     }
 }

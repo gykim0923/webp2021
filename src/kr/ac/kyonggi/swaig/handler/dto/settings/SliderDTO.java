@@ -1,10 +1,26 @@
 package kr.ac.kyonggi.swaig.handler.dto.settings;
 
 public class SliderDTO {
-    String id, real_name, original_name;
+    String id, real_name, original_name, slider_title, slider_content;
 
     public String getId() {
         return id;
+    }
+
+    public String getSlider_title() {
+        return slider_title;
+    }
+
+    public void setSlider_title(String slider_title) {
+        this.slider_title = slider_title;
+    }
+
+    public String getSlider_content() {
+        return slider_content;
+    }
+
+    public void setSlider_content(String slider_content) {
+        this.slider_content = slider_content;
     }
 
     public void setId(String id) {

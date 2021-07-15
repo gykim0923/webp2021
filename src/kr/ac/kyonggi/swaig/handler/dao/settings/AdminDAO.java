@@ -3,6 +3,7 @@ package kr.ac.kyonggi.swaig.handler.dao.settings;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import kr.ac.kyonggi.swaig.common.sql.Config;
+import kr.ac.kyonggi.swaig.handler.dao.DAO;
 import kr.ac.kyonggi.swaig.handler.dto.settings.ScheduleDTO;
 import kr.ac.kyonggi.swaig.handler.dto.settings.SliderDTO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
@@ -17,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class AdminDAO {
+public class AdminDAO implements DAO {
     public static AdminDAO it;
 
     public static AdminDAO getInstance() { //인스턴스 생성
@@ -168,4 +169,17 @@ public class AdminDAO {
         return selectedList;
     }
 
+
+    @Override
+    public void insertFile(String uploadFile, String newFileName) {
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn, "INSERT INTO slider(original_name, real_name) VALUES (?,?);", uploadFile, newFileName);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+    }
 }

@@ -98,7 +98,9 @@
             </table>
         </div>
     </div>
-
+    <div class="b-example-divider"></div>
+    <h1 class="display-5 fw-bold">파일 업로드(미구현)</h1>
+    <div><button class="btn btn-secondary" onclick="uploadfile()"><i class="bi bi-upload"></i> 업로드</button></div>
 </main>
 
 <footer class="text-muted py-5">
@@ -215,5 +217,8 @@
         return rows;
     }
 
+    function uploadfile(){
+
+    }
 </script>
 </html>

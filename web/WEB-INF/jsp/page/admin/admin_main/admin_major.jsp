@@ -59,23 +59,23 @@
   }
 
   function makeModifyMajorModal(i){
-    var header = '';
-    header += '<h5 class="modal-title" id="staticBackdropLabel">수정하기</h5>';
-    header += '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
+    var modal_header = '';
+    modal_header += '<h5 class="modal-title" id="staticBackdropLabel">수정하기</h5>';
+    modal_header += '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
 
-    var body = '';
-    body += '<div>전공 이름</div><input type="text" class="form-control" id="modify_major_name" name="new_table" value="" placeholder="major_name">'
+    var modal_body = '';
+    modal_body += '<div>전공 이름</div><input type="text" class="form-control" id="modify_major_name" name="new_table" value="" placeholder="major_name">'
             +'<div>전공 색상1</div><input type="color" class="form-control" id="modify_major_color1" name="new_table" value="" placeholder="major_color1">'
             +'<div>전공 색상2</div><input type="color" class="form-control" id="modify_major_color2" name="new_table" value="" placeholder="major_color2">'
             +'<div>전공 색상3</div><input type="color" class="form-control" id="modify_major_color3" name="new_table" value="" placeholder="major_color3">';
 
-    var footer = '';
-    footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-    footer += '<button type="button" class="btn btn-secondary pull-right" data-dismiss="modal" aria-label="Close" onclick="modifyMajor('+i+')">완료</button>';
+    var modal_footer = '';
+    modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+    modal_footer += '<button type="button" class="btn btn-secondary pull-right" data-dismiss="modal" aria-label="Close" onclick="modifyMajor('+i+')">완료</button>';
 
-    header.html(header);
-    body.html(body);
-    footer.html(footer);
+    header.html(modal_header);
+    body.html(modal_body);
+    footer.html(modal_footer);
   }
 
   function modifyMajor(i){
@@ -111,25 +111,25 @@
   }
 
   function makeAddMajorModal(){
-    var h = '';
-    h += '<h5 class="modal-title" id="staticBackdropLabel">전공 추가하기</h5>';
-    h += '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
+    var modal_header = '';
+    modal_header += '<h5 class="modal-title" id="staticBackdropLabel">전공 추가하기</h5>';
+    modal_header += '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
 
-    var b = '';
-    b += '<div>전공 아이디 (영문/숫자 혼용 가능) <mark>한번 생성하신 아이디는 수정하실 수 없습니다.</mark></div>'
+    var modal_body = '';
+    modal_body += '<div>전공 아이디 (영문/숫자 혼용 가능) <mark>한번 생성하신 아이디는 수정하실 수 없습니다.</mark></div>'
       + '<input type="text" class="form-control" id="add_major_id" name="new_table" value="" placeholder="major_id">'
       + '<div>전공 이름</div><input type="text" class="form-control" id="add_major_name" name="new_table" value="" placeholder="major_name">'
       + '<div>전공 색상1</div><input type="color" class="form-control" id="add_major_color1" name="new_table" value="" placeholder="major_color1">'
       + '<div>전공 색상2</div><input type="color" class="form-control" id="add_major_color2" name="new_table" value="" placeholder="major_color2">'
       + '<div>전공 색상3</div><input type="color" class="form-control" id="add_major_color3" name="new_table" value="" placeholder="major_color3">';
 
-    var f = '';
-    f += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-    f += '<button type="button" class="btn btn-secondary" onclick="addMajor()">추가</button>';
+    var modal_footer = '';
+    modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+    modal_footer += '<button type="button" class="btn btn-secondary" onclick="addMajor()">추가</button>';
 
-    header.html(h);
-    body.html(b);
-    footer.html(f);
+    header.html(modal_header);
+    body.html(modal_body);
+    footer.html(modal_footer);
   }
 
   function addMajor(){
