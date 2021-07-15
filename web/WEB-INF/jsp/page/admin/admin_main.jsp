@@ -13,111 +13,18 @@
 <div>
     <div class="album py-5 bg-light">
         <div class="container">
-            <%--전공 관리--%>
-            <div class="">
-                <label><h2><strong>전공 관리</strong></h2></label>
-                <div>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">전공 추가</button>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel1">전공 추가하기</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body" id="modalReset">
-                                    <div>전공 아이디 (영문/숫자 혼용 가능) <mark>한번 생성하신 아이디는 수정하실 수 없습니다.</mark></div>
-                                    <input type="text" class="form-control" id="add_major_id" name="new_table" value="" placeholder="major_id">
-                                    <div>전공 이름</div>
-                                    <input type="text" class="form-control" id="add_major_name" name="new_table" value="" placeholder="major_name">
-                                    <div>전공 색상1</div>
-                                    <input type="color" class="form-control" id="add_major_color1" name="new_table" value="" placeholder="major_color1">
-                                    <div>전공 색상2</div>
-                                    <input type="color" class="form-control" id="add_major_color2" name="new_table" value="" placeholder="major_color2">
-                                    <div>전공 색상3</div>
-                                    <input type="color" class="form-control" id="add_major_color3" name="new_table" value="" placeholder="major_color3">
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                    <button type="button" class="btn btn-primary" onclick="addMajor()">추가</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <%--modal end--%>
-                </div>
-
-                <table class="boardtable" id="table1"  data-toggle="table"
-                       data-pagination="true" data-toolbar="#toolbar"
-                       data-search="true" data-side-pagination="true" data-click-to-select="true" data-height="460"
-                       data-page-list="[10]">
-                    <thead>
-                    <tr>
-                        <th data-field="action">설정</th>
-                        <th data-field="oid" data-sortable="true">oid</th>
-                        <th data-field="major_id" data-sortable="true">major_id</th>
-                        <th data-field="major_name" data-sortable="true">major_name</th>
-                        <th data-field="major_color1" data-sortable="true">major_color1</th>
-                        <th data-field="major_color2" data-sortable="true">major_color2</th>
-                        <th data-field="major_color3" data-sortable="true">major_color3</th>
-                    </tr>
-                    </thead>
-                </table>
-            </div>
+<%--            전공 관리--%>
+            <%@include file="/WEB-INF/jsp/page/admin/admin_main/admin_major.jsp"%>
             <hr>
-                <div class="">
-                    <%--일정 관리--%>
-                    <label><h2><strong>일정 관리</strong></h2></label>
-                        <table class="boardtable" id="table2"  data-toggle="table"
-                               data-pagination="true" data-toolbar="#toolbar"
-                               data-search="true" data-side-pagination="true" data-click-to-select="true" data-height="460"
-                               data-page-list="[10]">
-                            <thead>
-                            <tr>
-                                <th data-field="action">설정</th>
-                                <th data-field="date" data-sortable="true">date</th>
-                                <th data-field="content" data-sortable="true">content</th>
-                            </tr>
-                            </thead>
-                        </table>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end"> <div class="col-md-10"></div>
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#insertSchedule" class="btn btn-secondary" onclick="insertSch()">추가</button>
-                            <button type="button" class="btn btn-secondary" onclick="updateSch()">갱신</button>
-                        </div>
-                </div>
-                <!-- Modal -->
-                <div class="modal fade" id="insertSchedule" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="">일정관리</h5> <%--staticBackdropLabel--%>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body" id="schModalbody"> <%--staticBackdropLabel--%>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
-                                <button type="button" class="btn btn-secondary" onclick="modalReset()">완료</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <%--일정 추가 모달 끝--%>
-                <hr>
-
-                <div class="">
-                    <%--대문 관리--%>
-
-                    <label><h2><strong>대문 관리</strong></h2></label>
-                </div>
-                <hr>
-            </div>
+<%--                일정 관리 --%>
+            <%@include file="/WEB-INF/jsp/page/admin/admin_main/admin_schedule.jsp"%>
+            <hr>
+<%--                대문 관리--%>
+            <%@include file="/WEB-INF/jsp/page/admin/admin_main/admin_slider.jsp"%>
+            <hr>
         </div>
     </div>
+</div>
 
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
