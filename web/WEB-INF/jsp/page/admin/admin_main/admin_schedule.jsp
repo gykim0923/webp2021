@@ -28,6 +28,14 @@
 </div>
 
 <script>
+  $(document).ready(function(){
+    callSetupTableView2();
+  })
+  function callSetupTableView2(){
+    $('#table2').bootstrapTable('load',tableData2());
+    $('#table2').bootstrapTable('refresh');
+  }
+
   function tableData2(){
     var getSchedule = <%=getSchedule%>;
     var rows = [];

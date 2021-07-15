@@ -46,22 +46,10 @@
 </div>
 
 <script>
-    $(document).ready(function(){
-        callSetupTableView();
-    })
+
     var header = $('#myModalHeader');
     var body = $('#myModalBody');
     var footer = $('#myModalFooter');
 
-    function callSetupTableView(){
-        $('#table1').bootstrapTable('load',tableData1());
-        // $('#table1').bootstrapTable('append',data());
-        $('#table1').bootstrapTable('refresh');
-
-        $('#table2').bootstrapTable('load',tableData2());
-        // $('#table1').bootstrapTable('append',data());
-        $('#table2').bootstrapTable('refresh');
-
-    }
 </script>
 
