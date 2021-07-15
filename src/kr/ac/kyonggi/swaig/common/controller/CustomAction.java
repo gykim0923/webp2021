@@ -2,6 +2,8 @@ package kr.ac.kyonggi.swaig.common.controller;
 
 import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
+import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
+import kr.ac.kyonggi.swaig.handler.dto.user.UserTypeDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +24,15 @@ public class CustomAction implements Action{
             num="0";
         }
         request.setAttribute("num", gson.toJson(num));
+
+        /**
+         * 다음 설정은 JSP의 taglib에서 JSON으로 바로 접근이 가능하게 처리해줌.
+         * 예를들어 Java에서 type.for_header라고 하는 경우 JSON의 for_header의 키값으로 바로 접근이 가능하게 도와줌.
+         * */
+        String user = (String) request.getSession().getAttribute("user");
+        request.setAttribute("user",gson.fromJson(user, UserDTO.class));
+        String type = (String) request.getSession().getAttribute("type");
+        request.setAttribute("type",gson.fromJson(type, UserTypeDTO.class));
 
         /**
         * Header 제작하기

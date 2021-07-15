@@ -23,6 +23,10 @@ public class ClubDAO {
     }
 
     public ArrayList<ClubDTO> getClub(){
+        /**
+         * 클럽 DB를 가져오는 역할
+         *
+         * */
         List<Map<String, Object>> listOfMaps = null;
         Connection conn = Config.getInstance().sqlLogin();
         try {
@@ -37,6 +41,11 @@ public class ClubDAO {
         ArrayList<ClubDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<ClubDTO>>() {}.getType());
         return selectedList;
     }
+
+
+
+
+
     public String getNumber(String id) {//번호(74번 가정)
         return null;
 

@@ -166,13 +166,19 @@ CREATE TABLE professor(
     PRIMARY KEY (`id`)
 );
 
+INSERT INTO professor(id, prof_img,prof_name, prof_email,prof_lecture,prof_location,prof_call) VALUE(1,'professor1.jpeg','권기현','khkwon@kyonggi.ac.kr','이산수학','8209호',' 031-249-9666');
+
+
 CREATE TABLE club(
                      `id` INT(50)  NOT NULL AUTO_INCREMENT,
-                     `clubname` VARCHAR (45)  NOT NULL,
-                     `clubcontent` text  NOT NULL,
-                     `clubaddr` text,
+                     `club_name` VARCHAR (45)  NOT NULL,
+                     `club_content` text  NOT NULL,
+                     `club_address` text,
                          PRIMARY KEY (`id`)
 );
+
+INSERT INTO club(id, club_name, club_content, club_address) VALUE('0','구글','<p>구글 동아리ㅏ</p>','https://www.google.com');
+INSERT INTO club(club_name, club_content, club_address) VALUE('네이버','<p>네이버 동아리</p>','https://www.naver.com');
 
 CREATE TABLE laboratory(
     `id` int(50) NOT NULL AUTO_INCREMENT,
@@ -203,9 +209,6 @@ INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('main',2021,'
 INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('major1',2021,'/img/cs_logo.png','#');
 
 
-
-
-INSERT INTO professor(id, prof_img,prof_name, prof_email,prof_lecture,prof_location,prof_call) VALUE(1,'professor1.jpeg','권기현','khkwon@kyonggi.ac.kr','이산수학','8209호',' 031-249-9666');
 CREATE TABLE schedule(
                            `id` INT(10) NOT NULL AUTO_INCREMENT,
                            `date` DATETIME NOT NULL,
@@ -213,6 +216,4 @@ CREATE TABLE schedule(
                            PRIMARY KEY (`id`)
 );
 INSERT INTO schedule(id, date, content) VALUE ('0', '2021-08-01', '프로젝트 마감');
-
-INSERT INTO club(id, clubname, clubcontent, clubaddr) VALUE('0','club0','<p>동아리0 소개</p>','http');
 

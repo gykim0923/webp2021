@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    String typeForInformation = (String)session.getAttribute("type");
+    String typeForCurriculum = (String)session.getAttribute("type");
     String curriculum = (String)request.getAttribute("curriculum");
     String getCurriculums = (String)request.getAttribute("getCurriculums");
 %>
@@ -21,7 +21,7 @@
         makeInformation();
     })
 
-    var typeForInformation = <%=typeForInformation%>;
+    var typeForCurriculum = <%=typeForCurriculum%>;
     var curriculum = <%=curriculum%>;
     var curriculumList = <%=getCurriculums%>
 
@@ -32,7 +32,7 @@
 
         text+='<p>'+curriculum.content+'</p>';
 
-        if(typeForInformation.for_header=='관리자'){
+        if(typeForCurriculum.for_header=='관리자'){
             var button = $('#modify_button');
             button.append('<button type="button" class="btn btn-outline-secondary" onclick="modify()">수정</button>');
         }

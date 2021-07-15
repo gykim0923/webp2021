@@ -2,8 +2,9 @@ package kr.ac.kyonggi.swaig.handler.dto.settings;
 
 public class ClubDTO {
     public int id;
-    public String clubname;
-    public String clubcontent;
+    public String club_name;
+    public String club_content;
+    public String club_address;
 
     public int getId() {
         return id;
@@ -13,29 +14,27 @@ public class ClubDTO {
         this.id = id;
     }
 
-    public String getClubname() {
-        return clubname;
+    public String getClub_name() {
+        return club_name;
     }
 
-    public void setClubname(String clubname) {
-        this.clubname = clubname;
+    public void setClub_name(String club_name) {
+        this.club_name = club_name;
     }
 
-    public String getClubcontent() {
-        return clubcontent;
+    public String getClub_content() {
+        return club_content;
     }
 
-    public void setClubcontent(String clubcontent) {
-        this.clubcontent = clubcontent;
+    public void setClub_content(String club_content) {
+        this.club_content = club_content;
     }
 
-    public String getClubaddr() {
-        return clubaddr;
+    public String getClub_address() {
+        return club_address;
     }
 
-    public void setClubaddr(String clubaddr) {
-        this.clubaddr = clubaddr;
+    public void setClub_address(String club_address) {
+        this.club_address = club_address;
     }
-
-    public String clubaddr;
 }
