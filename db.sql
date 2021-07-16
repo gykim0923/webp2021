@@ -217,16 +217,29 @@ CREATE TABLE schedule(
 );
 INSERT INTO schedule(id, date, content) VALUE ('0', '2021-08-01', '프로젝트 마감');
 
-
-
 CREATE TABLE slider(
                          `id` INT(10) NOT NULL AUTO_INCREMENT,
+                         `real_name` VARCHAR(100) NOT NULL,
+                         `original_name` VARCHAR(100) NOT NULL,
+                         `user_id` VARCHAR(100) NOT NULL,
+                         `upload_time` DATE NOT NULL,                         
+                         `savePath` VARCHAR(100)  NOT NULL,
                          `path` VARCHAR(100)  NOT NULL,
                          `slider_title` VARCHAR(100) DEFAULT NULL,
                          `slider_content` VARCHAR(100) DEFAULT NULL,
                          PRIMARY KEY (`id`)
-
 );
+
+CREATE TABLE developer(
+    `id` INT(10) NOT NULL AUTO_INCREMENT,
+    `team_name` VARCHAR(50) NOT NULL,
+    `members` VARCHAR(100) NOT NULL,
+    `start_date` VARCHAR(50) NOT NULL,
+    `end_date` VARCHAR(50) NOT NULL,
+    PRIMARY KEY (`id`)
+);
+INSERT INTO developer(id, team_name, members, start_date, end_date) VALUE (1, '웹 6기', '16학번 윤주현---19학번 김가영 박선애 박소영 박의진', '2021-07-05', '2021-08-31');
+
 CREATE TABLE location(
     `id` INT(10) NOT NULL,
     `address` VARCHAR(200) NOT NULL,
@@ -234,3 +247,4 @@ CREATE TABLE location(
     `content` VARCHAR(500) NOT NULL, PRIMARY KEY(`id`)
 );
 INSERT INTO location(id, address, contact_num, content) VALUE ('0', '(16227) 경기도 수원시 영통구 광교산로 154-42 육영관 8304호', ' 031-249-9670 (FAX : 031-249-9673)','hi');
+

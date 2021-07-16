@@ -190,6 +190,10 @@ public class AjaxAction implements Action {
                 if (type.board_level == 0)
                     result = LocationDAO.getInstance().modifyLoc(data);
                 break;
+            case "addDeveloper":
+                if (type.board_level == 0)
+                    result=DeveloperDAO.getInstance().addDeveloper(data);
+                break;
         }
         return result;
     }
