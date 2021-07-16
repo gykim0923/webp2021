@@ -230,6 +230,7 @@ CREATE TABLE slider(
                          `slider_title` VARCHAR(100) DEFAULT NULL,
                          `slider_content` VARCHAR(100) DEFAULT NULL,
                          PRIMARY KEY (`id`)
+
 );
 
 
