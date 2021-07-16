@@ -102,7 +102,8 @@ public class TutorialDAO implements DAO {
 
 
     @Override
-    public void insertFile(String uploadFile, String newFileName) {
+    public void insertFile(String common_parameter, String custom_parameter) {
+
 
     }
 }

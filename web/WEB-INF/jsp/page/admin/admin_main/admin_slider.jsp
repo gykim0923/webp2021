@@ -88,11 +88,12 @@
         var address="";
         if($('input[name=uploadFile]')[0].files[0]!=null){
             formData.append("file_data",$('input[name=uploadFile]')[0].files[0]);
-            <%--formData.append("id",${user.id}); //무슨 역할인지 모르겠음--%>
-            <%--formData.append("page","admin_slider"); //무슨 역할인지 모르겠음--%>
-            formData.append("req", "admin_slider");
+            formData.append("dao_name", "AdminDAO"); //호출하고 싶은 dao이름
+            formData.append("real_method_name","sliderUpload"); // 인터페이스 DAO에 있는 insertFile 메소드 안에서 이 이름대로 나눠줄 예정임.
+            formData.append("user_id",${user.id}); //업로드한 사람 (출처용)
+            formData.append("text", ""); //같이 보내고 싶은 문자열(여러개인 경우 -/-/- 으로 구분. ex) 윤주현-/-/-201713919-/-/-컴퓨터공학전공)
             $.ajax({
-                url : 'upload.kgu?uploadedPage='+'admin_slider'+'&&id=${user.id}',
+                url : 'upload.kgu?folder='+'/img/slider', //업로드 된 파일 folder 경로 설정은 여기에서 해줍니다.
                 type : "post",
                 async:false,
                 data : formData,

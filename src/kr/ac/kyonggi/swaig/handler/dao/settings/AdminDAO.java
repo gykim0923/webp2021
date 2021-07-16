@@ -73,7 +73,7 @@ public class AdminDAO implements DAO {
         try {
             QueryRunner queryRunner = new QueryRunner();
             listOfMaps = queryRunner.query(conn, "SELECT * FROM `schedule` ORDER BY `date` ASC;", new MapListHandler());
-            System.out.println(listOfMaps);
+//            System.out.println(listOfMaps);
         } catch (SQLException se) {
             se.printStackTrace();
         } finally {
@@ -81,7 +81,7 @@ public class AdminDAO implements DAO {
         }
         Gson gson = new Gson();
         ArrayList<ScheduleDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<ScheduleDTO>>() {}.getType());
-        System.out.println(selectedList);
+//        System.out.println(selectedList);
         return selectedList;
     }
 
@@ -125,7 +125,7 @@ public class AdminDAO implements DAO {
         try {
             QueryRunner queryRunner = new QueryRunner();
             for (ScheduleDTO S : selectedList) {
-                System.out.println(S.content);
+//                System.out.println(S.content);
                 if (((S.getDate().getTime() - today.getTime()) / (24 * 60 * 60 * 1000)) < 0) {
                     queryRunner.update(conn, "DELETE FROM `schedule` WHERE `id`=?;", S.id);
                 }
@@ -171,11 +171,28 @@ public class AdminDAO implements DAO {
 
 
     @Override
-    public void insertFile(String uploadFile, String newFileName) {
+    public void insertFile(String common_parameter, String custom_parameter) {
+        String common_arr[] = common_parameter.split("-/-/-"); //real_method_name+"-/-/-"+uploadFile+"-/-/-"+newFileName+"-/-/-"+user_id+"-/-/-"+upload_time+"-/-/-"+savePath+"-/-/-"+path;
+        String real_method_name = common_arr[0];
+        String uploadFile=common_arr[1];
+        String newFileName=common_arr[2];
+        String user_id=common_arr[3];
+        String upload_time=common_arr[4];
+        String savePath=common_arr[5];
+        String path=common_arr[6];
+
+        String custom_arr[] = custom_parameter.split("-/-/-");
+
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn, "INSERT INTO slider(original_name, real_name) VALUES (?,?);", uploadFile, newFileName);
+            switch (real_method_name){
+                case "sliderUpload":
+                    queryRunner.update(conn, "INSERT INTO slider(original_name, real_name, user_id, upload_time, savePath, path) VALUES (?,?,?,?,?,?);",
+                            uploadFile, newFileName, user_id, upload_time, savePath, path);
+                default:
+                    System.out.println("잘못된 real_method_name 입니다.");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

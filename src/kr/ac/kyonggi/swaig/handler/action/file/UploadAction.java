@@ -24,27 +24,15 @@ public class UploadAction implements Action {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        System.out.println("DDD");
         //30MB 제한
         int maxSize  = 1024*1024*30;
 
-        String req = request.getParameter("req");
-        System.out.println(req);
-        String uploadedPage = request.getParameter("uploadedPage");
-        DAO dao = null;
 
         // 웹서버 컨테이너 경로
-        String folder="";
-        switch (uploadedPage){
-            case "admin_slider":
-                dao = AdminDAO.getInstance();
-                folder="/img/slider";
-            default:
-                dao = TutorialDAO.getInstance();
-                folder="/img/slider";
-        }
-
-
+        String folder=request.getParameter("folder");
         String path = request.getSession().getServletContext().getRealPath(folder);
+
         //폴더가 없다면 생성
         File dircheck = new File(path);
         if(!dircheck.exists()) {
@@ -68,9 +56,12 @@ public class UploadAction implements Action {
         SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
         Gson gson = new Gson();
         UserTypeDTO type = gson.fromJson((String) request.getSession().getAttribute("type"), UserTypeDTO.class);
-        if(type.board_level != 0)
+        if(type.board_level != 0){
+            System.out.println("업로드 권한 부족!");
             return "fail";
-//        HomeDAO dao = HomeDAO.getInstance();
+        }
+        System.out.println("CCCC");
+
         try{
             MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
             uploadFile = multi.getFilesystemName("file_data");
@@ -83,14 +74,12 @@ public class UploadAction implements Action {
 
             // 실제 저장될 파일 객체 생성
             File newFile = new File(savePath, newFileName);
-
-
+            System.out.println("AAA");
 
             // 파일명 rename
             if(!oldFile.renameTo(newFile)){
 
                 // rename이 되지 않을경우 강제로 파일을 복사하고 기존파일은 삭제
-
                 buf = new byte[1024];
                 fin = new FileInputStream(oldFile);
                 fout = new FileOutputStream(newFile);
@@ -99,13 +88,27 @@ public class UploadAction implements Action {
                     fout.write(buf, 0, read);
                 }
 
-
                 fin.close();
                 fout.close();
                 oldFile.delete();
             }
-
-            dao.insertFile(uploadFile, newFileName);
+            System.out.println("BBBBB");
+            String real_method_name = multi.getFilesystemName("real_method_name"); //한 개의 DAO 메소드 안에서 여러 작업이 필요한 경우 나눠줄 목적
+            String user_id = multi.getFilesystemName("user_id");
+            String upload_time = simDf.format(new Date(currentTime));
+            String text = multi.getFilesystemName("text");
+            String common_parameter = real_method_name+"-/-/-"+uploadFile+"-/-/-"+newFileName+"-/-/-"+user_id+"-/-/-"+upload_time+"-/-/-"+savePath+"-/-/-"+path;
+            String custom_parameter = text;
+            System.out.println(common_parameter);
+            String dao_name = multi.getFilesystemName("dao_name");
+            DAO dao = null;
+            switch (dao_name){
+                case "AdminDAO":
+                    dao = AdminDAO.getInstance();
+                default:
+                    dao = TutorialDAO.getInstance();
+            }
+            dao.insertFile(common_parameter, custom_parameter);
 
         }catch(Exception e){
             e.printStackTrace();

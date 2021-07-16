@@ -226,6 +226,11 @@ CREATE TABLE uploadedFile(
 
 CREATE TABLE slider(
                          `id` INT(10) NOT NULL AUTO_INCREMENT,
+                         `real_name` VARCHAR(100) NOT NULL,
+                         `original_name` VARCHAR(100) NOT NULL,
+                         `user_id` VARCHAR(100) NOT NULL,
+                         `upload_time` DATE NOT NULL,                         
+                         `savePath` VARCHAR(100)  NOT NULL,
                          `path` VARCHAR(100)  NOT NULL,
                          `slider_title` VARCHAR(100) DEFAULT NULL,
                          `slider_content` VARCHAR(100) DEFAULT NULL,
