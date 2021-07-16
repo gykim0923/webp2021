@@ -186,6 +186,10 @@ public class AjaxAction implements Action {
                 if (type.board_level == 0)
                     result=AdminDAO.getInstance().deleteSchedule(data);
                 break;
+            case "modifyLoc":   //직접 권한 확인
+                if (type.board_level == 0)
+                    result = LocationDAO.getInstance().modifyLoc(data);
+                break;
         }
         return result;
     }
