@@ -114,7 +114,6 @@
         if(typeForLab.for_header=='관리자') {
             <!-- Button trigger modal -->
             text +='<div><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">연구실 추가</button><div>'
-            // '<div><button class="btn btn-secondary mx-2" onclick="insertLab()">추가</button></div>'
         }
         list.append(text);
     }
@@ -204,12 +203,6 @@
         var location2= $('#add_lab_location').val();
         var homepage2= $('#add_lab_homepage').val();
         var data2 =name1+'-/-/-'+location2+'-/-/-'+homepage2;
-        // var formData = new FormData();
-        // formData.append("lab_img",$('input[name=uploadFile]')[0].files[0]);
-        // formData.append("lab_name", $('input[name=add_lab_name1]').val());
-        // formData.append("lab_location", $('input[name=add_lab_location1]').val());
-        // formData.append("lab_homepage", $('input[name=add_lab_homepage1]').val());
-
          var check = confirm("정말 추가하시겠습니까?");
          if(check){
              $.ajax({
@@ -219,9 +212,6 @@
                          req : "insertLaboratory",
                          data : data2
                      },
-                    // processData : false,
-                   //  contentType : false,
-                     //dataType : "json",
                      success : function(data2) {
                          if (data2== 'success'){
                              alert("추가가 완료되었습니다");
@@ -267,7 +257,6 @@
 
 
 <div>
-
     <!-- Modal / 연구실 추가 모달-->
     <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
         <div class="modal-dialog">
@@ -298,78 +287,5 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div>
     <%--modal end--%>
-</div>
-
-<script>
-    /*function modifyLaboratory(i) { // 데이터 수정
-        var laboratory = <%=getLaboratoryList%>;
-        var m = $('#l');
-        $.ajax({
-            url : "ajax.kgu",
-            type : "post",
-            data : {
-                req : "getOneLaboratory",
-                data : i
-            },
-            dataType : "json",
-            success : function(data) {
-                var a = '';
-                $('#laboratoryImg'+i).css('width', '460px');
-                var it = data;
-              //  a += '<div><img id="whatImage" src="img/laboratory/'+it.lab_img+'"><form style="display : inline-block" name="fileform" id="fileform" action="" method="post" enctype="multipart/form-data"><input type="text" name="LaboratoryID" value="' +it.id+ '" hidden><input style="display : inline-block" type="file" name="uploadFile" id="uploadFile" accept=".jpg, .jpeg, .png"><a onclick="modifyImage()"><button type="button" class="btn btn-default pull-right">사진 수정</button></a></form></div>';
-              //  a +='<div class="input-group mb-3">'
-                a +='<div class="input-group-prepend my-1">'
-                a += '<span class="input-group-text" id="inputGroup-sizing-default">연구실이름</span>'
-                a += '</div>'
-                a += '<input type="text" class="form-control" name="lab_name1" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">'
-               // a += '</div>'
-               // a +='<div class="input-group mb-3">'
-                a +='<div class="input-group-prepend my-1">'
-                a += '<span class="input-group-text" id="inputGroup-sizing-default">연구실위치</span>'
-                a += '</div>'
-                a += '<input type="text" class="form-control" name="lab_location1" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">'
-               // a += '</div>'
-               // a +='<div class="input-group mb-3">'
-                a +='<div class="input-group-prepend my-1">'
-                a += '<span class="input-group-text" id="inputGroup-sizing-default">연구실홈페이지</span>'
-                //a += '</div>'
-                a += '<input type="text" class="form-control" name="lab_homepage1" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">'
-                a += '</div>'
-                a += '<div>'
-                a += '<div><button onclick="modifyLab(' + it.id + ')" class="btn btn-secondary mx-2 btn float-right">완료</button></div>'
-                a += '<div><button onclick="back()" class="btn btn-secondary mx-2 btn float-right">뒤로가기</button></div>'
-                a += '</dib>'
-                m.html(a);
-            }
-        })
-    }*/
-  /*  function modifyLab(i) {
-        var m = $('#laboratoryEdit');
-        var typeForLab = <%=typeForLab%>;
-        var laboratory = <%=getLaboratoryList%>;
-        var id = i;
-        var name = $('input[name=lab_name1]').val();
-        var location1 = $('input[name=lab_location1]').val();
-        var homepage = $('input[name=lab_homepage1]').val();
-        var update = name + "-/-/-" + location1 + "-/-/-" + homepage +  "-/-/-" + id;
-        var check = confirm("정말 수정하시겠습니까?");
-        if(check){
-            $.ajax({
-                url : "ajax.kgu",
-                type : "post",
-                data : {
-                    req : "modifyLaboratory",
-                    data : update
-                },
-                dataType : "json",
-                success : function(data) {
-                    alert("수정이 완료되었습니다");
-                    location.reload();
-                }
-            })
-        }
-    }*/
-
-</script>
