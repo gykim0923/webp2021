@@ -102,7 +102,9 @@ public class LaboratoryDAO {
         //List<Map<String, Object>> listOfMaps = null;
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn,"INSERT INTO laboratory (lab_name,lab_location,lab_homepage) VALUES(?,?,?);", arr[0],arr[1],arr[2]);
+            System.out.println(arr[0]);
+            queryRunner.update(conn,"INSERT INTO laboratory (lab_name,lab_location,lab_homepage,lab_img) VALUES(?,?,?,'#');", arr[0],arr[1],arr[2]);
+            System.out.println(arr[2]);
             //listOfMaps=queryRunner.query(conn,"SELECT * FROM laboratory WHERE lab_name=? and lab_location=? AND lab_homepage=?",new MapListHandler(),arr[0],arr[1],arr[2]);
         } catch(SQLException se) {
             se.printStackTrace();

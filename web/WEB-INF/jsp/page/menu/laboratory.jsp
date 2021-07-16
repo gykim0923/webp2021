@@ -250,10 +250,13 @@
                      },
                     // processData : false,
                    //  contentType : false,
-                     dataType : "json",
+                     //dataType : "json",
                      success : function(data) {
-                         alert("추가가 완료되었습니다");
-                         location.reload();
+                         if (data == 'success'){
+                             alert("추가가 완료되었습니다");
+                             location.reload();
+                         }
+                         alert('실패');
                      }
                  })
          }
