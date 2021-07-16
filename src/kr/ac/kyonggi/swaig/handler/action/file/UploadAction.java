@@ -24,7 +24,6 @@ public class UploadAction implements Action {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        System.out.println("DDD");
         //30MB 제한
         int maxSize  = 1024*1024*30;
 
@@ -60,7 +59,6 @@ public class UploadAction implements Action {
             System.out.println("업로드 권한 부족!");
             return "fail";
         }
-        System.out.println("CCCC");
 
         try{
             MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
@@ -74,7 +72,6 @@ public class UploadAction implements Action {
 
             // 실제 저장될 파일 객체 생성
             File newFile = new File(savePath, newFileName);
-            System.out.println("AAA");
 
             // 파일명 rename
             if(!oldFile.renameTo(newFile)){
@@ -92,18 +89,18 @@ public class UploadAction implements Action {
                 fout.close();
                 oldFile.delete();
             }
-            System.out.println("BBBBB");
-            String real_method_name = multi.getFilesystemName("real_method_name"); //한 개의 DAO 메소드 안에서 여러 작업이 필요한 경우 나눠줄 목적
-            String user_id = multi.getFilesystemName("user_id");
+            String real_method_name = multi.getParameter("real_method_name"); //한 개의 DAO 메소드 안에서 여러 작업이 필요한 경우 나눠줄 목적
+            String user_id = multi.getParameter("user_id");
             String upload_time = simDf.format(new Date(currentTime));
-            String text = multi.getFilesystemName("text");
+            String text = multi.getParameter("text");
             String common_parameter = real_method_name+"-/-/-"+uploadFile+"-/-/-"+newFileName+"-/-/-"+user_id+"-/-/-"+upload_time+"-/-/-"+savePath+"-/-/-"+path;
             String custom_parameter = text;
             System.out.println(common_parameter);
-            String dao_name = multi.getFilesystemName("dao_name");
+            String dao_name = multi.getParameter("dao_name");
             DAO dao = null;
             switch (dao_name){
                 case "AdminDAO":
+                    System.out.println(dao_name);
                     dao = AdminDAO.getInstance();
                 default:
                     dao = TutorialDAO.getInstance();

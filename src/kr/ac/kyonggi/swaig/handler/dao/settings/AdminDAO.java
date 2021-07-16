@@ -172,6 +172,7 @@ public class AdminDAO implements DAO {
 
     @Override
     public void insertFile(String common_parameter, String custom_parameter) {
+        System.out.println("dd");
         String common_arr[] = common_parameter.split("-/-/-"); //real_method_name+"-/-/-"+uploadFile+"-/-/-"+newFileName+"-/-/-"+user_id+"-/-/-"+upload_time+"-/-/-"+savePath+"-/-/-"+path;
         String real_method_name = common_arr[0];
         String uploadFile=common_arr[1];
