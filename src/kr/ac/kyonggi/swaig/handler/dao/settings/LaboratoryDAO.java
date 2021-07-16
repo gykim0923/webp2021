@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import kr.ac.kyonggi.swaig.common.sql.Config;
 import kr.ac.kyonggi.swaig.handler.dto.settings.LaboratoryDTO;
+import kr.ac.kyonggi.swaig.handler.dto.tutorial.TutorialDTO;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
@@ -97,14 +98,13 @@ public class LaboratoryDAO {
     }
 
     public String insertLaboratory(String data) {
+
         Connection conn = Config.getInstance().sqlLogin();
         String arr[]=data.split("-/-/-");//0=연구실 이름 1=연구실 위치 2=홈페이지
-        //List<Map<String, Object>> listOfMaps = null;
+        List<Map<String, Object>> listOfMaps = null;
         try {
             QueryRunner queryRunner = new QueryRunner();
-            System.out.println(arr[0]);
-            queryRunner.update(conn,"INSERT INTO laboratory (lab_name,lab_location,lab_homepage,lab_img) VALUES(?,?,?,'#');", arr[0],arr[1],arr[2]);
-            System.out.println(arr[2]);
+            queryRunner.update(conn,"INSERT INTO laboratory (lab_img,lab_name,lab_location,lab_homepage) VALUES('#',?,?,?);", arr[0],arr[1],arr[2]);
             //listOfMaps=queryRunner.query(conn,"SELECT * FROM laboratory WHERE lab_name=? and lab_location=? AND lab_homepage=?",new MapListHandler(),arr[0],arr[1],arr[2]);
         } catch(SQLException se) {
             se.printStackTrace();

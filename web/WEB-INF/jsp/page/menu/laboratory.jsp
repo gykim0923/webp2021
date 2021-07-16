@@ -97,17 +97,16 @@
         var text = '';
 
         for(var i=0; i<laboratory.length; i++){
-            var l = laboratory+i;
             text+= ''
                 +'<div class="col-md-6 col-lg-4 item" >'
-                +'<div class="box shadow rounded-3" style="height:350px" id="l">'
+                +'<div class="box shadow rounded-3" style="height:350px" id="'+laboratory[i].id+'">'
                 +'<div class="py-4">'
                 +'<img id="laboratoryImg" class="rounded-circle" src="'+laboratory[i].lab_img+'">'
                 +'<h4 class="name">'+laboratory[i].lab_name+'</h4>'
                 +'<p class="title">연구실위치:'+laboratory[i].lab_location+'</p>'
                 +'<p class="description"><a href="'+laboratory[i].lab_homepage+'">연구실홈페이지</a><p>';
             if(typeForLab.for_header=='관리자') {
-                text += '<div><button class="btn btn-secondary mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyLabModal('+(laboratory[i].id)+')">수정</button><button class="btn btn-secondary mx-2" onclick="deleteLaboratory('+ (laboratory[i].id)+')">삭제</button></div>'
+                text += '<div><button class="btn btn-secondary mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyLabModal('+i+')">수정</button><button class="btn btn-secondary mx-2" onclick="deleteLaboratory('+ (laboratory[i].id)+')">삭제</button></div>'
             }
             text+='</div>'
                 +'</div></div>';
@@ -127,14 +126,14 @@
         var list = $('#myModalbody');
         var laboratory1 = <%=getLaboratoryList%>;
         var a ='';
-        a+= '<div>연구실 이름</div><input type="text" class="form-control" id="modify_lab_name" name="lab_name1" value="'+(laboratory1[i-1].lab_name)+'" placeholder="lab_name">'
-        a+='<div>연구실 위치</div><input type="text" class="form-control" id="modify_lab_location" name="lab_location1" value="'+(laboratory1[i-1].lab_location)+'" placeholder="lab_location">'
-        a+='<div>연구실 위치</div><input type="text" class="form-control" id="modify_lab_homepage" name="lab_homepage1" value="'+(laboratory1[i-1].lab_homepage)+'" placeholder="lab_homepage">'
+        a+= '<div>연구실 이름</div><input type="text" class="form-control" id="modify_lab_name" name="lab_name1" value="'+(laboratory1[i].lab_name)+'" placeholder="lab_name">'
+        a+='<div>연구실 위치</div><input type="text" class="form-control" id="modify_lab_location" name="lab_location1" value="'+(laboratory1[i].lab_location)+'" placeholder="lab_location">'
+        a+='<div>연구실 홈페이지</div><input type="text" class="form-control" id="modify_lab_homepage" name="lab_homepage1" value="'+(laboratory1[i].lab_homepage)+'" placeholder="lab_homepage">'
         a+='<div><form style="display : inline-block" name="fileform" id="fileform" action="" method="post" enctype="multipart/form-data">'
         a+='<input type="text" name="LaboratoryID" value="' +i.id+ '" hidden>'
         a+='<input style="display : inline-block" type="file" name="uploadFile" id="uploadFile" accept=".jpg, .jpeg, .png">'
         a+='<button type="button" class="btn btn-secondary my-2" data-dismiss="modal" onclick="modifyImage()">사진 수정</button></form></div>'
-        a += '<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="modifyLabModal('+i+')">완료</button>';
+        a += '<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="modifyLabModal('+(laboratory1[i].id)+')">완료</button>';
         list.html(a);
     }
 
@@ -198,34 +197,6 @@
             }
         })
     }
-    function addMajor(){
-        var major_id=$('#add_major_id').val();
-        var major_name=$('#add_major_name').val();
-        var major_color1=$('#add_major_color1').val();
-        var major_color2=$('#add_major_color2').val();
-        var major_color3=$('#add_major_color3').val();
-        var data=major_id+'-/-/-'+major_name+'-/-/-'+major_color1+'-/-/-'+major_color2+'-/-/-'+major_color3;
-        var check = confirm("전공 "+data+"를 추가하시겠습니까?");
-        if (check) {
-            $.ajax({
-                url: "ajax.kgu", //AjaxAction에서
-                type: "post", //post 방식으로
-                data: {
-                    req: "addMajor", //이 메소드를 찾아서
-                    data: data //이 데이터를 파라미터로 넘겨줍니다.
-                },
-                success: function (data) { //성공 시
-                    if(data=='success'){
-                        alert("해당 전공이 추가되었습니다.");
-                        location.reload();
-                    }
-                    else{
-                        alert('권한이 부족합니다.');
-                    }
-                }
-            })
-        }
-    }
 
 
     function insertLab() { // 연구실 정보 추가
@@ -251,12 +222,13 @@
                     // processData : false,
                    //  contentType : false,
                      //dataType : "json",
-                     success : function(data) {
-                         if (data == 'success'){
+                     success : function(data2) {
+                         if (data2== 'success'){
                              alert("추가가 완료되었습니다");
                              location.reload();
                          }
-                         alert('실패');
+                         else
+                            alert("추가를 실패하였습니다");
                      }
                  })
          }
