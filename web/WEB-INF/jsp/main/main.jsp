@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String majorAllInfo = (String)request.getAttribute("majorAllInfo");
+    String scheduleAllInfo = (String)request.getAttribute("scheduleAllInfo");
 %>
 <html class="fontawesome-i2svg-active fontawesome-i2svg-complete">
 <head>
@@ -117,7 +118,35 @@
 
             <div class="col-lg-3 py-2" id="main2_right" style="height : 400px;">
                 <div class=" h-100 p-5 bg-light border shadow rounded">
-                    <h2><strong>일정</strong></h2>
+                    <div class="row">
+                        <h2><strong>일정</strong><i class="bi bi-plus col-sm-2 text-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addSearchModal()"></i></h2>
+                    </div>
+                    <div class="" id="schContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- search schedule Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">주요 일정</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <table class="boardtable" id="schTable"  data-toggle="table"
+                           data-pagination="true" data-toolbar="#toolbar"
+                           data-search="true" data-side-pagination="true" data-click-to-select="true" data-page-list="[10]">
+                        <thead>
+                        <tr>
+                            <th data-field="date" data-sortable="true">date</th>
+                            <th data-field="content" data-sortable="true">content</th>
+                        </tr>
+                        </thead>
+                    </table>                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                 </div>
             </div>
         </div>
@@ -144,6 +173,7 @@
 <script>
     $(document).ready(function(){
         makeMajorInfo();
+        makeScheduleInfo();
     })
 
     function makeMajorInfo(){
@@ -160,9 +190,78 @@
         }
         info.append(text);
     }
+
+    function makeScheduleInfo(){
+        var scheduleAllInfo = <%=scheduleAllInfo%>;
+        var schedule = $('#schContent');
+        var text='';
+        var size = scheduleAllInfo.length;
+        var today = new Date();
+        for(var i = 0; i < size; i++){
+            var date = new Date(scheduleAllInfo[i].date);
+            text += '<div class="bd-callout ';
+            var diffDay = (date.getTime() - today.getTime()) / (24 * 60 * 60 * 1000);
+            if(diffDay < 0)
+                text += 'bd-callout-end';
+            else if(diffDay < 10)
+                text += 'bd-callout-warning';
+            else
+                text += 'bd-callout-info';
+            text +=' row"><div class="border-end col-sm-5"><strong>'+formatDate(date)+'</strong></div><div class="border-end col-sm-7">'+scheduleAllInfo[i].content+'</div></div>';
+        }
+        schedule.html(text);
+    }
+
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate();
+        const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
+        let week = WEEKDAY[d.getDay()];
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+        var date = [month, day].join('.');
+
+        return date + '(' + week + ')';
+    }
+
+    function addSearchModal(){
+        var scheduleAllInfo = <%=scheduleAllInfo%>;
+        var rows = [];
+        var size = scheduleAllInfo.length;
+        for(var i=0;i<size;i++){
+            var schedule=scheduleAllInfo[i];
+            rows.push({
+                id: schedule.id,
+                date: formatDate(schedule.date),
+                content: schedule.content
+            });
+        }
+        $('#schTable').bootstrapTable('load',rows);
+    }
 </script>
 
+<style>
+    .bd-callout {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid #e9ecef;
+        border-left-width: .25rem;
+        border-radius: .25rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
 
+    .bd-callout-info {
+        border-left-color: #5bc0de;
+    }
 
+    .bd-callout-warning {
+        border-left-color: #f0ad4e;
+    }
 
-
+    .bd-callout-end {
+        border-left-color: #7d8285;
+    }
+</style>

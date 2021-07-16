@@ -1,6 +1,7 @@
 package kr.ac.kyonggi.swaig.common.controller;
 
 import com.google.gson.Gson;
+import kr.ac.kyonggi.swaig.handler.dao.settings.AdminDAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserTypeDTO;
@@ -58,6 +59,7 @@ public class CustomAction implements Action{
         }
         request.setAttribute("majorInfo", gson.toJson(HomeDAO.getInstance().getMajor(major)));
         request.setAttribute("majorAllInfo", gson.toJson(HomeDAO.getInstance().getAllMajor()));
+        request.setAttribute("scheduleAllInfo", gson.toJson(AdminDAO.getInstance().getSchedule()));
         return null;
     }
 }
