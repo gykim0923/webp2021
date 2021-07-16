@@ -27,19 +27,22 @@ public class UploadAction implements Action {
         //30MB 제한
         int maxSize  = 1024*1024*30;
 
-        String uploadedPage = (String)request.getParameter("uploadedPage");
+        String req = request.getParameter("req");
+        System.out.println(req);
+        String uploadedPage = request.getParameter("uploadedPage");
         DAO dao = null;
-
-        switch (uploadedPage){
-            case "admin_slider":
-                dao = AdminDAO.getInstance();
-            default:
-                dao = TutorialDAO.getInstance();
-        }
 
         // 웹서버 컨테이너 경로
         String folder="";
-        folder="/img/slider";
+        switch (uploadedPage){
+            case "admin_slider":
+                dao = AdminDAO.getInstance();
+                folder="/img/slider";
+            default:
+                dao = TutorialDAO.getInstance();
+                folder="/img/slider";
+        }
+
 
         String path = request.getSession().getServletContext().getRealPath(folder);
         //폴더가 없다면 생성

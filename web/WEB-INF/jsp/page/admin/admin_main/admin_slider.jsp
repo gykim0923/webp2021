@@ -90,6 +90,7 @@
             formData.append("file_data",$('input[name=uploadFile]')[0].files[0]);
             <%--formData.append("id",${user.id}); //무슨 역할인지 모르겠음--%>
             <%--formData.append("page","admin_slider"); //무슨 역할인지 모르겠음--%>
+            formData.append("req", "admin_slider");
             $.ajax({
                 url : 'upload.kgu?uploadedPage='+'admin_slider'+'&&id=${user.id}',
                 type : "post",
