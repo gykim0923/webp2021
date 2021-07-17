@@ -21,8 +21,7 @@
                 <thead>
                 <tr>
                     <th data-field="action">설정</th>
-                    <th data-field="real_name">real_name</th>
-                    <th data-field="original_name">original_name</th>
+                    <th data-field="slider_img">slider_img</th>
                     <th data-field="slider_title">slider_title</th>
                     <th data-field="slider_content">slider_content</th>
                 </tr>
@@ -46,12 +45,12 @@
     function tableData3(){
         var getSlider = <%=getSlider%>;
         var rows = [];
+        var image = null;
         for(var i=0;i<getSlider.length;i++){
             var slider=getSlider[i];
             rows.push({
                 id: slider.id,
-                real_name: slider.real_name,
-                original_name: slider.original_name,
+                slider_img: '<a href="image_viewer.kgu?image_path='+slider.slider_img+'" target="_blank">사진 보기</a>',
                 slider_title: slider.slider_title,
                 slider_content: slider.slider_content,
                 action : '<button class="btn btn-dark" type="button" onclick="deleteSlider('+i+')">삭제</button>'
@@ -76,23 +75,26 @@
 
         var modal_footer = '';
         modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-        modal_footer += '<button type="button" class="btn btn-secondary pull-right" data-dismiss="modal" aria-label="Close" onclick="foo()">추가하기</button>';
+        modal_footer += '<button type="button" class="btn btn-secondary pull-right" data-dismiss="modal" aria-label="Close" onclick="insertSlider()">추가하기</button>';
 
         header.html(modal_header);
         body.html(modal_body);
         footer.html(modal_footer);
     }
 
+
+    var file_id; //나중에 파일 상세정보를 uploadedFile로부터 역참조 하고싶은 경우에 사용하라고 만들어둠 (꼭 사용해야 하는 것은 아님)
+    var file_path; //파일이 업로드된 상대경로
     function uploadfile(){
         var formData = new FormData();
-        var address="";
+        var folder='/img/slider';//업로드 된 파일 folder 경로 설정은 여기에서 해줍니다. (마지막에 /가 오면 절대 안됩니다.)
         if($('input[name=uploadFile]')[0].files[0]!=null){
             formData.append("file_data",$('input[name=uploadFile]')[0].files[0]);
             formData.append("file_type", "image"); //전송하려는 파일 타입 설정 (제한이 없으려면 null로 한다.)
             formData.append("board_level", "0"); // board_level 제한 (부정 업로드 방지용. 교수까지 하려면 1, 학생까지 하려면 2로 설정하면 됨.)
 
             $.ajax({
-                url : 'upload.kgu?folder='+'/img/slider', //업로드 된 파일 folder 경로 설정은 여기에서 해줍니다. (마지막에 /가 오면 절대 안됩니다.)
+                url : 'upload.kgu?folder='+folder,
                 type : "post",
                 async:false,
                 data : formData,
@@ -104,17 +106,15 @@
                     }
                     else {
                         alert(data);
+                        var fileLog=data.split("-/-/-");
+                        var a='';
+                        a+='<div>파일제출</div><div>'+fileLog[1]+'</div>';
+                        a+='<div><a href="#"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드(미구현)</button></a>'
+                        a+='<button class="btn btn-danger" onclick="makeUploadSliderModal()"><i class="bi bi-x-circle-fill"></i> 첨부파일 수정하기</button></div>';
+                        file_id=fileLog[0];
+                        file_path=folder+'/'+fileLog[1];
+                        $('#fileUploadSection').html(a);
                     }
-
-
-                    <%--var file=data.split("-/-/-");--%>
-                    <%--var a='';--%>
-                    <%--a+='<div>파일제출</div><div>'+file[0]+'</div>';--%>
-                    <%--a+='<div><a href="download.kgu?id=${user.id}"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드(미구현)</button></a>'--%>
-                    <%--a+='<button class="btn btn-danger" onclick="makeUploadSliderModal()"><i class="bi bi-x-circle-fill"></i> 사진 수정하기</button></div>';--%>
-                    <%--uploadf=file[0];--%>
-                    <%--hashfile=file[1];--%>
-                    <%--$('#fileUploadSection').html(a);--%>
                 }
             })
         }else{
@@ -123,44 +123,26 @@
         return address;
     }
 
-
-
-    //여기까지
-    function insert_data(){
-        var modi='';
-        var obj = new Object();
-        obj.per_id = user.per_id; //여기 user.per_id 였었다
-        obj.name = user.name;
-        <%--obj.locker_num = ${assignedStudent.locker_num};--%>
-
-        obj.file = hashfile; //파일이름(uploadf)
-        obj.realfile = uploadf;
-        // if (obj.file == null && modify == "1") {
-        //     obj.file = stage_data.interim_filename;
-        // }
-
-        // obj.progress = $('#progress_content').val();
-        // obj.plan = $('#plan_content').val();
-        // obj.per_id = user.per_id;
-        // obj.stage = 3; //여기 추가
-        var jsonobj = JSON.stringify(obj);
-        $.ajax({
-            url: "ajax.do",
-            type: "post",
-            dataType: "json",
-            data: {
-                req: "return_picture",
-                data: jsonobj,
-                modify: modi
-            },
-            success: function (data) {
-                alert(user.name + "[" + data + "]님의 반납사진(내부)이 제출 되었습니다.");
-                window.location.href = "locker_apply.do?num=112";
-            }
-        });
-
+    function insertSlider(){
+        var slider_img = file_path;
+        var slider_title = $('#slider_title').val();
+        var slider_content = $('#slider_content').val();
+        var check = confirm("대문을 하나 추가하시겠습니까?");
+        if (check) {
+            $.ajax({
+                url: "ajax.kgu", //AjaxAction에서
+                type: "post",
+                data: {
+                    req: "insertSlider", //이 메소드를 찾아서
+                    data: slider_img+'-/-/-'+slider_title+'-/-/-'+slider_content //이 데이터를 파라미터로 넘겨줍니다.
+                },
+                success: function (data) { //성공 시
+                    alert("대문이 정상적으로 추가되었습니다.");
+                    location.reload()
+                }
+            })
+        }
     }
-
 
 
 
