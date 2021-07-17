@@ -6,8 +6,11 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kr.ac.kyonggi.swaig.common.controller.Action;
 import kr.ac.kyonggi.swaig.handler.dao.DAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.AdminDAO;
+import kr.ac.kyonggi.swaig.handler.dao.settings.FileDAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
+import kr.ac.kyonggi.swaig.handler.dao.settings.LocationDAO;
 import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
+import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserTypeDTO;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,12 +27,12 @@ public class UploadAction implements Action {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Gson gson = new Gson();
         //30MB 제한
         int maxSize  = 1024*1024*30;
 
-
         // 웹서버 컨테이너 경로
-        String folder=request.getParameter("folder");
+        String folder = request.getParameter("folder");
         String path = request.getSession().getServletContext().getRealPath(folder);
 
         //폴더가 없다면 생성
@@ -53,19 +56,56 @@ public class UploadAction implements Action {
         FileOutputStream fout = null;
         long currentTime = System.currentTimeMillis();
         SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
-        Gson gson = new Gson();
-        UserTypeDTO type = gson.fromJson((String) request.getSession().getAttribute("type"), UserTypeDTO.class);
-        if(type.board_level != 0){
-            System.out.println("업로드 권한 부족!");
-            return "fail";
-        }
 
         try{
             MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
             uploadFile = multi.getFilesystemName("file_data");
+
+            /**
+             * 파일 타입 검사 (웹 브라우저에서도 제약을 걸지만, 부정한 방법으로 업로드를 시도하는 경우가 있을 수도 있어 자바에서 이중 검사)
+             * */
             String check = uploadFile.substring(uploadFile.lastIndexOf(".")+1,uploadFile.length());
-            if(!check.equals("jpg") && !check.equals("jpeg") && !check.equals("png") && !check.equals("gif") && !check.equals("swf"))
-                return null;
+            String fileType = multi.getParameter("file_type"); //파일 타입 검사용
+            switch (fileType){ //추후 제약사항 추가 예정
+                case "image":
+                    if(!check.equals("jpg") && !check.equals("jpeg") && !check.equals("png") && !check.equals("gif") && !check.equals("bmp")){
+                        return null; // swf는 시장에서 퇴출된 관계로 삭제했습니다.
+                    }
+                    break;
+                case "doc":
+                    if(!check.equals("hwp") && !check.equals("hwpx") && !check.equals("doc") && !check.equals("docx") && !check.equals("pdf") && !check.equals("txt") && !check.equals("html")){
+                        return null;
+                    }
+                    break;
+                case "music":
+                    if(!check.equals("mp3") && !check.equals("wma") && !check.equals("wav")){
+                        return null;
+                    }
+                    break;
+                case "video":
+                    if(!check.equals("avi") && !check.equals("flv") && !check.equals("mkv") && !check.equals("mp4") && !check.equals("mov")){
+                        return null;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            /**
+             * 업로드 권한 검사
+             * jsp에서 넘겨준 board_level와 현재 로그인 한 계정의 type을 비교하여 업로드를 허가할 지 결정함.
+             * */
+
+            String board_level = multi.getParameter("board_level");
+            UserTypeDTO type = gson.fromJson((String) request.getSession().getAttribute("type"), UserTypeDTO.class);
+            if(type.board_level > Integer.parseInt(board_level)){ //현재 로그인 한 계정의 board_level이 jsp에서 정해준 값보다 크면(권한이 낮으면) 권한 부족으로 판단하여 fail처리함.
+                System.out.println("업로드 권한 부족!");
+                return "fail";
+            }
+
+            /**
+             * 위의 검사들을 다 통과하면 파일을 업로드해줌.
+             * */
+
             newFileName = simDf.format(new Date(currentTime)) + "_" + uploadFile;
             // 업로드된 파일 객체 생성
             File oldFile = new File(savePath, uploadFile);
@@ -89,28 +129,18 @@ public class UploadAction implements Action {
                 fout.close();
                 oldFile.delete();
             }
-            String real_method_name = multi.getParameter("real_method_name"); //한 개의 DAO 메소드 안에서 여러 작업이 필요한 경우 나눠줄 목적
-            String user_id = multi.getParameter("user_id");
-            String upload_time = simDf.format(new Date(currentTime));
-            String text = multi.getParameter("text");
-            String common_parameter = real_method_name+"-/-/-"+uploadFile+"-/-/-"+newFileName+"-/-/-"+user_id+"-/-/-"+upload_time+"-/-/-"+savePath+"-/-/-"+path;
-            String custom_parameter = text;
-            System.out.println(common_parameter);
-            String dao_name = multi.getParameter("dao_name");
-            DAO dao = null;
-            switch (dao_name){
-                case "AdminDAO":
-                    System.out.println(dao_name);
-                    dao = AdminDAO.getInstance();
-                default:
-                    dao = TutorialDAO.getInstance();
-            }
-            dao.insertFile(common_parameter, custom_parameter);
 
+            UserDTO user = gson.fromJson((String) request.getSession().getAttribute("user"), UserDTO.class);
+            String id= user.id;
+
+            String upload_time = simDf.format(new Date(currentTime));
+            String parameter = id+"-/-/-"+uploadFile+"-/-/-"+newFileName+"-/-/-"+upload_time+"-/-/-"+savePath+"-/-/-"+path;
+            String file_id = FileDAO.getInstance().insertFileUploadLog(parameter); //업로드 파일 로그 남기면서 돌려받을 고유 번호
+            String relative_path=folder+"/"+newFileName; //나중에 파일 호출 시 사용할 상대경로
+            return file_id+"-/-/-"+relative_path;
         }catch(Exception e){
             e.printStackTrace();
             return "fail";
         }
-        return "success";
     }
 }

@@ -57,6 +57,7 @@
     <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container" id="headerTitle">
             <a class="navbar-brand d-flex align-items-center" href=<%=main_url%>>
+<%--                <img src="/img/kgu_logo.png" class="img-fluid px-2" style="height: 3rem;">--%>
                 <h3><strong id="majorTitle"></strong></h3>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">

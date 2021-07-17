@@ -83,6 +83,25 @@
         <a href="<%=main_url%>">
             <img class="cs_logo" src="<%=img_login_logo%>" alt="" width="300" height=75>
         </a>
+<%--        부트스트랩 테스트용--%>
+        <div class="row">
+            <div class="col-5">
+                <img class="img-fluid" src="/img/kgu_logo.png"/>
+            </div>
+            <div class="col-7">
+                <div class="py-auto">
+                    <div>
+                        <h2><strong>경기대학교</strong></h2>
+                    </div>
+                    <div>
+                        <h3><strong>전공이름</strong></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%--        부트스트랩 테스트용 끝--%>
+
+
         <h1 class="h3 mb-3 fw-normal">로그인</h1>
 
         <div class="form-floating">
