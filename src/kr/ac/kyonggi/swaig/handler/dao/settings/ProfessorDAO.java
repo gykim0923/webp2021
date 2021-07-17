@@ -94,7 +94,7 @@ public class ProfessorDAO {
       return "";
    }
 
-   public ProfessorDTO insertProfessor(String data) {
+   public String insertProfessor(String data) {
       String arr[]=data.split("-/-/-");//0=name 1=사무실 위치  2=전화번호 3=email 4:lecture
       Connection conn = Config.getInstance().sqlLogin();
       List<Map<String, Object>> listOfMaps = null;
@@ -107,11 +107,9 @@ public class ProfessorDAO {
       } finally {
          DbUtils.closeQuietly(conn);
       }
-      Gson gson = new Gson();
-      ArrayList<ProfessorDTO> results = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<ProfessorDTO>>() {}.getType());
-      return results.get(0);
+      return "sucess";
    }
-   public void changeImage(int id, String img) {
+   public void modifyImage(int id, String img) {
 	   Connection conn = Config.getInstance().sqlLogin();
 	      try {
 	         QueryRunner queryRunner = new QueryRunner();

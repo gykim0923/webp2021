@@ -131,10 +131,10 @@ public class AjaxAction implements Action {
                 if (type.board_level == 0)
                     result = gson.toJson(ProfessorDAO.getInstance().getOneProfessor(data));
                 break;
-//            case "insertProfessor":      //직접 권한 확인
-//                if (type.board_level == 0)
-//                    result =ProfessorDAO.getInstance().insertProfessor(data);
-//                break;
+            case "insertProfessor":      //직접 권한 확인
+                if (type.board_level == 0)
+                    result =ProfessorDAO.getInstance().insertProfessor(data);
+                break;
             case "deleteProfessor":      //직접 권한 확인
                 if (type.board_level == 0)
                     result = ProfessorDAO.getInstance().deleteProfessor(data);

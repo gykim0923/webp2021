@@ -116,7 +116,7 @@
       if(typeForProfessor.for_header=='관리자') {
          <!-- Button trigger modal -->
          text +='<div><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">교수님 추가</button><div>'
-         // '<div><button class="btn btn-secondary mx-2" onclick="insertLab()">추가</button></div>'
+
       }
       prolist.append(text);
    }
@@ -124,11 +124,11 @@
       var list = $('#myModalbody');
       var professor1 = <%=getProfessorList%>;
       var a = '';
-      a += '<div>교숫님 이름</div><input type="text" class="form-control" id="modify_prosfessor_name" name="prosfessor_name1" value="' + (prosfessor1[i - 1].prosfessor_name) + '" placeholder="prosfessor_name">'
-      a += '<div>사무실 위치</div><input type="text" class="form-control" id="modify_prosfessor_location" name="prosfessor_location1" value="' + (prosfessor1[i - 1].prosfessor_location) + '" placeholder="prosfessor_location">'
-      a += '<div>연락처 </div><input type="text" class="form-control" id="modify_prosfessor_call" name="prosfessor_call1" value="' + (prosfessor1[i - 1].prosfessor_call) + '" placeholder="prosfessor_call">'
-      a += '<div>이메일 </div><input type="text" class="form-control" id="modify_prosfessor_email" name="prosfessor_email1" value="' + (prosfessor1[i - 1].prosfessor_email) + '" placeholder="prosfessor_email">'
-      a += '<div>담당과목 </div><input type="text" class="form-control" id="modify_prosfessor_lecture" name="prosfessor_lecture1" value="' + (prosfessor1[i - 1].prosfessor_lecture) + '" placeholder="prosfessor_lecture">'
+      a += '<div>교수님 이름</div><input type="text" class="form-control" id="modify_pro_name" name="pro_name1" value="' + (professor1[i].pro_name) + '" placeholder="pro_name">'
+      a += '<div>사무실 위치</div><input type="text" class="form-control" id="modify_pro_location" name="pro_location1" value="' + (professor1[i].pro_location) + '" placeholder="pro_location">'
+      a += '<div>연락처 </div><input type="text" class="form-control" id="modify_pro_call" name="pro_call1" value="' + (professor1[i].pro_call) + '" placeholder="pro_call">'
+      a += '<div>이메일 </div><input type="text" class="form-control" id="modify_pro_email" name="pro_email1" value="' + (professor1[i].pro_email) + '" placeholder="pro_email">'
+      a += '<div>담당과목 </div><input type="text" class="form-control" id="modify_pro_lecture" name="pro_lecture1" value="' + (professor1[i].pro_lecture) + '" placeholder="pro_lecture">'
       a += '<div><form style="display : inline-block" name="fileform" id="fileform" action="" method="post" enctype="multipart/form-data">'
       a += '<input type="text" name="ProfessorID" value="' + i.id + '" hidden>'
       a += '<input style="display : inline-block" type="file" name="uploadFile" id="uploadFile" accept=".jpg, .jpeg, .png">'
@@ -182,30 +182,30 @@
 
    function deleteProfessor(i) {
       var check = confirm("[중요] 정말로 이 데이터를 삭제하시나요? 취소하실 수 없습니다.");
+      if (check) {
          $.ajax({
-            url : "ajax.kgu",
-            type : "post",
-            data : {
-               req : "deleteProfessor",
-               data : i
+            url: "ajax.kgu",
+            type: "post",
+            data: {
+               req: "deleteProfessor",
+               data: i
             },
-            success : function(data) {
+            success: function (data) {
                alert("해당 데이터가 삭제되었습니다.");
                location.reload()
             }
          })
       }
+   }
 
-   function insertProfess() { // 연구실 정보 추가
-      var name1 = $('#add_lab_name').val();
-      var location2= $('#add_lab_location').val();
-      var homepage2= $('#add_lab_homepage').val();
-      var data2 =name1+'-/-/-'+location2+'-/-/-'+homepage2;
-      // var formData = new FormData();
-      // formData.append("lab_img",$('input[name=uploadFile]')[0].files[0]);
-      // formData.append("lab_name", $('input[name=add_lab_name1]').val());
-      // formData.append("lab_location", $('input[name=add_lab_location1]').val());
-      // formData.append("lab_homepage", $('input[name=add_lab_homepage1]').val());
+   function insertPro() { //교수님 정보 추가
+      var name1 = $('#add_pro_name').val();
+      var location2= $('#add_pro_location').val();
+      var call2= $('#add_pro_call').val();
+      var email2= $('#add_pro_email').val();
+      var lecture2= $('#add_pro_lecture').val();
+      var data2 =name1+'-/-/-'+location2+'-/-/-'+call2+'-/-/-'+email2+'-/-/-'+lecture2;
+
 
       var check = confirm("정말 추가하시겠습니까?");
       if(check){
@@ -216,10 +216,9 @@
                req : "insertProfessor",
                data : data2
             },
-            // processData : false,
-            //  contentType : false,
+
             dataType : "json",
-            success : function(data) {
+            success : function(data2) {
                alert("추가가 완료되었습니다");
                location.reload();
             }
@@ -238,3 +237,58 @@
       </div>
    </div>
 </div>
+<!-- Modal /  교수님 수정 모달-->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">수정하기</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body" id = "myModalbody"></div>
+         <%--                        <div class="modal-footer">--%>
+         <%--                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>--%>
+         <%--                            <button type="button" class="btn btn-primary">추가하기</button>--%>
+         <%--                        </div>--%>
+      </div>
+   </div>
+</div>
+
+
+<div>
+   <!-- Modal / 교수님 추가 모달-->
+   <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="staticBackdropLabel1">교수님 추가하기</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modalReset">
+               <div>교수님 이름 </div>
+               <input type="text" class="form-control" id="add_pro_name" name="add_pro_name1" value="" placeholder="pro_name">
+               <div>사무실 위치</div>
+               <input type="text" class="form-control" id="add_pro_location" name="add_pro_location1" value="" placeholder="pro_location">
+               <div>연락처</div>
+               <input type="text" class="form-control" id="add_pro_call" name="add_pro_call1" value="" placeholder="pro_call">
+               <div>이메일</div>
+               <input type="text" class="form-control" id="add_pro_email" name="add_pro_email1" value="" placeholder="pro_email">
+               <div>담당과목</div>
+               <input type="text" class="form-control" id="add_pro_lecture" name="add_pro_lecture1" value="" placeholder="pro_lecture">
+               <div>
+                  <div>
+                     <form style="display : inline-block" name="fileform" id="fileform" action="" method="post" enctype="multipart/form-data">
+                        <input type="text" name="ProfessorID" value="' +it.id+ '" hidden>
+                        <input style="display : inline-block" type="file" name="uploadFile" id="uploadFile" accept=".jpg, .jpeg, .png">
+                        <button type="button" class="btn btn-secondary my-2" data-dismiss="modal" onclick="modifyImage()">사진 수정</button>
+                     </form>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                  <button type="button" class="btn btn-secondary" aria-label="Close" onclick="insertProfessor()">추가</button>
+               </div>
+            </div>
+         </div>
+      </div>
+<%--modal end--%>
