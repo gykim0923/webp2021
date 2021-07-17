@@ -90,7 +90,6 @@ public class ProfessorDAO {
       } finally {
          DbUtils.closeQuietly(conn);
       }
-      
       return "";
    }
 

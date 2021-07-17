@@ -110,7 +110,6 @@ public class AjaxAction implements Action {
                 result=AdminDAO.getInstance().modifyMajor(data);
                 break;
 
-
             case "checkPassword":
                 if (UserDAO.getInstance().checkPassword(data))
                     result = "true";
