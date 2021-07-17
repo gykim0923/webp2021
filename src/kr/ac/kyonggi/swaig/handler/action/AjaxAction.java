@@ -194,6 +194,10 @@ public class AjaxAction implements Action {
                 if (type.board_level == 0)
                     result=DeveloperDAO.getInstance().addDeveloper(data);
                 break;
+            case "insertSlider":
+                if(type.board_level==0)
+                    result=AdminDAO.getInstance().addSlider(data);
+                break;
         }
         return result;
     }

@@ -3,10 +3,8 @@ package kr.ac.kyonggi.swaig.handler.dao.settings;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import kr.ac.kyonggi.swaig.common.sql.Config;
-import kr.ac.kyonggi.swaig.handler.dao.DAO;
 import kr.ac.kyonggi.swaig.handler.dto.settings.ScheduleDTO;
 import kr.ac.kyonggi.swaig.handler.dto.settings.SliderDTO;
-import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
@@ -18,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class AdminDAO implements DAO {
+public class AdminDAO {
     public static AdminDAO it;
 
     public static AdminDAO getInstance() { //인스턴스 생성
@@ -169,35 +167,20 @@ public class AdminDAO implements DAO {
         return selectedList;
     }
 
-
-    @Override
-    public void insertFile(String common_parameter, String custom_parameter) {
-        System.out.println("dd");
-        String common_arr[] = common_parameter.split("-/-/-"); //real_method_name+"-/-/-"+uploadFile+"-/-/-"+newFileName+"-/-/-"+user_id+"-/-/-"+upload_time+"-/-/-"+savePath+"-/-/-"+path;
-        String real_method_name = common_arr[0];
-        String uploadFile=common_arr[1];
-        String newFileName=common_arr[2];
-        String user_id=common_arr[3];
-        String upload_time=common_arr[4];
-        String savePath=common_arr[5];
-        String path=common_arr[6];
-
-        String custom_arr[] = custom_parameter.split("-/-/-");
-
+    public String addSlider(String data) {
+        String arr[] = data.split("-/-/-"); // slider_img+'-/-/-'+slider_title+'-/-/-'+slider_content
+        String slider_img = arr[0];
+        String slider_title = arr[1];
+        String slider_content = arr[2];
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            switch (real_method_name){
-                case "sliderUpload":
-                    queryRunner.update(conn, "INSERT INTO slider(original_name, real_name, user_id, upload_time, savePath, path) VALUES (?,?,?,?,?,?);",
-                            uploadFile, newFileName, user_id, upload_time, savePath, path);
-                default:
-                    System.out.println("잘못된 real_method_name 입니다.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            queryRunner.update(conn,"INSERT INTO slider(slider_img, slider_title, slider_content) VALUE(?,?,?);", slider_img,slider_title,slider_content);
+        } catch(SQLException se) {
+            se.printStackTrace();
         } finally {
             DbUtils.closeQuietly(conn);
         }
+        return "success";
     }
 }

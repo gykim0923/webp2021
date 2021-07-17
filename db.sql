@@ -218,14 +218,20 @@ CREATE TABLE schedule(
 );
 INSERT INTO schedule(id, date, content) VALUE ('0', '2021-08-01', '프로젝트 마감');
 
+CREATE TABLE uploadedFile(
+                       `id` INT(10) NOT NULL AUTO_INCREMENT,
+                       `user_id` VARCHAR(100) NOT NULL,
+                       `uploadFile` VARCHAR(100) NOT NULL,
+                       `newFileName` VARCHAR(100) NOT NULL,
+                       `upload_time` DATE NOT NULL,
+                       `savePath` VARCHAR(100)  NOT NULL,
+                       `path` VARCHAR(100)  NOT NULL,
+                       PRIMARY KEY (`id`)
+);
+
 CREATE TABLE slider(
                          `id` INT(10) NOT NULL AUTO_INCREMENT,
-                         `real_name` VARCHAR(100) NOT NULL,
-                         `original_name` VARCHAR(100) NOT NULL,
-                         `user_id` VARCHAR(100) NOT NULL,
-                         `upload_time` DATE NOT NULL,                         
-                         `savePath` VARCHAR(100)  NOT NULL,
-                         `path` VARCHAR(100)  NOT NULL,
+                         `slider_img` VARCHAR(100) DEFAULT NULL,
                          `slider_title` VARCHAR(100) DEFAULT NULL,
                          `slider_content` VARCHAR(100) DEFAULT NULL,
                          PRIMARY KEY (`id`)

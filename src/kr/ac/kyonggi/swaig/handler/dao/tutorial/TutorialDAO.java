@@ -3,7 +3,6 @@ package kr.ac.kyonggi.swaig.handler.dao.tutorial;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import kr.ac.kyonggi.swaig.common.sql.Config;
-import kr.ac.kyonggi.swaig.handler.dao.DAO;
 import kr.ac.kyonggi.swaig.handler.dto.tutorial.DocumentDTO;
 import kr.ac.kyonggi.swaig.handler.dto.tutorial.TutorialDTO;
 import org.apache.commons.dbutils.DbUtils;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class TutorialDAO implements DAO {
+public class TutorialDAO {
     public static TutorialDAO it;
 
     public static TutorialDAO getInstance() { //인스턴스 생성
@@ -100,10 +99,4 @@ public class TutorialDAO implements DAO {
         return selectedList;
     }
 
-
-    @Override
-    public void insertFile(String common_parameter, String custom_parameter) {
-
-
-    }
 }

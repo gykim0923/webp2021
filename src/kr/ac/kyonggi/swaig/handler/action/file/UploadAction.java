@@ -4,12 +4,7 @@ import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kr.ac.kyonggi.swaig.common.controller.Action;
-import kr.ac.kyonggi.swaig.handler.dao.DAO;
-import kr.ac.kyonggi.swaig.handler.dao.settings.AdminDAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.FileDAO;
-import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
-import kr.ac.kyonggi.swaig.handler.dao.settings.LocationDAO;
-import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserTypeDTO;
 
@@ -18,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -136,8 +129,7 @@ public class UploadAction implements Action {
             String upload_time = simDf.format(new Date(currentTime));
             String parameter = id+"-/-/-"+uploadFile+"-/-/-"+newFileName+"-/-/-"+upload_time+"-/-/-"+savePath+"-/-/-"+path;
             String file_id = FileDAO.getInstance().insertFileUploadLog(parameter); //업로드 파일 로그 남기면서 돌려받을 고유 번호
-            String relative_path=folder+"/"+newFileName; //나중에 파일 호출 시 사용할 상대경로
-            return file_id+"-/-/-"+relative_path;
+            return file_id+"-/-/-"+newFileName;
         }catch(Exception e){
             e.printStackTrace();
             return "fail";
