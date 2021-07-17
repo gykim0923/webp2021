@@ -11,6 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * SFilter 이후에 실행되는 클래스입니다.
+ * 톰캣은 web/WEB-INF/web.xml의 설정에 의해 이 클래스를 실행합니다.
+ * 톰캣이 url 요청을 분석했을 때, *.kgu의 패턴이 있었다면 Controller 클래스를 실행하게됩니다.
+ * *.kgu패턴은 class.properties에서 검색하고, Action 클래스를 실행하게 됩니다.
+ * Action클래스가 종료될 때 까지 기다렸다가 Action클래스로부터 return 받은 jsp를 분석하여 톰캣으로 return합니다.
+ * */
 
 public class Controller extends HttpServlet{
     /**
@@ -41,14 +48,12 @@ public class Controller extends HttpServlet{
 
         String classPath = prop.getProperty(command);
 
-//        System.out.println(command + " ------ " + fullPath);
         try{
-//            System.out.println(classPath);
             Class<?> url = Class.forName(classPath);
 
             action = (Action) url.newInstance();
             try {
-                forward = action.execute(request, response);
+                forward = action.execute(request, response); //Action클래스를 실행한 후, 결과값을 forward 변수에 담습니다.
             } catch (Exception e) {
                 //세션 잃어버렸는데, 작업을 진행할때
             }
@@ -60,16 +65,20 @@ public class Controller extends HttpServlet{
             ex.printStackTrace();
         }catch(NullPointerException ex)
         {
-            //System.out.println("error class : " + command);
             ex.printStackTrace();
         }
+
+/**
+ * Action클래스 종료 이후, 반환받았던 변수인 forward를 분석하여 톰캣으로 넘겨줍니다.
+ * */
+
+
         if(forward != null){
 
             if(forward.contains("RequestDispatcher:"))
             {
                 String jspName = (forward.split(":")[1]);
                 request.getRequestDispatcher("WEB-INF/" + forward.split(":")[1]).forward(request, response);
-                //System.out.println("/" + jspName);
             }
             else {
                 PrintWriter pr = response.getWriter();

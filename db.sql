@@ -151,8 +151,8 @@ INSERT INTO text(id, major, content) VALUE('13','main','13-main');
 INSERT INTO text(id, major, content) VALUE('13','major1','13-major1');
 INSERT INTO text(id, major, content) VALUE('20','main','20-main');
 INSERT INTO text(id, major, content) VALUE('20','major1','20-major1');
-INSERT INTO text(id, major, content) VALUE('22','main','20-main');
-INSERT INTO text(id, major, content) VALUE('22','major1','20-major1');
+INSERT INTO text(id, major, content) VALUE('21','main','21-main');
+INSERT INTO text(id, major, content) VALUE('21','major1','21-major1');
 
 
 CREATE TABLE professor(

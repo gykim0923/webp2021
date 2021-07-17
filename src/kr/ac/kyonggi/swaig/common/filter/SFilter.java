@@ -29,6 +29,10 @@ public class SFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
         HttpSession session = request.getSession(true);
+
+        /**
+         * 자바 프로젝트가 UTF-8 인코딩으로 동작하게 설정해주는 역할
+         * */
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setHeader("P3P","CP='CAO PSA CONI OTR OUR DEM ONL'");
@@ -37,10 +41,10 @@ public class SFilter implements Filter {
         if(session.getAttribute("type") == null) {
             /**
              * type이 null인 경우 오류를 방지하기 위해 default 값으로 기타로 지정함.
-             * (일부 페이지에서는 JS로 type을 요구하는데, null인 경우 오류가 발생하는 것을 방지
+             * (일부 페이지에서는 JS로 type을 요구하는데, null인 경우 오류가 발생하는 것을 방지)
              * */
             Gson gson = new Gson();
-            session.setAttribute("type", gson.toJson(UserDAO.getInstance().getType("기타")));
+            session.setAttribute("type", gson.toJson(UserDAO.getInstance().getType("기타"))); //로그인 하지 않았지만 마치 기타 신분인 것 처럼 만들어준다.
 //            session.setAttribute("headermenulist", gson.toJson(HomeDAO.getInstance().getHeaderMenu()));
 //            session.setAttribute("menulist", gson.toJson(HomeDAO.getInstance().getMenu()));
 //            response.sendRedirect("Index");

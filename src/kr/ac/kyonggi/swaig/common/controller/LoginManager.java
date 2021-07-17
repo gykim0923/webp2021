@@ -3,6 +3,11 @@ package kr.ac.kyonggi.swaig.common.controller;
 import java.util.*;
 import javax.servlet.http.*;
 
+/**
+ * 로그인을 위한 클래스
+ * */
+
+
 public class LoginManager implements HttpSessionBindingListener{
 		private static LoginManager loginManager = null;
 	    //로그인한 접속자를 담기위한 해시테이블
@@ -39,7 +44,7 @@ public class LoginManager implements HttpSessionBindingListener{
 	               }
 	          }
 	     }
-	    /*
+	    /**
 	     * 해당 아이디의 동시 사용을 막기위해서 
 	     * 이미 사용중인 아이디인지를 확인한다.
 	     * @param userID 사용자 아이디
@@ -49,7 +54,7 @@ public class LoginManager implements HttpSessionBindingListener{
 	        return loginUsers.containsValue(userID);
 	    }
 	    
-	    /*
+	    /**
 	     * 로그인을 완료한 사용자의 아이디를 세션에 저장하는 메소드
 	     * @param session 세션 객체
 	     * @param userID 사용자 아이디
@@ -59,7 +64,7 @@ public class LoginManager implements HttpSessionBindingListener{
 	        //name값으로 userId, value값으로 자기자신(HttpSessionBindingListener를 구현하는 Object)
 	        session.setAttribute(userId, this);//login에 자기자신을 집어넣는다.
 	    }
-	    /*
+	    /**
 	      * 입력받은 세션Object로 아이디를 리턴한다.
 	      * @param session : 접속한 사용자의 session Object
 	      * @return String : 접속자 아이디
