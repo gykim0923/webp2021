@@ -19,7 +19,7 @@
 <%--                <h5 class="modal-title" id="staticBackdropLabel">Modal 제목</h5>--%>
 <%--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
             </div>
-            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-body g-3" id="modalBody"></div>
             <div class="modal-footer" id="modalFooter">
 <%--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>--%>
 <%--                <button type="button" class="btn btn-primary" onclick="modalReset()">버튼을 눌러 내용 교체</button>--%>
@@ -46,7 +46,8 @@
                 text += '<div class="text-center mt-1">'+members[j]+'</div>';
             }
             <c:if test = "${type.for_header == '관리자'}">
-                text += '<div class="widget-49-meeting-action mt-3"><a href="#" class="btn btn-sm btn-outline-primary">수정</a></div>';
+                text += '<div class="widget-49-meeting-action mt-3"><button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="modifyDeveloperModal('+i+')">수정</button>'+
+                    '<button class="btn btn-sm btn-outline-secondary" onclick="deleteDeveloper('+i+')">삭제</button></div>';
             </c:if>
             text += '</div></div></div></div>'
         }
@@ -58,16 +59,48 @@
         </c:if>
     }
 
+    function deleteDeveloper(i){
+        var getAllDevelopers = <%=getAllDevelopers%>;
+        var developer = getAllDevelopers[i];
+        var id = developer.id;
+        var teamName = developer.team_name;
+        var startDate = developer.start_date;
+        var endDate = developer.end_date;
+        var members = developer.members;
+        var data = id+'-/-/-'+teamName+'-/-/-'+startDate+'-/-/-'+endDate+'-/-/-'+members;
+
+        var check = confirm("팀 "+data+"를 삭제하시겠습니까?");
+        if (check) {
+            $.ajax({
+                url: "ajax.kgu", //AjaxAction에서
+                type: "post", //post 방식으로
+                data: {
+                    req: "deleteDeveloper", //이 메소드를 찾아서
+                    data: data //이 데이터를 파라미터로 넘겨줍니다.
+                },
+                success: function (data) { //성공 시
+                    if(data=='success'){
+                        alert("해당 팀이 삭제되었습니다.");
+                        location.reload();
+                    }
+                    else{
+                        alert('권한이 부족합니다.');
+                    }
+                }
+            })
+        }
+    }
+
     function addDeveloperModal(){
         var header = $('#modalHeader');
         var body = $('#modalBody');
         var footer = $('#modalFooter');
         var h = '', b = '', f = '';
         h += '<h5 class="modal-title" id="staticBackdropLabel">추가하기</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>'
-        b += '<div><div><label for="teamName">팀 명</label><input id="teamName" type="text" name="teamName" placeholder="웹 0기"></div>'+'' +
+        b += '<div><label for="teamName" class="form-label">팀 명</label><input type="text" class="form-control" id="teamName" placeholder="예)웹 0기"></div>'+
             '<div><label for="InputDate">시작 일</label><input class="form-control" id="startDate" type="date" name="startDate" value="' + formatDate(new Date()) + '"></div>'+
             '<div><label for="InputDate">종료 일</label><input class="form-control" id="endDate" type="date" name="endDate" value="' + formatDate(new Date()) + '"></div>'+
-            '<div class="form-floating"><label for="madeByContent">팀원</label><input type="text" class="form-control" id="madeByContent" placeholder="개발진들의 학번과 이름을 적어주세요." value="xx학번 ooo"> <label for="madebyContent">19학번 ooo ooo---20학번 xxx 식으로 적어주시기 바랍니다.</label> </div>';
+            '<div><label for="madeByContent" class="form-label">팀원</label><div class="form-floating"><input type="text" class="form-control" id="madeByContent" placeholder="개발진들의 학번과 이름을 적어주세요." value="oo학번 xxx"> <label for="madebyContent">19학번 ooo ooo---20학번 xxx 식으로 적어주시기 바랍니다.</label> </div></div>';
         f += '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button><button type="button" class="btn btn-primary" onclick="addDeveloper()">추가</button>';
 
         header.html(h);
@@ -104,6 +137,55 @@
         }
     }
 
+    function modifyDeveloperModal(i){
+        var getAllDevelopers = <%=getAllDevelopers%>;
+        var header = $('#modalHeader');
+        var body = $('#modalBody');
+        var footer = $('#modalFooter');
+        var h = '', b = '', f = '';
+        h += '<h5 class="modal-title" id="staticBackdropLabel">수정하기</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>'
+        b += '<div><label for="teamName" class="form-label">팀 명</label><input type="text" class="form-control" id="teamName" placeholder="예)웹 0기" required value="'+getAllDevelopers[i].team_name+'"></div>'+
+            '<div><label for="InputDate">시작 일</label><input class="form-control" id="startDate" type="date" name="startDate" value="' + formatDate(getAllDevelopers[i].start_date) + '"></div>'+
+            '<div><label for="InputDate">종료 일</label><input class="form-control" id="endDate" type="date" name="endDate" value="' + formatDate(getAllDevelopers[i].end_date) + '"></div>'+
+            '<div><label for="madeByContent" class="form-label">팀원</label><div class="form-floating"><input type="text" class="form-control" id="madeByContent" placeholder="개발진들의 학번과 이름을 적어주세요." value="'+getAllDevelopers[i].members+'"> <label for="madebyContent">19학번 ooo ooo---20학번 xxx 식으로 적어주시기 바랍니다.</label> </div></div>';
+        f += '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button><button type="button" class="btn btn-primary" onclick="modifyDeveloper('+i+')">수정</button>';
+
+        header.html(h);
+        body.html(b);
+        footer.html(f);
+    }
+
+    function modifyDeveloper(i){
+        var getAllDevelopers = <%=getAllDevelopers%>;
+        var id = getAllDevelopers[i].id;
+        var teamName = $('#teamName').val();
+        var madeByContent = $('#madeByContent').val();
+        var startDate = $('#startDate').val();
+        var endDate = $('#endDate').val();
+
+        var data = id + '-/-/-' + teamName + '-/-/-' + madeByContent + '-/-/-' + startDate + '-/-/-' + endDate;
+        var check = confirm("팀 "+data+"를 수정하시겠습니까?");
+        if (check) {
+            $.ajax({
+                url: "ajax.kgu", //AjaxAction에서
+                type: "post", //post 방식으로
+                data: {
+                    req: "modifyDeveloper", //이 메소드를 찾아서
+                    data: data //이 데이터를 파라미터로 넘겨줍니다.
+                },
+                success: function (data) { //성공 시
+                    if(data=='success'){
+                        alert("해당 팀이 수정되었습니다.");
+                        location.reload();
+                    }
+                    else{
+                        alert('권한이 부족합니다.');
+                    }
+                }
+            })
+        }
+    }
+
     function formatDate(date) {
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),
@@ -115,23 +197,6 @@
 
         return [year, month, day].join('-');
     }
-
-    // function addDeveloperModal(){
-    //     var header = $('#modalHeader');
-    //     var body = $('#modalBody');
-    //     var footer = $('#modalFooter');
-    //     var h = '', b = '', f = '';
-    //     h += '<h5 class="modal-title" id="staticBackdropLabel">추가하기</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>'
-    //     b += '<div class="row row-cols-2"><div class="col-4"><div class="input-group"><input type="text" class="form-control" placeholder="ex) 19"><span class="input-group-text">학번</span><button class="btn btn-outline-secondary" type="button">+</button><button class="btn btn-outline-secondary" type="button">-</button></div></div>'+
-    //         '<div class="col-8 align-self-end"><div class="input-group"><input type="text" class="form-control" placeholder="이름을 입력하세요."><button class="btn btn-outline-secondary" type="button">+</button><button class="btn btn-outline-secondary" type="button">-</button></div></div></div>';
-    //     f += '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button><button type="button" class="btn btn-primary" onclick="modalReset()">버튼을 눌러 내용 교체</button>';
-    //
-    //     header.html(h);
-    //     body.html(b);
-    //     footer.html(f);
-    //
-    //     //el.setAttribute(속성명, 속성값); 속성 변경
-    // }
 </script>
 
 <style>

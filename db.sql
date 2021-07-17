@@ -245,7 +245,7 @@ CREATE TABLE developer(
     `end_date` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`id`)
 );
-INSERT INTO developer(id, team_name, members, start_date, end_date) VALUE (1, '웹 6기', '16학번 윤주현---19학번 김가영 박선애 박소영 박의진', '2021-07-05', '2021-08-31');
+INSERT INTO developer(id, team_name, members, start_date, end_date) VALUE (1, '웹 6기', '17학번 윤주현---19학번 김가영 박선애 박소영 박의진', '2021-07-05', '2021-08-31');
 
 CREATE TABLE location(
     `id` INT(10) NOT NULL,
