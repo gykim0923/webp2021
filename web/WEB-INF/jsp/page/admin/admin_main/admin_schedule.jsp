@@ -74,7 +74,7 @@
     footer.html(f);
   }
 
-  function modifySchedule(i){
+  function modifySchedule(i){   //일정 수정
     var getSchedule = <%=getSchedule%>;
     var schedule = getSchedule[i];
     var schedule_id = schedule.id;
@@ -122,7 +122,7 @@
     footer.html(f);
   }
 
-  function addSchedule(){
+  function addSchedule(){  //일정 추가
     var schedule_date = $('[name = schDate]').val();
     var schedule_content = $('[name = schContent]').val();
 
@@ -149,7 +149,7 @@
     }
   }
 
-  function formatDate(date) {
+  function formatDate(date) {  //주어진 날짜를 yyyy-mm-dd 형식으로 반환해주는 함수
     var d = new Date(date),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
@@ -161,7 +161,7 @@
     return [year, month, day].join('-');
   }
 
-  function updateSch(){
+  function updateSch(){  //일정 갱신 (기간이 지난 일정을 삭제해주는 기능)
     $.ajax({
       url:"ajax.kgu",
       type:"post",
@@ -180,7 +180,7 @@
     })
   }
 
-  function deleteSchedule(i){
+  function deleteSchedule(i){ //일정 삭제
     var getSchedule = <%=getSchedule%>;
     var schedule = getSchedule[i];
     var schedule_id = schedule.id;

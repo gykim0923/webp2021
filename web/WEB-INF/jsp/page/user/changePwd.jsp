@@ -48,8 +48,8 @@
         button.append('<button type="button" class="btn btn-primary" onclick="change()">변경하기</button>');
     }
 
-    function change(){
-        if($('#password').val() != '' && $('#newPassword').val() != '' && $('#newPasswordCheck').val() != ''){
+    function change(){ //비밀번호 변경하기 전 조건 확인
+        if($('#password').val() != '' && $('#newPassword').val() != '' && $('#newPasswordCheck').val() != ''){ //빈 칸 있는지 확인
             var passwordSalt = user.id + $('#password').val();
             $('#password_hash1').val(SHA256(passwordSalt));
             var password = $('#password_hash1').val();
@@ -64,21 +64,21 @@
                 },
                 success:function(data){
                     if(data == 'true'){
-                        if($('#newPasswordCheck').val() == $('#newPassword').val() && check()){
+                        if($('#newPasswordCheck').val() == $('#newPassword').val() && check()){ //바꿀 비밀번호가 확인 비밀번호와 일치하여 수정
                             var newPasswordSalt = $('#id').val() + $('#newPassword').val();
                             $('#password_hash2').val(SHA256(newPasswordSalt));
                             modify();
                         }
-                        else if($('#newPassword').val() != $('#newPasswordCheck').val()){
+                        else if($('#newPassword').val() != $('#newPasswordCheck').val()){ // 바꿀 비밀번호가 확인 비밀번호와 일치하지 않아 수정 불가
                             $('#warning').text("비밀번호 확인이 정확하지 않습니다");
                             $('#warning').css("color", "red");
                         }
-                        else if(!check()){
+                        else if(!check()){ //새 비밀번호가 형식에 맞지 않아 수정 불가
                             $('#warning').text("새로운 비밀번호는 8자 이상,영문,숫자,특수기호가 포함되어야 합니다");
                             $('#warning').css("color", "red");
                         }
                     }
-                    else{
+                    else{ //현재 비밀번호가 올바르지 않아 수정 불가
                         $('#warning').text("현재 비밀번호가 정확하지 않습니다.");
                         $('#warning').css("color", "red");
 
@@ -93,7 +93,7 @@
         }
     }
 
-    function modify(){
+    function modify(){ //비밀번호 수정
         var forsha = user.id + $('#newPassword').val();
         var data = user.id + "-/-/-" + SHA256(forsha);
         $.ajax({
@@ -114,17 +114,19 @@
         })
     }
 
-    function check(){
+    function check(){ //비밀번호 조건 확인
         var password = $('#newPassword').val();
         var isOK1 = 0;
         var isOK2 = 0;
         var isOK3 = 0;
+        if (password.length < 8)
+            return false;
         for(var i = 0; i < password.length ; ++i){
-            if(pattern[0].indexOf(password[i]) >= 0)
+            if(pattern[0].indexOf(password[i]) >= 0) //숫자 포함
                 isOK1 = 1;
-            if(pattern[1].indexOf(password[i]) >= 0)
+            if(pattern[1].indexOf(password[i]) >= 0) //영문자 포함
                 isOK2 = 1;
-            if(pattern[2].indexOf(password[i]) >= 0)
+            if(pattern[2].indexOf(password[i]) >= 0) //특수문자 포함
                 isOK3 = 1;
         }
         if(isOK1 == 1 && isOK2 == 1 && isOK3 == 1)

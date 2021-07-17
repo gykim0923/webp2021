@@ -47,7 +47,7 @@
         data.append(text);
     }
 
-    function modify(){
+    function modify(){  //커리큘럼 수정 화면 띄움
         var modify_button = $('#modify_button');
         var a='';
         modify_button.empty();
@@ -62,7 +62,7 @@
         });
     }
 
-    function back(){
+    function back(){  //수정하기를 취소하였을 때 원래 페이지가 나오도록함
         var a='';
         a+=curriculum.content;
         $('#curriculum_content').html(a);
@@ -70,7 +70,7 @@
         $('#modify_button').html(b);
     }
 
-    function modifyText(){
+    function modifyText(){  //커리큘럼 내용 수정
         var content = CKEDITOR.instances.editor.getData();
         var modify=curriculum.id+"-/-/-"+curriculum.major+"-/-/-"+content;
 
@@ -93,7 +93,7 @@
         })
     }
 
-    function viewImages(num){
+    function viewImages(num){  //버튼으로 선택한 연도의 교육과정 이미지를 띄움
         var list = $('#curriculum_view');
         list.empty();
         list.append('<div>'+curriculumList[num].year+'년도 교육과정</div>'

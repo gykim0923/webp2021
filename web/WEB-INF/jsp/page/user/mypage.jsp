@@ -63,11 +63,11 @@
         $('#modify_button').append('<button type="button" class="btn btn-outline-secondary" onclick="modify()">완료</button>');
     }
 
-    function refresh(){
+    function refresh(){ //수정하기를 취소하였을 때 화면 리로드
         window.location.reload();
     }
 
-    function modify(){
+    function modify(){  //개인정보 수정
         var id = user.id;
         var phone = $('[name = phone]').val();
         var birth = $('[name = birth]').val();
@@ -89,7 +89,7 @@
         })
     }
 
-    function formatDate(date) {
+    function formatDate(date) { //날짜를 yyyy-mm-dd 형식으로 반환
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
@@ -101,7 +101,7 @@
         return [year, month, day].join('-');
     }
 
-    function deleteUser(){
+    function deleteUser(){ //자신의 데이터 삭제 (탈퇴기능)
         var id = user.id;
         var name = user.name;
         var check = confirm("[중요] 정말로 "+id+"["+name+"]를 삭제하시나요? 되돌릴 수 없습니다.");

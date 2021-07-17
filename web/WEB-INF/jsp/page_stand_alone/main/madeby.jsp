@@ -59,7 +59,7 @@
         </c:if>
     }
 
-    function deleteDeveloper(i){
+    function deleteDeveloper(i){ //개발팀 삭제
         var getAllDevelopers = <%=getAllDevelopers%>;
         var developer = getAllDevelopers[i];
         var id = developer.id;
@@ -108,7 +108,7 @@
         footer.html(f);
     }
 
-    function addDeveloper(){
+    function addDeveloper(){ //개발팀 추가
         var teamName = $('#teamName').val();
         var madeByContent = $('#madeByContent').val();
         var startDate = $('#startDate').val();
@@ -145,8 +145,8 @@
         var h = '', b = '', f = '';
         h += '<h5 class="modal-title" id="staticBackdropLabel">수정하기</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>'
         b += '<div><label for="teamName" class="form-label">팀 명</label><input type="text" class="form-control" id="teamName" placeholder="예)웹 0기" required value="'+getAllDevelopers[i].team_name+'"></div>'+
-            '<div><label for="InputDate">시작 일</label><input class="form-control" id="startDate" type="date" name="startDate" value="' + formatDate(getAllDevelopers[i].start_date) + '"></div>'+
-            '<div><label for="InputDate">종료 일</label><input class="form-control" id="endDate" type="date" name="endDate" value="' + formatDate(getAllDevelopers[i].end_date) + '"></div>'+
+            '<div><label for="InputDate">시작 일</label><input class="form-control" id="startDate" type="date" name="startDate" value="' + getAllDevelopers[i].start_date + '"></div>'+
+            '<div><label for="InputDate">종료 일</label><input class="form-control" id="endDate" type="date" name="endDate" value="' + getAllDevelopers[i].end_date + '"></div>'+
             '<div><label for="madeByContent" class="form-label">팀원</label><div class="form-floating"><input type="text" class="form-control" id="madeByContent" placeholder="개발진들의 학번과 이름을 적어주세요." value="'+getAllDevelopers[i].members+'"> <label for="madebyContent">19학번 ooo ooo---20학번 xxx 식으로 적어주시기 바랍니다.</label> </div></div>';
         f += '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button><button type="button" class="btn btn-primary" onclick="modifyDeveloper('+i+')">수정</button>';
 
@@ -155,7 +155,7 @@
         footer.html(f);
     }
 
-    function modifyDeveloper(i){
+    function modifyDeveloper(i){ //개발팀 정보 수정
         var getAllDevelopers = <%=getAllDevelopers%>;
         var id = getAllDevelopers[i].id;
         var teamName = $('#teamName').val();
@@ -186,7 +186,7 @@
         }
     }
 
-    function formatDate(date) {
+    function formatDate(date) { //날짜를 yyyy-mm-dd 형식으로 출력될 수 있도록함
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
