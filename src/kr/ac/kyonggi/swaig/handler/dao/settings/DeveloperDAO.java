@@ -57,4 +57,38 @@ public class DeveloperDAO {
         }
         return "success";
     }
+
+    public String modifyDeveloper(String data) {
+        String arr[] = data.split("-/-/-"); // id+'-/-/-'+team_name+'-/-/-'+members+'-/-/-'+start_date+'-/-/-'+end_date;
+        String id = arr[0];
+        String team_name = arr[1];
+        String members = arr[2];
+        String start_date = arr[3];
+        String end_date = arr[4];
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"UPDATE developer SET team_name=?, members=?, start_date=?, end_date=? WHERE id=?;", team_name, members, start_date, end_date, id);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
+    }
+
+    public String deleteDeveloper(String data) {
+        String arr[] = data.split("-/-/-"); // id+'-/-/-'+team_name+'-/-/-'+members+'-/-/-'+start_date+'-/-/-'+end_date;
+        String id = arr[0];
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"DELETE FROM `developer` WHERE `id`=?;", id);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
+    }
 }
