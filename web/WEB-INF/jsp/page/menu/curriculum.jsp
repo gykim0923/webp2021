@@ -50,7 +50,7 @@
         if(typeForCurriculum.for_header=='관리자'){
             var button = $('#modify_button');
             button.append('<button type="button" class="btn btn-outline-secondary" onclick="modify()">수정</button>'
-                        +'<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="addCurriculum()">추가</button>');
+                        +'<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="addCurriculumModal()">추가</button>');
         }
 
         var yearCount = curriculumList.length;
@@ -79,11 +79,7 @@
     }
 
     function back(){  //수정하기를 취소하였을 때 원래 페이지가 나오도록함
-        var a='';
-        a+=curriculum.content;
-        $('#curriculum_content').html(a);
-        var b='<div id="write_post" class="col-xs-13 text-right" style = "margin : 2px;"><button type="button" class="btn btn-outline-secondary" onclick="modify()">수정</button></div>';
-        $('#modify_button').html(b);
+        location.reload()
     }
 
     function modifyText(){  //커리큘럼 내용 수정
@@ -121,15 +117,23 @@
             +'<button type="button" class="btn btn-outline-secondary" onclick="deleteCurriculum('+num+')">삭제</button></div>');
     }
 
-    function addCurriculum(){
+    function addCurriculumModal(){
         var major = <%=major%>;
         modalHeader.html('<h5 class="modal-title" id="staticBackdropLabel">추가하기</h5>'
             +'<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>');
         modalBody.html('<div class="row g-3"><div class="col-md-6"><label for="major" class="form-label">전공</label><input class="form-control" id="major" value="'+major+'" readonly></div>'
             +'<div class="col-md-6"><label for="year" class="form-label">연도</label><input class="form-control" id="year" placeholder="ex)2021"></div>'
-            +'<div class="col-12"><label for="curriculumFile" class="form-label">커리큘럼 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="curriculumFile"><label class="input-group-text" for="curriculumFile">Upload</label></div></div>'
-            +'<div class="col-12"><label for="eduFile" class="form-label">이수체계도 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="eduFile"><label class="input-group-text" for="eduFile">Upload</label></div></div>');
-        modalFooter.html('<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button><button type="button" class="btn btn-primary">추가하기</button>');
+            +'<div class="col-12"><label for="curriculumFile" class="form-label">커리큘럼 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="curriculumFile" accept="image/*"><label class="btn btn-secondary" for="curriculumFile" onclick="uploadfile()">Upload</label></div></div>'
+            +'<div class="col-12"><label for="eduFile" class="form-label">이수체계도 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="eduFile" accept="image/*"><label class="btn btn-secondary" for="eduFile" onclick="uploadfile()">Upload</label></div></div>');
+        modalFooter.html('<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button><button type="button" class="btn btn-primary" onclick="addCurriculum()">추가하기</button>');
+    }
+
+    function uploadfile(){
+
+    }
+
+    function addCurriculum(){
+
     }
 
     function modifyCurriculum(num){
@@ -138,8 +142,8 @@
                         +'<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>');
         modalBody.html('<div class="row g-3"><div class="col-md-6"><label for="major" class="form-label">전공</label><input class="form-control" id="major" value="'+major+'" readonly></div>'
                     +'<div class="col-md-6"><label for="year" class="form-label">연도</label><input class="form-control" id="year" value="'+curriculumList[num].year+'년도" readonly></div>'
-                    +'<div class="col-12"><label for="curriculumFile" class="form-label">커리큘럼 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="curriculumFile"><label class="input-group-text" for="curriculumFile">Upload</label></div></div>'
-                    +'<div class="col-12"><label for="eduFile" class="form-label">이수체계도 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="eduFile"><label class="input-group-text" for="eduFile">Upload</label></div></div>');
+                    +'<div class="col-12"><label for="curriculumFile" class="form-label">커리큘럼 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="curriculumFile" value="'+curriculumList[num].curriculum_img+'"><button class="btn btn-outline-secondary" type="button">Upload</button></div></div>'
+                    +'<div class="col-12"><label for="eduFile" class="form-label">이수체계도 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="eduFile" value="'+curriculumList[num].edu_img+'"><button class="btn btn-outline-secondary" type="button">Upload</button></div></div>');
         modalFooter.html('<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button><button type="button" class="btn btn-primary">수정하기</button>');
 }
 
