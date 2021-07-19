@@ -8,8 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Integer miss = (Integer) session.getAttribute("miss");
-    String main_url = "main.kgu";
-    String img_login_logo = "img/cs_logo.png";
+    String majorInfo = (String) request.getAttribute("majorInfo");
 %>
 <html>
 <head>
@@ -108,31 +107,22 @@
 
 <main class="form-signin">
     <form method="POST" action="login.kgu" id="login_form">
-        <a href="<%=main_url%>">
-<%--            <img class="cs_logo" src="<%=img_login_logo%>" alt="" width="300" height=75>--%>
-        </a>
-<%--        부트스트랩 테스트용--%>
-        <div class="row">
+
+        <div class="row py-5">
             <div class="col-5">
-                <img class="img-fluid" src="/img/kgu_logo(500x300).png"/>
+                <img class="img-fluid" onclick="window.location.href='main.kgu';" src="/img/logo/kgu_logo(500x300).png"/>
             </div>
             <div class="col-7">
                 <div class="py-2">
                     <div class = "font1">
-                        <h2 class="logo"><strong>경기대학교</strong></h2>
+                        <a href="main.kgu"><h2 class="logo"><strong>경기대학교</strong></h2></a>
                     </div>
                     <div class = "font2">
-                        <h4><strong>컴퓨터공학전공</strong></h4>
+                        <a href="main.kgu"><h4><strong id="majorTitle"></strong></h4></a>
                     </div>
                 </div>
             </div>
-
         </div>
-        <%--        부트스트랩 테스트용 끝--%>
-
-
-        <%--        부트스트랩 테스트용--%>
-
 
 
         <h1 class="h3 mb-3 fw-normal">로그인</h1>
@@ -169,11 +159,23 @@
 </body>
 
 <script>
+
+    $(document).ready(function(){
+        makeMajorTitle();
+    })
+    function makeMajorTitle(){
+        var majorInfo =<%=majorInfo%>;
+        var title = $('#majorTitle');
+        title.append(majorInfo[0].major_name);
+    }
+
     var panel = $('#wrong_password');
     var miss = <%=miss%>;
     if(miss > 0){
         panel.text('잘못된 아이디, 혹은 비밀번호입니다 (' + miss + '회)');
         panel.css({'color' : 'red', 'font-weight' : 'bold', 'font-size' : '20px'});
     }
+
+
 </script>
 </html>
