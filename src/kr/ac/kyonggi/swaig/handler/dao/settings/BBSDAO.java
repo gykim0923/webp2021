@@ -30,7 +30,7 @@ public class BBSDAO {
         try {
             QueryRunner queryRunner = new QueryRunner();
             listOfMaps = queryRunner.query(conn,"SELECT * FROM bbs;", new MapListHandler());
-            System.out.println(listOfMaps);
+//            System.out.println(listOfMaps);
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {
@@ -52,7 +52,7 @@ public class BBSDAO {
         try {
             QueryRunner queryRunner = new QueryRunner();
             listOfMaps = queryRunner.query(conn,"SELECT * FROM bbs WHERE category=?;", new MapListHandler(),num);
-            System.out.println(listOfMaps);
+//            System.out.println(listOfMaps);
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {
