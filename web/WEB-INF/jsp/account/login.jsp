@@ -89,11 +89,9 @@
     }
     .col-7{
         padding:0;
-
     }
     .a{
         height: 130px ; display: table-cell; vertical-align: middle;
-
     }
 
 
