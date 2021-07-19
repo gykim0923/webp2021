@@ -120,7 +120,6 @@ CREATE TABLE major(
     `major_color2` VARCHAR(100) NOT NULL,
     `major_color3` VARCHAR(100) NOT NULL,
      PRIMARY KEY (`oid`)
-
 );
 
 INSERT INTO major(oid,major_id,major_name,major_color1,major_color2,major_color3) VALUE('1','main','K-WITH 융합교육원','#000000','#000000','#000000');

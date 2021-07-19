@@ -55,7 +55,7 @@ public class ClubDAO {
         Connection conn =Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn,"UPDATE club SET clubname=?, clubcontent=?, clubaddr=? WHERE id=?",arr[1],arr[2],arr[3],arr[0]);
+            queryRunner.update(conn,"UPDATE club SET club_name=?, club_content=?, club_address=? WHERE id=?",arr[1],arr[2],arr[3],arr[0]);
         }catch(SQLException se) {
             se.printStackTrace();
         }finally {
@@ -64,11 +64,11 @@ public class ClubDAO {
         return "1";
     }
     public String insertclub(String data) {
-        String arr[] = data.split("-/-/-");//0=clubname 1=clubcontent 2=clubaddr
+        String arr[] = data.split("-/-/-");//0=club_name 1=club_content 2=club_address
         Connection conn =Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn,"INSERT INTO club(clubname,clubcontent,clubaddr) VALUES (?,?,?)",arr[0],arr[1],arr[2]);
+            queryRunner.update(conn,"INSERT INTO club(club_name,club_content,club_address) VALUES (?,?,?)",arr[0],arr[1],arr[2]);
         }catch(SQLException se) {
             se.printStackTrace();
         }finally {
