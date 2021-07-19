@@ -253,3 +253,17 @@ CREATE TABLE location(
 );
 INSERT INTO location(id, address, contact_num, content) VALUE ('0', '(16227) 경기도 수원시 영통구 광교산로 154-42 육영관 8304호', ' 031-249-9670 (FAX : 031-249-9673)','hi');
 
+CREATE TABLE bbs(
+    `id` INT(10) NOT NULL AUTO_INCREMENT,
+    `major` VARCHAR(50) NOT NULL,
+    `writer_id` VARCHAR(50) NOT NULL,
+    `writer_name` VARCHAR(50) NOT NULL,
+    `title` VARCHAR(200) NOT NULL,
+    `category` INT(10) NOT NULL,
+    `views` INT(10) DEFAULT 0,
+    `level` INT(10) DEFAULT 0,
+    `last_modified` DATE NOT NULL,
+    `text` TEXT NOT NULL,
+    `coments_count` INT(10) DEFAULT 0 ,
+    PRIMARY KEY(`id`)
+);

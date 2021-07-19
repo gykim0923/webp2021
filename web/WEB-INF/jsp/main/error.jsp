@@ -24,14 +24,14 @@
 </head>
 <body>
 <div class="container col-xxl-8 px-4 py-5">
-    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-        <div class="col-10 col-sm-8 col-lg-6">
-            <img src="" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+    <div class="row align-items-center flex-lg-row-reverse g-5 py-5"> <%--align-items-center flex-lg-row-reverse--%>
+        <div class="col-12 col-lg-5 px-5">
+            <img src="/img/uploadimg/luckyTuttle/kgu_mascot.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
         </div>
-        <div class="col-lg-6">
-            <h1 class="display-5 fw-bold lh-1 mb-3">오류가 발생했습니다.</h1>
-            <p class="lead">오류로 인해 접속이 제한됩니다. </p>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <div class="col-lg-7">
+            <h1 class="display-5 fw-bold lh-1 mb-3 text-center">오류가 발생했습니다.</h1>
+            <p class="lead text-center">오류로 인해 접속이 제한됩니다. </p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                 <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" onclick="window.open('main.kgu')">홈으로 돌아가기</button>
                 <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
             </div>
