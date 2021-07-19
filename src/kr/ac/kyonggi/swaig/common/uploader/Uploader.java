@@ -7,6 +7,7 @@ package kr.ac.kyonggi.swaig.common.uploader;
 import com.oreilly.servlet.MultipartRequest;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -77,9 +78,9 @@ public class Uploader extends HttpServlet {
 					fin.close();
 					fout.close();
 					oldFile.delete();
-				}  
+				}
 				response.getWriter().println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction(" + sFunc + ", '"+ contextPath + newFileName + "', '완료');</script>");
-				response.getWriter().flush(); 
+				response.getWriter().flush();
 			}
 		} catch (Exception ex) {
 			throw new ServletException(ex.getMessage(), ex);
