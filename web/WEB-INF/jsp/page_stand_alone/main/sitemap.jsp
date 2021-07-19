@@ -61,7 +61,7 @@
 </script>
 
 <div>
-    <div class="container"> // 화면 붙이는 html 태그 부분
+    <div class="container">
         <div class="row align-items-md-stretch" id="siteMapCard">
         </div>
 

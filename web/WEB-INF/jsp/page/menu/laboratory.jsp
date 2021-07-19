@@ -128,12 +128,85 @@
         a+= '<div>연구실 이름</div><input type="text" class="form-control" id="modify_lab_name" name="lab_name1" value="'+(laboratory1[i].lab_name)+'" placeholder="lab_name">'
         a+='<div>연구실 위치</div><input type="text" class="form-control" id="modify_lab_location" name="lab_location1" value="'+(laboratory1[i].lab_location)+'" placeholder="lab_location">'
         a+='<div>연구실 홈페이지</div><input type="text" class="form-control" id="modify_lab_homepage" name="lab_homepage1" value="'+(laboratory1[i].lab_homepage)+'" placeholder="lab_homepage">'
-        a+='<div><form style="display : inline-block" name="fileform" id="fileform" action="" method="post" enctype="multipart/form-data">'
-        a+='<input type="text" name="LaboratoryID" value="' +i.id+ '" hidden>'
-        a+='<input style="display : inline-block" type="file" name="uploadFile" id="uploadFile" accept=".jpg, .jpeg, .png">'
-        a+='<button type="button" class="btn btn-secondary my-2" data-dismiss="modal" onclick="modifyImage()">사진 수정</button></form></div>'
-        a += '<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="modifyLabModal('+(laboratory1[i].id)+')">완료</button>';
+
+        a+='<div id="fileUploadSection">'
+        a+='<input type="file" name="uploadFile" id="uploadFile" accept="image/*">'
+        a+='<button class="btn btn-secondary" onclick="uploadfile()"><i class="bi bi-upload"></i> 업로드</button>'
+        a+='</div>'
+
+        // a+='<div><form style="display : inline-block" name="fileform" id="fileform" action="" method="post" enctype="multipart/form-data">'
+        // a+='<input type="text" name="LaboratoryID" value="' +i.id+ '" hidden>'
+        // a+='<input style="display : inline-block" type="file" name="uploadFile" id="uploadFile" accept=".jpg, .jpeg, .png">'
+        // a+='<button type="button" class="btn btn-secondary my-2" data-dismiss="modal" onclick="modifyImage()">사진 수정</button></form></div>'
+        a += '<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="modifyLabModal('+i+')">완료</button>';
         list.html(a);
+    }
+
+    var file_id; //나중에 파일 상세정보를 uploadedFile로부터 역참조 하고싶은 경우에 사용하라고 만들어둠 (꼭 사용해야 하는 것은 아님)
+    var file_path; //파일이 업로드된 상대경로
+    function uploadfile(){
+        var formData = new FormData();
+        var folder='/img/laboratory';//업로드 된 파일 folder 경로 설정은 여기에서 해줍니다. (마지막에 /가 오면 절대 안됩니다.)
+        if($('input[name=uploadFile]')[0].files[0]!=null){
+            formData.append("file_data",$('input[name=uploadFile]')[0].files[0]);
+            formData.append("file_type", "image"); //전송하려는 파일 타입 설정 (제한이 없으려면 null로 한다.)
+            formData.append("board_level", "0"); // board_level 제한 (부정 업로드 방지용. 교수까지 하려면 1, 학생까지 하려면 2로 설정하면 됨.)
+
+            $.ajax({
+                url : 'upload.kgu?folder='+folder,
+                type : "post",
+                async:false,
+                data : formData,
+                processData : false,
+                contentType : false,
+                success : function(data){//데이터는 주소
+                    if(data=='fail'){
+                        alert('실패');
+                    }
+                    else {
+                        alert(data);
+                        var fileLog=data.split("-/-/-");
+                        var a='';
+                        a+='<div>파일제출</div><div>'+fileLog[1]+'</div>';
+                        a+='<div><a href="#"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드(미구현)</button></a>'
+                        a+='<button class="btn btn-danger" onclick="makeUploadSliderModal()"><i class="bi bi-x-circle-fill"></i> 첨부파일 수정하기</button></div>';
+                        file_id=fileLog[0];
+                        file_path=folder+'/'+fileLog[1];
+                        $('#fileUploadSection').html(a);
+                    }
+                }
+            })
+        }else{
+            alert("파일을 등록해주세요");
+        }
+        // return address;
+    }
+
+    function insertLab() { // 연구실 정보 추가
+        var lab_img = file_path;
+        var name1 = $('#add_lab_name').val();
+        var location2= $('#add_lab_location').val();
+        var homepage2= $('#add_lab_homepage').val();
+        var data2 =lab_img+'-/-/-'+name1+'-/-/-'+location2+'-/-/-'+homepage2;
+        var check = confirm("정말 추가하시겠습니까?");
+        if(check){
+            $.ajax({
+                url : "ajax.kgu",
+                type : "post",
+                data : {
+                    req : "insertLaboratory",
+                    data : data2
+                },
+                success : function(data2) {
+                    if (data2== 'success'){
+                        alert("추가가 완료되었습니다");
+                        location.reload();
+                    }
+                    else
+                        alert("추가를 실패하였습니다");
+                }
+            })
+        }
     }
 
 
@@ -156,11 +229,17 @@
     }
 
     function modifyLabModal(i){ // 데이터 정보 받아와서 DB에 정보 수정 후 화면에 반영
-        var id = i;
+        var laboratory2 = <%=getLaboratoryList%>;
+        var id = laboratory2[i].id;
+        var lab_img='';
+        if(file_path!=null)
+            lab_img = file_path;
+        else
+            lab_img = laboratory2[i].lab_img
         var name = $('input[name=lab_name1]').val();
         var location1 = $('input[name=lab_location1]').val();
         var homepage = $('input[name=lab_homepage1]').val();
-        var update = name + "-/-/-" + location1 + "-/-/-" + homepage +  "-/-/-" + id;
+        var update = lab_img+"-/-/-"+name + "-/-/-" + location1 + "-/-/-" + homepage +  "-/-/-" + id;
         var check = confirm("정말 수정하시겠습니까?");
         if(check){
             $.ajax({
@@ -179,50 +258,6 @@
         }
     }
 
-    function modifyImage(){ // 이미지 수정(업로드)
-        var formData = new FormData();
-        formData.append("LaboratoryID",$('input[name=LaboratoryID]').val());
-        formData.append("uploadFile",$('input[type=file]')[0].files[0]);
-        $.ajax({
-            url : "changeLabImage.kgu",
-            type : "post",
-            data : formData,
-            processData : false,
-            contentType : false,
-            success : function(data) {
-                var a = '';
-                a += '<img src="img/laboratory/'+data+'" alt="" class="profile">';
-                $('#whatImage').attr('src',data);
-            }
-        })
-    }
-
-
-    function insertLab() { // 연구실 정보 추가
-        var name1 = $('#add_lab_name').val();
-        var location2= $('#add_lab_location').val();
-        var homepage2= $('#add_lab_homepage').val();
-        var data2 =name1+'-/-/-'+location2+'-/-/-'+homepage2;
-         var check = confirm("정말 추가하시겠습니까?");
-         if(check){
-             $.ajax({
-                     url : "ajax.kgu",
-                     type : "post",
-                     data : {
-                         req : "insertLaboratory",
-                         data : data2
-                     },
-                     success : function(data2) {
-                         if (data2== 'success'){
-                             alert("추가가 완료되었습니다");
-                             location.reload();
-                         }
-                         else
-                            alert("추가를 실패하였습니다");
-                     }
-                 })
-         }
-     }
 
 </script>
 
@@ -273,14 +308,11 @@
                     <div>연구실 홈페이지</div>
                     <input type="text" class="form-control" id="add_lab_homepage" name="add_lab_homepage1" value="" placeholder="lab_homepage">
                     <div>
-                        <div>
-                         <form style="display : inline-block" name="fileform" id="fileform" action="" method="post" enctype="multipart/form-data">
-                         <input type="text" name="LaboratoryID" value="' +it.id+ '" hidden>
-                         <input style="display : inline-block" type="file" name="uploadFile" id="uploadFile" accept=".jpg, .jpeg, .png">
-                         <button type="button" class="btn btn-secondary my-2" data-dismiss="modal" onclick="modifyImage()">사진 수정</button>
-                        </form>
-                     </div>
-                </div>
+                        <div id="fileUploadSection">
+                        <input type="file" name="uploadFile" id="uploadFile" accept="image/*">
+                        <button class="btn btn-secondary" onclick="uploadfile()"><i class="bi bi-upload"></i> 업로드</button>
+                        </div>
+                    </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                     <button type="button" class="btn btn-secondary" aria-label="Close" onclick="insertLab()">추가</button>

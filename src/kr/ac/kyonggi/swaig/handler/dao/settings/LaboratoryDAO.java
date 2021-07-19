@@ -55,15 +55,15 @@ public class LaboratoryDAO {
         ArrayList<LaboratoryDTO> results = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<LaboratoryDTO>>() {}.getType());
         return results.get(0);
     }
-    public String modifyLaboratory(String data) {
-        String arr[]=data.split("-/-/-");//0=연구실 이름 1=연구실  위치    2=홈페이지 3=id
+    public String modifyLaboratory(String data) { // 연구실 데이터 수정
+        String arr[]=data.split("-/-/-");//lab_img+"-/-/-"+name + "-/-/-" + location1 + "-/-/-" + homepage +  "-/-/-" + id;
         Connection conn = Config.getInstance().sqlLogin();
         List<Map<String, Object>> listOfMaps = null;
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn,"UPDATE laboratory SET lab_name=?, lab_location=?, lab_homepage=? WHERE id=?;",arr[0],arr[1],arr[2],arr[3]);
+            queryRunner.update(conn, "UPDATE laboratory SET lab_img=?,lab_name=?, lab_location=?, lab_homepage=? WHERE id=?;", arr[0], arr[1], arr[2], arr[3], arr[4]);
 
-            listOfMaps=queryRunner.query(conn,"SELECT * FROM laboratory WHERE id=?",new MapListHandler(),Integer.parseInt(arr[3]));
+            listOfMaps=queryRunner.query(conn,"SELECT * FROM laboratory WHERE id=?",new MapListHandler(),Integer.parseInt(arr[4]));
 
         } catch(SQLException se) {
             se.printStackTrace();
@@ -87,24 +87,20 @@ public class LaboratoryDAO {
         } finally {
             DbUtils.closeQuietly(conn);
         }
-       /* try {
-            String path = request.getSession().getServletContext().getRealPath("/");
-            File deleteFile = new File(path, it.lab_img);
-            deleteFile.delete();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }*/
         return "";
     }
 
-    public String insertLaboratory(String data) {
+    public String insertLaboratory(String data) { // 연구실 데이터 추가
 
         Connection conn = Config.getInstance().sqlLogin();
-        String arr[]=data.split("-/-/-");//0=연구실 이름 1=연구실 위치 2=홈페이지
+        String arr[]=data.split("-/-/-");//lab_img+'-/-/-'+name1+'-/-/-'+location2+'-/-/-'+homepage2;
         List<Map<String, Object>> listOfMaps = null;
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn,"INSERT INTO laboratory (lab_img,lab_name,lab_location,lab_homepage) VALUES('#',?,?,?);", arr[0],arr[1],arr[2]);
+            if(arr[0]!=null)
+                queryRunner.update(conn,"INSERT INTO laboratory (lab_img,lab_name,lab_location,lab_homepage) VALUES(?,?,?,?);", arr[0],arr[1],arr[2],arr[3]);
+            else
+                queryRunner.update(conn,"INSERT INTO laboratory (lab_img,lab_name,lab_location,lab_homepage) VALUES('#',?,?,?);",arr[1],arr[2],arr[3]);
             //listOfMaps=queryRunner.query(conn,"SELECT * FROM laboratory WHERE lab_name=? and lab_location=? AND lab_homepage=?",new MapListHandler(),arr[0],arr[1],arr[2]);
         } catch(SQLException se) {
             se.printStackTrace();
@@ -112,21 +108,6 @@ public class LaboratoryDAO {
             DbUtils.closeQuietly(conn);
         }
         return "success";
-        /*String arr[]=data.split("-/-/-");//0=연구실 이름 1=연구실 위치 2=홈페이지
-        Connection conn = Config.getInstance().sqlLogin();
-        List<Map<String, Object>> listOfMaps = null;
-        try {
-            QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn,"INSERT INTO laboratory (lab_name,lab_location,lab_homepage) VALUES(?,?,?);", arr[0],arr[1],arr[2]);
-            listOfMaps=queryRunner.query(conn,"SELECT * FROM laboratory WHERE lab_name=? and lab_location=? AND lab_homepage=?",new MapListHandler(),arr[0],arr[1],arr[2]);
-        } catch(SQLException se) {
-            se.printStackTrace();
-        } finally {
-            DbUtils.closeQuietly(conn);
-        }
-       // Gson gson = new Gson();
-        //ArrayList<LaboratoryDTO> results = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<LaboratoryDTO>>() {}.getType());
-        return results.get(0)*/
     }
 
     public void changeImage(int id, String img) {
