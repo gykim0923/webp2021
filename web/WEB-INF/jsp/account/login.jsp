@@ -70,6 +70,36 @@
     /*    align-items: center;*/
     /*    text-align: center;*/
     /*}*/
+    .font1,font2{
+        font-family: HY견고딕;
+
+
+
+    }
+    .font2{
+        color:dimgray;
+
+
+    }
+    .logo{
+        margin:0;
+    }
+    .col-5{
+        padding:0;
+    }
+    .col-7{
+        padding:0;
+
+    }
+    .a{
+        height: 130px ; display: table-cell; vertical-align: middle;
+
+    }
+
+
+
+
+
 </style>
 
 
@@ -81,7 +111,7 @@
 <main class="form-signin">
     <form method="POST" action="login.kgu" id="login_form">
         <a href="<%=main_url%>">
-            <img class="cs_logo" src="<%=img_login_logo%>" alt="" width="300" height=75>
+<%--            <img class="cs_logo" src="<%=img_login_logo%>" alt="" width="300" height=75>--%>
         </a>
 <%--        부트스트랩 테스트용--%>
         <div class="row">
@@ -89,17 +119,25 @@
                 <img class="img-fluid" src="/img/kgu_logo.png"/>
             </div>
             <div class="col-7">
-                <div class="py-auto">
-                    <div>
-                        <h2><strong>경기대학교</strong></h2>
+
+                    <div class = "font1">
+                        <br>
+                        <br>
+
+                        <h2 class="logo"><strong>경기대학교</strong></h2>
                     </div>
-                    <div>
-                        <h3><strong>전공이름</strong></h3>
+                    <div class = "font2">
+                        <h4><strong>컴퓨터공학전공</strong></h4>
                     </div>
-                </div>
+
             </div>
+
         </div>
         <%--        부트스트랩 테스트용 끝--%>
+
+
+        <%--        부트스트랩 테스트용--%>
+
 
 
         <h1 class="h3 mb-3 fw-normal">로그인</h1>
