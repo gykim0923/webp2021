@@ -109,9 +109,9 @@
         var list = $('#curriculum_view');
         list.empty();
         list.append('<div>'+curriculumList[num].year+'년도 교육과정</div>'
-            +'<img src="'+curriculumList[num].curriculum_img+'" id="curriculum_'+curriculumList[num].year+'" class="img-fluid">'
+            +'<img src="'+curriculumList[num].curriculum_img+'" id="curriculum_'+curriculumList[num].year+'" onerror="this.src=\'http://placehold.it/300x300\'" class="img-fluid">'
             +'<div>'+curriculumList[num].year+'년도 교육과정 이수체계도</div>'
-            +'<img src="'+curriculumList[num].edu_img+'" id="edu_'+curriculumList[num].year+'" class="img-fluid">'
+            +'<img src="'+curriculumList[num].edu_img+'" id="edu_'+curriculumList[num].year+'" onerror="this.src=\'http://placehold.it/300x300\'" class="img-fluid">'
             +'<div class="d-grid gap-2 d-md-flex justify-content-md-end">'
             +'<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="modifyCurriculumModal('+num+')">수정</button>'
             +'<button type="button" class="btn btn-outline-secondary" onclick="deleteCurriculum('+num+')">삭제</button></div>');
@@ -137,6 +137,10 @@
         var edu_img = eduFile_path;
         var major = $('#major').val();
         var year = $('#year').val();
+        if (curriculum_img == null)
+            curriculum_img = "#";
+        if (edu_img == null)
+            edu_img = "#";
         var check = confirm("커리큘럼 이미지를 추가하시겠습니까?");
         if (check) {
             $.ajax({
