@@ -49,8 +49,8 @@
 
         if(typeForCurriculum.for_header=='관리자'){
             var button = $('#modify_button');
-            button.append('<button type="button" class="btn btn-outline-secondary" onclick="modify()">수정</button>'
-                        +'<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="addCurriculumModal()">추가</button>');
+            button.append('<button type="button" class="btn btn-outline-secondary" onclick="modify()">내용 수정</button>'
+                        +'<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="addCurriculumModal()">이미지 추가</button>');
         }
 
         var yearCount = curriculumList.length;
@@ -119,39 +119,89 @@
 
     function addCurriculumModal(){
         var major = <%=major%>;
+        curriculumFile_path=null;
+        curriculumFile_id=null;
+        eduFile_id=null;
+        eduFile_path=null;
         modalHeader.html('<h5 class="modal-title" id="staticBackdropLabel">추가하기</h5>'
             +'<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>');
         modalBody.html('<div class="row g-3"><div class="col-md-6"><label for="major" class="form-label">전공</label><input class="form-control" id="major" value="'+major+'" readonly></div>'
             +'<div class="col-md-6"><label for="year" class="form-label">연도</label><input class="form-control" id="year" placeholder="ex)2021"></div>'
-            +'<div class="col-12"><label for="curriculumFile" class="form-label">커리큘럼 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="curriculumFile" accept="image/*"><label class="btn btn-secondary" for="curriculumFile" onclick="uploadfile()">Upload</label></div></div>'
-            +'<div class="col-12"><label for="eduFile" class="form-label">이수체계도 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="eduFile" accept="image/*"><label class="btn btn-secondary" for="eduFile" onclick="uploadfile()">Upload</label></div></div>');
+            +'<div class="col-12" id="curriculumUpload"><label for="curriculumFile" class="form-label">커리큘럼 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="curriculumFile" name="curriculumFile" accept="image/*"><label class="btn btn-secondary" for="curriculumFile" onclick="uploadCurriculum()">Upload</label></div></div>'
+            +'<div class="col-12" id="eduUpload"><label for="eduFile" class="form-label">이수체계도 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="eduFile" name="eduFile" accept="image/*"><label class="btn btn-secondary" for="eduFile" onclick="uploadEdu()">Upload</label></div></div>');
         modalFooter.html('<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button><button type="button" class="btn btn-primary" onclick="addCurriculum()">추가하기</button>');
     }
 
     function addCurriculum(){
-
+        var curriculum_img = curriculumFile_path;
+        var edu_img = eduFile_path;
+        var major = $('#major').val();
+        var year = $('#year').val();
+        var check = confirm("커리큘럼 이미지를 추가하시겠습니까?");
+        if (check) {
+            $.ajax({
+                url: "ajax.kgu", //AjaxAction에서
+                type: "post",
+                data: {
+                    req: "insertCurriculum", //이 메소드를 찾아서
+                    data: major+'-/-/-'+year+'-/-/-'+curriculum_img+'-/-/-'+edu_img //이 데이터를 파라미터로 넘겨줍니다.
+                },
+                success: function (data) { //성공 시
+                    alert("커리큘럼 이미지가 정상적으로 추가되었습니다.");
+                    location.reload()
+                }
+            })
+        }
     }
 
     function modifyCurriculumModal(num){
         var major = <%=major%>;
+        curriculumFile_path=null;
+        curriculumFile_id=null;
+        eduFile_id=null;
+        eduFile_path=null;
         modalHeader.html('<h5 class="modal-title" id="staticBackdropLabel">수정하기</h5>'
                         +'<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>');
         modalBody.html('<div class="row g-3"><div class="col-md-6"><label for="major" class="form-label">전공</label><input class="form-control" id="major" value="'+major+'" readonly></div>'
-                    +'<div class="col-md-6"><label for="year" class="form-label">연도</label><input class="form-control" id="year" value="'+curriculumList[num].year+'년도" readonly></div>'
-                    +'<div class="col-12"><label for="curriculumFile" class="form-label">커리큘럼 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="curriculumFile" value="'+curriculumList[num].curriculum_img+'"><button class="btn btn-outline-secondary" type="button">Upload</button></div></div>'
-                    +'<div class="col-12"><label for="eduFile" class="form-label">이수체계도 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="eduFile" value="'+curriculumList[num].edu_img+'"><button class="btn btn-outline-secondary" type="button">Upload</button></div></div>');
-        modalFooter.html('<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button><button type="button" class="btn btn-primary" onclick="modifuCurriculum('+num+')">수정하기</button>');
+                    +'<div class="col-md-6"><label for="year" class="form-label">연도</label><input class="form-control" id="year" value="'+curriculumList[num].year+'" readonly></div>'
+                    +'<div class="col-12" id="curriculumUpload"><label for="curriculumFile" class="form-label">커리큘럼 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" name="curriculumFile" id="curriculumFile" accept="image/*"><button class="btn btn-outline-secondary" type="button" onclick="uploadCurriculum()">Upload</button></div></div>'
+                    +'<div class="col-12" id="eduUpload"><label for="eduFile" class="form-label">이수체계도 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="eduFile" name="eduFile" accept="image/*"><button class="btn btn-outline-secondary" type="button" onclick="uploadEdu()">Upload</button></div></div>');
+        modalFooter.html('<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button><button type="button" class="btn btn-primary" onclick="modifyCurriculum('+num+')">수정하기</button>');
     }
 
-    function modifuCurriculum(){
-
+    function modifyCurriculum(num){
+        var curriculum_img = curriculumFile_path;
+        var edu_img = eduFile_path;
+        var major = $('#major').val();
+        var year = $('#year').val();
+        var check = confirm("커리큘럼 이미지를 수정하시겠습니까?");
+        if(curriculum_img == null)
+            curriculum_img = curriculumList[num].curriculum_img;
+        if(edu_img == null)
+            edu_img = curriculumList[num].edu_img;
+        if (check) {
+            $.ajax({
+                url: "ajax.kgu", //AjaxAction에서
+                type: "post",
+                data: {
+                    req: "modifyCurriculum", //이 메소드를 찾아서
+                    data: major+'-/-/-'+year+'-/-/-'+curriculum_img+'-/-/-'+edu_img //이 데이터를 파라미터로 넘겨줍니다.
+                },
+                success: function (data) { //성공 시
+                    alert("커리큘럼 이미지가 정상적으로 수정되었습니다.");
+                    location.reload()
+                }
+            })
+        }
     }
 
-    function uploadfile(){
+    var curriculumFile_id; //나중에 파일 상세정보를 uploadedFile로부터 역참조 하고싶은 경우에 사용하라고 만들어둠 (꼭 사용해야 하는 것은 아님)
+    var curriculumFile_path; //파일이 업로드된 상대경로
+    function uploadCurriculum(){
         var formData = new FormData();
         var folder='/img/curriculum';//업로드 된 파일 folder 경로 설정은 여기에서 해줍니다. (마지막에 /가 오면 절대 안됩니다.)
-        if($('input[name=uploadFile]')[0].files[0]!=null){
-            formData.append("file_data",$('input[name=uploadFile]')[0].files[0]);
+        if($('input[name=curriculumFile]')[0].files[0]!=null){
+            formData.append("file_data",$('input[name=curriculumFile]')[0].files[0]);
             formData.append("file_type", "image"); //전송하려는 파일 타입 설정 (제한이 없으려면 null로 한다.)
             formData.append("board_level", "0"); // board_level 제한 (부정 업로드 방지용. 교수까지 하려면 1, 학생까지 하려면 2로 설정하면 됨.)
 
@@ -173,9 +223,9 @@
                         a+='<div>파일제출</div><div>'+fileLog[1]+'</div>';
                         a+='<div><a href="#"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드(미구현)</button></a>'
                         a+='<button class="btn btn-danger" onclick="makeUploadSliderModal()"><i class="bi bi-x-circle-fill"></i> 첨부파일 수정하기</button></div>';
-                        file_id=fileLog[0];
-                        file_path=folder+'/'+fileLog[1];
-                        $('#fileUploadSection').html(a);
+                        curriculumFlie_id=fileLog[0];
+                        curriculumFile_path=folder+'/'+fileLog[1];
+                        $('#curriculumUpload').html(a);
                     }
                 }
             })
@@ -185,7 +235,63 @@
         return address;
     }
 
-    function deleteCurriculum(){
+    var eduFile_id; //나중에 파일 상세정보를 uploadedFile로부터 역참조 하고싶은 경우에 사용하라고 만들어둠 (꼭 사용해야 하는 것은 아님)
+    var eduFile_path; //파일이 업로드된 상대경로
+    function uploadEdu(){
+        var formData = new FormData();
+        var folder='/img/curriculum';//업로드 된 파일 folder 경로 설정은 여기에서 해줍니다. (마지막에 /가 오면 절대 안됩니다.)
+        if($('input[name=eduFile]')[0].files[0]!=null){
+            formData.append("file_data",$('input[name=eduFile]')[0].files[0]);
+            formData.append("file_type", "image"); //전송하려는 파일 타입 설정 (제한이 없으려면 null로 한다.)
+            formData.append("board_level", "0"); // board_level 제한 (부정 업로드 방지용. 교수까지 하려면 1, 학생까지 하려면 2로 설정하면 됨.)
 
+            $.ajax({
+                url : 'upload.kgu?folder='+folder,
+                type : "post",
+                async:false,
+                data : formData,
+                processData : false,
+                contentType : false,
+                success : function(data){//데이터는 주소
+                    if(data=='fail'){
+                        alert('실패');
+                    }
+                    else {
+                        alert(data);
+                        var fileLog=data.split("-/-/-");
+                        var a='';
+                        a+='<div>파일제출</div><div>'+fileLog[1]+'</div>';
+                        a+='<div><a href="#"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드(미구현)</button></a>'
+                        a+='<button class="btn btn-danger" onclick="makeUploadSliderModal()"><i class="bi bi-x-circle-fill"></i> 첨부파일 수정하기</button></div>';
+                        eduFile_id=fileLog[0];
+                        eduFile_path=folder+'/'+fileLog[1];
+                        $('#eduUpload').html(a);
+                    }
+                }
+            })
+        }else{
+            alert("파일을 등록해주세요");
+        }
+        return address;
+    }
+
+    function deleteCurriculum(num){
+        var major = <%=major%>;
+        var year = curriculumList[num].year;
+        var check = confirm("커리큘럼을 삭제하시겠습니까?");
+        if (check) {
+            $.ajax({
+                url: "ajax.kgu", //AjaxAction에서
+                type: "post",
+                data: {
+                    req: "deleteCurriculum", //이 메소드를 찾아서
+                    data: major+'-/-/-'+year //이 데이터를 파라미터로 넘겨줍니다.
+                },
+                success: function (data) { //성공 시
+                    alert("커리큘럼이 정상적으로 삭제되었습니다.");
+                    location.reload()
+                }
+            })
+        }
     }
 </script>
