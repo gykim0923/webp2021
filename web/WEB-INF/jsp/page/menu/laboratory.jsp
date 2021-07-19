@@ -129,7 +129,7 @@
         a+='<div>연구실 위치</div><input type="text" class="form-control" id="modify_lab_location" name="lab_location1" value="'+(laboratory1[i].lab_location)+'" placeholder="lab_location">'
         a+='<div>연구실 홈페이지</div><input type="text" class="form-control" id="modify_lab_homepage" name="lab_homepage1" value="'+(laboratory1[i].lab_homepage)+'" placeholder="lab_homepage">'
 
-        a+='<div id="fileUploadSection">'
+        a+='<div id="fileUploadSection" class="my-2" >'
         a+='<input type="file" name="uploadFile" id="uploadFile" accept="image/*">'
         a+='<button class="btn btn-secondary" onclick="uploadfile()"><i class="bi bi-upload"></i> 업로드</button>'
         a+='</div>'
@@ -303,7 +303,7 @@
                     <div>연구실 홈페이지</div>
                     <input type="text" class="form-control" id="add_lab_homepage" name="add_lab_homepage1" value="" placeholder="lab_homepage">
                     <div>
-                        <div id="fileUploadSection">
+                        <div id="fileUploadSection" class="my-2">
                         <input type="file" name="uploadFile" id="uploadFile" accept="image/*">
                         <button class="btn btn-secondary" onclick="uploadfile()"><i class="bi bi-upload"></i> 업로드</button>
                         </div>
