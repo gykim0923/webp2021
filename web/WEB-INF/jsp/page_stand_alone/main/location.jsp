@@ -11,26 +11,27 @@
 %>
 <style>
     #map{
-        height: 600px;
-    }
-    #way{
-        max-width:100%;
-        height:auto;
+        height: 400px;
+        width: 100%;
     }
     .bi-telephone{
         width: 100px;
     }
+    #way{
+        padding-left: 50px;
+        padding-right: 50px;
+    }
 </style>
 <div class="row">
     <div class="col-12 py-5">
-        <h3><strong><i class="bi bi-telephone"></i>&nbsp주소 및 연락처</strong></h3><br>
+        <h3 id="smalltitle" class="px-4"><strong><i class="bi bi-telephone"></i>&nbsp주소 및 연락처</strong></h3><br>
         <div id="contact"></div>
     </div>
     <hr>
     <div class="col-12 py-5">
-        <h3><strong><i class="bi bi-compass"></i>&nbsp오시는 길</strong></h3><br>
-        <div id="campus"><h4><strong>수원캠퍼스</strong></h4></div><br>
-        <div id="map"></div>
+        <h3 class="px-4"><strong><i class="bi bi-compass"></i>&nbsp오시는 길</strong></h3><br>
+        <div id="campus" class="px-5"><h5>수원캠퍼스</h5></div><br>
+        <div id="map"></div><br>
         <script>
             function initMap() {
                 var map = new google.maps.Map(document.getElementById('map'), {
@@ -58,8 +59,8 @@
         var list = $('#contact');
         var location = <%=getLocation%>;
         var text = '';
-        text += '<h4 id="loc"><strong> 주소 : '+location[0].address+'</strong></h4><br>'
-            +'<h4 id="loc"><strong> 연락처 : '+location[0].contact_num+'</strong></h4>'
+        text += '<h5 id="loc" class="px-5"><strong>주소</strong>&nbsp&nbsp&nbsp'+location[0].address+'</h5><br>'
+            +'<h5 id="loc" class="px-5"><strong>연락처</strong>&nbsp&nbsp&nbsp'+location[0].contact_num+'</h5>'
         <c:if test="${type.for_header == '관리자'}">
             text+='<button class="btn btn-secondary mx-1" onclick="makeModifyContact()">수정</button>';
         </c:if>
@@ -69,7 +70,7 @@
         var location = <%=getLocation%>;
         var list = $('#way');
         var text = '';
-        text += '<h4><strong><div>'+location[0].content+'</div></strong></h4>'
+        text += '<h5><div>'+location[0].content+'</div></h5>'
             <c:if test="${type.for_header == '관리자'}">
                 text+='<button class="btn btn-secondary mx-1" onclick="makeModifyContent()">수정</button>'
             </c:if>
@@ -85,7 +86,7 @@
         $('#way').html(a);
         CKEDITOR.replace('editorContent', {
             allowedContent: true,
-            height: 400,
+            height: 300,
             'filebrowserUploadUrl': 'Uploader'
         });
     }
