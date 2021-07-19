@@ -207,7 +207,7 @@
                 text += 'bd-callout-warning';
             else
                 text += 'bd-callout-info';
-            text +=' row"><div class="border-end col-sm-5"><strong>'+formatDate(date)+'</strong></div><div class="border-end col-sm-7">'+scheduleAllInfo[i].content+'</div></div>';
+            text +=' row"><div class="border-end col-xxl-5 col-lg-12 col-sm-5"><strong>'+formatDate(date)+'</strong></div><div class="border-end col-xxl-7 col-lg-12 col-sm-7">'+scheduleAllInfo[i].content+'</div></div>';
         }
         schedule.html(text);
     }
