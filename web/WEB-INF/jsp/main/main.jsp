@@ -10,6 +10,7 @@
 <%
     String majorAllInfo = (String)request.getAttribute("majorAllInfo");
     String scheduleAllInfo = (String)request.getAttribute("scheduleAllInfo");
+    String slider = (String)  request.getAttribute("slider");
 %>
 <html class="fontawesome-i2svg-active fontawesome-i2svg-complete">
 <head>
@@ -29,55 +30,13 @@
 <main>
     <div class="container py-4">
         <div class="row align-items-md-stretch">
-            <div class="col-lg-9 py-2" id="main1_left">
-                <div id="myCarousel" class="carousel slide  shadow rounded"
-                     data-bs-ride="carousel" style="margin-bottom : 0px;">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
-                                aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <div class="col-lg-9 py-2" id="main1_left" >
+                <div id="myCarousel" class="carousel slide  shadow rounded" data-bs-ride="carousel" style="margin-bottom : 0px;">
+                    <div class="carousel-indicators" id="carouselButton">
+                        <%--   슬라이더 사진 개수와 동일한 버트 만들어 줘야함 makecarouselCard에 있음--%>
                     </div>
-                    <div class="carousel-inner rounded2">
-                        <div class="carousel-item active">
-                            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
-                                 aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                                <rect width="100%" height="100%" fill="#777" />
-                            </svg>
-<%--                            <img class="img-responsive center-block" src="../img/main1.jpg">--%>
-                            <div class="container">
-                                <div class="carousel-caption text-start">
-                                    <h1>Title</h1>
-                                    <p>content</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
-                                 aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                                <rect width="100%" height="100%" fill="#777" />
-                            </svg>
-<%--                            <img class="bd-placeholder-img" src="../img/main2.jpg">--%>
-                            <div class="container">
-                                <div class="carousel-caption">
-                                    <h1>Title</h1>
-                                    <p>content</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
-                                 aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                                <rect width="100%" height="100%" fill="#777" />
-                            </svg>
-<%--                            <img class="bd-placeholder-img" src="../img/main3.jpg">--%>
-                            <div class="container">
-                                <div class="carousel-caption text-end">
-                                    <h1>Title</h1>
-                                    <p>content</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="carousel-inner rounded2" id="carouselCard">
+                        <%--     makecarouselCard에 있음--%>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -174,7 +133,36 @@
     $(document).ready(function(){
         makeMajorInfo();
         makeScheduleInfo();
+        makeCarouselCard();
     })
+
+
+    function makeCarouselCard(){ // 슬라이더 카드 만드는 함수
+        var list = $('#carouselCard');
+        var list2 =$('#carouselButton');
+        var text = '';
+        var text2 ='';
+        var sliderList = <%=slider%>;
+
+        for(var j=0; j<sliderList.length; j++){
+            if(j==0)
+                text2 +='<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="'+j+'" class="active" aria-current="true" aria-label="Slide '+j+'"></button>'
+            else
+                text2 +='<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="'+j+'" aria-current="true" aria-label="Slide '+j+'"></button>'
+        }
+        list2.append(text2);
+        for (var i =0; i< sliderList.length; i++){
+
+            if(i==0)
+                text +='<div class="carousel-item active">';
+            else
+                text +='<div class="carousel-item">';
+            text += '<img width="100%" height="100%" src = "'+sliderList[i].slider_img+'">'
+            text += '</div>';
+        }
+        list.append(text);
+    }
+
 
     function makeMajorInfo(){
         var majorAllInfo =<%=majorAllInfo%>;
@@ -240,6 +228,7 @@
         }
         $('#schTable').bootstrapTable('load',rows);
     }
+
 </script>
 
 <style>

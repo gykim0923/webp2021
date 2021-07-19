@@ -20,6 +20,7 @@ public class MainAction extends CustomAction {
         super.execute(request,response);
         Gson gson = new Gson();
         request.setAttribute("scheduleAllInfo", gson.toJson(AdminDAO.getInstance().getSchedule()));
+        request.setAttribute("slider", gson.toJson(AdminDAO.getInstance().getSlider()));
         return "RequestDispatcher:jsp/main/main.jsp";
     }
 }
