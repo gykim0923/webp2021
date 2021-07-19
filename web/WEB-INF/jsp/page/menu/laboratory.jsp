@@ -133,11 +133,6 @@
         a+='<input type="file" name="uploadFile" id="uploadFile" accept="image/*">'
         a+='<button class="btn btn-secondary" onclick="uploadfile()"><i class="bi bi-upload"></i> 업로드</button>'
         a+='</div>'
-
-        // a+='<div><form style="display : inline-block" name="fileform" id="fileform" action="" method="post" enctype="multipart/form-data">'
-        // a+='<input type="text" name="LaboratoryID" value="' +i.id+ '" hidden>'
-        // a+='<input style="display : inline-block" type="file" name="uploadFile" id="uploadFile" accept=".jpg, .jpeg, .png">'
-        // a+='<button type="button" class="btn btn-secondary my-2" data-dismiss="modal" onclick="modifyImage()">사진 수정</button></form></div>'
         a += '<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="modifyLabModal('+i+')">완료</button>';
         list.html(a);
     }

@@ -118,9 +118,8 @@ public class AjaxAction implements Action {
                 break;
             case "modifyPwd":
                 String modifyPwd[] = data.split("-/-/-");
-                if (!modifyPwd[0].equals(user.id))
-                    return "fail";
-                result = UserDAO.getInstance().modifypw(data);
+                if (modifyPwd[0].equals(user.id) || type.board_level == 0)
+                    result = UserDAO.getInstance().modifypw(data);
                 break;
             case "modifyProfessor":   //직접 권한 확인
                 if (type.board_level == 0)
