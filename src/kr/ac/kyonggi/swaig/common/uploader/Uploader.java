@@ -44,6 +44,13 @@ public class Uploader extends HttpServlet {
 
 				String data = request.getServletContext().getRealPath("/");
 				String url=data+"img/uploadimg";
+
+				//폴더가 없다면 생성
+				File dircheck = new File(url);
+				if(!dircheck.exists()) {
+					dircheck.mkdirs();
+				}
+
 				MultipartRequest multi = new MultipartRequest(request, url, Integer.MAX_VALUE, "UTF-8");
 				String filename = multi.getOriginalFileName("upload");
 
