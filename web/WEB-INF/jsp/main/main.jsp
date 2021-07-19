@@ -179,10 +179,17 @@
         var text='';
         for(var i=0; i<majorAllInfo.length;i++){
             text+='<div class="col-lg major">'
-                +'<svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>'
-                +'<h2>'+majorAllInfo[i].major_name+'</h2>'
-                +'<p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>'
-                +'<p><a class="btn btn-secondary" href="main.kgu?major='+majorAllInfo[i].major_id+'">이동하기</a></p>'
+                // +'<img src="/img/person.svg" style="height: 140px; width: 140px;">'
+
+                // +'<svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">'
+                +'<img class="bd-placeholder-img rounded-circle" style="background-color: '+majorAllInfo[i].major_color1+'" weight="140" height="140" src="/img/logo/kgu_logo(500x500).png">'
+                // +'<title>Placeholder</title>'
+                // +'<rect width="100%" height="100%" fill="#777"/>'
+                // +'<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>'
+                // +'</svg>'
+                +'<h2><strong>'+majorAllInfo[i].major_name+'</strong></h2>'
+                // +'<p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>'
+                +'<p><a class="btn btn-secondary" href="main.kgu?major='+majorAllInfo[i].major_id+'">전환하기</a></p>'
                 +'</div>';
         }
         info.append(text);
