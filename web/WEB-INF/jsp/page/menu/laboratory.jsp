@@ -101,7 +101,7 @@
                 +'<div class="col-md-6 col-lg-4 item" >'
                 +'<div class="box shadow rounded-3" style="height:350px" id="'+laboratory[i].id+'">'
                 +'<div class="py-4">'
-                +'<img id="laboratoryImg" class="rounded-circle" src="'+laboratory[i].lab_img+'">'
+                +'<img  onerror="this.src=\'http://placehold.it/100x100\'" id="laboratoryImg" class="rounded-circle" src="' + laboratory[i].lab_img + '">'
                 +'<h4 class="name">'+laboratory[i].lab_name+'</h4>'
                 +'<p class="title">연구실위치:'+laboratory[i].lab_location+'</p>'
                 +'<p class="description"><a href="'+laboratory[i].lab_homepage+'">연구실홈페이지</a><p>';
