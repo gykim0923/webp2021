@@ -113,7 +113,7 @@
             +'<div>'+curriculumList[num].year+'년도 교육과정 이수체계도</div>'
             +'<img src="'+curriculumList[num].edu_img+'" id="edu_'+curriculumList[num].year+'" class="img-fluid">'
             +'<div class="d-grid gap-2 d-md-flex justify-content-md-end">'
-            +'<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="modifyCurriculum('+num+')">수정</button>'
+            +'<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="modifyCurriculumModal('+num+')">수정</button>'
             +'<button type="button" class="btn btn-outline-secondary" onclick="deleteCurriculum('+num+')">삭제</button></div>');
     }
 
@@ -128,15 +128,11 @@
         modalFooter.html('<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button><button type="button" class="btn btn-primary" onclick="addCurriculum()">추가하기</button>');
     }
 
-    function uploadfile(){
-
-    }
-
     function addCurriculum(){
 
     }
 
-    function modifyCurriculum(num){
+    function modifyCurriculumModal(num){
         var major = <%=major%>;
         modalHeader.html('<h5 class="modal-title" id="staticBackdropLabel">수정하기</h5>'
                         +'<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>');
@@ -144,10 +140,52 @@
                     +'<div class="col-md-6"><label for="year" class="form-label">연도</label><input class="form-control" id="year" value="'+curriculumList[num].year+'년도" readonly></div>'
                     +'<div class="col-12"><label for="curriculumFile" class="form-label">커리큘럼 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="curriculumFile" value="'+curriculumList[num].curriculum_img+'"><button class="btn btn-outline-secondary" type="button">Upload</button></div></div>'
                     +'<div class="col-12"><label for="eduFile" class="form-label">이수체계도 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="eduFile" value="'+curriculumList[num].edu_img+'"><button class="btn btn-outline-secondary" type="button">Upload</button></div></div>');
-        modalFooter.html('<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button><button type="button" class="btn btn-primary">수정하기</button>');
-}
+        modalFooter.html('<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button><button type="button" class="btn btn-primary" onclick="modifuCurriculum('+num+')">수정하기</button>');
+    }
 
-function deleteCurriculum(){
+    function modifuCurriculum(){
 
-}
+    }
+
+    function uploadfile(){
+        var formData = new FormData();
+        var folder='/img/curriculum';//업로드 된 파일 folder 경로 설정은 여기에서 해줍니다. (마지막에 /가 오면 절대 안됩니다.)
+        if($('input[name=uploadFile]')[0].files[0]!=null){
+            formData.append("file_data",$('input[name=uploadFile]')[0].files[0]);
+            formData.append("file_type", "image"); //전송하려는 파일 타입 설정 (제한이 없으려면 null로 한다.)
+            formData.append("board_level", "0"); // board_level 제한 (부정 업로드 방지용. 교수까지 하려면 1, 학생까지 하려면 2로 설정하면 됨.)
+
+            $.ajax({
+                url : 'upload.kgu?folder='+folder,
+                type : "post",
+                async:false,
+                data : formData,
+                processData : false,
+                contentType : false,
+                success : function(data){//데이터는 주소
+                    if(data=='fail'){
+                        alert('실패');
+                    }
+                    else {
+                        alert(data);
+                        var fileLog=data.split("-/-/-");
+                        var a='';
+                        a+='<div>파일제출</div><div>'+fileLog[1]+'</div>';
+                        a+='<div><a href="#"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드(미구현)</button></a>'
+                        a+='<button class="btn btn-danger" onclick="makeUploadSliderModal()"><i class="bi bi-x-circle-fill"></i> 첨부파일 수정하기</button></div>';
+                        file_id=fileLog[0];
+                        file_path=folder+'/'+fileLog[1];
+                        $('#fileUploadSection').html(a);
+                    }
+                }
+            })
+        }else{
+            alert("파일을 등록해주세요");
+        }
+        return address;
+    }
+
+    function deleteCurriculum(){
+
+    }
 </script>

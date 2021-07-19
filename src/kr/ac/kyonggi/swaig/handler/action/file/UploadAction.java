@@ -15,6 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class UploadAction implements Action {
 
@@ -58,6 +59,7 @@ public class UploadAction implements Action {
              * 파일 타입 검사 (웹 브라우저에서도 제약을 걸지만, 부정한 방법으로 업로드를 시도하는 경우가 있을 수도 있어 자바에서 이중 검사)
              * */
             String check = uploadFile.substring(uploadFile.lastIndexOf(".")+1,uploadFile.length());
+            check = check.toLowerCase();
             String fileType = multi.getParameter("file_type"); //파일 타입 검사용
             switch (fileType){ //추후 제약사항 추가 예정
                 case "image":
