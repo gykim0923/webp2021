@@ -95,7 +95,7 @@
       var text ='';
       for (var i = 0; i < professor.length; i++) {
          text+='<div class="col-12 py-2"><div class="shadow rounded-3" ><div class="p-5">'
-                 +'<div id="image'+i+'" style=" display : inline"><img src="'+professor[i].prof_img+'"width="110px"  align ="left"  ></div>'
+                 +'<div id="image'+i+'" style=" display : inline"><img src="'+professor[i].prof_img+'"width="110px"  align ="left" onerror="this.src=\'http://placehold.it/110x150\'" ></div>'
                  +'<div class ="name" ><b>'+professor[i].prof_name+' 교수</b></div>'
                  +'<div class ="location">사무실위치 : '+professor[i].prof_location+'</div>'
                  +'<div class ="call">연락처 : '+professor[i].prof_call+'</div>'
