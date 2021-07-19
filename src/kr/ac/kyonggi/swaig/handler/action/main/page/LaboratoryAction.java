@@ -19,6 +19,6 @@ public class LaboratoryAction extends CustomAction {
         String num=request.getParameter("num");
         request.setAttribute("getLaboratoryList", gson.toJson(LaboratoryDAO.getInstance().getLaboratory()));
         request.setAttribute("jsp", gson.toJson("laboratory")); //laboratory.jsp
-        return "RequestDispatcher:jsp/main/page.jsp";
+        return "RequestDispatcher:jsp/page/page.jsp";
     }
 }

@@ -20,6 +20,6 @@ public class ProfessorAction extends CustomAction  {
 	    request.setAttribute("getProfessorlist", gson.toJson(ProfessorDAO.getInstance().getProfessor()));
 
 		request.setAttribute("jsp", gson.toJson("professor")); //information.jsp
-		return "RequestDispatcher:jsp/main/page.jsp";
+		return "RequestDispatcher:jsp/page/page.jsp";
 	}
 }

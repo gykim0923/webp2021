@@ -17,6 +17,6 @@ public class ClubAction extends CustomAction {
         Gson gson = new Gson();
         request.setAttribute("getClub", gson.toJson(ClubDAO.getInstance().getClub()));
         request.setAttribute("jsp", gson.toJson("club")); //club.jsp
-        return "RequestDispatcher:jsp/main/page.jsp";
+        return "RequestDispatcher:jsp/page/page.jsp";
     }
 }

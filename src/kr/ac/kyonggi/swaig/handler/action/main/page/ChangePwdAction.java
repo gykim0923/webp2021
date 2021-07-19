@@ -17,6 +17,6 @@ public class ChangePwdAction extends CustomAction {
         String num=request.getParameter("num");
 
         request.setAttribute("jsp", gson.toJson("changePwd")); //curriculum.jsp
-        return "RequestDispatcher:jsp/main/page.jsp";
+        return "RequestDispatcher:jsp/page/page.jsp";
     }
 }

@@ -22,6 +22,6 @@ public class CurriculumAction extends CustomAction {
 
         request.setAttribute("jsp", gson.toJson("curriculum")); //curriculum.jsp
 
-        return "RequestDispatcher:jsp/main/page.jsp";
+        return "RequestDispatcher:jsp/page/page.jsp";
     }
 }

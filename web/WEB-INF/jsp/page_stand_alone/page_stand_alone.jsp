@@ -62,6 +62,8 @@
   </div>
 </main>
 </body>
+<%@include file="../main/footer.jsp"%>
+
 </html>
 <script>
     $(document).ready(function(){ //본문 제어

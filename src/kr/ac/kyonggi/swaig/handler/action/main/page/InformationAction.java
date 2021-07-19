@@ -21,6 +21,6 @@ public class InformationAction extends CustomAction {
         request.setAttribute("information", gson.toJson(HomeDAO.getInstance().getText(major,num)));
 
         request.setAttribute("jsp", gson.toJson("information")); //information.jsp
-        return "RequestDispatcher:jsp/main/page.jsp";
+        return "RequestDispatcher:jsp/page/page.jsp";
     }
 }
