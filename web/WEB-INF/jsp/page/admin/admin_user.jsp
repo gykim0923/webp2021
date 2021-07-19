@@ -9,6 +9,7 @@
 <%
     String getAllUser = (String)request.getAttribute("getAllUser");
 %>
+<script src='js/sha256.js'></script>
 <div>
     <div class="album py-5 bg-light">
         <div class="container">
@@ -92,6 +93,32 @@
     }
 
     function passwordReset(i){
+        var makeUserAll = <%=getAllUser%>;
+        var user = makeUserAll[i];
+        var change =user.birth;
 
+        var check = confirm(user.name+"의 패스워드를 초기화 하시겠습니까?(초기화 : 생년월일(생년월일이 없을 경우 1234))");
+        if(check){
+            if(change=="-")
+                change="1234";
+            else{
+                var a=change.split("-");
+                change=user.id+a[0].substring(2,4)+""+a[1]+""+a[2];
+            }
+            $.ajax({
+                url : "ajax.kgu",
+                type : "post",
+                data : {
+                    req : "modifyPwd",
+                    data : user.id+"-/-/-"+SHA256(change)
+                },
+                success : function(data){
+                    if(data == "success")
+                        alert(data+"의 패스워드가 변경 되었습니다!!");
+                    else
+                        alert('SERVER ERROR, Please try again later');
+                }
+            })
+        }
     }
 </script>
