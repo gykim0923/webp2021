@@ -1,7 +1,7 @@
 package kr.ac.kyonggi.swaig.handler.dto.settings;
 
 public class BBSDTO {
- String id, major, writer_id, writer_name,title,category, views, level, last_modified, text, coments_count;
+ String id, major, writer_id, writer_name,title,category, views, level, last_modified, text, comments_count;
 
     public String getId() {
         return id;
@@ -83,11 +83,11 @@ public class BBSDTO {
         this.text = text;
     }
 
-    public String getComents_count() {
-        return coments_count;
+    public String getComments_count() {
+        return comments_count;
     }
 
-    public void setComents_count(String coments_count) {
-        this.coments_count = coments_count;
+    public void setComments_count(String coments_count) {
+        this.comments_count = coments_count;
     }
 }
