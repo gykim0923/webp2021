@@ -144,6 +144,13 @@
         var text2 ='';
         var sliderList = <%=slider%>;
 
+        if(sliderList.length==0){ // 데이터가 없을 시 디폴트 화면 구성
+            text2 +='<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button>'
+            text +='<div class="carousel-item active">';
+            text +='<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg>'
+            text +='</div>';
+        }
+
         for(var j=0; j<sliderList.length; j++){
             if(j==0)
                 text2 +='<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="'+j+'" class="active" aria-current="true" aria-label="Slide '+j+'"></button>'
@@ -154,12 +161,14 @@
         for (var i =0; i< sliderList.length; i++){
 
             if(i==0)
-                text +='<div class="carousel-item active">';
+                text +='<div class="carousel-item active">'
             else
-                text +='<div class="carousel-item">';
+                text +='<div class="carousel-item">'
             text += '<img width="100%" height="100%" src = "'+sliderList[i].slider_img+'">'
             text += '</div>';
         }
+
+
         list.append(text);
     }
 
