@@ -11,8 +11,8 @@
     String majorAllInfo = (String)request.getAttribute("majorAllInfo");
     String scheduleAllInfo = (String)request.getAttribute("scheduleAllInfo");
     String slider = (String)  request.getAttribute("slider");
-    String major = (String)request.getAttribute("major");
-    String num = (String)request.getAttribute("num");
+    String major2 = (String)request.getAttribute("major");
+    String num2 = (String)request.getAttribute("num");
 %>
 <html class="fontawesome-i2svg-active fontawesome-i2svg-complete">
 <head>
