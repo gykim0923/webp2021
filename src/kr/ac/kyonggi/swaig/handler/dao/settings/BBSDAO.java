@@ -29,7 +29,7 @@ public class BBSDAO {
         for (String number: numbers) {
             sql+=" OR category="+number;
         }
-        sql+=";";
+        sql+=" ORDER BY id DESC ;";
         List<Map<String, Object>> listOfMaps = null;
         Connection conn = Config.getInstance().sqlLogin();
         try {
@@ -56,7 +56,7 @@ public class BBSDAO {
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            listOfMaps = queryRunner.query(conn,"SELECT * FROM bbs WHERE category=?;", new MapListHandler(),num);
+            listOfMaps = queryRunner.query(conn,"SELECT * FROM bbs WHERE category=? ORDER BY id DESC ;", new MapListHandler(),num);
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {
