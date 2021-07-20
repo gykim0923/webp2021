@@ -39,17 +39,19 @@
         var size = getAllDevelopers.length;
         for(var i=0; i<size;i++){
             var members = getAllDevelopers[i].members.split('---')
-            text+= '<div class="col-lg-4"><div class="card card-margin"><div class="card-body pt-4 pb-4"><div class="widget-49"><div class="widget-49-title-wrapper">'+
+            text+= '<div class="col-xl-3 col-lg-4 col-md-6"><div class="card card-margin"><div class="card-body pt-4 pb-4"><div class="widget-49"><div class="widget-49-title-wrapper">'+
                 '<div class="widget-49-date-primary"><div class="bi bi-people-fill fs-3"></div></div><div class="widget-49-meeting-info">'+
-                '<span class="widget-49-pro-title"><h5>'+getAllDevelopers[i].team_name+'</h5></span><span class="widget-49-meeting-time">'+getAllDevelopers[i].start_date+' ~ '+getAllDevelopers[i].end_date+'</span></div></div>';
+                '<span class="widget-49-pro-title"><h5>'+getAllDevelopers[i].team_name+'</h5></span><span class="widget-49-meeting-time">'+getAllDevelopers[i].start_date+' ~ '+getAllDevelopers[i].end_date+'</span></div></div><div class="d-flex justify-content-center align-items-center" style="height: 150px"><div>';
             for(var j=0; j<members.length;j++){
-                text += '<div class="text-center mt-1">'+members[j]+'</div>';
+                text += '<div class="text-center mt-1 px-5' +
+                    '">'+members[j]+'</div>';
             }
+            text += '</div></div></div>';
             <c:if test = "${type.for_header == '관리자'}">
-                text += '<div class="widget-49-meeting-action mt-3"><button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="modifyDeveloperModal('+i+')">수정</button>'+
+                text += '<div class="widget-49-meeting-action"><button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="modifyDeveloperModal('+i+')">수정</button>'+
                     '<button class="btn btn-sm btn-outline-secondary" onclick="deleteDeveloper('+i+')">삭제</button></div>';
             </c:if>
-            text += '</div></div></div></div>'
+            text += '</div></div></div>'
         }
         developerInfo.html(text);
 
@@ -110,6 +112,7 @@
 
     function addDeveloper(){ //개발팀 추가
         var teamName = $('#teamName').val();
+        alert(teamName);
         var madeByContent = $('#madeByContent').val();
         var startDate = $('#startDate').val();
         var endDate = $('#endDate').val();
@@ -206,6 +209,7 @@
 
     .card {
         border: 0;
+        height:300px;
         box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
         -webkit-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
         -moz-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
