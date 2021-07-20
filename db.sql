@@ -188,12 +188,9 @@ CREATE TABLE laboratory(
     PRIMARY KEY (`id`)
 );
 
-INSERT INTO laboratory(id, lab_img,lab_name, lab_location, lab_homepage) VALUE (0,'/img/laboratory/testLab0.png','테스트 연구실1','8501','http://rtos.kyonggi.ac.kr/rtos/home.jsp');
-INSERT INTO laboratory(lab_img,lab_name, lab_location, lab_homepage) VALUE ('/img/laboratory/testLab0.png','테스트 연구실2','8502','http://rtos.kyonggi.ac.kr/rtos/home.jsp');
-INSERT INTO laboratory(lab_img,lab_name, lab_location, lab_homepage) VALUE ('/img/laboratory/testLab0.png','테스트 연구실3','8502','http://rtos.kyonggi.ac.kr/rtos/home.jsp');
-INSERT INTO laboratory(lab_img,lab_name, lab_location, lab_homepage) VALUE ('/img/laboratory/testAI1.png','테스트 연구실4','8502','http://rtos.kyonggi.ac.kr/rtos/home.jsp');
-INSERT INTO laboratory(lab_img,lab_name, lab_location, lab_homepage) VALUE ('/img/laboratory/testAI1.png','테스트 연구실5','8502','http://rtos.kyonggi.ac.kr/rtos/home.jsp');
-INSERT INTO laboratory(lab_img,lab_name, lab_location, lab_homepage) VALUE ('/img/laboratory/testAI1.png','테스트 연구실6','8502','http://rtos.kyonggi.ac.kr/rtos/home.jsp');
+INSERT INTO laboratory(id, lab_img,lab_name, lab_location, lab_homepage) VALUE (0,'#','테스트 연구실1','8501','http://rtos.kyonggi.ac.kr/rtos/home.jsp');
+INSERT INTO laboratory(lab_img,lab_name, lab_location, lab_homepage) VALUE ('#','테스트 연구실2','8502','http://rtos.kyonggi.ac.kr/rtos/home.jsp');
+INSERT INTO laboratory(lab_img,lab_name, lab_location, lab_homepage) VALUE ('#','테스트 연구실3','8502','http://rtos.kyonggi.ac.kr/rtos/home.jsp');
 
 CREATE TABLE curriculum(
     `major` VARCHAR(50) NOT NULL,
@@ -228,11 +225,10 @@ CREATE TABLE uploadedFile(
 );
 
 CREATE TABLE slider(
-                         `id` INT(10) NOT NULL AUTO_INCREMENT,
-                         `slider_img` VARCHAR(100) DEFAULT NULL,
-                         `slider_title` VARCHAR(100) DEFAULT NULL,
-                         `slider_content` VARCHAR(100) DEFAULT NULL,
-                         PRIMARY KEY (`id`)
+    `id` INT(10) NOT NULL AUTO_INCREMENT,
+    `slider_img` VARCHAR(100) DEFAULT NULL,
+    `slider_major` VARCHAR(50) NOT NULL,
+    PRIMARY KEY (`id`)
 );
 
 CREATE TABLE developer(
