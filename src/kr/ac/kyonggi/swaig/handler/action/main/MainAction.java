@@ -19,10 +19,13 @@ public class MainAction extends CustomAction {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         super.execute(request,response);
         Gson gson = new Gson();
-        request.setAttribute("scheduleAllInfo", gson.toJson(AdminDAO.getInstance().getSchedule()));
-        request.setAttribute("slider", gson.toJson(AdminDAO.getInstance().getSlider()));
         String major=request.getParameter("major");
+        if(major==null){
+            major="main";
+        }
         String num=request.getParameter("num");
+        request.setAttribute("scheduleAllInfo", gson.toJson(AdminDAO.getInstance().getSchedule()));
+        request.setAttribute("slider", gson.toJson(AdminDAO.getInstance().getSlider(major)));
         return "RequestDispatcher:jsp/main/main.jsp";
     }
 }

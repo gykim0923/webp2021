@@ -11,8 +11,6 @@
     String majorAllInfo = (String)request.getAttribute("majorAllInfo");
     String scheduleAllInfo = (String)request.getAttribute("scheduleAllInfo");
     String slider = (String)  request.getAttribute("slider");
-    String major2 = (String)request.getAttribute("major");
-    String num2 = (String)request.getAttribute("num");
 %>
 <html class="fontawesome-i2svg-active fontawesome-i2svg-complete">
 <head>
@@ -150,6 +148,7 @@
             text2 +='<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button>'
             text +='<div class="carousel-item active">';
             text +='<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg>'
+            text +='<div class="container"> <div class="carousel-caption"> <h1>등록된 대문이 없습니다.</h1> <p>관리자 모드에서 대문을 추가해주시기 바랍니다.</p> </div> </div>'
             text +='</div>';
         }
 

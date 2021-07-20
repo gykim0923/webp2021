@@ -22,8 +22,7 @@
                 <tr>
                     <th data-field="action">설정</th>
                     <th data-field="slider_img">slider_img</th>
-                    <th data-field="slider_title">slider_title</th>
-                    <th data-field="slider_content">slider_content</th>
+                    <th data-field="slider_major">slider_major</th>
                 </tr>
                 </thead>
             </table>
@@ -51,15 +50,17 @@
             rows.push({
                 id: slider.id,
                 slider_img: '<a href="image_viewer.kgu?image_path='+slider.slider_img+'" target="_blank">사진 보기</a>',
-                slider_title: slider.slider_title,
-                slider_content: slider.slider_content,
+                slider_major: slider.slider_major,
                 action : '<button class="btn btn-dark" type="button" onclick="deleteSlider('+i+')">삭제</button>'
             });
         }
         return rows;
     }
 
+
     function makeUploadSliderModal(){
+        var majorList=<%=getAllMajor%>;
+
         var modal_header = '';
         modal_header += '<h5 class="modal-title" id="staticBackdropLabel">대문 사진 업로드하기</h5>';
         modal_header += '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
@@ -67,11 +68,13 @@
         var modal_body = '<div id="fileUploadSection">'
             +'<input type="file" name="uploadFile" id="uploadFile" accept="image/*">'
             +'<button class="btn btn-secondary" onclick="uploadfile()"><i class="bi bi-upload"></i> 업로드</button>'
-            +'</div>'
-            +'<div>'
-            +'<input type="text" class="form-control" id="slider_title" name="new_table" value="" placeholder="slider_title">'
-            +'<input type="text" class="form-control" id="slider_content" name="new_table" value="" placeholder="slider_content">'
             +'</div>';
+
+        modal_body+='<label for="slider_major" class="form-label">학과</label><select class="form-select" id="slider_major" required>'
+        for(var i=0;i<majorList.length;i++){
+            modal_body+='<option value="'+majorList[i].major_id+'">'+majorList[i].major_name+'</option>';
+        }
+        modal_body+='</select>';
 
         var modal_footer = '';
         modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
@@ -125,8 +128,7 @@
 
     function insertSlider(){
         var slider_img = file_path;
-        var slider_title = $('#slider_title').val();
-        var slider_content = $('#slider_content').val();
+        var slider_major = $('#slider_major').val();
         var check = confirm("대문을 하나 추가하시겠습니까?");
         if (check) {
             $.ajax({
@@ -134,7 +136,7 @@
                 type: "post",
                 data: {
                     req: "insertSlider", //이 메소드를 찾아서
-                    data: slider_img+'-/-/-'+slider_title+'-/-/-'+slider_content //이 데이터를 파라미터로 넘겨줍니다.
+                    data: slider_img+"-/-/-"+slider_major //이 데이터를 파라미터로 넘겨줍니다.
                 },
                 success: function (data) { //성공 시
                     alert("대문이 정상적으로 추가되었습니다.");

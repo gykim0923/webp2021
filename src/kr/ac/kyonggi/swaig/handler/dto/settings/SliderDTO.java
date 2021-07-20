@@ -1,7 +1,7 @@
 package kr.ac.kyonggi.swaig.handler.dto.settings;
 
 public class SliderDTO {
-    String id, slider_img, slider_title, slider_content;
+    String id, slider_img, slider_major;
 
     public String getId() {
         return id;
@@ -19,19 +19,11 @@ public class SliderDTO {
         this.slider_img = slider_img;
     }
 
-    public String getSlider_title() {
-        return slider_title;
+    public String getSlider_major() {
+        return slider_major;
     }
 
-    public void setSlider_title(String slider_title) {
-        this.slider_title = slider_title;
-    }
-
-    public String getSlider_content() {
-        return slider_content;
-    }
-
-    public void setSlider_content(String slider_content) {
-        this.slider_content = slider_content;
+    public void setSlider_major(String slider_major) {
+        this.slider_major = slider_major;
     }
 }
