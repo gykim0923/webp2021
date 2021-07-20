@@ -28,7 +28,6 @@ public class Uploader extends HttpServlet {
 
 	public Uploader() {
 		super();
-		
 	}
 
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -39,11 +38,17 @@ public class Uploader extends HttpServlet {
 			HttpSession session = request.getSession();
 			if(session.getAttribute("user") != null)
 			{
-				String contextPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/img/uploadimg/";
-				String sFunc = request.getParameter("CKEditorFuncNum");
+				/* request.getScheme()는 http 혹은 https 반환
+				*  request.getServerName()는 localhost 반환
+				*  request.getServerPort()는 서버가 사용중인 포트 반환 +
+				*  request.getContextPath()는 JSP 페이지가 속한 웹 어플리케이션의 컨텍스트 경로 반환
+				*/
+				String contextPath = request.getScheme() + "://" + request.getServerName() + ":"
+						+ request.getServerPort() + request.getContextPath() + "/img/uploadimg/"; //URI
+				String sFunc = request.getParameter("CKEditorFuncNum"); // 성공여부 반환
 
 				String data = request.getServletContext().getRealPath("/");
-				String url=data+"img/uploadimg";
+				String url = data+"img/uploadimg"; // 실제 저장될 파일 경로
 
 				//폴더가 없다면 생성
 				File dircheck = new File(url);
@@ -51,7 +56,7 @@ public class Uploader extends HttpServlet {
 					dircheck.mkdirs();
 				}
 
-				MultipartRequest multi = new MultipartRequest(request, url, Integer.MAX_VALUE, "UTF-8");
+				MultipartRequest multi = new MultipartRequest(request, url, Integer.MAX_VALUE, "UTF-8"); // 생성해주면 파일 자체의 업로드 됨
 				String filename = multi.getOriginalFileName("upload");
 
 				String check = filename.substring(filename.lastIndexOf(".")+1, filename.length());
@@ -86,6 +91,7 @@ public class Uploader extends HttpServlet {
 					fout.close();
 					oldFile.delete();
 				}
+				// url이 서버에 전송 성공하면 뜨는 스크립트
 				response.getWriter().println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction(" + sFunc + ", '"+ contextPath + newFileName + "', '완료');</script>");
 				response.getWriter().flush();
 			}
@@ -94,6 +100,7 @@ public class Uploader extends HttpServlet {
 		}
 	}
 
+	//클라이언트 요청시 호출되고 Request 객체와 Response 객체 호출해서 인자로 전달
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
