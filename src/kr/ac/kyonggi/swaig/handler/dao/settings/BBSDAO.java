@@ -24,12 +24,17 @@ public class BBSDAO {
         return it;
     }
 
-    public ArrayList<BBSDTO> getBBS() {
+    public ArrayList<BBSDTO> getAllBBSList(String [] numbers) {
+        String sql = "SELECT * FROM bbs WHERE category=0";
+        for (String number: numbers) {
+            sql+=" OR category="+number;
+        }
+        sql+=";";
         List<Map<String, Object>> listOfMaps = null;
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            listOfMaps = queryRunner.query(conn,"SELECT * FROM bbs;", new MapListHandler());
+            listOfMaps = queryRunner.query(conn,sql, new MapListHandler());
 //            System.out.println(listOfMaps);
         } catch(SQLException se) {
             se.printStackTrace();
@@ -46,13 +51,12 @@ public class BBSDAO {
             return null;
     }
 
-    public ArrayList<BBSDTO> getBBS(String num) {
+    public ArrayList<BBSDTO> getBBSList(String num) {
         List<Map<String, Object>> listOfMaps = null;
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
             listOfMaps = queryRunner.query(conn,"SELECT * FROM bbs WHERE category=?;", new MapListHandler(),num);
-//            System.out.println(listOfMaps);
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {
@@ -60,7 +64,6 @@ public class BBSDAO {
         }
         Gson gson = new Gson();
         ArrayList<BBSDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<BBSDTO>>() {}.getType());
-//        System.out.println(selected);
         if(selected.size()>0) {
             return selected;
         }
@@ -68,4 +71,24 @@ public class BBSDAO {
             return null;
     }
 
+    public BBSDTO getBBS(String id) {
+
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn,"SELECT * FROM bbs WHERE id=?;", new MapListHandler(),id);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<BBSDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<BBSDTO>>() {}.getType());
+        if(selected.size()>0) {
+            return selected.get(0);
+        }
+        else
+            return null;
+    }
 }

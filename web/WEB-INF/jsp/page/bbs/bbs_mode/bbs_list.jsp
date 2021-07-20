@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    String getBBS = (String) request.getAttribute("getBBS");
+    String getBBSList = (String) request.getAttribute("getBBSList");
 %>
 <div>
 
@@ -26,32 +26,42 @@
         </thead>
     </table>
 </div>
+<div id="write_button"></div>
 
 <script>
     $(document).ready(function(){
         callSetupTableView();
+        makeWriteButton();
     })
-
+    var major = <%=major%>;
+    var num = <%=num%>;
     function callSetupTableView(){
         $('#table1').bootstrapTable('load',tableData());
         // $('#table1').bootstrapTable('append',data());
         $('#table1').bootstrapTable('refresh');
     }
     function tableData(){
-        var bbsList = <%=getBBS%>;
+        var bbsList = <%=getBBSList%>;
         var rows = [];
         if(bbsList!=null){
             for(var i=0;i<bbsList.length;i++){
                 var bbs=bbsList[i];
+                var url = 'bbs.kgu?major='+major+'&&num='+num+'&&mode=view'+'&&id='+bbs.id;
                 rows.push({
-                    id: bbs.id,
-                    title: bbs.title,
-                    writer_name: bbs.writer_name,
-                    last_modified: bbs.last_modified,
-                    views: bbs.views
+                    id: '<a href="'+url+'">'+bbs.id+'</a>',
+                    title: '<a href="'+url+'">'+bbs.title+'</a>',
+                    writer_name: '<a href="'+url+'">'+bbs.writer_name+'</a>',
+                    last_modified: '<a href="'+url+'">'+bbs.last_modified+'</a>',
+                    views: '<a href="'+url+'">'+bbs.views+'</a>'
                 });
             }
         }
         return rows;
+    }
+
+    function makeWriteButton(){
+        var button =$('#write_button');
+        var text = '<a href = "bbs.kgu?major='+major+'&&num='+num+'&&mode=write"><div class="btn btn-secondary">글쓰기</div></a>';
+        button.append(text);
     }
 </script>

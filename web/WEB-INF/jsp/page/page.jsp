@@ -54,8 +54,9 @@
                         <c:when test="${jsp == '\"professor\"'}">
                             <%@include file="/WEB-INF/jsp/page/menu/professor.jsp" %>
                         </c:when>
+
                         <%--            bbs--%>
-                        <c:when test="${jsp == '\"bbs\"'}">
+                        <c:when test="${jsp == '\"bbs_list\"' || jsp == '\"bbs_view\"' || jsp == '\"bbs_write\"' || jsp == '\"bbs_modify\"'}">
                             <%@include file="/WEB-INF/jsp/page/bbs/bbs.jsp" %>
                         </c:when>
 

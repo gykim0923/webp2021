@@ -263,3 +263,6 @@ CREATE TABLE bbs(
     `coments_count` INT(10) DEFAULT 0 ,
     PRIMARY KEY(`id`)
 );
+
+INSERT INTO bbs(id, major, writer_id, writer_name, title, category, last_modified, text) VALUE('0', 'main','admin','관리자','제목1',41,'2021-01-01','<p>컨텐츠내용1</p>');
+INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목2',42,'2021-01-01','<p>컨텐츠내2용</p>');
