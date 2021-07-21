@@ -274,7 +274,8 @@ CREATE TABLE comment(
   `writer_name` VARCHAR (50) NOT NULL,
   `comment` VARCHAR(200) NOT NULL,
   `comment_date` DATE NOT NULL,
+  `bbs_id` INT(10) NOT NULL,
   PRIMARY KEY (`id`)
 );
 
-INSERT INTO comment(id, writer_id,writer_name, comment,comment_date) VALUE ('0','amin','관리자','이것은 test 댓글 입니다.','2021-01-01');
+INSERT INTO comment(id, writer_id,writer_name, comment,comment_date,bbs_id) VALUE ('1','amin','관리자','이것은 test 댓글 입니다.','2021-01-01','1');

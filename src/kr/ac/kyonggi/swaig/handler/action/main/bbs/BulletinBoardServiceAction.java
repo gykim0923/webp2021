@@ -70,8 +70,9 @@ public class BulletinBoardServiceAction extends CustomAction {
         }
         else { //리스트를 제외한 모든 모드에서는 게시글 1개를 가지고 작업하기 때문에 다음과 같이 게시글 1개만 불러주는 작업을 한다.
             String id = request.getParameter("id"); //게시글 고유 번호
-            request.setAttribute("id", id); //다시 JSP로 보내줌 (재활용을 위해)
+            request.setAttribute("id", id); //다시 JSP로 보내줌 (재활용을 위해), 게시글 아이디
             request.setAttribute("getBBS", gson.toJson(BBSDAO.getInstance().getBBS(id)));
+            request.setAttribute("getComments",gson.toJson(BBSDAO.getInstance().getCommentsList(id)));
         }
 
 

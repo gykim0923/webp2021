@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import kr.ac.kyonggi.swaig.common.sql.Config;
 import kr.ac.kyonggi.swaig.handler.dto.settings.BBSDTO;
+import kr.ac.kyonggi.swaig.handler.dto.settings.CommentDTO;
 import kr.ac.kyonggi.swaig.handler.dto.settings.TextDTO;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
@@ -149,4 +150,30 @@ public class BBSDAO {
         }
         return "success";
     }
+
+
+    public ArrayList<CommentDTO> getCommentsList(String id) {
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn,"SELECT * FROM comment WHERE bbs_id=? ORDER BY id DESC ;", new MapListHandler(),id);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<CommentDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<CommentDTO>>() {}.getType());
+        if(selected.size()>0) {
+            return selected;
+        }
+        else
+            return null;
+    }
+
+
+
+
+
 }
