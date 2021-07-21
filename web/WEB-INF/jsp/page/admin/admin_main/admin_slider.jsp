@@ -85,7 +85,8 @@
         footer.html(modal_footer);
     }
 
-    var file_id; //나중에 파일 상세정보를 uploadedFile로부터 역참조 하고싶은 경우에 사용하라고 만들어둠 (꼭 사용해야 하는 것은 아님)
+    var file_id; //나중에 파일 상세정보를 uploadedFile로부터 역참조 하고싶은 경우에 사용하라고 만들어둠 (다운로드에서 사용하는 기능)
+    var file_folder; //다운로드에서 쓸 경로
     var file_path; //파일이 업로드된 상대경로
 
     function uploadfile(){
@@ -108,14 +109,14 @@
                         alert('실패');
                     }
                     else {
-                        alert(data);
                         var fileLog=data.split("-/-/-");
+                        file_id=fileLog[0];
+                        file_folder=folder;
+                        file_path=folder+'/'+fileLog[1];
                         var a='';
                         a+='<div>파일제출</div><div>'+fileLog[1]+'</div>';
-                        a+='<div><a href="#"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드(미구현)</button></a>'
+                        a+='<div><a href="download.kgu?id='+file_id+'&&path='+file_folder+'" target="_blank"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드</button></a>'
                         a+='<button class="btn btn-danger" onclick="makeUploadSliderModal()"><i class="bi bi-x-circle-fill"></i> 첨부파일 수정하기</button></div>';
-                        file_id=fileLog[0];
-                        file_path=folder+'/'+fileLog[1];
                         $('#fileUploadSection').html(a);
                     }
                 }

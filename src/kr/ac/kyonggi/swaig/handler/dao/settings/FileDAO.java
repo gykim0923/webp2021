@@ -29,20 +29,20 @@ public class FileDAO {
 
     public String insertFileUploadLog(String parameter) {
         System.out.println(parameter);
-        String arr[]=parameter.split("-/-/-"); // String parameter = id+"-/-/-"+uploadFile+"-/-/-"+newFileName+"-/-/-"+upload_time+"-/-/-"+savePath+"-/-/-"+path;
+        String arr[]=parameter.split("-/-/-"); // String parameter = id+"-/-/-"+uploadFile+"-/-/-"+newFileName+"-/-/-"+upload_time+"-/-/-"+savePath+"-/-/-"+folder;
         String user_id = arr[0];
         String uploadFile = arr[1];
         String newFileName = arr[2];
         String upload_time = arr[3];
         String savePath = arr[4];
-        String path = arr[5];
+        String folder = arr[5];
 
         List<Map<String, Object>> listOfMaps = null;
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.query(conn, "INSERT `uploadedFile` SET user_id=?, uploadFile=?, newFileName=?, upload_time=?, savePath=?, path=?", new MapListHandler(),
-                    user_id, uploadFile, newFileName, upload_time, savePath, path);
+            queryRunner.query(conn, "INSERT `uploadedFile` SET user_id=?, uploadFile=?, newFileName=?, upload_time=?, savePath=?, folder=?", new MapListHandler(),
+                    user_id, uploadFile, newFileName, upload_time, savePath, folder);
             listOfMaps = queryRunner.query(conn, "SELECT * FROM `uploadedFile` WHERE user_id=? AND newFileName=?", new MapListHandler(),
                     user_id, newFileName);
         } catch (SQLException se) {
@@ -62,5 +62,24 @@ public class FileDAO {
         }
 
 
+    }
+
+    public UploadedFileDTO getFile(String id) {
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM uploadedFile WHERE id=?", new MapListHandler(), id);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<UploadedFileDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<UploadedFileDTO>>() {}.getType());
+        if(selectedList.size() > 0)
+            return selectedList.get(0);
+        else
+            return null;
     }
 }

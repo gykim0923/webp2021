@@ -1,7 +1,7 @@
 package kr.ac.kyonggi.swaig.handler.dto.settings;
 
 public class UploadedFileDTO {
-    public String id, user_id, uploadFile,newFileName,upload_time,savePath,path;
+    public String id, user_id, uploadFile,newFileName,upload_time,savePath,folder;
 
     public String getId() {
         return id;
@@ -51,11 +51,11 @@ public class UploadedFileDTO {
         this.savePath = savePath;
     }
 
-    public String getPath() {
-        return path;
+    public String getFolder() {
+        return folder;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setFolder(String folder) {
+        this.folder = folder;
     }
 }

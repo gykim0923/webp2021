@@ -220,7 +220,7 @@ CREATE TABLE uploadedFile(
                        `newFileName` VARCHAR(100) NOT NULL,
                        `upload_time` DATE NOT NULL,
                        `savePath` VARCHAR(100)  NOT NULL,
-                       `path` VARCHAR(100)  NOT NULL,
+                       `folder` VARCHAR(100)  NOT NULL,
                        PRIMARY KEY (`id`)
 );
 

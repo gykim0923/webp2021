@@ -129,7 +129,7 @@ public class UploadAction implements Action {
             String id= user.id;
 
             String upload_time = simDf.format(new Date(currentTime));
-            String parameter = id+"-/-/-"+uploadFile+"-/-/-"+newFileName+"-/-/-"+upload_time+"-/-/-"+savePath+"-/-/-"+path;
+            String parameter = id+"-/-/-"+uploadFile+"-/-/-"+newFileName+"-/-/-"+upload_time+"-/-/-"+savePath+"-/-/-"+folder;
             String file_id = FileDAO.getInstance().insertFileUploadLog(parameter); //업로드 파일 로그 남기면서 돌려받을 고유 번호
             return file_id+"-/-/-"+newFileName;
         }catch(Exception e){
