@@ -1,7 +1,19 @@
 package kr.ac.kyonggi.swaig.handler.dto.settings;
 
 public class BBSDTO {
- String id, major, writer_id, writer_name,title,category, views, level, last_modified, text, comments_count;
+    public String id;
+    public String major;
+    public String writer_id;
+    public String writer_name;
+    public String title;
+    public String category;
+    public String views;
+    public String level;
+    public String last_modified;
+    public String text;
+    public String comments_count;
+
+    public String already_like;
 
     public String getId() {
         return id;

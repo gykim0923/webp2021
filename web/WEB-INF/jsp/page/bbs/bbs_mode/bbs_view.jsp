@@ -13,6 +13,12 @@
 <div>
   <div id="view_content"></div>
   <hr>
+  <div id="view_comments"></div>
+  <c:if test="${user.type != null}">
+    <div id="view_likes">
+      <i class="bi bi-hand-thumbs-up" onclick="liked()"></i>
+    </div>
+  </c:if>
 
   <div id="view_comments">
 
@@ -105,6 +111,40 @@
             + '<a onclick="deleteBbs()"><div class="btn btn-secondary">삭제</div></a>'
     list_button.append(text);
   }
+
+  function likedit(){
+    var list_button = $('#view_likes');
+    var text = '';
+    text+='<a href="'+url+'"><div class="btn btn-secondary">목록</div></a>'
+  }
+
+  function liked(){
+    var data = <%=getBBS%>.id;
+    var view_likes = $('#view_likes');
+    var text = '';
+    text+='<i class="bi bi-hand-thumbs-up-fill"></i>'
+    view_likes.html(text)
+
+    $.ajax({
+      url : 'ajax.kgu',
+      type : 'post',
+      data : {
+        req : 'likeBoard',
+        data : data
+      },
+      success : function(data){
+        if(data == 'success'){
+          alert('추천 성공');
+          location.reload();
+        }else if(data == 'already'){
+          alert('이미 추천한 글입니다');
+        }else{
+          alert('SERVER ERROR, Please try again later...');
+        }
+      }
+    });
+  }
+
 
   function deleteBbs(){
     var getBBS = <%=getBBS%>;

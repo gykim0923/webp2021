@@ -228,6 +228,10 @@ public class AjaxAction implements Action {
                 if(type.board_level==0)
                     result=BBSDAO.getInstance().deleteBbs(data);
                 break;
+            case "likeBoard":
+                data = data.concat("-/-/-" + user.id);
+                result = BBSDAO.getInstance().likeBoards(data);
+                break;
         }
         return result;
     }

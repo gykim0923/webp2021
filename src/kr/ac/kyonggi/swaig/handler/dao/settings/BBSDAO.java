@@ -15,6 +15,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BBSDAO {
     public static BBSDAO it;
@@ -91,6 +93,26 @@ public class BBSDAO {
         }
         else
             return null;
+    }
+
+    public String likeBoards(String data) {
+        String arr[] = data.split("-/-/-");
+        Connection conn = Config.getInstance().sqlLogin();
+        try{
+            BBSDTO checkBBS = getBBS(arr[0]);
+            String isNew = "|" + arr[1] + "|";
+            if(checkBBS.already_like.contains(isNew)) {
+                return "already";
+            }
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"UPDATE bbs SET already_like = concat(already_like,?),likes = likes+1 WHERE id=?;", isNew, arr[0]);
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return "fail";
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
     }
 
     public String insertBbs(String data) {
