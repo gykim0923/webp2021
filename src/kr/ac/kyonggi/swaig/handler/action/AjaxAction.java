@@ -138,24 +138,6 @@ public class AjaxAction implements Action {
                     result = ProfessorDAO.getInstance().deleteProfessor(data);
                 break;
 
-            case "getOneLaboratory":   //직접 권한 확인
-                if (type.board_level == 0)
-                    result = gson.toJson(ContactDAO.getInstance().getOneLaboratory(data));
-                break;
-
-            case "modifyLaboratory":      //직접 권한 확인
-                if (type.board_level == 0)
-                    result = ContactDAO.getInstance().modifyLaboratory(data);
-                break;
-            case "insertLaboratory":      //직접 권한 확인
-                if (type.board_level == 0)
-                    result = ContactDAO.getInstance().insertLaboratory(data);
-                break;
-            case "deleteLaboratory":      //직접 권한 확인
-                if (type.board_level == 0)
-                    result = ContactDAO.getInstance().deleteLaboratory(data);
-                break;
-
             case "addSchedule":
                 if (type.board_level == 0)
                     result=AdminDAO.getInstance().addSchedule(data);
