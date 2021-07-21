@@ -87,6 +87,7 @@ CREATE TABLE user(
     `hope_type` VARCHAR(45) NOT NULL DEFAULT '-',
     `reg_date` DATETIME NOT NULL DEFAULT '2000-01-01 00:00:00',
     `major` VARCHAR(45) NOT NULL DEFAULT '-',
+    `sub_major` VARCHAR (200),
     `per_id` VARCHAR(45) NOT NULL DEFAULT '-',
     `grade` VARCHAR(10) NOT NULL DEFAULT '-',
     `state` VARCHAR(10) NOT NULL DEFAULT '-',
