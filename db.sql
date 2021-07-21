@@ -49,7 +49,7 @@ INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,mi
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('50', '5', '0', 'information.kgu', '전공소개',  '11',  '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('51', '5', '1', 'curriculum.kgu', '교육과정',  '11',  '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('52', '5', '2', 'bbs.kgu', '전공게시판', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('52', '5', '2', 'bbs.kgu', '자유게시판', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('53', '5', '3', 'bbs.kgu', '자유게시판', '11', '0');
 
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('60', '6', '0', 'mypage.kgu', '마이페이지', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('61', '6', '1', 'changePwd.kgu', '비밀번호변경', '11', '0');
