@@ -40,7 +40,7 @@
                     <c:choose>
                         <%--            menu--%>
                         <c:when test="${jsp == '\"laboratory\"'}">
-                            <%@include file="/WEB-INF/jsp/page/menu/laboratory.jsp" %>
+                            <%@include file="/WEB-INF/jsp/page/menu/Contact.jsp" %>
                         </c:when>
                         <c:when test="${jsp == '\"information\"'}">
                             <%@include file="/WEB-INF/jsp/page/menu/information.jsp" %>

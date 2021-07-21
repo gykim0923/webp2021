@@ -76,20 +76,15 @@
       $('#table1').bootstrapTable('refresh');
   }
   function tableData(){
-      <%--var bbsList = <%=getBBSList%>;--%>
       var commentsList = <%=getComment%>;
       var rows = [];
       if(commentsList != null){
           for(var i=0;i< commentsList.length;i++){
               var comment = commentsList[i];
-              // var url = 'bbs.kgu?major='+major+'&&num='+num+'&&mode=view'+'&&id='+bbs.id;
               rows.push({
                   writer_name: comment.writer_name,
                   comment: comment.comment,
                   comment_date: comment.comment_date,
-                  // writer_name: '<a href="'+url+'">'+bbs.writer_name+'</a>',
-                  // comment: '<a href="'+url+'">'+bbs.title+'</a>',
-                  // comment_date: '<a href="'+url+'">'+bbs.last_modified+'</a>',
               });
           }
       }

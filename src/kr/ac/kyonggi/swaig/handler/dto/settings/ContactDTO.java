@@ -1,6 +1,6 @@
 package kr.ac.kyonggi.swaig.handler.dto.settings;
 
-public class LaboratoryDTO {
+public class ContactDTO {
 
     String id,lab_img, lab_name, lab_location, lab_homepage;
 
