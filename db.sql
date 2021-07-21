@@ -26,6 +26,7 @@ INSERT INTO menu_tabs(tab_id, tab_title, tab_level, tab_img, tab_url, orderNum) 
 INSERT INTO menu_tabs(tab_id, tab_title, tab_level, tab_img, tab_url, orderNum) VALUES('4', '전공보기', '4', 'img/common/logo.png', '#', '4');
 INSERT INTO menu_tabs(tab_id, tab_title, tab_level, tab_img, tab_url, orderNum) VALUES('5', 'K-WITH 세부전공', '4', 'img/common/logo.png', 'information.kgu', '5');
 
+
 CREATE TABLE menu_pages(
     `page_id` INT(10) NOT NULL,
     `tab_id` INT(10) NOT NULL,
