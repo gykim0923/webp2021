@@ -38,29 +38,24 @@ CREATE TABLE menu_pages(
 );
 
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('10', '1', '0', 'information.kgu', '학부소개', '11',  '0'); '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('11', '3', '0', 'professor.kgu', '교수진', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('12', '3', '1', 'laboratory.kgu', '연구실', '12', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('', '2', '0', 'curriculum.kgu', '교육과정',  '11',  '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('21', '2', '1', 'information.kgu', '학습활동',  '11',  '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('22', '2', '2', 'club.kgu', '동아리 소개', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('30', '3', '0', 'professor.kgu', '교수진', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('31', '3', '1', 'laboratory.kgu', '연구실', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('40', '4', '0', 'bbs.kgu', '전체공지', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('41', '4', '1', 'bbs.kgu', '학과공지', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('42', '4', '2', 'bbs.kgu', '수업공지', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('43', '4', '3', 'bbs.kgu', '취업공지', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('50', '5', '0', 'bbs.kgu', '신청하기', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('51', '5', '1', 'bbs.kgu', '학과자료실', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('60', '6', '0', 'bbs.kgu', '학과소식', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('61', '6', '1', 'bbs.kgu', '우수작품전', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('62', '6', '2', 'bbs.kgu', '칼럼', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('70', '7', '0', 'bbs.kgu', '전공게시판', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('71', '7', '1', 'gallery_board_list.kgu', '갤러리', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('80', '8', '0', 'mypage.kgu', '마이페이지', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('81', '8', '1', 'changePwd.kgu', '비밀번호변경', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('82', '8', '2', 'whatIDoPage.kgu', '활동내역', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('90', '9', '0', 'admin.kgu', '홈페이지관리', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('91', '9', '1', 'admin.kgu', '회원관리', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('11', '1', '1', 'professor.kgu', '교수진', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('12', '1', '2', 'contact.kgu', '위치 및 연락처', '12', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('20', '2', '0', 'bbs.kgu', '전체공지', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('21', '2', '1', 'bbs.kgu', 'K-WITH 공지', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('22', '2', '2', 'bbs.kgu', '수업공지', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('23', '2', '3', 'bbs.kgu', '취업공지', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('24', '2', '4', 'bbs.kgu', '학과자료실', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('30', '3', '0', 'bbs.kgu', '신청하기', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('50', '5', '0', 'information.kgu', '전공소개',  '11',  '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('51', '5', '1', 'curriculum.kgu', '교육과정',  '11',  '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('52', '5', '2', 'bbs.kgu', '전공게시판', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('52', '5', '2', 'bbs.kgu', '자유게시판', '11', '0');
+
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('60', '6', '0', 'mypage.kgu', '마이페이지', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('61', '6', '1', 'changePwd.kgu', '비밀번호변경', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('62', '6', '2', 'whatIDoPage.kgu', '활동내역', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('70', '7', '0', 'admin.kgu', '홈페이지관리', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('71', '7', '1', 'admin.kgu', '회원관리', '11', '0');
 
 CREATE TABLE usertype(
     `type_name` varchar(45) NOT NULL,
@@ -72,12 +67,9 @@ CREATE TABLE usertype(
 
 INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('홈페이지관리자', 'Admin', '0', '관리자');
 INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('교수', 'Professor', '1', '교수');
-INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('대학원생', 'Student', '2', '학생');
+INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('조교', 'Professor', '1', '조교');
 INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('학부생', 'Student', '2', '학생');
-INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('복전생', 'Student', '2', '학생');
-INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('타과생', 'Student', '2', '학생');
 INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('학부모', 'Etc', '3', '기타');
-INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('조교', 'Student', '2', '학생');
 INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('입학예정자', 'Etc', '3', '기타');
 INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('기타', 'Etc', '3', '기타');
 
@@ -98,15 +90,14 @@ CREATE TABLE user(
     `per_id` VARCHAR(45) NOT NULL DEFAULT '-',
     `grade` VARCHAR(10) NOT NULL DEFAULT '-',
     `state` VARCHAR(10) NOT NULL DEFAULT '-',
-    `myhomeid` VARCHAR(45) NOT NULL DEFAULT '-',
     PRIMARY KEY (`id`)
 );
 
-INSERT INTO user(id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state,myhomeid) VALUE('201713919', '6ab7108f5c8ab980a584f1e2b98b2991b087af4907864575e6905edf2b759ae8', '윤주현', '남', '1996-03-25', '학부생', 'test1@test.com','010-0000-0001','2021-07-05','-','2021-07-05','main','201713919','-','-','-');
-INSERT INTO user(id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state,myhomeid) VALUE('admin', '112b16f5f7b04cecda94c345900574686e5ed35803e2b7e9702fa4b46810a2d4', '관리자테스트', '-', '2021-01-01', '홈페이지관리자', 'admin@kyonggi.ac.kr','010-0000-0000','2021-07-05','-','2021-07-05','main','-','-','-','-');
-INSERT INTO user(id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state,myhomeid) VALUE('professor', '1f9d870484301db50342aa184bd9f3f891195090030ad56cbbc9d0f0b996a567', '교수테스트', '-', '2021-01-01', '교수', 'professor@kyonggi.ac.kr','010-0000-0000','2021-07-05','-','2021-07-05','main','-','-','-','-');
-INSERT INTO user(id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state,myhomeid) VALUE('202100000', '9f50515645763c0b8704f8114c81da0fddd2b4bdc9240de158e905884d8cb840', '학생테스트', '-', '2021-01-01', '학부생', 'student@test.com','010-0000-0001','2021-07-05','-','2021-07-05','main','201713919','-','-','-');
-INSERT INTO user(id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state,myhomeid) VALUE('etc', '7bbe475cfc8390cb8c2ca19de371e1a3b5ab88ef39760d7ce0da003a59773a14', '기타테스트', '-', '2021-01-01', '기타', 'etc@test.com','010-0000-0001','2021-07-05','-','2021-07-05','main','201713919','-','-','-');
+INSERT INTO user(id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state) VALUE('201713919', '6ab7108f5c8ab980a584f1e2b98b2991b087af4907864575e6905edf2b759ae8', '윤주현', '남', '1996-03-25', '학부생', 'test1@test.com','010-0000-0001','2021-07-05','-','2021-07-05','main','201713919','-','-');
+INSERT INTO user(id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state) VALUE('admin', '112b16f5f7b04cecda94c345900574686e5ed35803e2b7e9702fa4b46810a2d4', '관리자테스트', '-', '2021-01-01', '홈페이지관리자', 'admin@kyonggi.ac.kr','010-0000-0000','2021-07-05','-','2021-07-05','main','-','-','-');
+INSERT INTO user(id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state) VALUE('professor', '1f9d870484301db50342aa184bd9f3f891195090030ad56cbbc9d0f0b996a567', '교수테스트', '-', '2021-01-01', '교수', 'professor@kyonggi.ac.kr','010-0000-0000','2021-07-05','-','2021-07-05','main','-','-','-');
+INSERT INTO user(id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state) VALUE('202100000', '9f50515645763c0b8704f8114c81da0fddd2b4bdc9240de158e905884d8cb840', '학생테스트', '-', '2021-01-01', '학부생', 'student@test.com','010-0000-0001','2021-07-05','-','2021-07-05','main','201713919','-','-');
+INSERT INTO user(id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state) VALUE('etc', '7bbe475cfc8390cb8c2ca19de371e1a3b5ab88ef39760d7ce0da003a59773a14', '기타테스트', '-', '2021-01-01', '기타', 'etc@test.com','010-0000-0001','2021-07-05','-','2021-07-05','main','201713919','-','-');
 
 
 
@@ -114,23 +105,13 @@ CREATE TABLE major(
     `oid` int(50) NOT NULL AUTO_INCREMENT,
     `major_id` VARCHAR(50) NOT NULL,
     `major_name` VARCHAR(100) NOT NULL,
-    `major_color1` VARCHAR(100) NOT NULL,
-    `major_color2` VARCHAR(100) NOT NULL,
-    `major_color3` VARCHAR(100) NOT NULL,
+    `major_location` VARCHAR(100) NOT NULL,
+    `major_contact` VARCHAR(100) NOT NULL,
      PRIMARY KEY (`oid`)
 );
 
-INSERT INTO major(oid,major_id,major_name,major_color1,major_color2,major_color3) VALUE('1','main','K-WITH 융합교육원','#000000','#000000','#000000');
-INSERT INTO major(major_id,major_name,major_color1,major_color2,major_color3) VALUE('major1','전공1','#000000','#000000','#000000');
-
-CREATE TABLE documents(
-                      `oid` int(50) NOT NULL AUTO_INCREMENT,
-                      `title` VARCHAR(250) NOT NULL,
-                      `contents` TEXT NOT NULL,
-                      PRIMARY KEY (`oid`)
-);
-
-INSERT INTO documents(oid, title, contents) VALUE('0','메인페이지','게시글내용');
+INSERT INTO major(oid,major_id,major_name) VALUE('1','main','K-WITH 융합교육원','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+INSERT INTO major(major_id,major_name) VALUE('major1','전공1','수원캠퍼스 육영관(8강의동) 8308호', '031-000-0000');
 
 CREATE TABLE text(
     `id` int(50) NOT NULL,
@@ -140,17 +121,10 @@ CREATE TABLE text(
 );
 INSERT INTO text(id, major, content) VALUE('10','main','10-main');
 INSERT INTO text(id, major, content) VALUE('10','major1','10-major1');
-INSERT INTO text(id, major, content) VALUE('11','main','11-main');
-INSERT INTO text(id, major, content) VALUE('11','major1','11-major1');
-INSERT INTO text(id, major, content) VALUE('12','main','12-main');
-INSERT INTO text(id, major, content) VALUE('12','major1','12-major1');
-INSERT INTO text(id, major, content) VALUE('13','main','13-main');
-INSERT INTO text(id, major, content) VALUE('13','major1','13-major1');
-INSERT INTO text(id, major, content) VALUE('20','main','20-main');
-INSERT INTO text(id, major, content) VALUE('20','major1','20-major1');
-INSERT INTO text(id, major, content) VALUE('21','main','21-main');
-INSERT INTO text(id, major, content) VALUE('21','major1','21-major1');
-
+INSERT INTO text(id, major, content) VALUE('50','main','50-main');
+INSERT INTO text(id, major, content) VALUE('50','major1','50-major1');
+INSERT INTO text(id, major, content) VALUE('51','main','51-main');
+INSERT INTO text(id, major, content) VALUE('51','major1','51-major1');
 
 CREATE TABLE professor(
     `id` int(50) NOT NULL AUTO_INCREMENT,
@@ -165,30 +139,6 @@ CREATE TABLE professor(
 
 INSERT INTO professor(id, prof_img,prof_name, prof_email,prof_lecture,prof_location,prof_call) VALUE(1,'img/professor/professor1.jpeg','권기현','khkwon@kyonggi.ac.kr','이산수학','8209호',' 031-249-9666');
 INSERT INTO professor(id, prof_img,prof_name, prof_email,prof_lecture,prof_location,prof_call) VALUE(2,'img/professor/syskgcsprofessor1.jpeg','권기현','khkwon@kyonggi.ac.kr','이산수학','8209호',' 031-249-9666');
-
-CREATE TABLE club(
-                     `id` INT(50)  NOT NULL AUTO_INCREMENT,
-                     `club_name` VARCHAR (45)  NOT NULL,
-                     `club_content` text  NOT NULL,
-                     `club_address` text,
-                         PRIMARY KEY (`id`)
-);
-
-INSERT INTO club(id, club_name, club_content, club_address) VALUE('0','구글','<p>구글 동아리ㅏ</p>','https://www.google.com');
-INSERT INTO club(club_name, club_content, club_address) VALUE('네이버','<p>네이버 동아리</p>','https://www.naver.com');
-
-CREATE TABLE laboratory(
-    `id` int(50) NOT NULL AUTO_INCREMENT,
-    `lab_img` VARCHAR (100) NOT NULL,
-    `lab_name` VARCHAR (100) NOT NULL,
-    `lab_location` VARCHAR (100) NOT NULL,
-    `lab_homepage` VARCHAR (200) NOT NULL,
-    PRIMARY KEY (`id`)
-);
-
-INSERT INTO laboratory(id, lab_img,lab_name, lab_location, lab_homepage) VALUE (0,'#','테스트 연구실1','8501','http://rtos.kyonggi.ac.kr/rtos/home.jsp');
-INSERT INTO laboratory(lab_img,lab_name, lab_location, lab_homepage) VALUE ('#','테스트 연구실2','8502','http://rtos.kyonggi.ac.kr/rtos/home.jsp');
-INSERT INTO laboratory(lab_img,lab_name, lab_location, lab_homepage) VALUE ('#','테스트 연구실3','8502','http://rtos.kyonggi.ac.kr/rtos/home.jsp');
 
 CREATE TABLE curriculum(
     `major` VARCHAR(50) NOT NULL,
@@ -225,7 +175,6 @@ CREATE TABLE uploadedFile(
 CREATE TABLE slider(
     `id` INT(10) NOT NULL AUTO_INCREMENT,
     `slider_img` VARCHAR(100) DEFAULT NULL,
-    `slider_major` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`id`)
 );
 
@@ -258,7 +207,7 @@ CREATE TABLE bbs(
     `level` INT(10) DEFAULT 0,
     `last_modified` DATE NOT NULL,
     `text` TEXT NOT NULL,
-    `coments_count` INT(10) DEFAULT 0 ,
+    `comments_count` INT(10) DEFAULT 0 ,
     `likes` INT(10) DEFAULT 0,
     `already_like` varchar(3000) NOT NULL DEFAULT '',
     PRIMARY KEY(`id`)
