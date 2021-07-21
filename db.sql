@@ -37,7 +37,7 @@ CREATE TABLE menu_pages(
     `min_level` INT(10)  NOT NULL DEFAULT '0', PRIMARY KEY(`page_id`)
 );
 
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('10', '1', '0', 'information.kgu', '학부소개', '11',  '0'); '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('10', '1', '0', 'information.kgu', '학부소개', '11',  '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('11', '1', '1', 'professor.kgu', '교수진', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('12', '1', '2', 'contact.kgu', '위치 및 연락처', '12', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('20', '2', '0', 'bbs.kgu', '전체공지', '11', '0');
@@ -111,8 +111,8 @@ CREATE TABLE major(
      PRIMARY KEY (`oid`)
 );
 
-INSERT INTO major(oid,major_id,major_name) VALUE('1','main','K-WITH 융합교육원','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
-INSERT INTO major(major_id,major_name) VALUE('major1','전공1','수원캠퍼스 육영관(8강의동) 8308호', '031-000-0000');
+INSERT INTO major(oid,major_id,major_name,major_location,major_contact) VALUE('1','main','K-WITH 융합교육원','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major1','전공1','수원캠퍼스 육영관(8강의동) 8308호', '031-000-0000');
 
 CREATE TABLE text(
     `id` int(50) NOT NULL,
