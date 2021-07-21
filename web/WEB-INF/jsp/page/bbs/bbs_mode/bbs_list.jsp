@@ -35,6 +35,7 @@
     })
     var major = <%=major%>;
     var num = <%=num%>;
+    var type = <%=type%>;
     function callSetupTableView(){
         $('#table1').bootstrapTable('load',tableData());
         // $('#table1').bootstrapTable('append',data());
@@ -61,7 +62,11 @@
 
     function makeWriteButton(){
         var button =$('#write_button');
-        var text = '<a href = "bbs.kgu?major='+major+'&&num='+num+'&&mode=write"><div class="btn btn-secondary">글쓰기</div></a>';
-        button.append(text);
+        if(num == "40" || num == "41" || num == "42" || num == "43") {
+            if (type.board_level == 0 || type.board_level == 1) {
+                var text = '<a href = "bbs.kgu?major=' + major + '&&num=' + num + '&&mode=write"><div class="btn btn-secondary">글쓰기</div></a>';
+                button.append(text);
+            }
+        }
     }
 </script>

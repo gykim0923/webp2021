@@ -68,6 +68,7 @@
   var major = <%=major%>;
   var num = <%=num%>;
   var id = <%=id%>;
+  var type = <%=type%>;
 
   function callSetupCommentView(){
       $('#table1').bootstrapTable('load',tableData());
@@ -107,8 +108,12 @@
     var modifyUrl = 'bbs.kgu?major='+major+'&&num='+num+'&&mode=modify&&id='+id;
     var text = '';
     text+='<a href="'+listUrl+'"><div class="btn btn-secondary">목록</div></a>'
-            + '<a href="'+modifyUrl+'"><div class="btn btn-secondary">수정</div></a>'
-            + '<a onclick="deleteBbs()"><div class="btn btn-secondary">삭제</div></a>'
+    if(num == "40" || num == "41" || num == "42" || num == "43"){
+      if(type.board_level == 0 || type.board_level == 1){
+        text += '<a href="'+modifyUrl+'"><div class="btn btn-secondary">수정</div></a>'
+                + '<a onclick="deleteBbs()"><div class="btn btn-secondary">삭제</div></a>'
+      }
+    }
     list_button.append(text);
   }
 
