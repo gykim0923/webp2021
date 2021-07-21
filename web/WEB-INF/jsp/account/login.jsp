@@ -115,10 +115,10 @@
             <div class="col-7">
                 <div class="py-2">
                     <div class = "font1">
-                        <a href="main.kgu"><h2 class="logo"><strong>경기대학교</strong></h2></a>
+                        <a href="main.kgu"><p class="h2 logo"><strong>경기대학교</strong></p></a>
                     </div>
                     <div class = "font2">
-                        <a href="main.kgu"><h4><strong id="majorTitle"></strong></h4></a>
+                        <a href="main.kgu"><p class="h5"><strong id="majorTitle"></strong></p></a>
                     </div>
                 </div>
             </div>
