@@ -165,8 +165,8 @@ CREATE TABLE professor(
     PRIMARY KEY (`id`)
 );
 
-INSERT INTO professor(id, prof_img,prof_name, prof_email,prof_lecture,prof_location,prof_call) VALUE(1,'professor1.jpeg','권기현','khkwon@kyonggi.ac.kr','이산수학','8209호',' 031-249-9666');
-INSERT INTO professor(id, prof_img,prof_name, prof_email,prof_lecture,prof_location,prof_call) VALUE(2,'professor1.jpeg','권기현','khkwon@kyonggi.ac.kr','이산수학','8209호',' 031-249-9666');
+INSERT INTO professor(id, prof_img,prof_name, prof_email,prof_lecture,prof_location,prof_call) VALUE(1,'img/professor/professor1.jpeg','권기현','khkwon@kyonggi.ac.kr','이산수학','8209호',' 031-249-9666');
+INSERT INTO professor(id, prof_img,prof_name, prof_email,prof_lecture,prof_location,prof_call) VALUE(2,'img/professor/syskgcsprofessor1.jpeg','권기현','khkwon@kyonggi.ac.kr','이산수학','8209호',' 031-249-9666');
 
 CREATE TABLE club(
                      `id` INT(50)  NOT NULL AUTO_INCREMENT,
@@ -267,3 +267,14 @@ CREATE TABLE bbs(
 
 INSERT INTO bbs(id, major, writer_id, writer_name, title, category, last_modified, text) VALUE('0', 'main','admin','관리자','제목1',41,'2021-01-01','<p>컨텐츠내용1</p>');
 INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목2',42,'2021-01-01','<p>컨텐츠내2용</p>');
+
+CREATE TABLE comment(
+  `id` INT(10) NOT NULL AUTO_INCREMENT,
+  `writer_id` VARCHAR(50) NOT NULL,
+  `writer_name` VARCHAR (50) NOT NULL,
+  `comment` VARCHAR(200) NOT NULL,
+  `comment_date` DATE NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+INSERT INTO comment(id, writer_id,writer_name, comment,comment_date) VALUE ('0','amin','관리자','이것은 test 댓글 입니다.','2021-01-01');
