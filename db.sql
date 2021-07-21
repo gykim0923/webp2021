@@ -261,6 +261,7 @@ CREATE TABLE bbs(
     `last_modified` DATE NOT NULL,
     `text` TEXT NOT NULL,
     `coments_count` INT(10) DEFAULT 0 ,
+    `likes` INT(10) DEFAULT 0,
     PRIMARY KEY(`id`)
 );
 
