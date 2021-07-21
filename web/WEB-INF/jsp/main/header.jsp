@@ -121,11 +121,11 @@
         else{ //로그인 시
             var text = '<div>안녕하세요. ' + user.name + ' ('+type.for_header+')님. ';
             if(type.for_header=='관리자'){
-                text +='<a href="admin.kgu?num=90"> 관리페이지 </a> '
+                text +='<a href="admin.kgu?num=70"> 관리페이지 </a> '
                     // +'<a href="tutorial.kgu?tutorial=main"> 튜토리얼 </a>';
             }
             else{
-                text +=' <a href="mypage.kgu?major='+major+'&&num=80">마이페이지</a> ';
+                text +=' <a href="mypage.kgu?major='+major+'&&num=60">마이페이지</a> ';
             }
             text += '  <a href="logout.kgu" title=LOGOUT>LOGOUT</a></div>';
         }
