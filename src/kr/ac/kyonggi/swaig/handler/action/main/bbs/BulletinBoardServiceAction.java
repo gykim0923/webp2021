@@ -48,7 +48,7 @@ public class BulletinBoardServiceAction extends CustomAction {
         else { //num이 없는 경우 오류 메시지 출력용
             bbs_type="error";
         }
-        request.setAttribute("bbs_type", gson.toJson(bbs_type)); //
+        request.setAttribute("bbs_type", gson.toJson(bbs_type));
 
         /**
          * mode는 현재 페이지의 모드(list/view/write/modify)를 나타냄. default 값은 list임. url로 받음.

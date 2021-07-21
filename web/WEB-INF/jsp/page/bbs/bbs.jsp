@@ -20,10 +20,7 @@
   <c:when test="${jsp == '\"bbs_view\"'}">
     <%@include file="/WEB-INF/jsp/page/bbs/bbs_mode/bbs_view.jsp" %>
   </c:when>
-  <c:when test="${jsp == '\"bbs_write\"'}">
-    <%@include file="/WEB-INF/jsp/page/bbs/bbs_mode/bbs_write.jsp" %>
-  </c:when>
-  <c:when test="${jsp == '\"bbs_modify\"'}">
-    <%@include file="/WEB-INF/jsp/page/bbs/bbs_mode/bbs_modify.jsp" %>
+  <c:when test="${jsp == '\"bbs_write\"' || jsp == '\"bbs_modify\"'}">
+    <%@include file="/WEB-INF/jsp/page/bbs/bbs_mode/bbs_upload.jsp" %>
   </c:when>
 </c:choose>
