@@ -151,17 +151,12 @@ public class AdminDAO {
         return "success";
     }
 
-    public ArrayList<SliderDTO> getSlider(String major) {
+    public ArrayList<SliderDTO> getSlider() {
         List<Map<String, Object>> listOfMaps = null;
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            if(major.equals("all")){
-                listOfMaps = queryRunner.query(conn, "SELECT * FROM slider ORDER BY id DESC", new MapListHandler());
-            }
-            else {
-                listOfMaps = queryRunner.query(conn, "SELECT * FROM slider WHERE slider_major=? ORDER BY id DESC", new MapListHandler(), major);
-            }
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM slider ORDER BY id DESC", new MapListHandler());
         } catch (SQLException se) {
             se.printStackTrace();
         } finally {
@@ -173,13 +168,12 @@ public class AdminDAO {
     }
 
     public String addSlider(String data) {
-        String arr[] = data.split("-/-/-"); // slider_img+"-/-/-"+slider_major
+        String arr[] = data.split("-/-/-"); // slider_img
         String slider_img = arr[0];
-        String slider_major = arr[1];
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn,"INSERT INTO slider(slider_img, slider_major) VALUE(?,?);", slider_img,slider_major);
+            queryRunner.update(conn,"INSERT INTO slider(slider_img) VALUE(?);", slider_img);
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {

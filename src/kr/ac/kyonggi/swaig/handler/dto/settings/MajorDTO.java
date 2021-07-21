@@ -1,7 +1,7 @@
 package kr.ac.kyonggi.swaig.handler.dto.settings;
 
 public class MajorDTO {
-    public String oid, major_id, major_name, major_color1, major_color2, major_color3;
+    public String oid, major_id, major_name, major_location, major_contact;
 
     public String getOid() {
         return oid;
@@ -27,27 +27,19 @@ public class MajorDTO {
         this.major_name = major_name;
     }
 
-    public String getMajor_color1() {
-        return major_color1;
+    public String getMajor_location() {
+        return major_location;
     }
 
-    public void setMajor_color1(String major_color1) {
-        this.major_color1 = major_color1;
+    public void setMajor_location(String major_location) {
+        this.major_location = major_location;
     }
 
-    public String getMajor_color2() {
-        return major_color2;
+    public String getMajor_contact() {
+        return major_contact;
     }
 
-    public void setMajor_color2(String major_color2) {
-        this.major_color2 = major_color2;
-    }
-
-    public String getMajor_color3() {
-        return major_color3;
-    }
-
-    public void setMajor_color3(String major_color3) {
-        this.major_color3 = major_color3;
+    public void setMajor_contact(String major_contact) {
+        this.major_contact = major_contact;
     }
 }

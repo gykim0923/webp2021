@@ -155,18 +155,6 @@ public class AjaxAction implements Action {
                 if (type.board_level == 0)
                     result = ContactDAO.getInstance().deleteLaboratory(data);
                 break;
-            case "deleteclub":   //직접 권한 확인
-                if (type.board_level == 0)
-                    result = ClubDAO.getInstance().deleteclub(data);
-                break;
-            case "modifyclub":   //직접 권한 확인
-                if (type.board_level == 0)
-                    result = ClubDAO.getInstance().modifyclub(data);
-                break;
-            case "insertclub":   //직접 권한 확인
-                if (type.board_level == 0)
-                    result = ClubDAO.getInstance().insertclub(data);
-                break;
 
             case "addSchedule":
                 if (type.board_level == 0)

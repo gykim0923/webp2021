@@ -2,7 +2,6 @@ package kr.ac.kyonggi.swaig.handler.action.main.page_stand_alone;
 
 import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.CustomAction;
-import kr.ac.kyonggi.swaig.handler.dao.settings.ClubDAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.LocationDAO;
 
 import javax.servlet.http.HttpServletRequest;
