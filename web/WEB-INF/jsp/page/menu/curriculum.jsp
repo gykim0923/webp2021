@@ -201,6 +201,7 @@
 
     var curriculumFile_id; //나중에 파일 상세정보를 uploadedFile로부터 역참조 하고싶은 경우에 사용하라고 만들어둠 (꼭 사용해야 하는 것은 아님)
     var curriculumFile_path; //파일이 업로드된 상대경로
+    var curriculumFile_folder; //파일이 업로드된 상대경로
     function uploadCurriculum(){
         var formData = new FormData();
         var folder='/img/curriculum';//업로드 된 파일 folder 경로 설정은 여기에서 해줍니다. (마지막에 /가 오면 절대 안됩니다.)
@@ -224,11 +225,12 @@
                         alert(data);
                         var fileLog=data.split("-/-/-");
                         var a='';
-                        a+='<div>파일제출</div><div>'+fileLog[1]+'</div>';
-                        a+='<div><a href="#"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드(미구현)</button></a>'
-                        a+='<button class="btn btn-danger" onclick="makeUploadSliderModal()"><i class="bi bi-x-circle-fill"></i> 첨부파일 수정하기</button></div>';
                         curriculumFlie_id=fileLog[0];
                         curriculumFile_path=folder+'/'+fileLog[1];
+                        curriculumFile_folder=folder;
+                        a+='<div>파일제출</div><div>'+fileLog[1]+'</div>';
+                        a+='<div><a href="download.kgu?id='+curriculumFlie_id+'&&path='+curriculumFile_folder+'" target="_blank"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드</button></a>'
+                        a+='<button class="btn btn-danger" onclick="modifyCurriculumFile(\'curriculum\')"><i class="bi bi-x-circle-fill"></i> 첨부파일 수정하기</button></div>';
                         $('#curriculumUpload').html(a);
                     }
                 }
@@ -241,6 +243,7 @@
 
     var eduFile_id; //나중에 파일 상세정보를 uploadedFile로부터 역참조 하고싶은 경우에 사용하라고 만들어둠 (꼭 사용해야 하는 것은 아님)
     var eduFile_path; //파일이 업로드된 상대경로
+    var eduFile_folder; //파일이 업로드된 상대경로
     function uploadEdu(){
         var formData = new FormData();
         var folder='/img/curriculum';//업로드 된 파일 folder 경로 설정은 여기에서 해줍니다. (마지막에 /가 오면 절대 안됩니다.)
@@ -264,11 +267,12 @@
                         alert(data);
                         var fileLog=data.split("-/-/-");
                         var a='';
-                        a+='<div>파일제출</div><div>'+fileLog[1]+'</div>';
-                        a+='<div><a href="#"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드(미구현)</button></a>'
-                        a+='<button class="btn btn-danger" onclick="makeUploadSliderModal()"><i class="bi bi-x-circle-fill"></i> 첨부파일 수정하기</button></div>';
                         eduFile_id=fileLog[0];
+                        eduFile_folder=folder;
                         eduFile_path=folder+'/'+fileLog[1];
+                        a+='<div>파일제출</div><div>'+fileLog[1]+'</div>';
+                        a+='<div><a href="download.kgu?id='+eduFile_id+'&&path='+eduFile_folder+'" target="_blank"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드</button></a>'
+                        a+='<button class="btn btn-danger" onclick="modifyCurriculumFile(\'edu\')"><i class="bi bi-x-circle-fill"></i> 첨부파일 수정하기</button></div>';
                         $('#eduUpload').html(a);
                     }
                 }
@@ -296,6 +300,15 @@
                     location.reload()
                 }
             })
+        }
+    }
+
+    function modifyCurriculumFile(type){
+        if(type == 'curriculum'){
+            $('#curriculumUpload').html('<label for="curriculumFile" class="form-label">커리큘럼 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" name="curriculumFile" id="curriculumFile" accept="image/*"><button class="btn btn-outline-secondary" type="button" onclick="uploadCurriculum()">Upload</button></div>');
+        }
+        else if(type == 'edu'){
+            $('#eduUpload').html('<label for="eduFile" class="form-label">이수체계도 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="eduFile" name="eduFile" accept="image/*"><button class="btn btn-outline-secondary" type="button" onclick="uploadEdu()">Upload</button></div>');
         }
     }
 </script>
