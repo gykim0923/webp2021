@@ -91,4 +91,62 @@ public class BBSDAO {
         else
             return null;
     }
+
+    public String insertBbs(String data) {
+        String arr[] = data.split("-/-/-"); // major+"-/-/-"+writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+num+"-/-/-"+last_modified+"-/-/-"+text
+        String major = arr[0];
+        String writer_id = arr[1];
+        String writer_name = arr[2];
+        String title = arr[3];
+        String category = arr[4];
+        String last_modified = arr[5];
+        String text = arr[6];
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE(?,?,?,?,?,?,?);", major,writer_id,writer_name, title, category, last_modified, text);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
+    }
+
+    public String modifyBbs(String data) {
+        String arr[] = data.split("-/-/-"); // id+"-/-/-"+major+"-/-/-"+writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+num+"-/-/-"+last_modified+"-/-/-"+text
+        String id = arr[0];
+        String major = arr[1];
+        String writer_id = arr[2];
+        String writer_name = arr[3];
+        String title = arr[4];
+        String category = arr[5];
+        String last_modified = arr[6];
+        String text = arr[7];
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"UPDATE bbs SET major=?, writer_id=?, writer_name=?, title=?, category=?, last_modified=?, text=? WHERE id=?;", major, writer_id, writer_name, title, category, last_modified, text, id);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
+    }
+
+    public String deleteBbs(String data) {
+        String arr[] = data.split("-/-/-"); // id+"-/-/-"+major+"-/-/-"+writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+num+"-/-/-"+last_modified+"-/-/-"+text
+        String id = arr[0];
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"DELETE FROM `bbs` WHERE `id`=?;", id);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
+    }
 }

@@ -216,6 +216,18 @@ public class AjaxAction implements Action {
                 if(type.board_level==0)
                     result=CurriculumDAO.getInstance().deleteCurriculum(data);
                 break;
+            case "insertBbs":
+                if(type.board_level==0)
+                    result=BBSDAO.getInstance().insertBbs(data);
+                break;
+            case "modifyBbs":
+                if(type.board_level==0)
+                    result=BBSDAO.getInstance().modifyBbs(data);
+                break;
+            case "deleteBbs":
+                if(type.board_level==0)
+                    result=BBSDAO.getInstance().deleteBbs(data);
+                break;
         }
         return result;
     }
