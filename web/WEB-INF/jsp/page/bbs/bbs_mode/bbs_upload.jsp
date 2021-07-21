@@ -9,6 +9,14 @@
 <%
     String getBBS = (String) request.getAttribute("getBBS");
 %>
+<script src="js/default.js"></script>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/fileinput.min.js"></script>
+<script src="js/sortable.min.js" type="text/javascript"></script>
+<script src="js/theme.js" type="text/javascript"></script>
 
 <div class="h3">글 작성하기</div>
 <%--ckeditor가 나와야 하는 자리--%>
@@ -32,6 +40,10 @@
 </c:choose>
     <button type="button" class="btn btn-outline-secondary" onclick="back()">뒤로</button>
 </div>
+<div class="file-loading">
+    <input id="kv-explorer" type="file" multiple>
+</div>
+
 
 <script>
     var major = <%=major%>;
@@ -117,4 +129,15 @@
 
         return [year, month, day].join('-');
     }
+    $("#kv-explorer").fileinput({
+        'theme': 'explorer-fa',
+        'uploadUrl': 'notice_board_upload.do',
+        showRemove : false,
+        showUpload : false,
+        overwriteInitial : false,
+        uploadExtraData:{
+            writer : user.id,
+            num : num
+        }
+    });
 </script>
