@@ -244,6 +244,7 @@
     var eduFile_id; //나중에 파일 상세정보를 uploadedFile로부터 역참조 하고싶은 경우에 사용하라고 만들어둠 (꼭 사용해야 하는 것은 아님)
     var eduFile_path; //파일이 업로드된 상대경로
     var eduFile_folder; //파일이 업로드된 상대경로
+
     function uploadEdu(){
         var formData = new FormData();
         var folder='/img/curriculum';//업로드 된 파일 folder 경로 설정은 여기에서 해줍니다. (마지막에 /가 오면 절대 안됩니다.)
