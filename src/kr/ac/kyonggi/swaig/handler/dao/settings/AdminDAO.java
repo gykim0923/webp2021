@@ -26,16 +26,15 @@ public class AdminDAO {
     }
 
     public String addMajor(String data) {
-        String arr[] = data.split("-/-/-"); //major_id+'-/-/-'+major_name+'/-/-'+major_color1+'/-/-'+major_color2+'/-/-'+major_color3;
+        String arr[] = data.split("-/-/-"); //major_id+'-/-/-'+major_name+'-/-/-'+major_location+'-/-/-'+major_contact;
         String major_id = arr[0];
         String major_name = arr[1];
-        String major_color1 = arr[2];
-        String major_color2 = arr[3];
-        String major_color3 = arr[4];
+        String major_location = arr[2];
+        String major_contact = arr[3];
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn,"INSERT INTO major(major_id,major_name,major_color1,major_color2,major_color3) VALUE(?,?,?,?,?);", major_id,major_name,major_color1,major_color2,major_color3);
+            queryRunner.update(conn,"INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE(?,?,?,?);", major_id,major_name,major_location,major_contact);
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {
@@ -45,17 +44,15 @@ public class AdminDAO {
     }
 
     public String modifyMajor(String data) {
-        String arr[] = data.split("-/-/-"); // target_oid+'-/-/-'+major_name+'-/-/-'+major_color1+'-/-/-'+major_color2+'-/-/-'+major_color3;
+        String arr[] = data.split("-/-/-"); // major_id+'-/-/-'+major_name+'-/-/-'+major_location+'-/-/-'+major_contact;
         String target_oid = arr[0];
-//        String major_id = arr[1];
         String major_name = arr[1];
-        String major_color1 = arr[2];
-        String major_color2 = arr[3];
-        String major_color3 = arr[4];
+        String major_location = arr[2];
+        String major_contact = arr[3];
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn,"UPDATE major SET major_name=?,major_color1=?,major_color2=?,major_color3=? WHERE oid=?;", major_name,major_color1,major_color2,major_color3, target_oid);
+            queryRunner.update(conn,"UPDATE major SET major_name=?,major_location=?,major_contact=? WHERE oid=?;", major_name,major_location,major_contact, target_oid);
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {

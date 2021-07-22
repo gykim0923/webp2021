@@ -19,9 +19,8 @@
       <th data-field="oid" data-sortable="true">oid</th>
       <th data-field="major_id" data-sortable="true">major_id</th>
       <th data-field="major_name" data-sortable="true">major_name</th>
-      <th data-field="major_color1" data-sortable="true">major_color1</th>
-      <th data-field="major_color2" data-sortable="true">major_color2</th>
-      <th data-field="major_color3" data-sortable="true">major_color3</th>
+      <th data-field="major_location" data-sortable="true">major_location</th>
+      <th data-field="major_contact" data-sortable="true">major_contact</th>
     </tr>
     </thead>
   </table>
@@ -48,9 +47,8 @@
         oid: major.oid,
         major_id: major.major_id,
         major_name: major.major_name,
-        major_color1: major.major_color1,
-        major_color2: major.major_color2,
-        major_color3: major.major_color3,
+        major_location: major.major_location,
+        major_contact: major.major_contact,
         action : '<button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyMajorModal('+i+')">수정</button>'
       });
     }
@@ -65,9 +63,8 @@
 
     var modal_body = '';
     modal_body += '<div>전공 이름</div><input type="text" class="form-control" id="modify_major_name" name="new_table" value="" placeholder="major_name">'
-            +'<div>전공 색상1</div><input type="color" class="form-control" id="modify_major_color1" name="new_table" value="" placeholder="major_color1">'
-            +'<div>전공 색상2</div><input type="color" class="form-control" id="modify_major_color2" name="new_table" value="" placeholder="major_color2">'
-            +'<div>전공 색상3</div><input type="color" class="form-control" id="modify_major_color3" name="new_table" value="" placeholder="major_color3">';
+            +'<div>major_location</div><input type="text" class="form-control" id="major_location" name="new_table" value="" placeholder="major_location">'
+            +'<div>major_contact</div><input type="text" class="form-control" id="major_contact" name="new_table" value="" placeholder="major_contact">';
 
     var modal_footer = '';
     modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
@@ -83,11 +80,9 @@
     var target_oid=major[i].oid;
     // var major_id=$('#modify_major_id').val();
     var major_name=$('#modify_major_name').val();
-    var major_color1=$('#modify_major_color1').val();
-    var major_color2=$('#modify_major_color2').val();
-    var major_color3=$('#modify_major_color3').val();
-    // var data=target_id+'-/-/-'+major_id+'-/-/-'+major_name+'-/-/-'+major_color1+'-/-/-'+major_color2+'-/-/-'+major_color3;
-    var data=target_oid+'-/-/-'+major_name+'-/-/-'+major_color1+'-/-/-'+major_color2+'-/-/-'+major_color3;
+    var major_location=$('#major_location').val();
+    var major_contact=$('#major_contact').val();
+    var data=target_oid+'-/-/-'+major_name+'-/-/-'+major_location+'-/-/-'+major_contact;
     var check = confirm("전공 "+data+"를 수정하시겠습니까?");
     if (check) {
       $.ajax({
@@ -119,9 +114,8 @@
     modal_body += '<div>전공 아이디 (영문/숫자 혼용 가능) <mark>한번 생성하신 아이디는 수정하실 수 없습니다.</mark></div>'
       + '<input type="text" class="form-control" id="add_major_id" name="new_table" value="" placeholder="major_id">'
       + '<div>전공 이름</div><input type="text" class="form-control" id="add_major_name" name="new_table" value="" placeholder="major_name">'
-      + '<div>전공 색상1</div><input type="color" class="form-control" id="add_major_color1" name="new_table" value="" placeholder="major_color1">'
-      + '<div>전공 색상2</div><input type="color" class="form-control" id="add_major_color2" name="new_table" value="" placeholder="major_color2">'
-      + '<div>전공 색상3</div><input type="color" class="form-control" id="add_major_color3" name="new_table" value="" placeholder="major_color3">';
+      + '<div>major_location</div><input type="text" class="form-control" id="add_major_location" name="new_table" value="" placeholder="major_location">'
+      + '<div>major_contact</div><input type="text" class="form-control" id="add_major_contact" name="new_table" value="" placeholder="major_contact">';
 
     var modal_footer = '';
     modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
@@ -135,10 +129,9 @@
   function addMajor(){
     var major_id=$('#add_major_id').val();
     var major_name=$('#add_major_name').val();
-    var major_color1=$('#add_major_color1').val();
-    var major_color2=$('#add_major_color2').val();
-    var major_color3=$('#add_major_color3').val();
-    var data=major_id+'-/-/-'+major_name+'-/-/-'+major_color1+'-/-/-'+major_color2+'-/-/-'+major_color3;
+    var major_location=$('#add_major_location').val();
+    var major_contact=$('#add_major_contact').val();
+    var data=major_id+'-/-/-'+major_name+'-/-/-'+major_location+'-/-/-'+major_contact;
     var check = confirm("전공 "+data+"를 추가하시겠습니까?");
     if (check) {
       $.ajax({

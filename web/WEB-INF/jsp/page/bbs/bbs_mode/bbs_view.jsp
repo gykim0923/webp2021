@@ -63,7 +63,7 @@
     makeViewContent();
     makeViewButtons();
     callSetupCommentView();
-    makeCommentButton();
+    // makeCommentButton();
   })
   var major = <%=major%>;
   var num = <%=num%>;

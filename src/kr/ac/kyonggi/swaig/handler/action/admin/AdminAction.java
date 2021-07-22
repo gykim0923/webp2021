@@ -17,14 +17,14 @@ public class AdminAction extends CustomAction {
         Gson gson = new Gson();
         String num= request.getParameter("num");
         if(num!=null){
-            if(num.equals("90")){
+            if(num.equals("70")){
                 request.setAttribute("jsp", gson.toJson("admin_main")); //admin_main.jsp
                 request.setAttribute("getAllMajor", gson.toJson(HomeDAO.getInstance().getAllMajor()));
                 request.setAttribute("getSchedule", gson.toJson(AdminDAO.getInstance().getSchedule()));
                 request.setAttribute("getSlider", gson.toJson(AdminDAO.getInstance().getSlider()));
                 return "RequestDispatcher:jsp/page/page.jsp";
             }
-            else if(num.equals("91")){
+            else if(num.equals("71")){
                 request.setAttribute("jsp", gson.toJson("admin_user")); //admin_user.jsp
                 request.setAttribute("getAllUser", gson.toJson(UserDAO.getInstance().getAllUser()));
                 return "RequestDispatcher:jsp/page/page.jsp";
