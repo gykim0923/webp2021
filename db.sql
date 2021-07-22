@@ -39,13 +39,16 @@ CREATE TABLE menu_pages(
 
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('10', '1', '0', 'information.kgu', '학부소개', '11',  '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('11', '1', '1', 'professor.kgu', '교수진', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('12', '1', '2', 'contact.kgu', '위치 및 연락처', '12', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('12', '1', '2', 'contact.kgu', '위치 및 연락처', '11', '0');
+
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('20', '2', '0', 'bbs.kgu', '전체공지', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('21', '2', '1', 'bbs.kgu', 'K-WITH 공지', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('22', '2', '2', 'bbs.kgu', '수업공지', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('23', '2', '3', 'bbs.kgu', '취업공지', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('24', '2', '4', 'bbs.kgu', '학과자료실', '11', '0');
+
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('30', '3', '0', 'bbs.kgu', '신청하기', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('31', '3', '1', 'bbs.kgu', '학과자료실', '11', '0');
+
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('50', '5', '0', 'information.kgu', '전공소개',  '11',  '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('51', '5', '1', 'curriculum.kgu', '교육과정',  '11',  '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('52', '5', '2', 'bbs.kgu', '전공게시판', '11', '0');
@@ -54,6 +57,7 @@ INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,mi
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('60', '6', '0', 'mypage.kgu', '마이페이지', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('61', '6', '1', 'changePwd.kgu', '비밀번호변경', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('62', '6', '2', 'whatIDoPage.kgu', '활동내역', '11', '0');
+
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('70', '7', '0', 'admin.kgu', '홈페이지관리', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('71', '7', '1', 'admin.kgu', '회원관리', '11', '0');
 
@@ -214,8 +218,8 @@ CREATE TABLE bbs(
     PRIMARY KEY(`id`)
 );
 
-INSERT INTO bbs(id, major, writer_id, writer_name, title, category, last_modified, text) VALUE('0', 'main','admin','관리자','제목1',41,'2021-01-01','<p>컨텐츠내용1</p>');
-INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목2',42,'2021-01-01','<p>컨텐츠내2용</p>');
+INSERT INTO bbs(id, major, writer_id, writer_name, title, category, last_modified, text) VALUE('0', 'main','admin','관리자','제목1',21,'2021-01-01','<p>컨텐츠내용1</p>');
+INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목2',22,'2021-01-01','<p>컨텐츠내2용</p>');
 
 CREATE TABLE comment(
   `id` INT(10) NOT NULL AUTO_INCREMENT,

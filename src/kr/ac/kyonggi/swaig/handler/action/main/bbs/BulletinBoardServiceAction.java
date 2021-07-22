@@ -27,7 +27,7 @@ public class BulletinBoardServiceAction extends CustomAction {
          * DB로 하고 싶었는데, 그게 오히려 더 복잡해질까봐 Action에서 변수를 정해주는 것으로 함.
          * */
         /*____________________________________________________________________
-        * |          |   일반(common)  |   웹진(webzine) |   신청(application) |
+        * |          |   일반(common)  |   자유게시판(free) |   신청(application) |
         * --------------------------------------------------------------------
         * | 작성,수정  |        O       |        O        |          O         |
         * |   댓 글   |        O       |        O        |          X         |
@@ -35,15 +35,15 @@ public class BulletinBoardServiceAction extends CustomAction {
         * |  신청기능  |        X       |        X        |          O         |
         * --------------------------------------------------------------------
         * */
-        String bbs_type = ""; // (common/webzine/application) 중 하나
-        if (num.equals("40")||num.equals("41")||num.equals("42")||num.equals("43")||num.equals("51")||num.equals("70")||num.equals("71")){
-            bbs_type="common";
+        String bbs_type = ""; // (common/free/application) 중 하나
+        if (num.equals("20")||num.equals("21")||num.equals("22")||num.equals("23")||num.equals("31")){
+            bbs_type="notice";
         }
-        else if (num.equals("50")){
+        else if (num.equals("30")){
             bbs_type="application";
         }
-        else if (num.equals("60")||num.equals("61")||num.equals("62")){
-            bbs_type="webzine";
+        else if (num.equals("53")){
+            bbs_type="free";
         }
         else { //num이 없는 경우 오류 메시지 출력용
             bbs_type="error";
@@ -60,8 +60,8 @@ public class BulletinBoardServiceAction extends CustomAction {
 
         //mode에 따라 필요한 DB가 다르다.
         if(mode.equals("list")){
-            if(num.equals("40")){ // 여러 게시판을 한번에 요청 시
-                String [] numbers = {"41","42","43"}; //여기에 들어있는 num들의 DB를 모두 불러와서 반환한다.
+            if(num.equals("20")){ // 여러 게시판을 한번에 요청 시
+                String [] numbers = {"21","22","23"}; //여기에 들어있는 num들의 DB를 모두 불러와서 반환한다.
                 request.setAttribute("getBBSList", gson.toJson(BBSDAO.getInstance().getAllBBSList(numbers)));
             }
             else{ // 한개의 게시판만 요청 시
