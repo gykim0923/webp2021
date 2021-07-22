@@ -103,7 +103,7 @@
     var modifyUrl = 'bbs.kgu?major='+major+'&&num='+num+'&&mode=modify&&id='+id;
     var text = '';
     text+='<a href="'+listUrl+'"><div class="btn btn-secondary">목록</div></a>'
-    if(num == "40" || num == "41" || num == "42" || num == "43"){
+    if(num == "20" || num == "21" || num == "22" || num == "23"){
       if(type.board_level == 0 || type.board_level == 1){
         text += '<a href="'+modifyUrl+'"><div class="btn btn-secondary">수정</div></a>'
                 + '<a onclick="deleteBbs()"><div class="btn btn-secondary">삭제</div></a>'
