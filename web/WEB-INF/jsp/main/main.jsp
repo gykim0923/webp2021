@@ -16,13 +16,9 @@
 <head>
     <title>Title</title>
     <style>
-        .carousel-item {
-            height: 32rem;
-        }
-        .container .major {
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
+        /*.carousel-item {*/
+        /*    height: 32rem;*/
+        /*}*/
     </style>
 </head>
 <%@include file="./header.jsp"%>
@@ -49,8 +45,46 @@
                 </div>
             </div>
             <div class="col-lg-3 py-2" id="main1_right">
-                <div class=" h-100 p-5 bg-light border  shadow rounded">
-                    <h2><strong>바로가기</strong></h2>
+                <div class=" h-100 bg-light border  shadow rounded">
+<%--                    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">--%>
+<%--                        <div class="d-flex w-100 align-items-center justify-content-between">--%>
+<%--                            <strong class="mb-1">List group item heading</strong>--%>
+<%--                            <small class="text-muted">Tues</small>--%>
+<%--                        </div>--%>
+<%--                        <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>--%>
+<%--                    </a>--%>
+                    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <p class="h2">메뉴이름</p>
+                        </div>
+                    </a>
+    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+        <div class="d-flex w-100 align-items-center justify-content-between">
+            <p class="h2">메뉴이름</p>
+        </div>
+    </a>
+
+    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+        <div class="d-flex w-100 align-items-center justify-content-between">
+            <p class="h2">메뉴이름</p>
+        </div>
+    </a>
+
+    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+        <div class="d-flex w-100 align-items-center justify-content-between">
+            <p class="h2">메뉴이름</p>
+        </div>
+    </a>
+    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+        <div class="d-flex w-100 align-items-center justify-content-between">
+            <p class="h2">메뉴이름</p>
+        </div>
+    </a>
+    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+        <div class="d-flex w-100 align-items-center justify-content-between">
+            <p class="h2">메뉴이름</p>
+        </div>
+    </a>
 
                 </div>
             </div>
