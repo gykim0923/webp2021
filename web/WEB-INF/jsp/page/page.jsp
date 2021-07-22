@@ -20,7 +20,7 @@
 </head>
 <body>
 <%@include file="../main/header.jsp" %>
-<main>
+<main class="bg-light">
     <div class="container py-4">
 
         <div class="row align-items-md-stretch">

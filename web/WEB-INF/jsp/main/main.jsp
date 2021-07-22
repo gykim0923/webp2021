@@ -27,7 +27,7 @@
 </head>
 <%@include file="./header.jsp"%>
 <body>
-<main>
+<main class=" bg-light">
     <div class="container py-4">
         <div class="row align-items-md-stretch">
             <div class="col-lg-9 py-2" id="main1_left" >

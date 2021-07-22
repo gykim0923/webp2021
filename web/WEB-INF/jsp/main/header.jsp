@@ -54,7 +54,7 @@
     <div class="bg-secondary">
         <div class="container text-end text-white" id="user"></div>
     </div>
-    <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="navbar navbar-light bg-light shadow-sm">
         <div class="container" id="headerTitle">
             <a class="navbar-brand d-flex align-items-center" href=<%=main_url%>>
 <%--                <img src="/img/kgu_logo(500x500).png" class="img-fluid px-2" style="height: 3rem;">--%>
@@ -65,7 +65,7 @@
             </button>
         </div>
     </div>
-    <div class="collapse bg-dark" id="navbarHeader">
+    <div class="collapse" id="navbarHeader">
         <div class="container">
             <div class="row" id="headerContent"></div>
         </div>
@@ -84,13 +84,13 @@
         var text = '';
 
         for(var i=0; i<menuTabList.length; i++){
-            text+= '<div class="col-lg py-4">'
-                +'<h4 class="text-white">'+menuTabList[i].tab_title+'</h4>'
+            text+= '<div class="col-lg py-lg-4 py-2">'
+                +'<h4 class="text-dark">'+menuTabList[i].tab_title+'</h4>'
                 +'<ul class="list-unstyled">'
                 +'';
             for(var j=0; j<menuPageList.length; j++){
                 if(menuTabList[i].tab_id==menuPageList[j].tab_id){
-                    text+='<li><a href="'+menuPageList[j].page_path+'?major='+major+'&&num='+menuPageList[j].page_id+'" class="text-white">'+menuPageList[j].page_title+'</a></li>'
+                    text+='<li><a href="'+menuPageList[j].page_path+'?major='+major+'&&num='+menuPageList[j].page_id+'" class="text-dark">'+menuPageList[j].page_title+'</a></li>'
                 }
             }
             text+='</ul></div>';
@@ -116,18 +116,18 @@
         var type =<%=type%>;
         var it = $('#user');
         if(user == null){ //Geust
-            var text = '<div class=""><a href="loginPage.kgu" title="로그인">LOGIN</a></div>';
+            var text = '<div ><a href="loginPage.kgu" title="로그인" class="text-white">LOGIN</a></div>';
         }
         else{ //로그인 시
             var text = '<div>안녕하세요. ' + user.name + ' ('+type.for_header+')님. ';
             if(type.for_header=='관리자'){
-                text +='<a href="admin.kgu?num=70"> 관리페이지 </a> '
+                text +='<a href="admin.kgu?num=70" class="text-white"> 관리페이지 </a> '
                     // +'<a href="tutorial.kgu?tutorial=main"> 튜토리얼 </a>';
             }
             else{
-                text +=' <a href="mypage.kgu?major='+major+'&&num=60">마이페이지</a> ';
+                text +=' <a href="mypage.kgu?major='+major+'&&num=60" class="text-white">마이페이지</a> ';
             }
-            text += '  <a href="logout.kgu" title=LOGOUT>LOGOUT</a></div>';
+            text += '  <a href="logout.kgu" class="text-white" title=LOGOUT>LOGOUT</a></div>';
         }
         it.append(text);
     }
