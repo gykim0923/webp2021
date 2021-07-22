@@ -231,4 +231,40 @@ CREATE TABLE comment(
   PRIMARY KEY (`id`)
 );
 
-INSERT INTO comment(id, writer_id,writer_name, comment,comment_date,bbs_id) VALUE ('1','amin','관리자','이것은 test 댓글 입니다.','2021-01-01','1');
+INSERT INTO comment(id, writer_id,writer_name, comment,comment_date,bbs_id) VALUE ('1','admin','관리자','이것은 test 댓글 입니다.','2021-01-01','1');
+
+CREATE TABLE kgu_major(
+  `campus` VARCHAR(50) NOT NULL ,
+  `college` VARCHAR(100) NOT NULL ,
+  `major` VARCHAR(100)NOT NULL
+);
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '진성애교양대학', '교직학부 교육학전공');
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '진성애교양대학', 'ROTC');
+
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '인문대학', '유아교육과');
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '인문대학', '국어국문학과');
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '인문대학', '영어영문학과');
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '인문대학', '중어중문학과');
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '인문대학', '사학과');
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '인문대학', '문헌정보학과');
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '인문대학', '문예창작학과');
+
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '예술체육대학', '서양화.미술경영학과');
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '예술체육대학', '한국화.서예학과');
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '예술체육대학', '입체조형학과');
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '예술체육대학', '디자인비즈학부 시각정보디자인전공');
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '예술체육대학', '디자인비즈학부 산업디자인전공');
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '예술체육대학', '디자인비즈학부 장신구.금속디자인전공');
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '예술체육대학', 'Fine Arts 학부');
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '예술체육대학', '스포츠과학부 스포츠건강과학전공');
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '예술체육대학', '스포츠과학부 레저스포츠전공');
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '예술체육대학', '스포츠과학부 스포츠산업경영전공');
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '예술체육대학', '스포츠과학부 스포츠레저산업전공');
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '예술체육대학', '시큐리티매니지먼트학과');
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '예술체육대학', '체육학과');
+
+
+
+
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '소프트웨어경영대학', 'AI컴퓨터공학부 컴퓨터공학전공');
+INSERT INTO kgu_major(campus, college, major) VALUE ('수원캠퍼스', '소프트웨어경영대학', 'AI컴퓨터공학부 인공지능전공');
