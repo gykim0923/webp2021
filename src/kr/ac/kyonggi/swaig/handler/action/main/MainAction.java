@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.Action;
 import kr.ac.kyonggi.swaig.common.controller.CustomAction;
 import kr.ac.kyonggi.swaig.handler.dao.settings.AdminDAO;
+import kr.ac.kyonggi.swaig.handler.dao.settings.BBSDAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
 import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
 
@@ -26,6 +27,10 @@ public class MainAction extends CustomAction {
         String num=request.getParameter("num");
         request.setAttribute("scheduleAllInfo", gson.toJson(AdminDAO.getInstance().getSchedule()));
         request.setAttribute("slider", gson.toJson(AdminDAO.getInstance().getSlider()));
+        request.setAttribute("bbs21", gson.toJson(BBSDAO.getInstance().getBBSList("21")));
+        request.setAttribute("bbs22", gson.toJson(BBSDAO.getInstance().getBBSList("22")));
+        request.setAttribute("bbs23", gson.toJson(BBSDAO.getInstance().getBBSList("23")));
+        request.setAttribute("favorite_menu", gson.toJson(HomeDAO.getInstance().getFavoriteMenu()));
         return "RequestDispatcher:jsp/main/main.jsp";
     }
 }

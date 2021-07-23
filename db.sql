@@ -221,6 +221,12 @@ CREATE TABLE bbs(
 
 INSERT INTO bbs(id, major, writer_id, writer_name, title, category, last_modified, text) VALUE('0', 'main','admin','관리자','제목1',21,'2021-01-01','<p>컨텐츠내용1</p>');
 INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목2',22,'2021-01-01','<p>컨텐츠내2용</p>');
+INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목3',23,'2021-01-01','<p>컨텐츠내용3</p>');
+INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목22332',21,'2021-01-01','<p>컨텐츠내2용4</p>');
+INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목2323232',21,'2021-01-01','<p>컨텐츠내2용5</p>');
+INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목23232',23,'2021-01-01','<p>컨텐츠내2용6</p>');
+INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목4552',21,'2021-01-01','<p>컨텐츠내2용7</p>');
+
 
 CREATE TABLE comment(
   `id` INT(10) NOT NULL AUTO_INCREMENT,
@@ -331,5 +337,17 @@ INSERT INTO kgu_major(campus, college, major) VALUE ('서울캠퍼스', '관광�
 INSERT INTO kgu_major(campus, college, major) VALUE ('서울캠퍼스', '관광문화대학', '미디어영상학과');
 INSERT INTO kgu_major(campus, college, major) VALUE ('서울캠퍼스', '관광문화대학', '관광학부 ');
 
+CREATE TABLE favorite_menu(
+                          `id` INT(10) NOT NULL AUTO_INCREMENT,
+                          `name` VARCHAR(100) NOT NULL ,
+                          `url` VARCHAR(100)NOT NULL,
+                          PRIMARY KEY (`id`)
+);
+INSERT INTO favorite_menu(id, name, url) VALUE ('0', '경기대학교', 'http://www.kyonggi.ac.kr/KyonggiUp.kgu');
+INSERT INTO favorite_menu(name, url) VALUE ('성적확인', 'https://grade.kyonggi.ac.kr/');
+INSERT INTO favorite_menu(name, url) VALUE ('수강신청', 'http://sugang.kyonggi.ac.kr/');
+INSERT INTO favorite_menu(name, url) VALUE ('KUTIS', 'https://kutis.kyonggi.ac.kr/webkutis/view/indexWeb.jsp');
+INSERT INTO favorite_menu(name, url) VALUE ('LMS', 'https://lms.kyonggi.ac.kr/login.php');
+INSERT INTO favorite_menu(name, url) VALUE ('경기대 입학처', 'http://enter.kyonggi.ac.kr/intro.do');
 
 

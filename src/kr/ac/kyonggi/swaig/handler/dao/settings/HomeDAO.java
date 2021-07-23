@@ -162,4 +162,20 @@ public class HomeDAO {
         ArrayList<TextDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<TextDTO>>() {}.getType());
         return gson.toJson(selectedList.get(0));
     }
+
+    public ArrayList<FavoriteMenuDTO> getFavoriteMenu() {
+        Connection conn = Config.getInstance().sqlLogin();
+        List<Map<String, Object>> listOfMaps = null;
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM favorite_menu;",new MapListHandler());
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<FavoriteMenuDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<FavoriteMenuDTO>>() {}.getType());
+        return selectedList;
+    }
 }

@@ -8,9 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-    String majorAllInfo = (String)request.getAttribute("majorAllInfo");
+//    String majorAllInfo = (String)request.getAttribute("majorAllInfo");
     String scheduleAllInfo = (String)request.getAttribute("scheduleAllInfo");
     String slider = (String)  request.getAttribute("slider");
+    String favorite_menu = (String) request.getAttribute("favorite_menu");
+    String bbs21 = (String) request.getAttribute("bbs21");
+    String bbs22 = (String) request.getAttribute("bbs22");
+    String bbs23 = (String) request.getAttribute("bbs23");
 %>
 <html class="fontawesome-i2svg-active fontawesome-i2svg-complete">
 <head>
@@ -45,48 +49,7 @@
                 </div>
             </div>
             <div class="col-lg-3 py-2" id="main1_right">
-                <div class=" h-100 bg-light border  shadow rounded">
-<%--                    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">--%>
-<%--                        <div class="d-flex w-100 align-items-center justify-content-between">--%>
-<%--                            <strong class="mb-1">List group item heading</strong>--%>
-<%--                            <small class="text-muted">Tues</small>--%>
-<%--                        </div>--%>
-<%--                        <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>--%>
-<%--                    </a>--%>
-                    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
-                        <div class="d-flex w-100 align-items-center justify-content-between">
-                            <p class="h2">메뉴이름</p>
-                        </div>
-                    </a>
-    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
-        <div class="d-flex w-100 align-items-center justify-content-between">
-            <p class="h2">메뉴이름</p>
-        </div>
-    </a>
-
-    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
-        <div class="d-flex w-100 align-items-center justify-content-between">
-            <p class="h2">메뉴이름</p>
-        </div>
-    </a>
-
-    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
-        <div class="d-flex w-100 align-items-center justify-content-between">
-            <p class="h2">메뉴이름</p>
-        </div>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
-        <div class="d-flex w-100 align-items-center justify-content-between">
-            <p class="h2">메뉴이름</p>
-        </div>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
-        <div class="d-flex w-100 align-items-center justify-content-between">
-            <p class="h2">메뉴이름</p>
-        </div>
-    </a>
-
-                </div>
+                <div class=" h-100 bg-light border  shadow rounded" id="favorite_menu"></div>
             </div>
         </div>
 
@@ -96,8 +59,24 @@
 
             <div class="col-lg py-2" id="main2_left"  style="height : 400px;">
                 <div class=" h-100 p-5 bg-light border shadow rounded">
-                    <h2><strong>영역 1</strong></h2>
-                    <hr>
+                    <div>
+                        <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-21" type="button" role="tab" aria-controls="nav-home" aria-selected="true">21</button>
+                            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-22" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">22</button>
+                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-23" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">23</button>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-21" role="tabpanel" aria-labelledby="nav-home-tab">
+<%--                            <p>21</p>--%>
+                        </div>
+                        <div class="tab-pane fade" id="nav-22" role="tabpanel" aria-labelledby="nav-profile-tab">
+<%--                            <p>22</p>--%>
+                        </div>
+                        <div class="tab-pane fade" id="nav-23" role="tabpanel" aria-labelledby="nav-contact-tab">
+<%--                            <p>23</p>--%>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -149,13 +128,50 @@
 </html>
 
 <script>
-    $(document).ready(function(){
 
+    $(document).ready(function(){
+        makeFavoriteMenu();
         makeScheduleInfo();
         makeCarouselCard();
+        makeNoticeBBS();
     })
+    function makeNoticeBBS() {
+        var notice21 = $('#nav-21');
+        var notice22 = $('#nav-22');
+        var notice23 = $('#nav-23');
+        var bbs21=<%=bbs21%>;
+        var bbs22=<%=bbs22%>;
+        var bbs23=<%=bbs23%>;
+        var text21='';
+        var text22='';
+        var text23='';
+        for (var i=0; i<bbs21.length; i++){
+            text21+='<div>'+bbs21[i].title+'</div>';
+        }
+        for (var i=0; i<bbs22.length; i++){
+            text22+='<div>'+bbs22[i].title+'</div>';
+        }
+        for (var i=0; i<bbs23.length; i++){
+            text23+='<div>'+bbs23[i].title+'</div>';
+        }
+        notice21.append(text21);
+        notice22.append(text22);
+        notice23.append(text23);
+    }
 
-
+    function makeFavoriteMenu() {
+        var menu = $('#favorite_menu');
+        var favorite_menu = <%=favorite_menu%>;
+        var text='';
+        for (var i=0;i<favorite_menu.length;i++){
+            text+='<a href="'+favorite_menu[i].url+'" class="list-group-item list-group-item-action py-3 lh-tight">'
+                +'<div class="d-flex w-100 align-items-center justify-content-between">'
+                +'<p class="h3">'+favorite_menu[i].name+'</p>'
+                +'</div>'
+                +'</a>';
+        }
+        menu.append(text);
+    }
     function makeCarouselCard(){ // 슬라이더 카드 만드는 함수
         var list = $('#carouselCard');
         var list2 =$('#carouselButton');
