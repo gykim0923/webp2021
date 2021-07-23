@@ -9,7 +9,9 @@
 <%
   String getBBS = (String) request.getAttribute("getBBS");
   String getComment = (String) request.getAttribute("getComments");
+  String userForBbs_view = (String)session.getAttribute("user");
 %>
+
 <div>
   <div id="view_content"></div>
   <hr>
@@ -39,14 +41,20 @@
     </div>
 
 <%--  댓글 입력 창--%>
-  <hr>
-  <div class="my-2">댓글</div>
-  <div class="input-group mb-3">
-    <input type="text" class="form-control" id="commentInput" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+  <c:if test="${user != null}">
+    <hr>
+    <div class="my-2">댓글</div>
+    <div class="input-group mb-3">
+    <input type="text" class="form-control" id="commentInput" placeholder="comment" aria-label="comment" aria-describedby="button-addon2">
     <div class="input-group-append">
     <button class="btn btn-outline-secondary" type="button" id="commentButton" onClick="insertComment();"> 쓰기 </button>
-    </div>
-  </div>
+    </div></div>
+<%--    <div class="card" id="commentCard"></div>--%>
+  </c:if>
+
+
+
+
 
   <hr>
   <div>
@@ -68,12 +76,46 @@
   var num = <%=num%>;
   var id = <%=id%>;
   var type = <%=type%>;
-
+  var user = <%=userForBbs_view%>;
   function callSetupCommentView(){
       $('#table1').bootstrapTable('load',tableData());
       // $('#table1').bootstrapTable('append',data());
       $('#table1').bootstrapTable('refresh');
   }
+
+  function formatDate(date) {  //주어진 날짜를 yyyy-mm-dd 형식으로 반환해주는 함수
+    var d = new Date(date),
+    month = '' + (d.getMonth() + 1),
+   day = '' + d.getDate(),
+   year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
+
+  function insertComment(){
+    var comment = $('#commentInput').val();
+    var user_id = user.id;
+    var user_name = user.name;
+    var comment_date = formatDate(new Date());
+    alert("동작 됨");
+    var data = user_id+"-/-/-"+user_name+"-/-/-"+comment+"-/-/-"+comment_date+"-/-/-"+id;
+      $.ajax({
+        url: "ajax.kgu", //AjaxAction에서
+        type: "post", //post 방식으로
+        data: {
+          req: "insertComment", //이 메소드를 찾아서
+          data: data //이 데이터를 파라미터로 넘겨줍니다.
+        },
+        success: function (data) { //성공 시
+          alert("성공함")
+            location.reload();
+        }
+      })
+  }
+
   function tableData(){
       var commentsList = <%=getComment%>;
       var rows = [];

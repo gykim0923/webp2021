@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.CustomAction;
 import kr.ac.kyonggi.swaig.handler.dao.settings.BBSDAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
+import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
