@@ -23,17 +23,42 @@
 
 <main>
     <%@include file="common/tutorial_section.jsp"%>
+
+
+    <input type="button" id="loginBtn" value="login">
+    <script>
+        var client_id = '961716324050-r6i9dib682nsqjotloum1igkvf1jm0og.apps.googleusercontent.com';
+        $("#loginBtn").click(function(){
+            location.href="https://accounts.google.com/o/oauth2/auth?client_id="+client_id
+                // +"220458850151-3varsnqai8qutmf3k4c77mmnq4bk9dls.apps.googleusercontent.com"
+                +"&redirect_uri="
+                +"http://localhost:8080/redirect"
+                +"&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email&approval_prompt=force&access_type=offline";
+        });
+    </script>
+
+
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
     <script>
         $(document).ready(function(){
-            onSignIn();
+            // onSignIn();
         })
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
             console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            console.log('Name: ' + profile.getName());
+            console.log('Full Name: ' + profile.getName());
+            console.log('Given Name: ' + profile.getGivenName());
+            console.log('Family Name: ' + profile.getFamilyName());
             console.log('Image URL: ' + profile.getImageUrl());
             console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+            var id_token = googleUser.getAuthResponse().id_token;
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'google_login.kgu');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                console.log('Signed in as: ' + xhr.responseText);
+            };
+            xhr.send('idtoken=' + id_token);
         }
     </script>
     <a href="#" onclick="signOut();">Sign out</a>

@@ -48,16 +48,6 @@ public class TutorialAction implements Action {
         else if(tutorial.equals("layout")){
             return url;  //"RequestDispatcher:jsp/tutorial/tutorial_layout.jsp"
         }
-        else if(tutorial.equals("documents_view")){
-            String article= request.getParameter("article");
-            System.out.println(article);
-            request.setAttribute("document", gson.toJson(TutorialDAO.getInstance().getDocument(article)));
-            return "RequestDispatcher:jsp/tutorial/documents/documents_view.jsp";
-        }
-        else if(tutorial.equals("documents_write")){
-            String article= request.getParameter("article");
-            return "RequestDispatcher:jsp/tutorial/documents/documents_write.jsp";
-        }
         else{ //예상 외의 요청이 들어오는 경우에는 error 페이지를 돌려준다.
             return "RequestDispatcher:jsp/main/error.jsp";
         }
