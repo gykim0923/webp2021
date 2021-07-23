@@ -39,15 +39,14 @@
     </div>
 
 <%--  댓글 입력 창--%>
-<div class="card mb-2">
- <div class="card-header bg-light">
-     <span>댓글</span>
-     <button type="button" class="btn btn-secondary " onClick="insertComment();">쓰기</button>
- </div>
-   <div class="commentCard">
-     <input class="form-control" id="commentInput" rows="3">
-   </div>
-</div>
+  <hr>
+  <div class="my-2">댓글</div>
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" id="commentInput" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+    <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button" id="commentButton" onClick="insertComment();"> 쓰기 </button>
+    </div>
+  </div>
 
   <hr>
   <div>
