@@ -126,7 +126,6 @@ CREATE TABLE text(
     PRIMARY KEY(`id`,`major`)
 );
 INSERT INTO text(id, major, content) VALUE('10','main','10-main');
-INSERT INTO text(id, major, content) VALUE('10','major1','10-major1');
 INSERT INTO text(id, major, content) VALUE('50','main','50-main');
 INSERT INTO text(id, major, content) VALUE('50','major1','50-major1');
 INSERT INTO text(id, major, content) VALUE('51','main','51-main');
