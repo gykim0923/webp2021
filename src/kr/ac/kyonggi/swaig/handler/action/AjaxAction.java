@@ -8,6 +8,7 @@ import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
 import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserTypeDTO;
+import kr.ac.kyonggi.swaig.handler.excel.ExcelReader;
 ;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 public class AjaxAction implements Action {
     /**
@@ -37,6 +40,7 @@ public class AjaxAction implements Action {
         UserDTO user = gson.fromJson((String)session.getAttribute("user"), UserDTO.class);
         UserTypeDTO type = gson.fromJson((String)session.getAttribute("type"), UserTypeDTO.class);
         String result=null;
+        String address = null;
         switch(req) {
             case "deleteExampleData":   //테스트용
                 result = TutorialDAO.getInstance().deleteExampleData(data); //삭제할 oid를 넘겨줍니다.
@@ -202,7 +206,48 @@ public class AjaxAction implements Action {
                 data = data.concat("-/-/-" + user.id);
                 result = BBSDAO.getInstance().likeBoards(data);
                 break;
+            case "deleteuser":
+                if (type.board_level == 0) // 유저 삭제
+                {
+                    result = UserDAO.getInstance().deleteUser(data);
+                    File log = new File(request.getServletContext().getRealPath("/WEB-INF"), "log.txt");
+                    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(log, true));
+                    bufferedWriter.write(new Date().toString() + "] 아이디 삭제! " + "ID : " + data + "\r\n");
+                    bufferedWriter.close();
+                }
+                break;
+            case "insertexceluser": // 엑셀 유저 추가
+                if (type.board_level == 0) {
+                    address = request.getParameter("address");
+                    List<Map<String, Object>> insertmap = null;
+                    String xls = address.substring(address.lastIndexOf(".") + 1);
+                    if (xls.equals("xlsx"))
+                        insertmap = new ExcelReader().xlsxUserReader(address);
+                    else
+                        insertmap = new ExcelReader().xlsUserReader(address);
+                    result = UserDAO.getInstance().insertexceluser(insertmap);
+                    String path = request.getSession().getServletContext().getRealPath("/") + "excel";
+                    File deleteFile = new File(path, address);
+                    deleteFile.delete();
+                }
+                break;
+            case "modifyexceluser": // 엑셀 유저 수정
+                if (type.board_level == 0) {
+                    address = request.getParameter("address");
+                    String xlsx = address.substring(address.lastIndexOf(".") + 1);
+                    List<Map<String, Object>> modifymap = null;
+                    if (xlsx.equals("xlsx"))
+                        modifymap = new ExcelReader().xlsxUserReadermodify(data, address);
+                    else
+                        modifymap = new ExcelReader().xlsUserReadermodify(data, address);
+                    result = UserDAO.getInstance().modifyexceluser(modifymap);
+                    String path2 = request.getSession().getServletContext().getRealPath("/") + "excel";
+                    File deleteFile2 = new File(path2, address);
+                    deleteFile2.delete();
+                }
+                break;
         }
+
         return result;
     }
 
