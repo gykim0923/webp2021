@@ -166,15 +166,6 @@ CREATE TABLE schedule(
                            PRIMARY KEY (`id`)
 );
 INSERT INTO schedule(id, date, content) VALUE ('0', '2021-08-01', '프로젝트 마감');
-INSERT INTO schedule(id, date, content) VALUE ('1', '2021-08-02', '복학신청');
-INSERT INTO schedule(id, date, content) VALUE ('2', '2021-08-02', '휴학신청');
-INSERT INTO schedule(id, date, content) VALUE ('3', '2021-08-02', '소망가방 예비수강신청');
-INSERT INTO schedule(id, date, content) VALUE ('4', '2021-08-11', '2021학년도 2학기 수강신청');
-INSERT INTO schedule(id, date, content) VALUE ('5', '2021-08-15', '광복절');
-INSERT INTO schedule(id, date, content) VALUE ('6', '2021-08-16', '재학생 등록');
-INSERT INTO schedule(id, date, content) VALUE ('7', '2021-08-23', '2021학년도 2학기 수강신청');
-INSERT INTO schedule(id, date, content) VALUE ('8', '2021-08-25', '2021전기교원자격무시험검정원서접수');
-INSERT INTO schedule(id, date, content) VALUE ('9', '2021-08-27', '2020학년도 후기 학위수여식');
 
 CREATE TABLE uploadedFile(
                        `id` INT(10) NOT NULL AUTO_INCREMENT,
