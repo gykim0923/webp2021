@@ -17,7 +17,9 @@
 <script src="js/fileinput.min.js"></script>
 <script src="js/sortable.min.js" type="text/javascript"></script>
 <script src="js/theme.js" type="text/javascript"></script>
-
+<link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        media="all" rel="stylesheet" type="text/css" />
 <div class="h3">글 작성하기</div>
 <%--ckeditor가 나와야 하는 자리--%>
 <div class="form-group mb-3" id="bbsTitleBox"><input class="form-control" id="bbsTitle" placeholder="제목을 입력하세요."></div>
@@ -131,7 +133,7 @@
     }
     $("#kv-explorer").fileinput({
         'theme': 'explorer-fa',
-        'uploadUrl': 'notice_board_upload.do',
+        'uploadUrl': 'notice_board_upload.kgu',
         showRemove : false,
         showUpload : false,
         overwriteInitial : false,
