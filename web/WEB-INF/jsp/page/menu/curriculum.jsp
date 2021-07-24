@@ -7,7 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    String typeForCurriculum = (String)session.getAttribute("type");
     String curriculum = (String)request.getAttribute("curriculum");  //커리큘럼 내용
     String getCurriculums = (String)request.getAttribute("getCurriculums");  //해당 전공 연도별 커리큘럼 사진
 %>
@@ -33,7 +32,7 @@
         makeInformation();
     })
 
-    var typeForCurriculum = <%=typeForCurriculum%>;
+    var type = <%=type%>;
     var curriculum = <%=curriculum%>;
     var curriculumList = <%=getCurriculums%>;
     var modalHeader = $('#curriculumModalHeader');
@@ -47,7 +46,7 @@
 
         text+='<p>'+curriculum.content+'</p>';
 
-        if(typeForCurriculum.for_header=='관리자'){
+        if(type.for_header=='관리자'){
             var button = $('#modify_button');
             button.append('<button type="button" class="btn btn-outline-secondary" onclick="modify()">내용 수정</button>'
                         +'<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="addCurriculumModal()">이미지 추가</button>');
@@ -111,10 +110,11 @@
         list.append('<div>'+curriculumList[num].year+'년도 교육과정</div>'
             +'<img src="'+curriculumList[num].curriculum_img+'" id="curriculum_'+curriculumList[num].year+'" onerror="this.src=\'http://placehold.it/300x300\'" class="img-fluid">'
             +'<div>'+curriculumList[num].year+'년도 교육과정 이수체계도</div>'
-            +'<img src="'+curriculumList[num].edu_img+'" id="edu_'+curriculumList[num].year+'" onerror="this.src=\'http://placehold.it/300x300\'" class="img-fluid">'
-            +'<div class="d-grid gap-2 d-md-flex justify-content-md-end">'
-            +'<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="modifyCurriculumModal('+num+')">수정</button>'
-            +'<button type="button" class="btn btn-outline-secondary" onclick="deleteCurriculum('+num+')">삭제</button></div>');
+            +'<img src="'+curriculumList[num].edu_img+'" id="edu_'+curriculumList[num].year+'" onerror="this.src=\'http://placehold.it/300x300\'" class="img-fluid">');
+        if(type.for_header == '관리자')
+            list.append('<div class="d-grid gap-2 d-md-flex justify-content-md-end">'
+                +'<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="modifyCurriculumModal('+num+')">수정</button>'
+                +'<button type="button" class="btn btn-outline-secondary" onclick="deleteCurriculum('+num+')">삭제</button></div>');
     }
 
     function addCurriculumModal(){
