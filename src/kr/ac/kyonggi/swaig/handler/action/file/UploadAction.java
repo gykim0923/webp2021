@@ -1,6 +1,9 @@
 package kr.ac.kyonggi.swaig.handler.action.file;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kr.ac.kyonggi.swaig.common.controller.Action;
@@ -131,7 +134,35 @@ public class UploadAction implements Action {
             String upload_time = simDf.format(new Date(currentTime));
             String parameter = id+"-/-/-"+uploadFile+"-/-/-"+newFileName+"-/-/-"+upload_time+"-/-/-"+savePath+"-/-/-"+folder;
             String file_id = FileDAO.getInstance().insertFileUploadLog(parameter); //업로드 파일 로그 남기면서 돌려받을 고유 번호
-            return file_id+"-/-/-"+newFileName;
+            String upload_mode = multi.getParameter("upload_mode");
+//            System.out.println(upload_mode);
+            if(!upload_mode.equals("bbs")){
+//                System.out.println("it's not bbs");
+                return file_id+"-/-/-"+newFileName;
+            }
+            else {
+                JsonObject forFinish = new JsonObject();
+                JsonArray forArray = new JsonArray();
+                JsonObject intoArray = new JsonObject();
+                intoArray.addProperty("url", "notice_board_file_upload_delete.do");
+                JsonObject forIntoArray = new JsonObject();
+                forIntoArray.addProperty("id", file_id);
+                intoArray.add("extra", forIntoArray);
+                forArray.add(intoArray);
+                forFinish.add("initialPreviewConfig", forArray);
+                JsonArray forArray2 = new JsonArray();
+                forArray2.add("<span style='font-size : 14px; font-family : NanumSquare ;'>" + uploadFile + " 업로드 성공</span>");
+//                if(fileType.equals("image")){
+//                    forArray2.add("<img src='"+folder+"/" + newFileName + "' style='width : 200px'><span style='font-size : 12px'> " + uploadFile + " 업로드 성공</span>");
+//                }
+//                else{
+//                    forArray2.add("<span style='font-size : 14px; font-family : NanumSquare ;'>" + uploadFile + " 업로드 성공</span>");
+//                }
+                forFinish.add("initialPreview", forArray2);
+                Gson gson2 = new GsonBuilder().disableHtmlEscaping().create();
+                return gson2.toJson(forFinish);
+            }
+
         }catch(Exception e){
             e.printStackTrace();
             return "fail";

@@ -131,15 +131,17 @@
 
         return [year, month, day].join('-');
     }
+    var upload_folder = '/img/bbs';
     $("#kv-explorer").fileinput({
         'theme': 'explorer-fa',
-        'uploadUrl': 'notice_board_upload.kgu',
+        'uploadUrl': 'upload.kgu?folder='+upload_folder,
         showRemove : false,
         showUpload : false,
         overwriteInitial : false,
         uploadExtraData:{
-            writer : user.id,
-            num : num
+            file_type : 'null',
+            board_level : '0',
+            upload_mode : 'bbs'
         }
     });
 </script>
