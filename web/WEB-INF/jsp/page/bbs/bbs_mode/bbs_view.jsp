@@ -47,14 +47,9 @@
     <div class="input-group mb-3">
     <input type="text" class="form-control" id="commentInput" placeholder="comment" aria-label="comment" aria-describedby="button-addon2">
     <div class="input-group-append">
-    <button class="btn btn-outline-secondary" type="button" id="commentButton" onClick="insertComment();"> 쓰기 </button>
+    <button class="btn btn-outline-secondary" type="button" id="commentButton" onClick="insertComment()"> 쓰기 </button>
     </div></div>
-<%--    <div class="card" id="commentCard"></div>--%>
   </c:if>
-
-
-
-
 
   <hr>
   <div>
@@ -100,7 +95,6 @@
     var user_id = user.id;
     var user_name = user.name;
     var comment_date = formatDate(new Date());
-    alert("동작 됨");
     var data = user_id+"-/-/-"+user_name+"-/-/-"+comment+"-/-/-"+comment_date+"-/-/-"+id;
       $.ajax({
         url: "ajax.kgu", //AjaxAction에서
@@ -110,7 +104,6 @@
           data: data //이 데이터를 파라미터로 넘겨줍니다.
         },
         success: function (data) { //성공 시
-          alert("성공함")
             location.reload();
         }
       })
