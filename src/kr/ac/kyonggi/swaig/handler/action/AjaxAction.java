@@ -8,7 +8,7 @@ import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
 import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserTypeDTO;
-//import kr.ac.kyonggi.swaig.handler.excel.ExcelReader;
+import kr.ac.kyonggi.swaig.handler.excel.ExcelReader;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -201,10 +201,10 @@ public class AjaxAction implements Action {
                 if(type.board_level==0)
                     result=BBSDAO.getInstance().deleteBbs(data);
                 break;
-//            case "insertComment":
-//                if(user!=null)
-//                    result=BBSDAO.getInstance().insertComment(data);
-//                break;
+            case "insertComment":
+                if(user!=null)
+                    result=BBSDAO.getInstance().insertComment(data);
+                break;
             case "likeBoard":
                 data = data.concat("-/-/-" + user.id);
                 result = BBSDAO.getInstance().likeBoards(data);
@@ -219,36 +219,36 @@ public class AjaxAction implements Action {
                     bufferedWriter.close();
                 }
                 break;
-//            case "insertexceluser": // 엑셀 유저 추가
-//                if (type.board_level == 0) {
-//                    address = request.getParameter("address");
-//                    List<Map<String, Object>> insertmap = null;
-//                    String xls = address.substring(address.lastIndexOf(".") + 1);
-//                    if (xls.equals("xlsx"))
-//                        insertmap = new ExcelReader().xlsxUserReader(address);
-//                    else
-//                        insertmap = new ExcelReader().xlsUserReader(address);
-//                    result = UserDAO.getInstance().insertexceluser(insertmap);
-//                    String path = request.getSession().getServletContext().getRealPath("/") + "excel";
-//                    File deleteFile = new File(path, address);
-//                    deleteFile.delete();
-//                }
-//                break;
-//            case "modifyexceluser": // 엑셀 유저 수정
-//                if (type.board_level == 0) {
-//                    address = request.getParameter("address");
-//                    String xlsx = address.substring(address.lastIndexOf(".") + 1);
-//                    List<Map<String, Object>> modifymap = null;
-//                    if (xlsx.equals("xlsx"))
-//                        modifymap = new ExcelReader().xlsxUserReadermodify(data, address);
-//                    else
-//                        modifymap = new ExcelReader().xlsUserReadermodify(data, address);
-//                    result = UserDAO.getInstance().modifyexceluser(modifymap);
-//                    String path2 = request.getSession().getServletContext().getRealPath("/") + "excel";
-//                    File deleteFile2 = new File(path2, address);
-//                    deleteFile2.delete();
-//                }
-//                break;
+            case "insertexceluser": // 엑셀 유저 추가
+                if (type.board_level == 0) {
+                    address = request.getParameter("address");
+                    List<Map<String, Object>> insertmap = null;
+                    String xls = address.substring(address.lastIndexOf(".") + 1);
+                    if (xls.equals("xlsx"))
+                        insertmap = new ExcelReader().xlsxUserReader(address);
+                    else
+                        insertmap = new ExcelReader().xlsUserReader(address);
+                    result = UserDAO.getInstance().insertexceluser(insertmap);
+                    String path = request.getSession().getServletContext().getRealPath("/") + "excel";
+                    File deleteFile = new File(path, address);
+                    deleteFile.delete();
+                }
+                break;
+            case "modifyexceluser": // 엑셀 유저 수정
+                if (type.board_level == 0) {
+                    address = request.getParameter("address");
+                    String xlsx = address.substring(address.lastIndexOf(".") + 1);
+                    List<Map<String, Object>> modifymap = null;
+                    if (xlsx.equals("xlsx"))
+                        modifymap = new ExcelReader().xlsxUserReadermodify(data, address);
+                    else
+                        modifymap = new ExcelReader().xlsUserReadermodify(data, address);
+                    result = UserDAO.getInstance().modifyexceluser(modifymap);
+                    String path2 = request.getSession().getServletContext().getRealPath("/") + "excel";
+                    File deleteFile2 = new File(path2, address);
+                    deleteFile2.delete();
+                }
+                break;
         }
 
         return result;

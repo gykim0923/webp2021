@@ -146,13 +146,16 @@
         var text22='';
         var text23='';
         for (var i=0; i<bbs21.length; i++){
-            text21+='<div>'+bbs21[i].title+'</div>';
+            var url21 = 'bbs.kgu?major=main&num=21&mode=view&id='+bbs21[i].id;
+            text21+='<div><a href="'+url21+'">'+bbs21[i].title+'</a></div>';
         }
         for (var i=0; i<bbs22.length; i++){
-            text22+='<div>'+bbs22[i].title+'</div>';
+            var url22 = 'bbs.kgu?major=main&num=22&mode=view&id='+bbs22[i].id;
+            text22+='<div><a href="'+url22+'">'+bbs22[i].title+'</a></div>';
         }
         for (var i=0; i<bbs23.length; i++){
-            text23+='<div>'+bbs23[i].title+'</div>';
+            var url23 = 'bbs.kgu?major=main&num=23&mode=view&id='+bbs23[i].id;
+            text23+='<div><a href="'+url23+'">'+bbs23[i].title+'</a></div>';
         }
         notice21.append(text21);
         notice22.append(text22);

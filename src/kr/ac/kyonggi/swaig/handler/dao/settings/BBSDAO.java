@@ -127,6 +127,7 @@ public class BBSDAO {
         String text = arr[6];
         Connection conn = Config.getInstance().sqlLogin();
         try {
+            System.out.println(data);
             QueryRunner queryRunner = new QueryRunner();
             queryRunner.update(conn,"INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE(?,?,?,?,?,?,?);", major,writer_id,writer_name, title, category, last_modified, text);
         } catch(SQLException se) {
@@ -174,6 +175,24 @@ public class BBSDAO {
         return "success";
     }
 
+    public String insertComment(String data) {
+        String arr[] = data.split("-/-/-"); //user_id+"-/-/-"+user_name+"-/-/-"+comment+"-/-/-"+comment_date+"-/-/-"+id
+        String writer_id = arr[0];
+        String writer_name = arr[1];
+        String comment = arr[2];
+        String comment_date = arr[3];
+        String id = arr[4];
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"INSERT INTO comment(writer_id, writer_name, comment, comment_date, bbs_id) VALUE(?,?,?,?,?);", writer_id,writer_name,comment, comment_date, id);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
+    }
 
     public ArrayList<CommentDTO> getCommentsList(String id) {
         List<Map<String, Object>> listOfMaps = null;

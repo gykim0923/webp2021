@@ -13,6 +13,8 @@
 %>
 
 <div>
+  <div class="h2" id="view_title"></div>
+  <hr>
   <div id="view_content"></div>
   <hr>
   <div id="view_comments"></div>
@@ -67,6 +69,7 @@
 <script>
 
   $(document).ready(function(){
+    makeViewTitle();
     makeViewContent();
     makeViewButtons();
     callSetupCommentView();
@@ -131,10 +134,13 @@
       }
       return rows;
   }
-
+  var getBBS = <%=getBBS%>;
+  function makeViewTitle() {
+    var content = $('#view_title');
+    content.append(getBBS.title);
+  }
   function makeViewContent() {
     var content = $('#view_content');
-    var getBBS = <%=getBBS%>;
     content.append(getBBS.text);
   }
 
