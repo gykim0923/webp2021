@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.CustomAction;
 import kr.ac.kyonggi.swaig.handler.dao.settings.AdminDAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
+import kr.ac.kyonggi.swaig.handler.dao.settings.LogDAO;
 import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
 import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
 
@@ -33,6 +34,11 @@ public class AdminAction extends CustomAction {
             else if(num.equals("72")){
                 request.setAttribute("jsp", gson.toJson("admin_excel")); //admin_excel.jsp
                 request.setAttribute("getAllUser", gson.toJson(UserDAO.getInstance().getAllUser()));
+                return "RequestDispatcher:jsp/page/page.jsp";
+            }
+            else if(num.equals("73")){
+                request.setAttribute("jsp", gson.toJson("admin_log")); //admin_log.jsp
+                request.setAttribute("getAllLog",gson.toJson(LogDAO.getInstance().getAllLog()));
                 return "RequestDispatcher:jsp/page/page.jsp";
             }
             else {

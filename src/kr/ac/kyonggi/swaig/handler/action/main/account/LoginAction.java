@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.Action;
 import kr.ac.kyonggi.swaig.common.controller.CustomAction;
 import kr.ac.kyonggi.swaig.common.controller.LoginManager;
+import kr.ac.kyonggi.swaig.handler.dao.settings.LogDAO;
 import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserTypeDTO;
@@ -38,10 +39,7 @@ public class LoginAction extends CustomAction {
             manager.setSession(request.getSession(), id); //세션 설정하기
             UserTypeDTO type = dao.getType(it.type);
             dao.whoIsLogIn(id);
-            File log = new File(request.getServletContext().getRealPath("/WEB-INF"), "log.txt");
-            BufferedWriter bufWriter = new BufferedWriter(new FileWriter(log, true));
-            bufWriter.write(new Date().toString() + "] " + it.id + "(" + it.name + ")이 로그인하였습니다.\r\n");
-            bufWriter.close();
+            LogDAO.getInstance().insertLog(it.id,it.name,it.type, new Date(),"로그인");
             session.setAttribute("user", gson.toJson(it));
             session.setAttribute("type", gson.toJson(type));
             session.setAttribute("miss", 0);

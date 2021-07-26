@@ -70,6 +70,9 @@
                         <c:when test="${jsp == '\"admin_excel\"'}">
                             <%@include file="/WEB-INF/jsp/page/admin/admin_excel.jsp" %>
                         </c:when>
+                        <c:when test="${jsp == '\"admin_log\"'}">
+                            <%@include file="/WEB-INF/jsp/page/admin/admin_log.jsp" %>
+                        </c:when>
 
                         <%--            user--%>
                         <c:when test="${jsp == '\"mypage\"'}">

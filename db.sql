@@ -61,6 +61,7 @@ INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,mi
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('70', '7', '0', 'admin.kgu', '홈페이지관리', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('71', '7', '1', 'admin.kgu', '회원관리', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('72', '7', '2', 'admin.kgu', '엑셀관리', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('73', '7', '3', 'admin.kgu', '로그확인', '11', '0');
 
 CREATE TABLE usertype(
     `type_name` varchar(45) NOT NULL,
@@ -358,3 +359,13 @@ INSERT INTO favorite_menu(name, url) VALUE ('경기대 입학처', 'http://enter
 --                         `bbs_id` INT(10) NOT NULL,
 --                         PRIMARY KEY (`id`)
 -- );
+
+CREATE TABLE log(
+    `id` INT Auto_Increment,
+    `user_id` VARCHAR(20) NOT NULL ,
+    `user_name` VARCHAR(50) NOT NULL ,
+    `user_type` VARCHAR(50) NOT NULL ,
+    `log_time` DATETIME NOT NULL ,
+    `log_type` VARCHAR(50) NOT NULL ,
+    PRIMARY KEY (`id`)
+);
