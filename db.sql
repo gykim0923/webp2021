@@ -443,7 +443,7 @@ CREATE TABLE log(
 CREATE TABLE bbs_reg_answer(
 
     `id` INT Auto_Increment,
-    `bbs_id` INT(10) NOT NULL,
+    `reg_id` INT(10) NOT NULL,
     `question_num` INT(10) NOT null,
     `answer` varchar(200) not null,
     `writer_name` varchar(100) not null,
@@ -457,7 +457,7 @@ CREATE TABLE bbs_reg_answer(
 
 CREATE TABLE bbs_reg_answerFile(
     `id` INT Auto_Increment,
-    `bbs_id` INT(10) NOT NULL,
+    `reg_id` INT(10) NOT NULL,
     `original_FileName` varchar(300) not null,
     `real_FileName` varchar(300) not null,
     `writer_id` varchar(100) not null,
@@ -466,7 +466,7 @@ CREATE TABLE bbs_reg_answerFile(
 
 CREATE TABLE bbs_regQuestion(
     `id` INT Auto_Increment,
-    `bbs_id` INT(10) NOT NULL,
+    `reg_id` INT(10) NOT NULL,
     `question_num` int(10) not null,
     `question_content` varchar(600) not null,
     `question_type` TINYINT(3) NOT NULL,
@@ -475,8 +475,24 @@ CREATE TABLE bbs_regQuestion(
 
 CREATE TABLE bbs_reg_WriterFile(
     `id` INT Auto_Increment,
-    `bbs_id` Int(10) not null,
+    `reg_id` Int(10) not null,
     `original_FileName` varchar(200) not null,
     `real_FileName` varchar(200) not null,
     PRIMARY KEY (`id`)
+);
+
+CREATE TABLE bbs_reg(
+                        `id` INT(10) NOT NULL AUTO_INCREMENT,
+                        `writer_id` VARCHAR(50) NOT NULL,
+                        `writer_name` VARCHAR(50) NOT NULL,
+                        `title` VARCHAR(200) NOT NULL DEFAULT '제목없음',
+                        `views` INT(10) DEFAULT 0,
+                        `last_modified` DATE NOT NULL,
+                        `text` TEXT NOT NULL,
+                        `starting_date` DATETIME NOT NULL ,
+                        `closing_date` DATETIME NOT NULL ,
+                        `level` VARCHAR(50) ,
+                        `for_who` INT(10),
+                        `applicant_count` INT(10),
+                        PRIMARY KEY(`id`)
 );
