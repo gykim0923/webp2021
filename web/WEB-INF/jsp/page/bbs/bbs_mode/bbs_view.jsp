@@ -11,20 +11,16 @@
   String getComment = (String) request.getAttribute("getComments");
   String userForBbs_view = (String)session.getAttribute("user");
 %>
-
 <div>
   <div class="h2" id="view_title"></div>
   <hr>
   <div id="view_content"></div>
   <hr>
-  <div id="view_comments"></div>
   <c:if test="${user.type != null}">
     <div id="view_likes">
       <i class="bi bi-hand-thumbs-up" onclick="liked()"></i>
     </div>
   </c:if>
-
-  <div id="view_comments">
 
 <%--    댓글리스트--%>
     <div>
@@ -152,18 +148,11 @@
     list_button.append(text);
   }
 
-  function likedit(){
-    var list_button = $('#view_likes');
-    var text = '';
-    text+='<a href="'+url+'"><div class="btn btn-secondary">목록</div></a>'
-  }
-
   function liked(){
     var data = <%=getBBS%>.id;
     var view_likes = $('#view_likes');
     var text = '';
-    text+='<i class="bi bi-hand-thumbs-up-fill"></i>'
-    view_likes.html(text)
+
 
     $.ajax({
       url : 'ajax.kgu',
@@ -174,6 +163,8 @@
       },
       success : function(data){
         if(data == 'success'){
+          text+='<i class="bi bi-hand-thumbs-up-fill"></i>'
+          view_likes.html(text)
           alert('추천 성공');
           location.reload();
         }else if(data == 'already'){
