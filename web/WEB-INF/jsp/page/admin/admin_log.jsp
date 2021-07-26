@@ -30,7 +30,6 @@
                 </tr>
                 </thead>
             </table>
-            <a href="excel.kgu?writeorread=write" class="btn btn-default col-md-2">로그삭제</a>
         </div>
     </div>
 </div>
