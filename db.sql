@@ -470,7 +470,7 @@ CREATE TABLE bbs_regQuestion(
     `question_num` int(10) not null,
     `question_content` varchar(600) not null,
     `question_type` TINYINT(3) NOT NULL,
-    PRIMARY KEY (`id`);
+    PRIMARY KEY (`id`)
 );
 
 CREATE TABLE bbs_reg_WriterFile(
