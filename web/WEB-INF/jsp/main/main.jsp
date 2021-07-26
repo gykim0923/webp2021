@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-//    String majorAllInfo = (String)request.getAttribute("majorAllInfo");
     String scheduleAllInfo = (String)request.getAttribute("scheduleAllInfo");
     String slider = (String)  request.getAttribute("slider");
     String favorite_menu = (String) request.getAttribute("favorite_menu");

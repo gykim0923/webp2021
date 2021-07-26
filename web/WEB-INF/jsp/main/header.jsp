@@ -18,8 +18,8 @@
      * */
     String menuTabList = (String)request.getAttribute("menuTabList");
     String menuPageList = (String)request.getAttribute("menuPageList");
-    String main_url = "main.kgu?major="+major.substring(1, major.length()-1);
     String majorInfo = (String)request.getAttribute("majorInfo");
+    String majorAllInfo = (String)request.getAttribute("majorAllInfo");
 
     /**
      * [공통] 로그인 정보 제어
@@ -56,8 +56,7 @@
     </div>
     <div class="navbar navbar-light bg-light shadow-sm">
         <div class="container" id="headerTitle">
-            <a class="navbar-brand d-flex align-items-center" href=<%=main_url%>>
-<%--                <img src="/img/kgu_logo(500x500).png" class="img-fluid px-2" style="height: 3rem;">--%>
+            <a class="navbar-brand d-flex align-items-center" href="main.kgu">
                 <h3><strong id="majorTitle"></strong></h3>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,35 +78,71 @@
     function makeHeaderMenu(){
         var menuTabList = <%=menuTabList%>;
         var menuPageList = <%=menuPageList%>;
+        var majorAllInfo = <%=majorAllInfo%>;
         var major=<%=major%>;
         var list = $('#headerContent');
         var text = '';
-
-        for(var i=0; i<menuTabList.length; i++){
+        //기본 메뉴
+        for(var i=0; i<3; i++){
             text+= '<div class="col-lg py-lg-4 py-2">'
                 +'<h4 class="text-dark">'+menuTabList[i].tab_title+'</h4>'
                 +'<ul class="list-unstyled">'
                 +'';
             for(var j=0; j<menuPageList.length; j++){
                 if(menuTabList[i].tab_id==menuPageList[j].tab_id){
-                    text+='<li><a href="'+menuPageList[j].page_path+'?major='+major+'&&num='+menuPageList[j].page_id+'" class="text-dark">'+menuPageList[j].page_title+'</a></li>'
+                    text+='<li><a href="'+menuPageList[j].page_path+'?num='+menuPageList[j].page_id+'" class="text-dark">'+menuPageList[j].page_title+'</a></li>'
                 }
             }
             text+='</ul></div>';
         }
+
+        //전공 선택
+        text+= '<div class="col-lg py-lg-4 py-2">'
+            +'<h4 class="text-dark">'+menuTabList[3].tab_title+'</h4>'
+            +'<ul class="list-unstyled">'
+            +'';
+        for(var j=0; j<majorAllInfo.length; j++){
+            text+='<li onclick="makeHeaderMajorBBS('+j+')">'+majorAllInfo[j].major_name+'</li>'
+        }
+        text+='</ul></div>';
+
+        //전공 뜨는 곳
+        text+= '<div class="col-lg py-lg-4 py-2">'
+            +'<h4 class="text-dark" id="majorBBStitle">'+menuTabList[4].tab_title+'</h4>'
+            +'<ul class="list-unstyled" id="majorBBSname">'
+            +'';
+        text+='</ul></div>';
+
         list.append(text);
     }
 
 </script>
 <script> //헤더 제어
+    function makeHeaderMajorBBS(i){
+        var menuPageList = <%=menuPageList%>;
+        var majorAllInfo = <%=majorAllInfo%>;
+        var major = majorAllInfo[i];
+        var majorBBStitle = $('#majorBBStitle');
+        majorBBStitle.html(major.major_name);
+        var list = $('#majorBBSname');
+        var text='';
+        for (var j=0; j<menuPageList.length; j++){
+            if (menuPageList[j].tab_id==5){
+                var url = 'bbs.kgu?major='+major.major_id+'&&num='+menuPageList[j].page_id;
+                text += '<li><a href="'+url+'">'+menuPageList[j].page_title+'</a></li>';
+            }
+        }
+        list.html(text);
+    }
+
     $(document).ready(function(){
         makeHeaderUserInfo();
         makeHeaderTitle();
     })
     function makeHeaderTitle(){
-        var majorInfo =<%=majorInfo%>;
+        var majorAllInfo =<%=majorAllInfo%>;
         var title = $('#majorTitle');
-        title.append('경기대학교 '+majorInfo[0].major_name);
+        title.append('경기대학교 '+majorAllInfo[0].major_name);
     }
 
     function makeHeaderUserInfo(){

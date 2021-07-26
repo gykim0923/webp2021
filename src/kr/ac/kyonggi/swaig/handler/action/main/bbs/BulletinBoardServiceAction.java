@@ -37,7 +37,7 @@ public class BulletinBoardServiceAction extends CustomAction {
         * --------------------------------------------------------------------
         * */
         String bbs_type = ""; // (common/free/application) 중 하나
-        if (num.equals("20")||num.equals("21")||num.equals("22")||num.equals("23")||num.equals("31")){
+        if (num.equals("20")||num.equals("21")||num.equals("22")||num.equals("23")||num.equals("31")||num.equals("52")){
             bbs_type="notice";
         }
         else if (num.equals("30")){
