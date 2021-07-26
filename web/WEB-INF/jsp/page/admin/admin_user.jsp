@@ -86,6 +86,7 @@
         var user = <%=getAllUser%>;
         var id = user[i].id;
         var name = user[i].name;
+        var type = user[i].type;
         var check = confirm("[중요] 정말로 "+id+"["+name+"]를 삭제하시나요? 되돌릴 수 없습니다.");
         if (check) {
             $.ajax({
@@ -93,7 +94,7 @@
                 type: "post",
                 data: {
                     req: "deleteUser",
-                    data: id+"-/-/-"+name  //이중 검사용으로 DB를 두개 넘깁니다.
+                    data: id+"-/-/-"+name+"-/-/-"+type  //이중 검사용으로 DB를 두개 넘깁니다.
                 },
                 success: function (result) {
                     if(result!='fail'){

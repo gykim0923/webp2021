@@ -37,8 +37,8 @@ public class SFilter implements Filter {
         response.setCharacterEncoding("UTF-8");
         response.setHeader("P3P","CP='CAO PSA CONI OTR OUR DEM ONL'");
 
-
-        if(session.getAttribute("type") == null) {
+        String type = (String) session.getAttribute("type");
+        if(type == null || type.equals("-") || type.equals("null")) {
             /**
              * type이 null인 경우 오류를 방지하기 위해 default 값으로 기타로 지정함.
              * (일부 페이지에서는 JS로 type을 요구하는데, null인 경우 오류가 발생하는 것을 방지)

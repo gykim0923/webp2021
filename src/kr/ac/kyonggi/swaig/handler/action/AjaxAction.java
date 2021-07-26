@@ -58,10 +58,7 @@ public class AjaxAction implements Action {
                 if (UserDAO.getInstance().checkID(big[0]))
                     result = UserDAO.getInstance().registerBigID(data);
                 if (result.equals("success")) {
-                    File log = new File(request.getServletContext().getRealPath("/WEB-INF"), "log.txt");
-                    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(log, true));
-                    bufferedWriter.write(new Date().toString() + "] 회원가입! " + "ID : " + big[0] + " 이름 :" + big[2]  + "\r\n");
-                    bufferedWriter.close();
+                    LogDAO.getInstance().insertLog(big[0],big[2], "-", new Date(),"회원가입("+big[5]+")");
                 } else
                     result = "fail";
                 break;
@@ -70,10 +67,7 @@ public class AjaxAction implements Action {
                 if (UserDAO.getInstance().checkID(small[0]))
                     result = UserDAO.getInstance().registerSmallID(data);
                 if (result.equals("success")) {
-                    File log = new File(request.getServletContext().getRealPath("/WEB-INF"), "log.txt");
-                    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(log, true));
-                    bufferedWriter.write(new Date().toString() + "] 회원가입! " + "ID : " + small[0] + " 이름 :" + small[2]  + "\r\n");
-                    bufferedWriter.close();
+                    LogDAO.getInstance().insertLog(small[0], small[2], "-", new Date(),"회원가입("+small[5]+")");
                 } else
                     result = "fail";
                 break;
@@ -88,6 +82,9 @@ public class AjaxAction implements Action {
                 String delete[] = data.split("-/-/-");
                 if (type.board_level == 0 || delete[0].equals(user.id)){
                     result=UserDAO.getInstance().deleteUser(data);
+                }
+                if (result.equals("success")){
+                    LogDAO.getInstance().insertLog(delete[0], delete[1], delete[2], new Date(),"탈퇴");
                     break;
                 }
                 return "fail";
@@ -97,6 +94,7 @@ public class AjaxAction implements Action {
                     return "fail";
                 result = UserDAO.getInstance().modifydata(data);
                 session.setAttribute("user", gson.toJson(UserDAO.getInstance().getUser(arr[0])));
+                LogDAO.getInstance().insertLog(user.id, user.name, user.type, new Date(),"회원정보수정");
                 break;
 
             case "addMajor":
@@ -123,6 +121,10 @@ public class AjaxAction implements Action {
                 String modifyPwd[] = data.split("-/-/-");
                 if (modifyPwd[0].equals(user.id) || type.board_level == 0)
                     result = UserDAO.getInstance().modifypw(data);
+                if(result.equals("success")){
+                    UserDTO modifiedUser = UserDAO.getInstance().getUser(modifyPwd[0]);
+                    LogDAO.getInstance().insertLog(modifiedUser.id, modifiedUser.name, modifiedUser.type, new Date(),"비밀번호수정");
+                }
                 break;
             case "modifyProfessor":   //직접 권한 확인
                 if (type.board_level == 0)
@@ -222,16 +224,6 @@ public class AjaxAction implements Action {
             case "likeBoard":
                 data = data.concat("-/-/-" + user.id);
                 result = BBSDAO.getInstance().likeBoards(data);
-                break;
-            case "deleteuser":
-                if (type.board_level == 0) // 유저 삭제
-                {
-                    result = UserDAO.getInstance().deleteUser(data);
-                    File log = new File(request.getServletContext().getRealPath("/WEB-INF"), "log.txt");
-                    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(log, true));
-                    bufferedWriter.write(new Date().toString() + "] 아이디 삭제! " + "ID : " + data + "\r\n");
-                    bufferedWriter.close();
-                }
                 break;
             case "insertexceluser": // 엑셀 유저 추가
                 if (type.board_level == 0) {
