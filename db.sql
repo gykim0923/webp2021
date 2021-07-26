@@ -118,7 +118,18 @@ CREATE TABLE major(
 );
 
 INSERT INTO major(oid,major_id,major_name,major_location,major_contact) VALUE('1','main','K-WITH 융합교육원','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
-INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major1','전공1','수원캠퍼스 육영관(8강의동) 8308호', '031-000-0000');
+INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major1','문화재관리학융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major2','형사사법학융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major3','심리상담융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major4','관광스포츠산업융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major5','창업합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major6','커뮤니티공공안전융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major7','융합데이터공학융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major8','미디어융합콘텐츠융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major9','AI경영융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major10','스마트AI융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major11','미디어융합콘텐츠융합전공 트랙','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major12','융합데이터공학융합전공트랙융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
 
 CREATE TABLE text(
     `id` int(50) NOT NULL,
@@ -126,9 +137,68 @@ CREATE TABLE text(
     `content` TEXT NOT NULL,
     PRIMARY KEY(`id`,`major`)
 );
-INSERT INTO text(id, major, content) VALUE('10','main','10-main');
+INSERT INTO text(id, major, content) VALUE('10','main','<ul>
+	<li>융합전공은?</li>
+</ul>
+
+<p>2개 이상의 학과(부) 또는 전공을 융합하여 제공되는 다전공 교육과정중 하나로 학생들에게 다양한 교육기회를 제공하고, 실용성 강화를 통한 교육 경쟁력 제고로 사회에서 요구하는 인재상 실현 및 교육, 신학문, 신지식 창출을 통한 연구 중심 대학 기반 구축을 위한 제도이다.</p>
+
+<ul>
+	<li>&nbsp;경기대학교 K-WITH융합교육원은 4차 산업혁명의 시대적 흐름과 유망 분야 인재양성 강화를 위해 2021년 3월에 설립되었습니다. K-WITH융합교육원의 K의 의미는 우리 대학 경기대의 이니셜인 K, 경 기도의 K, 더 나아가서 대한민국의 K를 뜻합니다. 이는 우리 대학이 표방하는 경기도를 대표하는 대학 을 넘어 우리나라를 대표하는 대학으로 성장하고 더 나아가 전 세계 교육의 트렌드를 선도하고 국가 경 쟁력에 이바지하기 위한 노력으로 K 대학으로서의 목표를 달성하고자 하는 의지를 나타낸 것입니다. 이와 함께 &#39;K-WITH&#39; 는 지속성장을 의미하는 &#39;Keep up with Growth&#39; 의 의미를 함축하는 것으로 대 학 구성원들이 경기대와 지속성장을 함께 누리기를 바라는 희망을 나타낸 것입니다. 이러한 배경으로 탄생한 K-WITH 융합교육원은 융합전공 교육과정 편성과 개편, 교수학습지원을 위한 지원 업무를 적 극적으로 추진하고자 합니다. 본 K-WITH융합교육원은 우리 경기대학교의 비전인 &#39;글로벌 역량을 갖춘 융&middot;복합 인재 양성 대학&#39; 달 성 정진에 발맞추어 효율적인 융합교육과정의 개발과 지원, 교수능력 개발과 학습능력 개발을 위한 연 구와 지원에 정성을 다하도록 하겠습니다. 교수님들과 학생들의 지속적인 관심과 격려를 부탁드립니다. 감사합니다.</li>
+</ul>
+
+');
 INSERT INTO text(id, major, content) VALUE('50','main','50-main');
-INSERT INTO text(id, major, content) VALUE('50','major1','50-major1');
+
+INSERT INTO text(id, major, content) VALUE('50','major1','<p>▣ 문화재관리학융합전공(Management of Cultural Properties)</p>
+
+<p>- 참여학과: 건축학과, 문헌정보학과, 사학과, 미술경영전공</p>
+
+<p>- 이수학점: 42학점</p>
+<p>- 학위명: 문화재학사</p>
+<p>&nbsp;</p>
+
+<p>▣ 교육목표</p>
+
+<p>- 문화재에 대한 애정과 관심을 고취시키고 이론과 실제를 겸비한 인재양성 문화재관리를 위한 종합적이고 체계적인 지식과 실무능력을 갖춘 전문가 양성</p>
+<p>&nbsp;</p>
+<p>▣ 취업분야</p>
+<p>- 문화재 행정직 및 학예직 공무원 - 문화재 전시 및 문화교육 분야 전문가 - 문화재관리 및 문화경영 분야 단체 및 기업 담당자</p>
+
+
+');
+INSERT INTO text(id, major, content) VALUE('50','major2','<p>▣ 형사사법학융합전공(Criminal Justice)</p>
+
+<p>- 참여학과: 공공안전학부, 범죄교정전공, 경찰행정전공, 시큐리티매니지먼트학과</p>
+
+<p>- 이수학점: 42학점</p>
+<p>- 학위명: 법학사</p>
+<p>&nbsp;</p>
+
+<p>▣ 교육목표</p>
+
+<p>- 현대사회의 범죄 원인 분석과 대책마련에 필요한 기본지식 함양 - 실무지식 습득을 통한 범죄 위험에 효과적으로 대처할 수 있는 전문인력 양성</p>
+<p>&nbsp;</p>
+<p>▣ 취업분야</p>
+<p>- 문화재 행정직 및 학예직 공무원 - 문화재 전시 및 문화교육 분야 전문가 - 문화재관리 및 문화경영 분야 단체 및 기업 담당자</p>
+');
+INSERT INTO text(id, major, content) VALUE('50','major3','<p>▣ 형사사법학융합전공(Criminal Justice)</p>
+
+<p>- 참여학과: 공공안전학부, 범죄교정전공, 경찰행정전공, 시큐리티매니지먼트학과</p>
+
+<p>- 이수학점: 42학점</p>
+<p>- 학위명: 법학사</p>
+<p>&nbsp;</p>
+
+<p>▣ 교육목표</p>
+
+<p>- 현대사회의 범죄 원인 분석과 대책마련에 필요한 기본지식 함양 - 실무지식 습득을 통한 범죄 위험에 효과적으로 대처할 수 있는 전문인력 양성</p>
+<p>&nbsp;</p>
+<p>▣ 취업분야</p>
+<p>- 문화재 행정직 및 학예직 공무원 - 문화재 전시 및 문화교육 분야 전문가 - 문화재관리 및 문화경영 분야 단체 및 기업 담당자</p>
+');
+
+
 INSERT INTO text(id, major, content) VALUE('51','main','51-main');
 INSERT INTO text(id, major, content) VALUE('51','major1','51-major1');
 
@@ -144,7 +214,7 @@ CREATE TABLE professor(
 );
 
 INSERT INTO professor(id, prof_img,prof_name, prof_email,prof_lecture,prof_location,prof_call) VALUE(1,'img/professor/professor1.jpeg','권기현','khkwon@kyonggi.ac.kr','이산수학','8209호',' 031-249-9666');
-INSERT INTO professor(id, prof_img,prof_name, prof_email,prof_lecture,prof_location,prof_call) VALUE(2,'img/professor/syskgcsprofessor1.jpeg','권기현','khkwon@kyonggi.ac.kr','이산수학','8209호',' 031-249-9666');
+INSERT INTO professor(id, prof_img,prof_name, prof_email,prof_lecture,prof_location,prof_call) VALUE(2,'img/professor/professor1.jpeg','권기현','khkwon@kyonggi.ac.kr','이산수학','8209호',' 031-249-9666');
 
 CREATE TABLE curriculum(
     `major` VARCHAR(50) NOT NULL,
@@ -200,7 +270,7 @@ CREATE TABLE location(
     `contact_num` VARCHAR(100) NOT NULL,
     `content` VARCHAR(500) NOT NULL, PRIMARY KEY(`id`)
 );
-INSERT INTO location(id, address, contact_num, content) VALUE ('0', '(16227) 경기도 수원시 영통구 광교산로 154-42 육영관 8304호', ' 031-249-9670 (FAX : 031-249-9673)','hi');
+INSERT INTO location(id, address, contact_num, content) VALUE ('0', 'K-WITH 융합교육원 수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288','hi');
 
 CREATE TABLE bbs(
     `id` INT(10) NOT NULL AUTO_INCREMENT,
@@ -357,7 +427,6 @@ INSERT INTO favorite_menu(name, url) VALUE ('경기대 입학처', 'http://enter
 --                         `comment` VARCHAR(200) NOT NULL,
 --                         `comment_date` DATE NOT NULL,
 --                         `bbs_id` INT(10) NOT NULL,
---                         PRIMARY KEY (`id`)
 -- );
 
 CREATE TABLE log(
