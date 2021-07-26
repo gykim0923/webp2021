@@ -35,11 +35,11 @@
         <script>
             function initMap() {
                 var map = new google.maps.Map(document.getElementById('map'), {
-                    center: {lat: 37.3007218, lng: 127.0392770},
+                    center: {lat: 37.30069004788188, lng: 127.03655392727285},
                     zoom: 16
                 });
                 var marker = new google.maps.Marker({
-                    position: {lat: 37.3007218, lng: 127.0392770},
+                    position: {lat: 37.30069004788188, lng: 127.03655392727285},
                     map: map
                 });
             }
@@ -82,7 +82,9 @@
         var a='';
         modify_button.empty();
         a+='<div><textarea id="editorContent" name="modify_content">'+location[0].content+'</textarea></div>';
-        a += '<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="modifyContent()">수정</button>';
+        a += '<button type="button" class="btn btn-dark pull-right my-2 " data-dismiss="modal" aria-label="Close" onclick="modifyContent()">수정</button>'
+            +'<span class="px-2"><button type="button" class="btn btn-dark pull-right my-2 " data-dismiss="modal" aria-label="Close" onclick="back()">뒤로</button></span>';
+
         $('#way').html(a);
         CKEDITOR.replace('editorContent', {
             allowedContent: true,
@@ -97,7 +99,9 @@
         a+= '<div>주소</div><input type="text" class="form-control" id="modify_address" name="modify_address" value="'+location[0].address+'" placeholder="주소">'
         a+='<div>연락처</div><input type="text" class="form-control" id="modify_contact_num" name="modify_contact_num" value="'+location[0].contact_num+'" placeholder="연락처">'
         a+='<div><form style="display : inline-block" name="fileform" id="fileform" action="" method="post" enctype="multipart/form-data">'
-        a += '<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="modifyContact()">수정</button>';
+        a += '<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="modifyContact()">수정</button>'
+            +'<span class="px-2"><button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="back()">뒤로</button></span>';
+
         list.html(a);
     }
     function modifyContact(){
@@ -158,5 +162,8 @@
                 }
             })
         }
+    }
+    function back(){
+        window.location.href = 'location.kgu';
     }
 </script>
