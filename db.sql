@@ -60,8 +60,9 @@ INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,mi
 
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('70', '7', '0', 'admin.kgu', '홈페이지관리', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('71', '7', '1', 'admin.kgu', '회원관리', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('72', '7', '2', 'admin.kgu', '엑셀관리', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('72', '7', '2', 'admin.kgu', '메뉴관리', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('73', '7', '3', 'admin.kgu', '로그확인', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('74', '7', '4', 'admin.kgu', '엑셀관리', '11', '0');
 
 CREATE TABLE usertype(
     `type_name` varchar(45) NOT NULL,

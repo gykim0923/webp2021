@@ -67,6 +67,9 @@
                         <c:when test="${jsp == '\"admin_user\"'}">
                             <%@include file="/WEB-INF/jsp/page/admin/admin_user.jsp" %>
                         </c:when>
+                        <c:when test="${jsp == '\"admin_menu\"'}">
+                            <%@include file="/WEB-INF/jsp/page/admin/admin_menu.jsp" %>
+                        </c:when>
                         <c:when test="${jsp == '\"admin_excel\"'}">
                             <%@include file="/WEB-INF/jsp/page/admin/admin_excel.jsp" %>
                         </c:when>

@@ -32,13 +32,19 @@ public class AdminAction extends CustomAction {
                 return "RequestDispatcher:jsp/page/page.jsp";
             }
             else if(num.equals("72")){
-                request.setAttribute("jsp", gson.toJson("admin_excel")); //admin_excel.jsp
-                request.setAttribute("getAllUser", gson.toJson(UserDAO.getInstance().getAllUser()));
+                request.setAttribute("jsp", gson.toJson("admin_menu")); //admin_menu.jsp
+                request.setAttribute("getPageMenu", gson.toJson(HomeDAO.getInstance().getHeaderMenuPages()));
+                request.setAttribute("tabmenulist", gson.toJson(HomeDAO.getInstance().getHeaderMenuTabs()));
                 return "RequestDispatcher:jsp/page/page.jsp";
             }
             else if(num.equals("73")){
                 request.setAttribute("jsp", gson.toJson("admin_log")); //admin_log.jsp
                 request.setAttribute("getAllLog",gson.toJson(LogDAO.getInstance().getAllLog()));
+                return "RequestDispatcher:jsp/page/page.jsp";
+            }
+            else if(num.equals("74")){
+                request.setAttribute("jsp", gson.toJson("admin_excel")); //admin_excel.jsp
+                request.setAttribute("getAllUser", gson.toJson(UserDAO.getInstance().getAllUser()));
                 return "RequestDispatcher:jsp/page/page.jsp";
             }
             else {
