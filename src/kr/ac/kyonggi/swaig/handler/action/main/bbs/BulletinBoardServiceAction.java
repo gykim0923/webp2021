@@ -40,9 +40,6 @@ public class BulletinBoardServiceAction extends CustomAction {
         if (num.equals("20")||num.equals("21")||num.equals("22")||num.equals("23")||num.equals("31")||num.equals("52")){
             bbs_type="notice";
         }
-        else if (num.equals("30")){
-            bbs_type="application";
-        }
         else if (num.equals("53")){
             bbs_type="free";
         }

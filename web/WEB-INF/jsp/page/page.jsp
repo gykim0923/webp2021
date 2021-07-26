@@ -59,6 +59,10 @@
                         <c:when test="${jsp == '\"bbs_list\"' || jsp == '\"bbs_view\"' || jsp == '\"bbs_write\"' || jsp == '\"bbs_modify\"'}">
                             <%@include file="/WEB-INF/jsp/page/bbs/bbs.jsp" %>
                         </c:when>
+                        <%--            registerBbs--%>
+                        <c:when test="${jsp == '\"reg_list\"' || jsp == '\"reg_view\"' || jsp == '\"reg_write\"' || jsp == '\"reg_modify\"'}">
+                            <%@include file="/WEB-INF/jsp/page/register/register.jsp" %>
+                        </c:when>
 
                         <%--            admin--%>
                         <c:when test="${jsp == '\"admin_main\"'}">

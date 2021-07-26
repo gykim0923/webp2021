@@ -46,7 +46,7 @@ INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,mi
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('22', '2', '2', 'bbs.kgu', '수업공지', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('23', '2', '3', 'bbs.kgu', '취업공지', '11', '0');
 
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('30', '3', '0', 'bbs.kgu', '신청하기', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('30', '3', '0', 'reg.kgu', '신청하기', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('31', '3', '1', 'bbs.kgu', '학과자료실', '11', '0');
 
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('50', '5', '0', 'information.kgu', '전공소개',  '11',  '0');
@@ -485,14 +485,16 @@ CREATE TABLE bbs_reg(
                         `id` INT(10) NOT NULL AUTO_INCREMENT,
                         `writer_id` VARCHAR(50) NOT NULL,
                         `writer_name` VARCHAR(50) NOT NULL,
-                        `title` VARCHAR(200) NOT NULL DEFAULT '제목없음',
+                        `title` VARCHAR(200) DEFAULT '제목없음',
                         `views` INT(10) DEFAULT 0,
-                        `last_modified` DATE NOT NULL,
+                        `last_modified` DATETIME NOT NULL ,
                         `text` TEXT NOT NULL,
                         `starting_date` DATETIME NOT NULL ,
                         `closing_date` DATETIME NOT NULL ,
-                        `level` VARCHAR(50) ,
-                        `for_who` INT(10),
-                        `applicant_count` INT(10),
+                        `level` VARCHAR(50) NOT NULL ,
+                        `for_who` VARCHAR(100) NOT NULL ,
+                        `applicant_count` INT(10) DEFAULT 0,
                         PRIMARY KEY(`id`)
 );
+
+INSERT INTO bbs_reg(id,writer_id,writer_name,title,last_modified,text,starting_date,closing_date,level,for_who) VALUE (1,'admin','관리자','test','2021-07-05','testtest','2021-07-05','2021-08-05',0,'관리자');
