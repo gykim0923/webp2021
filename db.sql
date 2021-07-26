@@ -439,3 +439,44 @@ CREATE TABLE log(
     `log_type` VARCHAR(50) NOT NULL ,
     PRIMARY KEY (`id`)
 );
+
+CREATE TABLE bbs_reg_answer(
+
+    `id` INT Auto_Increment,
+    `bbs_id` INT(10) NOT NULL,
+    `question_num` INT(10) NOT null,
+    `answer` varchar(200) not null,
+    `writer_name` varchar(100) not null,
+    `writer_id` varchar(100) not null,
+    `writer_grade` varchar(100) not null,
+    `writer_type` varchar(100) not null,
+    `writer_perId` varchar(100) null,
+    PRIMARY KEY (`id`)
+
+);
+
+CREATE TABLE bbs_reg_answerFile(
+    `id` INT Auto_Increment,
+    `bbs_id` INT(10) NOT NULL,
+    `original_FileName` varchar(300) not null,
+    `real_FileName` varchar(300) not null,
+    `writer_id` varchar(100) not null,
+    PRIMARY KEY(`id`)
+);
+
+CREATE TABLE bbs_regQuestion(
+    `id` INT Auto_Increment,
+    `bbs_id` INT(10) NOT NULL,
+    `question_num` int(10) not null,
+    `question_content` varchar(600) not null,
+    `question_type` TINYINT(3) NOT NULL,
+    PRIMARY KEY (`id`);
+);
+
+CREATE TABLE bbs_reg_WriterFile(
+    `id` INT Auto_Increment,
+    `bbs_id` Int(10) not null,
+    `original_FileName` varchar(200) not null,
+    `real_FileName` varchar(200) not null,
+    PRIMARY KEY (`id`)
+);
