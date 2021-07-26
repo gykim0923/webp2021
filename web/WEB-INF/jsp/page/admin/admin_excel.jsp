@@ -15,19 +15,19 @@
         <div class="album py-5 bg-light">
             <div class="container">
                 <label><h2><strong>사용자 관리</strong></h2></label>
-                <fieldset>
-                    <div class="col-xs-3">수정 필드(일괄 수정)</div>
-                    <label class="checkbox-inline"><input type="checkbox"
-                                                          name="modify" value="type">구분</label> <label
-                        class="checkbox-inline"><input type="checkbox"
-                                                       name="modify" value="grade">학년</label> <label
-                        class="checkbox-inline"><input type="checkbox"
-                                                       name="modify" value="per_id">학번</label> <label
-                        class="checkbox-inline"><input type="checkbox"
-                                                       name="modify" value="major">학과</label> <label
-                        class="checkbox-inline"><input type="checkbox"
-                                                       name="modify" value="state">학적상태</label>
-                </fieldset>
+<%--                <fieldset>--%>
+<%--                    <div class="col-xs-3">수정 필드(일괄 수정)</div>--%>
+<%--                    <label class="checkbox-inline"><input type="checkbox"--%>
+<%--                                                          name="modify" value="type">구분</label> <label--%>
+<%--                        class="checkbox-inline"><input type="checkbox"--%>
+<%--                                                       name="modify" value="grade">학년</label> <label--%>
+<%--                        class="checkbox-inline"><input type="checkbox"--%>
+<%--                                                       name="modify" value="per_id">학번</label> <label--%>
+<%--                        class="checkbox-inline"><input type="checkbox"--%>
+<%--                                                       name="modify" value="major">학과</label> <label--%>
+<%--                        class="checkbox-inline"><input type="checkbox"--%>
+<%--                                                       name="modify" value="state">학적상태</label>--%>
+<%--                </fieldset>--%>
                 <table class="boardtable" id="table" data-toggle="table"
                        data-pagination="true"
                        data-toolbar="#toolbar" data-search="true"
