@@ -150,8 +150,9 @@
         var user =<%=user%>;
         var type =<%=type%>;
         var it = $('#user');
-        if(user == null){ //Geust
-            var text = '<div ><a href="loginPage.kgu" title="로그인" class="text-white">LOGIN</a></div>';
+        if(user == null){ //Guest
+            var text = '<div><a href="loginPage_v2.kgu" title="로그인" class="text-white">LOGIN</a></div>';
+            text += '<div><a href="loginPage.kgu" title="로그인" class="text-white">LOGIN(OLD)</a></div>';
         }
         else{ //로그인 시
             var text = '<div>안녕하세요. ' + user.name + ' ('+type.for_header+')님. ';
@@ -162,10 +163,20 @@
             else{
                 text +=' <a href="mypage.kgu?major='+major+'&&num=60" class="text-white">마이페이지</a> ';
             }
-            text += '  <a href="logout.kgu" class="text-white" title=LOGOUT>LOGOUT</a></div>';
+            text +='<a href="#" onclick="signOut();">Sign out</a>'
+                +'  <a href="logout.kgu" class="text-white" title=LOGOUT>LOGOUT(OLD)</a></div>';
         }
         it.append(text);
     }
 
 
+</script>
+
+<script>
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+        });
+    }
 </script>

@@ -104,6 +104,27 @@ public class UserDAO {
             return null;
     }
 
+    public UserDTO getGoogleUser(String google_id){
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn,"SELECT * FROM user WHERE google_id = ?;", new MapListHandler(), google_id);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<UserDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<UserDTO>>() {}.getType());
+        if(selected.size()>0) {
+            return selected.get(0);
+        }
+        else
+            return null;
+    }
+
+
     public ArrayList<UserDTO> getAllUser() {
         List<Map<String, Object>> listOfMaps = null;
         Connection conn = Config.getInstance().sqlLogin();

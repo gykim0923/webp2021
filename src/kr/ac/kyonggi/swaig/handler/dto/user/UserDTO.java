@@ -3,9 +3,25 @@ package kr.ac.kyonggi.swaig.handler.dto.user;
 import java.util.Date;
 
 public class UserDTO {
-    public String id,password,name,birth,email,phone,type,hope_type;
+    public String google_id, google_img, id,password,name,birth,email,phone,type,hope_type;
     public String major, sub_major, per_id, grade, state, gender;
     public Date last_login, reg_date, log_date;
+
+    public String getGoogle_id() {
+        return google_id;
+    }
+
+    public void setGoogle_id(String google_id) {
+        this.google_id = google_id;
+    }
+
+    public String getGoogle_img() {
+        return google_img;
+    }
+
+    public void setGoogle_img(String google_img) {
+        this.google_img = google_img;
+    }
 
     public String getSub_major() {
         return sub_major;

@@ -82,6 +82,8 @@ INSERT INTO usertype(type_name,class_type,board_level,for_header) VALUE('기타'
 
 
 CREATE TABLE user(
+	`google_id` VARCHAR(100) DEFAULT NULL,
+	`google_img` VARCHAR(100) DEFAULT NULL,
     `id` VARCHAR(45) NOT NULL,
     `password` VARCHAR(100) NOT NULL DEFAULT '-',
     `name` VARCHAR(45) NOT NULL DEFAULT '-',
@@ -101,7 +103,7 @@ CREATE TABLE user(
     PRIMARY KEY (`id`)
 );
 
-INSERT INTO user(id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state) VALUE('201713919', '6ab7108f5c8ab980a584f1e2b98b2991b087af4907864575e6905edf2b759ae8', '윤주현', '남', '1996-03-25', '학부생', 'test1@test.com','010-0000-0001','2021-07-05','-','2021-07-05','main','201713919','-','-');
+INSERT INTO user(google_id,id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state) VALUE('100350954658560464139','201713919', '6ab7108f5c8ab980a584f1e2b98b2991b087af4907864575e6905edf2b759ae8', '윤주현', '남', '1996-03-25', '학부생', 'gabrielyoon7@gmail.com','010-0000-0001','2021-07-05','-','2021-07-05','main','201713919','-','-');
 INSERT INTO user(id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state) VALUE('admin', '112b16f5f7b04cecda94c345900574686e5ed35803e2b7e9702fa4b46810a2d4', '관리자테스트', '-', '2021-01-01', '홈페이지관리자', 'admin@kyonggi.ac.kr','010-0000-0000','2021-07-05','-','2021-07-05','main','-','-','-');
 INSERT INTO user(id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state) VALUE('professor', '1f9d870484301db50342aa184bd9f3f891195090030ad56cbbc9d0f0b996a567', '교수테스트', '-', '2021-01-01', '교수', 'professor@kyonggi.ac.kr','010-0000-0000','2021-07-05','-','2021-07-05','main','-','-','-');
 INSERT INTO user(id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state) VALUE('202100000', '9f50515645763c0b8704f8114c81da0fddd2b4bdc9240de158e905884d8cb840', '학생테스트', '-', '2021-01-01', '학부생', 'student@test.com','010-0000-0001','2021-07-05','-','2021-07-05','main','201713919','-','-');
