@@ -62,7 +62,7 @@
 
     function makeWriteButton(){
         var button =$('#write_button');
-        if(num == "21" || num == "22" || num == "23") {
+        if(num == "21" || num == "22" || num == "23" || num == "30" || num=="31") {
             if (type.board_level == 0 || type.board_level == 1) {
                 var text = '<a href = "bbs.kgu?major=' + major + '&&num=' + num + '&&mode=write"><div class="btn btn-secondary">글쓰기</div></a>';
                 button.append(text);

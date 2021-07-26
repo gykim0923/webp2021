@@ -9,19 +9,19 @@
 <%
   String getBBS = (String) request.getAttribute("getBBS");
   String getComment = (String) request.getAttribute("getComments");
-  String userForBbs_view = (String)session.getAttribute("user");
 %>
 <div>
   <div class="h2" id="view_title"></div>
   <hr>
   <div id="view_content"></div>
   <hr>
-  <c:if test="${user.type != null}">
+  <c:if test="${bbs_type =='\"free\"' && user.type != null}">
     <div id="view_likes">
       <i class="bi bi-hand-thumbs-up" onclick="liked()"></i>
     </div>
   </c:if>
 
+<c:if test="${bbs_type !='\"application\"'}">
 <%--    댓글리스트--%>
     <div>
       <table class="commnetstable" id="table1"  data-toggle="table"
@@ -57,6 +57,7 @@
     <div id="delete_button"></div>
   </div>
 </div>
+</c:if>
 
   <!-- Modal -->
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -95,7 +96,7 @@
   var num = <%=num%>;
   var id = <%=id%>;
   var type = <%=type%>;
-  var user = <%=userForBbs_view%>;
+  var user = <%=user%>;
   function callSetupCommentView(){
       $('#table1').bootstrapTable('load',tableData());
       // $('#table1').bootstrapTable('append',data());

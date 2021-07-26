@@ -45,7 +45,9 @@
 <div class="file-loading">
     <input id="kv-explorer" type="file" multiple>
 </div>
-
+<c:if test="${bbs_type =='\"application\"'}">
+    <div>신청하기 폼은 여기에서 작성</div>
+</c:if>
 
 <script>
     var major = <%=major%>;

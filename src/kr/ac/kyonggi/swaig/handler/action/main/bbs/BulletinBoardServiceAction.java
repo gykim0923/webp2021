@@ -38,12 +38,15 @@ public class BulletinBoardServiceAction extends CustomAction {
         * */
         String bbs_type = ""; // (common/free/application) 중 하나
         if (num.equals("20")||num.equals("21")||num.equals("22")||num.equals("23")||num.equals("31")){
+            System.out.println("notice");
             bbs_type="notice";
         }
         else if (num.equals("30")){
+            System.out.println("application");
             bbs_type="application";
         }
         else if (num.equals("53")){
+            System.out.println("free");
             bbs_type="free";
         }
         else { //num이 없는 경우 오류 메시지 출력용
