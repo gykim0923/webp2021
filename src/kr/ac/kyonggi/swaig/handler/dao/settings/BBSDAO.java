@@ -174,6 +174,38 @@ public class BBSDAO {
         }
         return "success";
     }
+    public String deleteComment(String data) {
+        String arr[] = data.split("-/-/-");
+//        String id = arr[0];
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"DELETE FROM `comment` WHERE `id`=?;", arr[0]);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
+    }
+
+    public String modifyComment(String data) {
+        String arr[] = data.split("-/-/-"); // modifiedComment+'-/-/-'+commentId;
+        String comment = arr[0];
+        String commentDate = arr[1];
+        String commentId = arr[2];
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"UPDATE comment SET comment=?, comment_date= ? WHERE id=?;",comment, commentDate,commentId);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
+    }
+
 
     public String insertComment(String data) {
         String arr[] = data.split("-/-/-"); //user_id+"-/-/-"+user_name+"-/-/-"+comment+"-/-/-"+comment_date+"-/-/-"+id

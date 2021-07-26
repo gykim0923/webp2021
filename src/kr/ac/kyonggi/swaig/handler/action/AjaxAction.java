@@ -209,6 +209,14 @@ public class AjaxAction implements Action {
                 if(user!=null)
                     result=BBSDAO.getInstance().insertComment(data);
                 break;
+            case "modifyComment":
+                if(user!=null)
+                    result=BBSDAO.getInstance().modifyComment(data);
+                break;
+            case "deleteComment":
+                if(user!=null)
+                    result=BBSDAO.getInstance().deleteComment(data);
+                break;
             case "likeBoard":
                 data = data.concat("-/-/-" + user.id);
                 result = BBSDAO.getInstance().likeBoards(data);

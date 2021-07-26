@@ -33,6 +33,7 @@
           <th data-field="writer_name" data-sortable="true">이름</th>
           <th data-field="comment" data-sortable="true">댓글</th>
           <th data-field="comment_date" data-sortable="true">등록일자</th>
+          <th data-field="action">설정</th>
         </tr>
         </thead>
       </table>
@@ -57,6 +58,30 @@
   </div>
 </div>
 
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" id="myModalHeader">
+          <%--                    <h5 class="modal-title" id="staticBackdropLabel">수정하기</h5>--%>
+          <%--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
+        </div>
+        <div class="modal-body" id = "myModalBody"></div>
+        <div class="modal-footer" id="myModalFooter">
+          <%--                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>--%>
+          <%--                        <button type="button" class="btn btn-primary">추가하기</button>--%>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    var header = $('#myModalHeader');
+    var body = $('#myModalBody');
+    var footer = $('#myModalFooter');
+
+  </script>
 <script>
 
   $(document).ready(function(){
@@ -113,12 +138,22 @@
       var rows = [];
       if(commentsList != null){
           for(var i=0;i< commentsList.length;i++){
-              var comment = commentsList[i];
-              rows.push({
-                  writer_name: comment.writer_name,
-                  comment: comment.comment,
-                  comment_date: comment.comment_date,
-              });
+            var comment = commentsList[i];
+            var text='';
+            if(user!=null){
+              if(user.type =='홈페이지관리자'){
+                text = '<button class="btn btn-dark mx-1" type="button" onclick="deleteComment('+i+')">삭제</button>'
+              }
+              if(user.id == commentsList[i].writer_id){
+                text ='<button class="btn btn-dark mx-1" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyCommentModal('+i+')">수정</button><button class="btn btn-dark mx-1" type="button"  onclick="deleteComment('+i+')">삭제</button>'
+              }
+            }
+            rows.push({
+                writer_name: comment.writer_name,
+                comment: comment.comment,
+                comment_date: comment.comment_date,
+                action : text
+            });
           }
       }
       return rows;
@@ -132,6 +167,69 @@
     var content = $('#view_content');
     content.append(getBBS.text);
   }
+
+  function deleteComment(i){
+    var commentsList = <%=getComment%>;
+    var commentId = commentsList[i].id;
+    var data = commentId;
+    var check = alert("댓글을 삭제하시겠습니까?");
+    if (check){
+      $.ajax({
+        url: "ajax.kgu", //AjaxAction에서
+        type: "post", //post 방식으로
+        data: {
+          req: "deleteComment", //이 메소드를 찾아서
+          data: data //이 데이터를 파라미터로 넘겨줍니다.
+        },
+        success: function (data) { //성공 시
+          if (data == 'success')
+              location.reload();
+        }
+      })
+    }
+
+  }
+
+  function modifyComment(i){
+    var commentsList = <%=getComment%>;
+    var commentId = commentsList[i].id;
+    var comment_date = formatDate(new Date());
+    var modifiedComment = $('#modifyComment').val();
+    var data = modifiedComment+'-/-/-'+comment_date+'-/-/-'+commentId;
+      $.ajax({
+        url: "ajax.kgu", //AjaxAction에서
+        type: "post", //post 방식으로
+        data: {
+          req: "modifyComment", //이 메소드를 찾아서
+          data: data //이 데이터를 파라미터로 넘겨줍니다.
+        },
+        success: function (data) { //성공 시
+          if (data == 'success') {
+            location.reload();
+          }
+        }
+      })
+  }
+
+
+  function makeModifyCommentModal(i){
+    var commentsList = <%=getComment%>;
+    var modal_header = '';
+    modal_header += '<h5 class="modal-title" id="staticBackdropLabel">수정하기</h5>';
+    modal_header += '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
+
+    var modal_body = '';
+    modal_body += '<div>댓글</div><input type="text" class="form-control" id="modifyComment" name="new_table" value="'+commentsList[i].comment+'" placeholder="comment">';
+
+    var modal_footer = '';
+    modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';
+    modal_footer += '<button type="button" class="btn btn-secondary pull-right" data-dismiss="modal" aria-label="Close" onclick="modifyComment('+i+')">완료</button>';
+
+    header.html(modal_header);
+    body.html(modal_body);
+    footer.html(modal_footer);
+  }
+
 
   function makeViewButtons() {
     var list_button = $('#list_button');
