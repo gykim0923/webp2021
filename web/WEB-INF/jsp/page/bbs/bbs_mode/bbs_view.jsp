@@ -175,10 +175,8 @@
 
   function deleteComment(i){
     var commentsList = <%=getComment%>;
-    var commentId = commentsList[i].id;
-    var data = commentId;
-    var check = alert("댓글을 삭제하시겠습니까?");
-    if (check){
+    var data = commentsList[i].id;
+    alert("댓글을 삭제하시겠습니까?");
       $.ajax({
         url: "ajax.kgu", //AjaxAction에서
         type: "post", //post 방식으로
@@ -191,8 +189,6 @@
               location.reload();
         }
       })
-    }
-
   }
 
   function modifyComment(i){

@@ -175,12 +175,11 @@ public class BBSDAO {
         return "success";
     }
     public String deleteComment(String data) {
-        String arr[] = data.split("-/-/-");
-//        String id = arr[0];
+        String id = data;
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn,"DELETE FROM `comment` WHERE `id`=?;", arr[0]);
+            queryRunner.update(conn,"DELETE FROM `comment` WHERE `id`=?;", id);
         } catch (SQLException se) {
             se.printStackTrace();
         } finally {
