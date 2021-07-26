@@ -19,6 +19,7 @@
                    data-page-list="[10]">
                 <thead>
                 <tr>
+                    <th data-field="state" data-checkbox="true"></th>
                     <th data-field="action">설정</th>
                     <th data-field="id" data-sortable="true">id</th>
                     <th data-field="name" data-sortable="true">name</th>
@@ -31,6 +32,21 @@
                 </tr>
                 </thead>
             </table>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="button" class="btn btn-secondary" onclick="modifyType()" data-bs-toggle="modal" data-bs-target="#modifyTypeModal">권한 수정</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 회원 권한 수정 Modal -->
+<div class="modal fade" id="modifyTypeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modifyTypeLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" id="modifyTypeHeader"></div>
+            <div class="modal-body" id = "modifyTypeBody"></div>
+            <div class="modal-footer" id="modifyTypeFooter">
+            </div>
         </div>
     </div>
 </div>
@@ -119,6 +135,68 @@
                         alert('SERVER ERROR, Please try again later');
                 }
             })
+        }
+    }
+
+    var $table = $('#table1');
+    function modifyType(){
+        var ids=$.map($table.bootstrapTable('getSelections'),function(row){
+            return row.name + '(' + row.id + ')';
+        });
+        var types=$.map($table.bootstrapTable('getSelections'),function(row){
+            return row.type;
+        });
+        if(types != null){
+            var type=types[0];
+            var size = types.length;
+            for(var i = 0; i < size; i++){
+                if(type != types[i]){
+                    type = '여러 권한이 섞여있습니다.';
+                    break;
+                }
+            }
+            $('#modifyTypeHeader').html('<h5 class="modal-title" id="modifyTypeLabel">수정하기</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>');
+            $('#modifyTypeBody').html('<div class="form-group"><label for="InputType" style="display :inline-block">선택된 ID</label></div>'+
+                '<div class="form-group mb-3">'+ids+' [총'+ids.length+'명]</div>'+
+                '<div class="input-group mb-3"><span class="input-group-text" id=InputType">수정전 권한</span><input type="text" class="form-control" value="'+type+'" aria-label="Username" aria-describedby="basic-addon1" readonly></div>'+
+                '<div class="input-group"><label class="input-group-text" for="modifyType">수정후 권한</label><select class="form-select" id="modifyType"><option selected>'+types[0]+
+                '</option><option value="조교">조교</option><option value="교수">교수</option><option value="학부생">학부생</option></select></div>'+
+                '<div class="col-xs-13 text-right"></div>');
+            $('#modifyTypeFooter').html('<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button><button class="btn btn-default" onclick="updateType()">권한 수정</button>')
+        }
+    }
+
+    function updateType(){
+        var type = $('#modifyType').val();
+        var ids=$.map($table.bootstrapTable('getSelections'),function(row){
+            return row.id;
+        });
+
+        var id='';
+        for(var i=0;i<ids.length;i++){
+            id +=ids[i]+"-/-/-"
+        }
+        var modify= type+"-/-/-"+id;
+
+        var check = confirm("사용자 권한을 "+modify+"으로 수정하시겠습니까?");
+        if(check){
+            $.ajax({
+                url:"ajax.kgu",
+                type:"post",
+                data : {
+                    req : "modifyUserType",
+                    data : modify
+                },
+                success:function(data){
+                    if(data=='success'){
+                        alert("수정되었습니다");
+                        location.reload();
+                    }
+                    else{
+                        alert('권한이 부족합니다.');
+                    }
+                }
+            });
         }
     }
 </script>

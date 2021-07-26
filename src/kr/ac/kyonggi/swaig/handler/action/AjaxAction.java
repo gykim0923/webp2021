@@ -140,6 +140,10 @@ public class AjaxAction implements Action {
                 if (type.board_level == 0)
                     result = ProfessorDAO.getInstance().deleteProfessor(data);
                 break;
+            case "modifyUserType":      //권한 수정
+                if (type.board_level == 0)
+                    result = UserDAO.getInstance().modifyUserType(data);
+                break;
 
             case "addSchedule":
                 if (type.board_level == 0)

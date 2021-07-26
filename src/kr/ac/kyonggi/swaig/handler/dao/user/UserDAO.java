@@ -481,4 +481,20 @@ public class UserDAO {
         }
         return Integer.toString(modifymap.size());
     }
+
+    public String modifyUserType(String data) {
+        String arr[] = data.split("-/-/-"); // type+'-/-/-'+id(+'-/-/-'+id 여러개)
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            for (int i = 1; i < arr.length; i++){
+                queryRunner.update(conn,"UPDATE user SET type=?, hope_type=? WHERE id=?;", arr[0], "-", arr[i]);
+            }
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
+    }
 }
