@@ -65,6 +65,10 @@ public class BulletinBoardServiceAction extends CustomAction {
                 String [] numbers = {"21","22","23"}; //여기에 들어있는 num들의 DB를 모두 불러와서 반환한다.
                 request.setAttribute("getBBSList", gson.toJson(BBSDAO.getInstance().getAllBBSList(numbers)));
             }
+            else if(num.equals("52")||num.equals("53")){
+                String major = request.getParameter("major");
+                request.setAttribute("getBBSList", gson.toJson(BBSDAO.getInstance().getMajorBBSList(major, num)));
+            }
             else{ // 한개의 게시판만 요청 시
                 request.setAttribute("getBBSList", gson.toJson(BBSDAO.getInstance().getBBSList(num)));
             }

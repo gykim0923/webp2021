@@ -75,6 +75,27 @@ public class BBSDAO {
             return null;
     }
 
+    public ArrayList<BBSDTO> getMajorBBSList(String major, String num) {
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn,"SELECT * FROM bbs WHERE major=? AND category=? ORDER BY id DESC ;", new MapListHandler(), major,num);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<BBSDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<BBSDTO>>() {}.getType());
+        if(selected.size()>0) {
+            return selected;
+        }
+        else
+            return null;
+    }
+
+
     public BBSDTO getBBS(String id) {
 
         List<Map<String, Object>> listOfMaps = null;
