@@ -32,8 +32,6 @@
 
     <!-- content에 자신의 OAuth2.0 클라이언트ID를 넣습니다. -->
     <meta name ="google-signin-client_id" content="961716324050-r6i9dib682nsqjotloum1igkvf1jm0og.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
-
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0">
 
     <%--    Bootstrap    --%>
@@ -185,10 +183,12 @@
         });
     }
 
+</script>
+<script>
     function onLoad() {
         gapi.load('auth2', function() {
             gapi.auth2.init();
         });
     }
-
 </script>
+<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
