@@ -40,6 +40,7 @@ public class AjaxAction implements Action {
         UserTypeDTO type = gson.fromJson((String)session.getAttribute("type"), UserTypeDTO.class);
         String result=null;
         String address = null;
+        String num= request.getParameter("num");
         switch(req) {
             case "deleteExampleData":   //테스트용
                 result = TutorialDAO.getInstance().deleteExampleData(data); //삭제할 oid를 넘겨줍니다.
@@ -253,6 +254,16 @@ public class AjaxAction implements Action {
                     String path2 = request.getSession().getServletContext().getRealPath("/") + "excel";
                     File deleteFile2 = new File(path2, address);
                     deleteFile2.delete();
+                }
+                break;
+            case "getonemenu":
+                result = HomeDAO.getInstance().getOneMenu(data);
+                break;
+            case "modify_menu":   //직접 권한 확인
+                if (type.board_level == 0) {
+                    result = HomeDAO.getInstance().modifyMenu(data);
+                    session.setAttribute("menulist", gson.toJson(HomeDAO.getInstance().getHeaderMenuPages()));
+                    session.setAttribute("headermenulist", gson.toJson(HomeDAO.getInstance().getHeaderMenuTabs()));
                 }
                 break;
         }

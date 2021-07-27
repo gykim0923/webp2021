@@ -194,4 +194,46 @@ public class HomeDAO {
         ArrayList<FavoriteMenuDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<FavoriteMenuDTO>>() {}.getType());
         return selectedList;
     }
+    public String getOneMenu(String id) {
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM `menu_pages` where `id` = ?;", new MapListHandler(), Integer.parseInt(id));
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<MenuDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<MenuDTO>>() {}.getType());
+        return gson.toJson(selectedList.get(0));
+    }
+
+    public String modifyMenu(String data) {                           //Static_Page 수정
+
+        return "";
+    }
+
+//    public void sortedMenu(String id) {                     //메뉴들이 공백없이 위로정렬되게 하는 메소드
+//        List<Map<String, Object>> listOfMaps = null;
+//        Connection conn = Config.getInstance().sqlLogin();
+//        Gson gson= new Gson();
+//        try {
+//            QueryRunner queryRunner = new QueryRunner();
+//            listOfMaps=queryRunner.query(conn,"SELECT * FROM swaig.menu_pages WHERE `tab_id` = ?;",new MapListHandler(),id);
+//            ArrayList<MenuDTO> sortedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<MenuDTO>>() {}.getType());
+//            for(int i=0;i<sortedList.size();i++) {
+//                queryRunner.update(conn,"UPDATE `menu_pages` WHERE page_id=?",i+1,sortedList.get(i).page_id);
+//            }
+//            listOfMaps=queryRunner.query(conn,"SELECT * FROM swaig.menu_pages WHERE `tab_id` = ?;",new MapListHandler(),id);
+//            sortedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<MenuDTO>>() {}.getType());
+//            String pathName = sortedList.get(0).path+"?num="+sortedList.get(0).tab_id+"1";
+//            queryRunner.update(conn,"UPDATE `menu_pages` SET `tab_url`=? WHERE `tab_id`=?",pathName,sortedList.get(0).tab_id);
+//        }catch(SQLException se) {
+//            se.printStackTrace();
+//        } finally {
+//            DbUtils.closeQuietly(conn);
+//        }
+//    }
 }

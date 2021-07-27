@@ -1,7 +1,7 @@
 package kr.ac.kyonggi.swaig.handler.dto.settings;
 
 public class MenuDTO {
-//	public String path;
+	//	public String path;
 //	public String page_title;
 //	public int tab_id;
 //	public boolean show_in_menus;
@@ -56,13 +56,33 @@ public class MenuDTO {
 //	public void setId(int id) {
 //		this.id = id;
 //	}
-	private String page_id;
+	public String page_id;
+
+	public String getOrderNum() {
+		return orderNum;
+	}
+
+	public void setOrderNum(String orderNum) {
+		this.orderNum = orderNum;
+	}
+
+	public String orderNum;
 	private String page_path;
 	private String page_title;
-	private String tab_id;
+	public String tab_id;
 	private String max_level;
-	private String orderNum;
+
 	private String min_level;
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public String path;
 
 	public String getPage_id() {
 		return page_id;
@@ -102,14 +122,6 @@ public class MenuDTO {
 
 	public void setMax_level(String max_level) {
 		this.max_level = max_level;
-	}
-
-	public String getOrderNum() {
-		return orderNum;
-	}
-
-	public void setOrderNum(String orderNum) {
-		this.orderNum = orderNum;
 	}
 
 	public String getMin_level() {
