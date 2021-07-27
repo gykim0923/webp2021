@@ -158,7 +158,7 @@
         var type =<%=type%>;
         var it = $('#user');
         if(user == null){ //Guest
-            var text = '<div><a href="loginPage_v2.kgu" title="로그인" class="text-white">LOGIN</a></div>';
+            var text = '<div><a href="loginPage_v2.kgu" title="로그인" class="text-white">LOGIN(Google)</a></div>';
             text += '<div><a href="loginPage.kgu" title="로그인" class="text-white">LOGIN(OLD)</a></div>';
         }
         else{ //로그인 시
@@ -169,8 +169,7 @@
             else{
                 text +=' <a href="mypage.kgu?major='+major+'&&num=60" class="text-white">마이페이지</a> ';
             }
-            text +='<a href="#" onclick="signOut();">Sign out</a>'
-                +'  <a href="logout.kgu" class="text-white" title=LOGOUT>LOGOUT(OLD)</a></div>';
+            text +='<a href="#" onclick="signOut();" class="text-white" >LOGOUT(with Google)</a>';
         }
         it.append(text);
     }
