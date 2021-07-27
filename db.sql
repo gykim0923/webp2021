@@ -494,9 +494,10 @@ CREATE TABLE bbs_reg(
                         `starting_date` DATETIME NOT NULL ,
                         `closing_date` DATETIME NOT NULL ,
                         `level` VARCHAR(50) NOT NULL ,
-                        `for_who` VARCHAR(100) NOT NULL ,
+                        `for_who` INT NOT NULL ,
                         `applicant_count` INT(10) DEFAULT 0,
                         PRIMARY KEY(`id`)
 );
 
-INSERT INTO bbs_reg(id,writer_id,writer_name,title,last_modified,text,starting_date,closing_date,level,for_who) VALUE (1,'admin','관리자','test','2021-07-05','testtest','2021-07-05','2021-08-05',0,'관리자');
+INSERT INTO bbs_reg(id,writer_id,writer_name,title,last_modified,text,starting_date,closing_date,level,for_who) VALUE (1,'admin','관리자','test','2021-07-05','testtest','2021-07-05','2021-08-05','학생',0);
+INSERT INTO bbs_reg(writer_id,writer_name,title,last_modified,text,starting_date,closing_date,level,for_who) VALUE ('admin','관리자','test','2021-07-05','test123','2021-07-05','2021-07-15','학생',1);
