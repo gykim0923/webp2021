@@ -26,34 +26,8 @@
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
     <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
 
-    <%--        암호화--%>
-    <script src="js/sha256.js"></script>
-
     <style>
-
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-        .cs_logo{
-            margin-bottom: 20px;
-        }
-        /*.btn{*/
-        /*    display: flex;*/
-        /*}*/
-        /*.btn-primary{*/
-        /*    align-items: center;*/
-        /*    text-align: center;*/
-        /*}*/
-        .font1,font2{
+        .font1, font2{
             font-family: HY견고딕;
         }
         .font2{
@@ -68,15 +42,11 @@
         .col-7{
             padding:0;
         }
-        .a{
-            height: 130px ; display: table-cell; vertical-align: middle;
-        }
     </style>
     <!-- Custom styles for this template -->
     <link href="css/login.css" rel="stylesheet">
 </head>
 <body class="text-center">
-
 <main class="form-signin">
     <div>
         <div class="row py-5">
@@ -98,16 +68,21 @@
 
         <h1 class="h3 mb-3 fw-normal">구글 통합 로그인</h1>
         <div>학교 구글 계정(kyonggi.ac.kr)으로 로그인해주세요.</div>
+        <%--        구글 로그인 버튼 --%>
         <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+<%--        <a href="#" onclick="signOut();">Sign out</a>--%>
+<%--        <script>--%>
+<%--            function signOut() {--%>
+<%--                var auth2 = gapi.auth2.getAuthInstance();--%>
+<%--                auth2.signOut().then(function () {--%>
+<%--                    console.log('User signed out.');--%>
+<%--                });--%>
+<%--            }--%>
+<%--        </script>--%>
+
         <script>
             function onSignIn(googleUser) {
-                var profile = googleUser.getBasicProfile();
-                console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-                console.log('Full Name: ' + profile.getName());
-                console.log('Given Name: ' + profile.getGivenName());
-                console.log('Family Name: ' + profile.getFamilyName());
-                console.log('Image URL: ' + profile.getImageUrl());
-                console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
                 var id_token = googleUser.getAuthResponse().id_token;
                 var xhr = new XMLHttpRequest();
                 xhr.open('POST', 'google_login.kgu');
@@ -119,26 +94,20 @@
                         window.location.href='main.kgu';
                     }
                     else if(xhr.responseText=='success_but_wrong_email'){
-                        alert('구글 로그인에 성공했지만, DB의 이메일과 달라 로그인을 불허합니다.');
+                        alert('DB에 계정이 존재하지만, 이메일 변경이 감지되어 로그인을 불허합니다.');
                     }
                     else if (xhr.responseText=='register'){
-                        alert('구글 로그인에 성공했지만 DB에 회원정보가 존재하지 않습니다. 회원가입으로 이동합니다.')
+                        alert('구글 로그인에 성공했지만 DB에 회원정보가 존재하지 않습니다. 회원가입으로 이동합니다.');
                         window.location.href='register_v2.kgu';
                     }
                     else if (xhr.responseText=='failure'){
-                        alert('잘못된 토큰 값을 요청하였습니다.')
+                        alert('잘못된 토큰 값을 요청하였습니다.');
                     }
                 };
                 xhr.send('idtoken=' + id_token);
-                // var status = xhr.responseText;
-                // console.log(status);
             }
         </script>
     </div>
 </main>
-
-
-
 </body>
-
 </html>

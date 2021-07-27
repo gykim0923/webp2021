@@ -29,17 +29,27 @@
 
 %>
 <head>
+
+    <!-- content에 자신의 OAuth2.0 클라이언트ID를 넣습니다. -->
+    <meta name ="google-signin-client_id" content="961716324050-r6i9dib682nsqjotloum1igkvf1jm0og.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0">
+
     <%--    Bootstrap    --%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
     <%--    jQuery    --%>
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
     <%--    Bootstrap Table    --%>
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
     <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+
     <%--    ckeditor    --%>
     <script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+
     <%--    icon    --%>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
@@ -70,9 +80,12 @@
         </div>
     </div>
 </header>
-<script> //Header Menu 제작
+
+<script>
     $(document).ready(function(){
-        makeHeaderMenu();
+        makeHeaderUserInfo(); //Header User Info 제작
+        makeHeaderTitle(); //Header Title 제작
+        makeHeaderMenu(); //Header Menu 제작
     })
 
     function makeHeaderMenu(){
@@ -116,8 +129,8 @@
         list.append(text);
     }
 
-</script>
-<script> //헤더 제어
+
+    //헤더 제어
     function makeHeaderMajorBBS(i){
         var menuPageList = <%=menuPageList%>;
         var majorAllInfo = <%=majorAllInfo%>;
@@ -135,10 +148,6 @@
         list.html(text);
     }
 
-    $(document).ready(function(){
-        makeHeaderUserInfo();
-        makeHeaderTitle();
-    })
     function makeHeaderTitle(){
         var majorAllInfo =<%=majorAllInfo%>;
         var title = $('#majorTitle');
@@ -158,7 +167,6 @@
             var text = '<div>안녕하세요. ' + user.name + ' ('+type.for_header+')님. ';
             if(type.for_header=='관리자'){
                 text +='<a href="admin.kgu?num=70" class="text-white"> 관리페이지 </a> '
-                    // +'<a href="tutorial.kgu?tutorial=main"> 튜토리얼 </a>';
             }
             else{
                 text +=' <a href="mypage.kgu?major='+major+'&&num=60" class="text-white">마이페이지</a> ';
@@ -169,14 +177,18 @@
         it.append(text);
     }
 
-
-</script>
-
-<script>
     function signOut() {
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
             console.log('User signed out.');
+            window.location.href='logout.kgu';
         });
     }
+
+    function onLoad() {
+        gapi.load('auth2', function() {
+            gapi.auth2.init();
+        });
+    }
+
 </script>
