@@ -8,10 +8,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    String google_id = (String)session.getAttribute("google_id");
+//    String google_id = (String)session.getAttribute("google_id");
     String google_name = (String)session.getAttribute("google_name");
     String google_email = (String)session.getAttribute("google_email");
-    String google_imageUrl = (String)session.getAttribute("google_imageUrl");
+//    String google_imageUrl = (String)session.getAttribute("google_imageUrl");
     String getAllKguMajor = (String)request.getAttribute("getAllKguMajor");
     String getAllType = (String)request.getAttribute("getAllType");
 %>
@@ -42,7 +42,7 @@
         <div class="row justify-content-md-center">
             <div class="col-lg-8">
                 <div class="row">
-                    경기인 회원가입
+                    구글 회원가입
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
                     <div class="row g-3">
 
                         <div class="col-12">
-                            <label for="name" class="form-label">이름</label>
+                            <label for="name" class="form-label">이름(반드시 한글로 작성)</label>
                             <input type="email" class="form-control" id="name" placeholder="이름을 입력해주세요" value=<%=google_name%>>
                             <div class="invalid-feedback">
                                 이름을 입력해주세요
@@ -88,13 +88,11 @@
                             <label for="gender" class="form-label">성별</label>
                             <div id="gender">
                                 <div class="form-check">
-                                    <input id="male" name="gender" type="radio" class="form-check-input" value="남"
-                                           checked required>
+                                    <input id="male" name="gender" type="radio" class="form-check-input" value="남" checked required>
                                     <label class="form-check-label" for="male">남</label>
                                 </div>
                                 <div class="form-check">
-                                    <input id="female" name="gender" type="radio" class="form-check-input" value="여"
-                                           required>
+                                    <input id="female" name="gender" type="radio" class="form-check-input" value="여" required>
                                     <label class="form-check-label" for="female">여</label>
                                 </div>
                             </div>
@@ -131,7 +129,7 @@
                         </div>
                     </div>
                     <hr class="my-4">
-                    <div class="w-100 btn btn-primary btn-lg" type="submit" onclick="LetsRegisterBig()">가입하기</div>
+                    <div class="w-100 btn btn-primary btn-lg" type="submit" onclick="LetsRegisterGoogle()">가입하기</div>
                 </div>
             </div>
         </div>
@@ -171,34 +169,8 @@
 
 <script>
     var ischeckID = 0;
-    var ischeckPassword = 0;
-    var isSafePassword = 0;
-    var pattern = [];
-    var pattern1 = '0123456789';
-    pattern2 = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    pattern3 = '!@#$%^&*()';
-    pattern.push(pattern1);
-    pattern.push(pattern2);
-    pattern.push(pattern3);
 
-    function checkPattern(password) { //
-        isSafePassword = 0;
-        var isOK1 = 0;
-        var isOK2 = 0;
-        var isOK3 = 0;
-        for (var i = 0; i < password.length; ++i) {
-            if (pattern[0].indexOf(password[i]) >= 0)
-                isOK1 = 1;
-            if (pattern[1].indexOf(password[i]) >= 0)
-                isOK2 = 1;
-            if (pattern[2].indexOf(password[i]) >= 0)
-                isOK3 = 1;
-        }
-        if (isOK1 == 1 && isOK2 == 1 && isOK3 == 1)
-            isSafePassword = 1;
-    }
-
-    function checkID() { //중북확인
+    function checkID() { //중복확인
         var id = $('#id').val();
         $.ajax({
             url: "ajax.kgu",
@@ -227,111 +199,39 @@
         })
     }
 
-    function checkPassword() {
-        checkPattern($('#pwd').val());
-        if ($('#pwd').val().length < 8 || isSafePassword != 1) {
-            ischeckPassword = 0;
-            $('#warningPwd').html('8자 이상, 영문과 숫자, 특수문자의 조합');
-            $('#warningPwd').css('color', 'red');
-            $('#warningPwd').css('font-size', '11px');
-            $('#warningPwd').css('margin-left', '10px');
-        } else if ($('#pwd').val() == $('#pwdCheck').val()) {
-            ischeckPassword = 1;
-            $('#warningPwd').html('비밀번호가 일치합니다');
-            $('#warningPwd').css('color', 'blue');
-            $('#warningPwd').css('font-size', '11px');
-            $('#warningPwd').css('margin-left', '10px');
-        } else {
-            ischeckPassword = 2;
-            $('#warningPwd').html('비밀번호가 일치하지 않습니다');
-            $('#warningPwd').css('color', 'red');
-            $('#warningPwd').css('font-size', '11px');
-            $('#warningPwd').css('margin-left', '10px');
-        }
-    }
 
-    function LetsRegisterBig() {
+    function LetsRegisterGoogle() { //여기서부터 작업
         if (ischeckID == 1) {
-            if (ischeckPassword == 1) {
-                var id = $('#id').val();
-                var password = $('#pwd').val();
-                var forsha = id + password;
-                var name = $('#name').val();
-                var gender = $('input[name=gender]:checked').val();
-                var birth = $('#birth').val();
-                var email = $('#email').val();
-                var phone = $('#phone').val();
-                var hopetype = $('#hope_type').val();
-                var major = $('#major').val();
-                var perID = id;
+            var name = $('#name').val();
+            var id = $('#id').val();
+            var email = $('#email').val();
+            var gender = $('input[name=gender]:checked').val();
+            var birth = $('#birth').val();
+            var phone = $('#phone').val();
+            var hopetype = $('#hope_type').val();
+            var major = $('#major').val();
+            var perID = id;
 
-                if (name != '' && gender != '' && birth != '' && email != '' && phone != '') {
-                    var update = id + "-/-/-" + SHA256(forsha) + "-/-/-" + name + "-/-/-" + gender + "-/-/-" + birth + "-/-/-" + hopetype + "-/-/-" +
-                        email + "-/-/-" + phone + "-/-/-" + major + "-/-/-" + perID;
-                    $.ajax({
-                        url: "ajax.kgu",
-                        type: "post",
-                        data: {
-                            req: "registerBig",
-                            data: update
-                        },
-                        success: function (data) {
-                            if (data == 'success') {
-                                alert("회원가입 성공");
-                                window.location.href = "loginPage.kgu";
+            if (name != '' && gender != '' && birth != '' && email != '' && phone != '') {
+                var update = id+"-/-/-";
+                $.ajax({
+                    url: "ajax.kgu",
+                    type: "post",
+                    data: {
+                        req: "registerBig",
+                        data: update
+                    },
+                    success: function (data) {
+                        if (data == 'success') {
+                            alert("회원가입 성공");
+                            window.location.href = "main.kgu";
 
-                            } else
-                                alert('SERVER ERROR, Please try again later');
-                        }
-                    })
-                } else {
-                    alert("빈칸을 채워주세요");
-                }
+                        } else
+                            alert('SERVER ERROR, Please try again later');
+                    }
+                })
             } else {
-                if (ischeckPassword == 0)
-                    alert("8자 이상으로 영문,숫자,특수문자를 모두 사용하여 입력해주세요.")
-                else
-                    alert("비밀번호를 일치시켜주세요.");
-            }
-        } else
-            alert("아이디 중복확인을 해주세요");
-    }
-
-    function LetsRegisterSmall() {
-        if (ischeckID == 1) {
-            if (ischeckPassword == 1) {
-                var id = $('#id').val();
-                var password = $('#pwd').val();
-                var forsha = id + password;
-                var name = $('#name').val();
-                var gender = $('input[name=gender]:checked').val();
-                var birth = $('#birth').val();
-                var email = $('#email').val();
-                var phone = $('#phone').val();
-                var hopetype = $('#hope_type').val();
-                if (name != '' && gender != '' && birth != '' && email != '' && phone != '') {
-                    var update = id + "-/-/-" + SHA256(forsha) + "-/-/-" + name + "-/-/-" + gender + "-/-/-" + birth + "-/-/-" + hopetype + "-/-/-" + email + "-/-/-" + phone;
-                    $.ajax({
-                        url: "ajax.kgu",
-                        type: "post",
-                        data: {
-                            req: "registerSmall",
-                            data: update
-                        },
-                        success: function (data) {
-                            if (data == "success") {
-                                alert("회원가입 성공");
-                                window.location.href = "loginPage.kgu";
-                            } else {
-                                alert('SERVER ERROR, Please try again later');
-                            }
-                        }
-                    })
-                } else {
-                    alert("빈칸을 채워주세요");
-                }
-            } else {
-                alert("비밀번호를 일치시켜주세요.");
+                alert("빈칸을 채워주세요");
             }
         } else
             alert("아이디 중복확인을 해주세요");
