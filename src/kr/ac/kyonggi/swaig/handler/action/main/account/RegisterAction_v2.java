@@ -16,10 +16,10 @@ public class RegisterAction_v2 implements Action {
         if(session.getAttribute("user") != null)
             return "RequestDispatcher:jsp/main/error.jsp";
         Gson gson = new Gson();
-        request.setAttribute("getAllMajor", gson.toJson(HomeDAO.getInstance().getAllMajor()));
+        request.setAttribute("getAllKguMajor", gson.toJson(HomeDAO.getInstance().getAllKguMajor()));
         request.setAttribute("getAllType", gson.toJson(UserDAO.getInstance().getAllType()));
 
-        return "RequestDispatcher:jsp/account/register.jsp";
+        return "RequestDispatcher:jsp/account/register_v2.jsp";
     }
 
 }

@@ -69,7 +69,6 @@ public class GoogleLoginAction implements Action {
                 if (it.email.equals(email)) { //조회한 id와 구글에서 보내준 이메일이 일치한다면 (이중 검사)
                     if (manager.isUsing(it.id)) { //접속중이라면
                         manager.removeSession(it.id); //접속중인 세션 제거
-                        // (구글은 어떻게 세션 제거 요청을 할 건지 검토 필요)
                     }
                     System.out.println("로그인 성공");
                     manager.setSession(request.getSession(), it.id); //세션 설정하기
@@ -79,7 +78,6 @@ public class GoogleLoginAction implements Action {
                     session.setAttribute("user", gson.toJson(it));
                     session.setAttribute("type", gson.toJson(type));
                     session.setAttribute("miss", 0);
-//                    response.sendRedirect("/"); //요청이 끝나면 메인페이지로 이동시켜줌 (깔끔한 URL 정리를 위해 이걸로 대체함)
                     return "success";
                 }
                 else {
@@ -89,7 +87,10 @@ public class GoogleLoginAction implements Action {
             }
             else {
                 System.out.println("구글 아이디는 존재하나, 서버 DB에 회원 정보가 없음. 회원가입으로 이동");
-//                response.sendRedirect("/register_v2.kgu");
+                session.setAttribute("google_id", userId);
+                session.setAttribute("google_name", name);
+                session.setAttribute("google_email", email);
+                session.setAttribute("google_imageUrl", imageUrl);
                 return "register";
             }
         }catch(Exception e) {

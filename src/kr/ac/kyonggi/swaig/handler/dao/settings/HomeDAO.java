@@ -121,6 +121,22 @@ public class HomeDAO {
         return selectedList;
     }
 
+    public ArrayList<KguMajorDTO> getAllKguMajor() {
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM `kgu_major`;", new MapListHandler());
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<KguMajorDTO> selectedList = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<KguMajorDTO>>() {}.getType());
+        return selectedList;
+    }
+
     public TextDTO getText(String major, String num) {
         List<Map<String, Object>> listOfMaps = null;
         Connection conn = Config.getInstance().sqlLogin();
