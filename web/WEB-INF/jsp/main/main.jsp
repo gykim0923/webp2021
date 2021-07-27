@@ -60,28 +60,22 @@
                 <div class=" h-100 p-5 bg-light border shadow rounded">
                     <div>
                         <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-21" type="button" role="tab" aria-controls="nav-home" aria-selected="true">21</button>
-                            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-22" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">22</button>
-                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-23" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">23</button>
+                            <button class="nav-link active" id="nav-21-tab" data-bs-toggle="tab" data-bs-target="#nav-21" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
+                            <button class="nav-link" id="nav-22-tab" data-bs-toggle="tab" data-bs-target="#nav-22" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"></button>
+                            <button class="nav-link" id="nav-23-tab" data-bs-toggle="tab" data-bs-target="#nav-23" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"></button>
                         </div>
                     </div>
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="nav-21" role="tabpanel" aria-labelledby="nav-home-tab">
-<%--                            <p>21</p>--%>
-                        </div>
-                        <div class="tab-pane fade" id="nav-22" role="tabpanel" aria-labelledby="nav-profile-tab">
-<%--                            <p>22</p>--%>
-                        </div>
-                        <div class="tab-pane fade" id="nav-23" role="tabpanel" aria-labelledby="nav-contact-tab">
-<%--                            <p>23</p>--%>
-                        </div>
+                        <div class="tab-pane fade show active" id="nav-21" role="tabpanel" aria-labelledby="nav-21-tab"></div>
+                        <div class="tab-pane fade" id="nav-22" role="tabpanel" aria-labelledby="nav-22-tab"></div>
+                        <div class="tab-pane fade" id="nav-23" role="tabpanel" aria-labelledby="nav-23-tab"></div>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg py-2" id="main2_center"  style="height : 400px;">
                 <div class=" h-100 p-5 bg-light border shadow rounded">
-                    <h2><strong>영역 2</strong></h2>
+                    <h2><strong>ㅇㅇ</strong></h2>
                     <hr>
                 </div>
             </div>
@@ -114,7 +108,8 @@
                             <th data-field="content" data-sortable="true">content</th>
                         </tr>
                         </thead>
-                    </table>                </div>
+                    </table>
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                 </div>
@@ -159,6 +154,29 @@
         notice21.append(text21);
         notice22.append(text22);
         notice23.append(text23);
+
+        var menuPageList = <%=menuPageList%>;
+        var nav21tab = $('#nav-21-tab');
+        var nav22tab = $('#nav-22-tab');
+        var nav23tab = $('#nav-23-tab');
+        var tab_name_21 = '';
+        var tab_name_22 = '';
+        var tab_name_23 = '';
+        for (var i = 0 ; i < menuPageList.length; i++){
+            if(menuPageList[i].page_id == '21'){
+                tab_name_21=menuPageList[i].page_title;
+                nav21tab.append(tab_name_21);
+            }
+            if(menuPageList[i].page_id == '22'){
+                tab_name_22=menuPageList[i].page_title;
+                nav22tab.append(tab_name_22);
+            }
+            if(menuPageList[i].page_id == '23'){
+                tab_name_23=menuPageList[i].page_title;
+                nav23tab.append(tab_name_23);
+                break;
+            }
+        }
     }
 
     function makeFavoriteMenu() {
