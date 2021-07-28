@@ -17,19 +17,11 @@
     String registerAllInfo = (String) request.getAttribute("registerAllInfo");
 %>
 <%--<html class="fontawesome-i2svg-active fontawesome-i2svg-complete">--%>
-<%--<head>--%>
-<%--    <title>Title</title>--%>
-<%--    <style>--%>
-<%--        /*.carousel-item {*/--%>
-<%--        /*    height: 32rem;*/--%>
-<%--        /*}*/--%>
-<%--    </style>--%>
-<%--</head>--%>
-<%@include file="./header.jsp"%>
+
+<%--<%@include file="./header.jsp"%>--%>
 <%--<body>--%>
 
 <%--</body>--%>
-<%--<%@include file="./footer.jsp"%>--%>
 <%--</html>--%>
 
 
@@ -49,16 +41,6 @@
             defer
     ></script>
     <script src="/js/init-alpine.js"></script>
-<%--    <link--%>
-<%--            rel="stylesheet"--%>
-<%--            href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"--%>
-<%--    />--%>
-<%--    <script--%>
-<%--            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"--%>
-<%--            defer--%>
-<%--    ></script>--%>
-<%--    <script src="/js/charts-lines.js" defer></script>--%>
-<%--    <script src="/js/charts-pie.js" defer></script>--%>
 </head>
 <body>
 <div
@@ -67,7 +49,7 @@
 >
 <%@include file="aside.jsp"%>
     <div class="flex flex-col flex-1 w-full">
-<%@include file="header_v2.jsp"%>
+        <%@include file="header_v2.jsp"%>
         <main class="h-full overflow-y-auto">
             <div class="container px-6 mx-auto grid">
 <%--                여기서 부터 main 복붙--%>
@@ -172,9 +154,12 @@
                 </main>
             </div>
         </main>
+        <%@include file="./footer.jsp"%>
     </div>
 </div>
 </body>
+
+
 </html>
 
 
