@@ -73,6 +73,36 @@ public class AjaxAction implements Action {
                     result = "fail";
                 break;
 
+            case "registerGoogle":
+//                System.out.println(data);
+                String google[] = data.split("-/-/-");
+                //id+"-/-/-"+perID+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+hopetype+"-/-/-"+phone+"-/-/-"+major;
+                String google_id = (String)session.getAttribute("google_id");;
+                String google_img = (String)session.getAttribute("google_imageUrl");;
+                String id = google[0];
+                String password = "no_password_for_google_account";
+                String name = google[2];
+                String gender= google[3];
+                String birth= google[4];
+                String email= (String)session.getAttribute("google_email");;
+                String phone= google[6];
+                String hope_type= google[5];
+                String major= google[7];
+                String per_id = google[1];
+
+                if (UserDAO.getInstance().checkID(google[0])){
+                    String new_data = google_id+"-/-/-"+google_img+"-/-/-"+id+"-/-/-"+password+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+phone+"-/-/-"+hope_type+"-/-/-"+major+"-/-/-"+per_id;
+//                    System.out.println(new_data);
+                    result = UserDAO.getInstance().registerGoogleID(new_data);
+                }
+                if (result.equals("success")) {
+                    LogDAO.getInstance().insertLog(google[0],google[2], "-", new Date(),"구글/회원가입("+google[5]+")");
+                }
+                else{
+                    result = "fail";
+                }
+                break;
+
             case "modifyText":
                 if (type.board_level != 0)
                     return "fail";

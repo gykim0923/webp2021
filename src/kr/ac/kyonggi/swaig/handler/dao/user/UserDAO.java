@@ -217,6 +217,44 @@ public class UserDAO {
             return "fail";
     }
 
+    public String registerGoogleID(String text) {
+        System.out.println(text);
+        String arr[] = text.split("-/-/-");
+//        google_id+"-/-/-"+google_img+"-/-/-"+id+"-/-/-"+password+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+phone+"-/-/-"+hope_type+"-/-/-"+major+"-/-/-"+per_id;
+        if(!checking(text))
+            return "fail";
+        boolean result = false;
+        String google_id = arr[0];
+        String google_img = arr[1];
+        String id = arr[2];
+        String password = arr[3];
+        String name = arr[4];
+        String gender = arr[5];
+        String birth = arr[6];
+        String email = arr[7];
+        String phone = arr[8];
+        String hope_type = arr[9];
+        String major = arr[10];
+        String per_id = arr[11];
+
+
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            System.out.println("dd");
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"INSERT INTO user(google_id,google_img,id,password,name,gender,birth,email,phone,hope_type,major,per_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);", google_id,google_img,id,password,name,gender,birth,email,phone,hope_type,major,per_id);
+            result = true;
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        if(result)
+            return "success";
+        else
+            return "fail";
+    }
+
     private boolean checking(String content) {
         Pattern SCRIPTS = Pattern.compile("<(no)?script[^>]*>.*?</(no)?script>", Pattern.DOTALL);
         Pattern STYLE = Pattern.compile("<style[^>]*>.*</style>", Pattern.DOTALL);
@@ -226,7 +264,7 @@ public class UserDAO {
         Pattern WHITESPACE = Pattern.compile("\\s\\s+");
         Pattern WHITE = Pattern.compile("<!--");
         Pattern ON = Pattern.compile("(on)+[a-z]*=");
-        Pattern SQL = Pattern.compile("[`';=]");
+//        Pattern SQL = Pattern.compile("[`';=]");
 
         Matcher m;
 
@@ -251,9 +289,9 @@ public class UserDAO {
         m = ON.matcher(content);
         if(m.find())
             return false;
-        m = SQL.matcher(content);
-        if(m.find())
-            return false;
+//        m = SQL.matcher(content);
+//        if(m.find())
+//            return false;
         return true;
     }
 

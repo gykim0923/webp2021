@@ -8,10 +8,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-//    String google_id = (String)session.getAttribute("google_id");
     String google_name = (String)session.getAttribute("google_name");
     String google_email = (String)session.getAttribute("google_email");
-//    String google_imageUrl = (String)session.getAttribute("google_imageUrl");
     String getAllKguMajor = (String)request.getAttribute("getAllKguMajor");
     String getAllType = (String)request.getAttribute("getAllType");
 %>
@@ -54,7 +52,7 @@
 
                         <div class="col-12">
                             <label for="name" class="form-label">이름(반드시 한글로 작성)</label>
-                            <input type="email" class="form-control" id="name" placeholder="이름을 입력해주세요" value=<%=google_name%>>
+                            <input type="name" class="form-control" id="name" placeholder="이름을 입력해주세요" value=<%=google_name%>>
                             <div class="invalid-feedback">
                                 이름을 입력해주세요
                             </div>
@@ -72,8 +70,7 @@
                             <label for="id" class="form-label">학번(교번)</label><span id="warningID"></span>
                             <div class="row align-items-md-stretch">
                                 <div class="col-10">
-                                    <input type="text" class="form-control" id="id" placeholder="학번이나 교번을 입력해주세요."
-                                           value="" required>
+                                    <input type="text" class="form-control" id="id" placeholder="학번이나 교번을 입력해주세요." value="" required>
                                 </div>
                                 <div class="col-2 text-end">
                                     <button class="btn float-right btn-primary" onclick="checkID()">중복확인</button>
@@ -150,7 +147,7 @@
         var majorList=<%=getAllKguMajor%>;
         var text = '';
         for(var i=0;i<majorList.length;i++){
-            text+='<option>'+majorList[i].campus+' '+majorList[i].college+' '+majorList[i].major+'</option>';
+            text+='<option value="'+majorList[i].major+'">'+majorList[i].campus+' '+majorList[i].college+' '+majorList[i].major+'</option>';
         }
         text+='<option>기타</option>';
         major.append(text);
@@ -204,7 +201,6 @@
         if (ischeckID == 1) {
             var name = $('#name').val();
             var id = $('#id').val();
-            var email = $('#email').val();
             var gender = $('input[name=gender]:checked').val();
             var birth = $('#birth').val();
             var phone = $('#phone').val();
@@ -212,13 +208,14 @@
             var major = $('#major').val();
             var perID = id;
 
-            if (name != '' && gender != '' && birth != '' && email != '' && phone != '') {
-                var update = id+"-/-/-";
+            if (name != '' && gender != '' && birth != '' && phone != '') {
+                var update = id+"-/-/-"+perID+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+hopetype+"-/-/-"+phone+"-/-/-"+major;
+                alert(update);
                 $.ajax({
                     url: "ajax.kgu",
                     type: "post",
                     data: {
-                        req: "registerBig",
+                        req: "registerGoogle",
                         data: update
                     },
                     success: function (data) {
