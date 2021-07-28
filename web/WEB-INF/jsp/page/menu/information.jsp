@@ -23,16 +23,19 @@
     var information = <%=information%>;
     function makeInformation() {
         var data = $('#information_content');
-        var text = '';
+        if(information!=null){
+            var text = '';
 
-        text+=information.content;
+            text+=information.content;
 
-        if(typeForInformation.for_header=='관리자'){
-            var button = $('#modify_button');
-            button.append('<button onclick="modify()">수정</button>');
+            if(typeForInformation.for_header=='관리자'){
+                var button = $('#modify_button');
+                button.append('<button onclick="modify()">수정</button>');
+            }
+
+            data.append(text);
         }
 
-        data.append(text);
     }
 
     function modify(){

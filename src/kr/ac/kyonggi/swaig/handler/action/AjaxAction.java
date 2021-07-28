@@ -303,6 +303,20 @@ public class AjaxAction implements Action {
                     session.setAttribute("headermenulist", gson.toJson(HomeDAO.getInstance().getHeaderMenuTabs()));
                 }
                 break;
+            case "insert_menu":   //직접 권한 확인
+                if (type.board_level == 0) {
+                    result = HomeDAO.getInstance().insertMenu(data);
+                    session.setAttribute("menulist", gson.toJson(HomeDAO.getInstance().getHeaderMenuPages()));
+                    session.setAttribute("headermenulist", gson.toJson(HomeDAO.getInstance().getHeaderMenuTabs()));
+                }
+                break;
+            case "insert_notice_menu":   //직접 권한 확인
+                if (type.board_level == 0) {
+                    result = HomeDAO.getInstance().insertNoticeMenu(data);
+                    session.setAttribute("menulist", gson.toJson(HomeDAO.getInstance().getHeaderMenuPages()));
+                    session.setAttribute("headermenulist", gson.toJson(HomeDAO.getInstance().getHeaderMenuTabs()));
+                }
+                break;
         }
 
         return result;
