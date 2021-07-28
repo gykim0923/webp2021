@@ -7,7 +7,7 @@ import kr.ac.kyonggi.swaig.handler.dao.settings.RegisterDAO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class registerAction extends CustomAction {
+public class RegisterAction extends CustomAction {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         super.execute(request, response);

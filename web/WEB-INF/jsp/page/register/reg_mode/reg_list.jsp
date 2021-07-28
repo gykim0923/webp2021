@@ -64,7 +64,7 @@
                 var close = new Date(reg.closing_date).getTime() + 1000*60*60*24;
                 var today = new Date().getTime();
                 var buttonText = '';
-                if(reg.writer_id == user.id){
+                if(user != null && reg.writer_id == user.id){
                     lvlText = '<a href="'+url+'">'+reg.title+'</a>';
                     can = '작성자';
                 }
