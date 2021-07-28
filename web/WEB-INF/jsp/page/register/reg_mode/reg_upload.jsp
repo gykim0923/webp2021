@@ -67,14 +67,10 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">수정하기</h5>
+                <h5 class="modal-title" id="staticBackdropLabel"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id = "myModalbody"></div>
-            <%--                        <div class="modal-footer">--%>
-            <%--                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>--%>
-            <%--                            <button type="button" class="btn btn-primary">추가하기</button>--%>
-            <%--                        </div>--%>
         </div>
     </div>
 </div>
@@ -116,6 +112,7 @@
 <script>
 
     function makeQ1Modal(){
+        $('#staticBackdropLabel').html('주관식');
         var list = $('#myModalbody');
         var text ='';
         text += '<div class="form-group"><input type="text" class="form-control" id="InputQ1" placeholder="질문을 입력해주세요"></div>';
@@ -124,6 +121,7 @@
     }
 
     function makeQ2Modal(){
+        $('#staticBackdropLabel').html('단일객관식');
         var list = $('#myModalbody');
         var text ='';
         text +='<div class="form-group"><input type="text" class="form-control" id="InputName" placeholder="질문을 입력해주세요"></div>'
@@ -134,6 +132,7 @@
     }
 
     function makeQ3Modal(){
+        $('#staticBackdropLabel').html('단중객관식');
         var list = $('#myModalbody');
         var text ='';
         text += '<div class="form-group"><input type="text" class="form-control" id="InputName" placeholder="질문을 입력해주세요"></div>';
@@ -144,6 +143,7 @@
     }
 
     function makeQ4Modal(){
+        $('#staticBackdropLabel').html('척도형');
         var list = $('#myModalbody');
         var text ='';
 
@@ -155,6 +155,7 @@
     }
 
     function makeQ5Modal(){
+        $('#staticBackdropLabel').html('파일업로드형');
         var list = $('#myModalbody');
         var text ='';
         text += '<div class="form-group"><input type="text" class="form-control" id="InputName" placeholder="어떠한 파일을 올릴지 간단한 설명을 적어주세요"></div>';
