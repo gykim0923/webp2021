@@ -43,8 +43,20 @@
         </select>
     </div>
 </div>
-<div id="selectLevelDiv">
+<div class="mb-3" id="selectLevelDiv">
     <label>신청대상</label>
+    <div class="form-check form-check-inline ms-4">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="교수">
+        <label class="form-check-label" for="inlineCheckbox1">교수</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="조교">
+        <label class="form-check-label" for="inlineCheckbox2">조교</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="학부생">
+        <label class="form-check-label" for="inlineCheckbox3">학부생</label>
+    </div>
 </div>
 
 <textarea id="regUpdateContent"></textarea>
