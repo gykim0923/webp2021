@@ -483,6 +483,7 @@ CREATE TABLE bbs_reg_WriterFile(
     PRIMARY KEY (`id`)
 );
 
+
 CREATE TABLE bbs_reg(
                         `id` INT(10) NOT NULL AUTO_INCREMENT,
                         `writer_id` VARCHAR(50) NOT NULL,

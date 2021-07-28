@@ -59,7 +59,26 @@
     </div>
 </div>
 
+
 <textarea id="regUpdateContent"></textarea>
+
+<!-- Modal /  폼 모달-->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">수정하기</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id = "myModalbody"></div>
+            <%--                        <div class="modal-footer">--%>
+            <%--                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>--%>
+            <%--                            <button type="button" class="btn btn-primary">추가하기</button>--%>
+            <%--                        </div>--%>
+        </div>
+    </div>
+</div>
+
 <%--버튼이 나와야 하는 자리--%>
 <div id="write_post" class="d-grid gap-2 d-md-flex justify-content-md-end">
     <c:choose>
@@ -81,7 +100,73 @@
 <div class="file-loading">
     <input id="kv-explorer" type="file" multiple>
 </div>
-<div>신청하기 폼은 여기에서 작성</div>
+
+<%--질문 폼 만드는 버튼 --%>
+<div class="my-2">
+    <button class="btn btn-secondary" id="q1" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ1Modal()">주관식</button>
+    <button class="btn btn-secondary" id="q2" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ2Modal()">단일객관식</button>
+    <button class="btn btn-secondary" id="q3" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ3Modal()">다중객관식</button>
+    <button class="btn btn-secondary" id="q4" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ4Modal()">척도형</button>
+    <button class="btn btn-secondary" id="q5" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ5Modal()">파일업로드형</button>
+</div>
+
+<div id="questionYouMade"></div>
+
+
+<script>
+
+    function makeQ1Modal(){
+        var list = $('#myModalbody');
+        var text ='';
+        text += '<div class="form-group"><input type="text" class="form-control" id="InputQ1" placeholder="질문을 입력해주세요"></div>';
+        text += '<div class="my-2"><button type="button" class="btn btn-secondary" onclick="">저장</button></div>'
+        list.html(text);
+    }
+
+    function makeQ2Modal(){
+        var list = $('#myModalbody');
+        var text ='';
+        text +='<div class="form-group"><input type="text" class="form-control" id="InputName" placeholder="질문을 입력해주세요"></div>'
+        text += '<div id="answers"></div>';
+        text += '<div style="width : 200px"><div class="input-group"><input type="text" class="form-control" placeholder="새로운 답변" id="newAnswer"><span class="input-group-btn"><button class="btn btn-default" type="button" onclick="makeAnswer()">추가!</button></span></div></div>';
+        text += '<div class="my-2"><button type="button" class="btn btn-secondary" onclick="">저장</button></div>'
+        list.html(text);
+    }
+
+    function makeQ3Modal(){
+        var list = $('#myModalbody');
+        var text ='';
+        text += '<div class="form-group"><input type="text" class="form-control" id="InputName" placeholder="질문을 입력해주세요"></div>';
+        text += '<div id="answers"></div>';
+        text += '<div style="width : 200px"><div class="input-group"><input type="text" class="form-control" placeholder="새로운 답변" id="newAnswer"><span class="input-group-btn"><button class="btn btn-default" type="button" onclick="makeAnswer()">추가!</button></span></div></div>';
+        text += '<div class="my-2"><button type="button" class="btn btn-secondary" onclick="">저장</button></div>'
+        list.html(text);
+    }
+
+    function makeQ4Modal(){
+        var list = $('#myModalbody');
+        var text ='';
+
+        text += '<div class="form-group"><input type="text" class="form-control" id="InputName" placeholder="질문을 입력해주세요"></div>';
+        text += '<div class="form-group" style="width : 200px"><input type="text" class="form-control" id="InputMin" placeholder="최솟값"></div>';
+        text += '<div class="form-group" style="width : 200px"><input type="text" class="form-control" id="InputMax" placeholder="최댓값"></div>';
+        text += '<div class="my-2"><button type="button" class="btn btn-secondary" onclick="">저장</button></div>'
+         list.html(text);
+    }
+
+    function makeQ5Modal(){
+        var list = $('#myModalbody');
+        var text ='';
+        text += '<div class="form-group"><input type="text" class="form-control" id="InputName" placeholder="어떠한 파일을 올릴지 간단한 설명을 적어주세요"></div>';
+        text += '<div class="my-2"><button type="button" class="btn btn-secondary" onclick="">저장</button></div>';
+        list.html(text);
+    }
+
+    function makeAnswer(){
+
+    }
+
+</script>
 
 <script>
     var major = <%=major%>;
