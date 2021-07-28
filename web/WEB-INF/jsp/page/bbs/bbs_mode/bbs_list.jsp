@@ -22,6 +22,7 @@
             <th data-field="writer_name" data-sortable="true">writer_name</th>
             <th data-field="last_modified" data-sortable="true">last_modified</th>
             <th data-field="views" data-sortable="true">views</th>
+            <th data-field="likes" data-sortable="true">추천</th>
         </tr>
         </thead>
     </table>
@@ -53,7 +54,7 @@
                     title: '<a href="'+url+'">'+bbs.title+'</a>',
                     writer_name: '<a href="'+url+'">'+bbs.writer_name+'</a>',
                     last_modified: '<a href="'+url+'">'+bbs.last_modified+'</a>',
-                    views: '<a href="'+url+'">'+bbs.views+'</a>'
+                    views: '<a href="'+url+'">'+bbs.views+'</a>',
                 });
             }
         }
@@ -62,6 +63,16 @@
 
     function makeWriteButton(){
         var button =$('#write_button');
+        var bbsnum;
+        for(var i=54; i<60; i++){
+            bbsnum=i;
+            if(num==bbsnum){
+                if (type.board_level == 0 || type.board_level == 1) {
+                    var text = '<a href = "bbs.kgu?major=' + major + '&&num=' + num + '&&mode=write"><div class="btn btn-secondary">글쓰기</div></a>';
+                    button.append(text);
+                }
+            }
+        }
         if(num == "21" || num == "22" || num == "23" || num == "30" || num=="31" || num=="52" || num=="53") {
             if (type.board_level == 0 || type.board_level == 1) {
                 var text = '<a href = "bbs.kgu?major=' + major + '&&num=' + num + '&&mode=write"><div class="btn btn-secondary">글쓰기</div></a>';

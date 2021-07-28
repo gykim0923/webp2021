@@ -9,6 +9,7 @@
 <%
     String getPageMenu = (String)request.getAttribute("getPageMenu");
     String tabmenulist = (String)request.getAttribute("tabmenulist");
+    String getAllType = (String) request.getAttribute("getAllType");
 %>
 <div>
     <div class="album py-5 bg-light">
@@ -31,12 +32,13 @@
             </table>
             <div class="col-md-11"></div>
                 <div id="inoutbtn">
-                    <a href="#insertModal" data-toggle="modal" onclick ="insertMenu()" class="btn btn-default col-md-1">추가</a>
+                    <button class="btn btn-secondary mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="insertMenu()">메뉴 추가</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -48,17 +50,19 @@
         </div>
     </div>
 </div>
-<%--<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">--%>
-<%--    <div class="modal-dialog">--%>
-<%--        <div class="modal-content">--%>
-<%--            <div class="modal-header">--%>
-<%--                <h5 class="modal-title" id="staticBackdropLabel2">메뉴 추가</h5>--%>
-<%--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
-<%--            </div>--%>
-<%--            <div class="modal-body" id = "insertModalbody1"></div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
+
+<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel2">메뉴 추가</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id = "insertModalbody"></div>
+            <div class="modal-body" id = "insertModalbody2"></div>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function(){
         callSetupTableView();
@@ -71,59 +75,6 @@
         $('#table').bootstrapTable('append',data());
         $('#table').bootstrapTable('refresh');
     }
-
-    // function insertMenu(){
-    //     var list = $('#insertModalbody1');
-    //     var a="";
-    //     a += '<div class="form-group"><span>메뉴 타입 </span><select onchange="selectType()" style="display : inline-block; width:200px;" class="form-control" name="menutype"><option value="default">선택해주세요</option><option value="static">정보 페이지</option><option value="notice">공지사항 게시판</option></div><br>'
-    //     list.html(a);
-    // }
-
-    // function selectType(){
-    //     var list=$('#insertModalbody2');
-    //     list.empty();
-    //     var val = $('[name=menutype]').val();
-    //     if(val=='static' || val=='notice'){
-    //         list.append(
-    //             '<div class="form-group"><span>메뉴 이름 :</span><input style="display : inline-block; width:200px;" type="text" class="form-control" name = "title"></div><br>'+
-    //             '<div class="form-group"><span>위 치 :</span><select id="insert" style="display : inline-block; width:200px;" class="form-control" name="ordernum"></select></div><br>');
-    //         var foot = $('#insertModalfooter');
-    //         foot.html('<button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertMu()">완료</button>');
-    //     }
-    // }
-
-    // function insertMu(){
-    //     var name = $('[name=title]').val();
-    //     if(name.length>=25){
-    //         alert("이름이 너무 깁니다!");
-    //         return;
-    //     }
-    //     if(name.length==0){
-    //         alert("이름을 한 글자 이상 입력해주세요.");
-    //         return;
-    //     }
-    //     var header = $('[name=insertheader]').val();
-    //     if(header=="0"){
-    //         alert("메뉴 구분을 먼저 선택해주세요");
-    //         return;
-    //     }
-    //     var insert = name + "-/-/-" + header;
-    //     var check = confirm("정말 추가하시겠습니까?");
-    //     if(check){
-    //         $.ajax({
-    //             url : "ajax.kgu",
-    //             type : "post",
-    //             data : {
-    //                 req : "insert_menu",
-    //                 data : insert
-    //             },
-    //             success : function(data) {
-    //                 alert("추가가 완료되었습니다");
-    //                 location.reload();
-    //             }
-    //         });
-    //     }
-    // }
 
     function data(){
         var rows = [];
@@ -220,4 +171,99 @@
             });
         }
     }
+
+    function insertMenu(){
+        var list = $('#insertModalbody');
+        var a = '';
+        a += '<div class="form-group"><span>메뉴 타입 :</span><select onchange="selectType()" style="display : inline-block; width:200px;" class="form-control" name="menutype"><option value="default">선택해주세요</option><option value="static">정보 페이지</option><option value="notice">공지사항 게시판</option></div><br>'
+        list.html(a);
+    }
+
+    function selectType(){
+        var list=$('#insertModalbody2');
+        list.empty();
+        var val = $('[name=menutype]').val();
+        var a = '';
+        if(val=='static'){
+            a += '<div class="form-group"><span>메뉴 이름 </span><input style="display : inline-block; width:200px;" type="text" class="form-control" name = "title"></div><br>'
+            a += '<div class="form-group"><span>메뉴 구분 </span><select onchange="" style="display : inline-block; width:200px;" class="form-control" name="insertheader"><option value="0">선택해주세요</option>'
+            for(var i=0; i<headermenulist.length; i++){
+                a += '<option value="'+(headermenulist[i].tab_id)+'">'+(headermenulist[i].tab_title)+'</option>'
+            }
+            a += '</select></div><br>'
+
+            a+='<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="insertMenuFinish()">완료</button>';
+            list.html(a);
+        }
+        else if(val=='notice'){
+            a += '<div class="form-group"><span>메뉴 이름 </span><input style="display : inline-block; width:200px;" type="text" class="form-control" name = "title"></div><br>'
+
+            a+='<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="insertBBSFinish()">완료</button>';
+            list.html(a);
+        }
+
+    }
+
+    function insertMenuFinish(){
+        var name = $('[name=title]').val();
+        if(name.length>=25){
+            alert("이름이 너무 깁니다!");
+            return;
+        }
+        if(name.length==0){
+            alert("이름을 한 글자 이상 입력해주세요.");
+            return;
+        }
+        var header = $('[name=insertheader]').val();
+        if(header=="0"){
+            alert("메뉴 구분을 먼저 선택해주세요");
+            return;
+        }
+        var insert = name + "-/-/-" + header;
+        var check = confirm("정말 추가하시겠습니까?");
+        if(check){
+            $.ajax({
+                url : "ajax.kgu",
+                type : "post",
+                data : {
+                    req : "insert_menu",
+                    data : insert
+                },
+                success : function(data) {
+                    alert("추가가 완료되었습니다");
+                    location.reload();
+                }
+            });
+        }
+    }
+
+    function insertBBSFinish(){
+        var name = $('[name=title]').val();
+        if(name.length>=25){
+            alert("이름이 너무 깁니다!");
+            return;
+        }
+        if(name.length==0){
+            alert("이름을 한 글자 이상 입력해주세요.");
+            return;
+        }
+        var insert = name;
+        var check = confirm("정말 추가하시겠습니까?");
+        if(check){
+            $.ajax({
+                url : "ajax.kgu",
+                type : "post",
+                data : {
+                    req : "insert_notice_menu",
+                    data : insert
+                },
+                success : function(data) {
+                    alert("추가가 완료되었습니다");
+                    location.reload();
+                }
+            });
+        }
+    }
+
+
 </script>
