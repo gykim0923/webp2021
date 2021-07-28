@@ -296,6 +296,13 @@ public class AjaxAction implements Action {
                     session.setAttribute("headermenulist", gson.toJson(HomeDAO.getInstance().getHeaderMenuTabs()));
                 }
                 break;
+            case "delete_menu":
+                if (type.board_level == 0) {   //직접 권한 확인
+                    result = HomeDAO.getInstance().deleteMenu(data);
+                    session.setAttribute("menulist", gson.toJson(HomeDAO.getInstance().getHeaderMenuPages()));
+                    session.setAttribute("headermenulist", gson.toJson(HomeDAO.getInstance().getHeaderMenuTabs()));
+                }
+                break;
         }
 
         return result;

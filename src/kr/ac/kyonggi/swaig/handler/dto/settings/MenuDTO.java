@@ -57,6 +57,7 @@ public class MenuDTO {
 //		this.id = id;
 //	}
 	public String page_id;
+	public String id;
 
 	public String getOrderNum() {
 		return orderNum;
@@ -67,7 +68,7 @@ public class MenuDTO {
 	}
 
 	public String orderNum;
-	private String page_path;
+	public String page_path;
 	private String page_title;
 	public String tab_id;
 	private String max_level;

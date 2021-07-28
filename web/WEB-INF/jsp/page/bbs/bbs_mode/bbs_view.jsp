@@ -21,10 +21,6 @@
     </div>
   </c:if>
 
-<c:if test="${bbs_type =='\"application\"'}">
-  <div>신청하기 폼은 여기에서 뜰 예정</div>
-</c:if>
-
 <c:if test="${bbs_type !='\"application\"'}">
 <%--    댓글리스트--%>
     <div>
