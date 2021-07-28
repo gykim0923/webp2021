@@ -136,6 +136,9 @@ public class UploadAction implements Action {
             String file_id = FileDAO.getInstance().insertFileUploadLog(parameter); //업로드 파일 로그 남기면서 돌려받을 고유 번호
             String upload_mode = multi.getParameter("upload_mode");
 //            System.out.println(upload_mode);
+            if(upload_mode==null){
+                upload_mode="common";
+            }
             if(!upload_mode.equals("bbs")){
 //                System.out.println("it's not bbs");
                 return file_id+"-/-/-"+newFileName;
