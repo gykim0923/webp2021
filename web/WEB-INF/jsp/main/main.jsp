@@ -14,6 +14,7 @@
     String bbs21 = (String) request.getAttribute("bbs21");
     String bbs22 = (String) request.getAttribute("bbs22");
     String bbs23 = (String) request.getAttribute("bbs23");
+    String registerAllInfo = (String) request.getAttribute("registerAllInfo");
 %>
 <html class="fontawesome-i2svg-active fontawesome-i2svg-complete">
 <head>
@@ -75,8 +76,16 @@
 
             <div class="col-lg py-2" id="main2_center"  style="height : 400px;">
                 <div class=" h-100 p-5 bg-light border shadow rounded">
-                    <h2><strong>ㅇㅇ</strong></h2>
-                    <hr>
+                    <div>
+                        <div class="nav nav-tabs mb-3" id="nav-tab2" role="tablist">
+                            <button class="nav-link active" id="nav-30-tab" data-bs-toggle="tab" data-bs-target="#nav-30" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
+                            <button class="nav-link" id="nav-31-tab" data-bs-toggle="tab" data-bs-target="#nav-31" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"></button>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="nav-tabContent2">
+                        <div class="tab-pane fade show active" id="nav-30" role="tabpanel" aria-labelledby="nav-30-tab"></div>
+                        <div class="tab-pane fade" id="nav-31" role="tabpanel" aria-labelledby="nav-31-tab"></div>
+                    </div>
                 </div>
             </div>
 
@@ -128,7 +137,33 @@
         makeScheduleInfo();
         makeCarouselCard();
         makeNoticeBBS();
+        makeNoticeReg();
     })
+    function makeNoticeReg(){
+        var nav30 = $('#nav-30');
+        var nav31 = $('#nav-31');
+        var registerAllInfo = <%=registerAllInfo%>;
+        for(var i=0;i<registerAllInfo.length;i++){
+            var urlReg = 'reg.kgu?major=main&num=30&mode=view&id='+registerAllInfo[i].id;
+            nav30.append('<li class="list-group-item"><a href="'+urlReg+'">'+registerAllInfo[i].title+'</a></li>')
+        }
+        // for(var i=0;i<registerAllInfo.length;i++){ 자료실
+        //     var urlReg = 'reg.kgu?major=main&num=30&mode=view&id='+registerAllInfo[i].id;
+        //     nav30.append('<li class="list-group-item"><a href="'+urlReg+'">'+registerAllInfo[i].title+'</a></li>')
+        // }
+
+        var menuPageList = <%=menuPageList%>;
+        var nav30tab = $('#nav-30-tab');
+        var nav31tab = $('#nav-31-tab');
+        for (var i = 0 ; i < menuPageList.length; i++){
+            if(menuPageList[i].page_id == '30'){
+                nav30tab.append(menuPageList[i].page_title);
+            }
+            if(menuPageList[i].page_id == '31'){
+                nav31tab.append(menuPageList[i].page_title);
+            }
+        }
+    }
     function makeNoticeBBS() {
         var notice21 = $('#nav-21');
         var notice22 = $('#nav-22');
