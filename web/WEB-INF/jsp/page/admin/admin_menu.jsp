@@ -265,29 +265,5 @@
         }
     }
 
-    <%--function selectInsertType(){--%>
-    <%--    var type = <%=getAllType%>;--%>
-    <%--    var memory = [];--%>
-    <%--    for(var i=0; i<5;i++){--%>
-    <%--        var list=$('#insertType'+(i+1))--%>
-    <%--        for(var j=0; j<type.length;j++){--%>
-    <%--            var value = type[j];--%>
-    <%--            if(j>0){--%>
-    <%--                if(value.board_level==type[j-1].board_level){--%>
-    <%--                    var recentIndex = memory[memory.length - 1];--%>
-    <%--                    $('#insert'+i+recentIndex).append(', '+value.type_name);--%>
-    <%--                }--%>
-    <%--                else{--%>
-    <%--                    list.append('<option id="insert'+i+j+'" value="'+(memory.length%10)+'">'+value.type_name +'</option');--%>
-    <%--                    memory.push(j);--%>
-    <%--                }--%>
-    <%--            }--%>
-    <%--            else{--%>
-    <%--                list.append('<option id="insert'+i+j+'" value="'+(memory.length%10)+'">'+value.type_name +'</option');--%>
-    <%--                memory.push(j);--%>
-    <%--            }--%>
-    <%--        }--%>
-    <%--    }--%>
-    <%--}--%>
 
 </script>
