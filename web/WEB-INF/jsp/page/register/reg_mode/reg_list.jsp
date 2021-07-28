@@ -27,10 +27,12 @@
         </thead>
     </table>
 </div>
+<div id="write_button"></div>
 
 <script>
     $(document).ready(function(){
         callSetupTableView();
+        makeWriteButton();
     })
     var user = <%=user%>
     var major = <%=major%>;
@@ -40,6 +42,13 @@
         $('#table1').bootstrapTable('load',tableData());
         // $('#table1').bootstrapTable('append',data());
         $('#table1').bootstrapTable('refresh');
+    }
+    function makeWriteButton(){
+        var button = $('#write_button')
+        if (type.for_header == '관리자' || type.for_header == '교수'){
+            var text = '<a href = "reg.kgu?major=' + major + '&&num=' + num + '&&mode=write"><div class="btn btn-secondary">글쓰기</div></a>';
+            button.append(text);
+        }
     }
     function tableData(){
         var regList = <%=getRegList%>;
