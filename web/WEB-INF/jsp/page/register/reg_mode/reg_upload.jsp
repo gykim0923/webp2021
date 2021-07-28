@@ -91,6 +91,7 @@
 </div>
 
 <div id="questionYouMade"></div>
+
 <div id="write_post" class="d-grid gap-2 d-md-flex justify-content-md-end">
     <c:choose>
         <c:when test="${jsp == '\"reg_write\"'}">
@@ -110,58 +111,86 @@
 </div>
 
 <script>
-
+    var questionIndex = 1;
     function makeQ1Modal(){
         $('#staticBackdropLabel').html('주관식');
+        var index = 1;
         var list = $('#myModalbody');
         var text ='';
         text += '<div class="form-group"><input type="text" class="form-control" id="InputQ1" placeholder="질문을 입력해주세요"></div>';
-        text += '<div class="my-2"><button type="button" class="btn btn-secondary" onclick="">저장</button></div>'
+        text += '<div class="my-2"><button type="button" class="btn btn-secondary" onclick="submitQ1('+index+')">저장</button></div>'
         list.html(text);
     }
 
     function makeQ2Modal(){
         $('#staticBackdropLabel').html('단일객관식');
         var list = $('#myModalbody');
+        var index = 2;
         var text ='';
         text +='<div class="form-group my-2"><input type="text" class="form-control" id="InputQ2" placeholder="질문을 입력해주세요"></div>'
         text += '<div id="answers"></div>';
         text += '<div class="my-2" style="width : 200px"><div class="input-group"><input type="text" class="form-control" placeholder="새로운 답변" id="newAnswer"><span class="input-group-btn"><button type="button" class="btn btn-secondary mx-2" onclick="makeAnswer()">추가!</button></span></div></div>';
-        text += '<div class="my-2"><button type="button" class="btn btn-secondary" onclick="">저장</button></div>'
+        text += '<div class="my-2"><button type="button" class="btn btn-secondary" onclick="submitQ2('+index+')">저장</button></div>'
         list.html(text);
     }
 
     function makeQ3Modal(){
         $('#staticBackdropLabel').html('단중객관식');
         var list = $('#myModalbody');
+        var index = 3;
         var text ='';
         text += '<div class="form-group my-2"><input type="text" class="form-control" id="InputQ3" placeholder="질문을 입력해주세요"></div>';
         text += '<div  id="answers"></div>';
         text += '<div class="my-2" style="width : 200px"><div class="input-group"><input type="text" class="form-control" placeholder="새로운 답변" id="newAnswer"><span class="input-group-btn"><button type="button" class="btn btn-secondary mx-2" onclick="makeAnswer()">추가!</button></span></div></div>';
-        text += '<div class="my-2"><button type="button" class="btn btn-secondary" onclick="">저장</button></div>'
+        text += '<div class="my-2"><button type="button" class="btn btn-secondary" onclick="submitQ3('+index+')">저장</button></div>'
         list.html(text);
     }
 
     function makeQ4Modal(){
         $('#staticBackdropLabel').html('척도형');
         var list = $('#myModalbody');
+        var index = 4;
         var text ='';
 
         text += '<div class="form-group"><input type="text" class="form-control my-2" id="InputQ4" placeholder="질문을 입력해주세요"></div>';
         text += '<div class="form-group my-2" style="width : 200px"><input type="text" class="form-control" id="InputMin" placeholder="최솟값"></div>';
         text += '<div class="form-group my-2" style="width : 200px"><input type="text" class="form-control" id="InputMax" placeholder="최댓값"></div>';
-        text += '<div class="my-2"><button type="button" class="btn btn-secondary" onclick="">저장</button></div>'
+        text += '<div class="my-2"><button type="button" class="btn btn-secondary" onclick="submitQ4('+index+')">저장</button></div>'
          list.html(text);
     }
 
     function makeQ5Modal(){
         $('#staticBackdropLabel').html('파일업로드형');
         var list = $('#myModalbody');
+        var index = 5;
         var text ='';
         text += '<div class="form-group my-2"><input type="text" class="form-control" id="InputQ4 placeholder="어떠한 파일을 올릴지 간단한 설명을 적어주세요"></div>';
-        text += '<div class="my-2"><button type="button" class="btn btn-secondary" onclick="">저장</button></div>';
+        text += '<div class="my-2"><button type="button" class="btn btn-secondary" onclick="submitQ5('+index+')">저장</button></div>';
         list.html(text);
     }
+
+    answerIndex = 0;
+    var a ='';
+    function submitQ1(index){
+        var text = $('#InputQ1').val();
+        a += '<div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><div><input type="text" class="form-control" readonly id="question'+questionIndex+'" name="question'+questionIndex+'" value="'+ text +'"><button type="button" class="btn btn-secondary" onclick=""></button></div><hr style="border : 1px dotted black"></div>';
+        $('#questionYouMade').append(a);
+    }
+
+    function submitQ2(index){
+
+    }
+    function submitQ3(index){
+
+    }
+    function submitQ4(index){
+
+    }
+    function submitQ5(index){
+
+    }
+
+
     var answerIndex = 1;
     function makeAnswer(){
         var text = $('#newAnswer').val();
