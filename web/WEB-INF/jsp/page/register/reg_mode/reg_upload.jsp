@@ -76,23 +76,7 @@
 </div>
 
 <%--버튼이 나와야 하는 자리--%>
-<div id="write_post" class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <c:choose>
-        <c:when test="${jsp == '\"bbs_write\"'}">
-            <button type="button" class="btn btn-outline-secondary" onclick="insertReg()">추가</button>
-        </c:when>
-        <c:when test="${jsp == '\"bbs_modify\"'}">
-            <button type="button" class="btn btn-outline-secondary" onclick="modifyReg()">수정</button>
-            <script>
-                var content = $('#regUpdateContent');
-                var getReg = <%=getReg%>;
-                content.html(getReg.text);
-                $('#bbsTitleBox').html('<input class="form-control" id="bbsTitle" placeholder="제목을 입력하세요." value="'+getReg.title+'">');
-            </script>
-        </c:when>
-    </c:choose>
-    <button type="button" class="btn btn-outline-secondary" onclick="back()">뒤로</button>
-</div>
+
 <div class="file-loading">
     <input id="kv-explorer" type="file" multiple>
 </div>
@@ -107,7 +91,23 @@
 </div>
 
 <div id="questionYouMade"></div>
-
+<div id="write_post" class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <c:choose>
+        <c:when test="${jsp == '\"reg_write\"'}">
+            <button type="button" class="btn btn-outline-secondary" onclick="insertReg()">추가</button>
+        </c:when>
+        <c:when test="${jsp == '\"reg_modify\"'}">
+            <button type="button" class="btn btn-outline-secondary" onclick="modifyReg()">수정</button>
+            <script>
+                var content = $('#regUpdateContent');
+                var getReg = <%=getReg%>;
+                content.html(getReg.text);
+                $('#bbsTitleBox').html('<input class="form-control" id="bbsTitle" placeholder="제목을 입력하세요." value="'+getReg.title+'">');
+            </script>
+        </c:when>
+    </c:choose>
+    <button type="button" class="btn btn-outline-secondary" onclick="back()">뒤로</button>
+</div>
 
 <script>
 
@@ -162,10 +162,22 @@
         text += '<div class="my-2"><button type="button" class="btn btn-secondary" onclick="">저장</button></div>';
         list.html(text);
     }
-
+    var answerIndex = 1;
     function makeAnswer(){
-
+        var text = $('#newAnswer').val();
+        if(text == ''){
+            alert('칸을 입력해주세요');
+            return;
+        }
+        $('#newAnswer').val('');
+        var a = '<div class="radio disabled count"><label><input type="radio" id="answer'+answerIndex+'" value="'+text+'" disabled>'+text+'</label></div>';
+        $('#answers').append(a);
+        answerIndex++;
     }
+
+
+
+
 
 </script>
 
@@ -271,4 +283,5 @@
             upload_mode : 'bbs'
         }
     });
+
 </script>
