@@ -124,9 +124,9 @@
         $('#staticBackdropLabel').html('단일객관식');
         var list = $('#myModalbody');
         var text ='';
-        text +='<div class="form-group"><input type="text" class="form-control" id="InputName" placeholder="질문을 입력해주세요"></div>'
+        text +='<div class="form-group my-2"><input type="text" class="form-control" id="InputQ2" placeholder="질문을 입력해주세요"></div>'
         text += '<div id="answers"></div>';
-        text += '<div style="width : 200px"><div class="input-group"><input type="text" class="form-control" placeholder="새로운 답변" id="newAnswer"><span class="input-group-btn"><button class="btn btn-default" type="button" onclick="makeAnswer()">추가!</button></span></div></div>';
+        text += '<div class="my-2" style="width : 200px"><div class="input-group"><input type="text" class="form-control" placeholder="새로운 답변" id="newAnswer"><span class="input-group-btn"><button type="button" class="btn btn-secondary mx-2" onclick="makeAnswer()">추가!</button></span></div></div>';
         text += '<div class="my-2"><button type="button" class="btn btn-secondary" onclick="">저장</button></div>'
         list.html(text);
     }
@@ -135,9 +135,9 @@
         $('#staticBackdropLabel').html('단중객관식');
         var list = $('#myModalbody');
         var text ='';
-        text += '<div class="form-group"><input type="text" class="form-control" id="InputName" placeholder="질문을 입력해주세요"></div>';
-        text += '<div id="answers"></div>';
-        text += '<div style="width : 200px"><div class="input-group"><input type="text" class="form-control" placeholder="새로운 답변" id="newAnswer"><span class="input-group-btn"><button class="btn btn-default" type="button" onclick="makeAnswer()">추가!</button></span></div></div>';
+        text += '<div class="form-group my-2"><input type="text" class="form-control" id="InputQ3" placeholder="질문을 입력해주세요"></div>';
+        text += '<div  id="answers"></div>';
+        text += '<div class="my-2" style="width : 200px"><div class="input-group"><input type="text" class="form-control" placeholder="새로운 답변" id="newAnswer"><span class="input-group-btn"><button type="button" class="btn btn-secondary mx-2" onclick="makeAnswer()">추가!</button></span></div></div>';
         text += '<div class="my-2"><button type="button" class="btn btn-secondary" onclick="">저장</button></div>'
         list.html(text);
     }
@@ -147,9 +147,9 @@
         var list = $('#myModalbody');
         var text ='';
 
-        text += '<div class="form-group"><input type="text" class="form-control" id="InputName" placeholder="질문을 입력해주세요"></div>';
-        text += '<div class="form-group" style="width : 200px"><input type="text" class="form-control" id="InputMin" placeholder="최솟값"></div>';
-        text += '<div class="form-group" style="width : 200px"><input type="text" class="form-control" id="InputMax" placeholder="최댓값"></div>';
+        text += '<div class="form-group"><input type="text" class="form-control my-2" id="InputQ4" placeholder="질문을 입력해주세요"></div>';
+        text += '<div class="form-group my-2" style="width : 200px"><input type="text" class="form-control" id="InputMin" placeholder="최솟값"></div>';
+        text += '<div class="form-group my-2" style="width : 200px"><input type="text" class="form-control" id="InputMax" placeholder="최댓값"></div>';
         text += '<div class="my-2"><button type="button" class="btn btn-secondary" onclick="">저장</button></div>'
          list.html(text);
     }
@@ -158,7 +158,7 @@
         $('#staticBackdropLabel').html('파일업로드형');
         var list = $('#myModalbody');
         var text ='';
-        text += '<div class="form-group"><input type="text" class="form-control" id="InputName" placeholder="어떠한 파일을 올릴지 간단한 설명을 적어주세요"></div>';
+        text += '<div class="form-group my-2"><input type="text" class="form-control" id="InputQ4 placeholder="어떠한 파일을 올릴지 간단한 설명을 적어주세요"></div>';
         text += '<div class="my-2"><button type="button" class="btn btn-secondary" onclick="">저장</button></div>';
         list.html(text);
     }
