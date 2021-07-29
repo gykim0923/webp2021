@@ -16,128 +16,157 @@
     String bbs23 = (String) request.getAttribute("bbs23");
     String registerAllInfo = (String) request.getAttribute("registerAllInfo");
 %>
-
 <!DOCTYPE html>
-<html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
+<html>
 <%@include file="common_settings.jsp"%>
 <head>
-<%--    <meta name="viewport" content="width=device-width, initial-scale=1.0" />--%>
-    <title>Windmill Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Mazer Admin Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
+
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
 </head>
+
 <body>
-<div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
-<%@include file="aside.jsp"%>
-    <div class="flex flex-col flex-1 w-full">
-        <%@include file="header_v2.jsp"%>
-        <main class="h-full overflow-y-auto">
-            <div class="container px-6 mx-auto grid">
-<%--                여기서 부터 main 복붙--%>
-                <main class=" bg-light">
-                    <div class="container py-4">
-                        <div class="row align-items-md-stretch">
-                            <div class="col-lg-9 py-2" id="main1_left" >
-                                <div id="myCarousel" class="carousel slide  shadow rounded" data-bs-ride="carousel" style="margin-bottom : 0px;">
-                                    <div class="carousel-indicators" id="carouselButton">
-                                        <%--   슬라이더 사진 개수와 동일한 버트 만들어 줘야함 makecarouselCard에 있음--%>
-                                    </div>
-                                    <div class="carousel-inner rounded2" id="carouselCard">
-                                        <%--     makecarouselCard에 있음--%>
-                                    </div>
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </button>
-                                </div>
+<div id="app">
+    <%@include file="aside_v2.jsp"%>
+    <div id="main">
+        <header class="mb-3 bg-light">
+            <%@include file="header_v2.jsp"%>
+        </header>
+<%--Main start--%>
+        <%--                여기서 부터 main 복붙--%>
+        <main class=" bg-light">
+            <div class="container py-4">
+                <div class="row align-items-md-stretch">
+                    <div class="col-lg-9 py-2" id="main1_left" >
+                        <div id="myCarousel" class="carousel slide  shadow rounded" data-bs-ride="carousel" style="margin-bottom : 0px;">
+                            <div class="carousel-indicators" id="carouselButton">
+                                <%--   슬라이더 사진 개수와 동일한 버트 만들어 줘야함 makecarouselCard에 있음--%>
                             </div>
-                            <div class="col-lg-3 py-2" id="main1_right">
-                                <div class=" h-100 bg-light border  shadow rounded" id="favorite_menu"></div>
+                            <div class="carousel-inner rounded2" id="carouselCard">
+                                <%--     makecarouselCard에 있음--%>
                             </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
+                    </div>
+                    <div class="col-lg-3 py-2" id="main1_right">
+                        <div class=" h-100 bg-light border  shadow rounded" id="favorite_menu"></div>
+                    </div>
+                </div>
 
 
 
-                        <div class="row align-items-md-stretch">
+                <div class="row align-items-md-stretch">
 
-                            <div class="col-lg py-2" id="main2_left"  style="height : 400px;">
-                                <div class=" h-100 p-5 bg-light border shadow rounded">
-                                    <div>
-                                        <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-                                            <button class="nav-link active" id="nav-21-tab" data-bs-toggle="tab" data-bs-target="#nav-21" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
-                                            <button class="nav-link" id="nav-22-tab" data-bs-toggle="tab" data-bs-target="#nav-22" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"></button>
-                                            <button class="nav-link" id="nav-23-tab" data-bs-toggle="tab" data-bs-target="#nav-23" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"></button>
-                                        </div>
-                                    </div>
-                                    <div class="tab-content" id="nav-tabContent">
-                                        <div class="tab-pane fade show active" id="nav-21" role="tabpanel" aria-labelledby="nav-21-tab"></div>
-                                        <div class="tab-pane fade" id="nav-22" role="tabpanel" aria-labelledby="nav-22-tab"></div>
-                                        <div class="tab-pane fade" id="nav-23" role="tabpanel" aria-labelledby="nav-23-tab"></div>
-                                    </div>
+                    <div class="col-lg py-2" id="main2_left"  style="height : 400px;">
+                        <div class=" h-100 p-5 bg-light border shadow rounded">
+                            <div>
+                                <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                                    <button class="nav-link active" id="nav-21-tab" data-bs-toggle="tab" data-bs-target="#nav-21" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
+                                    <button class="nav-link" id="nav-22-tab" data-bs-toggle="tab" data-bs-target="#nav-22" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"></button>
+                                    <button class="nav-link" id="nav-23-tab" data-bs-toggle="tab" data-bs-target="#nav-23" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"></button>
                                 </div>
                             </div>
-
-                            <div class="col-lg py-2" id="main2_center"  style="height : 400px;">
-                                <div class=" h-100 p-5 bg-light border shadow rounded">
-                                    <div>
-                                        <div class="nav nav-tabs mb-3" id="nav-tab2" role="tablist">
-                                            <button class="nav-link active" id="nav-30-tab" data-bs-toggle="tab" data-bs-target="#nav-30" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
-                                            <button class="nav-link" id="nav-31-tab" data-bs-toggle="tab" data-bs-target="#nav-31" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"></button>
-                                        </div>
-                                    </div>
-                                    <div class="tab-content" id="nav-tabContent2">
-                                        <div class="tab-pane fade show active" id="nav-30" role="tabpanel" aria-labelledby="nav-30-tab"></div>
-                                        <div class="tab-pane fade" id="nav-31" role="tabpanel" aria-labelledby="nav-31-tab"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3 py-2" id="main2_right" style="height : 400px;">
-                                <div class=" h-100 p-5 bg-light border shadow rounded">
-                                    <div class="row">
-                                        <h2><strong>일정</strong><i class="bi bi-plus col-sm-2 text-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addSearchModal()"></i></h2>
-                                    </div>
-                                    <div class="" id="schContent"></div>
-                                </div>
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-21" role="tabpanel" aria-labelledby="nav-21-tab"></div>
+                                <div class="tab-pane fade" id="nav-22" role="tabpanel" aria-labelledby="nav-22-tab"></div>
+                                <div class="tab-pane fade" id="nav-23" role="tabpanel" aria-labelledby="nav-23-tab"></div>
                             </div>
                         </div>
                     </div>
-                    <!-- search schedule Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">주요 일정</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                    <div class="col-lg py-2" id="main2_center"  style="height : 400px;">
+                        <div class=" h-100 p-5 bg-light border shadow rounded">
+                            <div>
+                                <div class="nav nav-tabs mb-3" id="nav-tab2" role="tablist">
+                                    <button class="nav-link active" id="nav-30-tab" data-bs-toggle="tab" data-bs-target="#nav-30" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
+                                    <button class="nav-link" id="nav-31-tab" data-bs-toggle="tab" data-bs-target="#nav-31" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"></button>
                                 </div>
-                                <div class="modal-body" id="modalBody">
-                                    <table class="boardtable" id="schTable"  data-toggle="table"
-                                           data-pagination="true" data-toolbar="#toolbar"
-                                           data-search="true" data-side-pagination="true" data-click-to-select="true" data-page-list="[10]">
-                                        <thead>
-                                        <tr>
-                                            <th data-field="date" data-sortable="true">date</th>
-                                            <th data-field="content" data-sortable="true">content</th>
-                                        </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                                </div>
+                            </div>
+                            <div class="tab-content" id="nav-tabContent2">
+                                <div class="tab-pane fade show active" id="nav-30" role="tabpanel" aria-labelledby="nav-30-tab"></div>
+                                <div class="tab-pane fade" id="nav-31" role="tabpanel" aria-labelledby="nav-31-tab"></div>
                             </div>
                         </div>
                     </div>
-                </main>
+
+                    <div class="col-lg-3 py-2" id="main2_right" style="height : 400px;">
+                        <div class=" h-100 p-5 bg-light border shadow rounded">
+                            <div class="row">
+                                <h2><strong>일정</strong><i class="bi bi-plus col-sm-2 text-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addSearchModal()"></i></h2>
+                            </div>
+                            <div class="" id="schContent"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- search schedule Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">주요 일정</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="modalBody">
+                            <table class="boardtable" id="schTable"  data-toggle="table"
+                                   data-pagination="true" data-toolbar="#toolbar"
+                                   data-search="true" data-side-pagination="true" data-click-to-select="true" data-page-list="[10]">
+                                <thead>
+                                <tr>
+                                    <th data-field="date" data-sortable="true">date</th>
+                                    <th data-field="content" data-sortable="true">content</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
-        <%@include file="./footer.jsp"%>
+<%--Main end--%>
+
+        <footer>
+            <div class="footer clearfix mb-0 text-muted">
+                <div class="float-start">
+                    <p>2021 &copy; Mazer</p>
+                </div>
+                <div class="float-end">
+                    <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
+                            href="http://ahmadsaugi.com">A. Saugi</a></p>
+                </div>
+            </div>
+        </footer>
     </div>
 </div>
-</body>
+<script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
 
+<%--<script src="/assets/vendors/apexcharts/apexcharts.js"></script>--%>
+<script src="/assets/js/pages/dashboard.js"></script>
+
+<script src="/assets/js/main.js"></script>
+</body>
 
 </html>
 
