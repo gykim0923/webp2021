@@ -173,7 +173,7 @@
         var index = 5;
         var text ='';
         var text1 ='';
-        text += '<div class="form-group my-2"><input type="text" class="form-control" id="InputQ5 placeholder="어떠한 파일을 올릴지 간단한 설명을 적어주세요"></div>';
+        text += '<div class="form-group my-2"><input type="text" class="form-control" id="InputQ5" placeholder="어떠한 파일을 올릴지 간단한 설명을 적어주세요"></div>';
         text1 ='<div class="my-2"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="submitQ5('+index+')">저장</button></div>';
         body.html(text);
         footer.html(text1);
@@ -234,7 +234,7 @@
         a='';
         var text = $('#InputQ1').val();
         a += '<div class= "my-1" id="wantRemove'+questionIndex+'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>주관식</span>' +
-            '<div class="input-group mb-3 my-2"> <input type="text" class="form-control" readonly id="question'+questionIndex+'" name="question'+questionIndex+'" placeholder="" value="'+ text +'" aria-label="" aria-describedby="button-addon2"> <div class="input-group-append"> <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="removeQuestion('+questionIndex+')">삭제</button> </div><hr style="border:1px dotted black"></div></div>';
+            '<div class="input-group mb-3 my-2"> <input type="text" class="form-control" readonly id="question'+questionIndex+'" name="question'+questionIndex+'" placeholder="" value="'+ text +'" aria-label="" aria-describedby="button-addon2"> <div class="input-group-append"> <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="removeQuestion('+questionIndex+')">삭제</button> </div></div><hr style="border:1px dotted black"></div>';
         whatSequence.push(questionIndex);
         questionIndex++;
         $('#questionYouMade').append(a);
@@ -263,8 +263,11 @@
         a += '<div class= "my-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>척도형</span>'
     }
     function submitQ5(index){
+        a = '';
         var text = $('#InputQ5').val();
-        a += '<div class= "my-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>파일업로드형</span>'
+        a += '<div class= "my-1" id="wantRemove'+questionIndex+'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>파일업로드형</span>'
+            + '<div class="input-group mb-3 my-2"> <input type="text" class="form-control" readonly id="question'+questionIndex+'" name="question'+questionIndex+'" placeholder="" value="'+ text +'" aria-label="" aria-describedby="button-addon2"> <div class="input-group-append"> <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="removeQuestion('+questionIndex+')">삭제</button></div></div><input type="file" disabled><hr style="border:1px dotted black"></div>';
+        $('#questionYouMade').append(a);
     }
 
 
@@ -286,11 +289,6 @@
         $('#answers').append(a);
         answerIndex++;
     }
-
-
-
-
-
 </script>
 
 <script>
@@ -312,12 +310,16 @@
         var title = $('#bbsTitle').val();
         var last_modified = formatDate(new Date());
         var text = CKEDITOR.instances.regUpdateContent.getData();
-        // var starting_date =;
-        // var closing_date = ;
-        // var level =;
-        // var for_who = ;
+        var starting_date = $('#InputStartDate').val();
+        var closing_date = $('#InputFinishDate').val();
+        var level = '';
+        var for_who = $('#forWho').val();
+        for(var i = 0 ; i < 4 ; ++i){
+            if($('input:checkbox[id="inlineCheckbox' + i +'"]').is(":checked") ==  true)
+                level += '|'+$('#inlineCheckbox'+i).val()+'|';
+        }
 
-        var data = major+"-/-/-"+writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+num+"-/-/-"+last_modified+"-/-/-"+text;
+        var data = major+"-/-/-"+writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+num+"-/-/-"+last_modified+"-/-/-"+text+"-/-/-"+starting_date+"-/-/-"+closing_date+"-/-/-"+level+"-/-/-"+for_who;
 
         var check = confirm(data+"를 추가하시겠습니까?");
         if (check) {
