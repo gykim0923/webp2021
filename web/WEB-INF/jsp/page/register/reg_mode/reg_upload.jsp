@@ -241,25 +241,32 @@
     }
 
     function submitQ2(index){
+        var answerLength = $('.count').length;
         var text = $('#InputQ2').val();
-        a += '<div class= "my-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>단일객관식</span>' +
+        a += '<div class= "my-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>단일객관식</span>'+
+        '<div class="input-group mb-3 my-2"> <input type="text" class="form-control" readonly id="question'+questionIndex+'" name="question'+questionIndex+'" placeholder=""value="'+ text +'" aria-label="" aria-describedby="button-addon2"> <div class="input-group-append"> <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="removeQ">삭제</button> </div><hr style="border:1px dotted black"></div>';
+        a+='<div id="answerOf'+questionIndex+'"></div><hr style="border : 1px dotted black"></div>';
+        $('#questionYouMade').append(a);
+        var b = '';
+        for(var i = 1 ; i <= answerLength ; ++i){
+            var answer = $('#answer'+i).val();
+            b += '<div class="radio disabled"><label><input type="radio" disabled class="Q' + questionIndex + '" id="Q' + questionIndex + 'A' + i + '" value="' + answer + '">' + answer + '</label></div>';
+        }
+        $('#answerOf'+questionIndex).html(b);
     }
     function submitQ3(index){
         var text = $('#InputQ3').val();
-        a += '<div class= "my-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>다중객관식</span>' +
+        a += '<div class= "my-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>다중객관식</span>'
     }
     function submitQ4(index){
         var text = $('#InputQ4').val();
-        a += '<div class= "my-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>척도형</span>' +
+        a += '<div class= "my-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>척도형</span>'
     }
     function submitQ5(index){
         var text = $('#InputQ5').val();
-        a += '<div class= "my-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>파일업로드형</span>' +
+        a += '<div class= "my-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>파일업로드형</span>'
     }
 
-    function removeQ(index){
-
-    }
 
     function removeQuestion(index){
         $('#wantRemove'+index).remove();
