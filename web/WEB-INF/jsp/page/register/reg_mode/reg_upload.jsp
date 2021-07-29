@@ -20,6 +20,10 @@
 <link
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         media="all" rel="stylesheet" type="text/css" />
+<%--<link href="css/bootstrap-slider.css" rel="stylesheet" type="text/css">--%>
+
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 
 <div class="h3">글 작성하기</div>
 <%--ckeditor가 나와야 하는 자리--%>
@@ -234,7 +238,7 @@
         a='';
         var text = $('#InputQ1').val();
         a += '<div class= "my-1" id="wantRemove'+questionIndex+'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>주관식</span>' +
-            '<div class="input-group mb-3 my-2"> <input type="text" class="form-control" readonly id="question'+questionIndex+'" name="question'+questionIndex+'" placeholder="" value="'+ text +'" aria-label="" aria-describedby="button-addon2"> <div class="input-group-append"> <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="removeQuestion('+questionIndex+')">삭제</button> </div></div><hr style="border:1px dotted black"></div>';
+            '<div class="input-group mb-3 my-2"> <input type="text" class="form-control" readonly id="question'+questionIndex+'" name="question'+questionIndex+'" placeholder="" value="'+ text +'" aria-label="" aria-describedby="button-addon2"> <div class="input-group-append"> <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="removeQuestion('+questionIndex+')">삭제</button> </div><hr style="border:1px dotted black"></div></div>';
         whatSequence.push(questionIndex);
         questionIndex++;
         $('#questionYouMade').append(a);
@@ -258,9 +262,40 @@
         var text = $('#InputQ3').val();
         a += '<div class= "my-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>다중객관식</span>'
     }
-    function submitQ4(index){
+    function submitQ4(index){ // 척도형
+        a='';
         var text = $('#InputQ4').val();
-        a += '<div class= "my-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>척도형</span>'
+        var min = $('#InputMin').val() + '';
+        var max = $('#InputMax').val() + '';
+        var avg = Number(max) + Number(min);
+        if(min == '' || max == ''){
+            alert("빈칸을 입력해주세요^^");
+            return;
+        }
+        if(min > max){
+            alert('최소값이 최댓값보다 큽니다!');
+            return;
+        }
+        if(!checkInt(min) || !checkInt(max)){
+            alert("숫자만 입력해주세요");
+            return;
+        }
+        a += '<div class= "my-1" id="wantRemove'+questionIndex+'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>척도형</span>';
+        a += '<div class="input-group mb-3 my-2"> <input type="text" class="form-control" readonly id="question'+questionIndex+'" name="question'+questionIndex+'" placeholder="" value="'+ text +'" aria-label="" aria-describedby="button-addon2">';
+        a += '<div class="input-group-append"> <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="removeQuestion('+questionIndex+')">삭제</button> ';
+
+        a += min +'<input type="range" id="range' + questionIndex + '">' + max + '<input type="hidden" id="min' + questionIndex + '" value="' + min + '"><input type="hidden" id="max' + questionIndex + '" value="' + max + '"><br></div></div></div>';
+        a += '<hr style="border : 1px dotted black"></div>'
+
+        $('#questionYouMade').append(a);
+        $('#range'+questionIndex).slider({
+            min : min ,
+            max : max ,
+            value : Math.floor(avg/2),
+            step : 1,
+            enabled : false
+        });
+
     }
     function submitQ5(index){
         a = '';
@@ -289,6 +324,20 @@
         $('#answers').append(a);
         answerIndex++;
     }
+    function checkInt(String){
+        var a = ['0','1','2','3','4','5','6','7','8','9'];
+        var isOk = 1;
+        for(var i = 0 ; i < String.length ; ++i){
+            var value = String[i];
+            if(!a.includes(value))
+                isOk = 0;
+        }
+        if(isOk == 0)
+            return false;
+        else
+            return true;
+    }
+
 </script>
 
 <script>
@@ -384,6 +433,7 @@
 
         return [year, month, day].join('-');
     }
+
     var upload_folder = '/img/bbs';
     $("#kv-explorer").fileinput({
         'theme': 'explorer-fa',
@@ -399,3 +449,4 @@
     });
 
 </script>
+
