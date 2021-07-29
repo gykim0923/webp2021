@@ -8,6 +8,31 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
+    /**
+     * [공통] url 제어
+     * */
+    String major = (String) request.getAttribute("major");
+    String num = (String) request.getAttribute("num");
+
+    /**
+     * [공통] 헤더 제어
+     * */
+    String menuTabList = (String) request.getAttribute("menuTabList");
+    String menuPageList = (String) request.getAttribute("menuPageList");
+    String majorInfo = (String) request.getAttribute("majorInfo");
+    String majorAllInfo = (String) request.getAttribute("majorAllInfo");
+
+    /**
+     * [공통] 로그인 정보 제어
+     * */
+    String user = (String) session.getAttribute("user");
+    String type = (String) session.getAttribute("type");
+
+%>
+<%
+    /**
+     * for Main.jsp
+     * */
     String scheduleAllInfo = (String)request.getAttribute("scheduleAllInfo");
     String slider = (String)  request.getAttribute("slider");
     String favorite_menu = (String) request.getAttribute("favorite_menu");

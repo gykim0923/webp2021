@@ -7,28 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    /**
-     * [공통] url 제어
-     * */
-    String major = (String) request.getAttribute("major");
-    String num = (String) request.getAttribute("num");
 
-    /**
-     * [공통] 헤더 제어
-     * */
-    String menuTabList = (String) request.getAttribute("menuTabList");
-    String menuPageList = (String) request.getAttribute("menuPageList");
-    String majorInfo = (String) request.getAttribute("majorInfo");
-    String majorAllInfo = (String) request.getAttribute("majorAllInfo");
-
-    /**
-     * [공통] 로그인 정보 제어
-     * */
-    String user = (String) session.getAttribute("user");
-    String type = (String) session.getAttribute("type");
-
-%>
 <header class="z-10 py-4 bg-white shadow-md dark:bg-gray-800">
     <div class="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300">
         <%--        <!-- Mobile hamburger -->--%>
