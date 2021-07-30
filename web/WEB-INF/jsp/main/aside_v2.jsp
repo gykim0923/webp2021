@@ -6,11 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<head>
-
-</head>
-
-<div id="sidebar" class="active">
+<div id="sidebar" class="active fixed-top" style="z-index: 1040">
     <div class="sidebar-wrapper active">
         <div class="sidebar-header">
             <div class="d-flex justify-content-between">
