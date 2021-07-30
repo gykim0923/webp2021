@@ -70,7 +70,7 @@
         </header>
 <%--Main start--%>
         <%--                여기서 부터 main 복붙--%>
-        <main class=" bg-light">
+        <main class="">
             <div class="container py-4">
                 <div class="row align-items-md-stretch">
                     <div class="col-lg-9 py-2" id="main1_left" >
@@ -188,7 +188,7 @@
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
 
 <%--<script src="/assets/vendors/apexcharts/apexcharts.js"></script>--%>
-<script src="/assets/js/pages/dashboard.js"></script>
+<%--<script src="/assets/js/pages/dashboard.js"></script>--%>
 
 <script src="/assets/js/main.js"></script>
 </body>
