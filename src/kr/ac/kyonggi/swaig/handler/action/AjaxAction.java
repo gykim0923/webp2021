@@ -317,6 +317,18 @@ public class AjaxAction implements Action {
                     session.setAttribute("headermenulist", gson.toJson(HomeDAO.getInstance().getHeaderMenuTabs()));
                 }
                 break;
+            case "insertReg":
+                if(type.board_level==0)
+                    result=RegisterDAO.getInstance().insertReg(data);
+                break;
+//            case "modifyBbs":
+//                if(type.board_level==0)
+//                    result=BBSDAO.getInstance().modifyBbs(data);
+//                break;
+//            case "deleteBbs":
+//                if(type.board_level==0)
+//                    result=BBSDAO.getInstance().deleteBbs(data);
+//                break;
         }
 
         return result;

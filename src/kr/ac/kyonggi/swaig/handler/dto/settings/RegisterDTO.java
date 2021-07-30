@@ -3,9 +3,9 @@ package kr.ac.kyonggi.swaig.handler.dto.settings;
 import java.util.Date;
 
 public class RegisterDTO {
-    int id, views, applicant_count;
-    String writer_id, writer_name, title, text, level, for_who;
-    Date last_modified, starting_date, closing_date;
+    public int id, views, applicant_count;
+    public String writer_id, writer_name, title, text, level, for_who;
+    public Date last_modified, starting_date, closing_date;
 
     public int getId() {
         return id;

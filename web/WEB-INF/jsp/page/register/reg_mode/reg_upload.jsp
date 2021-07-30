@@ -133,6 +133,7 @@
 
     function makeQ2Modal(){
         $('#staticBackdropLabel').html('단일객관식');
+        answerIndex = 1;
         var index = 2;
         var text ='';
         var text1 ='';
@@ -146,6 +147,7 @@
 
     function makeQ3Modal(){
         $('#staticBackdropLabel').html('단중객관식');
+        answerIndex = 1;
         var index = 3;
         var text ='';
         var text1 ='';
@@ -183,7 +185,6 @@
         footer.html(text1);
     }
     var questionIndex = 1;
-    answerIndex = 0;
     var whatSequence = [];
     // var howManyQuestion = whatSequence.length;
     // if(howManyQuestion == 0){
@@ -237,17 +238,26 @@
     function submitQ1(index){
         a='';
         var text = $('#InputQ1').val();
-        a += '<div class= "my-1" id="wantRemove'+questionIndex+'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>주관식</span>' +
-            '<div class="input-group mb-3 my-2"> <input type="text" class="form-control" readonly id="question'+questionIndex+'" name="question'+questionIndex+'" placeholder="" value="'+ text +'" aria-label="" aria-describedby="button-addon2"> <div class="input-group-append"> <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="removeQuestion('+questionIndex+')">삭제</button> </div><hr style="border:1px dotted black"></div></div>';
+        if(text == null){
+            alert("질문을 만들어주세요.");
+            return;
+        }
+        a += '<div class= "my-1" id="wantRemove'+questionIndex+'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span id="Type'+questionIndex+'">주관식</span>' +
+            '<div class="input-group mb-3 my-2"> <input type="text" class="form-control" readonly id="question'+questionIndex+'" name="question'+questionIndex+'" placeholder="" value="'+ text +'" aria-label="" aria-describedby="button-addon2"> <div class="input-group-append"> <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="removeQuestion('+questionIndex+')">삭제</button> </div></div><hr style="border:1px dotted black"></div>';
         whatSequence.push(questionIndex);
         questionIndex++;
         $('#questionYouMade').append(a);
     }
 
     function submitQ2(index){
+        a='';
         var answerLength = $('.count').length;
         var text = $('#InputQ2').val();
-        a += '<div class= "my-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>단일객관식</span>'+
+        if(text == null){
+            alert("질문을 만들어주세요.");
+            return;
+        }
+        a += '<div class= "my-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span id="Type'+questionIndex+'">단일객관식</span>'+
         '<div class="input-group mb-3 my-2"> <input type="text" class="form-control" readonly id="question'+questionIndex+'" name="question'+questionIndex+'" placeholder=""value="'+ text +'" aria-label="" aria-describedby="button-addon2"> <div class="input-group-append"> <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="removeQ">삭제</button> </div><hr style="border:1px dotted black"></div>';
         a+='<div id="answerOf'+questionIndex+'"></div><hr style="border : 1px dotted black"></div>';
         $('#questionYouMade').append(a);
@@ -257,10 +267,29 @@
             b += '<div class="radio disabled"><label><input type="radio" disabled class="Q' + questionIndex + '" id="Q' + questionIndex + 'A' + i + '" value="' + answer + '">' + answer + '</label></div>';
         }
         $('#answerOf'+questionIndex).html(b);
+        whatSequence.push(questionIndex);
+        questionIndex++;
     }
     function submitQ3(index){
+        a = '';
+        var answerLength = $('.count').length;
         var text = $('#InputQ3').val();
-        a += '<div class= "my-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>다중객관식</span>'
+        if(text == null){
+            alert("질문을 만들어주세요.");
+            return;
+        }
+        a += '<div class= "my-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span id="Type'+questionIndex+'">다중객관식</span>'+
+            '<div class="input-group mb-3 my-2"> <input type="text" class="form-control" readonly id="question'+questionIndex+'" name="question'+questionIndex+'" placeholder=""value="'+ text +'" aria-label="" aria-describedby="button-addon2"> <div class="input-group-append"> <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="removeQ">삭제</button> </div><hr style="border:1px dotted black"></div>';
+        a+='<div id="answerOf'+questionIndex+'"></div><hr style="border : 1px dotted black"></div>';
+        $('#questionYouMade').append(a);
+        var b = '';
+        for(var i = 1 ; i <= answerLength ; ++i){
+            var answer = $('#answer'+i).val();
+            b += '<div class="checkbox disabled"><label><input type="checkbox" disabled class="Q' + questionIndex + '" id="Q' + questionIndex + 'A' + i + '" value="' + answer + '">' + answer + '</label></div>';
+        }
+        $('#answerOf'+questionIndex).html(b);
+        whatSequence.push(questionIndex);
+        questionIndex++;
     }
     function submitQ4(index){ // 척도형
         a='';
@@ -268,6 +297,10 @@
         var min = $('#InputMin').val() + '';
         var max = $('#InputMax').val() + '';
         var avg = Number(max) + Number(min);
+        if(text == null){
+            alert("질문을 만들어주세요.");
+            return;
+        }
         if(min == '' || max == ''){
             alert("빈칸을 입력해주세요^^");
             return;
@@ -280,11 +313,11 @@
             alert("숫자만 입력해주세요");
             return;
         }
-        a += '<div class= "my-1" id="wantRemove'+questionIndex+'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>척도형</span>';
+        a += '<div class= "my-1" id="wantRemove'+questionIndex+'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span id="Type'+questionIndex+'">척도형</span>';
         a += '<div class="input-group mb-3 my-2"> <input type="text" class="form-control" readonly id="question'+questionIndex+'" name="question'+questionIndex+'" placeholder="" value="'+ text +'" aria-label="" aria-describedby="button-addon2">';
-        a += '<div class="input-group-append"> <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="removeQuestion('+questionIndex+')">삭제</button> ';
+        a += '<div class="input-group-append"> <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="removeQuestion('+questionIndex+')">삭제</button> </div></div>';
 
-        a += min +'<input type="range" id="range' + questionIndex + '">' + max + '<input type="hidden" id="min' + questionIndex + '" value="' + min + '"><input type="hidden" id="max' + questionIndex + '" value="' + max + '"><br></div></div></div>';
+        a += min +'<input type="range" id="range' + questionIndex + '">' + max + '<input type="hidden" id="min' + questionIndex + '" value="' + min + '"><input type="hidden" id="max' + questionIndex + '" value="' + max + '"><br></div></div>';
         a += '<hr style="border : 1px dotted black"></div>'
 
         $('#questionYouMade').append(a);
@@ -295,13 +328,20 @@
             step : 1,
             enabled : false
         });
-
+        whatSequence.push(questionIndex);
+        questionIndex++;
     }
     function submitQ5(index){
         a = '';
         var text = $('#InputQ5').val();
-        a += '<div class= "my-1" id="wantRemove'+questionIndex+'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span>파일업로드형</span>'
+        if(text == null){
+            alert("질문을 만들어주세요.");
+            return;
+        }
+        a += '<div class= "my-1" id="wantRemove'+questionIndex+'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span id="Type'+questionIndex+'">파일업로드형</span>'
             + '<div class="input-group mb-3 my-2"> <input type="text" class="form-control" readonly id="question'+questionIndex+'" name="question'+questionIndex+'" placeholder="" value="'+ text +'" aria-label="" aria-describedby="button-addon2"> <div class="input-group-append"> <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="removeQuestion('+questionIndex+')">삭제</button></div></div><input type="file" disabled><hr style="border:1px dotted black"></div>';
+        whatSequence.push(questionIndex);
+        questionIndex++;
         $('#questionYouMade').append(a);
     }
 
@@ -357,18 +397,82 @@
         var writer_id = user.id;
         var writer_name = type.for_header;
         var title = $('#bbsTitle').val();
+        if(title.length == 0){
+            alert("제목을 입력해주세요.");
+            return;
+        }
         var last_modified = formatDate(new Date());
         var text = CKEDITOR.instances.regUpdateContent.getData();
+        if(text.length == 0){
+            alert("내용을 입력해주세요.");
+            return;
+        }
         var starting_date = $('#InputStartDate').val();
         var closing_date = $('#InputFinishDate').val();
+        if(starting_date.length == 0 || closing_date.length == 0){
+            alert("시작일/종료일을 입력해주세요.");
+            return;
+        }
         var level = '';
-        var for_who = $('#forWho').val();
         for(var i = 0 ; i < 4 ; ++i){
             if($('input:checkbox[id="inlineCheckbox' + i +'"]').is(":checked") ==  true)
                 level += '|'+$('#inlineCheckbox'+i).val()+'|';
         }
+        if(level.length == 0){
+            alert("신청대상을 선택해주세요.");
+            return;;
+        }
+        var for_who = $('#forWho').val();
 
-        var data = major+"-/-/-"+writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+num+"-/-/-"+last_modified+"-/-/-"+text+"-/-/-"+starting_date+"-/-/-"+closing_date+"-/-/-"+level+"-/-/-"+for_who;
+        // -/#/- 로 문제마다 구분 -/!/-로 문제 유형과 답변 구분  -/@/- 로 답변별 구분    1 주관 2 단일객관 3 다중객관 4척도형 5 파일업로드형
+        var question = '';
+        var howManyQuestion = whatSequence.length;
+        if(howManyQuestion == 0){
+            alert('질문을 만들어주세요');
+            return;
+        }
+        for(var k = 1 ; k <= howManyQuestion ; k ++){
+            var i = whatSequence[k-1]
+            if($('#Type'+i).text() == '주관식'){
+                question += '1-/!/-';
+                question += $('#question'+i).val();
+            }
+            if($('#Type'+i).text() == "단일객관식"){
+                question += "2-/!/-";
+                question += $('#question'+i).val() + "-/@/-";
+                var length = $('.Q'+i).length;
+                for(var j = 1 ; j <= length ; j++){
+                    var text = $('#Q'+i+'A'+j).val();
+                    question += text;
+                    if(j != length)
+                        question += "-/@/-"
+                }
+            }
+            if($('#Type'+i).text() == "다중객관식"){
+                question += "3-/!/-";
+                question += $('#question'+i).val() + "-/@/-";
+                var length = $('.Q'+i).length;
+                for(var j = 1 ; j <= length ; j++){
+                    var text = $('#Q'+i+'A'+j).val();
+                    question += text;
+                    if(j != length)
+                        question += "-/@/-"
+                }
+            }
+            if($('#Type'+i).text() == '척도형'){
+                question += "4-/!/-";
+                question += $('#question'+i).val() + "-/@/-"
+                question += $('#min'+i).val() + "-/@/-" + $('#max'+i).val();
+            }
+            if($('#Type'+i).text() == '파일업로드형'){
+                question += '5-/!/-';
+                question += $('#question'+i).val();
+            }
+            if(k != howManyQuestion)
+                question += "-/#/-"
+        }
+
+        var data = writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+last_modified+"-/-/-"+text+"-/-/-"+starting_date+"-/-/-"+closing_date+"-/-/-"+level+"-/-/-"+for_who+"-/-/-"+question+"-/-/-"+type.board_level;
 
         var check = confirm(data+"를 추가하시겠습니까?");
         if (check) {
