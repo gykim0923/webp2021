@@ -58,8 +58,8 @@
         <label class="form-check-label" for="inlineCheckbox2">조교</label>
     </div>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="학부생">
-        <label class="form-check-label" for="inlineCheckbox3">학부생</label>
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="학생">
+        <label class="form-check-label" for="inlineCheckbox3">학생</label>
     </div>
 </div>
 

@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import kr.ac.kyonggi.swaig.common.sql.Config;
 import kr.ac.kyonggi.swaig.handler.dto.settings.BBSDTO;
+import kr.ac.kyonggi.swaig.handler.dto.settings.RegAnswerDTO;
+import kr.ac.kyonggi.swaig.handler.dto.settings.RegQuestionDTO;
 import kr.ac.kyonggi.swaig.handler.dto.settings.RegisterDTO;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
@@ -14,6 +16,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterDAO {
     public static RegisterDAO it;
@@ -108,5 +112,82 @@ public class RegisterDAO {
             DbUtils.closeQuietly(conn);
         }
         return "success";
+    }
+
+    public String whoAnswerIt(String data) {
+        String arr[] = data.split("-/-/-");// 0= board_number 1= user_id
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_reg_answer WHERE reg_id=? AND writer_id=?;",
+                    new MapListHandler(), arr[0], arr[1]);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "fail";
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<RegAnswerDTO> list = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<RegAnswerDTO>>() {}.getType());
+        if(list.isEmpty())
+            return "empty";
+        for(int i = 0 ; i < list.size() ; ++i)
+            list.get(i).answer = getRemoveHtmlText(list.get(i).answer);
+        return gson.toJson(list);
+    }
+
+    public ArrayList<RegQuestionDTO> getQuestions(String data) {
+        String arr[] = data.split("-/-/-");// 0= id 1=type.for_header 2= user.id 3= type.board_level
+        List<Map<String, Object>> listOfMaps = null;
+        Gson gson = new Gson();
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_reg WHERE id=?;", new MapListHandler(), arr[0]);
+            ArrayList<RegisterDTO> reqList = gson.fromJson(gson.toJson(listOfMaps),
+                    new TypeToken<List<RegisterDTO>>() {
+                    }.getType());
+            if (!reqList.get(0).writer_id.equals(arr[2]) && !reqList.get(0).level.contains(arr[1]) && Integer.valueOf(arr[3]) != 0) //권한 확인 (작성지인지, 신청 대상인지, 관리자인지 확인)
+                return null;
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_regquestion WHERE reg_id=? ORDER BY question_num;", new MapListHandler(), arr[0]);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        ArrayList<RegQuestionDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<RegQuestionDTO>>() {}.getType());
+        for(int i = 0 ; i < selected.size() ; ++i)
+            selected.get(i).question_content = getRemoveHtmlText(selected.get(i).question_content);
+        return selected;
+    }
+
+    private String getRemoveHtmlText(String content) {
+        if(content == null)
+            return null;
+        Pattern SCRIPTS = Pattern.compile("<(no)?script[^>]*>.*?</(no)?script>", Pattern.DOTALL);
+        Pattern STYLE = Pattern.compile("<style[^>]*>.*</style>", Pattern.DOTALL);
+        //Pattern TAGS = Pattern.compile("<(\"[^\"]*\"|\'[^\']*\'|[^\'\">])*>");
+        //Pattern nTAGS = Pattern.compile("<\\w+\\s+[^<]*\\s*>");
+        Pattern ENTITY_REFS = Pattern.compile("&[^;]+;");
+        Pattern WHITESPACE = Pattern.compile("\\s\\s+");
+        Pattern WHITE = Pattern.compile("<!--");
+        Pattern ON = Pattern.compile("(on)+[a-z]*=");
+
+        Matcher m;
+
+        m = SCRIPTS.matcher(content);
+        content = m.replaceAll("");
+        m = STYLE.matcher(content);
+        content = m.replaceAll("");
+        m = ENTITY_REFS.matcher(content);
+        content = m.replaceAll("");
+        m = WHITESPACE.matcher(content);
+        content = m.replaceAll(" ");
+        m = WHITE.matcher(content);
+        content = m.replaceAll("");
+        m = ON.matcher(content);
+        content = m.replaceAll("");
+        return content;
     }
 }

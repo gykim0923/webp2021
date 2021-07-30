@@ -321,14 +321,22 @@ public class AjaxAction implements Action {
                 if(type.board_level==0)
                     result=RegisterDAO.getInstance().insertReg(data);
                 break;
-//            case "modifyBbs":
+//            case "modifyReg":
 //                if(type.board_level==0)
 //                    result=BBSDAO.getInstance().modifyBbs(data);
 //                break;
-//            case "deleteBbs":
+//            case "deleteReg":
 //                if(type.board_level==0)
 //                    result=BBSDAO.getInstance().deleteBbs(data);
 //                break;
+            case "whoAnswerIt": //현재 유저가 이미 신청한 사람인지 확인하는 것이기 때문에 권한 확인 필요 없음
+                data = data.concat("-/-/-" + user.id);
+                result = RegisterDAO.getInstance().whoAnswerIt(data);
+                break;
+            case "getQuestions":   //DAO에서 권한 확인
+                data = data.concat("-/-/-" + type.for_header + "-/-/-" + user.id + "-/-/-" + type.board_level);
+                result = gson.toJson(RegisterDAO.getInstance().getQuestions(data));
+                break;
         }
 
         return result;
