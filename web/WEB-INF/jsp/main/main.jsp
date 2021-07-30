@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     /**
      * [공통] url 제어
@@ -29,6 +28,7 @@
     String type = (String) session.getAttribute("type");
 
 %>
+
 <%
     /**
      * for Main.jsp
@@ -41,72 +41,9 @@
     String bbs23 = (String) request.getAttribute("bbs23");
     String registerAllInfo = (String) request.getAttribute("registerAllInfo");
 %>
-<%--<!DOCTYPE html>--%>
-<%--<html>--%>
-
-
-<%--<body>--%>
-<%--<div id="app">--%>
-
-<%--    <div id="main">--%>
-<%--&lt;%&ndash;        <header class="mb-3 bg-light">&ndash;%&gt;--%>
-<%--            <%@include file="header_v2.jsp"%>--%>
-<%--&lt;%&ndash;        </header>&ndash;%&gt;--%>
-
-
-<%--        <footer>--%>
-<%--            <div class="footer clearfix mb-0 text-muted">--%>
-<%--                <div class="float-start">--%>
-<%--                    <p>2021 &copy; Mazer</p>--%>
-<%--                </div>--%>
-<%--                <div class="float-end">--%>
-<%--                    <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a--%>
-<%--                            href="http://ahmadsaugi.com">A. Saugi</a></p>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </footer>--%>
-<%--    </div>--%>
-<%--</div>--%>
-<%--<script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>--%>
-<%--<script src="/assets/js/bootstrap.bundle.min.js"></script>--%>
-
-<%--&lt;%&ndash;<script src="/assets/vendors/apexcharts/apexcharts.js"></script>&ndash;%&gt;--%>
-<%--&lt;%&ndash;<script src="/assets/js/pages/dashboard.js"></script>&ndash;%&gt;--%>
-
-<%--<script src="/assets/js/main.js"></script>--%>
-<%--</body>--%>
-
-<%--</html>--%>
-
-
-
-
-
-
-
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <%@include file="common_settings.jsp"%>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dashboard - Mazer Admin Dashboard</title>
-
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/assets/css/bootstrap.css">
-
-        <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
-
-        <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
-        <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
-        <link rel="stylesheet" href="/assets/css/app.css">
-        <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
-    </head>
-</head>
-
+<html>
+<%@include file="common_settings.jsp"%>
 <body>
 <div id="app">
     <%@include file="aside_v2.jsp"%>
@@ -234,7 +171,6 @@
 </div>
 <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
-
 <script src="/assets/js/main.js"></script>
 </body>
 
