@@ -49,12 +49,4 @@
   <link rel="stylesheet" href="/assets/css/app.css">
   <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
 
-
-<%--  <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>--%>
-<%--  <script src="/assets/js/bootstrap.bundle.min.js"></script>--%>
-
-<%--  <script src="/assets/vendors/apexcharts/apexcharts.js"></script>--%>
-<%--  <script src="/assets/js/pages/dashboard.js"></script>--%>
-
-<%--  <script src="/assets/js/main.js"></script>--%>
 </head>

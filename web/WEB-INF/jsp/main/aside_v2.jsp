@@ -12,7 +12,7 @@
             <div class="d-flex justify-content-between">
                 <div class="logo">
                     <a href="main.kgu">
-                        <%--                        <img src="/img/logo/kgu_logo(500x300).png" alt="Logo" srcset="" style="height: auto">--%>
+                        <%--<img src="/img/logo/kgu_logo(500x300).png" alt="Logo" srcset="" style="height: auto">--%>
                         KGU
                     </a>
                 </div>

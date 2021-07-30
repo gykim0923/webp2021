@@ -121,7 +121,7 @@
                     <div class="container my-5 py-5">
                         <div class="row align-items-md-stretch">
                             <div class="col-lg-9 py-2" id="main1_left" >
-                                <div id="myCarousel" class="carousel slide  shadow rounded" data-bs-ride="carousel" style="margin-bottom : 0px;">
+                                <div id="myCarousel" class="carousel slide card" data-bs-ride="carousel" style="margin-bottom : 0px;">
                                     <div class="carousel-indicators" id="carouselButton">
                                         <%--   슬라이더 사진 개수와 동일한 버트 만들어 줘야함 makecarouselCard에 있음--%>
                                     </div>
@@ -139,7 +139,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-3 py-2" id="main1_right">
-                                <div class=" h-100 bg-light border  shadow rounded" id="favorite_menu"></div>
+                                <div class=" h-100  border card" id="favorite_menu"></div>
                             </div>
                         </div>
 
@@ -148,7 +148,7 @@
                         <div class="row align-items-md-stretch">
 
                             <div class="col-lg py-2" id="main2_left"  style="height : 400px;">
-                                <div class=" h-100 p-5 bg-light border shadow rounded">
+                                <div class=" h-100 p-5  border card">
                                     <div>
                                         <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
                                             <button class="nav-link active" id="nav-21-tab" data-bs-toggle="tab" data-bs-target="#nav-21" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
@@ -165,7 +165,7 @@
                             </div>
 
                             <div class="col-lg py-2" id="main2_center"  style="height : 400px;">
-                                <div class=" h-100 p-5 bg-light border shadow rounded">
+                                <div class=" h-100 p-5  border card">
                                     <div>
                                         <div class="nav nav-tabs mb-3" id="nav-tab2" role="tablist">
                                             <button class="nav-link active" id="nav-30-tab" data-bs-toggle="tab" data-bs-target="#nav-30" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
@@ -180,7 +180,7 @@
                             </div>
 
                             <div class="col-lg-3 py-2" id="main2_right" style="height : 400px;">
-                                <div class=" h-100 p-5 bg-light border shadow rounded">
+                                <div class=" h-100 p-5  border card">
                                     <div class="row">
                                         <h2><strong>일정</strong><i class="bi bi-plus col-sm-2 text-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addSearchModal()"></i></h2>
                                     </div>
