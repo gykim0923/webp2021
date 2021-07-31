@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<header class='mb-3'>
+<header>
   <nav class="navbar navbar-expand navbar-light ">
     <div class="container-fluid">
       <a href="#" class="burger-btn d-block">

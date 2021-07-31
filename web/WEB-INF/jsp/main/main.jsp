@@ -55,14 +55,14 @@
                 <%--Main start--%>
                 <%--                여기서 부터 main 복붙--%>
                 <main class="">
-                    <div class="container my-5 py-5">
+                    <div class="container">
                         <div class="row align-items-md-stretch">
                             <div class="col-lg-9 py-2" id="main1_left" >
-                                <div id="myCarousel" class="carousel slide card" data-bs-ride="carousel" style="margin-bottom : 0px;">
+                                <div id="myCarousel" class="h-100 carousel slide card" data-bs-ride="carousel" style="margin-bottom : 0px;">
                                     <div class="carousel-indicators" id="carouselButton">
                                         <%--   슬라이더 사진 개수와 동일한 버트 만들어 줘야함 makecarouselCard에 있음--%>
                                     </div>
-                                    <div class="carousel-inner rounded2" id="carouselCard">
+                                    <div class="carousel-inner h-100 " id="carouselCard">
                                         <%--     makecarouselCard에 있음--%>
                                     </div>
                                     <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
@@ -76,7 +76,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-3 py-2" id="main1_right">
-                                <div class=" h-100  border card" id="favorite_menu"></div>
+                                <div class=" h-100 border card" id="favorite_menu"></div>
                             </div>
                         </div>
 
@@ -85,7 +85,7 @@
                         <div class="row align-items-md-stretch">
 
                             <div class="col-lg py-2" id="main2_left"  style="height : 400px;">
-                                <div class=" h-100 p-5  border card">
+                                <div class=" h-100 p-xxl-5 p-lg-4 p-3 border card">
                                     <div>
                                         <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
                                             <button class="nav-link active" id="nav-21-tab" data-bs-toggle="tab" data-bs-target="#nav-21" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
@@ -102,7 +102,7 @@
                             </div>
 
                             <div class="col-lg py-2" id="main2_center"  style="height : 400px;">
-                                <div class=" h-100 p-5  border card">
+                                <div class=" h-100 p-xxl-5 p-lg-4 p-3 border card">
                                     <div>
                                         <div class="nav nav-tabs mb-3" id="nav-tab2" role="tablist">
                                             <button class="nav-link active" id="nav-30-tab" data-bs-toggle="tab" data-bs-target="#nav-30" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
@@ -117,9 +117,9 @@
                             </div>
 
                             <div class="col-lg-3 py-2" id="main2_right" style="height : 400px;">
-                                <div class=" h-100 p-5  border card">
-                                    <div class="row">
-                                        <h2><strong>일정</strong><i class="bi bi-plus col-sm-2 text-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addSearchModal()"></i></h2>
+                                <div class=" h-100 p-xxl-5 p-lg-4 p-3 border card">
+                                    <div class="">
+                                        <strong>일정</strong><i class="bi bi-plus col-sm-2 text-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addSearchModal()"></i>
                                     </div>
                                     <div class="" id="schContent"></div>
                                 </div>
@@ -283,25 +283,29 @@
 
         if(sliderList.length==0){ // 데이터가 없을 시 디폴트 화면 구성
             text2 +='<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button>'
-            text +='<div class="carousel-item active">';
+            text +='<div class="h-100 carousel-item active">';
             text +='<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg>'
             text +='<div class="container"> <div class="carousel-caption"> <h1>등록된 대문이 없습니다.</h1> <p>관리자 모드에서 대문을 추가해주시기 바랍니다.</p> </div> </div>'
             text +='</div>';
         }
 
         for(var j=0; j<sliderList.length; j++){
-            if(j==0)
+            if(j==0){
                 text2 +='<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="'+j+'" class="active" aria-current="true" aria-label="Slide '+j+'"></button>'
-            else
+            }
+            else{
                 text2 +='<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="'+j+'" aria-current="true" aria-label="Slide '+j+'"></button>'
+            }
         }
         list2.append(text2);
         for (var i =0; i< sliderList.length; i++){
 
-            if(i==0)
+            if(i==0){
                 text +='<div class="carousel-item active">'
-            else
+            }
+            else{
                 text +='<div class="carousel-item">'
+            }
             text += '<img width="100%" height="100%" src = "'+sliderList[i].slider_img+'">'
             text += '</div>';
         }
@@ -321,12 +325,15 @@
             var date = new Date(scheduleAllInfo[i].date);
             text += '<div class="bd-callout ';
             var diffDay = (date.getTime() - today.getTime()) / (24 * 60 * 60 * 1000);
-            if(diffDay < 0)
+            if(diffDay < 0){
                 text += 'bd-callout-end';
-            else if(diffDay < 10)
+            }
+            else if(diffDay < 10){
                 text += 'bd-callout-warning';
-            else
+            }
+            else{
                 text += 'bd-callout-info';
+            }
             text +=' row"><div class="border-end col-xxl-5 col-lg-12 col-sm-5"><strong>'+formatDate(date)+'</strong></div><div class="border-end col-xxl-7 col-lg-12 col-sm-7">'+scheduleAllInfo[i].content+'</div></div>';
         }
         schedule.html(text);
