@@ -44,4 +44,9 @@
   <link rel="stylesheet" href="/assets/css/app.css">
   <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
 
+
+<%--  sweet alert--%>
+  <link rel="stylesheet" href="assets/vendors/sweetalert2/sweetalert2.min.css">
+
+  <script src="assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 </head>

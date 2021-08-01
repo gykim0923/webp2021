@@ -1,5 +1,4 @@
-<%@ page import="kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO" %>
-<%@ page import="kr.ac.kyonggi.swaig.handler.dao.user.UserDAO" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: wooris
   Date: 2021-07-05
