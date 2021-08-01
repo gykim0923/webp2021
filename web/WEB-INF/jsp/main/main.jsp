@@ -218,20 +218,29 @@
         var bbs21=<%=bbs21%>;
         var bbs22=<%=bbs22%>;
         var bbs23=<%=bbs23%>;
-        var text21='';
-        var text22='';
-        var text23='';
+        var text21='<ul class="list-group">';
+        var text22='<ul class="list-group">';
+        var text23='<ul class="list-group">';
         for (var i=0; i<bbs21.length; i++){
             var url21 = 'bbs.kgu?major=main&num=21&mode=view&id='+bbs21[i].id;
-            text21+='<div><a href="'+url21+'">'+bbs21[i].title+'</a></div>';
+            text21+='<li class="border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+                +'<a href="'+url21+'"><span>'+bbs21[i].title+'</span></a>'
+                +'<a href="'+url21+'"><span>'+bbs21[i].last_modified+'</span></a>'
+                +'</li></ul>';
         }
         for (var i=0; i<bbs22.length; i++){
             var url22 = 'bbs.kgu?major=main&num=22&mode=view&id='+bbs22[i].id;
-            text22+='<div><a href="'+url22+'">'+bbs22[i].title+'</a></div>';
+            text22+='<li class="border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+                +'<a href="'+url22+'"><span>'+bbs22[i].title+'</span></a>'
+                +'<a href="'+url22+'"><span>'+bbs22[i].last_modified+'</span></a>'
+                +'</li></ul>';
         }
         for (var i=0; i<bbs23.length; i++){
             var url23 = 'bbs.kgu?major=main&num=23&mode=view&id='+bbs23[i].id;
-            text23+='<div><a href="'+url23+'">'+bbs23[i].title+'</a></div>';
+            text23+='<li class="border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+                +'<a href="'+url23+'"><span>'+bbs23[i].title+'</span></a>'
+                +'<a href="'+url23+'"><span>'+bbs23[i].last_modified+'</span></a>'
+                +'</li></ul>';
         }
         notice21.append(text21);
         notice22.append(text22);
@@ -268,7 +277,8 @@
         for (var i=0;i<favorite_menu.length;i++){
             text+='<a href="'+favorite_menu[i].url+'" class="list-group-item list-group-item-action py-3 lh-tight">'
                 +'<div class="d-flex w-100 align-items-center justify-content-between">'
-                +'<p class="h3">'+favorite_menu[i].name+'</p>'
+                +'<p class="h3 m-0">'+favorite_menu[i].name+'</p>'
+                +'<i class="h3 m-0 bi-stack"></i>'
                 +'</div>'
                 +'</a>';
         }
