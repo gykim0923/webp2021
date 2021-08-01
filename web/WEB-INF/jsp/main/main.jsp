@@ -156,16 +156,6 @@
                 <%--Main end--%>
             </div>
 <%@include file="footer.jsp"%>
-<%--            <footer>--%>
-<%--                <div class="footer clearfix mb-0 text-muted">--%>
-<%--                    <div class="float-start">--%>
-<%--                        <p>2021 &copy; asdasdad</p>--%>
-<%--                    </div>--%>
-<%--                    <div class="float-end">--%>
-<%--                        <p>ddddddddd</p>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </footer>--%>
         </div>
     </div>
 </div>
