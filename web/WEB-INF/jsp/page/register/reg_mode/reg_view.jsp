@@ -9,6 +9,7 @@
 <%
     String getReg = (String) request.getAttribute("getReg");
 %>
+<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 <div>
     <div class="h2" id="view_title"></div>
     <hr>
@@ -157,10 +158,10 @@
                 if(it.question_type == '4'){
                     var text = '';
                     var answers = it.question_content.split('-/@/-');
-                    text += '<div class="form-group mt-3" id="question' + i + '"><label>'+ (i+1) + '.' + answers[0] + '</label><div class="for_slider" id="sliderPanel' + i + '"></div>';
+                    text += '<div class="form-group mt-3" id="question' + i + '"><label for="customRange3" class="form-label">'+ (i+1) + '.' + answers[0] + '</label><div class="for_slider" id="sliderPanel' + i + '"></div>';
                     panel.append(text);
                     var sliderPanel = $('#sliderPanel'+i);
-                    var text = answers[1] + ' <input type="range" id="range' + i + '"> ' + answers[2];
+                    var text = '<div class="d-flex justify-content-between align-items-center"><span>'+answers[1] + '&nbsp;</span><input type="range" class="form-range" id="range' + i + '"> <span>&nbsp;'+answers[2]+'</span></div>' ;
                     sliderPanel.append(text);
                     $('#range'+i).slider({
                         id : 'getRange'+i,
@@ -173,11 +174,11 @@
                 }
                 if(it.question_type == '5'){
                     var text = '';
-                    text += '<div class="form-group mt-3" id="question' + i + '"><label>'+ (i+1) + '.' + it.question_content + '</label><input type="file" name="answer' + i + '"></div>';
+                    text += '<div class="form-group mt-3" id="question' + i + '"><label>'+ (i+1) + '.' + it.question_content + '</label><div><input type="file" name="answer' + i + '"></div></div>';
                     panel.append(text);
                 }
             }
-            $('#questions').append('<div class="col-md-4"></div><button class="btn btn-secondary" onclick="submitNewAnswer()">제출할래요</button>');
+            $('#questions').append('<div class="col-md-4"></div><button class="btn btn-secondary mt-3" onclick="submitNewAnswer()">제출할래요</button>');
         }
     }
 
