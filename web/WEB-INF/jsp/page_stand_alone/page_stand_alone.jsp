@@ -89,6 +89,7 @@
                                         </c:when>
                                         <%--            registerBbs--%>
                                         <c:when test="${jsp == '\"reg_list\"' || jsp == '\"reg_view\"' || jsp == '\"reg_write\"' || jsp == '\"reg_modify\"'}">
+                                           <%System.out.println("페이지스탠드어론");%>
                                             <%@include file="/WEB-INF/jsp/page_stand_alone/register/register.jsp" %>
                                         </c:when>
 
