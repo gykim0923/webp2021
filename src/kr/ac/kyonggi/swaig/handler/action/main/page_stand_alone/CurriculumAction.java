@@ -1,4 +1,4 @@
-package kr.ac.kyonggi.swaig.handler.action.main.page;
+package kr.ac.kyonggi.swaig.handler.action.main.page_stand_alone;
 
 import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.CustomAction;
@@ -22,6 +22,6 @@ public class CurriculumAction extends CustomAction {
 
         request.setAttribute("jsp", gson.toJson("curriculum")); //curriculum.jsp
 
-        return "RequestDispatcher:jsp/page/page.jsp";
+        return "RequestDispatcher:jsp/page_stand_alone/page_stand_alone.jsp";
     }
 }

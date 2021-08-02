@@ -1,10 +1,8 @@
-package kr.ac.kyonggi.swaig.handler.action.main.page;
+package kr.ac.kyonggi.swaig.handler.action.main.page_stand_alone;
 
 import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.CustomAction;
-import kr.ac.kyonggi.swaig.handler.action.main.page.ProfessorAction;
 import kr.ac.kyonggi.swaig.handler.dao.settings.ProfessorDAO;
-import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +18,6 @@ public class ProfessorAction extends CustomAction  {
 	    request.setAttribute("getProfessorlist", gson.toJson(ProfessorDAO.getInstance().getProfessor()));
 
 		request.setAttribute("jsp", gson.toJson("professor")); //information.jsp
-		return "RequestDispatcher:jsp/page/page.jsp";
+		return "RequestDispatcher:jsp/page_stand_alone/page_stand_alone.jsp";
 	}
 }

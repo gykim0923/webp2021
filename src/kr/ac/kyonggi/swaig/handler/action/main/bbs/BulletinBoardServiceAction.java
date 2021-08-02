@@ -81,6 +81,6 @@ public class BulletinBoardServiceAction extends CustomAction {
         String bbs_mode = "bbs_"+mode;
         request.setAttribute("jsp", gson.toJson(bbs_mode)); //bbs_*.jsp
 
-        return "RequestDispatcher:jsp/page/page.jsp";
+        return "RequestDispatcher:jsp/page_stand_alone/page_stand_alone.jsp";
     }
 }

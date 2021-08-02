@@ -15,12 +15,12 @@
 %>
 <c:choose>
     <c:when test="${jsp == '\"reg_list\"'}">
-        <%@include file="/WEB-INF/jsp/page/register/reg_mode/reg_list.jsp" %>
+        <%@include file="/WEB-INF/jsp/page_stand_alone/register/reg_mode/reg_list.jsp" %>
     </c:when>
     <c:when test="${jsp == '\"reg_view\"'}">
-        <%@include file="/WEB-INF/jsp/page/register/reg_mode/reg_view.jsp" %>
+        <%@include file="/WEB-INF/jsp/page_stand_alone/register/reg_mode/reg_view.jsp" %>
     </c:when>
     <c:when test="${jsp == '\"reg_write\"' || jsp == '\"reg_modify\"'}">
-        <%@include file="/WEB-INF/jsp/page/register/reg_mode/reg_upload.jsp" %>
+        <%@include file="/WEB-INF/jsp/page_stand_alone/register/reg_mode/reg_upload.jsp" %>
     </c:when>
 </c:choose>

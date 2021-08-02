@@ -67,32 +67,6 @@
                             <div class="col-xxl-10 col-lg-9 py-2">
                                 <div class=" h-100 p-5 bg-light border shadow rounded">
                                     <c:choose>
-                                        <%--            menu--%>
-                                        <c:when test="${jsp == '\"contact\"'}">
-                                            <%@include file="/WEB-INF/jsp/page/menu/contact.jsp" %>
-                                        </c:when>
-                                        <c:when test="${jsp == '\"information\"'}">
-                                            <%@include file="/WEB-INF/jsp/page/menu/information.jsp" %>
-                                        </c:when>
-                                        <c:when test="${jsp == '\"curriculum\"'}">
-                                            <%@include file="/WEB-INF/jsp/page/menu/curriculum.jsp" %>
-                                        </c:when>
-                                        <c:when test="${jsp == '\"club\"'}">
-                                            <%@include file="/WEB-INF/jsp/page/menu/club.jsp" %>
-                                        </c:when>
-                                        <c:when test="${jsp == '\"professor\"'}">
-                                            <%@include file="/WEB-INF/jsp/page/menu/professor.jsp" %>
-                                        </c:when>
-
-                                        <%--            bbs--%>
-                                        <c:when test="${jsp == '\"bbs_list\"' || jsp == '\"bbs_view\"' || jsp == '\"bbs_write\"' || jsp == '\"bbs_modify\"'}">
-                                            <%@include file="/WEB-INF/jsp/page/bbs/bbs.jsp" %>
-                                        </c:when>
-                                        <%--            registerBbs--%>
-                                        <c:when test="${jsp == '\"reg_list\"' || jsp == '\"reg_view\"' || jsp == '\"reg_write\"' || jsp == '\"reg_modify\"'}">
-                                            <%@include file="/WEB-INF/jsp/page/register/register.jsp" %>
-                                        </c:when>
-
                                         <%--            admin--%>
                                         <c:when test="${jsp == '\"admin_main\"'}">
                                             <%@include file="/WEB-INF/jsp/page/admin/admin_main.jsp" %>

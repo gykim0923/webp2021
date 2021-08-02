@@ -68,6 +68,6 @@ public class RegisterAction extends CustomAction {
         request.setAttribute("jsp", gson.toJson(reg_mode)); //bbs_*.jsp
 
         System.out.println(reg_mode);
-        return "RequestDispatcher:jsp/page/page.jsp";
+        return "RequestDispatcher:jsp/page_stand_alone/page_stand_alone.jsp";
     }
 }

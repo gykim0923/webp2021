@@ -1,4 +1,4 @@
-package kr.ac.kyonggi.swaig.handler.action.main.page;
+package kr.ac.kyonggi.swaig.handler.action.main.page_stand_alone;
 
 import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.Action;
@@ -21,6 +21,6 @@ public class InformationAction extends CustomAction {
         request.setAttribute("information", gson.toJson(HomeDAO.getInstance().getText(major,num)));
 
         request.setAttribute("jsp", gson.toJson("information")); //information.jsp
-        return "RequestDispatcher:jsp/page/page.jsp";
+        return "RequestDispatcher:jsp/page_stand_alone/page_stand_alone.jsp";
     }
 }

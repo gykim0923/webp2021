@@ -15,12 +15,12 @@
 %>
 <c:choose>
   <c:when test="${jsp == '\"bbs_list\"'}">
-    <%@include file="/WEB-INF/jsp/page/bbs/bbs_mode/bbs_list.jsp" %>
+    <%@include file="/WEB-INF/jsp/page_stand_alone/bbs/bbs_mode/bbs_list.jsp" %>
   </c:when>
   <c:when test="${jsp == '\"bbs_view\"'}">
-    <%@include file="/WEB-INF/jsp/page/bbs/bbs_mode/bbs_view.jsp" %>
+    <%@include file="/WEB-INF/jsp/page_stand_alone/bbs/bbs_mode/bbs_view.jsp" %>
   </c:when>
   <c:when test="${jsp == '\"bbs_write\"' || jsp == '\"bbs_modify\"'}">
-    <%@include file="/WEB-INF/jsp/page/bbs/bbs_mode/bbs_upload.jsp" %>
+    <%@include file="/WEB-INF/jsp/page_stand_alone/bbs/bbs_mode/bbs_upload.jsp" %>
   </c:when>
 </c:choose>
