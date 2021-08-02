@@ -127,7 +127,7 @@
     modal_header += '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
 
     var modal_body = '';
-    modal_body += '<div>전공 아이디 (영문/숫자 혼용 가능) <mark>한번 생성하신 아이디는 수정하실 수 없습니다.</mark></div>'
+    modal_body += '<div>전공 아이디 (영문/숫자 혼용 가능) </div><mark>한번 생성하신 아이디는 수정하실 수 없습니다.</mark></div></div>'
       + '<input type="text" class="form-control" id="add_major_id" name="new_table" value="" placeholder="전공아이디를 입력해주세요">'
       + '<div>전공이름</div><input type="text" class="form-control" id="add_major_name" name="new_table" value="" placeholder="전공이름을 입력해주세요">'
       + '<div>학과위치</div><input type="text" class="form-control" id="add_major_location" name="new_table" value="" placeholder="학과위치를 입력해주세요">'
