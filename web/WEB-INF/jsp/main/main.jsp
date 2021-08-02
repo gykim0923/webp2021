@@ -191,7 +191,7 @@
             var url30 = 'reg.kgu?major=main&num=30&mode=view&id='+registerAllInfo[i].id;
             text30+='<li class="border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
                 +'<a href="'+url30+'"><span>'+registerAllInfo[i].title+'</span></a>'
-                +'<a href="'+url30+'"><span>'+registerAllInfo[i].last_modified+'</span></a>'
+                +'<a href="'+url30+'"><span>'+formatDate(registerAllInfo[i].last_modified)+'</span></a>'
                 +'</li></ul>';
         }
         nav30.append(text30);
@@ -230,7 +230,7 @@
             var url21 = 'bbs.kgu?major=main&num=21&mode=view&id='+bbs21[i].id;
             text21+='<li class="border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
                 +'<a href="'+url21+'"><span>'+bbs21[i].title+'</span></a>'
-                +'<a href="'+url21+'"><span>'+bbs21[i].last_modified+'</span></a>'
+                +'<a href="'+url21+'"><span>'+formatDate(bbs21[i].last_modified)+'</span></a>'
                 +'</li></ul>';
         }
         for (var i=0; i<bbs22.length; i++){
@@ -240,7 +240,7 @@
             var url22 = 'bbs.kgu?major=main&num=22&mode=view&id='+bbs22[i].id;
             text22+='<li class="border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
                 +'<a href="'+url22+'"><span>'+bbs22[i].title+'</span></a>'
-                +'<a href="'+url22+'"><span>'+bbs22[i].last_modified+'</span></a>'
+                +'<a href="'+url22+'"><span>'+formatDate(bbs22[i].last_modified)+'</span></a>'
                 +'</li></ul>';
         }
         for (var i=0; i<bbs23.length; i++){
@@ -250,7 +250,7 @@
             var url23 = 'bbs.kgu?major=main&num=23&mode=view&id='+bbs23[i].id;
             text23+='<li class="border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
                 +'<a href="'+url23+'"><span>'+bbs23[i].title+'</span></a>'
-                +'<a href="'+url23+'"><span>'+bbs23[i].last_modified+'</span></a>'
+                +'<a href="'+url23+'"><span>'+formatDate(bbs23[i].last_modified)+'</span></a>'
                 +'</li></ul>';
         }
         notice21.append(text21);
@@ -355,12 +355,12 @@
             else{
                 text += 'bd-callout-info';
             }
-            text +=' row"><div class="border-end col-xxl-5 col-lg-12 col-sm-5"><strong>'+formatDate(date)+'</strong></div><div class="border-end col-xxl-7 col-lg-12 col-sm-7">'+scheduleAllInfo[i].content+'</div></div>';
+            text +=' row"><div class="border-end col-xxl-5 col-lg-12 col-sm-5"><strong>'+formatDate2(date)+'</strong></div><div class="border-end col-xxl-7 col-lg-12 col-sm-7">'+scheduleAllInfo[i].content+'</div></div>';
         }
         schedule.html(text);
     }
 
-    function formatDate(date) {
+    function formatDate2(date) {
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate();
@@ -372,6 +372,18 @@
         var date = [month, day].join('.');
 
         return date + '(' + week + ')';
+    }
+
+    function formatDate(date) {  //주어진 날짜를 yyyy-mm-dd 형식으로 반환해주는 함수
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [year, month, day].join('-');
     }
 
     function addSearchModal(){
@@ -419,4 +431,5 @@
             height: 399px;
         }
     }
+
 </style>

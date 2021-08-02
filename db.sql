@@ -284,7 +284,7 @@ CREATE TABLE bbs(
     `category` INT(10) NOT NULL,
     `views` INT(10) DEFAULT 0,
     `level` INT(10) DEFAULT 0,
-    `last_modified` DATE NOT NULL,
+    `last_modified` DATETIME NOT NULL,
     `text` TEXT NOT NULL,
     `comments_count` INT(10) DEFAULT 0 ,
     `likes` INT(10) DEFAULT 0,
