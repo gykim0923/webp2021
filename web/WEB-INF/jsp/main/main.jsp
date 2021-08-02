@@ -84,8 +84,8 @@
 
                         <div class="row align-items-md-stretch">
 
-                            <div class="col-xl py-2" id="main2_left"  style="height : 400px;">
-                                <div class=" h-100 p-3 border card">
+                            <div class="col-xl py-2 " id="main2_left">
+                                <div class=" p-3 border card m-0"  style="height : 365px;">
                                     <div>
                                         <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
                                             <button class="nav-link active" id="nav-21-tab" data-bs-toggle="tab" data-bs-target="#nav-21" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
@@ -101,8 +101,8 @@
                                 </div>
                             </div>
 
-                            <div class="col-xl py-2" id="main2_center"  style="height : 400px;">
-                                <div class=" h-100 p-3 border card">
+                            <div class="col-xl py-2 " id="main2_center" >
+                                <div class=" p-3 border card m-0" style="height : 365px;">
                                     <div>
                                         <div class="nav nav-tabs mb-3" id="nav-tab2" role="tablist">
                                             <button class="nav-link active" id="nav-30-tab" data-bs-toggle="tab" data-bs-target="#nav-30" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
@@ -116,8 +116,8 @@
                                 </div>
                             </div>
 
-                            <div class="col-xxl-3 py-2" id="main2_right" style="height : 400px;">
-                                <div class=" h-100 p-3 border card">
+                            <div class="col-xxl-3 py-2 " id="main2_right" >
+                                <div class=" p-3 border card m-0" style="height : 365px;">
                                     <ul class="nav">
                                         <li class="nav-item">
                                             <a class="nav-link active" aria-current="page" href="#">일정<i class="bi bi-plus col-sm-2 text-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addSearchModal()"></i></a>
@@ -185,12 +185,12 @@
         var text30 = '<ul class="list-group">';
         var text31 = '<ul class="list-group">';
         for(var i=0;i<registerAllInfo.length;i++){
-            if(i==10){
+            if(i==9){
                 break;
             }
             var url30 = 'reg.kgu?major=main&num=30&mode=view&id='+registerAllInfo[i].id;
-            text30+='<li class="border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
-                +'<a href="'+url30+'"><span>'+registerAllInfo[i].title+'</span></a>'
+            text30+='<li class="p-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+                +'<a href="'+url30+'"><span class="index_post_link">'+registerAllInfo[i].title+'</span></a>'
                 +'<a href="'+url30+'"><span>'+formatDate(registerAllInfo[i].last_modified)+'</span></a>'
                 +'</li></ul>';
         }
@@ -224,7 +224,7 @@
         var text22='<ul class="list-group">';
         var text23='<ul class="list-group">';
         for (var i=0; i<bbs21.length; i++){
-            if(i==10){
+            if(i==9){
                 break;
             }
             var url21 = 'bbs.kgu?major=main&num=21&mode=view&id='+bbs21[i].id;
@@ -234,7 +234,7 @@
                 +'</li></ul>';
         }
         for (var i=0; i<bbs22.length; i++){
-            if(i==10){
+            if(i==9){
                 break;
             }
             var url22 = 'bbs.kgu?major=main&num=22&mode=view&id='+bbs22[i].id;
@@ -244,7 +244,7 @@
                 +'</li></ul>';
         }
         for (var i=0; i<bbs23.length; i++){
-            if(i==10){
+            if(i==9){
                 break;
             }
             var url23 = 'bbs.kgu?major=main&num=23&mode=view&id='+bbs23[i].id;
@@ -286,7 +286,7 @@
         var favorite_menu = <%=favorite_menu%>;
         var text='';
         for (var i=0;i<favorite_menu.length;i++){
-            text+='<a href="'+favorite_menu[i].url+'" class="list-group-item list-group-item-action py-3 lh-tight">'
+            text+='<a href="'+favorite_menu[i].url+'" class="list-group-item list-group-item-action py-4 lh-tight">'
                 +'<div class="d-flex w-100 align-items-center justify-content-between">'
                 +'<p class="h3 m-0">'+favorite_menu[i].name+'</p>'
                 +'<i class="h3 m-0 bi-stack"></i>'
