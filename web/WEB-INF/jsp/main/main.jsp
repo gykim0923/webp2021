@@ -118,10 +118,12 @@
 
                             <div class="col-lg-3 py-2" id="main2_right" style="height : 400px;">
                                 <div class=" h-100 p-xxl-5 p-lg-4 p-3 border card">
-                                    <div class="">
-                                        <strong>일정</strong><i class="bi bi-plus col-sm-2 text-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addSearchModal()"></i>
-                                    </div>
-                                    <div class="" id="schContent"></div>
+                                    <ul class="nav">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="#">일정<i class="bi bi-plus col-sm-2 text-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addSearchModal()"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" id="schContent"></div>
                                 </div>
                             </div>
                         </div>

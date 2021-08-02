@@ -26,8 +26,13 @@
     <%--    Bootstrap Table--%>
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
     <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
-    <script src='js/sha256.js'></script>
     <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" href="/assets/css/pages/auth.css">
     <style>
         .my-2 {
 
@@ -35,80 +40,76 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <main>
-        <div class="row justify-content-md-center">
-            <div class="col-lg-8">
-                <div class="row">
-                    구글 회원가입
+<div id="auth">
+
+    <div class="row h-100">
+        <div class="col-lg-5 col-12">
+            <div id="auth-left">
+                <div class="auth-logo">
+                    <a href="index.html"><img src="/assets/images/logo/logo.png" alt="Logo"></a>
                 </div>
-            </div>
-        </div>
-        <div class="row justify-content-md-center" id="registerReset"><!--class="row g-5"-->
-            <div class="col-lg-8">
-                <h4 class="mb-3">회원 가입</h4>
-                <div class="needs-validation" novalidate>
-                    <div class="row g-3">
+                <h1 class="auth-title">회원가입</h1>
+                <p class="auth-subtitle mb-5">추가 정보를 입력하고<br> 회원가입을 완료하세요.</p>
 
-                        <div class="col-12">
-                            <label for="name" class="form-label">이름(반드시 한글로 작성)</label>
-                            <input type="name" class="form-control" id="name" placeholder="이름을 입력해주세요" value=<%=google_name%>>
-                            <div class="invalid-feedback">
-                                이름을 입력해주세요
-                            </div>
+                <div>
+                    <div class="form-group position-relative has-icon-left mb-4">
+                        <input type="text" class="form-control form-control-xl" placeholder="이메일" id="email" value=<%=google_email%> readonly>
+                        <div class="form-control-icon">
+                            <i class="bi bi-envelope"></i>
                         </div>
-
-                        <div class="col-12">
-                            <label for="email" class="form-label">E-mail</label>
-                            <input type="email" class="form-control" id="email" placeholder="이메일을 입력해주세요." value=<%=google_email%> readonly>
-                            <div class="invalid-feedback">
-                                이메일을 입력해주세요.
-                            </div>
+                    </div>
+                    <div class="form-group position-relative has-icon-left mb-4">
+                        <input type="text" class="form-control form-control-xl" id="name"  placeholder="이름" value=<%=google_name%>>
+                        <div class="form-control-icon">
+                            <i class="bi bi-person"></i>
                         </div>
+                    </div>
 
-                        <div class="col-12">
-                            <label for="id" class="form-label">학번(교번)</label><span id="warningID"></span>
-                            <div class="row align-items-md-stretch">
-                                <div class="col-10">
-                                    <input type="text" class="form-control" id="id" placeholder="학번이나 교번을 입력해주세요." value="" required>
-                                </div>
-                                <div class="col-2 text-end">
-                                    <button class="btn float-right btn-primary" onclick="checkID()">중복확인</button>
-                                </div>
+                    <div class="form-group position-relative has-icon-left mb-4">
+                        <div class="form-group row align-items-center">
+                            <div class="col-lg-10 col-9">
+                                <input type="text" class="form-control" id="id" placeholder="학번(혹은 교번)" value="" required>
                             </div>
+                            <div class="col-lg-2 col-3">
+                                <button class="btn float-right btn-primary" onclick="checkID()">중복확인</button>
+                            </div>
+                            <span id="warningID"></span>
                             <div class="invalid-feedback">
                                 학번을 입력해 주세요.
                             </div>
                         </div>
+                    </div>
 
-                        <div class="my-3">
-                            <label for="gender" class="form-label">성별</label>
-                            <div id="gender">
-                                <div class="form-check">
-                                    <input id="male" name="gender" type="radio" class="form-check-input" value="남" checked required>
-                                    <label class="form-check-label" for="male">남</label>
-                                </div>
-                                <div class="form-check">
-                                    <input id="female" name="gender" type="radio" class="form-check-input" value="여" required>
-                                    <label class="form-check-label" for="female">여</label>
-                                </div>
+                    <div class="form-group position-relative has-icon-left mb-4">
+                        <label for="gender" class="form-label">성별</label>
+                        <div id="gender">
+                            <div class="form-check">
+                                <input id="male" name="gender" type="radio" class="form-check-input" value="남" checked required>
+                                <label class="form-check-label" for="male">남</label>
+                            </div>
+                            <div class="form-check">
+                                <input id="female" name="gender" type="radio" class="form-check-input" value="여" required>
+                                <label class="form-check-label" for="female">여</label>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <label for="birth">생년월일</label>
-                            <div class="form-floating mb-3">
-                                <input type="date" class="form-control" id="birth" placeholder="date">
-                            </div>
-                        </div>
+                    </div>
 
-                        <div class="col-12">
-                            <label for="phone" class="form-label">전화번호</label>
-                            <input type="text" class="form-control" id="phone" placeholder="-포함해서 적어주세요." required>
-                            <div class="invalid-feedback">
-                                전화번호를 입력해주세요.
-                            </div>
+                    <div class="form-group position-relative has-icon-left mb-4">
+                        <label for="birth">생년월일</label>
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" id="birth" placeholder="date">
                         </div>
+                    </div>
 
+                    <div class="form-group position-relative has-icon-left mb-4">
+                        <label for="phone" class="form-label">전화번호</label>
+                        <input type="text" class="form-control" id="phone" placeholder="-포함해서 적어주세요." required>
+                        <div class="invalid-feedback">
+                            전화번호를 입력해주세요.
+                        </div>
+                    </div>
+
+                    <div class="form-group position-relative has-icon-left mb-4">
                         <div class="col-md-4">
                             <label for="hope_type" class="form-label">희망구분<span> (관리자 승인후 변경됩니다.)</span></label>
                             <select class="form-select" id="hope_type" required></select>
@@ -125,13 +126,25 @@
                             </div>
                         </div>
                     </div>
-                    <hr class="my-4">
-                    <div class="w-100 btn btn-primary btn-lg" type="submit" onclick="LetsRegisterGoogle()">가입하기</div>
+
+                    <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5" onclick="LetsRegisterGoogle()">Sign Up</button>
+                </div>
+                <div class="text-center mt-5 text-lg fs-4">
+                    <p class='text-gray-600'>
+                        Already have an account?
+                        <a href="auth-login.html" class="font-bold">Log in</a>.
+                    </p>
                 </div>
             </div>
         </div>
-    </main>
+        <div class="col-lg-7 d-none d-lg-block">
+            <div id="auth-right">
+
+            </div>
+        </div>
+    </div>
 </div>
+
 <br>
 </body>
 </html>
@@ -253,3 +266,4 @@
     }
 
 </script>
+
