@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <div class="py-5">
   <%--일정 관리--%>
   <label><h2><strong>일정 관리</strong></h2></label>
@@ -74,7 +75,7 @@
     footer.html(f);
   }
 
-  function modifySchedule(i){   //일정 수정
+  function modifySchedule(i){   //일정 de
     var getSchedule = <%=getSchedule%>;
     var schedule = getSchedule[i];
     var schedule_id = schedule.id;
@@ -82,8 +83,7 @@
     var schedule_content = $('[name = newSchContent]').val();
 
     var data=schedule_id+'-/-/-'+schedule_date+'-/-/-'+schedule_content;
-    var check = confirm("일정 "+data+"를 수정하시겠습니까?");
-    if (check) {
+
       $.ajax({
         url: "ajax.kgu", //AjaxAction에서
         type: "post", //post 방식으로
@@ -93,16 +93,28 @@
         },
         success: function (data) { //성공 시
           if(data=='success'){
-            alert("해당 일정이 수정되었습니다.");
-            location.reload();
+
+            swal.fire({
+              title : '해당 일정이 수정되었습니다.',
+              icon : 'success',
+              showConfirmButton: true
+
+            }).then(function (){
+              location.reload();
+            });
           }
           else{
-            alert('권한이 부족합니다.');
+            swal.fire({
+              title : '권한이 부족합니다.',
+              icon : 'warning',
+              showConfirmButton: true
+
+            });
           }
         }
       })
     }
-  }
+
 
   function insertSch(){
     var h = '';
@@ -127,8 +139,7 @@
     var schedule_content = $('[name = schContent]').val();
 
     var data = schedule_date+'-/-/-'+schedule_content;
-    var check = confirm("일정 "+data+"를 추가하시겠습니까?");
-    if (check) {
+
       $.ajax({
         url: "ajax.kgu", //AjaxAction에서
         type: "post", //post 방식으로
@@ -138,16 +149,28 @@
         },
         success: function (data) { //성공 시
           if(data=='success'){
-            alert("해당 일정이 추가되었습니다.");
-            location.reload();
+
+            swal.fire({
+              title : '해당 일정이 추가되었습니다.',
+              icon : 'success',
+              showConfirmButton: true
+
+            }).then(function (){
+              location.reload();
+            });
           }
           else{
-            alert('권한이 부족합니다.');
+            swal.fire({
+              title : '권한이 부족합니다.',
+              icon : 'warning',
+              showConfirmButton: true
+
+            });
           }
         }
       })
     }
-  }
+
 
   function formatDate(date) {  //주어진 날짜를 yyyy-mm-dd 형식으로 반환해주는 함수
     var d = new Date(date),
@@ -170,43 +193,77 @@
       },
       success : function(data){
         if(data=='success'){
-          alert("일정 갱신이 완료되었습니다.");
-          location.reload();
+
+          swal.fire({
+            title : '일정 갱신이 완료되었습니다.',
+            icon : 'success',
+            showConfirmButton: true
+
+          }).then(function (){
+            location.reload();
+          });
         }
         else{
-          alert('권한이 부족합니다.');
+          swal.fire({
+            title : '권한이 부족합니다.',
+            icon : 'warning',
+            showConfirmButton: true
+
+          });
         }
       }
     })
   }
 
-  function deleteSchedule(i){ //일정 삭제
+  function deleteSchedule(i) { //일정 삭제
     var getSchedule = <%=getSchedule%>;
     var schedule = getSchedule[i];
     var schedule_id = schedule.id;
     var schedule_date = schedule.date;
     var schedule_content = schedule.content;
-    var data = schedule_id+'-/-/-'+schedule_date+'-/-/-'+schedule_content;
+    var data = schedule_id + '-/-/-' + schedule_date + '-/-/-' + schedule_content;
 
-    var check = confirm("일정 "+data+"를 삭제하시겠습니까?");
-    if (check) {
-      $.ajax({
-        url: "ajax.kgu", //AjaxAction에서
-        type: "post", //post 방식으로
-        data: {
-          req: "deleteSchedule", //이 메소드를 찾아서
-          data: data //이 데이터를 파라미터로 넘겨줍니다.
-        },
-        success: function (data) { //성공 시
-          if(data=='success'){
-            alert("해당 일정이 삭제되었습니다.");
-            location.reload();
-          }
-          else{
-            alert('권한이 부족합니다.');
-          }
+    swal.fire({
+      title: '정말로 삭제하시나요?',
+      text: '다시 되돌릴 수 없습니다.',
+      icon: 'warning',
+      showConfirmButton: true,
+      showCancelButton: true
+
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+          $.ajax({
+            url: "ajax.kgu", //AjaxAction에서
+            type: "post", //post 방식으로
+            data: {
+              req: "deleteSchedule", //이 메소드를 찾아서
+              data: data //이 데이터를 파라미터로 넘겨줍니다.
+            },
+            success: function (data) { //성공 시
+              if (data == 'success') {
+
+                swal.fire({
+                  title: '해당 일정이 삭제되었습니다.',
+                  icon: 'success',
+                  showConfirmButton: true
+
+                }).then(function () {
+                  location.reload();
+                });
+              } else {
+                swal.fire({
+                  title: '권한이 부족합니다.',
+                  icon: 'warning',
+                  showConfirmButton: true
+
+                });
+              }
+            }
+          })
         }
-      })
-    }
+
+    });
+
   }
 </script>

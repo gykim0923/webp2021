@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="">
   <label><h2><strong>전공 관리</strong></h2></label>
-
+  <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
   <table class="boardtable" id="table1"  data-toggle="table"
          data-pagination="true" data-toolbar="#toolbar"
          data-search="true" data-side-pagination="true" data-click-to-select="true" data-height="460"
@@ -16,11 +16,10 @@
     <thead>
     <tr>
       <th data-field="action">설정</th>
-      <th data-field="oid" data-sortable="true">oid</th>
-      <th data-field="major_id" data-sortable="true">major_id</th>
-      <th data-field="major_name" data-sortable="true">major_name</th>
-      <th data-field="major_location" data-sortable="true">major_location</th>
-      <th data-field="major_contact" data-sortable="true">major_contact</th>
+      <th data-field="major_id" data-sortable="true">전공아이디</th>
+      <th data-field="major_name" data-sortable="true">전공이름</th>
+      <th data-field="major_location" data-sortable="true">학과위치</th>
+      <th data-field="major_contact" data-sortable="true">학과연락처</th>
     </tr>
     </thead>
   </table>
@@ -44,7 +43,6 @@
     for(var i=0;i<makeAllMajor.length;i++){
       var major=makeAllMajor[i];
       rows.push({
-        oid: major.oid,
         major_id: major.major_id,
         major_name: major.major_name,
         major_location: major.major_location,
@@ -83,8 +81,8 @@
     var major_location=$('#major_location').val();
     var major_contact=$('#major_contact').val();
     var data=target_oid+'-/-/-'+major_name+'-/-/-'+major_location+'-/-/-'+major_contact;
-    var check = confirm("전공 "+data+"를 수정하시겠습니까?");
-    if (check) {
+
+
       $.ajax({
         url: "ajax.kgu", //AjaxAction에서
         type: "post", //post 방식으로
@@ -94,16 +92,27 @@
         },
         success: function (data) { //성공 시
           if(data=='success'){
-            alert("해당 전공이 수정되었습니다.");
-            location.reload();
+            swal.fire({
+              title : '해당 전공이 수정되었습니다.',
+              icon : 'success',
+              showConfirmButton: true
+
+            }).then(function (){
+              location.reload();
+            });
           }
           else{
-            alert('권한이 부족합니다.');
+            swal.fire({
+              title : '권한이 부족합니다.',
+              icon : 'warning',
+              showConfirmButton: true
+
+            });
           }
         }
       })
     }
-  }
+
 
   function makeAddMajorModal(){
     var modal_header = '';
@@ -112,7 +121,7 @@
 
     var modal_body = '';
     modal_body += '<div>전공 아이디 (영문/숫자 혼용 가능) <mark>한번 생성하신 아이디는 수정하실 수 없습니다.</mark></div>'
-      + '<input type="text" class="form-control" id="add_major_id" name="new_table" value="" placeholder="major_id">'
+      + '<input type="text" class="form-control" id="add_major_id" name="new_table" value="" placeholder="전공아이디">'
       + '<div>전공 이름</div><input type="text" class="form-control" id="add_major_name" name="new_table" value="" placeholder="major_name">'
       + '<div>major_location</div><input type="text" class="form-control" id="add_major_location" name="new_table" value="" placeholder="major_location">'
       + '<div>major_contact</div><input type="text" class="form-control" id="add_major_contact" name="new_table" value="" placeholder="major_contact">';
@@ -132,8 +141,7 @@
     var major_location=$('#add_major_location').val();
     var major_contact=$('#add_major_contact').val();
     var data=major_id+'-/-/-'+major_name+'-/-/-'+major_location+'-/-/-'+major_contact;
-    var check = confirm("전공 "+data+"를 추가하시겠습니까?");
-    if (check) {
+
       $.ajax({
         url: "ajax.kgu", //AjaxAction에서
         type: "post", //post 방식으로
@@ -143,14 +151,26 @@
         },
         success: function (data) { //성공 시
           if(data=='success'){
-            alert("해당 전공이 추가되었습니다.");
-            location.reload();
+            swal.fire({
+              title : '해당 전공이 추가되었습니다.',
+              icon : 'success',
+              showConfirmButton: true
+
+            }).then(function (){
+              location.reload();
+            });
           }
+
           else{
-            alert('권한이 부족합니다.');
+            swal.fire({
+              title : '권한이 부족합니다.',
+              icon : 'warning',
+              showConfirmButton: true
+
+            });
           }
         }
       })
     }
-  }
+
 </script>

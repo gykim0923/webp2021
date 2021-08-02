@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <%
     String getSlider = (String) request.getAttribute("getSlider");
 %>
@@ -98,7 +99,12 @@
                 contentType : false,
                 success : function(data){//데이터는 주소
                     if(data=='fail'){
-                        alert('실패');
+                        swal.fire({
+                            title : '실패',
+                            icon : 'error',
+                            showConfirmButton: true
+
+                        });
                     }
                     else {
                         var fileLog=data.split("-/-/-");
@@ -114,15 +120,19 @@
                 }
             })
         }else{
-            alert("파일을 등록해주세요");
+            swal.fire({
+                title : '파일을 등록해주세요.',
+                icon : 'warning',
+                showConfirmButton: true
+
+            });
         }
         // return address;
     }
 
     function insertSlider(){
         var slider_img = file_path;
-        var check = confirm("대문을 하나 추가하시겠습니까?");
-        if (check) {
+
             $.ajax({
                 url: "ajax.kgu", //AjaxAction에서
                 type: "post",
@@ -131,12 +141,67 @@
                     data: slider_img //이 데이터를 파라미터로 넘겨줍니다.
                 },
                 success: function (data) { //성공 시
-                    alert("대문이 정상적으로 추가되었습니다.");
-                    location.reload()
+                    swal.fire({
+                        title : '대문이 정상적으로 추가되었습니다.',
+                        icon : 'success',
+                        showConfirmButton: true
+
+                    }).then(function (){
+                        location.reload();
+                    });
                 }
             })
-        }
     }
+
+    function deleteSlider(i){
+        var getSlider = <%=getSlider%>;
+        var slider = getSlider[i];
+        var slider_id = slider.id;
+
+        swal.fire({
+            title: '정말로 삭제하시나요?',
+            text: '다시 되돌릴 수 없습니다.',
+            icon: 'warning',
+            showConfirmButton: true,
+            showCancelButton: true
+
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                $.ajax({
+                    url: "ajax.kgu", //AjaxAction에서
+                    type: "post", //post 방식으로
+                    data: {
+                        req: "deleteSlider", //이 메소드를 찾아서
+                        data: slider_id //이 데이터를 파라미터로 넘겨줍니다.
+                    },
+                    success: function (data) { //성공 시
+                        if (data == 'success') {
+
+                            swal.fire({
+                                title: '해당 대문이 삭제되었습니다.',
+                                icon: 'success',
+                                showConfirmButton: true
+
+                            }).then(function () {
+                                location.reload();
+                            });
+                        } else {
+                            swal.fire({
+                                title: '권한이 부족합니다.',
+                                icon: 'warning',
+                                showConfirmButton: true
+
+                            });
+                        }
+                    }
+                })
+            }
+
+        });
+
+    }
+
 
 
 
