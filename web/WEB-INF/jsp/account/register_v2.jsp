@@ -227,7 +227,6 @@
                             }).then(function (){
                                 window.location.href='main.kgu';
                             });
-
                         } else
 
                         swal.fire({
