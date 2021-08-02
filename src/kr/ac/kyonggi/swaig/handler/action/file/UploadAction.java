@@ -96,7 +96,7 @@ public class UploadAction implements Action {
             String board_level = multi.getParameter("board_level");
             UserTypeDTO type = gson.fromJson((String) request.getSession().getAttribute("type"), UserTypeDTO.class);
             if(type.board_level > Integer.parseInt(board_level)){ //현재 로그인 한 계정의 board_level이 jsp에서 정해준 값보다 크면(권한이 낮으면) 권한 부족으로 판단하여 fail처리함.
-                System.out.println("업로드 권한 부족!");
+//                System.out.println("업로드 권한 부족!");
                 return "fail";
             }
 

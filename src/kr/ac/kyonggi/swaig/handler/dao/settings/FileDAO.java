@@ -28,7 +28,7 @@ public class FileDAO {
 
 
     public String insertFileUploadLog(String parameter) {
-        System.out.println(parameter);
+//        System.out.println(parameter);
         String arr[]=parameter.split("-/-/-"); // String parameter = id+"-/-/-"+uploadFile+"-/-/-"+newFileName+"-/-/-"+upload_time+"-/-/-"+savePath+"-/-/-"+folder;
         String user_id = arr[0];
         String uploadFile = arr[1];

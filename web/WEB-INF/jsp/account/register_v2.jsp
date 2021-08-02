@@ -66,18 +66,18 @@
                     </div>
 
                     <div class="form-group position-relative has-icon-left mb-4">
-                        <div class="form-group row align-items-center">
-                            <div class="col-lg-10 col-9">
-                                <input type="text" class="form-control" id="id" placeholder="학번(혹은 교번)" value="" required>
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-xl" id="id" placeholder="학번(혹은 교번)" value="" required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-person"></i>
                             </div>
-                            <div class="col-lg-2 col-3">
-                                <button class="btn float-right btn-primary" onclick="checkID()">중복확인</button>
-                            </div>
-                            <span id="warningID"></span>
-                            <div class="invalid-feedback">
-                                학번을 입력해 주세요.
-                            </div>
+                            <button type="submit" class="btn btn-secondary" onclick="checkID()">중복확인</button>
                         </div>
+                        <span id="warningID"></span>
+                        <div class="invalid-feedback">
+                            학번을 입력해 주세요.
+                        </div>
+
                     </div>
 
                     <div class="form-group position-relative has-icon-left mb-4">
@@ -95,44 +95,87 @@
                     </div>
 
                     <div class="form-group position-relative has-icon-left mb-4">
-                        <label for="birth">생년월일</label>
                         <div class="form-floating mb-3">
-                            <input type="date" class="form-control" id="birth" placeholder="date">
+                            <input type="date" class="form-control form-control-xl" id="birth" placeholder="date">
+                            <label for="birth">생년월일</label>
                         </div>
                     </div>
 
                     <div class="form-group position-relative has-icon-left mb-4">
-                        <label for="phone" class="form-label">전화번호</label>
-                        <input type="text" class="form-control" id="phone" placeholder="-포함해서 적어주세요." required>
+                        <input type="text" class="form-control form-control-xl" id="phone" placeholder="전화번호(-포함해서 적어주세요.)" required>
+                        <div class="form-control-icon">
+                            <i class="bi bi-person"></i>
+                        </div>
                         <div class="invalid-feedback">
                             전화번호를 입력해주세요.
                         </div>
                     </div>
 
                     <div class="form-group position-relative has-icon-left mb-4">
-                        <div class="col-md-4">
-                            <label for="hope_type" class="form-label">희망구분<span> (관리자 승인후 변경됩니다.)</span></label>
-                            <select class="form-select" id="hope_type" required></select>
-                            <div class="invalid-feedback">
-                                희망구분을 선택해 주세요.
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="hope_type" class="form-label">희망구분<span> (관리자 승인후 변경됩니다.)</span></label>
+                                <select class="form-select form-select-xl" id="hope_type" required></select>
+                                <div class="invalid-feedback">
+                                    희망구분을 선택해 주세요.
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-8">
-                            <label for="major" class="form-label">학과</label>
-                            <select class="form-select" id="major" required></select>
-                            <div class="invalid-feedback">
-                                학과를 선택해 주세요
+                            <div class="col-12 my-3">
+                                <label for="major" class="form-label">학과</label>
+                                <select class="form-select form-select-xl" id="major" required></select>
+                                <div class="invalid-feedback">
+                                    학과를 선택해 주세요
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5" onclick="LetsRegisterGoogle()">Sign Up</button>
+                    <!-- Button trigger for scrollbar modal -->
+                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalLong">
+                        이용약관
+                    </button>
+
+                    <!--scrollbar Modal -->
+                    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">이용약관</h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal"
+                                            aria-label="Close">
+                                        <i data-feather="x"></i>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>
+                                        ㅇㅇ
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-outline-success" onclick="window.open('http://www.kyonggi.ac.kr/webService.kgu?menuCode=K00M0502');">
+                        개인정보 처리방침
+                    </button>
+
+
+                    <div class="form-check form-check-lg d-flex align-items-end">
+                        <input class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label text-gray-600" for="flexCheckDefault">
+                            <a href="#" class="font-bold">이용약관</a> 및 <a href="#" class="font-bold">개인정보 처리방침</a>에 동의합니다.(필수)
+                        </label>
+                    </div>
+
+                    <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5" onclick="LetsRegisterGoogle()">가입 하기</button>
                 </div>
                 <div class="text-center mt-5 text-lg fs-4">
                     <p class='text-gray-600'>
-                        Already have an account?
-                        <a href="auth-login.html" class="font-bold">Log in</a>.
+                        제 구글 계정은 안전한가요?
+                        <a href="#" class="font-bold">확인하기</a>.
                     </p>
                 </div>
             </div>

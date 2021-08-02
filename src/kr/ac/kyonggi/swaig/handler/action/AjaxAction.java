@@ -253,7 +253,7 @@ public class AjaxAction implements Action {
                 break;
             case "deleteComment":
                 if(user!=null){
-                    System.out.println("kjhjh");
+//                    System.out.println("kjhjh");
                     result=BBSDAO.getInstance().deleteComment(data);
                 }
                 break;
@@ -345,7 +345,7 @@ public class AjaxAction implements Action {
             case "insertAnswer":
                 RegisterDTO req_BoardsCheck = RegisterDAO.getInstance().getReg(data.split("-/-/-")[0]);
                 if (!req_BoardsCheck.level.contains(type.for_header)){
-                    System.out.println(req_BoardsCheck.level);
+//                    System.out.println(req_BoardsCheck.level);
                     return "fail";
                 }
                 if (new Date().getTime() > (req_BoardsCheck.closing_date.getTime() + 60 * 60 * 1000 * 24) || new Date().getTime() < req_BoardsCheck.starting_date.getTime())
@@ -356,7 +356,7 @@ public class AjaxAction implements Action {
             case "modifyAnswer":
                 RegisterDTO req_check = RegisterDAO.getInstance().getReg(data.split("-/-/-")[0]);
                 if (!req_check.level.contains(type.for_header)){
-                    System.out.println(req_check.level);
+//                    System.out.println(req_check.level);
                     return "fail";
                 }
                 if (new Date().getTime() > (req_check.closing_date.getTime() + 60 * 60 * 1000 * 24) || new Date().getTime() < req_check.starting_date.getTime())

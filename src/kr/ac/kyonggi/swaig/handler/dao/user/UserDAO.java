@@ -218,7 +218,7 @@ public class UserDAO {
     }
 
     public String registerGoogleID(String text) {
-        System.out.println(text);
+//        System.out.println(text);
         String arr[] = text.split("-/-/-");
 //        google_id+"-/-/-"+google_img+"-/-/-"+id+"-/-/-"+password+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+phone+"-/-/-"+hope_type+"-/-/-"+major+"-/-/-"+per_id;
         if(!checking(text))
@@ -240,7 +240,7 @@ public class UserDAO {
 
         Connection conn = Config.getInstance().sqlLogin();
         try {
-            System.out.println("dd");
+//            System.out.println("dd");
             QueryRunner queryRunner = new QueryRunner();
             queryRunner.update(conn,"INSERT INTO user(google_id,google_img,id,password,name,gender,birth,email,phone,hope_type,major,per_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);", google_id,google_img,id,password,name,gender,birth,email,phone,hope_type,major,per_id);
             result = true;

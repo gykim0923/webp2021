@@ -17,7 +17,7 @@ public class RegisterAction extends CustomAction {
          * */
         String num = request.getParameter("num"); //페이지 고유번호
         request.setAttribute("num",num); //다시 JSP로 보내줌 (재활용을 위해)
-        System.out.println(num);
+//        System.out.println(num);
 
         /**
          * bbs_type은 일반게시판, 신청게시판, 웹진게시판 인지 타입을 나타내는 것임.
@@ -42,7 +42,7 @@ public class RegisterAction extends CustomAction {
             reg_type="error";
         }
         request.setAttribute("reg_type", gson.toJson(reg_type));
-        System.out.println(reg_type);
+//        System.out.println(reg_type);
 
         /**
          * mode는 현재 페이지의 모드(list/view/write/modify)를 나타냄. default 값은 list임. url로 받음.
@@ -51,11 +51,11 @@ public class RegisterAction extends CustomAction {
         if(mode==null){ //mode가 비어있는 경우 list로 출력
             mode="list";
         }
-        System.out.println(mode);
+//        System.out.println(mode);
         //mode에 따라 필요한 DB가 다르다.
         if(mode.equals("list")){
             request.setAttribute("getRegList", gson.toJson(RegisterDAO.getInstance().getRegisterList()));
-            System.out.println(RegisterDAO.getInstance().getRegisterList());
+//            System.out.println(RegisterDAO.getInstance().getRegisterList());
         }
         else { //리스트를 제외한 모든 모드에서는 게시글 1개를 가지고 작업하기 때문에 다음과 같이 게시글 1개만 불러주는 작업을 한다.
             String id = request.getParameter("id"); //게시글 고유 번호
@@ -67,7 +67,7 @@ public class RegisterAction extends CustomAction {
         String reg_mode = "reg_"+mode;
         request.setAttribute("jsp", gson.toJson(reg_mode)); //bbs_*.jsp
 
-        System.out.println(reg_mode);
+//        System.out.println(reg_mode);
         return "RequestDispatcher:jsp/page_stand_alone/page_stand_alone.jsp";
     }
 }

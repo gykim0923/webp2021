@@ -35,7 +35,7 @@ public class LoginAction extends CustomAction {
             if (manager.isUsing(id)) { //접속중이라면
                manager.removeSession(id); //접속중인 세션 제거
             }
-            System.out.println("로그인 성공");
+//            System.out.println("로그인 성공");
             manager.setSession(request.getSession(), id); //세션 설정하기
             UserTypeDTO type = dao.getType(it.type);
             dao.whoIsLogIn(id);
@@ -47,7 +47,7 @@ public class LoginAction extends CustomAction {
             return "";
          }
       }
-      System.out.println("로그인 실패");
+//      System.out.println("로그인 실패");
       session.setAttribute("miss",(Integer)session.getAttribute("miss")+1);
       return "RequestDispatcher:jsp/account/login.jsp";
    }

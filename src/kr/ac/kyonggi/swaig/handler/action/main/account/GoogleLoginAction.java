@@ -54,10 +54,10 @@ public class GoogleLoginAction implements Action {
             String email = jsonObj.get("email").toString();
             String imageUrl = jsonObj.get("picture").toString();
 
-            System.out.println(userId);
-            System.out.println(name);
-            System.out.println(email);
-            System.out.println(imageUrl);
+//            System.out.println(userId);
+//            System.out.println(name);
+//            System.out.println(email);
+//            System.out.println(imageUrl);
 
 
             LoginManager manager = LoginManager.getInstance();
@@ -65,12 +65,12 @@ public class GoogleLoginAction implements Action {
             UserDTO it = dao.getGoogleUser(userId); //id에 따른 유저 정보를 일단 받아옴. (아이디가 일치하지 않으면 null을 갖게됨)
 
             if(it!=null) { //조회한 id가 존재한다면
-                System.out.println("구글 id가 db에 있음.");
+//                System.out.println("구글 id가 db에 있음.");
                 if (it.email.equals(email)) { //조회한 id와 구글에서 보내준 이메일이 일치한다면 (이중 검사)
                     if (manager.isUsing(it.id)) { //접속중이라면
                         manager.removeSession(it.id); //접속중인 세션 제거
                     }
-                    System.out.println("로그인 성공");
+//                    System.out.println("로그인 성공");
                     manager.setSession(request.getSession(), it.id); //세션 설정하기
                     UserTypeDTO type = dao.getType(it.type);
                     dao.whoIsLogIn(it.id);
@@ -81,12 +81,12 @@ public class GoogleLoginAction implements Action {
                     return "success";
                 }
                 else {
-                    System.out.println("구글 id가 서버 db에 있으나, 메일 주소가 일치하지 않음.");
+//                    System.out.println("구글 id가 서버 db에 있으나, 메일 주소가 일치하지 않음.");
                     return "success_but_wrong_email";
                 }
             }
             else {
-                System.out.println("구글 아이디는 존재하나, 서버 DB에 회원 정보가 없음. 회원가입으로 이동");
+//                System.out.println("구글 아이디는 존재하나, 서버 DB에 회원 정보가 없음. 회원가입으로 이동");
                 session.setAttribute("google_id", userId);
                 session.setAttribute("google_name", name);
                 session.setAttribute("google_email", email);
@@ -94,8 +94,8 @@ public class GoogleLoginAction implements Action {
                 return "register";
             }
         }catch(Exception e) {
-            System.out.println("로그인 실패. 존재하지 않는 구글 아이디 혹은 잘못된 토큰 요청.");
-            System.out.println(e);
+//            System.out.println("로그인 실패. 존재하지 않는 구글 아이디 혹은 잘못된 토큰 요청.");
+//            System.out.println(e);
             return "failure";
         }
 

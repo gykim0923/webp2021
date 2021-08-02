@@ -15,12 +15,12 @@ public class DownloadAction implements Action {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Gson gson = new Gson();
         String id = request.getParameter("id");
-        System.out.println(id);
+//        System.out.println(id);
         String path =request.getParameter("path");
-        System.out.println(path);
+//        System.out.println(path);
         String root = request.getSession().getServletContext().getRealPath(path);
 
-        System.out.println(root);
+//        System.out.println(root);
         UserTypeDTO userType = gson.fromJson((String) request.getSession().getAttribute("type"), UserTypeDTO.class);
         UploadedFileDTO it = FileDAO.getInstance().getFile(id);
 //        NoticeBoardsBean checkboard = NoticeBoardsDAO.getInstance().getBoardRead(it.board_id);

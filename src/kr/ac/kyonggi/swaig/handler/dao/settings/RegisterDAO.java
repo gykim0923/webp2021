@@ -34,7 +34,7 @@ public class RegisterDAO {
         try {
             QueryRunner queryRunner = new QueryRunner();
             listOfMaps = queryRunner.query(conn,"SELECT * FROM bbs_reg ORDER BY id DESC;", new MapListHandler());
-            System.out.println(listOfMaps);
+//            System.out.println(listOfMaps);
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {
@@ -42,7 +42,7 @@ public class RegisterDAO {
         }
         Gson gson = new Gson();
         ArrayList<RegisterDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<RegisterDTO>>() {}.getType());
-        System.out.println(selected);
+//        System.out.println(selected);
         return selected;
     }
 
@@ -83,7 +83,7 @@ public class RegisterDAO {
             queryRunner.update(conn,
                     "INSERT INTO bbs_reg(writer_id, writer_name, title, last_modified, text, starting_date, closing_date, level, for_who) VALUES (?,?,?,?,?,?,?,?,?);",
                     arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6], arr[7], arr[8]);
-            System.out.println(arr[0]);
+//            System.out.println(arr[0]);
             listOfMaps = queryRunner.query(conn,
                     "SELECT * FROM bbs_reg WHERE writer_id=? AND title=? AND text=? AND starting_date=? AND closing_date=? AND level=? AND for_who=?;",
                     new MapListHandler(), arr[0], arr[2], arr[4], arr[5], arr[6], arr[7], arr[8]);
@@ -91,7 +91,7 @@ public class RegisterDAO {
                     new TypeToken<List<RegisterDTO>>() {
                     }.getType());
             RegisterDTO it = array.get(0);
-            System.out.println(it.id+"dd");
+//            System.out.println(it.id+"dd");
             id = Integer.toString(it.id);
             for (int i = 0; i < ques.length; i++) {
                 String text[] = ques[i].split("-/!/-"); //유형과 내용으로 구분
@@ -100,13 +100,13 @@ public class RegisterDAO {
                 queryRunner.update(conn,
                         "INSERT INTO bbs_regquestion(reg_id, question_num, question_content, question_type) VALUES (?,?,?,?);",
                         it.id, i + 1, content, Integer.valueOf(type));
-                System.out.println(i);
+//                System.out.println(i);
             }
 //            queryRunner.update(conn, "UPDATE bbs_req_writerfile SET board_id=? WHERE board_id=0 AND writer_id=?", id,
 //                    arr[0]);
         } catch (SQLException se) {
             se.printStackTrace();
-            System.out.println("fail2");
+//            System.out.println("fail2");
             return "fail";
         } finally {
             DbUtils.closeQuietly(conn);
@@ -195,7 +195,7 @@ public class RegisterDAO {
         } finally {
             DbUtils.closeQuietly(conn);
         }
-        System.out.println(result);
+//        System.out.println(result);
         if (result)
             return "success";
         else

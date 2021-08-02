@@ -20,8 +20,8 @@ public class InsertExcelAction extends CustomAction {
 		 // 10Mbyte 제한
 	    int maxSize  = 1024*1024*30;     
 	    
-	    System.out.println("InsertExcelAction");
-	 
+//	    System.out.println("InsertExcelAction");
+
 	    // 웹서버 컨테이너 경로
 	    String path = request.getSession().getServletContext().getRealPath("/");
 	    // 파일 저장 경로(ex : /home/tour/web/ROOT/upload)
