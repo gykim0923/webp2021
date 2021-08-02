@@ -58,7 +58,7 @@
                     <div class="container">
                         <div class="row align-items-md-stretch">
                             <div class="col-lg-9 py-2" id="main1_left" >
-                                <div id="myCarousel" class="h-100 carousel slide card" data-bs-ride="carousel" style="margin-bottom : 0px;">
+                                <div id="myCarousel" class="h-100 carousel slide card" data-bs-ride="carousel" style="margin-bottom : 0px; height:399px;">
                                     <div class="carousel-indicators" id="carouselButton">
                                         <%--   슬라이더 사진 개수와 동일한 버트 만들어 줘야함 makecarouselCard에 있음--%>
                                     </div>
@@ -76,7 +76,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-3 py-2" id="main1_right">
-                                <div class=" h-100 border card" id="favorite_menu"></div>
+                                <div class=" h-100 border card m-0" id="favorite_menu" style="height:399px;"></div>
                             </div>
                         </div>
 
@@ -180,10 +180,20 @@
         var nav30 = $('#nav-30');
         var nav31 = $('#nav-31');
         var registerAllInfo = <%=registerAllInfo%>;
+        var text30 = '<ul class="list-group">';
+        var text31 = '<ul class="list-group">';
         for(var i=0;i<registerAllInfo.length;i++){
-            var urlReg = 'reg.kgu?major=main&num=30&mode=view&id='+registerAllInfo[i].id;
-            nav30.append('<li class="list-group-item"><a href="'+urlReg+'">'+registerAllInfo[i].title+'</a></li>')
+            if(i==6){
+                break;
+            }
+            var url30 = 'reg.kgu?major=main&num=30&mode=view&id='+registerAllInfo[i].id;
+            text30+='<li class="border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+                +'<a href="'+url30+'"><span>'+registerAllInfo[i].title+'</span></a>'
+                +'<a href="'+url30+'"><span>'+registerAllInfo[i].last_modified+'</span></a>'
+                +'</li></ul>';
         }
+        nav30.append(text30);
+
         // for(var i=0;i<registerAllInfo.length;i++){ 자료실
         //     var urlReg = 'reg.kgu?major=main&num=30&mode=view&id='+registerAllInfo[i].id;
         //     nav30.append('<li class="list-group-item"><a href="'+urlReg+'">'+registerAllInfo[i].title+'</a></li>')
@@ -212,6 +222,9 @@
         var text22='<ul class="list-group">';
         var text23='<ul class="list-group">';
         for (var i=0; i<bbs21.length; i++){
+            if(i==6){
+                break;
+            }
             var url21 = 'bbs.kgu?major=main&num=21&mode=view&id='+bbs21[i].id;
             text21+='<li class="border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
                 +'<a href="'+url21+'"><span>'+bbs21[i].title+'</span></a>'
@@ -219,6 +232,9 @@
                 +'</li></ul>';
         }
         for (var i=0; i<bbs22.length; i++){
+            if(i==6){
+                break;
+            }
             var url22 = 'bbs.kgu?major=main&num=22&mode=view&id='+bbs22[i].id;
             text22+='<li class="border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
                 +'<a href="'+url22+'"><span>'+bbs22[i].title+'</span></a>'
@@ -226,6 +242,9 @@
                 +'</li></ul>';
         }
         for (var i=0; i<bbs23.length; i++){
+            if(i==6){
+                break;
+            }
             var url23 = 'bbs.kgu?major=main&num=23&mode=view&id='+bbs23[i].id;
             text23+='<li class="border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
                 +'<a href="'+url23+'"><span>'+bbs23[i].title+'</span></a>'
@@ -306,7 +325,7 @@
             else{
                 text +='<div class="carousel-item">'
             }
-            text += '<img width="100%" height="100%" src = "'+sliderList[i].slider_img+'">'
+            text += '<img class="carousel-img" width="100%" height="100%" src = "'+sliderList[i].slider_img+'">'
             text += '</div>';
         }
 
@@ -391,5 +410,11 @@
 
     .bd-callout-end {
         border-left-color: #7d8285;
+    }
+
+    @media (min-width: 1400px) {
+        .carousel-img{
+            height: 399px;
+        }
     }
 </style>
