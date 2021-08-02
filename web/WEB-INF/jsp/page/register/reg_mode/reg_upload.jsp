@@ -521,7 +521,7 @@
     }
 
     function back(){
-        window.location.href = 'bbs.kgu?major='+major+'&&num='+num+'&&mode=view&&id='+id;
+        window.location.href = 'reg.kgu?major='+major+'&&num='+num+'&&mode=list';
     }
 
     function formatDate(date) { //날짜를 yyyy-mm-dd 형식으로 반환
