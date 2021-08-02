@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
     <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
     <script src='js/sha256.js'></script>
+    <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
     <style>
         .my-2 {
 
@@ -209,7 +210,7 @@
 
             if (name != '' && gender != '' && birth != '' && phone != '') {
                 var update = id+"-/-/-"+perID+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+hopetype+"-/-/-"+phone+"-/-/-"+major;
-                alert(update);
+
                 $.ajax({
                     url: "ajax.kgu",
                     type: "post",
@@ -219,18 +220,37 @@
                     },
                     success: function (data) {
                         if (data == 'success') {
-                            alert("회원가입 성공");
-                            window.location.href = "main.kgu";
+                            swal.fire({
+                                title : '회원가입 성공',
+                                icon : 'success',
+                                showConfirmButton: true
+                            }).then(function (){
+                                window.location.href='main.kgu';
+                            });
 
                         } else
-                            alert('SERVER ERROR, Please try again later');
+
+                        swal.fire({
+                            title : '서버에러, 다음에 시도해주세요',
+                            icon : 'error',
+                            showConfirmButton: true
+                        });
                     }
                 })
             } else {
-                alert("빈칸을 채워주세요");
+                swal.fire({
+                    title : '빈칸을 입력해주세요',
+                    icon : 'warning',
+                    showConfirmButton: true
+                });
+
             }
         } else
-            alert("아이디 중복확인을 해주세요");
+            swal.fire({
+                title : '아이디 중복확인을 해주세요',
+                icon : 'warning',
+                showConfirmButton: true
+            });
     }
 
 </script>

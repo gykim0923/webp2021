@@ -65,6 +65,7 @@
 
     <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 
+
     <!-- content에 자신의 OAuth2.0 클라이언트ID를 넣습니다. -->
     <meta name ="google-signin-client_id" content="961716324050-r6i9dib682nsqjotloum1igkvf1jm0og.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
