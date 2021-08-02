@@ -48,15 +48,10 @@ public class RegisterDAO {
 
     public RegisterDTO getReg(String id) {
         List<Map<String, Object>> listOfMaps = null;
-        List<Map<String, Object>> listOfMaps2 = null;
-        List<Map<String, Object>> listOfMaps3 = null;
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
             listOfMaps = queryRunner.query(conn,"SELECT * FROM bbs_reg WHERE id=?;", new MapListHandler(),id);
-            listOfMaps2 = queryRunner.query(conn,"SELECT date_format(starting_date,'%Y-%m-%d') FROM bbs_reg WHERE id=?", new MapListHandler(),id);
-            listOfMaps3 = queryRunner.query(conn,"SELECT date_format(closing_date,'%Y-%m-%d') FROM bbs_reg WHERE id=?", new MapListHandler(),id);
-
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {
@@ -64,11 +59,6 @@ public class RegisterDAO {
         }
         Gson gson = new Gson();
         ArrayList<RegisterDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<RegisterDTO>>() {}.getType());
-        selected.get(0).setNew_starting_date(listOfMaps2.get(0).toString().split("=")[1].split("}")[0]);
-        selected.get(0).setNew_closing_date(listOfMaps3.get(0).toString().split("=")[1].split("}")[0]);
-        System.out.println(selected.get(0).getNew_starting_date());
-        System.out.println(selected.get(0).getNew_closing_date());
-
         if(selected.size()>0) {
             return selected.get(0);
         }

@@ -30,13 +30,13 @@
 <div class="form-group mb-3" id="bbsTitleBox"><input class="form-control" id="bbsTitle" placeholder="제목을 입력하세요."></div>
 
 <div class="row mb-3" >
-    <div class="col-md-4 form-group" id="InputStartDate">
+    <div class="col-md-4 form-group" id="sDate">
         <label for="InputStartDate">시작일</label>
-        <input type="date" class="form-control" name="startDate" >
+        <input type="date" class="form-control" name="startDate" id="InputStartDate" >
     </div>
-    <div class="col-md-4 form-group" id="InputFinishDate">
+    <div class="col-md-4 form-group" id="cDate">
         <label for="InputFinishDate">마감일</label>
-        <input type="date" class="form-control" name="finishDate" >
+        <input type="date" class="form-control" name="finishDate" id="InputFinishDate" >
     </div>
     <div class="col-md-4">
         <label for="forWho">신청현황공개</label>
@@ -111,8 +111,8 @@
             <button type="button" class="btn btn-outline-secondary" onclick="modifyReg()">수정</button>
             <script>
                 var content = $('#regUpdateContent');
-                var startDate = $('#InputStartDate');
-                var endDate = $('#InputFinishDate')
+                var startDate = $('#sDate');
+                var endDate = $('#cDate')
                 var who = $('#forWho');
                 var check1 = $('#inlineCheckbox1');
                 var check2 = $('#inlineCheckbox2');
@@ -136,7 +136,7 @@
 
                 who.html(text);
 
-                if( getReg.level.indexOf("교수")>0){
+                if( getReg.level.indexOf("교수")>=0){
                     check1.html('<input class="form-check-input" type="checkbox" checked="checked"  id="inlineCheckbox1" value="교수"><label class="form-check-label" for="inlineCheckbox1">교수</label>');
                 }
                 if( getReg.level.indexOf("조교")>0) {
@@ -587,4 +587,3 @@
     });
 
 </script>
-

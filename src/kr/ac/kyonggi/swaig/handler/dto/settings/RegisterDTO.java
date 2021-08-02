@@ -4,25 +4,8 @@ import java.util.Date;
 
 public class RegisterDTO {
     public int id, views, applicant_count;
-    public String writer_id, writer_name, title, text, level, for_who, new_starting_date,new_closing_date;
+    public String writer_id, writer_name, title, text, level, for_who;
     public Date last_modified, starting_date, closing_date;
-
-
-    public String getNew_starting_date() {
-        return new_starting_date;
-    }
-
-    public void setNew_starting_date(String new_starting_date) {
-        this.new_starting_date = new_starting_date;
-    }
-
-    public String getNew_closing_date() {
-        return new_closing_date;
-    }
-
-    public void setNew_closing_date(String new_closing_date) {
-        this.new_closing_date = new_closing_date;
-    }
 
     public int getId() {
         return id;
