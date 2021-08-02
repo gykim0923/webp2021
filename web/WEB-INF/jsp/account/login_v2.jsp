@@ -104,7 +104,7 @@
                 <div class="g-signin2 d-flex justify-content-center" data-onsuccess="onSignIn"></div>
 
                 <div class="text-center mt-5 text-lg fs-4">
-                    <p class="text-gray-600">학교 구글 계정이 없으신가요? <a href="#" class="font-bold">계정 만들기</a>.</p>
+                    <p class="text-gray-600">학교 구글 계정이 없으신가요? <a href="https://sites.google.com/kyonggi.ac.kr/help/" class="font-bold">계정 만들기</a>.</p>
                 </div>
             </div>
         </div>

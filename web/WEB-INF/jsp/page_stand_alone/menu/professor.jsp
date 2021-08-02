@@ -94,23 +94,26 @@
       var prolist = $('#professorCard');
       var text ='';
       for (var i = 0; i < professor.length; i++) {
-         text+='<div class="col-6 py-2"><div class="card bg-light" ><div class="p-5">'
-                 +'<div id="image'+i+'" style=" display : inline"><img src="'+professor[i].prof_img+'"width="110px"  align ="left" onerror="this.src=\'http://placehold.it/110x150\'" ></div>'
-                 +'<div class ="name" ><b>'+professor[i].prof_name+' 교수</b></div>'
-                 +'<div class ="location">사무실위치 : '+professor[i].prof_location+'</div>'
+         text+='<div class="col-4">'
+                 +'<div class="card">'
+                 +'<img src="https://via.placeholder.com/340x120/87CEFA/000000" alt="Cover" class="card-img-top">'
+                 +'<div class="card-body text-center">'
+                 +'<img src="'+professor[i].prof_img+'" style="width:100px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">'
+                 +'<h5 class="card-title">'+professor[i].prof_name+' 교수</h5>'
+                 +'<p class="text-secondary mb-1">이메일 : '+professor[i].prof_email+'</p>'
+                 +'<p class="text-muted font-size-sm">사무실 위치 : '+professor[i].prof_location+'</p>'
+
                  +'<div class ="call">연락처 : '+professor[i].prof_call+'</div>'
-                 +'<div class ="email">이메일 : '+professor[i].prof_email+'</div>'
                  +'<div class ="lecture">담당과목 : '+professor[i].prof_lecture+'</div>'
+                 +'</div>'
 
-               if(typeForProfessor.for_header=='관리자') {
-                  text += '<div><button class="btn btn-secondary mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyProModal('+i+')">수정</button>'
-                          +'<button class="btn btn-secondary mx-2" onclick="deleteProfessor('+i+')">삭제</button></div>'
-                  // text += '<a onclick="modifyProfessor(' + (prolist[i].id) + ')"><button type="button" style = "margin : 2px;" class="btn btn-default">수정</button></a>'
-                  //         + '<a onclick="deleteProfessor(' + (prolist[i].id) + ')"><button type="button" style = "margin : 2px;" class="btn btn-default">삭제</button></a>'
-               }
+         if(typeForProfessor.for_header=='관리자') {
+            text += '<div class="card-footer">'
+                    +'<button class="btn btn-secondary mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyProModal('+i+')">수정</button>'
+                    +'<button class="btn btn-secondary mx-2" onclick="deleteProfessor('+i+')">삭제</button></div>'
+         }
 
-
-            text+='</div></div></div>';
+            text+='</div></div>';
 
       }
       if(typeForProfessor.for_header=='관리자') {
