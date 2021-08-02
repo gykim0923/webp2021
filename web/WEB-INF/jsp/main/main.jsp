@@ -57,7 +57,7 @@
                 <main class="">
                     <div class="container">
                         <div class="row align-items-md-stretch">
-                            <div class="col-lg-9 py-2" id="main1_left" >
+                            <div class="col-xxl-9 col-xl-8 py-2" id="main1_left" >
                                 <div id="myCarousel" class="h-100 carousel slide card" data-bs-ride="carousel" style="margin-bottom : 0px; height:399px;">
                                     <div class="carousel-indicators" id="carouselButton">
                                         <%--   슬라이더 사진 개수와 동일한 버트 만들어 줘야함 makecarouselCard에 있음--%>
@@ -75,7 +75,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="col-lg-3 py-2" id="main1_right">
+                            <div class="col-xxl-3 col-xl-4 py-2" id="main1_right">
                                 <div class=" h-100 border card m-0" id="favorite_menu" style="height:399px;"></div>
                             </div>
                         </div>
@@ -84,8 +84,8 @@
 
                         <div class="row align-items-md-stretch">
 
-                            <div class="col-lg py-2" id="main2_left"  style="height : 400px;">
-                                <div class=" h-100 p-xxl-5 p-lg-4 p-3 border card">
+                            <div class="col-xl py-2" id="main2_left"  style="height : 400px;">
+                                <div class=" h-100 p-3 border card">
                                     <div>
                                         <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
                                             <button class="nav-link active" id="nav-21-tab" data-bs-toggle="tab" data-bs-target="#nav-21" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
@@ -101,8 +101,8 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg py-2" id="main2_center"  style="height : 400px;">
-                                <div class=" h-100 p-xxl-5 p-lg-4 p-3 border card">
+                            <div class="col-xl py-2" id="main2_center"  style="height : 400px;">
+                                <div class=" h-100 p-3 border card">
                                     <div>
                                         <div class="nav nav-tabs mb-3" id="nav-tab2" role="tablist">
                                             <button class="nav-link active" id="nav-30-tab" data-bs-toggle="tab" data-bs-target="#nav-30" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
@@ -116,8 +116,8 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-3 py-2" id="main2_right" style="height : 400px;">
-                                <div class=" h-100 p-xxl-5 p-lg-4 p-3 border card">
+                            <div class="col-xxl-3 py-2" id="main2_right" style="height : 400px;">
+                                <div class=" h-100 p-3 border card">
                                     <ul class="nav">
                                         <li class="nav-item">
                                             <a class="nav-link active" aria-current="page" href="#">일정<i class="bi bi-plus col-sm-2 text-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addSearchModal()"></i></a>
@@ -142,8 +142,8 @@
                                            data-search="true" data-side-pagination="true" data-click-to-select="true" data-page-list="[10]">
                                         <thead>
                                         <tr>
-                                            <th data-field="date" data-sortable="true">date</th>
-                                            <th data-field="content" data-sortable="true">content</th>
+                                            <th data-field="date" data-sortable="true">날짜</th>
+                                            <th data-field="content" data-sortable="true">내용</th>
                                         </tr>
                                         </thead>
                                     </table>
@@ -185,7 +185,7 @@
         var text30 = '<ul class="list-group">';
         var text31 = '<ul class="list-group">';
         for(var i=0;i<registerAllInfo.length;i++){
-            if(i==6){
+            if(i==10){
                 break;
             }
             var url30 = 'reg.kgu?major=main&num=30&mode=view&id='+registerAllInfo[i].id;
@@ -224,32 +224,32 @@
         var text22='<ul class="list-group">';
         var text23='<ul class="list-group">';
         for (var i=0; i<bbs21.length; i++){
-            if(i==6){
+            if(i==10){
                 break;
             }
             var url21 = 'bbs.kgu?major=main&num=21&mode=view&id='+bbs21[i].id;
-            text21+='<li class="border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
-                +'<a href="'+url21+'"><span>'+bbs21[i].title+'</span></a>'
+            text21+='<li class="p-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+                +'<a href="'+url21+'"><span class="index_post_link">'+bbs21[i].title+'</span></a>'
                 +'<a href="'+url21+'"><span>'+formatDate(bbs21[i].last_modified)+'</span></a>'
                 +'</li></ul>';
         }
         for (var i=0; i<bbs22.length; i++){
-            if(i==6){
+            if(i==10){
                 break;
             }
             var url22 = 'bbs.kgu?major=main&num=22&mode=view&id='+bbs22[i].id;
-            text22+='<li class="border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
-                +'<a href="'+url22+'"><span>'+bbs22[i].title+'</span></a>'
+            text22+='<li class="p-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+                +'<a href="'+url22+'"><span class="index_post_link">'+bbs22[i].title+'</span></a>'
                 +'<a href="'+url22+'"><span>'+formatDate(bbs22[i].last_modified)+'</span></a>'
                 +'</li></ul>';
         }
         for (var i=0; i<bbs23.length; i++){
-            if(i==6){
+            if(i==10){
                 break;
             }
             var url23 = 'bbs.kgu?major=main&num=23&mode=view&id='+bbs23[i].id;
-            text23+='<li class="border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
-                +'<a href="'+url23+'"><span>'+bbs23[i].title+'</span></a>'
+            text23+='<li class="p-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+                +'<a href="'+url23+'"><span class="index_post_link">'+bbs23[i].title+'</span></a>'
                 +'<a href="'+url23+'"><span>'+formatDate(bbs23[i].last_modified)+'</span></a>'
                 +'</li></ul>';
         }
@@ -430,6 +430,15 @@
         .carousel-img{
             height: 399px;
         }
+    }
+
+    .index_post_link {
+        color: grey;
+        display: inline-block;
+        width: 250px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
 </style>
