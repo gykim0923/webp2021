@@ -54,15 +54,22 @@
     return rows;
   }
 
-  function makeModifyMajorModal(i){
+  function makeModifyMajorModal(i){ //연동 필요
+    var major = <%=getAllMajor%>;
+    // var major = getMajor[i];
+    // var major_id = major.major_id;
+    // var major_name = major.major_name;
+    // var major_location = major.major_location;
+    // var major_contact = major.major_contact;
+
     var modal_header = '';
     modal_header += '<h5 class="modal-title" id="staticBackdropLabel">수정하기</h5>';
     modal_header += '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
 
     var modal_body = '';
-    modal_body += '<div>전공 이름</div><input type="text" class="form-control" id="modify_major_name" name="new_table" value="" placeholder="major_name">'
-            +'<div>major_location</div><input type="text" class="form-control" id="major_location" name="new_table" value="" placeholder="major_location">'
-            +'<div>major_contact</div><input type="text" class="form-control" id="major_contact" name="new_table" value="" placeholder="major_contact">';
+    modal_body += '<div>전공이름</div><input type="text" class="form-control" id="modify_major_name" name="new_table" value="'+(major[i].major_name)+'" placeholder="major_name">'
+            +'<div>학과위치</div><input type="text" class="form-control" id="major_location" name="new_table" value="'+(major[i].major_location)+'" placeholder="major_loction">'
+            +'<div>학과연락처</div><input type="text" class="form-control" id="major_contact" name="new_table" value="'+(major[i].major_contact)+'" placeholder="major_contact">';
 
     var modal_footer = '';
     modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
@@ -121,10 +128,10 @@
 
     var modal_body = '';
     modal_body += '<div>전공 아이디 (영문/숫자 혼용 가능) <mark>한번 생성하신 아이디는 수정하실 수 없습니다.</mark></div>'
-      + '<input type="text" class="form-control" id="add_major_id" name="new_table" value="" placeholder="전공아이디">'
-      + '<div>전공 이름</div><input type="text" class="form-control" id="add_major_name" name="new_table" value="" placeholder="major_name">'
-      + '<div>major_location</div><input type="text" class="form-control" id="add_major_location" name="new_table" value="" placeholder="major_location">'
-      + '<div>major_contact</div><input type="text" class="form-control" id="add_major_contact" name="new_table" value="" placeholder="major_contact">';
+      + '<input type="text" class="form-control" id="add_major_id" name="new_table" value="" placeholder="전공아이디를 입력해주세요">'
+      + '<div>전공이름</div><input type="text" class="form-control" id="add_major_name" name="new_table" value="" placeholder="전공이름을 입력해주세요">'
+      + '<div>학과위치</div><input type="text" class="form-control" id="add_major_location" name="new_table" value="" placeholder="학과위치를 입력해주세요">'
+      + '<div>학과연락처</div><input type="text" class="form-control" id="add_major_contact" name="new_table" value="" placeholder="학과연락처를 입력해주세요">';
 
     var modal_footer = '';
     modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
