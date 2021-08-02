@@ -162,6 +162,46 @@ public class RegisterDAO {
         return selected;
     }
 
+    public String insertAnswers(String data) {
+        String arr[] = data.split("-/-/-");// 0= userName 1=userid 2=per_id 3=grade 4=type 5=board_number 6=answers 7= question개수
+        String answers[] = arr[6].split("-/#/-"); // answer별 구분자 -/#/- 다중객관식은 그냥 answer에 구분자쨰로 넣음.
+        if(arr[2].equals("null"))
+            arr[2] = "-";
+        if(arr[3].equals("null"))
+            arr[3] = "-";
+        Connection conn = Config.getInstance().sqlLogin();
+        boolean result = false;
+        List<Map<String, Object>> listOfMaps = null;
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_reg_answer WHERE writer_id=? AND reg_id=?;",
+                    new MapListHandler(), arr[1], arr[5]);
+            if (listOfMaps.size() > 0)
+                return "already";
+            for (int i = 0; i < answers.length; i++) {
+                queryRunner.update(conn,
+                        "INSERT INTO bbs_reg_answer(writer_name, writer_id, writer_perId, writer_grade, writer_type, question_num, reg_id, answer) VALUES(?,?,?,?,?,?,?,?);",
+                        arr[0], arr[1], arr[2], arr[3], arr[4], (i + 1), arr[5], answers[i]);
+            }
+            for (int j = answers.length ; j < Integer.valueOf(arr[7]) ; ++j) {
+                queryRunner.update(conn,
+                        "INSERT INTO bbs_reg_answer(writer_name, writer_id, writer_perId, writer_grade, writer_type, question_number,board_number, answer) VALUES(?,?,?,?,?,?,?,?);",
+                        arr[0], arr[1], arr[2], arr[3], arr[4], (j + 1), arr[5], "");
+            }
+            queryRunner.update(conn, "UPDATE bbs_reg SET `applicant_count`= `applicant_count`+1 WHERE `id` = ?;", arr[5]);
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        System.out.println(result);
+        if (result)
+            return "success";
+        else
+            return "fail";
+    }
+
     private String getRemoveHtmlText(String content) {
         if(content == null)
             return null;

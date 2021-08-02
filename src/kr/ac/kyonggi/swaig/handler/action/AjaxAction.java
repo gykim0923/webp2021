@@ -6,6 +6,7 @@ import kr.ac.kyonggi.swaig.common.controller.Action;
 import kr.ac.kyonggi.swaig.handler.dao.settings.*;
 import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
 import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
+import kr.ac.kyonggi.swaig.handler.dto.settings.RegisterDTO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserTypeDTO;
 import kr.ac.kyonggi.swaig.handler.excel.ExcelReader;
@@ -336,6 +337,28 @@ public class AjaxAction implements Action {
             case "getQuestions":   //DAO에서 권한 확인
                 data = data.concat("-/-/-" + type.for_header + "-/-/-" + user.id + "-/-/-" + type.board_level);
                 result = gson.toJson(RegisterDAO.getInstance().getQuestions(data));
+                break;
+            case "insertAnswer":
+                RegisterDTO req_BoardsCheck = RegisterDAO.getInstance().getReg(data.split("-/-/-")[0]);
+                if (!req_BoardsCheck.level.contains(type.for_header)){
+                    System.out.println(req_BoardsCheck.level);
+                    return "fail";
+                }
+                if (new Date().getTime() > (req_BoardsCheck.closing_date.getTime() + 60 * 60 * 1000 * 24) || new Date().getTime() < req_BoardsCheck.starting_date.getTime())
+                    return "timeout";
+                data = (user.name + "-/-/-" + user.id + "-/-/-" + user.per_id + "-/-/-" + user.grade + "-/-/-" + user.type + "-/-/-").concat(data);
+                result = RegisterDAO.getInstance().insertAnswers(data);
+                break;
+            case "modifyAnswer":
+                RegisterDTO req_check = RegisterDAO.getInstance().getReg(data.split("-/-/-")[0]);
+                if (!req_check.level.contains(type.for_header)){
+                    System.out.println(req_check.level);
+                    return "fail";
+                }
+                if (new Date().getTime() > (req_check.closing_date.getTime() + 60 * 60 * 1000 * 24) || new Date().getTime() < req_check.starting_date.getTime())
+                    return "timeout";
+                data = (user.name + "-/-/-" + user.id + "-/-/-" + user.per_id + "-/-/-" + user.grade + "-/-/-" + user.type + "-/-/-").concat(data);
+                result = RegisterDAO.getInstance().insertAnswers(data);
                 break;
         }
 
