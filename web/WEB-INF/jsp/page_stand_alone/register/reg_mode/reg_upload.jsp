@@ -29,14 +29,14 @@
 <%--ckeditor가 나와야 하는 자리--%>
 <div class="form-group mb-3" id="bbsTitleBox"><input class="form-control" id="bbsTitle" placeholder="제목을 입력하세요."></div>
 
-<div class="row mb-3">
-    <div class="col-md-4 form-group">
+<div class="row mb-3" >
+    <div class="col-md-4 form-group" id="InputStartDate">
         <label for="InputStartDate">시작일</label>
-        <input type="date" class="form-control" name="startDate" id="InputStartDate">
+        <input type="date" class="form-control" name="startDate" >
     </div>
-    <div class="col-md-4 form-group">
+    <div class="col-md-4 form-group" id="InputFinishDate">
         <label for="InputFinishDate">마감일</label>
-        <input type="date" class="form-control" name="finishDate" id="InputFinishDate">
+        <input type="date" class="form-control" name="finishDate" >
     </div>
     <div class="col-md-4">
         <label for="forWho">신청현황공개</label>
@@ -87,13 +87,7 @@
 </div>
 
 <%--질문 폼 만드는 버튼 --%>
-<div class="my-2">
-    <button class="btn btn-secondary" id="q1" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ1Modal()">주관식</button>
-    <button class="btn btn-secondary" id="q2" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ2Modal()">단일객관식</button>
-    <button class="btn btn-secondary" id="q3" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ3Modal()">다중객관식</button>
-    <button class="btn btn-secondary" id="q4" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ4Modal()">척도형</button>
-    <button class="btn btn-secondary" id="q5" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ5Modal()">파일업로드형</button>
-</div>
+<div class="my-2" id="formButtons"></div>
 
 <div id="questionYouMade"></div>
 
@@ -101,14 +95,56 @@
     <c:choose>
         <c:when test="${jsp == '\"reg_write\"'}">
             <button type="button" class="btn btn-outline-secondary" onclick="insertReg()">추가</button>
+            <script>
+                var list = $('#formButtons');
+                var text = '';
+                text += '<div class="my-2">'
+                text += '<button class="btn btn-secondary px-1" id="q1" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ1Modal()">주관식</button>'
+                text += '<button class="btn btn-secondary px-1" id="q2" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ2Modal()">단일객관식</button>'
+                text += '<button class="btn btn-secondary px-1" id="q3" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ3Modal()">다중객관식</button>'
+                text += '<button class="btn btn-secondary px-1" id="q4" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ4Modal()">척도형</button>'
+                text += '<button class="btn btn-secondary px-1" id="q5" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ5Modal()">파일업로드형</button> </div>'
+                list.html(text);
+            </script>
         </c:when>
         <c:when test="${jsp == '\"reg_modify\"'}">
             <button type="button" class="btn btn-outline-secondary" onclick="modifyReg()">수정</button>
             <script>
                 var content = $('#regUpdateContent');
+                var startDate = $('#InputStartDate');
+                var endDate = $('#InputFinishDate')
+                var who = $('#forWho');
+                var check1 = $('#inlineCheckbox1');
+                var check2 = $('#inlineCheckbox2');
+                var check3 = $('#inlineCheckbox3');
+                var text = '';
                 var getReg = <%=getReg%>;
                 content.html(getReg.text);
                 $('#bbsTitleBox').html('<input class="form-control" id="bbsTitle" placeholder="제목을 입력하세요." value="'+getReg.title+'">');
+                startDate.html('<label for="InputStartDate">시작일</label><input type="date" class="form-control" name="startDate" id="InputStartDate" value="'+getReg.new_starting_date+'">');
+                endDate.html('<label for="InputFinishDate">마감일</label><input type="date" class="form-control" name="finishDate" id="InputFinishDate" value="'+getReg.new_closing_date+'">');
+
+                if(getReg.for_who == '1'){
+                    text ='<option value="1">관리자/교수</option><option value="0">작성자만</option><option value="2">모두에게</option>'
+                }
+                else if(getReg.for_who == '2'){
+                    text ='<option value="2">모두에게</option><option value="1">관리자/교수</option><option value="0">작성자만</option>'
+                }
+                else {
+                    text ='<option value="0">작성자만</option><option value="1">관리자/교수</option><option value="2">모두에게</option>'
+                }
+
+                who.html(text);
+
+                if( getReg.level.indexOf("교수")>0){
+                    check1.html('<input class="form-check-input" type="checkbox" checked="checked"  id="inlineCheckbox1" value="교수"><label class="form-check-label" for="inlineCheckbox1">교수</label>');
+                }
+                if( getReg.level.indexOf("조교")>0) {
+                    check2.html('<input class="form-check-input"  type="checkbox" checked="checked" id="inlineCheckbox2" value="조교"><label class="form-check-label" for="inlineCheckbox2">조교</label>')
+                }
+                if( getReg.level.indexOf("학생")>0) {
+                    check3.html('<input class="form-check-input" type="checkbox" checked="checked" id="inlineCheckbox3" value="학생"><label class="form-check-label" for="inlineCheckbox3">학생</label>')
+                }
             </script>
         </c:when>
     </c:choose>
@@ -256,7 +292,7 @@
             return;
         }
         a += '<div class= "my-1" id="wantRemove'+questionIndex+'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span id="Type'+questionIndex+'">단일객관식</span>'+
-        '<div class="input-group mb-3 my-2"> <input type="text" class="form-control" readonly id="question'+questionIndex+'" name="question'+questionIndex+'" placeholder=""value="'+ text +'" aria-label="" aria-describedby="button-addon2"> <div class="input-group-append"> <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="removeQuestion('+questionIndex+')">삭제</button> </div><hr style="border:1px dotted black"></div>';
+            '<div class="input-group mb-3 my-2"> <input type="text" class="form-control" readonly id="question'+questionIndex+'" name="question'+questionIndex+'" placeholder=""value="'+ text +'" aria-label="" aria-describedby="button-addon2"> <div class="input-group-append"> <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="removeQuestion('+questionIndex+')">삭제</button> </div><hr style="border:1px dotted black"></div>';
         a+='<div id="answerOf'+questionIndex+'"></div><hr style="border : 1px dotted black"></div>';
         $('#questionYouMade').append(a);
         var b = '';
@@ -521,7 +557,7 @@
     }
 
     function back(){
-        window.location.href = 'reg.kgu?major='+major+'&&num='+num+'&&mode=list';
+        window.location.href = 'bbs.kgu?major='+major+'&&num='+num+'&&mode=view&&id='+id;
     }
 
     function formatDate(date) { //날짜를 yyyy-mm-dd 형식으로 반환

@@ -11,6 +11,7 @@
     /**
      * BBS 공통 설정
      * */
+    System.out.println("jsp:"+jsp);
     String id = (String) request.getAttribute("id");
 %>
 <c:choose>
@@ -21,6 +22,7 @@
         <%@include file="/WEB-INF/jsp/page_stand_alone/register/reg_mode/reg_view.jsp" %>
     </c:when>
     <c:when test="${jsp == '\"reg_write\"' || jsp == '\"reg_modify\"'}">
+        <%System.out.println("!!!!!!!!!!!!!!!!");%>
         <%@include file="/WEB-INF/jsp/page_stand_alone/register/reg_mode/reg_upload.jsp" %>
     </c:when>
 </c:choose>
