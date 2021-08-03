@@ -57,73 +57,76 @@
                 <main class="">
                     <div class="container">
                         <div class="row align-items-md-stretch">
-                            <div class="col-xxl-9 col-xl-8 py-2" id="main1_left" >
-                                <div id="myCarousel" class="h-100 carousel slide card" data-bs-ride="carousel" style="margin-bottom : 0px; height:399px;">
-                                    <div class="carousel-indicators" id="carouselButton">
-                                        <%--   슬라이더 사진 개수와 동일한 버트 만들어 줘야함 makecarouselCard에 있음--%>
+                            <div class="col-xxl-9" id="main1_left" >
+                                <div class="py-2 col-12">
+<%--                                    carousel start--%>
+                                    <div id="myCarousel" class="h-100 carousel slide card" data-bs-ride="carousel" style="margin-bottom : 0px; height:399px;">
+                                        <div class="carousel-indicators" id="carouselButton">
+                                            <%--   슬라이더 사진 개수와 동일한 버트 만들어 줘야함 makecarouselCard에 있음--%>
+                                        </div>
+                                        <div class="carousel-inner h-100 " id="carouselCard">
+                                            <%--     makecarouselCard에 있음--%>
+                                        </div>
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
                                     </div>
-                                    <div class="carousel-inner h-100 " id="carouselCard">
-                                        <%--     makecarouselCard에 있음--%>
-                                    </div>
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </button>
+<%--                                    carousel end--%>
                                 </div>
-                            </div>
-                            <div class="col-xxl-3 col-xl-4 py-2" id="main1_right">
-                                <div class=" h-100 border card m-0" id="favorite_menu" style="height:399px;"></div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="row align-items-md-stretch">
-
-                            <div class="col-xl py-2 " id="main2_left">
-                                <div class=" p-3 border card m-0"  style="height : 365px;">
-                                    <div>
-                                        <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-                                            <button class="nav-link active" id="nav-21-tab" data-bs-toggle="tab" data-bs-target="#nav-21" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
-                                            <button class="nav-link" id="nav-22-tab" data-bs-toggle="tab" data-bs-target="#nav-22" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"></button>
-                                            <button class="nav-link" id="nav-23-tab" data-bs-toggle="tab" data-bs-target="#nav-23" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"></button>
+                                <div class="row">
+                                    <div class="col-xl-6 py-2 " id="main2_left">
+                                        <div class=" p-3 border card m-0"  style="height : 365px;">
+                                            <div>
+                                                <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                                                    <button class="nav-link active" id="nav-21-tab" data-bs-toggle="tab" data-bs-target="#nav-21" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
+                                                    <button class="nav-link" id="nav-22-tab" data-bs-toggle="tab" data-bs-target="#nav-22" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"></button>
+                                                    <button class="nav-link" id="nav-23-tab" data-bs-toggle="tab" data-bs-target="#nav-23" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"></button>
+                                                </div>
+                                            </div>
+                                            <div class="tab-content" id="nav-tabContent">
+                                                <div class="tab-pane fade show active" id="nav-21" role="tabpanel" aria-labelledby="nav-21-tab"></div>
+                                                <div class="tab-pane fade" id="nav-22" role="tabpanel" aria-labelledby="nav-22-tab"></div>
+                                                <div class="tab-pane fade" id="nav-23" role="tabpanel" aria-labelledby="nav-23-tab"></div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="tab-content" id="nav-tabContent">
-                                        <div class="tab-pane fade show active" id="nav-21" role="tabpanel" aria-labelledby="nav-21-tab"></div>
-                                        <div class="tab-pane fade" id="nav-22" role="tabpanel" aria-labelledby="nav-22-tab"></div>
-                                        <div class="tab-pane fade" id="nav-23" role="tabpanel" aria-labelledby="nav-23-tab"></div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="col-xl py-2 " id="main2_center" >
-                                <div class=" p-3 border card m-0" style="height : 365px;">
-                                    <div>
-                                        <div class="nav nav-tabs mb-3" id="nav-tab2" role="tablist">
-                                            <button class="nav-link active" id="nav-30-tab" data-bs-toggle="tab" data-bs-target="#nav-30" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
-                                            <button class="nav-link" id="nav-31-tab" data-bs-toggle="tab" data-bs-target="#nav-31" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"></button>
+                                    <div class="col-xl-6 py-2 " id="main2_center" >
+                                        <div class=" p-3 border card m-0" style="height : 365px;">
+                                            <div>
+                                                <div class="nav nav-tabs mb-3" id="nav-tab2" role="tablist">
+                                                    <button class="nav-link active" id="nav-30-tab" data-bs-toggle="tab" data-bs-target="#nav-30" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
+                                                    <button class="nav-link" id="nav-31-tab" data-bs-toggle="tab" data-bs-target="#nav-31" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"></button>
+                                                </div>
+                                            </div>
+                                            <div class="tab-content" id="nav-tabContent2">
+                                                <div class="tab-pane fade show active" id="nav-30" role="tabpanel" aria-labelledby="nav-30-tab"></div>
+                                                <div class="tab-pane fade" id="nav-31" role="tabpanel" aria-labelledby="nav-31-tab"></div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="tab-content" id="nav-tabContent2">
-                                        <div class="tab-pane fade show active" id="nav-30" role="tabpanel" aria-labelledby="nav-30-tab"></div>
-                                        <div class="tab-pane fade" id="nav-31" role="tabpanel" aria-labelledby="nav-31-tab"></div>
-                                    </div>
                                 </div>
                             </div>
-
-                            <div class="col-xxl-3 py-2 " id="main2_right" >
-                                <div class=" p-3 border card m-0" style="height : 365px;">
-                                    <ul class="nav">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" aria-current="page" href="#">일정<i class="bi bi-plus col-sm-2 text-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addSearchModal()"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content" id="schContent"></div>
+                            <div class="col-xxl-3" id="main1_right">
+                                <div class="row">
+                                    <div class="py-2 col-xxl-12 col-sm-6">
+                                        <div class=" h-100 border card m-0" id="favorite_menu" style="height:399px;"></div>
+                                    </div>
+                                    <div class="py-2 col-xxl-12 col-sm-6">
+                                        <div class=" p-3 border card m-0" style="height : 365px;">
+                                            <ul class="nav">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" aria-current="page" href="#">일정<i class="bi bi-plus col-sm-2 text-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addSearchModal()"></i></a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content" id="schContent"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

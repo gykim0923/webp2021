@@ -94,7 +94,7 @@
       var prolist = $('#professorCard');
       var text ='';
       for (var i = 0; i < professor.length; i++) {
-         text+='<div class="col-4">'
+         text+='<div class="col-lg-4 col-md-6">'
                  +'<div class="card">'
                  +'<img src="https://via.placeholder.com/340x120/87CEFA/000000" alt="Cover" class="card-img-top">'
                  +'<div class="card-body text-center">'
@@ -277,9 +277,6 @@
 <div>
    <div class="team-boxed">
       <div class="container">
-         <div class="intro">
-            <h3 class="text-center">교수진</h3>
-         </div>
          <div class="row people" id="professorCard"></div>
       </div>
    </div>
@@ -293,10 +290,6 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
          <div class="modal-body" id = "myModalbody"></div>
-         <%--                        <div class="modal-footer">--%>
-         <%--                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>--%>
-         <%--                            <button type="button" class="btn btn-primary">추가하기</button>--%>
-         <%--                        </div>--%>
       </div>
    </div>
 </div>

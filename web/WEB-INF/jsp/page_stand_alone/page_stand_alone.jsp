@@ -64,7 +64,7 @@
                         <div class="row align-items-md-stretch">
 
                             <div class="col-lg-12 py-2">
-                                <div class=" h-100 p-5 m-0 border card">
+                                <div class=" h-100 p-xxl-5 p-xl-4 p-3 m-0 border card">
                                     <c:choose>
                                         <%--            menu--%>
                                         <c:when test="${jsp == '\"information\"'}">
