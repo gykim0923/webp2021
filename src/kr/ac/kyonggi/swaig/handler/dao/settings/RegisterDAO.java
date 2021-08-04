@@ -3,10 +3,7 @@ package kr.ac.kyonggi.swaig.handler.dao.settings;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import kr.ac.kyonggi.swaig.common.sql.Config;
-import kr.ac.kyonggi.swaig.handler.dto.settings.BBSDTO;
-import kr.ac.kyonggi.swaig.handler.dto.settings.RegAnswerDTO;
-import kr.ac.kyonggi.swaig.handler.dto.settings.RegQuestionDTO;
-import kr.ac.kyonggi.swaig.handler.dto.settings.RegisterDTO;
+import kr.ac.kyonggi.swaig.handler.dto.settings.*;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
@@ -119,11 +116,10 @@ public class RegisterDAO {
                         it.id, i + 1, content, Integer.valueOf(type));
 //                System.out.println(i);
             }
-//            queryRunner.update(conn, "UPDATE bbs_req_writerfile SET board_id=? WHERE board_id=0 AND writer_id=?", id,
+//            queryRunner.update(conn, "UPDATE bbs_reg_writerfile SET board_id=? WHERE board_id=0 AND writer_id=?", id,
 //                    arr[0]);
         } catch (SQLException se) {
             se.printStackTrace();
-//            System.out.println("fail2");
             return "fail";
         } finally {
             DbUtils.closeQuietly(conn);
@@ -342,5 +338,21 @@ public class RegisterDAO {
         m = ON.matcher(content);
         content = m.replaceAll("");
         return content;
+    }
+
+    public ArrayList<RegWriterFileDTO> getRegFiles(String id) {
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn,"SELECT * FROM bbs_reg_writerfile WHERE reg_id = ? ORDER BY id DESC;", new MapListHandler(), id);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<RegWriterFileDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<RegWriterFileDTO>>() {}.getType());
+        return selected;
     }
 }
