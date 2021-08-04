@@ -365,9 +365,9 @@
         var text='';
         var size = scheduleAllInfo.length;
         var today = new Date();
-        for(var i = 0; i < size; i++){
+        for(var i = 0; i < 5; i++){
             var date = new Date(scheduleAllInfo[i].date);
-            text += '<div class="bd-callout ';
+            text += '<div class="py-4 bd-callout ';
             var diffDay = (date.getTime() - today.getTime()) / (24 * 60 * 60 * 1000);
             if(diffDay < 0){
                 text += 'bd-callout-end';
@@ -428,8 +428,8 @@
 
 <style>
     .bd-callout {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
         border: 1px solid #e9ecef;
         border-left-width: .25rem;
         border-radius: .25rem;
