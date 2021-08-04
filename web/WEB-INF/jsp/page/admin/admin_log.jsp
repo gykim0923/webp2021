@@ -37,7 +37,6 @@
 <script>
     $(document).ready(function(){
         callSetupTableView();
-        deleteLog();
     })
     var $table = $('#table');
     // var $remove = $('#remove');
@@ -46,16 +45,6 @@
     function callSetupTableView(){
         $table.bootstrapTable('load',data());
         $table.bootstrapTable('refresh');
-    }
-
-    function deleteLog(){
-        $.ajax({
-            url: "ajax.kgu",
-            type: "post",
-            data: {
-                req: "delete_log"
-            }
-        });
     }
 
     function data() {

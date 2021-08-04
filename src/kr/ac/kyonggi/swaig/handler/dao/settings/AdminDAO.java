@@ -241,16 +241,4 @@ public class AdminDAO {
         return "success";
     }
 
-    public String deleteLog() {
-        Connection conn = Config.getInstance().sqlLogin();
-        try {
-            QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn,"delete from log where log_time < DATE_FORMAT( CURDATE() + INTERVAL -1 MONTH , '%Y/%m/%d' )");
-        } catch(SQLException se) {
-            se.printStackTrace();
-        } finally {
-            DbUtils.closeQuietly(conn);
-        }
-        return "success";
-    }
 }

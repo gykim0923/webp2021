@@ -31,6 +31,7 @@ public class LogDAO {
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
+
             listOfMaps = queryRunner.query(conn, "SELECT * FROM log ORDER BY id DESC;", new MapListHandler());
         } catch(Exception se) {
             se.printStackTrace();
@@ -47,6 +48,7 @@ public class LogDAO {
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"delete from log where log_time < DATE_FORMAT( CURDATE() + INTERVAL -1 MONTH , '%Y/%m/%d' )");
             queryRunner.update(conn,"INSERT INTO log(user_id, user_name, user_type, log_time, log_type) VALUE(?,?,?,?,?);", user_id,user_name,user_type, log_time, log_type);
         } catch(SQLException se) {
             se.printStackTrace();
