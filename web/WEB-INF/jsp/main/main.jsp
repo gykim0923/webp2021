@@ -57,10 +57,15 @@
                 <main class="">
                     <div class="container">
                         <div class="row align-items-md-stretch">
+                            <div class="col-12 mb-3">
+                                <p class="h1 header_title" id="headerTitle"></p>
+                            </div>
+                        </div>
+                        <div class="row align-items-md-stretch">
                             <div class="col-xxl-9" id="main1_left" >
                                 <div class="py-2 col-12">
 <%--                                    carousel start--%>
-                                    <div id="myCarousel" class="h-100 carousel slide card" data-bs-ride="carousel" style="margin-bottom : 0px; height:399px;">
+                                    <div id="myCarousel" class="h-100 carousel slide card border" data-bs-ride="carousel" style="margin-bottom : 0px; height:399px;">
                                         <div class="carousel-indicators" id="carouselButton">
                                             <%--   슬라이더 사진 개수와 동일한 버트 만들어 줘야함 makecarouselCard에 있음--%>
                                         </div>
@@ -80,9 +85,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-6 py-2 " id="main2_left">
-                                        <div class=" p-3 border card m-0"  style="height : 365px;">
+                                        <div class=" p-3 border card m-0"  style="height : 493px;">
                                             <div>
-                                                <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                                                <div class="nav nav-tabs mb-2" id="nav-tab" role="tablist">
                                                     <button class="nav-link active" id="nav-21-tab" data-bs-toggle="tab" data-bs-target="#nav-21" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
                                                     <button class="nav-link" id="nav-22-tab" data-bs-toggle="tab" data-bs-target="#nav-22" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"></button>
                                                     <button class="nav-link" id="nav-23-tab" data-bs-toggle="tab" data-bs-target="#nav-23" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"></button>
@@ -97,9 +102,9 @@
                                     </div>
 
                                     <div class="col-xl-6 py-2 " id="main2_center" >
-                                        <div class=" p-3 border card m-0" style="height : 365px;">
+                                        <div class=" p-3 border card m-0" style="height : 493px;">
                                             <div>
-                                                <div class="nav nav-tabs mb-3" id="nav-tab2" role="tablist">
+                                                <div class="nav nav-tabs mb-2" id="nav-tab2" role="tablist">
                                                     <button class="nav-link active" id="nav-30-tab" data-bs-toggle="tab" data-bs-target="#nav-30" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
                                                     <button class="nav-link" id="nav-31-tab" data-bs-toggle="tab" data-bs-target="#nav-31" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"></button>
                                                 </div>
@@ -115,10 +120,10 @@
                             <div class="col-xxl-3" id="main1_right">
                                 <div class="row">
                                     <div class="py-2 col-xxl-12 col-sm-6">
-                                        <div class=" h-100 border card m-0" id="favorite_menu" style="height:399px;"></div>
+                                        <div class=" h-100 border card m-0" id="favorite_menu" style=""></div>
                                     </div>
                                     <div class="py-2 col-xxl-12 col-sm-6">
-                                        <div class=" p-3 border card m-0" style="height : 365px;">
+                                        <div class=" p-3 border card m-0" style="height : 493px;">
                                             <ul class="nav">
                                                 <li class="nav-item">
                                                     <a class="nav-link active" aria-current="page" href="#">일정<i class="bi bi-plus col-sm-2 text-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addSearchModal()"></i></a>
@@ -175,12 +180,21 @@
 <script>
 
     $(document).ready(function(){
+        makeHeaderTitle(); //Header Title 제작
+
         makeFavoriteMenu();
         makeScheduleInfo();
         makeCarouselCard();
         makeNoticeBBS();
         makeNoticeReg();
     })
+
+    function makeHeaderTitle(){
+        var majorAllInfo =<%=majorAllInfo%>;
+        var title = $('#headerTitle');
+        title.append('경기대학교 '+majorAllInfo[0].major_name);
+    }
+
     function makeNoticeReg(){
         var nav30 = $('#nav-30');
         var nav31 = $('#nav-31');
@@ -192,7 +206,7 @@
                 break;
             }
             var url30 = 'reg.kgu?major=main&num=30&mode=view&id='+registerAllInfo[i].id;
-            text30+='<li class="p-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+            text30+='<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
                 +'<a href="'+url30+'"><span class="index_post_link">'+registerAllInfo[i].title+'</span></a>'
                 +'<a href="'+url30+'"><span>'+formatDate(registerAllInfo[i].last_modified)+'</span></a>'
                 +'</li></ul>';
@@ -226,36 +240,42 @@
         var text21='<ul class="list-group">';
         var text22='<ul class="list-group">';
         var text23='<ul class="list-group">';
+
         for (var i=0; i<bbs21.length; i++){
             if(i==9){
                 break;
             }
             var url21 = 'bbs.kgu?major=main&num=21&mode=view&id='+bbs21[i].id;
-            text21+='<li class="p-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+            text21+='<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
                 +'<a href="'+url21+'"><span class="index_post_link">'+bbs21[i].title+'</span></a>'
                 +'<a href="'+url21+'"><span>'+formatDate(bbs21[i].last_modified)+'</span></a>'
-                +'</li></ul>';
+                +'</li>';
         }
+        text21+='</ul>';
+
         for (var i=0; i<bbs22.length; i++){
             if(i==9){
                 break;
             }
             var url22 = 'bbs.kgu?major=main&num=22&mode=view&id='+bbs22[i].id;
-            text22+='<li class="p-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+            text22+='<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
                 +'<a href="'+url22+'"><span class="index_post_link">'+bbs22[i].title+'</span></a>'
                 +'<a href="'+url22+'"><span>'+formatDate(bbs22[i].last_modified)+'</span></a>'
-                +'</li></ul>';
+                +'</li>';
         }
+        text22+='</ul>';
+
         for (var i=0; i<bbs23.length; i++){
             if(i==9){
                 break;
             }
             var url23 = 'bbs.kgu?major=main&num=23&mode=view&id='+bbs23[i].id;
-            text23+='<li class="p-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+            text23+='<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
                 +'<a href="'+url23+'"><span class="index_post_link">'+bbs23[i].title+'</span></a>'
                 +'<a href="'+url23+'"><span>'+formatDate(bbs23[i].last_modified)+'</span></a>'
-                +'</li></ul>';
+                +'</li>';
         }
+        text23+='</ul>';
         notice21.append(text21);
         notice22.append(text22);
         notice23.append(text23);
@@ -308,7 +328,7 @@
         if(sliderList.length==0){ // 데이터가 없을 시 디폴트 화면 구성
             text2 +='<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button>'
             text +='<div class="h-100 carousel-item active">';
-            text +='<svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg>'
+            text +='<svg class="carousel-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg>'
             text +='<div class="container"> <div class="carousel-caption"> <h1>등록된 대문이 없습니다.</h1> <p>관리자 모드에서 대문을 추가해주시기 바랍니다.</p> </div> </div>'
             text +='</div>';
         }
@@ -434,11 +454,16 @@
             height: 495px;
         }
     }
+    @media (max-width: 1600px) {
+        .header_title{
+            text-align: center;
+        }
+    }
 
     .index_post_link {
         color: grey;
         display: inline-block;
-        width: 250px;
+        width: 270px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
