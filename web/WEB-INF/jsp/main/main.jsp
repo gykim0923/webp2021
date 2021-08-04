@@ -370,7 +370,7 @@
                 break;
             }
             var date = new Date(scheduleAllInfo[i].date);
-            text += '<div class="py-4 bd-callout ';
+            text += '<div class="py-xxl-4 p-md-3 p-2 bd-callout ';
             var diffDay = (date.getTime() - today.getTime()) / (24 * 60 * 60 * 1000);
             if(diffDay < 0){
                 text += 'bd-callout-end';
@@ -441,11 +441,11 @@
     }
 
     .bd-callout-info {
-        border-left-color: #5bc0de;
+        border-left-color: #0025d2;
     }
 
     .bd-callout-warning {
-        border-left-color: #f0ad4e;
+        border-left-color: #ffc330;
     }
 
     .bd-callout-end {
@@ -466,10 +466,14 @@
     .index_post_link {
         color: grey;
         display: inline-block;
-        width: 270px;
+        width: 265px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+
+    .index_post_time {
+        width: 92px;
     }
 
 </style>
