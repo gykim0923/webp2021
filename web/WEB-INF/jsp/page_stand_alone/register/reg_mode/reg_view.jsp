@@ -9,6 +9,7 @@
 <%
     String getReg = (String) request.getAttribute("getReg");
     String AnswerWhoDone = (String) request.getAttribute("AnswerWhoDone");
+    String getAllFile = (String) request.getAttribute("regFiles");
 %>
 <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 
@@ -18,6 +19,8 @@
     <div class="h2" id="view_title"></div>
     <hr>
     <div class="row" id="view_info"></div>
+    <hr>
+    <div id="post_box"></div>
     <hr>
     <div id="view_content"></div>
     <hr>
@@ -34,6 +37,7 @@
     var user = <%=user%>;
     var getReg = <%=getReg%>;
     var anotherAnswer = <%=AnswerWhoDone%>;
+    var getAllFile = <%=getAllFile%>;
 
     var questions = null;
     var starting_date = getReg.starting_date;
@@ -51,6 +55,7 @@
         check();
         makeViewTitle();
         makeViewInfo();
+        makeViewPost()
         makeViewContent();
         getQuestion();
         makeAnother();
@@ -801,5 +806,26 @@
                 })
             }
         })
+    }
+
+    function makeViewPost(){ //첨부파일 표시
+        var postbox = $('#post_box');
+        var a = '';
+        if(getAllFile.length > 0)
+            a += '첨부파일: ';
+        if(getAllFile.length == 0)
+            $('#post_box').remove();
+        for(var i = 0 ; i < getAllFile.length ; i++){
+            var it = getAllFile[i];
+            if(user != null){
+                if(getReg.level.includes(type.for_header) || type.for_header == '관리자' || user.id == getReg.writer_id)
+                    a += '<a href="download.kgu?id='+it.id+'&&path='+it.real_FileName+'">' + it.original_FileName + '</a>&nbsp&nbsp';
+                else
+                    a  += it.original_FileName + '&nbsp&nbsp';
+            }
+            else
+                a  += it.original_FileName + '&nbsp&nbsp';
+        }
+        postbox.append(a);
     }
 </script>

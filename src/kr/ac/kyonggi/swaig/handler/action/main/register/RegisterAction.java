@@ -61,6 +61,7 @@ public class RegisterAction extends CustomAction {
             String id = request.getParameter("id"); //게시글 고유 번호
             request.setAttribute("id", id); //다시 JSP로 보내줌 (재활용을 위해), 게시글 아이디
             request.setAttribute("getReg", gson.toJson(RegisterDAO.getInstance().getReg(id)));
+            request.setAttribute("regFiles", gson.toJson(RegisterDAO.getInstance().getRegFiles(id)));
         }
         if(mode.equals("view")){ //해당 신청하기에 신청한 사람을 보내준다.
             String id = request.getParameter("id");
