@@ -171,74 +171,75 @@
         makeView(index, doneQuestions, panel);
     }
 
-    function makeView(index, doneQuestions, panel){
+    function makeView(index, doneQuestions, panel) {
         var doneQuestion = doneQuestions;
-        for(var i = 0 ; i < doneQuestion.length ; i++){
+        for (var i = 0; i < doneQuestion.length; i++) {
             var it = questions[i];//타입 1 = 주관식 2 = 단일객관식 3 = 다중객관식 4 = 척도형 5 = 파일업로드형
             var done = doneQuestion[i];
 
-            if(it.question_type == '1'){
+            if (it.question_type == '1') {
                 var text = '';
-            if(it.question_type == '1'){  //주관식
-                var text = '<div class="mx-3">';
-                if(done.answer != '')
-                    text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>'+ (i+1) + '.' + it.question_content + '</label><input type="text" class="form-control" name="answer' + i + '" value="' + done.answer + '" readonly></div>';
-                else
-                    text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>'+ (i+1) + '.' + it.question_content + '</label><input type="text" class="form-control" name="answer' + i + '" value="답변을 하지 않았습니다." readonly></div>';
-                panel.append(text+'</div>');
-            }
-            if(it.question_type == '2'){  //단일객관식
-                var text = '<div class="mx-3">';
-                var allAnswer = it.question_content;
-                var answers = allAnswer.split('-/@/-');
-                text += '<div class="form-group" id="question' + i + '"><label>'+ (i+1) + '.' + answers[0] + '</label><div id="allAnswers' + i + 'who' + index + '"></div>';
-                panel.append(text+'</div>');
-                var answerPanel = $('#allAnswers'+i+ 'who' + index);
-                for(var j = 1 ; j < answers.length ; ++j){
-                    if(answers[j] == done.answer)
-                        var input = '<div class="radio disabled"><label><input type="radio" disabled checked="true" name="answer' + i + 'who' + index + '" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
+                if (it.question_type == '1') {  //주관식
+                    var text = '<div class="mx-3">';
+                    if (done.answer != '')
+                        text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>' + (i + 1) + '.' + it.question_content + '</label><input type="text" class="form-control" name="answer' + i + '" value="' + done.answer + '" readonly></div>';
                     else
-                        var input = '<div class="radio disabled"><label><input type="radio" disabled name="answer' + i + 'who' + index + '" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
-                    answerPanel.append(input);
+                        text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>' + (i + 1) + '.' + it.question_content + '</label><input type="text" class="form-control" name="answer' + i + '" value="답변을 하지 않았습니다." readonly></div>';
+                    panel.append(text + '</div>');
                 }
-                if(done.answer == '')
-                    answerPanel.append('<span style="font-size : 14px; color : red">답변을 하지 않았습니다.</span>');
-            }
-            if(it.question_type == '3'){  //다중객관식
-                var text = '<div class="mx-3">';
-                var allAnswer = it.question_content;
-                var answers = allAnswer.split('-/@/-');
-                var myAnswer = done.answer.split('-/@/-');
-                text += '<div class="form-group" id="question' + i + '"><label>'+ (i+1) + '.' + answers[0] + '<span style="color : gray; font-size : 12px">(다중 선택 가능 문항입니다)</span></label><div id="allAnswers' + i + 'who' + index + '"></div>';
-                panel.append(text+'</div>');
-                var answerPanel = $('#allAnswers'+i+ 'who' + index);
-                for(var j = 1 ; j < answers.length ; ++j){
-                    if(myAnswer.includes(answers[j]))
-                        var input = '<div class="checkbox disabled"><label><input type="checkbox" disabled checked="true" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
+                if (it.question_type == '2') {  //단일객관식
+                    var text = '<div class="mx-3">';
+                    var allAnswer = it.question_content;
+                    var answers = allAnswer.split('-/@/-');
+                    text += '<div class="form-group" id="question' + i + '"><label>' + (i + 1) + '.' + answers[0] + '</label><div id="allAnswers' + i + 'who' + index + '"></div>';
+                    panel.append(text + '</div>');
+                    var answerPanel = $('#allAnswers' + i + 'who' + index);
+                    for (var j = 1; j < answers.length; ++j) {
+                        if (answers[j] == done.answer)
+                            var input = '<div class="radio disabled"><label><input type="radio" disabled checked="true" name="answer' + i + 'who' + index + '" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
+                        else
+                            var input = '<div class="radio disabled"><label><input type="radio" disabled name="answer' + i + 'who' + index + '" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
+                        answerPanel.append(input);
+                    }
+                    if (done.answer == '')
+                        answerPanel.append('<span style="font-size : 14px; color : red">답변을 하지 않았습니다.</span>');
+                }
+                if (it.question_type == '3') {  //다중객관식
+                    var text = '<div class="mx-3">';
+                    var allAnswer = it.question_content;
+                    var answers = allAnswer.split('-/@/-');
+                    var myAnswer = done.answer.split('-/@/-');
+                    text += '<div class="form-group" id="question' + i + '"><label>' + (i + 1) + '.' + answers[0] + '<span style="color : gray; font-size : 12px">(다중 선택 가능 문항입니다)</span></label><div id="allAnswers' + i + 'who' + index + '"></div>';
+                    panel.append(text + '</div>');
+                    var answerPanel = $('#allAnswers' + i + 'who' + index);
+                    for (var j = 1; j < answers.length; ++j) {
+                        if (myAnswer.includes(answers[j]))
+                            var input = '<div class="checkbox disabled"><label><input type="checkbox" disabled checked="true" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
+                        else
+                            var input = '<div class="checkbox disabled"><label><input type="checkbox" disabled id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
+                        answerPanel.append(input);
+                    }
+                    if (done.answer == '')
+                        answerPanel.append('<span style="font-size : 14px; color : red">답변을 하지 않았습니다.</span>');
+                }
+                if (it.question_type == '4') {  //척도형
+                    var text = '<div class="mx-3">';
+                    var allAnswer = it.question_content;
+                    var answers = allAnswer.split('-/@/-');
+                    text += '<div class="form-group" id="question' + i + '"><label>' + (i + 1) + '.' + answers[0] + '</label><div class="for_slider" id="sliderPanel' + i + 'who' + index + '"></div>';
+                    panel.append(text + '</div>');
+                    var sliderPanel = $('#sliderPanel' + i + 'who' + index);
+                    var text = '<div class="d-flex justify-content-between align-items-center"><span>' + answers[1] + '&nbsp;</span><input type="range" class="form-range" id="range' + i + 'who' + index + '" min=' + answers[1] + ' max=' + answers[2] + ' value="' + done.answer + '" step=1 disabled> <span>&nbsp;' + answers[2] + '</span></div><span class="for4"> 선택값 : ' + done.answer + '</span>';
+                    sliderPanel.append(text);
+                }
+                if (it.question_type == '5') {  //파일업로드형
+                    var text = '<div class="mx-3">';
+                    if (done.answer != 'null')
+                        text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>' + (i + 1) + '.' + it.question_content + '</label><br><a href="req_board_download.do?id=' + done.answer + '"><img src="img/file_ico.png"></a></div>';
                     else
-                        var input = '<div class="checkbox disabled"><label><input type="checkbox" disabled id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
-                    answerPanel.append(input);
+                        text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>' + (i + 1) + '.' + it.question_content + '</label><br><span style="font-size : 14px; color : red">파일을 올리지 않았습니다.</span></div>';
+                    panel.append(text + '</div>');
                 }
-                if(done.answer == '')
-                    answerPanel.append('<span style="font-size : 14px; color : red">답변을 하지 않았습니다.</span>');
-            }
-            if(it.question_type == '4'){  //척도형
-                var text = '<div class="mx-3">';
-                var allAnswer = it.question_content;
-                var answers = allAnswer.split('-/@/-');
-                text += '<div class="form-group" id="question' + i + '"><label>'+ (i+1) + '.' + answers[0] + '</label><div class="for_slider" id="sliderPanel' + i + 'who' + index + '"></div>';
-                panel.append(text+'</div>');
-                var sliderPanel = $('#sliderPanel'+i+ 'who' + index);
-                var text = '<div class="d-flex justify-content-between align-items-center"><span>'+answers[1] + '&nbsp;</span><input type="range" class="form-range" id="range' + i + 'who' + index + '" min='+answers[1]+' max='+answers[2]+' value="'+done.answer+'" step=1 disabled> <span>&nbsp;'+answers[2]+'</span></div><span class="for4"> 선택값 : ' + done.answer + '</span>';
-                sliderPanel.append(text);
-            }
-            if(it.question_type == '5'){  //파일업로드형
-                var text = '<div class="mx-3">';
-                if(done.answer != 'null')
-                    text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>'+ (i+1) + '.' + it.question_content + '</label><br><a href="req_board_download.do?id=' + done.answer + '"><img src="img/file_ico.png"></a></div>';
-                else
-                    text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>'+ (i+1) + '.' + it.question_content + '</label><br><span style="font-size : 14px; color : red">파일을 올리지 않았습니다.</span></div>';
-                panel.append(text+'</div>');
             }
         }
     }
@@ -752,21 +753,17 @@
         var text = '';
         if(type.board_level == 0 || type.board_level == 1){
             text += '<a href="'+modifyUrl+'"><div class="btn btn-secondary">수정</div></a>'
-                + '<a onclick="deleteBbs()"><div class="btn btn-secondary">삭제</div></a>'
-                + '<a onclick="deleteBbs()"><div class="btn btn-secondary">엑셀</div></a>'
+                + '<a onclick="deleteReg()"><div class="btn btn-secondary">삭제</div></a>'
+                + '<a onclick=""><div class="btn btn-secondary">엑셀</div></a>'
         }
         text+='<a href="'+listUrl+'"><div class="btn btn-secondary">목록</div></a>'
         list_button.append(text);
     }
 
-    function deleteBbs() {
+    function deleteReg() {
         var id = getReg.id;
-        var title = getReg.title;
         var writer_id = getReg.writer_id;
-        var writer_name = getReg.writer_name;
-        var applicant_count = getReg.applicant_count;
-        var data = id + "-/-/-" + major + "-/-/-" + writer_id + "-/-/-" + writer_name + "-/-/-" + title + "-/-/-" + num + "-/-/-" + applicant_count + "-/-/-" + starting_date + "-/-/-" + closing_date;
-
+        var data = id + "-/-/-" + writer_id;
 
         swal.fire({
             title: '글을 삭제하시겠습니까?',
@@ -790,7 +787,6 @@
                                 title: '해당 내용이 삭제되었습니다.',
                                 icon: 'success',
                                 showConfirmButton: true
-
                             }).then(function () {
                                 location.href = 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list';
                             });
@@ -799,7 +795,6 @@
                                 title: '권한이 부족합니다.',
                                 icon: 'error',
                                 showConfirmButton: true
-
                             });
                         }
                     }

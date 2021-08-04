@@ -334,9 +334,9 @@ public class AjaxAction implements Action {
                     result=RegisterDAO.getInstance().modifyReg(data);
                 break;
             case "deleteReg":
-                String writer1=data.split("-/-/-")[3];
-                if(user.id.equals(writer1))
-                    result=BBSDAO.getInstance().deleteBbs(data);
+                String writer1=data.split("-/-/-")[1];
+                if(user.id.equals(writer1) || type.board_level==0) //권한 검사
+                    result=RegisterDAO.getInstance().deleteReg(data);
                 break;
             case "whoAnswerIt": //현재 유저가 이미 신청한 사람인지 확인하는 것이기 때문에 권한 확인 필요 없음
                 data = data.concat("-/-/-" + user.id);

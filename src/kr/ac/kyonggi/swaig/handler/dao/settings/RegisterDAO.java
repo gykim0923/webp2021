@@ -297,6 +297,24 @@ public class RegisterDAO {
         return "success";
     }
 
+    public String deleteReg(String data) {
+        String arr[] = data.split("-/-/-"); // id+writer_id
+        String id = arr[0];
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"DELETE FROM `bbs_reg` WHERE `id`=?;", id);
+            queryRunner.update(conn,"DELETE FROM `bbs_reg_answer` WHERE `reg_id`=?;", id);
+            queryRunner.update(conn,"DELETE FROM `bbs_regquestion` WHERE `reg_id`=?;", id);
+            //파일 삭제 추가
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
+    }
+
     private String getRemoveHtmlText(String content) {
         if(content == null)
             return null;
