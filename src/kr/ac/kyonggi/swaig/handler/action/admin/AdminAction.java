@@ -24,6 +24,7 @@ public class AdminAction extends CustomAction {
                 request.setAttribute("getSchedule", gson.toJson(AdminDAO.getInstance().getSchedule()));
                 request.setAttribute("getSlider", gson.toJson(AdminDAO.getInstance().getSlider()));
                 request.setAttribute("getAllUser", gson.toJson(UserDAO.getInstance().getAllUser()));
+                request.setAttribute("getAllKGUMajor", gson.toJson(HomeDAO.getInstance().getAllKguMajor()));
                 return "RequestDispatcher:jsp/page/page.jsp";
             }
             else if(num.equals("71")){

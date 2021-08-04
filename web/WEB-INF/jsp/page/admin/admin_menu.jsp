@@ -112,7 +112,7 @@
         a+='<div class="form-group"><span>메뉴 이름 </span><input style="display : inline-block; width:200px;" type="text" class="form-control" name = "title" value="'+(menulist[i].page_title)+'"></div><br>';
 
         a += '<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="modifyProModal('+menulist[i].page_id+')">완료</button>';
-        a += '<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="deleteProModal('+menulist[i].page_id+')">삭제</button>';
+        a += '<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="deleteProModal('+menulist[i].page_id+')">메뉴 삭제</button>';
         list.html(a);
     }
 

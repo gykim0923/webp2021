@@ -313,7 +313,7 @@ public class UserDAO {
         }
 
         return "success";
-    }
+}
 
     public String modifydata(String data) {
         String arr[] = data.split("-/-/-");//0:id 1:phone 2:birth 3:email

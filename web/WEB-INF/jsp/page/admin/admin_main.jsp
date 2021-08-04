@@ -9,6 +9,7 @@
 <%
     String getAllMajor = (String)request.getAttribute("getAllMajor");
     String getSchedule = (String)request.getAttribute("getSchedule");
+    String getAllKGUMajor = (String)request.getAttribute("getAllKGUMajor");
 %>
 <div>
     <div class="album py-5 bg-light">
@@ -21,6 +22,9 @@
             <hr>
 <%--                대문 관리--%>
             <%@include file="/WEB-INF/jsp/page/admin/admin_main/admin_slider.jsp"%>
+            <hr>
+<%--                주전공 관리--%>
+            <%@include file="/WEB-INF/jsp/page/admin/admin_main/admin_kgu_major.jsp"%>
             <hr>
         </div>
     </div>

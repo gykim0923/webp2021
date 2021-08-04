@@ -136,6 +136,8 @@ public class AjaxAction implements Action {
                 result=AdminDAO.getInstance().addMajor(data);
                 break;
 
+
+
             case "modifyMajor":
                 if (type.board_level != 0){
                     return "fail";
@@ -353,6 +355,7 @@ public class AjaxAction implements Action {
                 data = (user.name + "-/-/-" + user.id + "-/-/-" + user.per_id + "-/-/-" + user.grade + "-/-/-" + user.type + "-/-/-").concat(data);
                 result = RegisterDAO.getInstance().insertAnswers(data);
                 break;
+
             case "modifyAnswer":
                 RegisterDTO req_check = RegisterDAO.getInstance().getReg(data.split("-/-/-")[0]);
                 if (!req_check.level.contains(type.for_header)){
@@ -363,6 +366,25 @@ public class AjaxAction implements Action {
                     return "timeout";
                 data = (user.name + "-/-/-" + user.id + "-/-/-" + user.per_id + "-/-/-" + user.grade + "-/-/-" + user.type + "-/-/-").concat(data);
                 result = RegisterDAO.getInstance().insertAnswers(data);
+                break;
+
+            case "modifyKguMajor":
+                if (type.board_level != 0){
+                    return "fail";
+                }
+                result=AdminDAO.getInstance().modifyKguMajor(data);
+                break;
+
+            case "addKguMajor":
+                if (type.board_level != 0){
+                    return "fail";
+                }
+                result=AdminDAO.getInstance().addKguMajor(data);
+                break;
+
+            case "delete_kgu_major":
+                if (type.board_level == 0)
+                    result=AdminDAO.getInstance().deleteKguMajor(data);
                 break;
         }
 

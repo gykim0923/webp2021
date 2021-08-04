@@ -192,4 +192,52 @@ public class AdminDAO {
         }
         return "success";
     }
+
+    public String modifyKguMajor(String data) {
+        String arr[] = data.split("-/-/-"); // kguMajor+'-/-/-'+campus+'-/-/-'+college+'-/-/-'+id;
+        String major = arr[0];
+        String campus = arr[1];
+        String college = arr[2];
+        String id = arr[3];
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"UPDATE kgu_major SET campus=?,college=?,major=? WHERE id=?;", campus,college,major,id);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
+
+    }
+    public String addKguMajor(String data) {
+        String arr[] = data.split("-/-/-"); //campus+'-/-/-'+college+'-/-/-'+major;
+        String campus = arr[0];
+        String college = arr[1];
+        String major = arr[2];
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"INSERT INTO kgu_major(campus,college,major) VALUE(?,?,?);", campus,college,major);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
+    }
+
+    public String deleteKguMajor(String data) {
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"DELETE FROM kgu_major WHERE major=?" ,data);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
+    }
 }
