@@ -22,9 +22,8 @@
         media="all" rel="stylesheet" type="text/css" />
 <%--<link href="css/bootstrap-slider.css" rel="stylesheet" type="text/css">--%>
 
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-
+<%--<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>--%>
+<%--<script src="//code.jquery.com/jquery-1.10.2.js"></script>--%>
 <div class="h3">글 작성하기</div>
 <%--ckeditor가 나와야 하는 자리--%>
 <div class="form-group mb-3" id="bbsTitleBox"><input class="form-control" id="bbsTitle" placeholder="제목을 입력하세요."></div>
@@ -49,15 +48,15 @@
 </div>
 <div class="mb-3" id="selectLevelDiv">
     <label>신청대상</label>
-    <div class="form-check form-check-inline ms-4">
+    <div class="form-check form-check-inline ms-4" id="check1">
         <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="교수">
         <label class="form-check-label" for="inlineCheckbox1">교수</label>
     </div>
-    <div class="form-check form-check-inline">
+    <div class="form-check form-check-inline" id="check2">
         <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="조교">
         <label class="form-check-label" for="inlineCheckbox2">조교</label>
     </div>
-    <div class="form-check form-check-inline">
+    <div class="form-check form-check-inline" id="check3">
         <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="학생">
         <label class="form-check-label" for="inlineCheckbox3">학생</label>
     </div>
@@ -99,30 +98,42 @@
                 var list = $('#formButtons');
                 var text = '';
                 text += '<div class="my-2">'
-                text += '<button class="btn btn-secondary px-1" id="q1" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ1Modal()">주관식</button>'
-                text += '<button class="btn btn-secondary px-1" id="q2" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ2Modal()">단일객관식</button>'
-                text += '<button class="btn btn-secondary px-1" id="q3" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ3Modal()">다중객관식</button>'
-                text += '<button class="btn btn-secondary px-1" id="q4" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ4Modal()">척도형</button>'
-                text += '<button class="btn btn-secondary px-1" id="q5" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ5Modal()">파일업로드형</button> </div>'
+                text += '<button class="btn btn-secondary mx-1" id="q1" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ1Modal()">주관식</button>'
+                text += '<button class="btn btn-secondary mx-1" id="q2" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ2Modal()">단일객관식</button>'
+                text += '<button class="btn btn-secondary mx-1" id="q3" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ3Modal()">다중객관식</button>'
+                text += '<button class="btn btn-secondary mx-1" id="q4" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ4Modal()">척도형</button>'
+                text += '<button class="btn btn-secondary mx-1" id="q5" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ5Modal()">파일업로드형</button> </div>'
                 list.html(text);
             </script>
         </c:when>
         <c:when test="${jsp == '\"reg_modify\"'}">
             <button type="button" class="btn btn-outline-secondary" onclick="modifyReg()">수정</button>
             <script>
+                function formatDate(date) { //날짜를 yyyy-mm-dd 형식으로 반환
+                    var d = new Date(date),
+                        month = '' + (d.getMonth() + 1),
+                        day = '' + d.getDate(),
+                        year = d.getFullYear();
+
+                    if (month.length < 2) month = '0' + month;
+                    if (day.length < 2) day = '0' + day;
+
+                    return [year, month, day].join('-');
+                }
+
                 var content = $('#regUpdateContent');
                 var startDate = $('#sDate');
                 var endDate = $('#cDate')
                 var who = $('#forWho');
-                var check1 = $('#inlineCheckbox1');
-                var check2 = $('#inlineCheckbox2');
-                var check3 = $('#inlineCheckbox3');
+                var check1 = $('#check1');
+                var check2 = $('#check2');
+                var check3 = $('#check3');
                 var text = '';
                 var getReg = <%=getReg%>;
                 content.html(getReg.text);
                 $('#bbsTitleBox').html('<input class="form-control" id="bbsTitle" placeholder="제목을 입력하세요." value="'+getReg.title+'">');
-                startDate.html('<label for="InputStartDate">시작일</label><input type="date" class="form-control" name="startDate" id="InputStartDate" value="'+getReg.new_starting_date+'">');
-                endDate.html('<label for="InputFinishDate">마감일</label><input type="date" class="form-control" name="finishDate" id="InputFinishDate" value="'+getReg.new_closing_date+'">');
+                startDate.html('<label for="InputStartDate">시작일</label><input type="date" class="form-control" name="startDate" id="InputStartDate" value="'+formatDate(getReg.starting_date)+'">');
+                endDate.html('<label for="InputFinishDate">마감일</label><input type="date" class="form-control" name="finishDate" id="InputFinishDate" value="'+formatDate(getReg.closing_date)+'">');
 
                 if(getReg.for_who == '1'){
                     text ='<option value="1">관리자/교수</option><option value="0">작성자만</option><option value="2">모두에게</option>'
@@ -136,14 +147,14 @@
 
                 who.html(text);
 
-                if( getReg.level.indexOf("교수")>=0){
-                    check1.html('<input class="form-check-input" type="checkbox" checked="checked"  id="inlineCheckbox1" value="교수"><label class="form-check-label" for="inlineCheckbox1">교수</label>');
+                if( getReg.level.indexOf("교수") >=0){
+                    check1.html('<input class="form-check-input" type="checkbox" checked  id="inlineCheckbox1" value="교수"><label class="form-check-label" for="inlineCheckbox1">교수</label>');
                 }
-                if( getReg.level.indexOf("조교")>0) {
-                    check2.html('<input class="form-check-input"  type="checkbox" checked="checked" id="inlineCheckbox2" value="조교"><label class="form-check-label" for="inlineCheckbox2">조교</label>')
+                if( getReg.level.indexOf("조교") >=0) {
+                    check2.html('<input class="form-check-input"  type="checkbox" checked id="inlineCheckbox2" value="조교"><label class="form-check-label" for="inlineCheckbox2">조교</label>');
                 }
-                if( getReg.level.indexOf("학생")>0) {
-                    check3.html('<input class="form-check-input" type="checkbox" checked="checked" id="inlineCheckbox3" value="학생"><label class="form-check-label" for="inlineCheckbox3">학생</label>')
+                if( getReg.level.indexOf("학생")>=0) {
+                    check3.html('<input class="form-check-input" type="checkbox" checked id="inlineCheckbox3" value="학생"><label class="form-check-label" for="inlineCheckbox3">학생</label>');
                 }
             </script>
         </c:when>
@@ -533,9 +544,17 @@
         var title = $('#bbsTitle').val();
         var text = CKEDITOR.instances.regUpdateContent.getData();
         var writer_id = user.id;
+        var for_who = $('#forWho').val();
+        var level = '';
+        for(i=1; i<=3; i++){
+            if($('input:checkbox[id="inlineCheckbox' + i +'"]').is(":checked") ==  true)
+                    level += '|'+$('#inlineCheckbox'+i).val()+'|';
+        }
+        var startingDate =$('#InputStartDate').val();;
+        var closingDate =$('#InputFinishDate').val();;
         var writer_name = type.for_header;
         var last_modified = formatDate(new Date());
-        var data = id+"-/-/-"+major+"-/-/-"+writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+num+"-/-/-"+last_modified+"-/-/-"+text;
+        var data = id+"-/-/-"+ title +"-/-/-"+ text +"-/-/-"+writer_id+"-/-/-"+for_who+"-/-/-"+level +"-/-/-"+startingDate +"-/-/-" +closingDate+"-/-/-"+writer_name+"-/-/-"+last_modified;
 
         $.ajax({
             url: "ajax.kgu", //AjaxAction에서
@@ -557,7 +576,7 @@
     }
 
     function back(){
-        window.location.href = 'bbs.kgu?major='+major+'&&num='+num+'&&mode=view&&id='+id;
+        window.location.href = 'reg.kgu?major='+major+'&&num='+num+'&&mode=view&&id='+id;
     }
 
     function formatDate(date) { //날짜를 yyyy-mm-dd 형식으로 반환
@@ -572,7 +591,7 @@
         return [year, month, day].join('-');
     }
 
-    var upload_folder = '/img/bbs';
+    var upload_folder = '/img/bbs_reg';
     $("#kv-explorer").fileinput({
         'theme': 'explorer-fa',
         'uploadUrl': 'upload.kgu?folder='+upload_folder,
@@ -581,7 +600,7 @@
         overwriteInitial : false,
         uploadExtraData:{
             file_type : 'null',
-            board_level : '0',
+            board_level : '2',
             upload_mode : 'bbs'
         }
     });

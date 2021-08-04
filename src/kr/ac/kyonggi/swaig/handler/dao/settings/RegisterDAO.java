@@ -66,6 +66,21 @@ public class RegisterDAO {
             return null;
     }
 
+    public String modifyReg(String data){
+        String arr[] = data.split("-/-/-"); //id+"-/-/-"+ title +"-/-/-"+ text +"-/-/-"+writer_id+"-/-/-"+for_who+"-/-/-"+level +"-/-/-"+startingDate +"-/-/-" +closingDate+"-/-/-"+writer_name+"-/-/-"+last_modified;
+
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"UPDATE bbs_reg SET title=?, text =? , for_who =?, level = ?, starting_date =? , closing_date =?, last_modified =?  WHERE id=?;",arr[1], arr[2], arr[4], arr[5],arr[6],arr[7],arr[9],arr[0]);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
+    }
+
     public String insertReg(String data) {
         String arr[] = data.split("-/-/-");
         // 0=writer_id 1=writer_name 2=title 3=last_modified 4=text 5=starting_date 6=closing_date 7=level 8=for_who

@@ -328,14 +328,16 @@ public class AjaxAction implements Action {
                 if(type.board_level==0)
                     result=RegisterDAO.getInstance().insertReg(data);
                 break;
-//            case "modifyReg":
-//                if(type.board_level==0)
-//                    result=BBSDAO.getInstance().modifyBbs(data);
-//                break;
-//            case "deleteReg":
-//                if(type.board_level==0)
-//                    result=BBSDAO.getInstance().deleteBbs(data);
-//                break;
+            case "modifyReg":
+                String writer=data.split("-/-/-")[3];
+                if(user.id.equals(writer))
+                    result=RegisterDAO.getInstance().modifyReg(data);
+                break;
+            case "deleteReg":
+                String writer1=data.split("-/-/-")[3];
+                if(user.id.equals(writer1))
+                    result=BBSDAO.getInstance().deleteBbs(data);
+                break;
             case "whoAnswerIt": //현재 유저가 이미 신청한 사람인지 확인하는 것이기 때문에 권한 확인 필요 없음
                 data = data.concat("-/-/-" + user.id);
                 result = RegisterDAO.getInstance().whoAnswerIt(data);
