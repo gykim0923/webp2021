@@ -300,8 +300,14 @@ public class UserDAO {
         String arr[] = data.split("-/-/-");
         String id = arr[0];
         String name = arr[1];
+        String type = arr[2];
 //        List<Map<String, Object>> listOfMaps = null;
         Connection conn = Config.getInstance().sqlLogin();
+
+        if(type.equals("홈페이지관리자")){
+            return "fail";
+        }
+
         try {
             QueryRunner queryRunner = new QueryRunner();
             queryRunner.query(conn, "DELETE FROM `user` WHERE id=? AND name=?", new MapListHandler(), id, name);
