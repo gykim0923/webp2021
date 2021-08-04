@@ -209,8 +209,8 @@ public class AdminDAO {
             DbUtils.closeQuietly(conn);
         }
         return "success";
-
     }
+
     public String addKguMajor(String data) {
         String arr[] = data.split("-/-/-"); //campus+'-/-/-'+college+'-/-/-'+major;
         String campus = arr[0];

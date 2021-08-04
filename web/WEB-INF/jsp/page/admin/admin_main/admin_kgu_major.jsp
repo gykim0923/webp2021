@@ -67,19 +67,18 @@
         var modal_footer = '';
         modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" onclick="deleteKguMajor('+i+')">본전공삭제</button>';
         modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-        modal_footer += '<button type="button" class="btn btn-secondary pull-right" data-dismiss="modal" aria-label="Close" onclick="modifyKguMajor('+i+')">완료</button>';
-
+        modal_footer += '<button type="button" class="btn btn-secondary pull-right" data-dismiss="modal" aria-label="Close" onclick="modifyKguMajor('+major[i].id+')">완료</button>';
 
         header.html(modal_header);
         body.html(modal_body);
         footer.html(modal_footer);
     }
 
-    function modifyKguMajor(i){
+    function modifyKguMajor(id){
         var campus=$('#campus').val();
         var college=$('#college').val();
         var kguMajor=$('#major').val();
-        var data = kguMajor+'-/-/-'+campus+'-/-/-'+college+'-/-/-'+(i+1);
+        var data = kguMajor+'-/-/-'+campus+'-/-/-'+college+'-/-/-'+id;
 
         $.ajax({
             url: "ajax.kgu", //AjaxAction에서
