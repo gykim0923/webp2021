@@ -49,7 +49,6 @@
         for(var a=0 ; a<menuPageList.length; a++){
             if(menuPageList[a].tab_id == 5){
                 tab5start=a;
-                console.log(tab5start);
                 break;
             }
         }
@@ -57,7 +56,6 @@
         for(var a=0 ; a<menuPageList.length; a++){
             if(menuPageList[a].tab_id == 6){
                 tab5end=a;
-                console.log(tab5end);
                 break;
             }
         }
@@ -66,7 +64,7 @@
         text += '<li class="sidebar-title">공통메뉴</li>';
         //기본 메뉴
         for (var i = 0; i < 3; i++) {
-            text += '<li class="sidebar-item  has-sub">'
+            text += '<li class="sidebar-item has-sub">'
                 + '<a href="#" class="sidebar-link">'
                 + '<i class="bi bi-stack"></i>'
                 + '<span>' + menuTabList[i].tab_title + '</span>'
@@ -91,22 +89,50 @@
             + '<span>' + menuTabList[3].tab_title + '</span>'
             + '</a>';
         for (var i = 0; i < majorAllInfo.length; i++) {
-            text += '<ul class="submenu active" style="display: block;">'
-                + '<li class="submenu-item dropend">'
-                + ' <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink' + i + '" data-bs-toggle="dropdown" aria-expanded="false">' + majorAllInfo[i].major_name + '</a>';
+            // text += '<ul class="submenu active" style="display: block;">'
+            //     + '<li class="submenu-item">'
+            text += '<ul class="submenu2" style="display: block;">'
+                + '<li class="">'
+                + '<div class="dropend">'
+                + ' <a href="#" id="dropdownMenuLink' + i + '" data-bs-toggle="dropdown" >' + majorAllInfo[i].major_name + '</a>';
                 // drop menu start
-            text += '<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink' + i + '" style="z-index: 9999">';
+            text += '<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink' + i + '" >';
             for(var j=tab5start; j<tab5end; j++){
                 var url = menuPageList[j].page_path+'?major='+majorAllInfo[i].major_id+'&&num='+menuPageList[j].page_id;
                 text += '<li><a class="dropdown-item" href="'+url+'">' + menuPageList[j].page_title + '</a></li>';
             }
             text += '</ul>';
                 //drop menu end
-            text += '</li>'
-                + '</ul>';
+
+            text += '</div>'
+                + '</li></ul>';
         }
-        text += '</ul></div>';
+        text += '</li>';
 
         list.append(text);
     }
 </script>
+
+<style>
+    .submenu2{
+        z-index: 9999;
+        list-style:none;
+        display:none;
+        transition:max-height 2s cubic-bezier(0,.55,.45,1);
+        /*overflow:hidden*/
+    }
+    .sidebar-item2{
+        list-style:none;
+        margin-top:.5rem;
+        position:relative
+    }
+    .submenu-item2 a{
+        padding:.7rem 2rem;
+        display:block;
+        color:#25396f;
+        font-size:.85rem;
+        font-weight:600;
+        letter-spacing:.5px;
+        transition:all .3s
+    }
+</style>
