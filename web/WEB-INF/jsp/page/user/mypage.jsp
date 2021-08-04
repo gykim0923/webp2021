@@ -10,6 +10,7 @@
     String typeForMyPage = (String)session.getAttribute("type");
     String userForMyPage = (String)session.getAttribute("user");
 %>
+<script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <div id="text"></div>
 <div id="modify_button" class="d-grid gap-2 d-md-flex justify-content-md-end"></div>
 
@@ -83,8 +84,14 @@
                 data:userdata
             },
             success : function(data){
-                alert("수정이 완료 되었습니다.");
-                window.location.reload();
+                swal.fire({
+                    title : '수정이 완료되었습니다.',
+                    icon : 'success',
+                    showConfirmButton: true
+
+                }).then(function (){
+                    location.reload();
+                });
             }
         })
     }
@@ -101,29 +108,49 @@
         return [year, month, day].join('-');
     }
 
-    function deleteUser(){ //자신의 데이터 삭제 (탈퇴기능)
+    function deleteUser() { //자신의 데이터 삭제 (탈퇴기능)
         var id = user.id;
         var name = user.name;
         var type = user.type;
-        var check = confirm("[중요] 정말로 "+id+"["+name+"]를 삭제하시나요? 되돌릴 수 없습니다.");
-        if (check) {
-            $.ajax({
-                url: "ajax.kgu", //AjaxAction에서
-                type: "post",
-                data: {
-                    req: "deleteUser",
-                    data: id+"-/-/-"+name+"-/-/-"+type  //이중 검사용으로 DB를 두개 넘깁니다.
-                },
-                success: function (result) {
-                    if(result!='fail'){
-                        alert("해당 회원이 삭제되었습니다.");
-                        window.location.href='logout.kgu';
+        swal.fire({
+            title: '정말로 탈퇴하시나요?',
+            text: '다시 되돌릴 수 없습니다.',
+            icon: 'warning',
+            showConfirmButton: true,
+            showCancelButton: true
+
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                $.ajax({
+                    url: "ajax.kgu", //AjaxAction에서
+                    type: "post",
+                    data: {
+                        req: "deleteUser",
+                        data: id + "-/-/-" + name + "-/-/-" + type  //이중 검사용으로 DB를 두개 넘깁니다.
+                    },
+                    success: function (result) {
+                        if (result != 'fail') {
+
+                            swal.fire({
+                                title : '탈퇴되었습니다.',
+                                icon : 'success',
+                                showConfirmButton: true
+
+                            }).then(function (){
+                                location.href = "logout.kgu";
+                            });
+                        } else {
+                            swal.fire({
+                                title : '권한이 부족합니다.',
+                                icon : 'error',
+                                showConfirmButton: true
+
+                            });
+                        }
                     }
-                    else {
-                        alert("삭제 권한이 없습니다.");
-                    }
-                }
-            })
-        }
+                })
+            }
+        })
     }
 </script>

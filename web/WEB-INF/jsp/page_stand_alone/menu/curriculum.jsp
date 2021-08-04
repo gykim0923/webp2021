@@ -10,6 +10,7 @@
     String curriculum = (String)request.getAttribute("curriculum");  //커리큘럼 내용
     String getCurriculums = (String)request.getAttribute("getCurriculums");  //해당 전공 연도별 커리큘럼 사진
 %>
+<script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <div id="curriculum_content"></div>
 <div id="modify_button" class="d-grid gap-2 d-md-flex justify-content-md-end"></div>
 <div id="curriculum_btn"></div>
@@ -95,11 +96,23 @@
             dataType:"json",
             success : function(data){
                 if(data != 'fail'){
-                    alert("수정완료");
-                    window.location.reload();
+                    swal.fire({
+                        title : '수정완료',
+                        icon : 'success',
+                        showConfirmButton: true
+
+                    }).then(function (){
+                        location.reload();
+                    });
                 }
                 else
-                    alert('SERVER ERROR, Please try again later');
+                    swal.fire({
+                        title : '서버에러',
+                        text : '다음에 다시 시도해주세요',
+                        icon : 'error',
+                        showConfirmButton: true
+
+                    });
             }
         })
     }
@@ -141,8 +154,7 @@
             curriculum_img = "#";
         if (edu_img == null)
             edu_img = "#";
-        var check = confirm("커리큘럼 이미지를 추가하시겠습니까?");
-        if (check) {
+
             $.ajax({
                 url: "ajax.kgu", //AjaxAction에서
                 type: "post",
@@ -151,12 +163,19 @@
                     data: major+'-/-/-'+year+'-/-/-'+curriculum_img+'-/-/-'+edu_img //이 데이터를 파라미터로 넘겨줍니다.
                 },
                 success: function (data) { //성공 시
-                    alert("커리큘럼 이미지가 정상적으로 추가되었습니다.");
-                    location.reload()
+
+                    swal.fire({
+                        text : '커리큘럼 이미지가 추가되었습니다.',
+                        icon : 'success',
+                        showConfirmButton: true
+
+                    }).then(function (){
+                        location.reload();
+                    });
                 }
             })
         }
-    }
+
 
     function modifyCurriculumModal(num){
         var major = <%=major%>;
@@ -178,12 +197,11 @@
         var edu_img = eduFile_path;
         var major = $('#major').val();
         var year = $('#year').val();
-        var check = confirm("커리큘럼 이미지를 수정하시겠습니까?");
         if(curriculum_img == null)
             curriculum_img = curriculumList[num].curriculum_img;
         if(edu_img == null)
             edu_img = curriculumList[num].edu_img;
-        if (check) {
+
             $.ajax({
                 url: "ajax.kgu", //AjaxAction에서
                 type: "post",
@@ -192,12 +210,18 @@
                     data: major+'-/-/-'+year+'-/-/-'+curriculum_img+'-/-/-'+edu_img //이 데이터를 파라미터로 넘겨줍니다.
                 },
                 success: function (data) { //성공 시
-                    alert("커리큘럼 이미지가 정상적으로 수정되었습니다.");
-                    location.reload()
+                    swal.fire({
+                        text : '커리큘럼 이미지가 수정되었습니다.',
+                        icon : 'success',
+                        showConfirmButton: true
+
+                    }).then(function (){
+                        location.reload();
+                    });
                 }
             })
         }
-    }
+
 
     var curriculumFile_id; //나중에 파일 상세정보를 uploadedFile로부터 역참조 하고싶은 경우에 사용하라고 만들어둠 (꼭 사용해야 하는 것은 아님)
     var curriculumFile_path; //파일이 업로드된 상대경로
@@ -219,10 +243,15 @@
                 contentType : false,
                 success : function(data){//데이터는 주소
                     if(data=='fail'){
-                        alert('실패');
+                        swal.fire({
+                            title : '실패',
+                            icon : 'error',
+                            showConfirmButton: true
+
+                        });
                     }
                     else {
-                        alert(data);
+
                         var fileLog=data.split("-/-/-");
                         var a='';
                         curriculumFlie_id=fileLog[0];
@@ -236,7 +265,12 @@
                 }
             })
         }else{
-            alert("파일을 등록해주세요");
+            swal.fire({
+                title : '파일을 등록해주세요.',
+                icon : 'warning',
+                showConfirmButton: true
+
+            });
         }
         return address;
     }
@@ -262,10 +296,15 @@
                 contentType : false,
                 success : function(data){//데이터는 주소
                     if(data=='fail'){
-                        alert('실패');
+                        swal.fire({
+                            title : '실패',
+                            icon : 'error',
+                            showConfirmButton: true
+
+                        });
                     }
                     else {
-                        alert(data);
+
                         var fileLog=data.split("-/-/-");
                         var a='';
                         eduFile_id=fileLog[0];
@@ -279,29 +318,48 @@
                 }
             })
         }else{
-            alert("파일을 등록해주세요");
+            swal.fire({
+                title : '파일을 등록해주세요.',
+                icon : 'warning',
+                showConfirmButton: true
+
+            });
         }
         return address;
     }
 
-    function deleteCurriculum(num){
+    function deleteCurriculum(num) {
         var major = <%=major%>;
         var year = curriculumList[num].year;
-        var check = confirm("커리큘럼을 삭제하시겠습니까?");
-        if (check) {
-            $.ajax({
-                url: "ajax.kgu", //AjaxAction에서
-                type: "post",
-                data: {
-                    req: "deleteCurriculum", //이 메소드를 찾아서
-                    data: major+'-/-/-'+year //이 데이터를 파라미터로 넘겨줍니다.
-                },
-                success: function (data) { //성공 시
-                    alert("커리큘럼이 정상적으로 삭제되었습니다.");
-                    location.reload()
-                }
-            })
-        }
+        swal.fire({
+            title: '정말로 삭제하시나요?',
+            text: '다시 되돌릴 수 없습니다.',
+            icon: 'warning',
+            showConfirmButton: true,
+            showCancelButton: true
+
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "ajax.kgu", //AjaxAction에서
+                    type: "post",
+                    data: {
+                        req: "deleteCurriculum", //이 메소드를 찾아서
+                        data: major + '-/-/-' + year //이 데이터를 파라미터로 넘겨줍니다.
+                    },
+                    success: function (data) { //성공 시
+                        swal.fire({
+                            title : '커리큘럼이 삭제되었습니다.',
+                            icon : 'success',
+                            showConfirmButton: true
+
+                        }).then(function (){
+                            location.reload();
+                        });
+                    }
+                })
+            }
+        })
     }
 
     function modifyCurriculumFile(type){

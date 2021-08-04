@@ -9,6 +9,7 @@
 <%
     String getBBS = (String) request.getAttribute("getBBS");
 %>
+<script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <script src="js/default.js"></script>
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/jquery.cookie.js"></script>
@@ -70,8 +71,7 @@
         var last_modified = formatDate(new Date());
         var data = major+"-/-/-"+writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+num+"-/-/-"+last_modified+"-/-/-"+text;
 
-        var check = confirm(data+"를 추가하시겠습니까?");
-        if (check) {
+
             $.ajax({
                 url: 'ajax.kgu',
                 type: 'post',
@@ -81,14 +81,27 @@
                 },
                 success: function (data) {
                     if (data == 'success') {
-                        alert("내용이 추가되었습니다.");
-                        window.location.href = 'bbs.kgu?major=' + major + '&&num=' + num + '&&mode=list';
+
+                        swal.fire({
+                            title : '내용이 추가되었습니다.',
+                            icon : 'success',
+                            showConfirmButton: true
+
+                        }).then(function (){
+                            location.href = 'bbs.kgu?major=' + major + '&&num=' + num + '&&mode=list';
+                        });
                     } else
-                        alert('SERVER ERROR, Please try again later');
+                        swal.fire({
+                            title : '서버에러',
+                            text : '다음에 다시 시도해주세요',
+                            icon : 'error',
+                            showConfirmButton: true
+
+                        });
                 }
             })
         }
-    }
+
 
     function modifyBbs(){
         var id = getBBS.id;
@@ -108,11 +121,20 @@
             },
             success: function (data) { //성공 시
                 if(data=='success'){
-                    alert("해당 내용이 수정되었습니다.");
+                    swal.fire({
+                        title : '해당 내용이 수정되었습니다.',
+                        icon : 'success',
+                        showConfirmButton: true
+                    });
                     back();
                 }
                 else{
-                    alert('권한이 부족합니다.');
+                    swal.fire({
+                        title : '권한이 부족합니다.',
+                        icon : 'error',
+                        showConfirmButton: true
+
+                    });
                 }
             }
         })

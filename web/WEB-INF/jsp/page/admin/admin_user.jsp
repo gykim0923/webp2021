@@ -9,6 +9,7 @@
 <%
     String getAllUser = (String)request.getAttribute("getAllUser");
 %>
+<script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <script src='js/sha256.js'></script>
 <div>
     <div class="album py-5 bg-light">
@@ -87,56 +88,101 @@
         var id = user[i].id;
         var name = user[i].name;
         var type = user[i].type;
-        var check = confirm("[중요] 정말로 "+id+"["+name+"]를 삭제하시나요? 되돌릴 수 없습니다.");
-        if (check) {
-            $.ajax({
-                url: "ajax.kgu", //AjaxAction에서
-                type: "post",
-                data: {
-                    req: "deleteUser",
-                    data: id+"-/-/-"+name+"-/-/-"+type  //이중 검사용으로 DB를 두개 넘깁니다.
-                },
-                success: function (result) {
-                    if(result!='fail'){
-                        alert("해당 회원이 삭제되었습니다.");
-                        window.location.reload();
+        swal.fire({
+            title: name+'회원을 삭제하시나요?',
+            text: '다시 되돌릴 수 없습니다.',
+            icon: 'warning',
+            showConfirmButton: true,
+            showCancelButton: true
+
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                $.ajax({
+                    url: "ajax.kgu", //AjaxAction에서
+                    type: "post",
+                    data: {
+                        req: "deleteUser",
+                        data: id+"-/-/-"+name+"-/-/-"+type  //이중 검사용으로 DB를 두개 넘깁니다.
+                    },
+                    success: function (data) { //성공 시
+                        if (data == 'success') {
+
+                            swal.fire({
+                                title: '해당 회원이 삭제되었습니다.',
+                                icon: 'success',
+                                showConfirmButton: true
+
+                            }).then(function () {
+                                location.reload();
+                            });
+                        } else {
+                            swal.fire({
+                                title: '권한이 부족합니다.',
+                                icon: 'warning',
+                                showConfirmButton: true
+
+                            });
+                        }
                     }
-                    else {
-                        alert("삭제 권한이 없습니다.");
-                    }
-                }
-            })
-        }
+                })
+            }
+
+        });
+
     }
 
-    function passwordReset(i){
+
+    function passwordReset(i) {
         var makeUserAll = <%=getAllUser%>;
         var user = makeUserAll[i];
-        var change =user.birth;
+        var change = user.birth;
 
-        var check = confirm(user.name+"의 패스워드를 초기화 하시겠습니까?(초기화 : 생년월일(생년월일이 없을 경우 1234))");
-        if(check){
-            if(change=="-")
-                change="1234";
-            else{
-                var a=change.split("-");
-                change=user.id+a[0].substring(2,4)+""+a[1]+""+a[2];
-            }
-            $.ajax({
-                url : "ajax.kgu",
-                type : "post",
-                data : {
-                    req : "modifyPwd",
-                    data : user.id+"-/-/-"+SHA256(change)
-                },
-                success : function(data){
-                    if(data == "success")
-                        alert(data+"의 패스워드가 변경 되었습니다!!");
-                    else
-                        alert('SERVER ERROR, Please try again later');
+        swal.fire({
+            title: user.name+'패스워드를 초기화 하시겠습니까?',
+            text: '초기화 : 생년월일(생년월일이 없을 경우 1234)',
+            icon: 'warning',
+            showConfirmButton: true,
+            showCancelButton: true
+
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                if (change == "-")
+                    change = "1234";
+                else {
+                    var a = change.split("-");
+                    change = user.id + a[0].substring(2, 4) + "" + a[1] + "" + a[2];
                 }
-            })
-        }
+                $.ajax({
+                    url: "ajax.kgu",
+                    type: "post",
+                    data: {
+                        req: "modifyPwd",
+                        data: user.id + "-/-/-" + SHA256(change)
+                    },
+                    success: function (data) {
+                        if (data == "success")
+                        swal.fire({
+                            title : '패스워드가 초기화 되었습니다!',
+                            icon : 'success',
+                            showConfirmButton: true
+
+                        }).then(function (){
+                            location.reload();
+                        });
+                        else
+                        swal.fire({
+                            title : '서버에러',
+                            text : '다음에 다시 시도해주세요',
+                            icon : 'error',
+                            showConfirmButton: true
+
+                        });
+                    }
+                })
+            }
+        })
     }
 
     var $table = $('#table1');
@@ -179,25 +225,43 @@
         }
         var modify= type+"-/-/-"+id;
 
-        var check = confirm("사용자 권한을 "+modify+"으로 수정하시겠습니까?");
-        if(check){
-            $.ajax({
-                url:"ajax.kgu",
-                type:"post",
-                data : {
-                    req : "modifyUserType",
-                    data : modify
-                },
-                success:function(data){
-                    if(data=='success'){
-                        alert("수정되었습니다");
-                        location.reload();
-                    }
-                    else{
-                        alert('권한이 부족합니다.');
-                    }
+            swal.fire({
+                title: '사용자 권한을 '+type+'으로 수정하시겠습니까?',
+                icon: 'warning',
+                showConfirmButton: true,
+                showCancelButton: true
+
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        url: "ajax.kgu",
+                        type: "post",
+                        data: {
+                            req: "modifyUserType",
+                            data: modify
+                        },
+                        success: function (data) {
+                            if (data == 'success') {
+                                swal.fire({
+                                    title: '수정되었습니다.',
+                                    icon: 'success',
+                                    showConfirmButton: true
+
+                                }).then(function () {
+                                    location.reload();
+                                });
+                            } else {
+                                swal.fire({
+                                    title: '권한이 부족합니다.',
+                                    icon: 'error',
+                                    showConfirmButton: true
+
+                                });
+                            }
+                        }
+                    });
                 }
-            });
-        }
+            })
     }
 </script>

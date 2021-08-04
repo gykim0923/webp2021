@@ -9,6 +9,7 @@
 <%
     String getLocation = (String)request.getAttribute("getLocation");
 %>
+<script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <style>
     #map{
         height: 400px;
@@ -113,8 +114,6 @@
         var content = location[0].content;
         var update = id + "-/-/-" + address + "-/-/-" + contact_num + "-/-/-" + content;
 
-        var check = confirm("정말 수정하시겠습니까?");
-        if(check){
             $.ajax({
                 url : "ajax.kgu",
                 type : "post",
@@ -125,15 +124,26 @@
                 dataType : "json",
                 success : function(data){
                     if(data != 'fail'){
-                        alert("수정완료");
-                        window.location.reload();
+                        swal.fire({
+                            title : '수정 완료',
+                            icon : 'success',
+                            showConfirmButton: true
+
+                        }).then(function (){
+                            location.reload();
+                        });
                     }
                     else
-                        alert('SERVER ERROR, Please try again later');
-                }
+                        swal.fire({
+                            title : '서버에러',
+                            text : '다음에 다시 시도해주세요',
+                            icon : 'error',
+                            showConfirmButton: true
+
+                        });                }
             })
         }
-    }
+
     function modifyContent(){
         var location = <%=getLocation%>;
         var id = location[0].id;
@@ -141,9 +151,6 @@
         var contact_num = location[0].contact_num;
         var content=CKEDITOR.instances.editorContent.getData();
         var update = id + "-/-/-" + address + "-/-/-" + contact_num + "-/-/-" + content;
-
-        var check = confirm("정말 수정하시겠습니까?");
-        if(check){
             $.ajax({
                 url : "ajax.kgu",
                 type : "post",
@@ -154,15 +161,27 @@
                 dataType : "json",
                 success : function(data){
                     if(data != 'fail'){
-                        alert("수정완료");
-                        window.location.reload();
+                        swal.fire({
+                            title : '수정 완료',
+                            icon : 'success',
+                            showConfirmButton: true
+
+                        }).then(function (){
+                            location.reload();
+                        });
                     }
                     else
-                        alert('SERVER ERROR, Please try again later');
+                        swal.fire({
+                            title : '서버에러',
+                            text : '다음에 다시 시도해주세요',
+                            icon : 'error',
+                            showConfirmButton: true
+
+                        });
                 }
             })
-        }
     }
+
     function back(){
         window.location.href = 'location.kgu';
     }

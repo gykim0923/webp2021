@@ -11,7 +11,7 @@
     String userForMyPage = (String)session.getAttribute("user");
 %>
 <script src='js/sha256.js'></script>
-
+<script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <div id="content" class="row px-md-5 justify-content-md-center"></div>
 <div id="change_btn" class="d-grid col-md-6 mx-auto"></div>
 
@@ -105,11 +105,24 @@
             },
             success:function(data){
                 if (data == 'success') {
-                    alert("비밀번호 수정 완료");
-                    window.location.href = "logout.kgu";
+
+                    swal.fire({
+                        title : '비밀번호 수정 완료',
+                        icon : 'success',
+                        showConfirmButton: true
+
+                    }).then(function (){
+                        location.href = "logout.kgu";
+                    });
 
                 } else
-                    alert('SERVER ERROR, Please try again later');
+                swal.fire({
+                    title : '서버에러',
+                    text : '다음에 다시 시도해주세요',
+                    icon : 'error',
+                    showConfirmButton: true
+
+                });
             }
         })
     }

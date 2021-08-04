@@ -9,6 +9,7 @@
 <%
     String getClub = (String)request.getAttribute("getClub");
 %>
+<script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <div id="club_content">
     <div id="clubList"></div>
     <c:if test="${type.for_header == '관리자'}">
@@ -97,11 +98,23 @@
             },
             success : function(data){
                 if(data != 'fail'){
-                    alert("삭제완료");
-                    window.location.reload();
+                    swal.fire({
+                        title : '삭제완료',
+                        icon : 'success',
+                        showConfirmButton: true
+
+                    }).then(function (){
+                        location.reload();
+                    });
                 }
                 else
-                    alert('SERVER ERROR, Please try again later');
+                    swal.fire({
+                        title : '서버에러',
+                        text : '다음에 다시 시도해주세요',
+                        icon : 'error',
+                        showConfirmButton: true
+
+                    });
             }
         })
     }
@@ -122,11 +135,23 @@
             dataType:"json",
             success : function(data){
                 if(data != 'fail'){
-                    alert("수정완료");
-                    window.location.reload();
+                    swal.fire({
+                        title : '수정완료',
+                        icon : 'success',
+                        showConfirmButton: true
+
+                    }).then(function (){
+                        location.reload();
+                    });
                 }
                 else
-                    alert('SERVER ERROR, Please try again later');
+                    swal.fire({
+                        title : '서버에러',
+                        text : '다음에 다시 시도해주세요',
+                        icon : 'error',
+                        showConfirmButton: true
+
+                    });
             }
         })
     }
@@ -162,11 +187,23 @@
             dataType:"json",
             success : function(data){
                 if(data != 'fail'){
-                    alert("추가 완료");
-                    window.location.reload();
+                    swal.fire({
+                        title : '추가완료',
+                        icon : 'success',
+                        showConfirmButton: true
+
+                    }).then(function (){
+                        location.reload();
+                    });
                 }
                 else
-                    alert('SERVER ERROR, Please try again later');
+                    swal.fire({
+                        title : '서버에러',
+                        text : '다음에 다시 시도해주세요',
+                        icon : 'error',
+                        showConfirmButton: true
+
+                    });
             }
         });
     }

@@ -10,6 +10,8 @@
     String getReg = (String) request.getAttribute("getReg");
     String AnswerWhoDone = (String) request.getAttribute("AnswerWhoDone");
 %>
+<script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+
 <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 <%--<script src="js/bootstrap-slider.js"></script>--%>
 <div>
@@ -98,7 +100,13 @@
             dataType : 'json',
             success : function(data){
                 if(data == 'fail')
-                    alert('SERVER ERROR, Please try again later.');
+                    swal.fire({
+                        title : '서버에러',
+                        text : '다음에 다시 시도해주세요',
+                        icon : 'error',
+                        showConfirmButton: true
+
+                    });
                 if(data == 'empty'){
                     return;
                 }
@@ -126,7 +134,7 @@
             for(var i = 0 ; i < anotherAnswer.length ; ++i){
                 var value = anotherAnswer[i];
                 var sequence = Math.floor(i/questions.length);
-                alert(sequence);
+
                 done.push(value);
                 if(i % questions.length == 0){
                     var text = '<a onclick="doMoreView(' + sequence + ')"><li class="list-group-item text-center">' + value.writer_name + '(' + value.writer_perId + ')의 신청입니다</li></a><div id="moreViewAnother' + sequence + '" style="display:none;"></div>';
@@ -163,7 +171,7 @@
         for(var i = 0 ; i < doneQuestion.length ; ++i){
             var it = questions[i];//타입 1 = 주관식 2 = 단일객관식 3 = 다중객관식
             var done = doneQuestion[i];
-            alert(it.question_type);
+
             if(it.question_type == '1'){
                 var text = '';
                 if(done.answer != '')
@@ -365,8 +373,16 @@
     function submitNewAnswer(){
         var now = new Date().getTime();
         if(start >= now || now >= close){
-            alert('현재 참여하실 수 없습니다.');
-            window.location.href = 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list';
+            swal.fire({
+                title : '현재 참여하실 수 없습니다.',
+                icon : 'warning',
+                showConfirmButton: true
+
+            }).then(function (){
+                location.href = 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list';
+            });
+
+
         }
         var Answer = '';
         var board_number = getReg.id;
@@ -375,7 +391,13 @@
             var it = questions[i];
             if($('input:text[name=answer'+i+']').val() != null)
                 if($('input:text[name=answer'+i+']').val().length >= 150){
-                    alert((i+1) + '번 문항의 답변이 너무 깁니다.');
+
+                    swal.fire({
+                        title : (i+1) + '번 문항의 답변이 너무 깁니다.',
+                        icon : 'warning',
+                        showConfirmButton: true
+
+                    });
                     return;
                 }
                 // else{
@@ -447,7 +469,11 @@
             },
             success : function(data){
                 if(data == 'success'){
-                    alert('신청이 성공하였습니다');
+                    swal.fire({
+                        title : '신청 성공',
+                        icon : 'success',
+                        showConfirmButton: true
+                    });
                     if(getReg.for_who == 1)
                         window.location.href= 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list&&id=' + getReg.id;
                     wasDone = 1;
@@ -455,13 +481,27 @@
                     whatIDone();
                 }
                 else if(data == 'fail'){
-                    alert('SERVER ERROR, Please try again later.');
+                    swal.fire({
+                        title : '서버에러',
+                        text : '다음에 다시 시도해주세요.',
+                        icon : 'error',
+                        showConfirmButton: true
+
+                    });
                 } else if(data == 'timeout'){
-                    alert('해당되는 시간이 아닙니다.');
+                    swal.fire({
+                        title : '해당되는 기간이 아닙니다.',
+                        icon : 'warning',
+                        showConfirmButton: true
+                    });
                     return;
                 }
                 else {
-                    alert('이미 신청한 글입니다.');
+                    swal.fire({
+                        title : '이미 신청한 글입니다.',
+                        icon : 'warning',
+                        showConfirmButton: true
+                    });
                 }
             }
         })
@@ -545,7 +585,12 @@
     function modifyMyAnswer(){
         var rightNow = new Date().getTime();
         if(start > rightNow || rightNow > close){
-            alert('현재 수정하실 수 없습니다.');
+
+            swal.fire({
+                title : '현재 수정하실 수 없습니다.',
+                icon : 'warning',
+                showConfirmButton: true
+            });
             return;
         }
         var panel = $('#questions');
@@ -613,7 +658,12 @@
     function submitModifyAnswer(){
         var rightNow = new Date().getTime();
         if(start > rightNow || rightNow > close){
-            alert('현재 수정하실 수 없습니다.');
+
+            swal.fire({
+                title : '현재 수정하실 수 없습니다.',
+                icon : 'warning',
+                showConfirmButton: true
+            });
             return;
         }
 
@@ -680,55 +730,89 @@
             },
             success : function(data){
                 if(data == 'success'){
-                    alert('수정이 성공하였습니다');
+                    swal.fire({
+                        title : '수정을 성공하였습니다.',
+                        icon : 'success',
+                        showConfirmButton: true
+                    });
                     if(getReg.for_who == 1)
                         window.location.href= 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=view&&id=' + getReg.id;
                     check();
                     whatIDone();
                 }
                 else if(data == 'fail'){
-                    alert('SERVER ERROR, Please try again later.');
+                    swal.fire({
+                        title : '서버에러',
+                        text : '다음에 다시 시도해주세요',
+                        icon : 'error',
+                        showConfirmButton: true
+
+                    });
                 } else{
-                    alert('이미 신청한 글입니다.');
+                    swal.fire({
+                        title : '이미 신청한 글입니다.',
+                        icon : 'warning',
+                        showConfirmButton: true
+                    });
                 }
             }
         })
     }
 
-    function deleteMyAnswer(){
+    function deleteMyAnswer() {
         var rightNow = new Date().getTime();
-        if(start > rightNow || rightNow > close){
-            alert('현재 삭제하실 수 없습니다.');
+        if (start > rightNow || rightNow > close) {
+            swal.fire({
+                title: '현재 삭제하실 수 없습니다.',
+                icon: 'warning',
+                showConfirmButton: true
+            });
             return;
         }
         var data = getReg.id;
-        var check = confirm("답변을 삭제하시겠습니까?");
-        if(check){
-            $.ajax({
-                url : 'ajax.kgu',
-                type : 'post',
-                async : false,
-                data : {
-                    req: 'deleteWhoAnswer',
-                    data: data
-                },
-                success : function(data){
-                    if(data == 'success'){
-                        alert('삭제에 성공하였습니다.');
-                        $('#questions').empty();
-                        wasDone = 0;
-                        settingQuestion();
-                        if(start <= rightNow && rightNow <= close){
-                            isAvailable = 1;
+        swal.fire({
+            title: '답변을 삭제하시나요?',
+            icon: 'warning',
+            showConfirmButton: true,
+            showCancelButton: true
+
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: 'ajax.kgu',
+                    type: 'post',
+                    async: false,
+                    data: {
+                        req: 'deleteWhoAnswer',
+                        data: data
+                    },
+                    success: function (data) {
+                        if (data == 'success') {
+                            swal.fire({
+                                title: '삭제에 성공하였습니다.',
+                                icon: 'success',
+                                showConfirmButton: true
+                            });
+                            $('#questions').empty();
+                            wasDone = 0;
+                            settingQuestion();
+                            if (start <= rightNow && rightNow <= close) {
+                                isAvailable = 1;
+                            }
+                        } else {
+                            swal.fire({
+                                title: '서버에러',
+                                text: '다음에 다시 시도해주세요',
+                                icon: 'error',
+                                showConfirmButton: true
+
+                            });
                         }
                     }
-                    else{
-                        alert('SERVER ERROR, Please try again later.');
-                    }
-                }
-            });
-        }
+                });
+            }
 
+        })
     }
 
     function makeViewButtons() {
@@ -745,33 +829,52 @@
         list_button.append(text);
     }
 
-    function deleteBbs(){
+    function deleteBbs() {
         var id = getReg.id;
         var title = getReg.title;
         var writer_id = getReg.writer_id;
         var writer_name = getReg.writer_name;
         var applicant_count = getReg.applicant_count;
-        var data = id+"-/-/-"+major+"-/-/-"+writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+num+"-/-/-"+applicant_count+"-/-/-"+starting_date+"-/-/-"+closing_date;
+        var data = id + "-/-/-" + major + "-/-/-" + writer_id + "-/-/-" + writer_name + "-/-/-" + title + "-/-/-" + num + "-/-/-" + applicant_count + "-/-/-" + starting_date + "-/-/-" + closing_date;
 
-        var check = confirm(data+"를 삭제하시겠습니까?");
-        if (check) {
-            $.ajax({
-                url: "ajax.kgu", //AjaxAction에서
-                type: "post", //post 방식으로
-                data: {
-                    req: "deleteReg", //이 메소드를 찾아서
-                    data: data //이 데이터를 파라미터로 넘겨줍니다.
-                },
-                success: function (data) { //성공 시
-                    if(data=='success'){
-                        alert("해당 내용이 삭제되었습니다.");
-                        window.location.href = 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list';
+
+        swal.fire({
+            title: data + '를 삭제하시겠습니까?',
+            text: '다시 되돌릴 수 없습니다.',
+            icon: 'warning',
+            showConfirmButton: true,
+            showCancelButton: true
+
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "ajax.kgu", //AjaxAction에서
+                    type: "post", //post 방식으로
+                    data: {
+                        req: "deleteReg", //이 메소드를 찾아서
+                        data: data //이 데이터를 파라미터로 넘겨줍니다.
+                    },
+                    success: function (data) { //성공 시
+                        if (data == 'success') {
+                            swal.fire({
+                                title: '해당 내용이 삭제되었습니다.',
+                                icon: 'success',
+                                showConfirmButton: true
+
+                            }).then(function () {
+                                location.href = 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list';
+                            });
+                        } else {
+                            swal.fire({
+                                title: '권한이 부족합니다.',
+                                icon: 'error',
+                                showConfirmButton: true
+
+                            });
+                        }
                     }
-                    else{
-                        alert('권한이 부족합니다.');
-                    }
-                }
-            })
-        }
+                })
+            }
+        })
     }
 </script>

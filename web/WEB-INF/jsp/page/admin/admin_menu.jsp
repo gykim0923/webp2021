@@ -11,6 +11,7 @@
     String tabmenulist = (String)request.getAttribute("tabmenulist");
     String getAllType = (String) request.getAttribute("getAllType");
 %>
+<script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <div>
     <div class="album py-5 bg-light">
         <div class="container">
@@ -26,7 +27,7 @@
                     <th data-field="page_title" data-sortable="true">이름</th>
                     <th data-field="type" data-sortable="true">타입</th>
                     <th data-field="tab_title" data-sortable="true">구분</th>
-                    <th data-field="show_detail" data-sortable="true" data-bs-toggle="modal" data-bs-target="#menuModal">상세보기</th>
+                    <th data-field="show_detail" data-sortable="true" data-bs-toggle="modal" data-bs-target="#menuModal">설정</th>
                 </tr>
                 </thead>
             </table>
@@ -98,7 +99,7 @@
                         page_title: value.page_title,
                         type: typeName,
                         tab_title: headvalue.tab_title,
-                        show_detail: '<button class="btn btn-secondary mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="detailModal('+i+')">상세보기</button>'
+                        show_detail: '<button class="btn btn-secondary mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="detailModal('+i+')">수정</button>'
                     });
                     indexID++;
             }
@@ -119,18 +120,28 @@
     function modifyProModal(id){
         var name = $('[name=title]').val();
         if(name.length>=25){
-            alert("이름이 너무 깁니다!");
+            swal.fire({
+                title : '이름이 너무 깁니다!',
+                icon : 'warning',
+                showConfirmButton: true
+
+            });
             return;
         }
         if(name.length==0){
-            alert("이름을 한 글자 이상 입력해주세요.");
+            swal.fire({
+                title : '이름을 한 글자 이상 입력해주세요.',
+                icon : 'warning',
+                showConfirmButton: true
+
+            });
+
             return;
         }
 
         var update = name + "-/-/-" + id;
 
-        var check = confirm("정말 수정하시겠습니까?");
-        if(check){
+
             $.ajax({
                 url : "ajax.kgu",
                 type : "post",
@@ -140,37 +151,105 @@
                 },
                 success : function(data) {
                     if(data == 'fail'){
-                        alert('하나 밖에 존재하지 않는 메뉴에요. 아껴주세요.');
+
+                        swal.fire({
+                            title : '하나 밖에 존재하지 않는 메뉴에요. 아껴주세요.',
+                            icon : 'warning',
+                            showConfirmButton: true
+
+                        });
                         return;
                     }
-                    alert("수정이 완료되었습니다");
-                    location.reload();
+                    swal.fire({
+                        title : '수정이 완료되었습니다.',
+                        icon : 'success',
+                        showConfirmButton: true
+
+                    }).then(function (){
+                        location.reload();
+                    });
                 }
             });
         }
+
+
+    function deleteProModal(id) {
+        swal.fire({
+            title: '정말로 삭제하시나요?',
+            text: '다시 되돌릴 수 없습니다.',
+            icon: 'warning',
+            showConfirmButton: true,
+            showCancelButton: true
+
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                $.ajax({
+                    url: "ajax.kgu",
+                    type: "post",
+                    data: {
+                        req: "delete_menu",
+                        data: id
+                    },
+                    success: function (data) {
+                        if (data == 'fail') {
+
+                            swal.fire({
+                                title: '하나 밖에 존재하지 않는 메뉴에요. 아껴주세요.',
+                                icon: 'warning',
+                                showConfirmButton: true
+
+                            });
+                            return;
+                        }
+
+                        swal.fire({
+                            title: '삭제가 완료되었습니다.',
+                            icon: 'success',
+                            showConfirmButton: true
+
+                        }).then(function () {
+                            location.reload();
+                        });
+                    }
+                });
+            }
+        })
     }
 
-    function deleteProModal(id){
-        var check = confirm("정말 삭제하시겠습니까?");
-        if(check){
-            $.ajax({
-                url : "ajax.kgu",
-                type : "post",
-                data : {
-                    req : "delete_menu",
-                    data : id
-                },
-                success : function(data) {
-                    if(data == 'fail'){
-                        alert('하나 밖에 존재하지 않는 메뉴에요. 아껴주세요.');
-                        return;
-                    }
-                    alert("삭제가 완료되었습니다");
-                    location.reload();
-                }
-            });
-        }
-    }
+    //     var check = confirm("정말 삭제하시겠습니까?");
+    //     if(check){
+    //         $.ajax({
+    //             url : "ajax.kgu",
+    //             type : "post",
+    //             data : {
+    //                 req : "delete_menu",
+    //                 data : id
+    //             },
+    //             success : function(data) {
+    //                 if(data == 'fail'){
+    //
+    //                     swal.fire({
+    //                         title : '하나 밖에 존재하지 않는 메뉴에요. 아껴주세요.',
+    //                         icon : 'warning',
+    //                         showConfirmButton: true
+    //
+    //                     });
+    //                     return;
+    //                 }
+    //
+    //                 swal.fire({
+    //                     title : '삭제가 완료되었습니다.',
+    //                     icon : 'success',
+    //                     showConfirmButton: true
+    //
+    //                 }).then(function (){
+    //                     location.reload();
+    //                 });
+    //             }
+    //         });
+    //     }
+    // }
 
     function insertMenu(){
         var list = $('#insertModalbody');
@@ -207,21 +286,35 @@
     function insertMenuFinish(){
         var name = $('[name=title]').val();
         if(name.length>=25){
-            alert("이름이 너무 깁니다!");
+
+            swal.fire({
+                title : '이름이 너무 깁니다!',
+                icon : 'warning',
+                showConfirmButton: true
+
+            });
             return;
         }
         if(name.length==0){
-            alert("이름을 한 글자 이상 입력해주세요.");
+
+            swal.fire({
+                title : '이름을 입력해주세요.',
+                icon : 'warning',
+                showConfirmButton: true
+            });
             return;
         }
         var header = $('[name=insertheader]').val();
         if(header=="0"){
-            alert("메뉴 구분을 먼저 선택해주세요");
+            swal.fire({
+                title : '메뉴 구분을 선택해주세요.',
+                icon : 'warning',
+                showConfirmButton: true
+            });
             return;
         }
         var insert = name + "-/-/-" + header;
-        var check = confirm("정말 추가하시겠습니까?");
-        if(check){
+
             $.ajax({
                 url : "ajax.kgu",
                 type : "post",
@@ -230,26 +323,44 @@
                     data : insert
                 },
                 success : function(data) {
-                    alert("추가가 완료되었습니다");
-                    location.reload();
+
+                    swal.fire({
+                        title : '추가가 완료되었습니다.',
+                        icon : 'success',
+                        showConfirmButton: true
+
+                    }).then(function (){
+                        location.reload();
+                    });
                 }
             });
         }
-    }
+
 
     function insertBBSFinish(){
         var name = $('[name=title]').val();
         if(name.length>=25){
-            alert("이름이 너무 깁니다!");
+
+            swal.fire({
+                title : '이름이 너무 깁니다!',
+                icon : 'warning',
+                showConfirmButton: true
+            });
+
             return;
         }
         if(name.length==0){
-            alert("이름을 한 글자 이상 입력해주세요.");
+
+            swal.fire({
+                title : '이름을 입력해주세요.',
+                icon : 'warning',
+                showConfirmButton: true
+            });
+
             return;
         }
         var insert = name;
-        var check = confirm("정말 추가하시겠습니까?");
-        if(check){
+
             $.ajax({
                 url : "ajax.kgu",
                 type : "post",
@@ -258,12 +369,18 @@
                     data : insert
                 },
                 success : function(data) {
-                    alert("추가가 완료되었습니다");
-                    location.reload();
+                    swal.fire({
+                        title : '추가가 완료되었습니다.',
+                        icon : 'success',
+                        showConfirmButton: true
+
+                    }).then(function (){
+                        location.reload();
+                    });
                 }
             });
         }
-    }
+
 
 
 </script>
