@@ -16,9 +16,9 @@
   <hr>
   <div class="container">
     <div class="row">
-      <div class="col-9" id="view_writer"></div>
-      <div class="col-1" id="view_count"><span>조회수:</span></div>
-      <div class="col-2" id="view_lastModified"><span>작성일:</span></div>
+      <div class=" col-xl-7 col-4" id="view_writer"></div>
+      <div class=" col-xl-2 col-3" id="view_count"><span>조회수:</span></div>
+      <div class=" col-xl-3 col-5" id="view_lastModified"><span>작성일:</span></div>
     </div>
   </div>
   <hr>
