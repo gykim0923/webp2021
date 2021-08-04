@@ -16,6 +16,7 @@ public class ChangePwdAction extends CustomAction {
 
         String type = (String) request.getSession().getAttribute("type");
         if(!type.equals("홈페이지관리자")){
+            request.setAttribute("error", "구글 아이디는 비밀번호 변경이 불가능합니다.");
             return "RequestDispatcher:jsp/main/error.jsp";
         }
 

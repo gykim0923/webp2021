@@ -141,9 +141,13 @@
     function makePageMenu() {
         var list = $('#page_menu');
         var text = '';
+        var user=<%=user%>;
         var pageMenu = <%=pageMenu%>;
         var major =<%=major%>;
         for (var i = 0; i < pageMenu.length; i++) {
+            if(pageMenu[i].tab_id==6 && !user.type=='홈페이지관리자' && i==1){
+                continue;
+            }
             text += '<div><span class="deco_dot">●</span><a href="' + pageMenu[i].page_path + '?major=' + major + '&&num=' + pageMenu[i].page_id + '">' + pageMenu[i].page_title + '</div>';
         }
         list.append(text);
