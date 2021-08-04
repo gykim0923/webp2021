@@ -14,6 +14,14 @@
 <div>
   <div class="h2" id="view_title"></div>
   <hr>
+  <div class="container">
+    <div class="row">
+      <div class="col-9" id="view_writer"></div>
+      <div class="col-1" id="view_count"><span>조회수:</span></div>
+      <div class="col-2" id="view_lastModified"><span>작성일:</span></div>
+    </div>
+  </div>
+  <hr>
   <div id="view_content"></div>
   <hr>
   <c:if test="${bbs_type =='\"free\"' && user.type != null}">
@@ -89,6 +97,9 @@
   $(document).ready(function(){
     makeViewTitle();
     makeViewContent();
+    makeViewWriter();
+    makeViewCount();
+    makeViewLastModified();
     makeViewButtons();
     callSetupCommentView();
     // makeCommentButton();
@@ -168,6 +179,20 @@
   function makeViewContent() {
     var content = $('#view_content');
     content.append(getBBS.text);
+  }
+
+  function makeViewWriter(){
+    var content = $('#view_writer');
+    content.append(getBBS.writer_name);
+  }
+  function makeViewCount(){
+    var content = $('#view_count');
+    content.append(getBBS.views);
+  }
+  function makeViewLastModified(){
+    var content = $('#view_lastModified');
+    var date = formatDate(getBBS.last_modified);
+    content.append(date);
   }
 
   function deleteComment(i){
