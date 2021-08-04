@@ -447,6 +447,16 @@ CREATE TABLE log(
     PRIMARY KEY (`id`)
 );
 
+INSERT INTO log(id, user_id, user_name, user_type,log_time, log_type) VALUE ('1', 'admin', '관리자테스트','홈페이지관리자','2020-08-04 12:39:40','로그인');
+INSERT INTO log(id, user_id, user_name, user_type,log_time, log_type) VALUE ('2', 'admin', '관리자테스트','홈페이지관리자','2020-08-11 12:39:40','로그인');
+INSERT INTO log(id, user_id, user_name, user_type,log_time, log_type) VALUE ('3', 'admin', '관리자테스트','홈페이지관리자','2020-08-12 12:39:40','로그인');
+INSERT INTO log(id, user_id, user_name, user_type,log_time, log_type) VALUE ('4', 'admin', '관리자테스트','홈페이지관리자','2021-07-02 12:39:40','로그인');
+INSERT INTO log(id, user_id, user_name, user_type,log_time, log_type) VALUE ('5', 'admin', '관리자테스트','홈페이지관리자','2021-07-04 12:39:40','로그인');
+INSERT INTO log(id, user_id, user_name, user_type,log_time, log_type) VALUE ('6', 'admin', '관리자테스트','홈페이지관리자','2021-08-04 12:39:40','로그인');
+
+
+
+
 CREATE TABLE bbs_reg_answer(
 
     `id` INT Auto_Increment,
