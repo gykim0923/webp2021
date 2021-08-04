@@ -84,7 +84,7 @@
                     buttonText = '<button type="button" class="btn btn-secondary" disabled>대기</button>';
                 else
                     buttonText = '<button type="button" class="btn btn-secondary" disabled>불가</button>';
-                if(can == 'X'){
+                if(can == 'ⅹ'){
                     rows.push({
                         id: '<span>'+reg.id+'</span>',
                         title: lvlText,
