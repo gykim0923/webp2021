@@ -13,6 +13,12 @@ public class ChangePwdAction extends CustomAction {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         super.execute(request,response);
         Gson gson = new Gson();
+
+        String type = (String) request.getSession().getAttribute("type");
+        if(!type.equals("홈페이지관리자")){
+            return "RequestDispatcher:jsp/main/error.jsp";
+        }
+
         String major=request.getParameter("major");
         String num=request.getParameter("num");
 

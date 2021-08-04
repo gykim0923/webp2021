@@ -10,6 +10,7 @@
     String typeForMyPage = (String)session.getAttribute("type");
     String userForMyPage = (String)session.getAttribute("user");
 %>
+
 <div id="text"></div>
 <div id="modify_button" class="d-grid gap-2 d-md-flex justify-content-md-end"></div>
 
@@ -23,8 +24,11 @@
         setdata();
     })
 
+
     function setdata(){
-        var a = '<div id="panel">';
+        var a ='<div id="panel">';
+        a +='<div id="panel m-4"><div id="panel1"><img src="'+user.google_img+'" onerror="this.src=\'http://placehold.it/200x150\'" style="height: 200px" class="img-circle img-responsive"></div></div>';
+        a +='<ul>'
         a += '<div id="panel2" class="row"><div>안녕하세요 '+user.name+'님, 오늘은 가입한 지 <span style="color : red;">'+ (parseInt(betweenDay)+1) +'</span>일째입니다.</div><hr>';
         a += '<div class="col-4 border-end">전화번호</div><div class="col-8">'+ user.phone+'</div>';
         a += '<div class="col-4 border-end">생년월일</div><div class="col-8">'+ user.birth+'</div>';
@@ -36,6 +40,8 @@
             a += '<div class="col-4 border-end">학년</div><div class="col-8">'+ user.grade+'</div>';
             a += '<div class="col-4 border-end">상태</div><div class="col-8">'+ user.state+'</div>';
         }
+        a +='</ul></div>'
+
         $('#text').empty();
         $('#text').append(a);
         $('#modify_button').empty();
