@@ -21,7 +21,7 @@
     <hr>
     <div id="view_content"></div>
     <hr>
-    <div id="questions"></div>
+    <div id="questions" class="card"></div>
     <ul class="list-group" id="anotherDone"></ul>
 </div>
 <div class="mt-3 d-grid gap-2 d-md-flex justify-content-md-end" id="list_button"></div>
@@ -168,43 +168,50 @@
         panel.css('padding-bottom','10px');
         panel.empty();
         panel.append('<div id="AnotherPanel' + index + '" style="text-align : center ; font-size : 20px; margin-bottom:10px;">' + doneQuestion[0].writer_name + '(' + doneQuestion[0].writer_perId + ')의 신청 현황</div>');
-        for(var i = 0 ; i < doneQuestion.length ; ++i){
-            var it = questions[i];//타입 1 = 주관식 2 = 단일객관식 3 = 다중객관식
+        makeView(index, doneQuestions, panel);
+    }
+
+    function makeView(index, doneQuestions, panel){
+        var doneQuestion = doneQuestions;
+        for(var i = 0 ; i < doneQuestion.length ; i++){
+            var it = questions[i];//타입 1 = 주관식 2 = 단일객관식 3 = 다중객관식 4 = 척도형 5 = 파일업로드형
             var done = doneQuestion[i];
 
             if(it.question_type == '1'){
                 var text = '';
+            if(it.question_type == '1'){  //주관식
+                var text = '<div class="mx-3">';
                 if(done.answer != '')
-                    text += '<div class="form-group" id="question' + i + 'Another' + index + '"><label>'+ (i+1) + '.' + it.question_content + '</label><input type="text" class="form-control" name="answer' + i + '" value="' + done.answer + '" readonly></div>';
+                    text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>'+ (i+1) + '.' + it.question_content + '</label><input type="text" class="form-control" name="answer' + i + '" value="' + done.answer + '" readonly></div>';
                 else
-                    text += '<div class="form-group" id="question' + i + 'Another' + index + '"><label>'+ (i+1) + '.' + it.question_content + '</label><input type="text" class="form-control" name="answer' + i + '" value="답변을 하지 않았습니다." readonly></div>';
-                panel.append(text);
+                    text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>'+ (i+1) + '.' + it.question_content + '</label><input type="text" class="form-control" name="answer' + i + '" value="답변을 하지 않았습니다." readonly></div>';
+                panel.append(text+'</div>');
             }
-            if(it.question_type == '2'){
-                var text = '';
+            if(it.question_type == '2'){  //단일객관식
+                var text = '<div class="mx-3">';
                 var allAnswer = it.question_content;
                 var answers = allAnswer.split('-/@/-');
-                text += '<div class="form-group" id="question' + i + '"><label>'+ (i+1) + '.' + answers[0] + '</label><div id="allAnswers' + i + 'Another' + index + '"></div>';
-                panel.append(text);
-                var answerPanel = $('#allAnswers'+ i + 'Another' + index);
+                text += '<div class="form-group" id="question' + i + '"><label>'+ (i+1) + '.' + answers[0] + '</label><div id="allAnswers' + i + 'who' + index + '"></div>';
+                panel.append(text+'</div>');
+                var answerPanel = $('#allAnswers'+i+ 'who' + index);
                 for(var j = 1 ; j < answers.length ; ++j){
                     if(answers[j] == done.answer)
-                        var input = '<div class="radio disabled"><label><input type="radio" disabled checked="true" name="answer' + i + 'Another' + index + '" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
+                        var input = '<div class="radio disabled"><label><input type="radio" disabled checked="true" name="answer' + i + 'who' + index + '" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
                     else
-                        var input = '<div class="radio disabled"><label><input type="radio" disabled name="answer' + i + 'Another' + index + '" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
+                        var input = '<div class="radio disabled"><label><input type="radio" disabled name="answer' + i + 'who' + index + '" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
                     answerPanel.append(input);
                 }
                 if(done.answer == '')
                     answerPanel.append('<span style="font-size : 14px; color : red">답변을 하지 않았습니다.</span>');
             }
-            if(it.question_type == '3'){
-                var text = '';
+            if(it.question_type == '3'){  //다중객관식
+                var text = '<div class="mx-3">';
                 var allAnswer = it.question_content;
                 var answers = allAnswer.split('-/@/-');
                 var myAnswer = done.answer.split('-/@/-');
-                text += '<div class="form-group" id="question' + i + '"><label>'+ (i+1) + '.' + answers[0] + '<span style="color : gray; font-size : 12px">(다중 선택 가능 문항입니다)</span></label><div id="allAnswers' + i + 'Another' + index + '"></div>';
-                panel.append(text);
-                var answerPanel = $('#allAnswers'+ i + 'Another' + index);
+                text += '<div class="form-group" id="question' + i + '"><label>'+ (i+1) + '.' + answers[0] + '<span style="color : gray; font-size : 12px">(다중 선택 가능 문항입니다)</span></label><div id="allAnswers' + i + 'who' + index + '"></div>';
+                panel.append(text+'</div>');
+                var answerPanel = $('#allAnswers'+i+ 'who' + index);
                 for(var j = 1 ; j < answers.length ; ++j){
                     if(myAnswer.includes(answers[j]))
                         var input = '<div class="checkbox disabled"><label><input type="checkbox" disabled checked="true" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
@@ -215,30 +222,23 @@
                 if(done.answer == '')
                     answerPanel.append('<span style="font-size : 14px; color : red">답변을 하지 않았습니다.</span>');
             }
-            if(it.question_type == '4'){
-                var text = '';
+            if(it.question_type == '4'){  //척도형
+                var text = '<div class="mx-3">';
                 var allAnswer = it.question_content;
                 var answers = allAnswer.split('-/@/-');
-                text += '<div class="form-group" id="question' + i + '"><label>'+ (i+1) + '.' + answers[0] + '</label><div  class="for_slider" id="sliderPanel' + i + 'Another' + index + '"></div>';
-                panel.append(text);
-                var sliderPanel = $('#sliderPanel' + i + 'Another' + index);
-                var text = answers[1] + ' <input type="range" id="range' + i + 'Another' + index + '"> ' + answers[2] + '<span class="for4"> 선택값 : ' + done.answer + '</span>';
+                text += '<div class="form-group" id="question' + i + '"><label>'+ (i+1) + '.' + answers[0] + '</label><div class="for_slider" id="sliderPanel' + i + 'who' + index + '"></div>';
+                panel.append(text+'</div>');
+                var sliderPanel = $('#sliderPanel'+i+ 'who' + index);
+                var text = '<div class="d-flex justify-content-between align-items-center"><span>'+answers[1] + '&nbsp;</span><input type="range" class="form-range" id="range' + i + 'who' + index + '" min='+answers[1]+' max='+answers[2]+' value="'+done.answer+'" step=1 disabled> <span>&nbsp;'+answers[2]+'</span></div><span class="for4"> 선택값 : ' + done.answer + '</span>';
                 sliderPanel.append(text);
-                $('#range' + i + 'Another' + index).slider({
-                    min : Number(answers[1]),
-                    max : Number(answers[2]),
-                    value : Number(done.answer),
-                    step : 1,
-                    enabled : false
-                });
             }
-            if(it.question_type == '5'){
-                var text = '';
+            if(it.question_type == '5'){  //파일업로드형
+                var text = '<div class="mx-3">';
                 if(done.answer != 'null')
-                    text += '<div class="form-group" id="question' + i + 'Another' + index + '"><label>'+ (i+1) + '.' + it.question_content + '</label><br><a href="req_board_download.do?id=' + done.answer + '"><img src="img/file_ico.png"></a></div>';
+                    text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>'+ (i+1) + '.' + it.question_content + '</label><br><a href="req_board_download.do?id=' + done.answer + '"><img src="img/file_ico.png"></a></div>';
                 else
-                    text += '<div class="form-group" id="question' + i + 'Another' + index + '"><label>'+ (i+1) + '.' + it.question_content + '</label><br><span style="font-size : 14px; color : red">파일을 올리지 않았습니다.</span></div>';
-                panel.append(text);
+                    text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>'+ (i+1) + '.' + it.question_content + '</label><br><span style="font-size : 14px; color : red">파일을 올리지 않았습니다.</span></div>';
+                panel.append(text+'</div>');
             }
         }
     }
@@ -292,8 +292,8 @@
             if(number == 0){
                 forRows = new Object();
                 forRows.name = value.writer_name;
-                forRows.per_id = value.wirter_perId;
-                forRows.grade = value.wirter_grade;
+                forRows.per_id = value.writer_perId;
+                forRows.grade = value.writer_grade;
             }
             forRows['AnswerAnother'+number] = value.answer;
             if(number == (questions.length - 1))
@@ -321,18 +321,19 @@
     function settingQuestion(){
         if(isAvailable == 1 && getReg.level.indexOf(type.for_header) >= 0){
             var panel = $('#questions');
+            panel.html('<div class="card-body"><div id="myPanel" class="mt-3" style="text-align : center ; font-size : 20px; margin-bottom:10px;">신청 폼 작성</div>');
             for(var i = 0 ; i < questions.length ; ++i ){
                 var it = questions[i];//타입 1 = 주관식 2 = 단일객관식 3 = 다중객관식  4 = 척도형  5 = 파일업로드형
                 if(it.question_type == '1'){
-                    var text = '';
+                    var text = '<div class="mx-3">';
                     text += '<div class="form-group mt-3" id="question' + i + '"><label>'+ (i+1) + '.' + it.question_content + '</label><input type="text" class="form-control" name="answer' + i + '" placeholder="답변을 해주세요"></div>';
-                    panel.append(text);
+                    panel.append(text+"</div>");
                 }
                 if(it.question_type == '2'){
-                    var text = '';
+                    var text = '<div class="mx-3">';
                     var answers = it.question_content.split('-/@/-');
                     text += '<div class="form-group mt-3" id="question' + i + '"><label>'+ (i+1) + '.' + answers[0] + '</label><div id="allAnswers' + i + '"></div>';
-                    panel.append(text);
+                    panel.append(text+"</div>");
                     var answerPanel = $('#allAnswers'+i);
                     for(var j = 1 ; j < answers.length ; ++j){
                         var input = '<div class="radio"><label><input type="radio" name="answer' + i + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
@@ -340,10 +341,10 @@
                     }
                 }
                 if(it.question_type == '3'){
-                    var text = '';
+                    var text = '<div class="mx-3">';
                     var answers = it.question_content.split('-/@/-');
                     text += '<div class="form-group mt-3" id="question' + i + '"><label>'+ (i+1) + '.' + answers[0] + '<span style="color : gray; font-size : 12px">(다중 선택 가능 문항입니다)</span></label><div id="allAnswers' + i + '"></div>';
-                    panel.append(text);
+                    panel.append(text+"</div>");
                     var answerPanel = $('#allAnswers'+i);
                     for(var j = 1 ; j < answers.length ; ++j){
                         var input = '<div class="checkbox"><label><input type="checkbox" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
@@ -352,21 +353,21 @@
                 }
 
                 if(it.question_type == '4'){
-                    var text = '';
+                    var text = '<div class="mx-3">';
                     var answers = it.question_content.split('-/@/-');
                     text += '<div class="form-group mt-3" id="question' + i + '"><label for="customRange3" class="form-label">'+ (i+1) + '.' + answers[0] + '</label><div class="for_slider" id="sliderPanel' + i + '"></div>';
-                    panel.append(text);
+                    panel.append(text+"</div>");
                     var sliderPanel = $('#sliderPanel'+i);
                     var text = '<div class="d-flex justify-content-between align-items-center"><span>'+answers[1] + '&nbsp;</span><input type="range" class="form-range" id="range' + i + '" min='+answers[1]+' max='+answers[2]+' step=1> <span>&nbsp;'+answers[2]+'</span></div>' ;
                     sliderPanel.append(text);
                 }
                 if(it.question_type == '5'){
-                    var text = '';
+                    var text = '<div class="mx-3">';
                     text += '<div class="form-group mt-3" id="question' + i + '"><label>'+ (i+1) + '.' + it.question_content + '</label><div><input type="file" name="answer' + i + '"></div></div>';
-                    panel.append(text);
+                    panel.append(text+"</div>");
                 }
             }
-            $('#questions').append('<div class="col-md-4"></div><button class="btn btn-secondary mt-3" onclick="submitNewAnswer()">제출할래요</button>');
+            $('#questions').append('<button class="btn btn-secondary mt-3" onclick="submitNewAnswer()">제출할래요</button></div>');
         }
     }
 
@@ -400,10 +401,6 @@
                     });
                     return;
                 }
-                // else{
-                //     alert("입력되지 않은 답변이 있습니다.");
-                //     return;
-                // }
             if(it.question_type == '1'){
                 Answer += $('input:text[name=answer'+i+']').val();
             }
@@ -509,77 +506,12 @@
 
     function whatIDone() {//doneQuestion 이용
         var panel = $('#questions');
-        panel.css('border','1px black dotted');
-        panel.empty();
-        panel.append('<div id="myPanel" class="mt-3" style="text-align : center ; font-size : 20px; margin-bottom:10px;">나의 신청 현황</div>');
-        for(var i = 0 ; i < doneQuestion.length ; i++){
-            var it = questions[i];//타입 1 = 주관식 2 = 단일객관식 3 = 다중객관식 4 = 척도형 5 = 파일업로드형
-            var done = doneQuestion[i];
-            if(it.question_type == '1'){  //주관식
-                var text = '<div class="mx-3">';
-                if(done.answer != '')
-                    text += '<div class="form-group" id="question' + i + '"><label>'+ (i+1) + '.' + it.question_content + '</label><input type="text" class="form-control" name="answer' + i + '" value="' + done.answer + '" readonly></div>';
-                else
-                    text += '<div class="form-group" id="question' + i + '"><label>'+ (i+1) + '.' + it.question_content + '</label><input type="text" class="form-control" name="answer' + i + '" value="답변을 하지 않았습니다." readonly></div>';
-                panel.append(text+'</div>');
-            }
-            if(it.question_type == '2'){  //단일객관식
-                var text = '<div class="mx-3">';
-                var allAnswer = it.question_content;
-                var answers = allAnswer.split('-/@/-');
-                text += '<div class="form-group" id="question' + i + '"><label>'+ (i+1) + '.' + answers[0] + '</label><div id="allAnswers' + i + '"></div>';
-                panel.append(text+'</div>');
-                var answerPanel = $('#allAnswers'+i);
-                for(var j = 1 ; j < answers.length ; ++j){
-                    if(answers[j] == done.answer)
-                        var input = '<div class="radio disabled"><label><input type="radio" disabled checked="true" name="answer' + i + '" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
-                    else
-                        var input = '<div class="radio disabled"><label><input type="radio" disabled name="answer' + i + '" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
-                    answerPanel.append(input);
-                }
-                if(done.answer == '')
-                    answerPanel.append('<span style="font-size : 14px; color : red">답변을 하지 않았습니다.</span>');
-            }
-            if(it.question_type == '3'){  //다중객관식
-                var text = '<div class="mx-3">';
-                var allAnswer = it.question_content;
-                var answers = allAnswer.split('-/@/-');
-                var myAnswer = done.answer.split('-/@/-');
-                text += '<div class="form-group" id="question' + i + '"><label>'+ (i+1) + '.' + answers[0] + '<span style="color : gray; font-size : 12px">(다중 선택 가능 문항입니다)</span></label><div id="allAnswers' + i + '"></div>';
-                panel.append(text+'</div>');
-                var answerPanel = $('#allAnswers'+i);
-                for(var j = 1 ; j < answers.length ; ++j){
-                    if(myAnswer.includes(answers[j]))
-                        var input = '<div class="checkbox disabled"><label><input type="checkbox" disabled checked="true" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
-                    else
-                        var input = '<div class="checkbox disabled"><label><input type="checkbox" disabled id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
-                    answerPanel.append(input);
-                }
-                if(done.answer == '')
-                    answerPanel.append('<span style="font-size : 14px; color : red">답변을 하지 않았습니다.</span>');
-            }
-            if(it.question_type == '4'){  //척도형
-                var text = '<div class="mx-3">';
-                var allAnswer = it.question_content;
-                var answers = allAnswer.split('-/@/-');
-                text += '<div class="form-group" id="question' + i + '"><label>'+ (i+1) + '.' + answers[0] + '</label><div class="for_slider" id="sliderPanel' + i + '"></div>';
-                panel.append(text+'</div>');
-                var sliderPanel = $('#sliderPanel'+i);
-                var text = '<div class="d-flex justify-content-between align-items-center"><span>'+answers[1] + '&nbsp;</span><input type="range" class="form-range" id="range' + i + '" min='+answers[1]+' max='+answers[2]+' value="'+done.answer+'" step=1 disabled> <span>&nbsp;'+answers[2]+'</span></div><span class="for4"> 선택값 : ' + done.answer + '</span>';
-                sliderPanel.append(text);
-            }
-            if(it.question_type == '5'){  //파일업로드형
-                var text = '<div class="mx-3">';
-                if(done.answer != 'null')
-                    text += '<div class="form-group" id="question' + i + '"><label>'+ (i+1) + '.' + it.question_content + '</label><br><a href="req_board_download.do?id=' + done.answer + '"><img src="img/file_ico.png"></a></div>';
-                else
-                    text += '<div class="form-group" id="question' + i + '"><label>'+ (i+1) + '.' + it.question_content + '</label><br><span style="font-size : 14px; color : red">파일을 올리지 않았습니다.</span></div>';
-                panel.append(text+'</div>');
-            }
-        }
+        panel.html('<div class="card-body"><div id="myPanel" class="mt-3" style="text-align : center ; font-size : 20px; margin-bottom:10px;">나의 신청 현황</div>');
+        makeView(0,doneQuestion,panel);
         var rightNow = new Date().getTime();
         if(start <= rightNow && rightNow <= close)
             panel.append('<div class="m-3 d-grid gap-2 d-md-flex justify-content-md-end"><button class="btn btn-secondary" onclick="modifyMyAnswer()">수정</button><button class="btn btn-secondary" onclick="deleteMyAnswer()">삭제</button></div>');
+        panel.append('</div>')
     }
 
     function modifyMyAnswer(){
@@ -594,9 +526,7 @@
             return;
         }
         var panel = $('#questions');
-        panel.css('border','1px black dotted');
-        panel.empty();
-        panel.append('<div id="myPanel" style="text-align : center ; font-size : 20px; margin-bottom:10px;">나의 신청 현황</div>');
+        panel.html('<div class="card-body"><div id="myPanel" style="text-align : center ; font-size : 20px; margin-bottom:10px;">나의 신청 현황</div>');
         for(var i = 0 ; i < doneQuestion.length ; ++i){
             var it = questions[i];//타입 1 = 주관식 2 = 단일객관식 3 = 다중객관식 4 = 척도형 5 = 파일업로드형
             var done = doneQuestion[i];
@@ -652,7 +582,7 @@
                 panel.append(text+'</div>');
             }
         }
-        $('#questions').append('<div class="col-md-4"></div><button class="btn btn-default col-md-4" onclick="submitModifyAnswer()">수정할래요</button>');
+        $('#questions').append('<button class="btn btn-secondary" onclick="submitModifyAnswer()">수정할래요</button></div>');
     }
 
     function submitModifyAnswer(){
@@ -839,7 +769,7 @@
 
 
         swal.fire({
-            title: data + '를 삭제하시겠습니까?',
+            title: '글을 삭제하시겠습니까?',
             text: '다시 되돌릴 수 없습니다.',
             icon: 'warning',
             showConfirmButton: true,
