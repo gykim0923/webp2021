@@ -10,6 +10,7 @@
     String typeForInformation = (String)session.getAttribute("type");
     String information = (String)request.getAttribute("information");
 %>
+<script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 
 <div id="information_content"></div>
 <div id="modify_button"></div>
@@ -74,11 +75,22 @@
             dataType:"json",
             success : function(data){
                 if(data != 'fail'){
-                    alert("수정완료");
-                    window.location.reload();
+                    swal.fire({
+                        title : '수정이 완료되었습니다.',
+                        icon : 'success',
+                        showConfirmButton: true
+
+                    }).then(function (){
+                        location.reload();
+                    });
                 }
                 else
-                    alert('SERVER ERROR, Please try again later');
+                    swal.fire({
+                        title : '서버에러',
+                        text : '다음에 다시 시도해주세요',
+                        icon : 'error',
+                        showConfirmButton: true
+                    });
             }
         })
     }

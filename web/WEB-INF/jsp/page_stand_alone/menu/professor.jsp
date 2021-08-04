@@ -4,6 +4,8 @@
    String typeForProfessor = (String)session.getAttribute("type");
    String getProfessorList = (String) request.getAttribute("getProfessorlist");
 %>
+<script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+
 <style>
    .team-boxed {
       color:#313437;
@@ -166,10 +168,15 @@
             contentType : false,
             success : function(data){//데이터는 주소
                if(data=='fail'){
-                  alert('실패');
+                  swal.fire({
+                     title : '실패',
+                     icon : 'error',
+                     showConfirmButton: true
+
+                  });
                }
                else {
-                  alert(data);
+
                   var fileLog=data.split("-/-/-");
                   var a='';
                   a+='<div>파일제출</div><div>'+fileLog[1]+'</div>';
@@ -182,7 +189,12 @@
             }
          })
       }else{
-         alert("파일을 등록해주세요");
+         swal.fire({
+            title : '파일을 등록해주세요.',
+            icon : 'warning',
+            showConfirmButton: true
+
+         });
       }
       // return address;
    }
@@ -202,8 +214,7 @@
       var email = $('input[name=pro_email1]').val();
       var lecture = $('input[name=pro_lecture1]').val();
       var update = prof_img+"-/-/-" +name + "-/-/-" + location1 + "-/-/-" + call +  "-/-/-" + email +  "-/-/-"+ lecture +  "-/-/-"+ id;
-      var check = confirm("정말 수정하시겠습니까?");
-      if(check){
+
          $.ajax({
             url : "ajax.kgu",
             type : "post",
@@ -213,30 +224,50 @@
             },
             dataType : "json",
             success : function(data) {
-               alert("수정이 완료되었습니다");
-               location.reload()
+               swal.fire({
+                  title : '수정이 완료되었습니다.',
+                  icon : 'success',
+                  showConfirmButton: true
+
+               }).then(function (){
+                  location.reload();
+               });
             }
          })
       }
-   }
+
 
 
    function deleteProfessor(i) {
-      var check = confirm("[중요] 정말로 이 데이터를 삭제하시나요? 취소하실 수 없습니다.");
-      if (check) {
-         $.ajax({
-            url: "ajax.kgu",
-            type: "post",
-            data: {
-               req: "deleteProfessor",
-               data: i
-            },
-            success: function (data) {
-               alert("해당 데이터가 삭제되었습니다.");
-               location.reload()
-            }
-         })
-      }
+      swal.fire({
+         title: '정말로 삭제하시나요?',
+         text: '다시 되돌릴 수 없습니다.',
+         icon: 'warning',
+         showConfirmButton: true,
+         showCancelButton: true
+
+      }).then((result) => {
+         if (result.isConfirmed) {
+            $.ajax({
+               url: "ajax.kgu",
+               type: "post",
+               data: {
+                  req: "deleteProfessor",
+                  data: i
+               },
+               success: function (data) {
+                  swal.fire({
+                     title: '해당데이터가 삭제되었습니다.',
+                     icon: 'success',
+                     showConfirmButton: true
+
+                  }).then(function () {
+                     location.reload();
+                  });
+               }
+            })
+         }
+      })
    }
 
    function insertProfessor() { //교수님 정보 추가
@@ -249,8 +280,7 @@
       var data2 =prof_img+'-/-/-'+name1+'-/-/-'+location2+'-/-/-'+call2+'-/-/-'+email2+'-/-/-'+lecture2;
 
 
-      var check = confirm("정말 추가하시겠습니까?");
-      if(check){
+
          $.ajax({
             url : "ajax.kgu",
             type : "post",
@@ -261,16 +291,27 @@
 
             success : function(data2) {
                if (data2== 'success'){
-                  alert("추가가 완료되었습니다");
-                  location.reload();
+                  swal.fire({
+                     title : '추가가 완료되었습니다.',
+                     icon : 'success',
+                     showConfirmButton: true
+
+                  }).then(function (){
+                     location.reload();
+                  });
                }
                else
-                  alert("추가를 실패하였습니다");
+                  swal.fire({
+                     title : '추가 실패',
+                     icon : 'error',
+                     showConfirmButton: true
+
+                  });
             }
 
          })
       }
-   }
+
 
 </script>
 

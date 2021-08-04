@@ -10,6 +10,7 @@
   String getBBS = (String) request.getAttribute("getBBS");
   String getComment = (String) request.getAttribute("getComments");
 %>
+<script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <div>
   <div class="h2" id="view_title"></div>
   <hr>
@@ -172,19 +173,28 @@
   function deleteComment(i){
     var commentsList = <%=getComment%>;
     var data = commentsList[i].id;
-    alert("댓글을 삭제하시겠습니까?");
-      $.ajax({
-        url: "ajax.kgu", //AjaxAction에서
-        type: "post", //post 방식으로
-        data: {
-          req: "deleteComment", //이 메소드를 찾아서
-          data: data //이 데이터를 파라미터로 넘겨줍니다.
-        },
-        success: function (data) { //성공 시
-          if (data == 'success')
+    swal.fire({
+      title: '댓글을 삭제하시겠습니까?',
+      icon: 'warning',
+      showConfirmButton: true,
+      showCancelButton: true
+
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: "ajax.kgu", //AjaxAction에서
+          type: "post", //post 방식으로
+          data: {
+            req: "deleteComment", //이 메소드를 찾아서
+            data: data //이 데이터를 파라미터로 넘겨줍니다.
+          },
+          success: function (data) { //성공 시
+            if (data == 'success')
               location.reload();
-        }
-      })
+          }
+        })
+      }
+    })
   }
 
   function modifyComment(i){
@@ -243,64 +253,102 @@
     list_button.append(text);
   }
 
-  function liked(){
-    var data = <%=getBBS%>.id;
+  function liked() {
+    var data =
+    <%=getBBS%>.
+    id;
     var view_likes = $('#view_likes');
     var text = '';
 
 
     $.ajax({
-      url : 'ajax.kgu',
-      type : 'post',
-      data : {
-        req : 'likeBoard',
-        data : data
+      url: 'ajax.kgu',
+      type: 'post',
+      data: {
+        req: 'likeBoard',
+        data: data
       },
-      success : function(data){
-        if(data == 'success'){
-          text+='<i class="bi bi-hand-thumbs-up-fill"></i>'
+      success: function (data) {
+        if (data == 'success') {
+          text += '<i class="bi bi-hand-thumbs-up-fill"></i>'
           view_likes.html(text)
-          alert('추천 성공');
-          location.reload();
-        }else if(data == 'already'){
-          alert('이미 추천한 글입니다');
-        }else{
-          alert('SERVER ERROR, Please try again later...');
+          swal.fire({
+            title: '추천 성공!',
+            icon: 'success',
+            showConfirmButton: true
+
+          }).then(function () {
+            location.reload();
+          });
+        } else if (data == 'already') {
+          swal.fire({
+            title: '이미 추천한 글입니다.',
+            icon: 'warning',
+            showConfirmButton: true
+
+          });
+        } else {
+          swal.fire({
+            title: '서버에러',
+            text: '다음에 다시 시도해주세요',
+            icon: 'error',
+            showConfirmButton: true
+
+          });
         }
       }
     });
   }
 
 
-  function deleteBbs(){
+  function deleteBbs() {
     var getBBS = <%=getBBS%>;
     var id = getBBS.id;
     var title = getBBS.title;
     var writer_id = getBBS.writer_id;
     var writer_name = getBBS.writer_name;
     var last_modified = getBBS.last_modified;
-    var data = id+"-/-/-"+major+"-/-/-"+writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+num+"-/-/-"+last_modified;
+    var data = id + "-/-/-" + major + "-/-/-" + writer_id + "-/-/-" + writer_name + "-/-/-" + title + "-/-/-" + num + "-/-/-" + last_modified;
 
-    var check = confirm(data+"를 삭제하시겠습니까?");
-    if (check) {
-      $.ajax({
-        url: "ajax.kgu", //AjaxAction에서
-        type: "post", //post 방식으로
-        data: {
-          req: "deleteBbs", //이 메소드를 찾아서
-          data: data //이 데이터를 파라미터로 넘겨줍니다.
-        },
-        success: function (data) { //성공 시
-          if(data=='success'){
-            alert("해당 내용이 삭제되었습니다.");
-            window.location.href = 'bbs.kgu?major=' + major + '&&num=' + num + '&&mode=list';
+    swal.fire({
+      title: '정말로 삭제하시나요?',
+      text: '다시 되돌릴 수 없습니다.',
+      icon: 'warning',
+      showConfirmButton: true,
+      showCancelButton: true
+
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        $.ajax({
+          url: "ajax.kgu", //AjaxAction에서
+          type: "post", //post 방식으로
+          data: {
+            req: "deleteBbs", //이 메소드를 찾아서
+            data: data //이 데이터를 파라미터로 넘겨줍니다.
+          },
+          success: function (data) { //성공 시
+            if (data == 'success') {
+              swal.fire({
+                title : '해당 내용이 삭제되었습니다.',
+                icon : 'success',
+                showConfirmButton: true
+
+              }).then(function (){
+                location.href = 'bbs.kgu?major=' + major + '&&num=' + num + '&&mode=list';
+              });
+            } else {
+              swal.fire({
+                title : '권한이 부족합니다.',
+                icon : 'error',
+                showConfirmButton: true
+
+              });
+            }
           }
-          else{
-            alert('권한이 부족합니다.');
-          }
-        }
-      })
-    }
+        })
+      }
+    })
   }
 </script>
 

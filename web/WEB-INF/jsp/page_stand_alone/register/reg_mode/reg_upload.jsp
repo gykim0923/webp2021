@@ -9,6 +9,7 @@
 <%
     String getReg = (String) request.getAttribute("getReg");
 %>
+<script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <script src="js/default.js"></script>
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/jquery.cookie.js"></script>
@@ -284,7 +285,12 @@
         a='';
         var text = $('#InputQ1').val();
         if(text == null){
-            alert("질문을 만들어주세요.");
+            swal.fire({
+                title : '질문을 만들어 주세요.',
+                icon : 'warning',
+                showConfirmButton: true
+
+            });
             return;
         }
         a += '<div class= "my-1" id="wantRemove'+questionIndex+'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span id="Type'+questionIndex+'">주관식</span>' +
@@ -299,7 +305,12 @@
         var answerLength = $('.count').length;
         var text = $('#InputQ2').val();
         if(text == null){
-            alert("질문을 만들어주세요.");
+            swal.fire({
+                title : '질문을 만들어 주세요.',
+                icon : 'warning',
+                showConfirmButton: true
+
+            });
             return;
         }
         a += '<div class= "my-1" id="wantRemove'+questionIndex+'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span id="Type'+questionIndex+'">단일객관식</span>'+
@@ -320,7 +331,12 @@
         var answerLength = $('.count').length;
         var text = $('#InputQ3').val();
         if(text == null){
-            alert("질문을 만들어주세요.");
+            swal.fire({
+                title : '질문을 만들어 주세요.',
+                icon : 'warning',
+                showConfirmButton: true
+
+            });
             return;
         }
         a += '<div class= "my-1" id="wantRemove'+questionIndex+'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span id="Type'+questionIndex+'">다중객관식</span>'+
@@ -343,19 +359,36 @@
         var max = $('#InputMax').val() + '';
         var avg = Number(max) + Number(min);
         if(text == null){
-            alert("질문을 만들어주세요.");
+            swal.fire({
+                title : '질문을 만들어 주세요.',
+                icon : 'warning',
+                showConfirmButton: true
+
+            });
             return;
         }
         if(min == '' || max == ''){
-            alert("빈칸을 입력해주세요^^");
+            swal.fire({
+                title : '빈칸을 입력해주세요.',
+                icon : 'warning',
+                showConfirmButton: true
+            });
             return;
         }
         if(min > max){
-            alert('최소값이 최댓값보다 큽니다!');
+            swal.fire({
+                title : '최소값이 최댓값보다 큽니다!',
+                icon : 'warning',
+                showConfirmButton: true
+            });
             return;
         }
         if(!checkInt(min) || !checkInt(max)){
-            alert("숫자만 입력해주세요");
+            swal.fire({
+                title : '숫자만 입력해주세요',
+                icon : 'warning',
+                showConfirmButton: true
+            });
             return;
         }
         a += '<div class= "my-1" id="wantRemove'+questionIndex+'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span id="Type'+questionIndex+'">척도형</span>';
@@ -380,7 +413,11 @@
         a = '';
         var text = $('#InputQ5').val();
         if(text == null){
-            alert("질문을 만들어주세요.");
+            swal.fire({
+                title : '질문을 만들어 주세요',
+                icon : 'warning',
+                showConfirmButton: true
+            });
             return;
         }
         a += '<div class= "my-1" id="wantRemove'+questionIndex+'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg><span id="Type'+questionIndex+'">파일업로드형</span>'
@@ -401,7 +438,11 @@
     function makeAnswer(){
         var text = $('#newAnswer').val();
         if(text == ''){
-            alert('칸을 입력해주세요');
+            swal.fire({
+                title : '칸을 입력해주세요',
+                icon : 'warning',
+                showConfirmButton: true
+            });;
             return;
         }
         $('#newAnswer').val('');
@@ -443,19 +484,31 @@
         var writer_name = type.for_header;
         var title = $('#bbsTitle').val();
         if(title.length == 0){
-            alert("제목을 입력해주세요.");
+            swal.fire({
+                title : '제목을 입력해주세요',
+                icon : 'warning',
+                showConfirmButton: true
+            });
             return;
         }
         var last_modified = formatDate(new Date());
         var text = CKEDITOR.instances.regUpdateContent.getData();
         if(text.length == 0){
-            alert("내용을 입력해주세요.");
+            swal.fire({
+                title : '내용을 입력해주세요',
+                icon : 'warning',
+                showConfirmButton: true
+            });
             return;
         }
         var starting_date = $('#InputStartDate').val();
         var closing_date = $('#InputFinishDate').val();
         if(starting_date.length == 0 || closing_date.length == 0){
-            alert("시작일/종료일을 입력해주세요.");
+            swal.fire({
+                title : '시작일/종료일을 입력해주세요',
+                icon : 'warning',
+                showConfirmButton: true
+            });
             return;
         }
         var level = '';
@@ -464,7 +517,11 @@
                 level += '|'+$('#inlineCheckbox'+i).val()+'|';
         }
         if(level.length == 0){
-            alert("신청대상을 선택해주세요.");
+            swal.fire({
+                title : '신청대상을 선택해주세요.',
+                icon : 'warning',
+                showConfirmButton: true
+            });
             return;;
         }
         var for_who = $('#forWho').val();
@@ -473,7 +530,11 @@
         var question = '';
         var howManyQuestion = whatSequence.length;
         if(howManyQuestion == 0){
-            alert('질문을 만들어주세요');
+            swal.fire({
+                title : '질문을 만들어 주세요',
+                icon : 'warning',
+                showConfirmButton: true
+            });
             return;
         }
         for(var k = 1 ; k <= howManyQuestion ; k ++){
@@ -519,8 +580,7 @@
 
         var data = writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+last_modified+"-/-/-"+text+"-/-/-"+starting_date+"-/-/-"+closing_date+"-/-/-"+level+"-/-/-"+for_who+"-/-/-"+question+"-/-/-"+type.board_level;
 
-        var check = confirm(data+"를 추가하시겠습니까?");
-        if (check) {
+
             $.ajax({
                 url: 'ajax.kgu',
                 type: 'post',
@@ -530,14 +590,26 @@
                 },
                 success: function (data) {
                     if (data == 'success') {
-                        alert("내용이 추가되었습니다.");
-                        window.location.href = 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list';
+                        swal.fire({
+                            title : '내용이 추가되었습니다.',
+                            icon : 'success',
+                            showConfirmButton: true
+                        }).then(function (){
+                            location.href = 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list';
+                        });
+
                     } else
-                        alert('SERVER ERROR, Please try again later');
+                        swal.fire({
+                            title : '서버에러',
+                            text : '다음에 다시 시도해주세요',
+                            icon : 'error',
+                            showConfirmButton: true
+
+                        });
                 }
             })
         }
-    }
+
 
     function modifyReg(){
         var id = getReg.id;
@@ -565,18 +637,29 @@
             },
             success: function (data) { //성공 시
                 if(data=='success'){
-                    alert("해당 내용이 수정되었습니다.");
+                    swal.fire({
+                        title : '해당 내용이 수정되었습니다.',
+                        icon : 'success',
+                        showConfirmButton: true
+
+                    })
                     back();
                 }
                 else{
-                    alert('권한이 부족합니다.');
+                    swal.fire({
+                        title : '서버에러',
+                        text : '다음에 다시 시도해주세요',
+                        icon : 'error',
+                        showConfirmButton: true
+
+                    });
                 }
             }
         })
     }
 
     function back(){
-        window.location.href = 'reg.kgu?major='+major+'&&num='+num+'&&mode=view&&id='+id;
+        window.location.href = 'reg.kgu?major='+major+'&&num='+num+'&&mode=list';
     }
 
     function formatDate(date) { //날짜를 yyyy-mm-dd 형식으로 반환
@@ -604,5 +687,4 @@
             upload_mode : 'bbs'
         }
     });
-
 </script>

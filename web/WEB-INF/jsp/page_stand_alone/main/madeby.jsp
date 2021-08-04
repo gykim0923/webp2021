@@ -9,6 +9,7 @@
 <%
     String getAllDevelopers = (String)request.getAttribute("getAllDevelopers");
 %>
+<script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <div class="row" id="developerInfo"></div>
 <div id="addDeveloperBnt" class="d-grid justify-content-md-end"></div>
 <!-- Modal -->
@@ -61,7 +62,7 @@
         </c:if>
     }
 
-    function deleteDeveloper(i){ //개발팀 삭제
+    function deleteDeveloper(i) { //개발팀 삭제
         var getAllDevelopers = <%=getAllDevelopers%>;
         var developer = getAllDevelopers[i];
         var id = developer.id;
@@ -69,28 +70,47 @@
         var startDate = developer.start_date;
         var endDate = developer.end_date;
         var members = developer.members;
-        var data = id+'-/-/-'+teamName+'-/-/-'+startDate+'-/-/-'+endDate+'-/-/-'+members;
+        var data = id + '-/-/-' + teamName + '-/-/-' + startDate + '-/-/-' + endDate + '-/-/-' + members;
 
-        var check = confirm("팀 "+data+"를 삭제하시겠습니까?");
-        if (check) {
-            $.ajax({
-                url: "ajax.kgu", //AjaxAction에서
-                type: "post", //post 방식으로
-                data: {
-                    req: "deleteDeveloper", //이 메소드를 찾아서
-                    data: data //이 데이터를 파라미터로 넘겨줍니다.
-                },
-                success: function (data) { //성공 시
-                    if(data=='success'){
-                        alert("해당 팀이 삭제되었습니다.");
-                        location.reload();
+        swal.fire({
+            title: teamName + '를 정말로 삭제하시나요?',
+            text: '다시 되돌릴 수 없습니다.',
+            icon: 'warning',
+            showConfirmButton: true,
+            showCancelButton: true
+
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                $.ajax({
+                    url: "ajax.kgu", //AjaxAction에서
+                    type: "post", //post 방식으로
+                    data: {
+                        req: "deleteDeveloper", //이 메소드를 찾아서
+                        data: data //이 데이터를 파라미터로 넘겨줍니다.
+                    },
+                    success: function (data) { //성공 시
+                        if (data == 'success') {
+                            swal.fire({
+                                title : '해당 팀이 삭제되었습니다.',
+                                icon : 'success',
+                                showConfirmButton: true
+
+                            }).then(function (){
+                                location.reload();
+                            });
+                        } else {
+                            swal.fire({
+                                title : '권한이 부족합니다.',
+                                icon : 'error',
+                                showConfirmButton: true
+
+                            });
+                        }
                     }
-                    else{
-                        alert('권한이 부족합니다.');
-                    }
-                }
-            })
-        }
+                })
+            }
+        })
     }
 
     function addDeveloperModal(){
@@ -112,14 +132,13 @@
 
     function addDeveloper(){ //개발팀 추가
         var teamName = $('#teamName').val();
-        alert(teamName);
+       // alert(teamName);
         var madeByContent = $('#madeByContent').val();
         var startDate = $('#startDate').val();
         var endDate = $('#endDate').val();
 
         var data = teamName + '-/-/-' + madeByContent + '-/-/-' + startDate + '-/-/-' + endDate;
-        var check = confirm("팀 "+data+"를 추가하시겠습니까?");
-        if (check) {
+
             $.ajax({
                 url: "ajax.kgu", //AjaxAction에서
                 type: "post", //post 방식으로
@@ -129,16 +148,27 @@
                 },
                 success: function (data) { //성공 시
                     if(data=='success'){
-                        alert("해당 팀이 추가되었습니다.");
-                        location.reload();
+                        swal.fire({
+                            title : '해당 팀이 추가되었습니다.',
+                            icon : 'success',
+                            showConfirmButton: true
+
+                        }).then(function (){
+                            location.reload();
+                        });
                     }
                     else{
-                        alert('권한이 부족합니다.');
+                        swal.fire({
+                            title : '권한이 부족합니다.',
+                            icon : 'error',
+                            showConfirmButton: true
+
+                        });
                     }
                 }
             })
         }
-    }
+
 
     function modifyDeveloperModal(i){
         var getAllDevelopers = <%=getAllDevelopers%>;
@@ -167,8 +197,7 @@
         var endDate = $('#endDate').val();
 
         var data = id + '-/-/-' + teamName + '-/-/-' + madeByContent + '-/-/-' + startDate + '-/-/-' + endDate;
-        var check = confirm("팀 "+data+"를 수정하시겠습니까?");
-        if (check) {
+
             $.ajax({
                 url: "ajax.kgu", //AjaxAction에서
                 type: "post", //post 방식으로
@@ -178,16 +207,26 @@
                 },
                 success: function (data) { //성공 시
                     if(data=='success'){
-                        alert("해당 팀이 수정되었습니다.");
-                        location.reload();
+                        swal.fire({
+                            title : '해당 팀이 수정되었습니다.',                            icon : 'success',
+                            showConfirmButton: true
+
+                        }).then(function (){
+                            location.reload();
+                        });
                     }
                     else{
-                        alert('권한이 부족합니다.');
+                        swal.fire({
+                            title : '권한이 부족합니다.',
+                            icon : 'error',
+                            showConfirmButton: true
+
+                        });
                     }
                 }
             })
         }
-    }
+
 
     function formatDate(date) { //날짜를 yyyy-mm-dd 형식으로 출력될 수 있도록함
         var d = new Date(date),
