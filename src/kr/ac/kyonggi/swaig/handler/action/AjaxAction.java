@@ -393,6 +393,11 @@ public class AjaxAction implements Action {
                 if (type.board_level == 0)
                     result=AdminDAO.getInstance().deleteKguMajor(data);
                 break;
+
+            case "delete_log":
+                if (type.board_level == 0)
+                    result=AdminDAO.getInstance().deleteLog();
+                break;
         }
 
         return result;
