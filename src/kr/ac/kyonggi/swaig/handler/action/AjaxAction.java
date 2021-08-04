@@ -349,7 +349,6 @@ public class AjaxAction implements Action {
             case "insertAnswer":
                 RegisterDTO req_BoardsCheck = RegisterDAO.getInstance().getReg(data.split("-/-/-")[0]);
                 if (!req_BoardsCheck.level.contains(type.for_header)){
-//                    System.out.println(req_BoardsCheck.level);
                     return "fail";
                 }
                 if (new Date().getTime() > (req_BoardsCheck.closing_date.getTime() + 60 * 60 * 1000 * 24) || new Date().getTime() < req_BoardsCheck.starting_date.getTime())
@@ -361,13 +360,19 @@ public class AjaxAction implements Action {
             case "modifyAnswer":
                 RegisterDTO req_check = RegisterDAO.getInstance().getReg(data.split("-/-/-")[0]);
                 if (!req_check.level.contains(type.for_header)){
-//                    System.out.println(req_check.level);
                     return "fail";
                 }
                 if (new Date().getTime() > (req_check.closing_date.getTime() + 60 * 60 * 1000 * 24) || new Date().getTime() < req_check.starting_date.getTime())
                     return "timeout";
-                data = (user.name + "-/-/-" + user.id + "-/-/-" + user.per_id + "-/-/-" + user.grade + "-/-/-" + user.type + "-/-/-").concat(data);
-                result = RegisterDAO.getInstance().insertAnswers(data);
+                data = (user.name + "-/-/-" + user.id + "-/-/-").concat(data);
+                result = RegisterDAO.getInstance().modifyAnswer(data);
+                break;
+            case "deleteWhoAnswer":
+                data = data.concat("-/-/-" + user.name + "-/-/-" + user.per_id + "-/-/-" + user.grade + "-/-/-" + user.id);
+                //String deletePath = request.getSession().getServletContext().getRealPath("/uploadFile/reqBoards");
+                //String realDeletePath = deletePath + "/" + data.split("-/-/-")[0];
+                //data = data.concat("-/-/-" + realDeletePath);
+                result = RegisterDAO.getInstance().deleteWhoAnswer(data);
                 break;
 
             case "modifyKguMajor":

@@ -77,21 +77,33 @@
                     can = 'ⅹ';
                 }
                 if(start <= today && today <= close && (reg.level.indexOf(type.for_header) >= 0 || type.for_header == '관리자'))
-                    buttonText = '<button type="button" class="btn btn-primary">참가</button>';
+                    buttonText = '<a href="'+url+'" type="button" class="btn btn-primary">참가</a>';
                 else if(close <= today)
                     buttonText = '<button type="button" class="btn btn-secondary" disabled>만료</button>';
                 else if(start > today)
                     buttonText = '<button type="button" class="btn btn-secondary" disabled>대기</button>';
                 else
                     buttonText = '<button type="button" class="btn btn-secondary" disabled>불가</button>';
-                rows.push({
-                    id: '<a href="'+url+'">'+reg.id+'</a>',
-                    title: lvlText,
-                    period: '<a href="'+url+'">'+formatDate(reg.starting_date)+'~'+formatDate(reg.closing_date)+'</a>',
-                    applicants: '<a href="'+url+'">'+reg.applicant_count+'명</a>',
-                    level: can,
-                    applicate: buttonText
-                });
+                if(can == 'X'){
+                    rows.push({
+                        id: '<span>'+reg.id+'</span>',
+                        title: lvlText,
+                        period: '<span>'+formatDate(reg.starting_date)+'~'+formatDate(reg.closing_date)+'</span>',
+                        applicants: '<span>'+reg.applicant_count+'명</span>',
+                        level: can,
+                        applicate: buttonText
+                    });
+                }
+                else {
+                    rows.push({
+                        id: '<a href="' + url + '">' + reg.id + '</a>',
+                        title: lvlText,
+                        period: '<a href="' + url + '">' + formatDate(reg.starting_date) + '~' + formatDate(reg.closing_date) + '</a>',
+                        applicants: '<a href="' + url + '">' + reg.applicant_count + '명</a>',
+                        level: can,
+                        applicate: buttonText
+                    });
+                }
             }
         }
         return rows;

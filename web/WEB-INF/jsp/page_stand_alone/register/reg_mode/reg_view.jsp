@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String getReg = (String) request.getAttribute("getReg");
+    String AnswerWhoDone = (String) request.getAttribute("AnswerWhoDone");
 %>
 <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 <%--<script src="js/bootstrap-slider.js"></script>--%>
@@ -18,11 +19,8 @@
     <hr>
     <div id="view_content"></div>
     <hr>
-    <div>신청하기 폼은 여기에서 뜰 예정</div>
-    <div id="questions">
-    </div>
-    <div id="anotherDone">
-    </div>
+    <div id="questions"></div>
+    <ul class="list-group" id="anotherDone"></ul>
 </div>
 <div class="mt-3 d-grid gap-2 d-md-flex justify-content-md-end" id="list_button"></div>
 
@@ -33,7 +31,9 @@
     var type = <%=type%>;
     var user = <%=user%>;
     var getReg = <%=getReg%>;
+    var anotherAnswer = <%=AnswerWhoDone%>;
 
+    var questions = null;
     var starting_date = getReg.starting_date;
     var start = new Date(starting_date).getTime();
     var closing_date = getReg.closing_date;
@@ -51,6 +51,7 @@
         makeViewInfo();
         makeViewContent();
         getQuestion();
+        makeAnother();
         if(wasDone == 0)
             settingQuestion();
         else
@@ -109,7 +110,190 @@
         })
     }
 
-    var questions = null;
+    function makeAnother(){
+        var AnotherPanel = $('#anotherDone');
+        if(getReg.for_who == 0){
+            if(getReg.writer_id != user.id)
+                return;
+        }
+        else if(getReg.for_who == 1){
+            if(type.for_header != "관리자" || type.for_header != "교수")
+                return;
+        }
+        if(anotherAnswer.length > 0){
+            AnotherPanel.append('<li class="list-group-item list-group-item-primary text-center">각각을 클릭하면 상세한 정보를 볼 수 있습니다.</li>')
+            var done = [];
+            for(var i = 0 ; i < anotherAnswer.length ; ++i){
+                var value = anotherAnswer[i];
+                var sequence = Math.floor(i/questions.length);
+                alert(sequence);
+                done.push(value);
+                if(i % questions.length == 0){
+                    var text = '<a onclick="doMoreView(' + sequence + ')"><li class="list-group-item text-center">' + value.writer_name + '(' + value.writer_perId + ')의 신청입니다</li></a><div id="moreViewAnother' + sequence + '" style="display:none;"></div>';
+                    AnotherPanel.append(text);
+                }
+                if(i % questions.length == (questions.length - 1)){
+                    whatAnotherDone(sequence, done);
+                    done = [];
+                }
+            }
+            AnotherPanel.append('<a onclick="doAllView()"><li class="list-group-item text-center">전체결과보기</li></a><div id ="moreViewAll" style="display : none; overflow:auto;">총 ' + (anotherAnswer.length / questions.length) + '명</div>');
+            makeAllView();
+        }
+        else if(type.for_header == '관리자' || getReg.writer_id == user.id ){
+            AnotherPanel.append('<li class="list-group-item text-center">※아직 신청자가 없습니다</li>');
+        }
+    }
+
+    function doMoreView(index){
+        $('#moreViewAnother'+index).toggle();
+    }
+
+    function doAllView(){
+        $('#moreViewAll').toggle();
+    }
+
+    function whatAnotherDone(index, doneQuestions){
+        var panel = $('#moreViewAnother'+index);
+        var doneQuestion = doneQuestions;
+        panel.css('border','1px black solid');
+        panel.css('padding-bottom','10px');
+        panel.empty();
+        panel.append('<div id="AnotherPanel' + index + '" style="text-align : center ; font-size : 20px; margin-bottom:10px;">' + doneQuestion[0].writer_name + '(' + doneQuestion[0].writer_perId + ')의 신청 현황</div>');
+        for(var i = 0 ; i < doneQuestion.length ; ++i){
+            var it = questions[i];//타입 1 = 주관식 2 = 단일객관식 3 = 다중객관식
+            var done = doneQuestion[i];
+            alert(it.question_type);
+            if(it.question_type == '1'){
+                var text = '';
+                if(done.answer != '')
+                    text += '<div class="form-group" id="question' + i + 'Another' + index + '"><label>'+ (i+1) + '.' + it.question_content + '</label><input type="text" class="form-control" name="answer' + i + '" value="' + done.answer + '" readonly></div>';
+                else
+                    text += '<div class="form-group" id="question' + i + 'Another' + index + '"><label>'+ (i+1) + '.' + it.question_content + '</label><input type="text" class="form-control" name="answer' + i + '" value="답변을 하지 않았습니다." readonly></div>';
+                panel.append(text);
+            }
+            if(it.question_type == '2'){
+                var text = '';
+                var allAnswer = it.question_content;
+                var answers = allAnswer.split('-/@/-');
+                text += '<div class="form-group" id="question' + i + '"><label>'+ (i+1) + '.' + answers[0] + '</label><div id="allAnswers' + i + 'Another' + index + '"></div>';
+                panel.append(text);
+                var answerPanel = $('#allAnswers'+ i + 'Another' + index);
+                for(var j = 1 ; j < answers.length ; ++j){
+                    if(answers[j] == done.answer)
+                        var input = '<div class="radio disabled"><label><input type="radio" disabled checked="true" name="answer' + i + 'Another' + index + '" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
+                    else
+                        var input = '<div class="radio disabled"><label><input type="radio" disabled name="answer' + i + 'Another' + index + '" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
+                    answerPanel.append(input);
+                }
+                if(done.answer == '')
+                    answerPanel.append('<span style="font-size : 14px; color : red">답변을 하지 않았습니다.</span>');
+            }
+            if(it.question_type == '3'){
+                var text = '';
+                var allAnswer = it.question_content;
+                var answers = allAnswer.split('-/@/-');
+                var myAnswer = done.answer.split('-/@/-');
+                text += '<div class="form-group" id="question' + i + '"><label>'+ (i+1) + '.' + answers[0] + '<span style="color : gray; font-size : 12px">(다중 선택 가능 문항입니다)</span></label><div id="allAnswers' + i + 'Another' + index + '"></div>';
+                panel.append(text);
+                var answerPanel = $('#allAnswers'+ i + 'Another' + index);
+                for(var j = 1 ; j < answers.length ; ++j){
+                    if(myAnswer.includes(answers[j]))
+                        var input = '<div class="checkbox disabled"><label><input type="checkbox" disabled checked="true" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
+                    else
+                        var input = '<div class="checkbox disabled"><label><input type="checkbox" disabled id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
+                    answerPanel.append(input);
+                }
+                if(done.answer == '')
+                    answerPanel.append('<span style="font-size : 14px; color : red">답변을 하지 않았습니다.</span>');
+            }
+            if(it.question_type == '4'){
+                var text = '';
+                var allAnswer = it.question_content;
+                var answers = allAnswer.split('-/@/-');
+                text += '<div class="form-group" id="question' + i + '"><label>'+ (i+1) + '.' + answers[0] + '</label><div  class="for_slider" id="sliderPanel' + i + 'Another' + index + '"></div>';
+                panel.append(text);
+                var sliderPanel = $('#sliderPanel' + i + 'Another' + index);
+                var text = answers[1] + ' <input type="range" id="range' + i + 'Another' + index + '"> ' + answers[2] + '<span class="for4"> 선택값 : ' + done.answer + '</span>';
+                sliderPanel.append(text);
+                $('#range' + i + 'Another' + index).slider({
+                    min : Number(answers[1]),
+                    max : Number(answers[2]),
+                    value : Number(done.answer),
+                    step : 1,
+                    enabled : false
+                });
+            }
+            if(it.question_type == '5'){
+                var text = '';
+                if(done.answer != 'null')
+                    text += '<div class="form-group" id="question' + i + 'Another' + index + '"><label>'+ (i+1) + '.' + it.question_content + '</label><br><a href="req_board_download.do?id=' + done.answer + '"><img src="img/file_ico.png"></a></div>';
+                else
+                    text += '<div class="form-group" id="question' + i + 'Another' + index + '"><label>'+ (i+1) + '.' + it.question_content + '</label><br><span style="font-size : 14px; color : red">파일을 올리지 않았습니다.</span></div>';
+                panel.append(text);
+            }
+        }
+    }
+
+    function makeAllView(){
+        var forAnswer = []
+        var allPanel = $('#moreViewAll');
+        allPanel.css('border', '1px solid black');
+        allPanel.css('padding-bottom', '10px');
+        var allViewTable = $('<table></table>').attr({'id' : 'table'});
+        allViewTable.addClass('table table-striped table-hover table-bordered');
+        var allViewThead = $('<thead></thead>').attr('id', 'allTableThead').appendTo(allViewTable);
+        var allViewTr = $('<tr></tr>').attr('id','allTableTr').appendTo(allViewThead);
+        $('<th></th>').attr({'data-field' : 'name', 'data-sortable' : 'true'}).text('이름').appendTo(allViewTr);
+        $('<th></th>').attr({'data-field' : 'per_id', 'data-sortable' : 'true'}).text('학번').appendTo(allViewTr);
+        $('<th></th>').attr({'data-field' : 'grade', 'data-sortable' : 'true'}).text('학년').appendTo(allViewTr);
+        for(var i = 0 ; i < questions.length ; i++){
+            $('<th></th>').attr({'data-field' : 'AnswerAnother' + i , 'data-sortable' : 'true'}).text((i+1) + '번').appendTo(allViewTr);
+        }
+        var allViewTbody = $('<tbody></tbody>').appendTo(allViewTable);
+        allViewTable.appendTo(allPanel);
+        var getDatas = data();
+        for(var i = 0 ; i < getDatas.length ; ++i){
+            var value = getDatas[i];
+            var oneTr = $('<tr></tr>').appendTo(allViewTbody);
+            $('<td></td>').text(value.name).appendTo(oneTr);
+            $('<td></td>').text(value.per_id).appendTo(oneTr);
+            $('<td></td>').text(value.grade).appendTo(oneTr);
+            for(var j = 0 ; j < questions.length ; ++j)
+                if(questions[j].question_type == 5){
+                    if(value['AnswerAnother' + j] != 'null')
+                        $('<td></td>').html('<a href="req_board_download.do?id=' + value['AnswerAnother' + j] + '"><img src="img/file_ico.png"></a>').appendTo(oneTr);
+                    else
+                        $('<td></td>').html('<span style="font-size : 14px; color : red">미제출<span>').appendTo(oneTr);
+                }
+                else{
+                    if(value['AnswerAnother' + j] != '')
+                        $('<td></td>').text(value['AnswerAnother' + j]).appendTo(oneTr);
+                    else
+                        $('<td></td>').html('<span style="color : red; font-size : 14px;">미답변</span>').appendTo(oneTr);
+                }
+        }
+    }
+
+    function data(){
+        var rows = [];
+        var forRows;
+        for(var i = 0 ; i < anotherAnswer.length ; ++i){
+            var value= anotherAnswer[i];
+            var number = i % questions.length;
+            if(number == 0){
+                forRows = new Object();
+                forRows.name = value.writer_name;
+                forRows.per_id = value.wirter_perId;
+                forRows.grade = value.wirter_grade;
+            }
+            forRows['AnswerAnother'+number] = value.answer;
+            if(number == (questions.length - 1))
+                rows.push(forRows);
+        }
+        return rows;
+    }
+
     function getQuestion(){
         $.ajax({
             url : 'ajax.kgu',
@@ -457,7 +641,7 @@
                 }
             }
             if(it.question_type == '4'){
-                Answer += $('#range'+i).slider("getValue");
+                Answer += $('#range'+i).val();
             }
             if(it.question_type == '5'){
                 <%--var formData = new FormData();--%>
@@ -498,7 +682,7 @@
                 if(data == 'success'){
                     alert('수정이 성공하였습니다');
                     if(getReg.for_who == 1)
-                    window.location.href= 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list&&id=' + getReg.id;
+                        window.location.href= 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=view&&id=' + getReg.id;
                     check();
                     whatIDone();
                 }
@@ -508,7 +692,43 @@
                     alert('이미 신청한 글입니다.');
                 }
             }
-        });
+        })
+    }
+
+    function deleteMyAnswer(){
+        var rightNow = new Date().getTime();
+        if(start > rightNow || rightNow > close){
+            alert('현재 삭제하실 수 없습니다.');
+            return;
+        }
+        var data = getReg.id;
+        var check = confirm("답변을 삭제하시겠습니까?");
+        if(check){
+            $.ajax({
+                url : 'ajax.kgu',
+                type : 'post',
+                async : false,
+                data : {
+                    req: 'deleteWhoAnswer',
+                    data: data
+                },
+                success : function(data){
+                    if(data == 'success'){
+                        alert('삭제에 성공하였습니다.');
+                        $('#questions').empty();
+                        wasDone = 0;
+                        settingQuestion();
+                        if(start <= rightNow && rightNow <= close){
+                            isAvailable = 1;
+                        }
+                    }
+                    else{
+                        alert('SERVER ERROR, Please try again later.');
+                    }
+                }
+            });
+        }
+
     }
 
     function makeViewButtons() {
