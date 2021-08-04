@@ -31,6 +31,7 @@
         <div class="col-lg-7">
             <h1 class="display-5 fw-bold lh-1 mb-3 text-center">오류가 발생했습니다.</h1>
             <p class="lead text-center">오류로 인해 접속이 제한됩니다. </p>
+            <p id="errorMessage" class="lead text-center">사유 : <%=error%></p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                 <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" onclick="window.open('main.kgu')">홈으로 돌아가기</button>
                 <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
@@ -40,3 +41,7 @@
 </div>
 </body>
 </html>
+
+<script>
+
+</script>
