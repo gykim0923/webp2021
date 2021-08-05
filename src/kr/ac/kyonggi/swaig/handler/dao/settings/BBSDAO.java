@@ -251,7 +251,7 @@ public class BBSDAO {
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            listOfMaps = queryRunner.query(conn,"SELECT * FROM comment WHERE bbs_id=? ORDER BY id DESC ;", new MapListHandler(),id);
+            listOfMaps = queryRunner.query(conn,"SELECT * FROM comment WHERE bbs_id=? ORDER BY id ASC ;", new MapListHandler(),id);
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {

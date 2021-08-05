@@ -33,13 +33,15 @@
 <c:if test="${bbs_type !='\"application\"'}">
 <%--    댓글리스트--%>
     <div>
-      <div class="list-group" id="comments"></div>
+      <div class="list-group" id="comments">
+        <div class="my-2 h3">댓글</div>
+      </div>
     </div>
 
 <%--  댓글 입력 창--%>
   <c:if test="${user != null}">
     <hr>
-    <div class="my-2">댓글</div>
+    <div class="my-2">댓글 쓰기</div>
     <div class="input-group mb-3">
     <input type="text" class="form-control" id="commentInput" placeholder="comment" aria-label="comment" aria-describedby="button-addon2">
     <div class="input-group-append">
@@ -99,11 +101,11 @@
         +'<small class="text-nowrap">'+comment.comment_date+'</small>'
         +'</div>'
         if(user!=null){
-          if(user.type =='홈페이지관리자'){
-            text += '<button style="width: 70px;" class="btn btn-dark mx-1" type="button" onclick="deleteComment('+i+')">삭제</button>'
-          }
           if(user.id == commentsList[i].writer_id){
             text +='<button style="width: 70px;" class="btn btn-dark mx-1" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyCommentModal('+i+')">수정</button><button style="width: 70px;" class="btn btn-dark mx-1" type="button"  onclick="deleteComment('+i+')">삭제</button>'
+          }
+          else if(user.type =='홈페이지관리자'){
+            text += '<button style="width: 70px;" class="btn btn-dark mx-1" type="button" onclick="deleteComment('+i+')">삭제</button>'
           }
         }
         text+='</a>'
@@ -367,5 +369,12 @@
     })
   }
 </script>
+
+<style>
+
+  #view_content{
+    min-height: 500px;
+  }
+</style>
 
 
