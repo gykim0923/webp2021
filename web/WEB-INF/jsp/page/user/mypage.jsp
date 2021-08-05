@@ -9,6 +9,7 @@
 <%
     String typeForMyPage = (String)session.getAttribute("type");
     String userForMyPage = (String)session.getAttribute("user");
+    String getAllMajor = (String)request.getAttribute("getAllMajor");
 %>
 <div>
     <h3>회원정보</h3>
@@ -23,6 +24,7 @@
     var today = new Date();
     var reg_day = new Date(user.reg_date);
     var betweenDay = (today.getTime() - reg_day.getTime())/24/1000/60/60;
+
     $(document).ready(function(){
         setdata();
     })
@@ -40,6 +42,7 @@
             a += '<div class="col-4 border-end">학과</div><div class="col-8">'+user.major+'</div>';
             a += '<div class="col-4 border-end">학번(교번)</div><div class="col-8">'+ user.per_id+'</div>';
             a += '<div class="col-4 border-end">학년</div><div class="col-8">'+ user.grade+'</div>';
+            a += '<div class="col-4 border-end">부전공</div><div class="col-8">'+ user.sub_major+'</div>';
             a += '<div class="col-4 border-end">상태</div><div class="col-8">'+ user.state+'</div>';
         }
         a +='</div>'
@@ -51,6 +54,9 @@
     }
 
     function setModify(){
+        var getAllMajor=<%=getAllMajor%>;
+        var text_sub_major = '';
+
         var a = '<div id="panel">';
         a += '<div id="panel2" class="row"><div>안녕하세요 '+user.name+'님, 오늘은 가입한 지 <span style="color : red;">'+ (parseInt(betweenDay)+1) +'</span>일째입니다.</div><hr>';
         a += '<div class="col-4 border-end">전화번호</div><div class="col-8"><input class="form-control" type="text" name = "phone" placeholder="변경할 번호를 입력해주세요" value="' + user.phone + '"></div>';
@@ -61,13 +67,22 @@
             a += '<div class="col-4 border-end">학과</div><div class="col-8">'+user.major+'</div>';
             a += '<div class="col-4 border-end">학번(교번)</div><div class="col-8">'+ user.per_id+'</div>';
             a += '<div class="col-4 border-end">학년</div><div class="col-8">'+ user.grade+'</div>';
+            a += '<div class="col-4 border-end">부전공</div><div class="col-8" id="sub_major_select"></div>';
             a += '<div class="col-4 border-end">상태</div><div class="col-8">'+ user.state+'</div>';
         }
         $('#text').empty();
         $('#text').append(a);
+
+        for(var i=0; i<getAllMajor.length; i++){
+            text_sub_major+='<div id="sub_major"><input class="form-check-input" type="checkbox" value="'+getAllMajor[i].major_name+'" name="checkbox">'+getAllMajor[i].major_name+'</div>';
+        }
+
+        $('#sub_major_select').append(text_sub_major);
+
         $('#modify_button').empty();
         $('#modify_button').append('<button type="button" class="btn btn-outline-secondary" onclick="refresh()">취소</button>');
         $('#modify_button').append('<button type="button" class="btn btn-outline-secondary" onclick="modify()">완료</button>');
+
     }
 
     function refresh(){ //수정하기를 취소하였을 때 화면 리로드
@@ -80,7 +95,12 @@
         var birth = $('[name = birth]').val();
         var email = $('[name = email]').val();
 
-        var userdata = id+"-/-/-"+phone+"-/-/-"+birth+"-/-/-"+email;
+        var checkboxValues = [];
+        $("input[name='checkbox']:checked").each(function(i) {
+            checkboxValues.push($(this).val());
+        });
+
+        var userdata = id+"-/-/-"+phone+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+ checkboxValues;
 
         $.ajax({
             url:"ajax.kgu",
@@ -159,4 +179,6 @@
             }
         })
     }
+
+
 </script>

@@ -322,11 +322,11 @@ public class UserDAO {
 }
 
     public String modifydata(String data) {
-        String arr[] = data.split("-/-/-");//0:id 1:phone 2:birth 3:email
+        String arr[] = data.split("-/-/-");//0:id 1:phone 2:birth 3:email 4:sub_major
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn,"UPDATE user SET phone=?,birth=?,email=? WHERE id = ?;",arr[1],arr[2],arr[3],arr[0]);
+            queryRunner.update(conn,"UPDATE user SET phone=?,birth=?,email=?,sub_major=? WHERE id = ?;",arr[1],arr[2],arr[3],arr[4],arr[0]);
         }catch(SQLException se) {
             se.printStackTrace();
         }finally {
