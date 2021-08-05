@@ -23,8 +23,7 @@
         <c:choose>
           <c:when test="${user == null}">
             <div class="dropdown">
-              <a href="loginPage_v2.kgu">로그인(구글)</a>
-              <a href="loginPage.kgu">로그인(구버전)</a>
+              <a href="loginPage_v2.kgu">로그인</a>
             </div>
           </c:when>
           <c:when test="${user != null}">

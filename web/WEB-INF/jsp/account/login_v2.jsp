@@ -81,19 +81,19 @@
             <div id="auth-left">
                 <div class="auth-logo">
                     <div class="row py-5">
-                        <div class="col-5">
-                            <img class="img-fluid" onclick="window.location.href='main.kgu';" src="/img/logo/kgu_logo(500x300).png"/>
-                        </div>
-                        <div class="col-7">
-                            <div class="py-2">
-                                <div class = "font1">
-                                    <a href="main.kgu"><p class="h2 logo text-dark"><strong>경기대학교</strong></p></a>
-                                </div>
-                                <div class = "font2">
-                                    <a href="main.kgu"><p class="h5 text-dark"><strong id="majorTitle"></strong></p></a>
-                                </div>
-                            </div>
-                        </div>
+<%--                        <div class="col-5">--%>
+<%--                            <img class="img-fluid" onclick="window.location.href='main.kgu';" src="/img/logo/kgu_logo(500x300).png"/>--%>
+<%--                        </div>--%>
+<%--                        <div class="col-7">--%>
+<%--                            <div class="py-2">--%>
+<%--                                <div class = "font1">--%>
+<%--                                    <a href="main.kgu"><p class="h2 logo text-dark"><strong>경기대학교</strong></p></a>--%>
+<%--                                </div>--%>
+<%--                                <div class = "font2">--%>
+<%--                                    <a href="main.kgu"><p class="h5 text-dark"><strong id="majorTitle"></strong></p></a>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
                     </div>
                 </div>
                 <h1 class="auth-title">GOOGLE LOGIN</h1>

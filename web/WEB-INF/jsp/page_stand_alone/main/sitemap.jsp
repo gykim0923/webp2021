@@ -50,7 +50,7 @@
             text +='<div class="col-md-6">'
             text +='<ol>';
             for(var j= count; pageMenu1[j].tab_id== pageTab1[i].tab_id; j++){
-                text +='<li  class="widget-49-meeting-item"><a href="'+pageMenu1[j].page_path+'?major='+major1+'&&num='+pageMenu1[j].page_id+'"><span>'+pageMenu1[j].page_title+'</span></a></li>'
+                text +='<a href="'+pageMenu1[j].page_path+'?major='+major1+'&&num='+pageMenu1[j].page_id+'"><span><li  class="widget-49-meeting-item">'+pageMenu1[j].page_title+'</span></a></li>'
                 count +=1;
             }
             text +='</ol>'
@@ -63,7 +63,7 @@
 <div>
     <div class="container">
         <div class="row align-items-md-stretch" id="siteMapCard">
+            <p class="h3"><a href="loginPage.kgu">로그인(구버전)</a></p>
         </div>
-
     </div>
 </div>

@@ -13,7 +13,7 @@
                 <div class="logo">
                     <a href="main.kgu">
                         <%--<img src="/img/logo/kgu_logo(500x300).png" alt="Logo" srcset="" style="height: auto">--%>
-                        KGU
+                            <i class="bi bi-house-fill"></i> HOME
                     </a>
                 </div>
                 <div class="toggler">

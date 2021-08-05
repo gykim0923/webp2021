@@ -126,7 +126,7 @@
 
         for(var i=0; i<major.length; i++){
             text+= ''
-            +'<div class="card bg-light mb-3 col-lg-6" id="labCard" style="max-width: 30rem;">'
+            +'<div class="py-5 card bg-light mb-3 col-lg-6" id="labCard" style="max-width: 30rem;">'
             +'<h2 class="card-title" style="font-size: 22px;">'+major[i].major_name+'</h2>'
             +'<div class="card-body">'
             +'<p class="card-text">연구실 위치 : '+major[i].major_location+'</p>'
