@@ -96,7 +96,7 @@
         var email = $('[name = email]').val();
 
         var checkboxValues = [];
-        $("input[name='checkbox']:checked").each(function(i) {
+        $("input[name='checkbox']:checked").each(function() {
             checkboxValues.push($(this).val());
         });
 
