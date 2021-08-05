@@ -87,10 +87,15 @@
                                     <div class="col-xl-6 py-2 " id="main2_left">
                                         <div class=" p-3 border card m-0"  style="height : 493px;">
                                             <div>
-                                                <div class="nav nav-tabs mb-2" id="nav-tab" role="tablist">
-                                                    <button class="nav-link active" id="nav-21-tab" data-bs-toggle="tab" data-bs-target="#nav-21" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
-                                                    <button class="nav-link" id="nav-22-tab" data-bs-toggle="tab" data-bs-target="#nav-22" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"></button>
-                                                    <button class="nav-link" id="nav-23-tab" data-bs-toggle="tab" data-bs-target="#nav-23" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"></button>
+                                                <div class="mb-2 d-flex justify-content-between" >
+                                                    <div class="nav nav-tabs " id="nav-tab" role="tablist">
+                                                        <button class="nav-link active" id="nav-21-tab" data-bs-toggle="tab" data-bs-target="#nav-21" type="button" role="tab" aria-controls="nav-home" aria-selected="true" onclick="clickBBS(21)"></button>
+                                                        <button class="nav-link" id="nav-22-tab" data-bs-toggle="tab" data-bs-target="#nav-22" type="button" role="tab" aria-controls="nav-profile" aria-selected="false" onclick="clickBBS(22)"></button>
+                                                        <button class="nav-link" id="nav-23-tab" data-bs-toggle="tab" data-bs-target="#nav-23" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="clickBBS(23)"></button>
+                                                    </div>
+                                                    <div class="morebtn">
+                                                        <a id="more_link" href="bbs.kgu?major=main&num=21" title="더보기"><i class="bi bi-plus-lg"></i></a>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="tab-content" id="nav-tabContent">
@@ -98,15 +103,21 @@
                                                 <div class="tab-pane fade" id="nav-22" role="tabpanel" aria-labelledby="nav-22-tab"></div>
                                                 <div class="tab-pane fade" id="nav-23" role="tabpanel" aria-labelledby="nav-23-tab"></div>
                                             </div>
+
                                         </div>
                                     </div>
 
                                     <div class="col-xl-6 py-2 " id="main2_center" >
                                         <div class=" p-3 border card m-0" style="height : 493px;">
                                             <div>
-                                                <div class="nav nav-tabs mb-2" id="nav-tab2" role="tablist">
-                                                    <button class="nav-link active" id="nav-30-tab" data-bs-toggle="tab" data-bs-target="#nav-30" type="button" role="tab" aria-controls="nav-home" aria-selected="true"></button>
-                                                    <button class="nav-link" id="nav-31-tab" data-bs-toggle="tab" data-bs-target="#nav-31" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"></button>
+                                                <div class="mb-2 d-flex justify-content-between">
+                                                    <div class="nav nav-tabs" id="nav-tab2" role="tablist">
+                                                        <button class="nav-link active" id="nav-30-tab" data-bs-toggle="tab" data-bs-target="#nav-30" type="button" role="tab" aria-controls="nav-home" aria-selected="true" onclick="clickNoticeReg(30)"></button>
+                                                        <button class="nav-link" id="nav-31-tab" data-bs-toggle="tab" data-bs-target="#nav-31" type="button" role="tab" aria-controls="nav-profile" aria-selected="false" onclick="clickNoticeReg(31)"></button>
+                                                    </div>
+                                                    <div class="morebtn">
+                                                        <a id="more_link2" href="bbs.kgu?major=main&num=30" title="더보기"><i class="bi bi-plus-lg"></i></a>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="tab-content" id="nav-tabContent2">
@@ -194,6 +205,8 @@
         var title = $('#headerTitle');
         title.append('경기대학교 '+majorAllInfo[0].major_name);
     }
+    // <i class="bi bi-plus-lg"></i>
+
 
     function makeNoticeReg(){
         var nav30 = $('#nav-30');
@@ -230,6 +243,15 @@
             }
         }
     }
+    function clickBBS(i) {
+        document.getElementById('more_link').setAttribute('href',
+            'bbs.kgu?major=main&num='+i+'');
+    }
+    function clickNoticeReg(i) {
+        document.getElementById('more_link2').setAttribute('href',
+            'bbs.kgu?major=main&num='+i+'');
+    }
+
     function makeNoticeBBS() {
         var notice21 = $('#nav-21');
         var notice22 = $('#nav-22');
@@ -241,6 +263,7 @@
         var text22='<ul class="list-group">';
         var text23='<ul class="list-group">';
 
+
         for (var i=0; i<bbs21.length; i++){
             if(i==9){
                 break;
@@ -250,6 +273,7 @@
                 +'<a href="'+url21+'"><span class="index_post_link">'+bbs21[i].title+'</span></a>'
                 +'<a href="'+url21+'"><span>'+formatDate(bbs21[i].last_modified)+'</span></a>'
                 +'</li>';
+
         }
         text21+='</ul>';
 
@@ -276,6 +300,7 @@
                 +'</li>';
         }
         text23+='</ul>';
+
         notice21.append(text21);
         notice22.append(text22);
         notice23.append(text23);
@@ -287,7 +312,9 @@
         var tab_name_21 = '';
         var tab_name_22 = '';
         var tab_name_23 = '';
+
         for (var i = 0 ; i < menuPageList.length; i++){
+
             if(menuPageList[i].page_id == '21'){
                 tab_name_21=menuPageList[i].page_title;
                 nav21tab.append(tab_name_21);
