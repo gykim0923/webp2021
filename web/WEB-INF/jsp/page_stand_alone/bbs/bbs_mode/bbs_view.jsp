@@ -33,51 +33,7 @@
 <c:if test="${bbs_type !='\"application\"'}">
 <%--    댓글리스트--%>
     <div>
-      <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-          <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
-          <div class="d-flex gap-2 w-100 justify-content-between">
-            <div>
-              <h6 class="mb-0">List group item heading</h6>
-              <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
-            </div>
-            <small class="opacity-50 text-nowrap">now</small>
-          </div>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-          <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
-          <div class="d-flex gap-2 w-100 justify-content-between">
-            <div>
-              <h6 class="mb-0">Another title here</h6>
-              <p class="mb-0 opacity-75">Some placeholder content in a paragraph that goes a little longer so it wraps to a new line.</p>
-            </div>
-            <small class="opacity-50 text-nowrap">3d</small>
-          </div>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
-          <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
-          <div class="d-flex gap-2 w-100 justify-content-between">
-            <div>
-              <h6 class="mb-0">Third heading</h6>
-              <p class="mb-0 opacity-75">Some placeholder content in a paragraph.</p>
-            </div>
-            <small class="opacity-50 text-nowrap">1w</small>
-          </div>
-        </a>
-      </div>
-      <table class="commnetstable" id="table1"  data-toggle="table"
-             data-pagination="true" data-toolbar="#toolbar"
-             data-search="true" data-side-pagination="true" data-click-to-select="true" data-height="460"
-             data-page-list="[10]">
-        <thead>
-        <tr>
-          <th data-field="writer_name" data-sortable="true">이름</th>
-          <th data-field="comment" data-sortable="true">댓글</th>
-          <th data-field="comment_date" data-sortable="true">등록일자</th>
-          <th data-field="action">설정</th>
-        </tr>
-        </thead>
-      </table>
+      <div class="list-group" id="comments"></div>
     </div>
 
 <%--  댓글 입력 창--%>
@@ -126,6 +82,38 @@
   </script>
 <script>
 
+  function makeViewComments() {
+    var comments = $('#comments');
+    var commentsList = <%=getComment%>;
+    var text='';
+    if(commentsList != null){
+      for(var i=0;i< commentsList.length;i++){
+        var comment = commentsList[i];
+        text+='<a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">'
+        +'<img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">'
+        +'<div class="d-flex gap-2 w-100 justify-content-between">'
+        +'<div>'
+        +'<h6 class="mb-0">'+comment.writer_name+'</h6>'
+        +'<p class="mb-0 opacity-75">'+comment.comment+'</p>'
+        +'</div>'
+        +'<small class="text-nowrap">'+comment.comment_date+'</small>'
+        +'</div>'
+        if(user!=null){
+          if(user.type =='홈페이지관리자'){
+            text += '<button style="width: 70px;" class="btn btn-dark mx-1" type="button" onclick="deleteComment('+i+')">삭제</button>'
+          }
+          if(user.id == commentsList[i].writer_id){
+            text +='<button style="width: 70px;" class="btn btn-dark mx-1" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyCommentModal('+i+')">수정</button><button style="width: 70px;" class="btn btn-dark mx-1" type="button"  onclick="deleteComment('+i+')">삭제</button>'
+          }
+        }
+        text+='</a>'
+
+      }
+    }
+    comments.append(text);
+
+  }
+
   $(document).ready(function(){
     makeViewTitle();
     makeViewContent();
@@ -133,7 +121,7 @@
     makeViewCount();
     makeViewLastModified();
     makeViewButtons();
-    callSetupCommentView();
+    makeViewComments();
     // makeCommentButton();
   })
   var major = <%=major%>;
@@ -141,11 +129,7 @@
   var id = <%=id%>;
   var type = <%=type%>;
   var user = <%=user%>;
-  function callSetupCommentView(){
-      $('#table1').bootstrapTable('load',tableData());
-      // $('#table1').bootstrapTable('append',data());
-      $('#table1').bootstrapTable('refresh');
-  }
+
 
   function formatDate(date) {  //주어진 날짜를 yyyy-mm-dd 형식으로 반환해주는 함수
     var d = new Date(date),
@@ -178,31 +162,6 @@
       })
   }
 
-  function tableData(){
-      var commentsList = <%=getComment%>;
-      var rows = [];
-      if(commentsList != null){
-          for(var i=0;i< commentsList.length;i++){
-            var comment = commentsList[i];
-            var text='';
-            if(user!=null){
-              if(user.type =='홈페이지관리자'){
-                text = '<button class="btn btn-dark mx-1" type="button" onclick="deleteComment('+i+')">삭제</button>'
-              }
-              if(user.id == commentsList[i].writer_id){
-                text ='<button class="btn btn-dark mx-1" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyCommentModal('+i+')">수정</button><button class="btn btn-dark mx-1" type="button"  onclick="deleteComment('+i+')">삭제</button>'
-              }
-            }
-            rows.push({
-                writer_name: comment.writer_name,
-                comment: comment.comment,
-                comment_date: comment.comment_date,
-                action : text
-            });
-          }
-      }
-      return rows;
-  }
   var getBBS = <%=getBBS%>;
   function makeViewTitle() {
     var content = $('#view_title');

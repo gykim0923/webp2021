@@ -61,7 +61,7 @@
                         <div class="row align-items-md-stretch">
 
                             <div class="col-xxl-2 col-lg-3 py-2">
-                                <div class=" h-100 p-5 bg-light border shadow rounded" id="page_menu"></div>
+                                <div class=" h-100 p-0 bg-light border shadow rounded" id="page_menu"></div>
                             </div>
 
                             <div class="col-xxl-10 col-lg-9 py-2">
@@ -140,7 +140,7 @@
 
     function makePageMenu() {
         var list = $('#page_menu');
-        var text = '';
+        var text = '<div class="list-group bg-light ">';
         var user=<%=user%>;
         var pageMenu = <%=pageMenu%>;
         var major =<%=major%>;
@@ -148,8 +148,13 @@
             if(pageMenu[i].tab_id==6 && !user.type=='홈페이지관리자' && i==1){
                 continue;
             }
-            text += '<div><span class="deco_dot">●</span><a href="' + pageMenu[i].page_path + '?major=' + major + '&&num=' + pageMenu[i].page_id + '">' + pageMenu[i].page_title + '</div>';
+            text+='<a href="' + pageMenu[i].page_path + '?major=' + major + '&&num=' + pageMenu[i].page_id + '" class="list-group-item list-group-item-action">'
+                +'<div class="d-flex w-100 ">'
+                +'<h5 class="mb-1">● ' + pageMenu[i].page_title + '</h5>'
+                +'</div></a>';
+            // text += '<div><span class="deco_dot">●</span><a href="' + pageMenu[i].page_path + '?major=' + major + '&&num=' + pageMenu[i].page_id + '">' + pageMenu[i].page_title + '</div>';
         }
+        text+='</div>'
         list.append(text);
     }
 </script>

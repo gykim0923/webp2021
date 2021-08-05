@@ -12,7 +12,7 @@
 %>
 <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 
-<div id="information_content"></div>
+<div class="container py-4" id="information_content"></div>
 <div id="modify_button"></div>
 <script>
 

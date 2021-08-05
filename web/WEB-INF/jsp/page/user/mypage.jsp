@@ -29,8 +29,8 @@
 
     function setdata(){
         var a ='<div class="row" id="panel">';
-        a +='<div class="col-lg-4" id="panel1"><img src="'+user.google_img+'" onerror="this.src=\'http://placehold.it/200x150\'" style="height: 200px" class="rounded-circle img-responsive"></div>';
-        a +='<div class="col-lg-8">'
+        a +='<div class="py-4 col-lg-4 d-flex justify-content-center" id="panel1"><img src="'+user.google_img+'" onerror="this.src=\'http://placehold.it/200x150\'" style="height: 200px" class="rounded-circle img-responsive"></div>';
+        a +='<div class="py-4 col-lg-8">'
         a += '<div id="panel2" class="row"><div>안녕하세요 '+user.name+'님, 오늘은 가입한 지 <span style="color : red;">'+ (parseInt(betweenDay)+1) +'</span>일째입니다.</div><hr>';
         a += '<div class="col-4 border-end">전화번호</div><div class="col-8">'+ user.phone+'</div>';
         a += '<div class="col-4 border-end">생년월일</div><div class="col-8">'+ user.birth+'</div>';
