@@ -54,7 +54,15 @@
     $(document).ready(function(){
         content();
         contact();
+        makePageTitleLocation();
     })
+
+    function makePageTitleLocation() {
+        var list = $('#page_title');
+        var text = '<h2><i class="bi bi-info-circle-fill"></i><strong> 연락처 및 오시는 길</strong></h2>';
+        list.html(text);
+    }
+
 
     function contact(){
         var list = $('#contact');

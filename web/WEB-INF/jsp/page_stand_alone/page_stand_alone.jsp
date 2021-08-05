@@ -143,8 +143,10 @@
                 break;
             }
         }
-        var text = '<h2><i class="bi bi-info-circle-fill"></i><strong>  ' + page_title + '</strong></h2>';
-        list.append(text);
+        if(page_title!=''){
+            var text = '<h2><i class="bi bi-info-circle-fill"></i><strong>  ' + page_title + '</strong></h2>';
+            list.append(text);
+        }
     }
 
 </script>

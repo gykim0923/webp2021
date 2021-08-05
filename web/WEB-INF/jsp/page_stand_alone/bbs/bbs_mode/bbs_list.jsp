@@ -13,15 +13,16 @@
 
     <table class="boardtable" id="table1"  data-toggle="table"
            data-pagination="true" data-toolbar="#toolbar"
-           data-search="true" data-side-pagination="true" data-click-to-select="true" data-height="460"
-           data-page-list="[10]">
+           data-search="true" data-side-pagination="true" data-click-to-select="true" data-height="600"
+           data-page-size="10"
+           data-page-list="[10,20,30]">
         <thead>
         <tr>
-            <th data-field="id" data-sortable="true">id</th>
-            <th data-field="title" data-sortable="true">title</th>
-            <th data-field="writer_name" data-sortable="true">writer_name</th>
-            <th data-field="last_modified" data-sortable="true">last_modified</th>
-            <th data-field="views" data-sortable="true">views</th>
+            <th data-field="id" data-sortable="false">번호</th>
+            <th data-field="title" data-sortable="false">제목</th>
+            <th data-field="writer_name" data-sortable="false">글쓴이</th>
+            <th data-field="last_modified" data-sortable="false">작성일</th>
+            <th data-field="views" data-sortable="true">조회수</th>
             <th data-field="likes" data-sortable="true">추천</th>
         </tr>
         </thead>
@@ -34,6 +35,19 @@
         callSetupTableView();
         makeWriteButton();
     })
+
+    function formatDate(date) {  //주어진 날짜를 yyyy-mm-dd 형식으로 반환해주는 함수
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
+
     var major = <%=major%>;
     var num = <%=num%>;
     var type = <%=type%>;
@@ -53,7 +67,7 @@
                     id: '<a href="'+url+'">'+bbs.id+'</a>',
                     title: '<a href="'+url+'">'+bbs.title+'</a>',
                     writer_name: '<a href="'+url+'">'+bbs.writer_name+'</a>',
-                    last_modified: '<a href="'+url+'">'+bbs.last_modified+'</a>',
+                    last_modified: '<a href="'+url+'">'+formatDate(bbs.last_modified)+'</a>',
                     views: '<a href="'+url+'">'+bbs.views+'</a>',
                 });
             }

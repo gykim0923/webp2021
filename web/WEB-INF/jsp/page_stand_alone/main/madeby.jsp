@@ -31,7 +31,15 @@
 <script>
     $(document).ready(function(){
         makeDeveloperInfo();
+        makePageTitleMadeby();
     })
+
+    function makePageTitleMadeby() {
+        var list = $('#page_title');
+        var text = '<h2><i class="bi bi-info-circle-fill"></i><strong> 개발진</strong></h2>';
+        list.html(text);
+    }
+
 
     function makeDeveloperInfo(){
         var developerInfo = $('#developerInfo');

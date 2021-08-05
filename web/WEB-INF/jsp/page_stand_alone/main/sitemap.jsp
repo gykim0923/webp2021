@@ -31,7 +31,15 @@
 <script>
     $(document).ready(function(){
         makeSiteMap();
+        makePageTitleSiteMap();
     })
+
+    function makePageTitleSiteMap() {
+        var list = $('#page_title');
+        var text = '<h2><i class="bi bi-info-circle-fill"></i><strong> 사이트맵</strong></h2>';
+        list.html(text);
+    }
+
     function makeSiteMap() { // 사이트맵 화면 만드는 함수
         var pageMenu1 = <%=pageMenu1%>;
         var pageTab1 = <%=pageTab1%>;

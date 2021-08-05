@@ -50,7 +50,10 @@
     <div id="main" class='layout-navbar'>
         <%@include file="header_v3.jsp"%>
         <div id="main-content">
-
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>주의!</strong> 아직 개발 중인 홈페이지입니다.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             <div class="page-heading">
                 <%--Main start--%>
                 <%--                여기서 부터 main 복붙--%>
@@ -116,7 +119,9 @@
                                                         <button class="nav-link" id="nav-31-tab" data-bs-toggle="tab" data-bs-target="#nav-31" type="button" role="tab" aria-controls="nav-profile" aria-selected="false" onclick="clickNoticeReg(31)"></button>
                                                     </div>
                                                     <div class="morebtn">
-                                                        <a id="more_link2" href="bbs.kgu?major=main&num=30" title="더보기"><i class="bi bi-plus-lg"></i></a>
+                                                        <div class="py-1">
+                                                            <a id="more_link2" href="bbs.kgu?major=main&num=30" title="더보기"><i class="bi bi-plus-lg"></i></a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
