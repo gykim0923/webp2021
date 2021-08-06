@@ -34,7 +34,7 @@
 <%--    댓글리스트--%>
     <div>
       <div class="list-group" id="comments">
-        <div class="my-2 h3">댓글</div>
+        <div class="mt-2 mb-5 h3">댓글</div>
       </div>
     </div>
 
@@ -88,7 +88,10 @@
     var comments = $('#comments');
     var commentsList = <%=getComment%>;
     var text='';
-    if(commentsList != null){
+    if(commentsList == null){
+      text+='아직 댓글이 없습니다.'
+    }
+    else {
       for(var i=0;i< commentsList.length;i++){
         var comment = commentsList[i];
         text+='<a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">'

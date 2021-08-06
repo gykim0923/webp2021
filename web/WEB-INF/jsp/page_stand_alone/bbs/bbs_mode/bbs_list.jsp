@@ -13,7 +13,7 @@
 
     <table class="boardtable" id="table1"  data-toggle="table"
            data-pagination="true" data-toolbar="#toolbar"
-           data-search="true" data-side-pagination="true" data-click-to-select="true" data-height="600"
+           data-search="true" data-side-pagination="true" data-click-to-select="true"
            data-page-size="10"
            data-page-list="[10,20,30]">
         <thead>

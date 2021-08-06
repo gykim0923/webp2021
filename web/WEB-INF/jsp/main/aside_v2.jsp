@@ -89,22 +89,27 @@
             + '<span>' + menuTabList[3].tab_title + '</span>'
             + '</a>';
         for (var i = 0; i < majorAllInfo.length; i++) {
-            // text += '<ul class="submenu active" style="display: block;">'
-            //     + '<li class="submenu-item">'
-            text += '<ul class="submenu2" style="display: block;">'
-                + '<li class="">'
-                + '<div class="dropend">'
-                + ' <a href="#" id="dropdownMenuLink' + i + '" data-bs-toggle="dropdown" >' + majorAllInfo[i].major_name + '</a>';
-                // drop menu start
-            text += '<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink' + i + '" >';
+            text += '<ul class="submenu active" style="display: block;">'
+                +'<li class="submenu-item">'
+                +'<a data-bs-toggle="collapse" href="#collapseExample'+i+'" role="button" aria-expanded="false" aria-controls="collapseExample">'+majorAllInfo[i].major_name+'</a>'
+                +'<div class="collapse" id="collapseExample'+i+'">';
             for(var j=tab5start; j<tab5end; j++){
                 var url = menuPageList[j].page_path+'?major='+majorAllInfo[i].major_id+'&&num='+menuPageList[j].page_id;
-                text += '<li><a class="dropdown-item" href="'+url+'">' + menuPageList[j].page_title + '</a></li>';
+                text += '<div class="ms-3"><a href="'+url+'">○ ' + menuPageList[j].page_title + '</a></div>';
             }
-            text += '</ul>';
-                //drop menu end
-
-            text += '</div>'
+            text+='</div>'
+            //     + '<div class="dropend">'
+            //     + ' <a href="#" id="dropdownMenuLink' + i + '" data-bs-toggle="dropdown" >' + majorAllInfo[i].major_name + '</a>';
+            //     // drop menu start
+            // text += '<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink' + i + '" >';
+            // for(var j=tab5start; j<tab5end; j++){
+            //     var url = menuPageList[j].page_path+'?major='+majorAllInfo[i].major_id+'&&num='+menuPageList[j].page_id;
+            //     text += '<li><a class="dropdown-item" href="'+url+'">' + menuPageList[j].page_title + '</a></li>';
+            // }
+            // text += '</ul>';
+            //     //drop menu end
+            //
+            // text += '</div>'
                 + '</li></ul>';
         }
         text += '</li>';
@@ -112,27 +117,3 @@
         list.append(text);
     }
 </script>
-
-<style>
-    .submenu2{
-        z-index: 9999;
-        list-style:none;
-        display:none;
-        transition:max-height 2s cubic-bezier(0,.55,.45,1);
-        /*overflow:hidden*/
-    }
-    .sidebar-item2{
-        list-style:none;
-        margin-top:.5rem;
-        position:relative
-    }
-    .submenu-item2 a{
-        padding:.7rem 2rem;
-        display:block;
-        color:#25396f;
-        font-size:.85rem;
-        font-weight:600;
-        letter-spacing:.5px;
-        transition:all .3s
-    }
-</style>
