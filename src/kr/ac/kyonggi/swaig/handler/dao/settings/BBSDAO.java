@@ -266,6 +266,18 @@ public class BBSDAO {
             return null;
     }
 
+    public void plusBoardView(String id) {
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn, "UPDATE bbs SET views = views+1 WHERE id=?;", id);
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DbUtils.closeQuietly(conn);
+        }
+    }
+
 // 추가
     public void insertFile(String id, String writer, String name, String link) {
         Connection conn=Config.getInstance().sqlLogin();

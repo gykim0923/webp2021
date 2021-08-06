@@ -180,7 +180,7 @@
   }
   function makeViewCount(){
     var content = $('#view_count');
-    content.append(getBBS.views);
+     content.append(getBBS.view);
   }
   function makeViewLastModified(){
     var content = $('#view_lastModified');

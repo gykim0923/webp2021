@@ -77,6 +77,24 @@ public class BulletinBoardServiceAction extends CustomAction {
             request.setAttribute("getComments",gson.toJson(BBSDAO.getInstance().getCommentsList(id)));
         }
 
+        String id = request.getParameter("id");
+        String whatISeen= (String)request.getSession().getAttribute("whatISeen");
+//      String arr[] = whatISeen.split("-/-/-");
+
+        String check = id +"-/-/-";
+        if(whatISeen == null) {
+            String newWhatISeen = id +"-/-/-";
+            request.getSession().setAttribute("whatISeen", newWhatISeen);
+            new BBSDAO().plusBoardView(id);
+        }
+        else {
+            if(!whatISeen.contains(check)) {
+                whatISeen += check;
+                request.getSession().setAttribute("whatISeen", whatISeen);
+                new BBSDAO().plusBoardView(id);
+            }
+        }
+
 
         String bbs_mode = "bbs_"+mode;
         request.setAttribute("jsp", gson.toJson(bbs_mode)); //bbs_*.jsp
