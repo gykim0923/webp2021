@@ -83,7 +83,8 @@
 <%--버튼이 나와야 하는 자리--%>
 
 <div class="file-loading">
-    <input id="kv-explorer" type="file" multiple>
+    <input id="input-24" name="input24[]" type="file" multiple>
+<%--    <input id="kv-explorer" type="file" multiple>--%>
 </div>
 
 <%--질문 폼 만드는 버튼 --%>
@@ -686,5 +687,22 @@
             board_level : '2',
             upload_mode : 'bbs'
         }
+    });
+
+    $(document).ready(function() {
+        $("#input-24").fileinput({
+            'theme': 'explorer-fa',
+            'uploadUrl': 'upload.kgu?folder='+upload_folder,
+            showRemove : true,
+            showUpload : true,
+            overwriteInitial : false,
+            uploadExtraData:{
+                file_type : 'null',
+                board_level : '0',
+                upload_mode : 'reg'
+            },
+            deleteUrl: "/site/file-delete",
+            maxFiledescription: "This is a representative placeholder description for this image.", size: 100,
+        });
     });
 </script>
