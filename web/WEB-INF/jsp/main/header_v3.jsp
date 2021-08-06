@@ -22,8 +22,8 @@
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0"></ul>
         <c:choose>
           <c:when test="${user == null}">
-            <div class="dropdown">
-              <a href="loginPage_v2.kgu">로그인</a>
+            <div class="dropdown py-2">
+              <a href="loginPage_v2.kgu"><h4 class="m-0"><strong><i class="bi bi-box-arrow-in-right"></i> LOGIN</strong></h4></a>
             </div>
           </c:when>
           <c:when test="${user != null}">
@@ -31,13 +31,11 @@
               <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="user-menu d-flex">
                   <div class="user-name text-end me-3">
-                    <h6 class="mb-0 text-gray-600" id="profileName">name(for_header)</h6>
-                    <p class="mb-0 text-sm text-gray-600" id="profileMajor">major</p>
+                    <h6 class="mb-0 text-gray-600" id="profileName"></h6>
+                    <p class="mb-0 text-sm text-gray-600" id="profileMajor"></p>
                   </div>
                   <div class="user-img d-flex align-items-center">
-                    <div class="avatar avatar-md">
-                      <img id="profilePicture">
-                    </div>
+                    <div class="avatar avatar-md" id="profilePicture"></div>
                   </div>
                 </div>
               </a>
@@ -86,7 +84,12 @@
     if (user != null) {
       $('#profileName').html(user.name+'('+type.for_header+')');
       $('#profileMajor').html(user.major);
-      $('#profilePicture').attr("src", user.google_img);
+      if(user.google_img==null){
+        $('#profilePicture').html("<h3><i class=\"bi bi-person-circle\"></i></h3>");
+      }
+      else {
+        $('#profilePicture').html("<img src='"+user.google_img+"'>");
+      }
       $('#profileHello').html('안녕하세요, '+user.name+'님!')
     }
   }

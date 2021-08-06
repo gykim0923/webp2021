@@ -16,9 +16,9 @@
   <hr>
   <div class="container">
     <div class="row">
-      <div class=" col-xl-7 col-4" id="view_writer"></div>
-      <div class=" col-xl-2 col-3" id="view_count"><span>조회수:</span></div>
-      <div class=" col-xl-3 col-5" id="view_lastModified"><span>작성일:</span></div>
+      <div class=" col" id="view_writer"></div>
+      <div class="col-auto" id="view_count"><span>조회수:</span></div>
+      <div class="col-auto" id="view_lastModified"><span>작성일:</span></div>
     </div>
   </div>
   <hr>
@@ -180,7 +180,7 @@
   }
   function makeViewCount(){
     var content = $('#view_count');
-     content.append(getBBS.view);
+     content.append(getBBS.views);
   }
   function makeViewLastModified(){
     var content = $('#view_lastModified');

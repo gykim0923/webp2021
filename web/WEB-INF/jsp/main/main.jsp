@@ -55,9 +55,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <div class="page-heading">
-                <%--Main start--%>
-                <%--                여기서 부터 main 복붙--%>
+                <%--Main 영역 start--%>
+
                 <main class="">
+<%--                    container start--%>
                     <div class="container">
                         <div class="row align-items-md-stretch">
                             <div class="col-12 mb-3">
@@ -65,6 +66,7 @@
                             </div>
                         </div>
                         <div class="row align-items-md-stretch">
+<%--                            left side start--%>
                             <div class="col-xxl-9" id="main1_left" >
                                 <div class="py-2 col-12">
 <%--                                    carousel start--%>
@@ -86,6 +88,7 @@
                                     </div>
 <%--                                    carousel end--%>
                                 </div>
+<%--                                bbs and reg start--%>
                                 <div class="row">
                                     <div class="col-xl-6 py-2 " id="main2_left">
                                         <div class=" p-3 border card m-0"  style="height : 493px;">
@@ -97,7 +100,9 @@
                                                         <button class="nav-link" id="nav-23-tab" data-bs-toggle="tab" data-bs-target="#nav-23" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="clickBBS(23)"></button>
                                                     </div>
                                                     <div class="morebtn">
-                                                        <a id="more_link" href="bbs.kgu?major=main&num=21" title="더보기"><i class="bi bi-plus-lg"></i></a>
+                                                        <div class="py-2">
+                                                            <a id="more_link1" href="bbs.kgu?major=main&num=21" title="더보기"><i class="bi bi-plus-lg"></i></a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -119,7 +124,7 @@
                                                         <button class="nav-link" id="nav-31-tab" data-bs-toggle="tab" data-bs-target="#nav-31" type="button" role="tab" aria-controls="nav-profile" aria-selected="false" onclick="clickNoticeReg(31)"></button>
                                                     </div>
                                                     <div class="morebtn">
-                                                        <div class="py-1">
+                                                        <div class="py-2">
                                                             <a id="more_link2" href="bbs.kgu?major=main&num=30" title="더보기"><i class="bi bi-plus-lg"></i></a>
                                                         </div>
                                                     </div>
@@ -132,7 +137,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                <%-- bbs and reg end--%>
                             </div>
+    <%--                            left side end--%>
+
+
+    <%--                            right side start--%>
                             <div class="col-xxl-3" id="main1_right">
                                 <div class="row">
                                     <div class="py-2 col-xxl-12 col-sm-6">
@@ -150,8 +160,12 @@
                                     </div>
                                 </div>
                             </div>
+    <%--                            left side end--%>
                         </div>
+
                     </div>
+<%--                    container end--%>
+
                     <!-- search schedule Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -226,7 +240,7 @@
             var url30 = 'reg.kgu?major=main&num=30&mode=view&id='+registerAllInfo[i].id;
             text30+='<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
                 +'<a href="'+url30+'"><span class="index_post_link">'+registerAllInfo[i].title+'</span></a>'
-                +'<a href="'+url30+'"><span>'+formatDate(registerAllInfo[i].last_modified)+'</span></a>'
+                +'<a href="'+url30+'"><span class="index_post_time">'+formatDate(registerAllInfo[i].last_modified)+'</span></a>'
                 +'</li></ul>';
         }
         nav30.append(text30);
@@ -249,12 +263,10 @@
         }
     }
     function clickBBS(i) {
-        document.getElementById('more_link').setAttribute('href',
-            'bbs.kgu?major=main&num='+i+'');
+        document.getElementById('more_link1').setAttribute('href', 'bbs.kgu?major=main&num='+i+'');
     }
     function clickNoticeReg(i) {
-        document.getElementById('more_link2').setAttribute('href',
-            'bbs.kgu?major=main&num='+i+'');
+        document.getElementById('more_link2').setAttribute('href', 'bbs.kgu?major=main&num='+i+'');
     }
 
     function makeNoticeBBS() {
@@ -276,7 +288,7 @@
             var url21 = 'bbs.kgu?major=main&num=21&mode=view&id='+bbs21[i].id;
             text21+='<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
                 +'<a href="'+url21+'"><span class="index_post_link">'+bbs21[i].title+'</span></a>'
-                +'<a href="'+url21+'"><span>'+formatDate(bbs21[i].last_modified)+'</span></a>'
+                +'<a href="'+url21+'"><span class="index_post_time">'+formatDate(bbs21[i].last_modified)+'</span></a>'
                 +'</li>';
 
         }
@@ -289,7 +301,7 @@
             var url22 = 'bbs.kgu?major=main&num=22&mode=view&id='+bbs22[i].id;
             text22+='<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
                 +'<a href="'+url22+'"><span class="index_post_link">'+bbs22[i].title+'</span></a>'
-                +'<a href="'+url22+'"><span>'+formatDate(bbs22[i].last_modified)+'</span></a>'
+                +'<a href="'+url22+'"><span class="index_post_time">'+formatDate(bbs22[i].last_modified)+'</span></a>'
                 +'</li>';
         }
         text22+='</ul>';
@@ -301,7 +313,7 @@
             var url23 = 'bbs.kgu?major=main&num=23&mode=view&id='+bbs23[i].id;
             text23+='<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
                 +'<a href="'+url23+'"><span class="index_post_link">'+bbs23[i].title+'</span></a>'
-                +'<a href="'+url23+'"><span>'+formatDate(bbs23[i].last_modified)+'</span></a>'
+                +'<a href="'+url23+'"><span class="index_post_time">'+formatDate(bbs23[i].last_modified)+'</span></a>'
                 +'</li>';
         }
         text23+='</ul>';
@@ -484,28 +496,64 @@
         border-left-color: #7d8285;
     }
 
+    @media (min-width: 0px) {
+        .index_post_link {
+            width: 240px;
+        }
+    }
+
+    @media (min-width: 576px) {
+        .index_post_link {
+            width: 390px;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .index_post_link {
+            width: 560px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .index_post_link {
+            width: 800px;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .index_post_link {
+            width: 300px;
+        }
+    }
+
     @media (min-width: 1400px) {
         .carousel-img{
             height: 495px;
         }
+        .index_post_link {
+            width: 262px;
+        }
     }
-    @media (max-width: 1600px) {
+    @media (min-width: 1600px) {
         .header_title{
             text-align: center;
+        }
+        .index_post_link {
+            width: 337px;
         }
     }
 
     .index_post_link {
         color: grey;
+        /*width: 270px;*/
         display: inline-block;
-        width: 265px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
 
     .index_post_time {
-        width: 92px;
+        min-width: 92px;
     }
 
 </style>

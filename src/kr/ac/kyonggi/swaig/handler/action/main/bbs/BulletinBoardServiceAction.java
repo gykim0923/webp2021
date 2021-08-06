@@ -22,19 +22,19 @@ public class BulletinBoardServiceAction extends CustomAction {
         request.setAttribute("num",num); //다시 JSP로 보내줌 (재활용을 위해)
 
         /**
-         * bbs_type은 일반게시판, 신청게시판, 웹진게시판 인지 타입을 나타내는 것임.
+         * bbs_type은 공지게시판, 자유게시판 인지 타입을 나타내는 것임.
          * [중요] 파라미터로 받지 말고 그냥 여기에서 타입 나누는걸로..
          * (현 상황에서 url로 넘겨주는 방식은 page Menu에서 조작하기가 쉽지 않음)
          * DB로 하고 싶었는데, 그게 오히려 더 복잡해질까봐 Action에서 변수를 정해주는 것으로 함.
          * */
-        /*____________________________________________________________________
-        * |          |   일반(common)  |   자유게시판(free) |   신청(application) |
-        * --------------------------------------------------------------------
-        * | 작성,수정  |        O       |        O        |          O         |
-        * |   댓 글   |        O       |        O        |          X         |
-        * |   추 천   |        X       |        O        |          X         |
-        * |  신청기능  |        X       |        X        |          O         |
-        * --------------------------------------------------------------------
+        /*________________________________________________
+        * |          |   공지(notice)  |   자유(free) |
+        * ------------------------------------------------
+        * | 작성,수정  |        O       |        O        |
+        * |   댓 글   |        O       |        O        |
+        * |   추 천   |        X       |        O        |
+        * |  신청기능  |        X       |        X        |
+        * ------------------------------------------------
         * */
         String bbs_type = ""; // (common/free/application) 중 하나
         if (num.equals("20")||num.equals("21")||num.equals("22")||num.equals("23")||num.equals("31")||num.equals("52")){
@@ -57,12 +57,12 @@ public class BulletinBoardServiceAction extends CustomAction {
         }
 
         //mode에 따라 필요한 DB가 다르다.
-        if(mode.equals("list")){
+        if(mode.equals("list")){ //리스트인 경우
             if(num.equals("20")){ // 여러 게시판을 한번에 요청 시
                 String [] numbers = {"21","22","23"}; //여기에 들어있는 num들의 DB를 모두 불러와서 반환한다.
                 request.setAttribute("getBBSList", gson.toJson(BBSDAO.getInstance().getAllBBSList(numbers)));
             }
-            else if(num.equals("52")||num.equals("53")){
+            else if(num.equals("52")||num.equals("53")){ //전공에 따른 게시판 분리가 필요한 경우
                 String major = request.getParameter("major");
                 request.setAttribute("getBBSList", gson.toJson(BBSDAO.getInstance().getMajorBBSList(major, num)));
             }
@@ -72,29 +72,29 @@ public class BulletinBoardServiceAction extends CustomAction {
         }
         else { //리스트를 제외한 모든 모드에서는 게시글 1개를 가지고 작업하기 때문에 다음과 같이 게시글 1개만 불러주는 작업을 한다.
             String id = request.getParameter("id"); //게시글 고유 번호
+            /**
+             * 게시글 확인 시 조회수 작업을 해줘야 하는데, 조회수는 세션당 1회 증가하도록 검사한다.
+             * */
+            String whatISeen= (String)request.getSession().getAttribute("whatISeen");
+//      String arr[] = whatISeen.split("-/-/-");
+
+            String check = id +"-/-/-";
+            if(whatISeen == null) {
+                whatISeen = check;
+                request.getSession().setAttribute("whatISeen", whatISeen);
+                new BBSDAO().getInstance().plusBoardView(id);
+            }
+            else {
+                if(!whatISeen.contains(check)) {
+                    whatISeen += check;
+                    request.getSession().setAttribute("whatISeen", whatISeen);
+                    new BBSDAO().getInstance().plusBoardView(id);
+                }
+            }
             request.setAttribute("id", id); //다시 JSP로 보내줌 (재활용을 위해), 게시글 아이디
             request.setAttribute("getBBS", gson.toJson(BBSDAO.getInstance().getBBS(id)));
             request.setAttribute("getComments",gson.toJson(BBSDAO.getInstance().getCommentsList(id)));
         }
-
-        String id = request.getParameter("id");
-        String whatISeen= (String)request.getSession().getAttribute("whatISeen");
-//      String arr[] = whatISeen.split("-/-/-");
-
-        String check = id +"-/-/-";
-        if(whatISeen == null) {
-            String newWhatISeen = id +"-/-/-";
-            request.getSession().setAttribute("whatISeen", newWhatISeen);
-            new BBSDAO().plusBoardView(id);
-        }
-        else {
-            if(!whatISeen.contains(check)) {
-                whatISeen += check;
-                request.getSession().setAttribute("whatISeen", whatISeen);
-                new BBSDAO().plusBoardView(id);
-            }
-        }
-
 
         String bbs_mode = "bbs_"+mode;
         request.setAttribute("jsp", gson.toJson(bbs_mode)); //bbs_*.jsp

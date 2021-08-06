@@ -22,7 +22,7 @@
             <th data-field="title" data-sortable="false">제목</th>
             <th data-field="writer_name" data-sortable="false">글쓴이</th>
             <th data-field="last_modified" data-sortable="false">작성일</th>
-            <th data-field="views" data-sortable="true">조회수</th>
+            <th data-field="views" data-sortable="false">조회수</th>
 <%--            <th data-field="likes" data-sortable="true">추천</th>--%>
         </tr>
         </thead>
