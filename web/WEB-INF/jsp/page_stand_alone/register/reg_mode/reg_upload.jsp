@@ -11,20 +11,16 @@
 %>
 <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <script src="js/default.js"></script>
-<script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/jquery.cookie.js"></script>
-<script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/fileinput.min.js"></script>
-<script src="js/sortable.min.js" type="text/javascript"></script>
-<script src="js/theme.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/js/plugins/sortable.min.js" type="text/javascript"></script>
+<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/js/fileinput.min.js"></script>
 <link
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         media="all" rel="stylesheet" type="text/css" />
-<%--<link href="css/bootstrap-slider.css" rel="stylesheet" type="text/css">--%>
+<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 
-<%--<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>--%>
-<%--<script src="//code.jquery.com/jquery-1.10.2.js"></script>--%>
 <div class="h3">글 작성하기</div>
 <%--ckeditor가 나와야 하는 자리--%>
 <div class="form-group mb-3" id="bbsTitleBox"><input class="form-control" id="bbsTitle" placeholder="제목을 입력하세요."></div>
@@ -82,9 +78,8 @@
 
 <%--버튼이 나와야 하는 자리--%>
 
-<div class="file-loading">
-    <input id="input-24" name="input24[]" type="file" multiple>
-<%--    <input id="kv-explorer" type="file" multiple>--%>
+<div class="file-loading mb-3">
+    <input id="regFile" type="file" multiple>
 </div>
 
 <%--질문 폼 만드는 버튼 --%>
@@ -676,33 +671,15 @@
     }
 
     var upload_folder = '/img/bbs_reg';
-    $("#kv-explorer").fileinput({
-        'theme': 'explorer-fa',
+
+    $("#regFile").fileinput({
         'uploadUrl': 'upload.kgu?folder='+upload_folder,
-        showRemove : false,
-        showUpload : false,
-        overwriteInitial : false,
         uploadExtraData:{
             file_type : 'null',
-            board_level : '2',
+            board_level : '1',
             upload_mode : 'bbs'
-        }
-    });
-
-    $(document).ready(function() {
-        $("#input-24").fileinput({
-            'theme': 'explorer-fa',
-            'uploadUrl': 'upload.kgu?folder='+upload_folder,
-            showRemove : true,
-            showUpload : true,
-            overwriteInitial : false,
-            uploadExtraData:{
-                file_type : 'null',
-                board_level : '0',
-                upload_mode : 'reg'
-            },
-            deleteUrl: "/site/file-delete",
-            maxFiledescription: "This is a representative placeholder description for this image.", size: 100,
-        });
+        },
+        overwriteInitial : false,
+        // deleteUrl: "/site/file-delete",
     });
 </script>
