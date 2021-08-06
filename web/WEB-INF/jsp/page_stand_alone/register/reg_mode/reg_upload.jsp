@@ -20,6 +20,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         media="all" rel="stylesheet" type="text/css" />
 <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/themes/fas/theme.min.js"></script>
 
 <div class="h3">글 작성하기</div>
 <%--ckeditor가 나와야 하는 자리--%>
@@ -681,5 +682,52 @@
         },
         overwriteInitial : false,
         // deleteUrl: "/site/file-delete",
+        preferIconicPreview: true,
+        previewFileIconSettings: { // configure your icon file extensions
+            'doc': '<i class="bi bi-file-earmark-word-fill text-primary"></i>',
+            'hwp': '<i class="bi bi-file-earmark-richtext-fill text-primary"></i>',
+            'xls': '<i class="bi bi-file-earmark-excel-fill text-success"></i>',
+            'ppt': '<i class="bi bi-file-earmark-ppt-fill text-danger"></i>',
+            'pdf': '<i class="bi bi-file-earmark-pdf-fill text-danger"></i>',
+            'zip': '<i class="bi bi-file-earmark-zip-fill text-muted"></i>',
+            'htm': '<i class="bi bi-file-earmark-code-fill text-info"></i>',
+            'txt': '<i class="bi bi-file-earmark-text-fill text-info"></i>',
+            'mov': '<i class="bi bi-file-earmark-play-fill text-warning"></i>',
+            'mp3': '<i class="bi bi-file-earmark-play-fill text-warning"></i>',
+            'jpg': '<i class="bi bi-file-earmark-image-fill text-danger"></i>',
+            'gif': '<i class="bi bi-file-earmark-image-fill text-muted"></i>',
+            'png': '<i class="bi bi-file-earmark-image-fill text-primary"></i>'
+        },
+        previewFileExtSettings: { // configure the logic for determining icon file extensions
+            'doc': function(ext) {
+                return ext.match(/(doc|docx)$/i);
+            },
+            'hwp': function(ext) {
+                return ext.match(/(hwp)$/i);
+            },
+            'xls': function(ext) {
+                return ext.match(/(xls|xlsx)$/i);
+            },
+            'ppt': function(ext) {
+                return ext.match(/(ppt|pptx)$/i);
+            },
+            'zip': function(ext) {
+                return ext.match(/(zip|rar|tar|gzip|gz|7z)$/i);
+            },
+            'htm': function(ext) {
+                return ext.match(/(htm|html)$/i);
+            },
+            'txt': function(ext) {
+                return ext.match(/(txt|ini|csv|java|php|js|css)$/i);
+            },
+            'mov': function(ext) {
+                return ext.match(/(avi|mpg|mkv|mov|mp4|3gp|webm|wmv)$/i);
+            },
+            'mp3': function(ext) {
+                return ext.match(/(mp3|wav)$/i);
+            }
+        }
+    }).on('fileuploaded', function(e, params) {
+        console.log('File uploaded params', $("#regFile").data('fileinput').initialPreview);
     });
 </script>

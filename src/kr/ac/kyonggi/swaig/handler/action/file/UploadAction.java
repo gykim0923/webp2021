@@ -151,17 +151,45 @@ public class UploadAction implements Action {
                 JsonObject forIntoArray = new JsonObject();
                 forIntoArray.addProperty("id", file_id);
                 intoArray.add("extra", forIntoArray);
+                intoArray.addProperty("caption", uploadFile);
                 forArray.add(intoArray);
                 forFinish.add("initialPreviewConfig", forArray);
                 JsonArray forArray2 = new JsonArray();
-                forArray2.add("<span style='font-size : 14px; font-family : NanumSquare ;'>" + uploadFile + " 업로드 성공</span>");
+//                forArray2.add("<span style='font-size : 14px; font-family : NanumSquare ;'>" + uploadFile + " 업로드 성공</span>");
 //                if(fileType.equals("image")){
 //                    forArray2.add("<img src='"+folder+"/" + newFileName + "' style='width : 200px'><span style='font-size : 12px'> " + uploadFile + " 업로드 성공</span>");
 //                }
 //                else{
 //                    forArray2.add("<span style='font-size : 14px; font-family : NanumSquare ;'>" + uploadFile + " 업로드 성공</span>");
 //                }
-                forFinish.add("initialPreview", forArray2);
+//                forFinish.add("initialPreview", forArray2);
+                JsonArray icon = new JsonArray();
+                icon.add("'doc': '<i class=\"bi bi-file-earmark-word-fill text-primary\"></i>',"+
+                        "'hwp': '<i class=\"bi bi-file-earmark-richtext-fill text-primary\"></i>',"+
+                        "'xls': '<i class=\"bi bi-file-earmark-excel-fill text-success\"></i>',"+
+                        "'ppt': '<i class=\"bi bi-file-earmark-ppt-fill text-danger\"></i>',"+
+                        "'pdf': '<i class=\"bi bi-file-earmark-pdf-fill text-danger\"></i>',"+
+                        "'zip': '<i class=\"bi bi-file-earmark-zip-fill text-muted\"></i>',"+
+                        "'htm': '<i class=\"bi bi-file-earmark-code-fill text-info\"></i>',"+
+                        "'txt': '<i class=\"bi bi-file-earmark-text-fill text-info\"></i>',"+
+                        "'mov': '<i class=\"bi bi-file-earmark-play-fill text-warning\"></i>',"+
+                        "'mp3': '<i class=\"bi bi-file-earmark-play-fill text-warning\"></i>',"+
+                        "'jpg': '<i class=\"bi bi-file-earmark-image-fill text-danger\"></i>',"+
+                        "'gif': '<i class=\"bi bi-file-earmark-image-fill text-muted\"></i>',"+
+                        "'png': '<i class=\"bi bi-file-earmark-image-fill text-primary\"></i>'");
+                forFinish.add("previewFileIconSettings", icon);
+                JsonArray iconCon = new JsonArray();
+                iconCon.add("'doc': function(ext) { return ext.match(/(doc|docx)$/i); },"+
+                        "'hwp': function(ext) { return ext.match(/(hwp)$/i); },"+
+                        "'xls': function(ext) {return ext.match(/(xls|xlsx)$/i);},"+
+                        "'ppt': function(ext) {return ext.match(/(ppt|pptx)$/i);},"+
+                        "'zip': function(ext) {return ext.match(/(zip|rar|tar|gzip|gz|7z)$/i);},"+
+                        "'htm': function(ext) {return ext.match(/(htm|html)$/i);},"+
+                        "'txt': function(ext) {return ext.match(/(txt|ini|csv|java|php|js|css)$/i);},"+
+                        "'mov': function(ext) {return ext.match(/(avi|mpg|mkv|mov|mp4|3gp|webm|wmv)$/i);},"+
+                        "'mp3': function(ext) {return ext.match(/(mp3|wav)$/i);}");
+                forFinish.add("previewFileExtSettings", iconCon);
+                forFinish.addProperty("previewZoom", "<img src=\""+folder+'/'+newFileName+"\" class=\"kv-preview-data file-preview-image file-zoom-detail\">"); // 상세보기를 누르면 나올 이미지
                 Gson gson2 = new GsonBuilder().disableHtmlEscaping().create();
                 return gson2.toJson(forFinish);
             }
