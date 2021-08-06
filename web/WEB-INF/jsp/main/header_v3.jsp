@@ -60,7 +60,7 @@
                 </li>
                 <li>
                   <a class="dropdown-item" href="#" onclick="signOut();">
-                    <i class="icon-mid bi bi-box-arrow-left me-2"></i> 로그아웃(통합버전)
+                    <i class="icon-mid bi bi-box-arrow-left me-2"></i> 로그아웃
                   </a>
                 </li>
               </ul>

@@ -150,11 +150,16 @@
                                     </div>
                                     <div class="py-2 col-xxl-12 col-sm-6">
                                         <div class=" p-3 border card m-0" style="height : 493px;">
-                                            <ul class="nav">
-                                                <li class="nav-item">
-                                                    <a class="nav-link active" aria-current="page" href="#">일정<i class="bi bi-plus col-sm-2 text-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addSearchModal()"></i></a>
-                                                </li>
-                                            </ul>
+                                            <div class="mb-2 d-flex justify-content-between">
+                                                <div class="nav nav-tabs"  role="tablist">
+                                                    <button class="nav-link active" >일정</button>
+                                                </div>
+                                                <div class="morebtn">
+                                                    <div class="py-2">
+                                                        <a title="더보기"><i class="bi bi-plus-lg col-sm-2 text-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addSearchModal()"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="tab-content" id="schContent"></div>
                                         </div>
                                     </div>
@@ -334,7 +339,7 @@
 
             if(menuPageList[i].page_id == '21'){
                 tab_name_21=menuPageList[i].page_title;
-                nav21tab.append(tab_name_21);
+                nav21tab.append('<strong>'+tab_name_21+'</strong>');
             }
             if(menuPageList[i].page_id == '22'){
                 tab_name_22=menuPageList[i].page_title;
@@ -498,10 +503,34 @@
 
     @media (min-width: 0px) {
         .index_post_link {
-            width: 240px;
+            width: 50px;
         }
     }
-
+    @media (min-width: 280px) {
+        .index_post_link {
+            width: 100px;
+        }
+    }
+    @media (min-width: 320px) {
+        .index_post_link {
+            width: 150px;
+        }
+    }
+    @media (min-width: 360px) {
+        .index_post_link {
+            width: 200px;
+        }
+    }
+    @media (min-width: 400px) {
+        .index_post_link {
+            width: 250px;
+        }
+    }
+    @media (min-width: 450px) {
+        .index_post_link {
+            width: 300px;
+        }
+    }
     @media (min-width: 576px) {
         .index_post_link {
             width: 390px;
@@ -535,13 +564,18 @@
         }
     }
     @media (min-width: 1600px) {
-        .header_title{
-            text-align: center;
-        }
         .index_post_link {
             width: 337px;
         }
     }
+
+    @media (max-width: 1600px) {
+        .header_title{
+            text-align: center;
+        }
+    }
+
+
 
     .index_post_link {
         color: grey;
