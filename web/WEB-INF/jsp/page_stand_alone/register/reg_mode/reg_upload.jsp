@@ -469,6 +469,7 @@
     var id = <%=id%>;
     var user = <%=user%>;
     var type = <%=type%>;
+    var arr = [];
 
     CKEDITOR.replace('regUpdateContent', {
         allowedContent: true,
@@ -678,7 +679,8 @@
         uploadExtraData:{
             file_type : 'null',
             board_level : '1',
-            upload_mode : 'bbs'
+            upload_mode : 'bbs',
+            id : ''
         },
         overwriteInitial : false,
         // deleteUrl: "/site/file-delete",
@@ -728,6 +730,9 @@
             }
         }
     }).on('fileuploaded', function(e, params) {
-        console.log('File uploaded params', $("#regFile").data('fileinput').initialPreview);
+        console.log('File uploaded params', Object.values($("#regFile").data('fileinput').initialPreviewConfig));
+        var obj = ($("#regFile").data('fileinput').initialPreviewConfig);
+        alert(Object.values(obj)[0].fileId);
+        arr.push(Object.values(obj)[0].fileId);
     });
 </script>
