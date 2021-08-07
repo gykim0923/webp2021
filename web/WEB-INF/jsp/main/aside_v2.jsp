@@ -92,7 +92,7 @@
             text += '<ul class="submenu active" style="display: block;" >'
                 +'<li class="submenu-item">'
                 +'<a data-bs-toggle="collapse" href="#collapseExample'+i+'" role="button" aria-expanded="false" aria-controls="collapseExample" onclick="display('+i+')">'+majorAllInfo[i].major_name+'</a>'
-                +'<div class="collapse" id="collapseExample'+i+'" style="display: none;">';
+                +'<div class="collapse" id="collapseExample'+i+'" style="display: none;" value="'+i+'">';
             for(var j=tab5start; j<tab5end; j++){
                 var url = menuPageList[j].page_path+'?major='+majorAllInfo[i].major_id+'&&num='+menuPageList[j].page_id;
                 text += '<div class="ms-3"><a href="'+url+'">○ ' + menuPageList[j].page_title + '</a></div>';
@@ -117,12 +117,13 @@
         list.append(text);
     }
     function display(i){
-        var value = document.getElementsByClassName('collapse');
+        var id = "collapseExample"+i;
+        var value = document.getElementById(id);
 
-        if(window.getComputedStyle(value[i],null).getPropertyValue("display")==='none'){
-            value[i].style.display = 'block'
+        if(window.getComputedStyle(value,null).getPropertyValue("display")==='none'){
+            value.style.display = 'block'
         } else {
-            value[i].style.display = 'none';
+            value.style.display = 'none';
         }
     }
 
