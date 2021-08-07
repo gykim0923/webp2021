@@ -92,24 +92,12 @@
             text += '<ul class="submenu active" style="display: block;" >'
                 +'<li class="submenu-item">'
                 +'<a data-bs-toggle="collapse" href="#collapseExample'+i+'" role="button" aria-expanded="false" aria-controls="collapseExample" onclick="display('+i+')">'+majorAllInfo[i].major_name+'</a>'
-                +'<div class="collapse" id="collapseExample'+i+'" style="display: none;" value="'+i+'">';
+                +'<div class="collapse" id="collapseExample'+i+'" style="display: none;">';
             for(var j=tab5start; j<tab5end; j++){
                 var url = menuPageList[j].page_path+'?major='+majorAllInfo[i].major_id+'&&num='+menuPageList[j].page_id;
                 text += '<div class="ms-3"><a href="'+url+'">○ ' + menuPageList[j].page_title + '</a></div>';
             }
             text+='</div>'
-            //     + '<div class="dropend">'
-            //     + ' <a href="#" id="dropdownMenuLink' + i + '" data-bs-toggle="dropdown" >' + majorAllInfo[i].major_name + '</a>';
-            //     // drop menu start
-            // text += '<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink' + i + '" >';
-            // for(var j=tab5start; j<tab5end; j++){
-            //     var url = menuPageList[j].page_path+'?major='+majorAllInfo[i].major_id+'&&num='+menuPageList[j].page_id;
-            //     text += '<li><a class="dropdown-item" href="'+url+'">' + menuPageList[j].page_title + '</a></li>';
-            // }
-            // text += '</ul>';
-            //     //drop menu end
-            //
-            // text += '</div>'
                 + '</li></ul>';
         }
         text += '</li>';
