@@ -1,0 +1,71 @@
+/*
+ * Nanum Gothic (Korean) http://www.google.com/fonts/earlyaccess
+ */
+@font-face {
+    font-family: 'Nanum Gothic';
+    font-style: normal;
+    font-weight: 400;
+    src: url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.eot);
+    src: url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.eot?#iefix) format('embedded-opentype'),
+    url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff2) format('woff2'),
+    url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff) format('woff'),
+    url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Nanum Gothic';
+    font-style: normal;
+    font-weight: 700;
+    src: url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Bold.eot);
+    src: url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Bold.eot?#iefix) format('embedded-opentype'),
+    url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Bold.woff2) format('woff2'),
+    url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Bold.woff) format('woff'),
+    url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Bold.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Nanum Gothic';
+    font-style: normal;
+    font-weight: 800;
+    src: url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-ExtraBold.eot);
+    src: url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-ExtraBold.eot?#iefix) format('embedded-opentype'),
+    url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-ExtraBold.woff2) format('woff2'),
+    url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-ExtraBold.woff) format('woff'),
+    url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-ExtraBold.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'NanumSquareRound';
+    font-weight: 400;
+    src: url(../font/NanumSquareRoundR.eot);
+    src: url(../font/NanumSquareRoundR.eot?#iefix) format('embedded-opentype'),
+    url(../font/NanumSquareRoundR.woff) format('woff'),
+    url(../font/NanumSquareRoundR.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'NanumSquareRound';
+    font-weight: 700;
+    src: url(../font/NanumSquareRoundB.eot);
+    src: url(../font/NanumSquareRoundB.eot?#iefix) format('embedded-opentype'),
+    url(../font/NanumSquareRoundB.woff) format('woff'),
+    url(../font/NanumSquareRoundB.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'NanumSquareRound';
+    font-weight: 800;
+    src: url(../font/NanumSquareRoundR.eot);
+    src: url(../font/NanumSquareRoundR.eot?#iefix) format('embedded-opentype'),
+    url(../font/NanumSquareRoundR.woff) format('woff'),
+    url(../font/NanumSquareRoundR.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'NanumSquareRound';
+    font-weight: 300;
+    src: url(../font/NanumSquareRoundL.eot);
+    src: url(../font/NanumSquareRoundL.eot?#iefix) format('embedded-opentype'),
+    url(../font/NanumSquareRoundL.woff) format('woff'),
+    url(../font/NanumSquareRoundL.ttf) format('truetype');
+}

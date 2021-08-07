@@ -9,6 +9,10 @@
 <%
     String getLocation = (String)request.getAttribute("getLocation");
 %>
+<head>
+    <link href='css/default.css' rel='stylesheet' type='text/css'>
+
+</head>
 <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <style>
     #map{
@@ -22,6 +26,14 @@
         padding-left: 50px;
         padding-right: 50px;
     }
+    @font-face{
+        font-family: NanumSquareRoundR;
+        src:url("//onlinefontconverter.com/converted-files/NanumSquareRoundR.eot");
+        src:url("//onlinefontconverter.com/converted-files/NanumSquareRoundR.woff");
+    }
+    /*div{*/
+    /*    font-family: NanumSquareRoundR*/
+    /*}*/
 </style>
 <div class="row">
     <div class="col-12 py-5">
