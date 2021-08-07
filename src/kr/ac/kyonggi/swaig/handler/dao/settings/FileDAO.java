@@ -82,4 +82,17 @@ public class FileDAO {
         else
             return null;
     }
+
+    public void deleteFileWithName(String newFileName) {
+        Connection conn=Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn, "DELETE FROM uploadedfile WHERE newFileName=?;", newFileName);
+        }
+        catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+    }
 }

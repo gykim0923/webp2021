@@ -149,7 +149,7 @@ public class UploadAction implements Action {
                 JsonObject forFinish = new JsonObject();
                 JsonArray forArray = new JsonArray();
                 JsonObject intoArray = new JsonObject();
-                intoArray.addProperty("url", "bbsFileDelete.kgu");
+                intoArray.addProperty("url", "bbsFileDelete.kgu?id="+file_id+"&&folder="+folder);
                 JsonObject forIntoArray = new JsonObject();
 //                forIntoArray.addProperty("id", file_id);
 //                intoArray.add("extra", forIntoArray);
