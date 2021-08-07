@@ -14,6 +14,23 @@ public class BBSDTO {
     public String comments_count;
 
     public String already_like;
+    public String uploadedFiles;
+
+    public String getAlready_like() {
+        return already_like;
+    }
+
+    public void setAlready_like(String already_like) {
+        this.already_like = already_like;
+    }
+
+    public String getUploadedFiles() {
+        return uploadedFiles;
+    }
+
+    public void setUploadedFiles(String uploadedFiles) {
+        this.uploadedFiles = uploadedFiles;
+    }
 
     public String getId() {
         return id;

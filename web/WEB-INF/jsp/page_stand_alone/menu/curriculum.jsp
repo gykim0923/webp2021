@@ -45,21 +45,22 @@
         var text = '';
         var yearButton = $('#curriculum_btn');
 
-        text+='<p>'+curriculum.content+'</p>';
+        if(curriculum!=null){
+            text+='<p>'+curriculum.content+'</p>';
 
-        if(type.for_header=='관리자'){
-            var button = $('#modify_button');
-            button.append('<button type="button" class="btn btn-outline-secondary" onclick="modify()">내용 수정</button>'
-                        +'<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="addCurriculumModal()">이미지 추가</button>');
+            if(type.for_header=='관리자'){
+                var button = $('#modify_button');
+                button.append('<button type="button" class="btn btn-outline-secondary" onclick="modify()">내용 수정</button>'
+                    +'<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="addCurriculumModal()">이미지 추가</button>');
+            }
+
+            var yearCount = curriculumList.length;
+            for(var i = 0; i<yearCount; i++){
+                yearButton.append('<button type="button" class="btn btn-outline-secondary me-2" onclick="viewImages('+i+')">'+curriculumList[i].year+'년 교육과정</button>');
+            }
+
+            viewImages(yearCount-1);
         }
-
-        var yearCount = curriculumList.length;
-        for(var i = 0; i<yearCount; i++){
-            yearButton.append('<button type="button" class="btn btn-outline-secondary me-2" onclick="viewImages('+i+')">'+curriculumList[i].year+'년 교육과정</button>');
-        }
-
-        viewImages(yearCount-1);
-
         data.append(text);
     }
 

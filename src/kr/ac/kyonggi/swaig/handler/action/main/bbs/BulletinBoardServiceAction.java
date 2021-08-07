@@ -26,17 +26,18 @@ public class BulletinBoardServiceAction extends CustomAction {
          * [중요] 파라미터로 받지 말고 그냥 여기에서 타입 나누는걸로..
          * (현 상황에서 url로 넘겨주는 방식은 page Menu에서 조작하기가 쉽지 않음)
          * DB로 하고 싶었는데, 그게 오히려 더 복잡해질까봐 Action에서 변수를 정해주는 것으로 함.
+         * 참고로 register는 여기에서 기능을 완전히 분리-독립 해서 별도의 클래스로 구성중
          * */
         /*________________________________________________
-        * |          |   공지(notice)  |   자유(free) |
+        * |          |   공지(notice)  |     자유(free)    |
         * ------------------------------------------------
         * | 작성,수정  |        O       |        O        |
         * |   댓 글   |        O       |        O        |
         * |   추 천   |        X       |        O        |
-        * |  신청기능  |        X       |        X        |
+        * |  신청기능  |        X       |        X        | (moved to register package)
         * ------------------------------------------------
         * */
-        String bbs_type = ""; // (common/free/application) 중 하나
+        String bbs_type = ""; // (notice/free) 중 하나
         if (num.equals("20")||num.equals("21")||num.equals("22")||num.equals("23")||num.equals("31")||num.equals("52")){
             bbs_type="notice";
         }
@@ -52,7 +53,7 @@ public class BulletinBoardServiceAction extends CustomAction {
          * mode는 현재 페이지의 모드(list/view/write/modify)를 나타냄. default 값은 list임. url로 받음.
          * */
         String mode= request.getParameter("mode"); //현재 mode를 가져옴. (list/view/write/modify) 중 하나.
-        if(mode==null){ //mode가 비어있는 경우 list로 출력
+        if(mode==null){ //mode가 비어있는 경우 list로 출력 (에러 방지)
             mode="list";
         }
 
@@ -66,12 +67,13 @@ public class BulletinBoardServiceAction extends CustomAction {
                 String major = request.getParameter("major");
                 request.setAttribute("getBBSList", gson.toJson(BBSDAO.getInstance().getMajorBBSList(major, num)));
             }
-            else{ // 한개의 게시판만 요청 시
+            else{ // 한개의 게시판만 요청 시 (일반적인 경우. 위에 오는 것들은 특수한 게시판을 만들기 위해 사용..)
                 request.setAttribute("getBBSList", gson.toJson(BBSDAO.getInstance().getBBSList(num)));
             }
         }
         else { //리스트를 제외한 모든 모드에서는 게시글 1개를 가지고 작업하기 때문에 다음과 같이 게시글 1개만 불러주는 작업을 한다.
             String id = request.getParameter("id"); //게시글 고유 번호
+//조회수 기능 시작
             /**
              * 게시글 확인 시 조회수 작업을 해줘야 하는데, 조회수는 세션당 1회 증가하도록 검사한다.
              * */
@@ -91,6 +93,9 @@ public class BulletinBoardServiceAction extends CustomAction {
                     new BBSDAO().getInstance().plusBoardView(id);
                 }
             }
+            //조회수 기능 끝
+
+
             request.setAttribute("id", id); //다시 JSP로 보내줌 (재활용을 위해), 게시글 아이디
             request.setAttribute("getBBS", gson.toJson(BBSDAO.getInstance().getBBS(id)));
             request.setAttribute("getComments",gson.toJson(BBSDAO.getInstance().getCommentsList(id)));

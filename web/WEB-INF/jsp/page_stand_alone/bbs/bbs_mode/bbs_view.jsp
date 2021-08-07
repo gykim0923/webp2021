@@ -24,10 +24,14 @@
   <hr>
   <div id="view_content"></div>
   <hr>
+  <div id="view_download"></div>
+  <hr>
+
   <c:if test="${bbs_type =='\"free\"' && user.type != null}">
-    <div id="view_likes">
-      <i class="bi bi-hand-thumbs-up" onclick="liked()"></i>
+    <div class="d-flex justify-content-center" id="view_likes">
+      <h1><i class="bi bi-hand-thumbs-up" onclick="liked()"></i></h1>
     </div>
+    <hr>
   </c:if>
 
 <c:if test="${bbs_type !='\"application\"'}">
@@ -83,6 +87,18 @@
 
   </script>
 <script>
+  $(document).ready(function(){
+    makeViewTitle();
+    makeViewContent();
+    makeViewWriter();
+    makeViewCount();
+    makeViewLastModified();
+    makeViewButtons();
+    makeViewComments();
+    makeDownloads();
+    // makeCommentButton();
+  })
+
 
   function makeViewComments() {
     var comments = $('#comments');
@@ -119,16 +135,12 @@
 
   }
 
-  $(document).ready(function(){
-    makeViewTitle();
-    makeViewContent();
-    makeViewWriter();
-    makeViewCount();
-    makeViewLastModified();
-    makeViewButtons();
-    makeViewComments();
-    // makeCommentButton();
-  })
+  function makeDownloads() {
+    // view_download
+    var view_download = $('#view_download');
+    var downloadList = <%=getDownloadList%>;
+  }
+
   var major = <%=major%>;
   var num = <%=num%>;
   var id = <%=id%>;

@@ -438,8 +438,7 @@ public class BBSDAO {
     }
 
 
-
-
-
-
+    public Object getDownloadList(String id) {
+        return null;
+    }
 }

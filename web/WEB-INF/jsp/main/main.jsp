@@ -152,7 +152,7 @@
                                         <div class=" p-3 border card m-0" style="height : 493px;">
                                             <div class="mb-2 d-flex justify-content-between">
                                                 <div class="nav nav-tabs"  role="tablist">
-                                                    <button class="nav-link active" >일정</button>
+                                                    <button class="nav-link active" ><strong>일정</strong></button>
                                                 </div>
                                                 <div class="morebtn">
                                                     <div class="py-2">
@@ -260,10 +260,10 @@
         var nav31tab = $('#nav-31-tab');
         for (var i = 0 ; i < menuPageList.length; i++){
             if(menuPageList[i].page_id == '30'){
-                nav30tab.append(menuPageList[i].page_title);
+                nav30tab.append('<strong>'+menuPageList[i].page_title+'</strong>');
             }
             if(menuPageList[i].page_id == '31'){
-                nav31tab.append(menuPageList[i].page_title);
+                nav31tab.append('<strong>'+menuPageList[i].page_title+'</strong>');
             }
         }
     }
@@ -343,11 +343,11 @@
             }
             if(menuPageList[i].page_id == '22'){
                 tab_name_22=menuPageList[i].page_title;
-                nav22tab.append(tab_name_22);
+                nav22tab.append('<strong>'+tab_name_22+'</strong>');
             }
             if(menuPageList[i].page_id == '23'){
                 tab_name_23=menuPageList[i].page_title;
-                nav23tab.append(tab_name_23);
+                nav23tab.append('<strong>'+tab_name_23+'</strong>');
                 break;
             }
         }
@@ -551,7 +551,7 @@
 
     @media (min-width: 1200px) {
         .index_post_link {
-            width: 300px;
+            width: 280px;
         }
     }
 

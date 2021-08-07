@@ -289,6 +289,7 @@ CREATE TABLE bbs(
     `comments_count` INT(10) DEFAULT 0 ,
     `likes` INT(10) DEFAULT 0,
     `already_like` varchar(3000) NOT NULL DEFAULT '',
+    `uploadedFiles` varchar(3000) NOT NULL DEFAULT '',
     PRIMARY KEY(`id`)
 );
 
