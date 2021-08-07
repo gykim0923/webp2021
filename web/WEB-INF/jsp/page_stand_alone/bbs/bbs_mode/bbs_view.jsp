@@ -138,7 +138,6 @@
   function makeDownloads() {
     // view_download
     var view_download = $('#view_download');
-    var downloadList = <%=getDownloadList%>;
   }
 
   var major = <%=major%>;

@@ -69,7 +69,10 @@
         var writer_id = user.id;
         var writer_name = type.for_header;
         var last_modified = formatDate(new Date());
-        var data = major+"-/-/-"+writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+num+"-/-/-"+last_modified+"-/-/-"+text;
+        if(uploadedFiles==''){
+            uploadedFiles='null';
+        }
+        var data = major+"-/-/-"+writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+num+"-/-/-"+last_modified+"-/-/-"+text+"-/-/-"+uploadedFiles;
 
 
             $.ajax({
@@ -80,8 +83,8 @@
                     data: data
                 },
                 success: function (data) {
+                    console.log("error : "+data);
                     if (data == 'success') {
-
                         swal.fire({
                             title : '내용이 추가되었습니다.',
                             icon : 'success',
@@ -155,7 +158,14 @@
 
         return [year, month, day].join('-');
     }
-    var upload_folder = '/img/bbs';
+
+    var file_id; //나중에 파일 상세정보를 uploadedFile로부터 역참조 하고싶은 경우에 사용하라고 만들어둠 (다운로드에서 사용하는 기능)
+    var file_folder; //다운로드에서 쓸 경로
+    var file_path; //파일이 업로드된 상대경로
+    var uploadedFiles='';
+
+
+    var upload_folder = '/uploaded/bbs';
     $("#kv-explorer").fileinput({
         'theme': 'explorer-fa',
         'uploadUrl': 'upload.kgu?folder='+upload_folder,

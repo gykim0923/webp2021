@@ -138,7 +138,7 @@ public class BBSDAO {
     }
 
     public String insertBbs(String data) {
-        String arr[] = data.split("-/-/-"); // major+"-/-/-"+writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+num+"-/-/-"+last_modified+"-/-/-"+text
+        String arr[] = data.split("-/-/-"); // major+"-/-/-"+writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+num+"-/-/-"+last_modified+"-/-/-"+text+"-/-/-"+uploadedFiles
         String major = arr[0];
         String writer_id = arr[1];
         String writer_name = arr[2];
@@ -146,11 +146,12 @@ public class BBSDAO {
         String category = arr[4];
         String last_modified = arr[5];
         String text = arr[6];
+        String uploadedFiles = arr[7];
         Connection conn = Config.getInstance().sqlLogin();
         try {
-//            System.out.println(data);
+            System.out.println(data);
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn,"INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE(?,?,?,?,?,?,?);", major,writer_id,writer_name, title, category, last_modified, text);
+            queryRunner.update(conn,"INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text, uploadedFiles) VALUE(?,?,?,?,?,?,?,?);", major,writer_id,writer_name, title, category, last_modified, text, uploadedFiles);
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {
