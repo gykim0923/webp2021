@@ -129,21 +129,23 @@ public class UploadAction implements Action {
             }
 
             UserDTO user = gson.fromJson((String) request.getSession().getAttribute("user"), UserDTO.class);
-            String id= user.id;
+            String user_id= user.id;
 
             String upload_time = simDf.format(new Date(currentTime));
-            String parameter = id+"-/-/-"+uploadFile+"-/-/-"+newFileName+"-/-/-"+upload_time+"-/-/-"+savePath+"-/-/-"+folder;
+            String parameter = user_id+"-/-/-"+uploadFile+"-/-/-"+newFileName+"-/-/-"+upload_time+"-/-/-"+savePath+"-/-/-"+folder;
             String file_id = FileDAO.getInstance().insertFileUploadLog(parameter); //업로드 파일 로그 남기면서 돌려받을 고유 번호
             String upload_mode = multi.getParameter("upload_mode");
 //            System.out.println(upload_mode);
             if(upload_mode==null){
                 upload_mode="common";
             }
+
             if(!upload_mode.equals("bbs")){
 //                System.out.println("it's not bbs");
                 return file_id+"-/-/-"+newFileName;
             }
             else {
+//                FileDAO.getInstance().updateFileUploadLog();
                 JsonObject forFinish = new JsonObject();
                 JsonArray forArray = new JsonArray();
                 JsonObject intoArray = new JsonObject();
@@ -191,6 +193,8 @@ public class UploadAction implements Action {
                 forFinish.add("previewFileExtSettings", iconCon);
                 forFinish.addProperty("previewZoom", "<img src=\""+folder+'/'+newFileName+"\" class=\"kv-preview-data file-preview-image file-zoom-detail\">"); // 상세보기를 누르면 나올 이미지
                 Gson gson2 = new GsonBuilder().disableHtmlEscaping().create();
+//                System.out.println(forFinish);
+//                System.out.println(gson2.toJson(forFinish));
                 return gson2.toJson(forFinish);
             }
 
