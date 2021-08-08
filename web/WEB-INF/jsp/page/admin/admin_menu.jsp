@@ -13,7 +13,7 @@
 %>
 <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <div>
-    <div class="album py-5 bg-light">
+    <div class="album">
         <div class="container">
             <label><h2><strong>메뉴 관리</strong></h2></label>
             <table class="boardtable" id="table" data-toggle="table"

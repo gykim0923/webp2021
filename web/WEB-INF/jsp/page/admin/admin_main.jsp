@@ -12,7 +12,7 @@
     String getAllKGUMajor = (String)request.getAttribute("getAllKGUMajor");
 %>
 <div>
-    <div class="album py-5 bg-light">
+    <div class="album">
         <div class="container">
 <%--            전공 관리--%>
             <%@include file="/WEB-INF/jsp/page/admin/admin_main/admin_major.jsp"%>

@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="">
-    <label><h2><strong>본전공 관리</strong></h2></label>
+    <label><h2><strong>본전공 관리 (경기대학교 전체 전공 리스트)</strong></h2></label>
     <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
     <table class="boardtable" id="table4"  data-toggle="table"
            data-pagination="true" data-toolbar="#toolbar"

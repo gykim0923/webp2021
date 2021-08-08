@@ -23,7 +23,7 @@
         <c:choose>
           <c:when test="${user == null}">
             <div class="dropdown py-2">
-              <a href="loginPage_v2.kgu"><h4 class="m-0"><strong><i class="bi bi-box-arrow-in-right"></i> LOGIN</strong></h4></a>
+              <a href="loginPage_v2.kgu"><h5 class="m-0"><strong><i class="bi bi-box-arrow-in-right"></i> LOGIN</strong></h5></a>
             </div>
           </c:when>
           <c:when test="${user != null}">

@@ -12,7 +12,7 @@
 <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <script src='js/sha256.js'></script>
 <div>
-    <div class="album py-5 bg-light">
+    <div class="album">
         <div class="container">
             <table class="boardtable" id="table1"  data-toggle="table"
                    data-pagination="true" data-toolbar="#toolbar"

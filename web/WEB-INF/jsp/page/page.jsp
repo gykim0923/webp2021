@@ -54,18 +54,18 @@
 
                         <div class="row align-items-md-stretch">
                             <div class="col-lg-12 py-2">
-                                <div class=" h-100 p-5 bg-light border shadow rounded" id="page_title"></div>
+                                <div class=" h-100 p-5 m-0 border card" id="page_title"></div>
                             </div>
                         </div>
 
-                        <div class="row align-items-md-stretch">
+                        <div class="row align-items-md-start">
 
                             <div class="col-xxl-2 col-lg-3 py-2">
-                                <div class=" h-100 p-0 bg-light border shadow rounded" id="page_menu"></div>
+                                <div class=" h-100 p-0 border card" id="page_menu"></div>
                             </div>
 
                             <div class="col-xxl-10 col-lg-9 py-2">
-                                <div class=" h-100 p-5 bg-light border shadow rounded">
+                                <div class=" h-100 p-xxl-5 p-xl-4 p-3 border card">
                                     <c:choose>
                                         <%--            admin--%>
                                         <c:when test="${jsp == '\"admin_main\"'}">

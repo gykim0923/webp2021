@@ -11,7 +11,7 @@
 %>
 
 <div>
-    <div class="album py-5 bg-light">
+    <div class="album">
         <div class="container">
             <label><h2><strong>사용자 관리</strong></h2></label>
             <table class="boardtable" id="table" data-toggle="table"

@@ -50,10 +50,6 @@
     <div id="main" class='layout-navbar'>
         <%@include file="header_v3.jsp"%>
         <div id="main-content">
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>주의!</strong> 아직 개발 중인 홈페이지입니다.
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
             <div class="page-heading">
                 <%--Main 영역 start--%>
 
@@ -64,6 +60,10 @@
                             <div class="col-12 mb-3">
                                 <p class="h1 header_title" id="headerTitle"></p>
                             </div>
+                        </div>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>주의!</strong> 아직 개발 중인 홈페이지입니다.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                         <div class="row align-items-md-stretch">
 <%--                            left side start--%>
@@ -92,8 +92,8 @@
                                 <div class="row">
                                     <div class="col-xl-6 py-2 " id="main2_left">
                                         <div class=" p-3 border card m-0"  style="height : 493px;">
-                                            <div>
-                                                <div class="mb-2 d-flex justify-content-between" >
+                                            <div class="">
+                                                <div class="mb-2 d-flex justify-content-between border-bottom" >
                                                     <div class="nav nav-tabs " id="nav-tab" role="tablist">
                                                         <button class="nav-link active" id="nav-21-tab" data-bs-toggle="tab" data-bs-target="#nav-21" type="button" role="tab" aria-controls="nav-home" aria-selected="true" onclick="clickBBS(21)"></button>
                                                         <button class="nav-link" id="nav-22-tab" data-bs-toggle="tab" data-bs-target="#nav-22" type="button" role="tab" aria-controls="nav-profile" aria-selected="false" onclick="clickBBS(22)"></button>
