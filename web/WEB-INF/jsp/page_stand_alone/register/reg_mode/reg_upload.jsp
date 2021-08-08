@@ -635,6 +635,7 @@
             },
             success: function (data) { //성공 시
                 if(data=='success'){
+
                     swal.fire({
                         title : '해당 내용이 수정되었습니다.',
                         icon : 'success',
@@ -680,10 +681,8 @@
             file_type : 'null',
             board_level : '1',
             upload_mode : 'bbs',
-            id : ''
         },
         overwriteInitial : false,
-        // deleteUrl: "/site/file-delete",
         preferIconicPreview: true,
         previewFileIconSettings: { // configure your icon file extensions
             'doc': '<i class="bi bi-file-earmark-word-fill text-primary"></i>',
@@ -729,10 +728,13 @@
                 return ext.match(/(mp3|wav)$/i);
             }
         }
-    }).on('fileuploaded', function(e, params) {
-        console.log('File uploaded params', Object.values($("#regFile").data('fileinput').initialPreviewConfig));
-        var obj = ($("#regFile").data('fileinput').initialPreviewConfig);
-        alert(Object.values(obj)[0].fileId);
-        arr.push(Object.values(obj)[0].fileId);
+    }).on('fileuploaded', function() {
+        //파일이 삭제되었습니다 추가?
+    }).on('filedeleted', function() {
+        swal.fire({
+            title : '파일이 삭제되었습니다.',
+            icon : 'success',
+            showConfirmButton: true
+        })
     });
 </script>

@@ -248,6 +248,7 @@ CREATE TABLE uploadedFile(
                        `upload_time` DATE NOT NULL,
                        `savePath` VARCHAR(100)  NOT NULL,
                        `folder` VARCHAR(100)  NOT NULL,
+                       `uploaded` VARCHAR(10) NOT NULL DEFAULT 'false',
                        PRIMARY KEY (`id`)
 );
 
@@ -492,7 +493,7 @@ CREATE TABLE bbs_regQuestion(
 );
 
 CREATE TABLE bbs_reg_WriterFile(
-    `id` INT Auto_Increment,
+    `id` INT NOT NULL ,
     `reg_id` Int(10) not null,
     `original_FileName` varchar(200) not null,
     `real_FileName` varchar(200) not null,

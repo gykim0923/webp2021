@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import kr.ac.kyonggi.swaig.common.sql.Config;
 import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
+import kr.ac.kyonggi.swaig.handler.dto.settings.RegisterDTO;
 import kr.ac.kyonggi.swaig.handler.dto.settings.UploadedFileDTO;
 import kr.ac.kyonggi.swaig.handler.dto.tutorial.TutorialDTO;
 import org.apache.commons.dbutils.DbUtils;
@@ -94,5 +95,24 @@ public class FileDAO {
         } finally {
             DbUtils.closeQuietly(conn);
         }
+    }
+
+    public ArrayList<UploadedFileDTO> getFiles(String folder) {
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn,"SELECT * FROM uploadedfile WHERE folder=? AND uploaded=? ORDER BY id DESC;", new MapListHandler(), folder, "false");
+            queryRunner.update(conn, "UPDATE uploadedfile SET `uploaded`=? WHERE `folder` = ? AND uploaded=?;", "true", folder, "false");
+//            System.out.println(listOfMaps);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<UploadedFileDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<UploadedFileDTO>>() {}.getType());
+//        System.out.println(selected);
+        return selected;
     }
 }

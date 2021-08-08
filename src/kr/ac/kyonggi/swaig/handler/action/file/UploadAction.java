@@ -149,28 +149,20 @@ public class UploadAction implements Action {
                 JsonObject forFinish = new JsonObject();
                 JsonArray forArray = new JsonArray();
                 JsonObject intoArray = new JsonObject();
-                intoArray.addProperty("url", "bbsFileDelete.kgu?id="+file_id+"&&folder="+folder);
+                intoArray.addProperty("url", "bbsFileDelete.kgu?folder="+folder);
                 JsonObject forIntoArray = new JsonObject();
-//                forIntoArray.addProperty("id", file_id);
-//                intoArray.add("extra", forIntoArray);
+                forIntoArray.addProperty("fileId", file_id);
                 intoArray.addProperty("fileId", file_id);
-//                forFinish.add("uploadExtraData", forIntoArray);
+                intoArray.add("extra", forIntoArray);
                 intoArray.addProperty("caption", uploadFile);
                 forArray.add(intoArray);
                 forFinish.add("initialPreviewConfig", forArray);
                 JsonArray forArray2 = new JsonArray();
                 forArray2.add("<span style='font-size : 14px; font-family : NanumSquare ;'>" + uploadFile + " 업로드 성공</span>");
-//                if(fileType.equals("image")){
-//                    forArray2.add("<img src='"+folder+"/" + newFileName + "' style='width : 200px'><span style='font-size : 12px'> " + uploadFile + " 업로드 성공</span>");
-//                }
-//                else{
-//                    forArray2.add("<span style='font-size : 14px; font-family : NanumSquare ;'>" + uploadFile + " 업로드 성공</span>");
-//                }
                 forFinish.add("initialPreview", forArray2);
+                System.out.println(forFinish);
                 forFinish.addProperty("previewZoom", "<img src=\""+folder+'/'+newFileName+"\" class=\"kv-preview-data file-preview-image file-zoom-detail\">"); // 상세보기를 누르면 나올 이미지
                 Gson gson2 = new GsonBuilder().disableHtmlEscaping().create();
-//                System.out.println(forFinish);
-//                System.out.println(gson2.toJson(forFinish));
                 return gson2.toJson(forFinish);
             }
 

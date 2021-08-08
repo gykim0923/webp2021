@@ -819,7 +819,7 @@
             var it = getAllFile[i];
             if(user != null){
                 if(getReg.level.includes(type.for_header) || type.for_header == '관리자' || user.id == getReg.writer_id)
-                    a += '<a href="download.kgu?id='+it.id+'&&path='+it.real_FileName+'">' + it.original_FileName + '</a>&nbsp&nbsp';
+                    a += '<a href="download.kgu?id='+it.id+'&&path=/img/bbs_reg">' + it.original_FileName + '</a>&nbsp&nbsp';
                 else
                     a  += it.original_FileName + '&nbsp&nbsp';
             }

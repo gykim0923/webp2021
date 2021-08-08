@@ -124,7 +124,7 @@ public class RegisterDAO {
         } finally {
             DbUtils.closeQuietly(conn);
         }
-        return "success";
+        return id;
     }
 
     public String whoAnswerIt(String data) {
@@ -354,5 +354,22 @@ public class RegisterDAO {
         Gson gson = new Gson();
         ArrayList<RegWriterFileDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<RegWriterFileDTO>>() {}.getType());
         return selected;
+    }
+
+    public String insertRegFile(ArrayList<UploadedFileDTO> files, String reg_id) {
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            for(UploadedFileDTO ud : files){
+                queryRunner.query(conn, "INSERT `bbs_reg_writerfile` SET id=?, reg_id=?, original_FileName=?, real_FileName=?", new MapListHandler(),
+                        ud.id, reg_id, ud.uploadFile, ud.newFileName);
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+            return "fail";
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
     }
 }
