@@ -372,4 +372,35 @@ public class RegisterDAO {
         }
         return "success";
     }
+
+    public String deleteAlreadyFile(String data) {
+        String arr[] = data.split("-/-/-"); // 0 data 1 id 2 type.type_name
+        List<Map<String, Object>> listOfMaps = null;
+        List<Map<String, Object>> listOfMaps2 = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        Gson gson = new Gson();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_reg_writerfile WHERE id=?;", new MapListHandler(),
+                    arr[0]);
+            ArrayList<RegWriterFileDTO> lists = gson.fromJson(gson.toJson(listOfMaps),
+                    new TypeToken<List<RegWriterFileDTO>>() {
+                    }.getType());
+            RegWriterFileDTO it = lists.get(0);
+            listOfMaps2 = queryRunner.query(conn, "SELECT * FROM bbs_reg WHERE id=?;", new MapListHandler(), it.reg_id);
+            ArrayList<RegisterDTO> lists2 = gson.fromJson(gson.toJson(listOfMaps2),
+                    new TypeToken<List<RegisterDTO>>() {
+                    }.getType());
+            RegisterDTO reg = lists2.get(0);
+            if (!reg.writer_id.equals(arr[1]) && !arr[2].equals("관리자"))
+                return "fail";
+            queryRunner.update(conn, "DELETE FROM bbs_reg_writerfile WHERE id=?", arr[0]);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            return "fail";
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
+    }
 }

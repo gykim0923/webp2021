@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String getReg = (String) request.getAttribute("getReg");
+    String getAllFile = (String) request.getAttribute("regFiles");
 %>
 <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <script src="js/default.js"></script>
@@ -77,8 +78,8 @@
     </div>
 </div>
 
-<%--버튼이 나와야 하는 자리--%>
-
+<%--파일 나와야 하는 자리--%>
+<ul class="list-group" id="alreadyFiles"></ul>
 <div class="file-loading mb-3">
     <input id="regFile" type="file" multiple>
 </div>
@@ -153,6 +154,51 @@
                 }
                 if( getReg.level.indexOf("학생")>=0) {
                     check3.html('<input class="form-check-input" type="checkbox" checked id="inlineCheckbox3" value="학생"><label class="form-check-label" for="inlineCheckbox3">학생</label>');
+                }
+                var alreadyFiles = <%=getAllFile%>;
+                if(alreadyFiles.length > 0){
+                    var alreadyPanel = $('#alreadyFiles');
+                    for(var i = 0 ; i < alreadyFiles.length ; ++i){
+                        var value = alreadyFiles[i];
+                        alreadyPanel.append('<li class="list-group-item d-flex justify-content-between align-items-center" id="alreadyFileDiv' + i + '">' + value.original_FileName + '<a onclick="alreadyDelete(' + i + ')"><i class="bi bi-x-lg"></i></a></li>')
+                    }
+                }
+                function alreadyDelete(index){
+                    var value = alreadyFiles[index];
+                    swal.fire({
+                        title: '정말로 파일을 삭제하시나요?',
+                        text: '다시 되돌릴 수 없습니다.',
+                        icon: 'warning',
+                        showConfirmButton: true,
+                        showCancelButton: true
+                    }).then(function () {
+                        $.ajax({
+                            url: 'ajax.kgu',
+                            type: 'post',
+                            data: {
+                                req: "deleteRegAlreadyFile",
+                                data: value.id
+                            },
+                            success: function (data) {
+                                if (data == "success") {
+                                    $('#alreadyFileDiv' + index).remove();
+                                    swal.fire({
+                                        title: '파일이 삭제되었습니다.',
+                                        icon: 'success',
+                                        showConfirmButton: true
+                                    })
+                                } else {
+                                    swal.fire({
+                                        title: '서버에러',
+                                        text: '다음에 다시 시도해주세요',
+                                        icon: 'error',
+                                        showConfirmButton: true
+                                    });
+                                    return;
+                                }
+                            }
+                        })
+                    });
                 }
             </script>
         </c:when>
