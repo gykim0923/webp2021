@@ -61,6 +61,13 @@ public class ProfessorDTO {
 
     public String prof_img,prof_name,prof_email,prof_lecture,prof_location,prof_call;
 
+    public String prof_color;
 
+    public String getProf_color() {
+        return prof_color;
+    }
 
+    public void setProf_color(String prof_color) {
+        this.prof_color = prof_color;
+    }
 }

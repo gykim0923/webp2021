@@ -59,12 +59,12 @@ public class ProfessorDAO {
       return results.get(0);
    }
    public String modifyProfessor(String data) {
-      String arr[]=data.split("-/-/-");//0=img 1=name 2=location  3=call 4=email 5:lecture
+      String arr[]=data.split("-/-/-");//0=img 1=name 2=location  3=call 4=email 5:lecture 6:id 7:color
       Connection conn = Config.getInstance().sqlLogin();
       List<Map<String, Object>> listOfMaps = null;
       try {
          QueryRunner queryRunner = new QueryRunner();
-         queryRunner.update(conn,"UPDATE professor SET prof_img=?, prof_name=?, prof_location=?, prof_call=?, prof_email=?, prof_lecture=? WHERE id=?;",arr[0],arr[1],arr[2],arr[3],arr[4],arr[5],arr[6]);
+         queryRunner.update(conn,"UPDATE professor SET prof_img=?, prof_name=?, prof_location=?, prof_call=?, prof_email=?, prof_lecture=?, prof_color=? WHERE id=?;",arr[0],arr[1],arr[2],arr[3],arr[4],arr[5],arr[7],arr[6]);
 
          listOfMaps=queryRunner.query(conn,"SELECT * FROM professor WHERE id=?",new MapListHandler(),Integer.parseInt(arr[6]));
 
@@ -95,15 +95,17 @@ public class ProfessorDAO {
 
    public String insertProfessor(String data) {
       Connection conn = Config.getInstance().sqlLogin();
-      String arr[]=data.split("-/-/-");//0=img 1=name 2=location  3=call 4=email 5:lecture
+      String arr[]=data.split("-/-/-");//0=img 1=name 2=location  3=call 4=email 5:lecture 6: color
 
       List<Map<String, Object>> listOfMaps = null;
       try {
          QueryRunner queryRunner = new QueryRunner();
-         if(arr[0]!=null)
-            queryRunner.update(conn,"INSERT INTO professor(prof_img,prof_name,prof_location,prof_call,prof_email,prof_lecture) VALUES(?,?,?,?,?,?);", arr[0],arr[1],arr[2],arr[3],arr[4],arr[5]);
-         else
-            queryRunner.update(conn,"INSERT INTO professor(prof_img,prof_name,prof_location,prof_call,prof_email,prof_lecture) VALUES('#',?,?,?,?,?);", arr[1],arr[2],arr[3],arr[4],arr[5]);
+         if(arr[0]!=null) {
+            queryRunner.update(conn, "INSERT INTO professor(prof_img,prof_name,prof_location,prof_call,prof_email,prof_lecture,prof_color) VALUES(?,?,?,?,?,?,?);", arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6]);
+         }
+         else {
+            queryRunner.update(conn, "INSERT INTO professor(prof_img,prof_name,prof_location,prof_call,prof_email,prof_lecture,prof_color) VALUES('#',?,?,?,?,?,?);", arr[1], arr[2], arr[3], arr[4], arr[5], arr[6]);
+         }
          //listOfMaps=queryRunner.query(conn,"SELECT * FROM professor WHERE prof_name=? and prof_call=?",new MapListHandler(),arr[0],arr[2]);
       } catch(SQLException se) {
          se.printStackTrace();

@@ -213,6 +213,7 @@ CREATE TABLE professor(
     `prof_lecture` VARCHAR (200) NOT NULL,
     `prof_location` VARCHAR (100) NOT NULL,
     `prof_call` VARCHAR (100) NOT NULL,
+    `prof_color` VARCHAR (100) NOT NULL DEFAULT '#777777',
     PRIMARY KEY (`id`)
 );
 

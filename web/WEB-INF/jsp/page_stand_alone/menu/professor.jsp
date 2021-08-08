@@ -98,7 +98,8 @@
       for (var i = 0; i < professor.length; i++) {
          text+='<div class="col-lg-4 col-md-6">'
                  +'<div class="card">'
-                 +'<img src="https://via.placeholder.com/340x120/87CEFA/000000" alt="Cover" class="card-img-top">'
+                 +'<svg class="card-img-top" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="'+professor[i].prof_color+'"></rect></svg>'
+                 // +'<img src="https://via.placeholder.com/340x120/87CEFA/000000" alt="Cover" class="card-img-top">'
                  +'<div class="card-body text-center">'
                  +'<img src="'+professor[i].prof_img+'" style="width:100px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">'
                  +'<h5 class="card-title">'+professor[i].prof_name+' 교수</h5>'
@@ -111,8 +112,8 @@
 
          if(typeForProfessor.for_header=='관리자') {
             text += '<div class="card-footer">'
-                    +'<button class="btn btn-secondary mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyProModal('+i+')">수정</button>'
-                    +'<button class="btn btn-secondary mx-2" onclick="deleteProfessor('+i+')">삭제</button></div>'
+                    +'<button class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyProModal('+i+')">수정</button>'
+                    +'<button class="btn btn-danger mx-2" onclick="deleteProfessor('+i+')">삭제</button></div>'
          }
 
             text+='</div></div>';
@@ -120,7 +121,7 @@
       }
       if(typeForProfessor.for_header=='관리자') {
          <!-- Button trigger modal -->
-         text +='<div><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">교수님 추가</button><div>'
+         text +='<div><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">교수님 추가</button><div>'
 
       }
       prolist.append(text);
@@ -129,11 +130,12 @@
       var list = $('#myModalbody');
       var professor1 = <%=getProfessorList%>;
       var a = '';
-      a += '<div>교수님 이름</div><input type="text" class="form-control" id="modify_pro_name" name="pro_name1" value="' + (professor1[i].prof_name) + '" placeholder="pro_name">'
-      a += '<div>사무실 위치</div><input type="text" class="form-control" id="modify_pro_location" name="pro_location1" value="' + (professor1[i].prof_location) + '" placeholder="pro_location">'
-      a += '<div>연락처 </div><input type="text" class="form-control" id="modify_pro_call" name="pro_call1" value="' + (professor1[i].prof_call) + '" placeholder="pro_call">'
-      a += '<div>이메일 </div><input type="text" class="form-control" id="modify_pro_email" name="pro_email1" value="' + (professor1[i].prof_email) + '" placeholder="pro_email">'
-      a += '<div>담당과목 </div><input type="text" class="form-control" id="modify_pro_lecture" name="pro_lecture1" value="' + (professor1[i].prof_lecture) + '" placeholder="pro_lecture">'
+      a += '<div>교수님 이름</div><input type="text" class="form-control" id="modify_pro_name" name="pro_name1" value="' + (professor1[i].prof_name) + '" placeholder="교수님 이름">'
+      a += '<div>사무실 위치</div><input type="text" class="form-control" id="modify_pro_location" name="pro_location1" value="' + (professor1[i].prof_location) + '" placeholder="사무실 위치">'
+      a += '<div>연락처 </div><input type="text" class="form-control" id="modify_pro_call" name="pro_call1" value="' + (professor1[i].prof_call) + '" placeholder="연락처">'
+      a += '<div>이메일 </div><input type="text" class="form-control" id="modify_pro_email" name="pro_email1" value="' + (professor1[i].prof_email) + '" placeholder="이메일">'
+      a += '<div>담당과목 </div><input type="text" class="form-control" id="modify_pro_lecture" name="pro_lecture1" value="' + (professor1[i].prof_lecture) + '" placeholder="담당과목">'
+      a += '<div>배경색상 </div><input type="color" class="form-control" id="modify_pro_color" name="pro_color1"  value="' + (professor1[i].prof_color) + '" placeholder="#777777">'
 
       a+='<div id="fileUploadSection">'
       a+='<input type="file" name="uploadFile" id="uploadFile" accept="image/*">'
@@ -213,7 +215,8 @@
       var call = $('input[name=pro_call1]').val();
       var email = $('input[name=pro_email1]').val();
       var lecture = $('input[name=pro_lecture1]').val();
-      var update = prof_img+"-/-/-" +name + "-/-/-" + location1 + "-/-/-" + call +  "-/-/-" + email +  "-/-/-"+ lecture +  "-/-/-"+ id;
+      var color = $('input[name=pro_color1]').val();
+      var update = prof_img+"-/-/-" + name + "-/-/-" + location1 + "-/-/-" + call +  "-/-/-" + email +  "-/-/-" + lecture +  "-/-/-" + id + "-/-/-" + color;
 
          $.ajax({
             url : "ajax.kgu",
@@ -277,7 +280,8 @@
       var call2= $('#add_pro_call').val();
       var email2= $('#add_pro_email').val();
       var lecture2= $('#add_pro_lecture').val();
-      var data2 =prof_img+'-/-/-'+name1+'-/-/-'+location2+'-/-/-'+call2+'-/-/-'+email2+'-/-/-'+lecture2;
+      var color2 = $('#add_pro_color').val();
+      var data2 =prof_img+'-/-/-'+name1+'-/-/-'+location2+'-/-/-'+call2+'-/-/-'+email2+'-/-/-'+lecture2+'-/-/-'+color2;
 
 
 
@@ -347,15 +351,18 @@
             </div>
             <div class="modal-body" id="modalReset">
                <div>교수님 이름 </div>
-               <input type="text" class="form-control" id="add_pro_name" name="add_pro_name1" value="" placeholder="pro_name">
+               <input type="text" class="form-control" id="add_pro_name" name="add_pro_name1" value="" placeholder="교수님 이름">
                <div>사무실 위치</div>
-               <input type="text" class="form-control" id="add_pro_location" name="add_pro_location1" value="" placeholder="pro_location">
+               <input type="text" class="form-control" id="add_pro_location" name="add_pro_location1" value="" placeholder="사무실 위치">
                <div>연락처</div>
-               <input type="text" class="form-control" id="add_pro_call" name="add_pro_call1" value="" placeholder="pro_call">
+               <input type="text" class="form-control" id="add_pro_call" name="add_pro_call1" value="" placeholder="연락처">
                <div>이메일</div>
-               <input type="text" class="form-control" id="add_pro_email" name="add_pro_email1" value="" placeholder="pro_email">
+               <input type="text" class="form-control" id="add_pro_email" name="add_pro_email1" value="" placeholder="이메일">
                <div>담당과목</div>
-               <input type="text" class="form-control" id="add_pro_lecture" name="add_pro_lecture1" value="" placeholder="pro_lecture">
+               <input type="text" class="form-control" id="add_pro_lecture" name="add_pro_lecture1" value="" placeholder="담당과목">
+               <div>배경색상 </div>
+               <input type="color" class="form-control" id="add_pro_color" name="add_pro_color1"  value="#777777" placeholder="#777777">
+
                <div>
                   <div id="fileUploadSection">
                      <input type="file" name="uploadFile" id="uploadFile" accept="image/*">
