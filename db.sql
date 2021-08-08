@@ -122,17 +122,17 @@ CREATE TABLE major(
 
 INSERT INTO major(oid,major_id,major_name,major_location,major_contact) VALUE('1','main','K-WITH 융합교육원','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
 INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major1','문화재관리학융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
-INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major2','형사사법학융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
-INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major3','심리상담융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
-INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major4','관광스포츠산업융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
-INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major5','창업합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
-INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major6','커뮤니티공공안전융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
-INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major7','융합데이터공학융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
-INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major8','미디어융합콘텐츠융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
-INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major9','AI경영융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
-INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major10','스마트AI융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
-INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major11','미디어융합콘텐츠융합전공 트랙','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
-INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major12','융합데이터공학융합전공트랙융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+-- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major2','형사사법학융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+-- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major3','심리상담융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+-- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major4','관광스포츠산업융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+-- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major5','창업합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+-- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major6','커뮤니티공공안전융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+-- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major7','융합데이터공학융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+-- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major8','미디어융합콘텐츠융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+-- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major9','AI경영융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+-- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major10','스마트AI융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+-- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major11','미디어융합콘텐츠융합전공 트랙','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+-- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major12','융합데이터공학융합전공트랙융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
 
 CREATE TABLE text(
     `id` int(50) NOT NULL,
@@ -302,6 +302,7 @@ INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, t
 INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목2323232',21,'2021-01-01','<p>컨텐츠내2용5</p>');
 INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목23232',23,'2021-01-01','<p>컨텐츠내2용6</p>');
 INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목4552',21,'2021-01-01','<p>컨텐츠내2용7</p>');
+INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','44444',31,'2021-01-01','<p>컨텐츠내2용7</p>');
 
 
 CREATE TABLE comment(
@@ -450,12 +451,12 @@ CREATE TABLE log(
     PRIMARY KEY (`id`)
 );
 
-INSERT INTO log(id, user_id, user_name, user_type,log_time, log_type) VALUE ('1', 'admin', '관리자테스트','홈페이지관리자','2020-08-04 12:39:40','로그인');
-INSERT INTO log(id, user_id, user_name, user_type,log_time, log_type) VALUE ('2', 'admin', '관리자테스트','홈페이지관리자','2020-08-11 12:39:40','로그인');
-INSERT INTO log(id, user_id, user_name, user_type,log_time, log_type) VALUE ('3', 'admin', '관리자테스트','홈페이지관리자','2020-08-12 12:39:40','로그인');
-INSERT INTO log(id, user_id, user_name, user_type,log_time, log_type) VALUE ('4', 'admin', '관리자테스트','홈페이지관리자','2021-07-02 12:39:40','로그인');
-INSERT INTO log(id, user_id, user_name, user_type,log_time, log_type) VALUE ('5', 'admin', '관리자테스트','홈페이지관리자','2021-07-04 12:39:40','로그인');
-INSERT INTO log(id, user_id, user_name, user_type,log_time, log_type) VALUE ('6', 'admin', '관리자테스트','홈페이지관리자','2021-08-04 12:39:40','로그인');
+-- INSERT INTO log(id, user_id, user_name, user_type,log_time, log_type) VALUE ('1', 'admin', '관리자테스트','홈페이지관리자','2020-08-04 12:39:40','로그인');
+-- INSERT INTO log(id, user_id, user_name, user_type,log_time, log_type) VALUE ('2', 'admin', '관리자테스트','홈페이지관리자','2020-08-11 12:39:40','로그인');
+-- INSERT INTO log(id, user_id, user_name, user_type,log_time, log_type) VALUE ('3', 'admin', '관리자테스트','홈페이지관리자','2020-08-12 12:39:40','로그인');
+-- INSERT INTO log(id, user_id, user_name, user_type,log_time, log_type) VALUE ('4', 'admin', '관리자테스트','홈페이지관리자','2021-07-02 12:39:40','로그인');
+-- INSERT INTO log(id, user_id, user_name, user_type,log_time, log_type) VALUE ('5', 'admin', '관리자테스트','홈페이지관리자','2021-07-04 12:39:40','로그인');
+-- INSERT INTO log(id, user_id, user_name, user_type,log_time, log_type) VALUE ('6', 'admin', '관리자테스트','홈페이지관리자','2021-08-04 12:39:40','로그인');
 
 
 
