@@ -13,7 +13,7 @@
 
     <table class="boardtable" id="table1"  data-toggle="table"
            data-pagination="true" data-toolbar="#toolbar"
-           data-search="true" data-side-pagination="true" data-click-to-select="true" data-height="500"
+           data-search="true" data-side-pagination="true" data-click-to-select="true" data-height="600"
            data-page-size="10"
            data-page-list="[10,20,30]">
         <thead>
@@ -97,7 +97,9 @@
 </script>
 
 <style>
-
+    .bootstrap-table  > fixed-table-body, .bootstrap-table  > fixed-table-border{
+        border: 0;
+    }
     .boardtable > thead > tr > th, .boardtable > tbody > tr > td{
         overflow:hidden;
         text-overflow:ellipsis;

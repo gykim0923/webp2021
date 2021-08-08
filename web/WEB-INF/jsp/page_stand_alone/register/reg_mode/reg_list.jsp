@@ -13,14 +13,14 @@
 
     <table class="boardtable" id="table1"  data-toggle="table"
            data-pagination="true" data-toolbar="#toolbar"
-           data-search="true" data-side-pagination="true" data-click-to-select="true" data-height="460"
+           data-search="true" data-side-pagination="true" data-click-to-select="true" data-height="600"
            data-page-list="[10]">
         <thead>
         <tr>
-            <th data-field="id" data-sortable="true">번호</th>
-            <th data-field="title" data-sortable="true">제목</th>
-            <th data-field="period" data-sortable="true">기간</th>
-            <th data-field="applicants" data-sortable="true">참여수</th>
+            <th data-field="id" data-sortable="false">번호</th>
+            <th data-field="title" data-sortable="false">제목</th>
+            <th data-field="period" data-sortable="false">기간</th>
+            <th data-field="applicants" data-sortable="false">참여수</th>
             <th data-field="level" data-sortable="false">대상</th>
             <th data-field="applicate" data-sortable="false">참여하기</th>
         </tr>
@@ -81,14 +81,14 @@
                 else if(close <= today)
                     buttonText = '<button type="button" class="btn btn-secondary" disabled>만료</button>';
                 else if(start > today)
-                    buttonText = '<button type="button" class="btn btn-secondary" disabled>대기</button>';
+                    buttonText = '<button type="button" class="btn btn-warning" disabled>대기</button>';
                 else
-                    buttonText = '<button type="button" class="btn btn-secondary" disabled>불가</button>';
+                    buttonText = '<button type="button" class="btn btn-danger" disabled>불가</button>';
                 if(can == 'ⅹ'){
                     rows.push({
                         id: '<span>'+reg.id+'</span>',
                         title: lvlText,
-                        period: '<span>'+formatDate(reg.starting_date)+'~'+formatDate(reg.closing_date)+'</span>',
+                        period: '<span>'+formatDate(reg.starting_date)+'</span><span>~</span><span>'+formatDate(reg.closing_date)+'</span>',
                         applicants: '<span>'+reg.applicant_count+'명</span>',
                         level: can,
                         applicate: buttonText
@@ -121,3 +121,40 @@
         return [year, month, day].join('-');
     }
 </script>
+
+<style>
+
+    .boardtable > thead > tr > th, .boardtable > tbody > tr > td{
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+        text-align: center;
+        border-right : none;
+        border-left : none;
+        height: 40px;
+        max-height: 40px;
+        min-height: 40px;
+    }
+    .boardtable > thead > tr > th:nth-child(1), .boardtable > tbody > tr > td:nth-child(1) {
+        min-width: 56px;
+        max-width: 56px;
+        width: 56px;
+    }
+    /*.boardtable > thead > tr > th:nth-child(3), .boardtable > tbody > tr > td:nth-child(3) {*/
+    /*    min-width: 75px;*/
+    /*    max-width: 75px;*/
+    /*    width: 75px;*/
+    /*}*/
+    .boardtable > thead > tr > th:nth-child(4), .boardtable > tbody > tr > td:nth-child(4) {
+        min-width: 110px;
+        max-width:110px;
+        width: 110px;
+    }
+
+    .boardtable > thead > tr > th:nth-child(5), .boardtable > tbody > tr > td:nth-child(5) {
+        min-width: 75px;
+        max-width: 75px;
+        width: 75px;
+    }
+
+</style>

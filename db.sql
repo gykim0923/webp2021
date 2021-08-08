@@ -20,11 +20,11 @@ CREATE TABLE menu_tabs(
     `tab_url` VARCHAR(50) NOT NULL,
     `orderNum` INT(10) NOT NULL, PRIMARY KEY(`tab_id`)
 );
-INSERT INTO menu_tabs(tab_id, tab_title, tab_level, tab_img, tab_url, orderNum) VALUES('1', 'K-WITH 소개', '4', 'img/common/logo.png', 'information.kgu', '1');
-INSERT INTO menu_tabs(tab_id, tab_title, tab_level, tab_img, tab_url, orderNum) VALUES('2', 'K-WITH 알림', '4', 'img/common/logo.png', 'bbs.kgu', '2');
-INSERT INTO menu_tabs(tab_id, tab_title, tab_level, tab_img, tab_url, orderNum) VALUES('3', '신청하기', '4', 'img/common/logo.png', 'bbs.kgu', '3');
-INSERT INTO menu_tabs(tab_id, tab_title, tab_level, tab_img, tab_url, orderNum) VALUES('4', '전공보기', '4', 'img/common/logo.png', '#', '4');
-INSERT INTO menu_tabs(tab_id, tab_title, tab_level, tab_img, tab_url, orderNum) VALUES('5', 'K-WITH 세부전공', '4', 'img/common/logo.png', 'information.kgu', '5');
+INSERT INTO menu_tabs(tab_id, tab_title, tab_level, tab_img, tab_url, orderNum) VALUES('1', 'K-WITH 소개', '4', 'info-circle-fill', 'information.kgu', '1');
+INSERT INTO menu_tabs(tab_id, tab_title, tab_level, tab_img, tab_url, orderNum) VALUES('2', 'K-WITH 알림', '4', 'bootstrap-fill', 'bbs.kgu', '2');
+INSERT INTO menu_tabs(tab_id, tab_title, tab_level, tab_img, tab_url, orderNum) VALUES('3', '신청하기', '4', 'check-circle-fill', 'bbs.kgu', '3');
+INSERT INTO menu_tabs(tab_id, tab_title, tab_level, tab_img, tab_url, orderNum) VALUES('4', '전공보기', '4', 'pencil-fill', '#', '4');
+INSERT INTO menu_tabs(tab_id, tab_title, tab_level, tab_img, tab_url, orderNum) VALUES('5', '세부전공', '4', 'bookmark-star-fill', 'information.kgu', '5');
 
 
 CREATE TABLE menu_pages(

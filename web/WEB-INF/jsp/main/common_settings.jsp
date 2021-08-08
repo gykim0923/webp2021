@@ -23,6 +23,7 @@
   <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
   <%--    Bootstrap Table    --%>
+  <link rel="stylesheet" href="/css/bootstrap-table.css">
   <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
   <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
 

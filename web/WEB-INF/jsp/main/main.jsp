@@ -118,7 +118,7 @@
                                     <div class="col-xl-6 py-2 " id="main2_center" >
                                         <div class=" p-3 border card m-0" style="height : 493px;">
                                             <div>
-                                                <div class="mb-2 d-flex justify-content-between">
+                                                <div class="mb-2 d-flex justify-content-between border-bottom">
                                                     <div class="nav nav-tabs" id="nav-tab2" role="tablist">
                                                         <button class="nav-link active" id="nav-30-tab" data-bs-toggle="tab" data-bs-target="#nav-30" type="button" role="tab" aria-controls="nav-home" aria-selected="true" onclick="clickNoticeReg(30)"></button>
                                                         <button class="nav-link" id="nav-31-tab" data-bs-toggle="tab" data-bs-target="#nav-31" type="button" role="tab" aria-controls="nav-profile" aria-selected="false" onclick="clickNoticeReg(31)"></button>
@@ -150,7 +150,7 @@
                                     </div>
                                     <div class="py-2 col-xxl-12 col-sm-6">
                                         <div class=" p-3 border card m-0" style="height : 493px;">
-                                            <div class="mb-2 d-flex justify-content-between">
+                                            <div class="mb-2 d-flex justify-content-between border-bottom">
                                                 <div class="nav nav-tabs"  role="tablist">
                                                     <button class="nav-link active" ><strong>일정</strong></button>
                                                 </div>

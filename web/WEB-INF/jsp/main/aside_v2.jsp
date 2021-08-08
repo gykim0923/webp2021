@@ -66,8 +66,8 @@
         for (var i = 0; i < 3; i++) {
             text += '<li class="sidebar-item has-sub">'
                 + '<a href="#" class="sidebar-link">'
-                + '<i class="bi bi-stack"></i>'
-                + '<span>' + menuTabList[i].tab_title + '</span>'
+                + '<div class="py-2"><i class="bi bi-'+menuTabList[i].tab_img+'"></i></div>'
+                + '<div class="py-2"><span>' + menuTabList[i].tab_title + '</span></div>'
                 + '</a>';
             for (var j = 0; j < menuPageList.length; j++) {
                 if (menuTabList[i].tab_id == menuPageList[j].tab_id) {
