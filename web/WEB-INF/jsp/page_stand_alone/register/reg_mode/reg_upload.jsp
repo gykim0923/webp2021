@@ -774,7 +774,7 @@
                 return ext.match(/(mp3|wav)$/i);
             }
         }
-    }).on('fileuploaded', function() {
+    // }).on('fileuploaded', function() {
         //파일이 삭제되었습니다 추가?
     }).on('filedeleted', function() {
         swal.fire({
