@@ -7,12 +7,15 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    String getSpaceInfo = (String) request.getAttribute("getSpaceInfo");
     String getAllLog = (String) request.getAttribute("getAllLog");
 %>
 
 <div>
     <div class="album">
         <div class="container">
+            <label><h2><strong>서버 상태</strong></h2></label>
+            <div id="serverStatus"></div>
             <label><h2><strong>사용자 관리</strong></h2></label>
             <table class="boardtable" id="table" data-toggle="table"
                    data-pagination="true"
@@ -37,6 +40,7 @@
 <script>
     $(document).ready(function(){
         callSetupTableView();
+        getSpaceInfo();
     })
     var $table = $('#table');
     // var $remove = $('#remove');
@@ -75,5 +79,25 @@
             day = '0' + day;
 
         return [ year, month, day ].join('-');
+    }
+
+    function getSpaceInfo(){
+        var text = '';
+        var serverStatus = $('#serverStatus');
+        var getSpaceInfo = <%=getSpaceInfo%>;
+        for (var i = 0 ; i<getSpaceInfo.length; i++){
+            var total = getSpaceInfo[i].total.split('.')[0];
+            var used = getSpaceInfo[i].used.split('.')[0];
+            var free = getSpaceInfo[i].free.split('.')[0];
+            var memoryPercent = parseInt(parseInt(used) /parseInt(total) * 100);
+            text+='<div>getSpaceInfo[i].disk : '+getSpaceInfo[i].disk + '</div>'
+            text+='<div class="progress progress-primary  mb-4">'
+                + '<div class="progress-bar progress-label" role="progressbar" style="width: '+memoryPercent+'%" aria-valuenow="'+memoryPercent+'" aria-valuemin="0" aria-valuemax="100"></div>'
+                + '</div>'
+            text+='<div>getSpaceInfo[i].total : '+ total + 'GB</div>'
+            text+='<div>getSpaceInfo[i].used : '+ used + 'GB</div>'
+            text+='<div>getSpaceInfo[i].free : '+ free + 'GB</div>'
+        }
+        serverStatus.append(text);
     }
 </script>

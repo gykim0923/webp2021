@@ -33,6 +33,7 @@ public class LogDAO {
             QueryRunner queryRunner = new QueryRunner();
 
             listOfMaps = queryRunner.query(conn, "SELECT * FROM log ORDER BY id DESC;", new MapListHandler());
+//            System.out.println(listOfMaps);
         } catch(Exception se) {
             se.printStackTrace();
         } finally {
