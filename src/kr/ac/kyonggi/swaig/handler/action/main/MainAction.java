@@ -31,6 +31,7 @@ public class MainAction extends CustomAction {
         request.setAttribute("bbs21", gson.toJson(BBSDAO.getInstance().getBBSList("21")));
         request.setAttribute("bbs22", gson.toJson(BBSDAO.getInstance().getBBSList("22")));
         request.setAttribute("bbs23", gson.toJson(BBSDAO.getInstance().getBBSList("23")));
+        request.setAttribute("bbs31", gson.toJson(BBSDAO.getInstance().getBBSList("31")));
         request.setAttribute("registerAllInfo",gson.toJson(RegisterDAO.getInstance().getRegisterList()));
         request.setAttribute("favorite_menu", gson.toJson(HomeDAO.getInstance().getFavoriteMenu()));
         return "RequestDispatcher:jsp/main/main.jsp";

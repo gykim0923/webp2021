@@ -39,6 +39,7 @@
     String bbs21 = (String) request.getAttribute("bbs21");
     String bbs22 = (String) request.getAttribute("bbs22");
     String bbs23 = (String) request.getAttribute("bbs23");
+    String bbs31 = (String) request.getAttribute("bbs31");
     String registerAllInfo = (String) request.getAttribute("registerAllInfo");
 %>
 <!DOCTYPE html>
@@ -95,9 +96,9 @@
                                             <div class="">
                                                 <div class="mb-2 d-flex justify-content-between border-bottom" >
                                                     <div class="nav nav-tabs " id="nav-tab" role="tablist">
-                                                        <button class="nav-link active" id="nav-21-tab" data-bs-toggle="tab" data-bs-target="#nav-21" type="button" role="tab" aria-controls="nav-home" aria-selected="true" onclick="clickBBS(21)"></button>
-                                                        <button class="nav-link" id="nav-22-tab" data-bs-toggle="tab" data-bs-target="#nav-22" type="button" role="tab" aria-controls="nav-profile" aria-selected="false" onclick="clickBBS(22)"></button>
-                                                        <button class="nav-link" id="nav-23-tab" data-bs-toggle="tab" data-bs-target="#nav-23" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="clickBBS(23)"></button>
+                                                        <button class="nav-link active" id="nav-21-tab" data-bs-toggle="tab" data-bs-target="#nav-21" type="button" role="tab" aria-controls="nav-home" aria-selected="true" onclick="clickBBS('more_link1', 21)"></button>
+                                                        <button class="nav-link" id="nav-22-tab" data-bs-toggle="tab" data-bs-target="#nav-22" type="button" role="tab" aria-controls="nav-profile" aria-selected="false" onclick="clickBBS('more_link1', 22)"></button>
+                                                        <button class="nav-link" id="nav-23-tab" data-bs-toggle="tab" data-bs-target="#nav-23" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" onclick="clickBBS('more_link1', 23)"></button>
                                                     </div>
                                                     <div class="morebtn">
                                                         <div class="py-2">
@@ -120,12 +121,12 @@
                                             <div>
                                                 <div class="mb-2 d-flex justify-content-between border-bottom">
                                                     <div class="nav nav-tabs" id="nav-tab2" role="tablist">
-                                                        <button class="nav-link active" id="nav-30-tab" data-bs-toggle="tab" data-bs-target="#nav-30" type="button" role="tab" aria-controls="nav-home" aria-selected="true" onclick="clickNoticeReg(30)"></button>
-                                                        <button class="nav-link" id="nav-31-tab" data-bs-toggle="tab" data-bs-target="#nav-31" type="button" role="tab" aria-controls="nav-profile" aria-selected="false" onclick="clickNoticeReg(31)"></button>
+                                                        <button class="nav-link active" id="nav-30-tab" data-bs-toggle="tab" data-bs-target="#nav-30" type="button" role="tab" aria-controls="nav-home" aria-selected="true" onclick="clickNoticeReg('more_link2', 30)"></button>
+                                                        <button class="nav-link" id="nav-31-tab" data-bs-toggle="tab" data-bs-target="#nav-31" type="button" role="tab" aria-controls="nav-profile" aria-selected="false" onclick="clickBBS('more_link2', 31)"></button>
                                                     </div>
                                                     <div class="morebtn">
                                                         <div class="py-2">
-                                                            <a id="more_link2" href="bbs.kgu?major=main&num=30" title="더보기"><i class="bi bi-plus-lg"></i></a>
+                                                            <a id="more_link2" href="reg.kgu?major=main&num=30" title="더보기"><i class="bi bi-plus-lg"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -236,8 +237,9 @@
         var nav30 = $('#nav-30');
         var nav31 = $('#nav-31');
         var registerAllInfo = <%=registerAllInfo%>;
+        var bbs31=<%=bbs31%>;
+
         var text30 = '<ul class="list-group">';
-        var text31 = '<ul class="list-group">';
         for(var i=0;i<registerAllInfo.length;i++){
             if(i==9){
                 break;
@@ -246,14 +248,25 @@
             text30+='<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
                 +'<a href="'+url30+'"><span class="index_post_link">'+registerAllInfo[i].title+'</span></a>'
                 +'<a href="'+url30+'"><span class="index_post_time">'+formatDate(registerAllInfo[i].last_modified)+'</span></a>'
-                +'</li></ul>';
+                +'</li>';
         }
+        text30 +='</ul>';
         nav30.append(text30);
 
-        // for(var i=0;i<registerAllInfo.length;i++){ 자료실
-        //     var urlReg = 'reg.kgu?major=main&num=30&mode=view&id='+registerAllInfo[i].id;
-        //     nav30.append('<li class="list-group-item"><a href="'+urlReg+'">'+registerAllInfo[i].title+'</a></li>')
-        // }
+        var text31 = '<ul class="list-group">';
+        for (var i=0; i<bbs31.length; i++){
+            if(i==9){
+                break;
+            }
+            var url31 = 'bbs.kgu?major=main&num=31&mode=view&id='+bbs31[i].id;
+            text31+='<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+                +'<a href="'+url31+'"><span class="index_post_link">'+bbs31[i].title+'</span></a>'
+                +'<a href="'+url31+'"><span class="index_post_time">'+formatDate(bbs31[i].last_modified)+'</span></a>'
+                +'</li>';
+
+        }
+        text31+='</ul>';
+        nav31.append(text31);
 
         var menuPageList = <%=menuPageList%>;
         var nav30tab = $('#nav-30-tab');
@@ -267,11 +280,13 @@
             }
         }
     }
-    function clickBBS(i) {
-        document.getElementById('more_link1').setAttribute('href', 'bbs.kgu?major=main&num='+i+'');
+    function clickBBS(id, i) {
+        var link_id = id;
+        document.getElementById(link_id).setAttribute('href', 'bbs.kgu?major=main&num='+i+'');
     }
-    function clickNoticeReg(i) {
-        document.getElementById('more_link2').setAttribute('href', 'bbs.kgu?major=main&num='+i+'');
+    function clickNoticeReg(id, i) {
+        var link_id = id;
+        document.getElementById(link_id).setAttribute('href', 'reg.kgu?major=main&num='+i+'');
     }
 
     function makeNoticeBBS() {
