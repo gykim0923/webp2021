@@ -83,7 +83,7 @@
 
         //전공 선택
         text += '<li class="sidebar-title">전공메뉴</li>';
-        text += '<li class="sidebar-item  has-sub">'
+        text += '<li class="sidebar-item  has-sub" style="margin-bottom: 50px;">'
             + '<a href="#" class="sidebar-link">'
             + '<i class="bi bi-stack"></i>'
             + '<span>' + menuTabList[3].tab_title + '</span>'
