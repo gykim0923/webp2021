@@ -24,8 +24,10 @@ public class LoginPageAction implements Action{
 		String result;
 		if(session.getAttribute("user") == null)
 			result = "RequestDispatcher:jsp/account/login.jsp";
-		else
+		else{
+			request.setAttribute("error", "이미 로그인 되어있습니다.");
 			result = "RequestDispatcher:jsp/main/error.jsp";
+		}
 		return result;
 	}
 

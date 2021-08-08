@@ -21,6 +21,7 @@ public class LoginPageAction_v2 implements Action {
             result = "RequestDispatcher:jsp/account/login_v2.jsp";
         }
         else{
+            request.setAttribute("error", "이미 로그인 되어있습니다.");
             result = "RequestDispatcher:jsp/main/error.jsp";
         }
         return result;
