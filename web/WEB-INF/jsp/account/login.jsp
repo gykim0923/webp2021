@@ -71,9 +71,6 @@
     /*}*/
     .font1,font2{
         font-family: HY견고딕;
-
-
-
     }
     .font2{
         color:dimgray;
@@ -115,10 +112,10 @@
             <div class="col-7">
                 <div class="py-2">
                     <div class = "font1">
-                        <a href="main.kgu"><p class="h2 logo text-dark"><strong>경기대학교</strong></p></a>
+                        <a class="text-decoration-none" href="main.kgu"><p class="h2 logo text-dark"><strong>경기대학교</strong></p></a>
                     </div>
                     <div class = "font2">
-                        <a href="main.kgu"><p class="h5 text-dark"><strong id="majorTitle"></strong></p></a>
+                        <a class="text-decoration-none" href="main.kgu"><p class="h5 text-dark"><strong id="majorTitle"></strong></p></a>
                     </div>
                 </div>
             </div>
