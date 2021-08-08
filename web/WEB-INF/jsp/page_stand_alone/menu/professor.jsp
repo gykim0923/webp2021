@@ -101,7 +101,7 @@
                  +'<svg class="card-img-top" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="'+professor[i].prof_color+'"></rect></svg>'
                  // +'<img src="https://via.placeholder.com/340x120/87CEFA/000000" alt="Cover" class="card-img-top">'
                  +'<div class="card-body text-center">'
-                 +'<img src="'+professor[i].prof_img+'" style="width:100px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-circle border-0 mb-3">'
+                 +'<img src="'+professor[i].prof_img+'" style="height:130px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-pill border-0 mb-3">'
                  +'<h5 class="card-title">'+professor[i].prof_name+' 교수</h5>'
                  +'<p class="text-secondary mb-1">이메일 : '+professor[i].prof_email+'</p>'
                  +'<p class="text-muted font-size-sm">사무실 위치 : '+professor[i].prof_location+'</p>'
@@ -322,7 +322,7 @@
 <div>
    <div class="team-boxed">
       <div class="container">
-         <div class="row people" id="professorCard"></div>
+         <div class="row people d-flex align-content-stretch " id="professorCard"></div>
       </div>
    </div>
 </div>
