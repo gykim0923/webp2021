@@ -339,6 +339,11 @@ public class AjaxAction implements Action {
                     result=RegisterDAO.getInstance().modifyReg(data);
                 }
                 break;
+            case "deleteRegAlreadyFile":
+                String forAlreadyFileUser = "-/-/-" + user.id + "-/-/-" + type.for_header;
+                data = data.concat(forAlreadyFileUser);
+                result = RegisterDAO.getInstance().deleteAlreadyFile(data);
+                break;
             case "deleteReg":
                 String writer1=data.split("-/-/-")[1];
                 if(user.id.equals(writer1) || type.board_level==0) //권한 검사
