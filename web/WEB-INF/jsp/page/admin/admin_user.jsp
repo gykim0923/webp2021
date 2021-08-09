@@ -29,7 +29,6 @@
                     <th data-field="phone" data-sortable="true">phone</th>
                     <th data-field="type" data-sortable="true">type</th>
                     <th data-field="hope_type" data-sortable="true">hope_type</th>
-                    <th data-field="myhomeid" data-sortable="true">myhomeid</th>
                 </tr>
                 </thead>
             </table>
@@ -65,19 +64,21 @@
     function tableData(){
         var makeUserAll = <%=getAllUser%>;
         var rows = [];
+
         for(var i=0;i<makeUserAll.length;i++){
             var user=makeUserAll[i];
-            rows.push({
-                id: user.id,
-                name: user.name,
-                birth: user.birth,
-                email: user.email,
-                phone: user.phone,
-                type: user.type,
-                hope_type: user.hope_type,
-                myhomeid: user.myhomeid,
-                action : '<button class="btn btn-secondary" type="button" onclick="deleteUser('+i+')">회원삭제</button>'+'<button class="btn btn-secondary" type="button" onclick="passwordReset('+i+')">PW초기화</button>'
-            });
+            if(user.id!="admin"){
+                rows.push({
+                    id: user.id,
+                    name: user.name,
+                    birth: user.birth,
+                    email: user.email,
+                    phone: user.phone,
+                    type: user.type,
+                    hope_type: user.hope_type,
+                    action : '<button class="btn btn-danger" type="button" onclick="deleteUser('+i+')">삭제</button>'
+                });
+            }
         }
         // alert(rows);
         return rows;
@@ -133,57 +134,57 @@
     }
 
 
-    function passwordReset(i) {
-        var makeUserAll = <%=getAllUser%>;
-        var user = makeUserAll[i];
-        var change = user.birth;
+    <%--function passwordReset(i) {--%>
+    <%--    var makeUserAll = <%=getAllUser%>;--%>
+    <%--    var user = makeUserAll[i];--%>
+    <%--    var change = user.birth;--%>
 
-        swal.fire({
-            title: user.name+'패스워드를 초기화 하시겠습니까?',
-            text: '초기화 : 생년월일(생년월일이 없을 경우 1234)',
-            icon: 'warning',
-            showConfirmButton: true,
-            showCancelButton: true
+    <%--    swal.fire({--%>
+    <%--        title: user.name+'패스워드를 초기화 하시겠습니까?',--%>
+    <%--        text: '초기화 : 생년월일(생년월일이 없을 경우 1234)',--%>
+    <%--        icon: 'warning',--%>
+    <%--        showConfirmButton: true,--%>
+    <%--        showCancelButton: true--%>
 
-        }).then((result) => {
-            if (result.isConfirmed) {
+    <%--    }).then((result) => {--%>
+    <%--        if (result.isConfirmed) {--%>
 
-                if (change == "-")
-                    change = "1234";
-                else {
-                    var a = change.split("-");
-                    change = user.id + a[0].substring(2, 4) + "" + a[1] + "" + a[2];
-                }
-                $.ajax({
-                    url: "ajax.kgu",
-                    type: "post",
-                    data: {
-                        req: "modifyPwd",
-                        data: user.id + "-/-/-" + SHA256(change)
-                    },
-                    success: function (data) {
-                        if (data == "success")
-                        swal.fire({
-                            title : '패스워드가 초기화 되었습니다!',
-                            icon : 'success',
-                            showConfirmButton: true
+    <%--            if (change == "-")--%>
+    <%--                change = "1234";--%>
+    <%--            else {--%>
+    <%--                var a = change.split("-");--%>
+    <%--                change = user.id + a[0].substring(2, 4) + "" + a[1] + "" + a[2];--%>
+    <%--            }--%>
+    <%--            $.ajax({--%>
+    <%--                url: "ajax.kgu",--%>
+    <%--                type: "post",--%>
+    <%--                data: {--%>
+    <%--                    req: "modifyPwd",--%>
+    <%--                    data: user.id + "-/-/-" + SHA256(change)--%>
+    <%--                },--%>
+    <%--                success: function (data) {--%>
+    <%--                    if (data == "success")--%>
+    <%--                    swal.fire({--%>
+    <%--                        title : '패스워드가 초기화 되었습니다!',--%>
+    <%--                        icon : 'success',--%>
+    <%--                        showConfirmButton: true--%>
 
-                        }).then(function (){
-                            location.reload();
-                        });
-                        else
-                        swal.fire({
-                            title : '서버에러',
-                            text : '다음에 다시 시도해주세요',
-                            icon : 'error',
-                            showConfirmButton: true
+    <%--                    }).then(function (){--%>
+    <%--                        location.reload();--%>
+    <%--                    });--%>
+    <%--                    else--%>
+    <%--                    swal.fire({--%>
+    <%--                        title : '서버에러',--%>
+    <%--                        text : '다음에 다시 시도해주세요',--%>
+    <%--                        icon : 'error',--%>
+    <%--                        showConfirmButton: true--%>
 
-                        });
-                    }
-                })
-            }
-        })
-    }
+    <%--                    });--%>
+    <%--                }--%>
+    <%--            })--%>
+    <%--        }--%>
+    <%--    })--%>
+    <%--}--%>
 
     var $table = $('#table1');
     function modifyType(){
@@ -209,7 +210,7 @@
                 '<div class="input-group"><label class="input-group-text" for="modifyType">수정후 권한</label><select class="form-select" id="modifyType"><option selected>'+types[0]+
                 '</option><option value="조교">조교</option><option value="교수">교수</option><option value="학부생">학부생</option></select></div>'+
                 '<div class="col-xs-13 text-right"></div>');
-            $('#modifyTypeFooter').html('<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button><button class="btn btn-default" onclick="updateType()">권한 수정</button>')
+            $('#modifyTypeFooter').html('<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button><button class="btn btn-primary" onclick="updateType()">권한 수정</button>')
         }
     }
 

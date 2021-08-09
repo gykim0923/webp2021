@@ -78,16 +78,20 @@
     function makeWriteButton(){
         var button =$('#write_button');
         var bbsnum;
-        for(var i=54; i<60; i++){
-            bbsnum=i;
-            if(num==bbsnum){
+        for(var i=0; i<10; i++){
+
+        }
+        for(var i=0; i<10; i++){
+            var bbsnum2 = "2"+i
+            if(num==bbsnum || num==bbsnum2){
                 if (type.board_level == 0 || type.board_level == 1) {
                     var text = '<a href = "bbs.kgu?major=' + major + '&&num=' + num + '&&mode=write"><div class="btn btn-success">글쓰기</div></a>';
                     button.append(text);
                 }
             }
         }
-        if(num == "21" || num == "22" || num == "23" || num == "30" || num=="31" || num=="52") {
+
+        if(num == "30" || num=="31") {
             if (type.board_level == 0 || type.board_level == 1) {
                 var text = '<a href = "bbs.kgu?major=' + major + '&&num=' + num + '&&mode=write"><div class="btn btn-success">글쓰기</div></a>';
                 button.append(text);
@@ -95,6 +99,11 @@
         }
         else if(num=="53"){
             if(type.board_level < 3){
+                var text = '<a href = "bbs.kgu?major=' + major + '&&num=' + num + '&&mode=write"><div class="btn btn-success">글쓰기</div></a>';
+                button.append(text);
+            }
+        } else if(num=="50" || num=="51" || num=="52"|| num=="54"|| num=="55"|| num=="56"|| num=="57"|| num=="58"|| num=="59"){
+            if (type.board_level == 0 || type.board_level == 1) {
                 var text = '<a href = "bbs.kgu?major=' + major + '&&num=' + num + '&&mode=write"><div class="btn btn-success">글쓰기</div></a>';
                 button.append(text);
             }

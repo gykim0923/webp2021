@@ -336,6 +336,13 @@ public class AjaxAction implements Action {
                     session.setAttribute("headermenulist", gson.toJson(HomeDAO.getInstance().getHeaderMenuTabs()));
                 }
                 break;
+            case "insert_independent":   //직접 권한 확인
+                if (type.board_level == 0) {
+                    result = HomeDAO.getInstance().insertIndependent(data);
+                    session.setAttribute("menulist", gson.toJson(HomeDAO.getInstance().getHeaderMenuPages()));
+                    session.setAttribute("headermenulist", gson.toJson(HomeDAO.getInstance().getHeaderMenuTabs()));
+                }
+                break;
             case "insertReg":
                 if(type.board_level==0 || type.for_header.equals("교수")) {
                     String reg_id = RegisterDAO.getInstance().insertReg(data);

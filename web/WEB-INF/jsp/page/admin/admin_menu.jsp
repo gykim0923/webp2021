@@ -9,7 +9,6 @@
 <%
     String getPageMenu = (String)request.getAttribute("getPageMenu");
     String tabmenulist = (String)request.getAttribute("tabmenulist");
-    String getAllType = (String) request.getAttribute("getAllType");
 %>
 <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <div>
@@ -89,7 +88,7 @@
                         typeName = "정보 페이지";
                     }
                     else if(value.page_path=="bbs.kgu"){
-                        typeName = "공지사항 게시판";
+                        typeName = "공지사항/게시판";
                     }
                     else{
                         typeName = "ETC";
@@ -99,7 +98,7 @@
                         page_title: value.page_title,
                         type: typeName,
                         tab_title: headvalue.tab_title,
-                        show_detail: '<button class="btn btn-secondary mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="detailModal('+i+')">수정</button>'
+                        show_detail: '<button class="btn btn-secondary mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="detailModal('+i+')">수정</button>&nbsp<button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close" onclick="deleteProModal('+menulist[i].page_id+')">삭제</button>'
                     });
                     indexID++;
             }
@@ -113,7 +112,6 @@
         a+='<div class="form-group"><span>메뉴 이름 </span><input style="display : inline-block; width:200px;" type="text" class="form-control" name = "title" value="'+(menulist[i].page_title)+'"></div><br>';
 
         a += '<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="modifyProModal('+menulist[i].page_id+')">완료</button>';
-        a += '<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="deleteProModal('+menulist[i].page_id+')">메뉴 삭제</button>';
         list.html(a);
     }
 
@@ -254,7 +252,11 @@
     function insertMenu(){
         var list = $('#insertModalbody');
         var a = '';
-        a += '<div class="form-group"><span>메뉴 타입 :</span><select onchange="selectType()" style="display : inline-block; width:200px;" class="form-control" name="menutype"><option value="default">선택해주세요</option><option value="static">정보 페이지</option><option value="notice">공지사항 게시판</option></div><br>'
+        a += '<div class="form-group"><span>메뉴 타입 :</span><select onchange="selectType()" style="display : inline-block; width:200px;" class="form-control" name="menutype">'
+        a += '<option value="default">선택해주세요</option><option value="static">소개</option><option value="bbs">공지</option>'
+        a += '<option value="independent">세부전공 메뉴</option>';
+        a += '</div><br>'
+
         list.html(a);
     }
 
@@ -265,22 +267,17 @@
         var a = '';
         if(val=='static'){
             a += '<div class="form-group"><span>메뉴 이름 </span><input style="display : inline-block; width:200px;" type="text" class="form-control" name = "title"></div><br>'
-            a += '<div class="form-group"><span>메뉴 구분 </span><select onchange="" style="display : inline-block; width:200px;" class="form-control" name="insertheader"><option value="0">선택해주세요</option>'
-            for(var i=0; i<headermenulist.length; i++){
-                a += '<option value="'+(headermenulist[i].tab_id)+'">'+(headermenulist[i].tab_title)+'</option>'
-            }
-            a += '</select></div><br>'
-
             a+='<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="insertMenuFinish()">완료</button>';
             list.html(a);
-        }
-        else if(val=='notice'){
+        }else if(val=='independent'){
+        a += '<div class="form-group"><span>메뉴 이름 </span><input style="display : inline-block; width:200px;" type="text" class="form-control" name = "title"></div><br>'
+        a+='<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="insertIndependent()">완료</button>';
+        list.html(a);
+     }else if(val=='bbs') {
             a += '<div class="form-group"><span>메뉴 이름 </span><input style="display : inline-block; width:200px;" type="text" class="form-control" name = "title"></div><br>'
-
-            a+='<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="insertBBSFinish()">완료</button>';
+            a += '<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="insertBBSFinish()">완료</button>';
             list.html(a);
         }
-
     }
 
     function insertMenuFinish(){
@@ -304,16 +301,7 @@
             });
             return;
         }
-        var header = $('[name=insertheader]').val();
-        if(header=="0"){
-            swal.fire({
-                title : '메뉴 구분을 선택해주세요.',
-                icon : 'warning',
-                showConfirmButton: true
-            });
-            return;
-        }
-        var insert = name + "-/-/-" + header;
+        var insert = name;
 
             $.ajax({
                 url : "ajax.kgu",
@@ -382,5 +370,48 @@
         }
 
 
+    function insertIndependent(){
+        var name = $('[name=title]').val();
+        if(name.length>=25){
+
+            swal.fire({
+                title : '이름이 너무 깁니다!',
+                icon : 'warning',
+                showConfirmButton: true
+
+            });
+            return;
+        }
+        if(name.length==0){
+
+            swal.fire({
+                title : '이름을 입력해주세요.',
+                icon : 'warning',
+                showConfirmButton: true
+            });
+            return;
+        }
+        var insert = name;
+
+        $.ajax({
+            url : "ajax.kgu",
+            type : "post",
+            data : {
+                req : "insert_independent",
+                data : insert
+            },
+            success : function(data) {
+
+                swal.fire({
+                    title : '추가가 완료되었습니다.',
+                    icon : 'success',
+                    showConfirmButton: true
+
+                }).then(function (){
+                    location.reload();
+                });
+            }
+        });
+    }
 
 </script>
