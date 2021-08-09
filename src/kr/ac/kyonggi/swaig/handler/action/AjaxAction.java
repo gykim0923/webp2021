@@ -399,10 +399,15 @@ public class AjaxAction implements Action {
                 }
                 result=AdminDAO.getInstance().addKguMajor(data);
                 break;
-
             case "delete_kgu_major":
                 if (type.board_level == 0)
                     result=AdminDAO.getInstance().deleteKguMajor(data);
+                break;
+            case "delete_sub_major":
+                String userId = data;
+                if (userId.equals(user.id)){
+                    result=UserDAO.getInstance().deleteSubMajor(data);
+                }
                 break;
         }
 
