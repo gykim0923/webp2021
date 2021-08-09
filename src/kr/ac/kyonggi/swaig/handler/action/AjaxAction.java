@@ -344,6 +344,9 @@ public class AjaxAction implements Action {
                 data = data.concat(forAlreadyFileUser);
                 result = RegisterDAO.getInstance().deleteAlreadyFile(data);
                 break;
+            case "deleteNotUploadedFile":
+                result = FileDAO.getInstance().deleteNotUploadedFile(data);
+                break;
             case "deleteReg":
                 String writer1=data.split("-/-/-")[1];
                 if(user.id.equals(writer1) || type.board_level==0) //권한 검사

@@ -692,9 +692,8 @@
                         title : '해당 내용이 수정되었습니다.',
                         icon : 'success',
                         showConfirmButton: true
-
                     })
-                    back();
+                    window.location.href = 'reg.kgu?major='+major+'&&num='+num+'&&mode=list';
                 }
                 else{
                     swal.fire({
@@ -710,8 +709,41 @@
     }
 
     function back(){
-        window.location.href = 'reg.kgu?major='+major+'&&num='+num+'&&mode=list';
+        $.ajax({
+            url: "ajax.kgu", //AjaxAction에서
+            type: "post", //post 방식으로
+            data: {
+                req: "deleteNotUploadedFile", //이 메소드를 찾아서
+                data: '/img/bbs_reg' //이 데이터를 파라미터로 넘겨줍니다.
+            },
+            success: function (data) { //성공 시
+                if(data=='success'){
+                    swal.fire({
+                        title : '뒤로가기',
+                        text : '올렸던 글과 파일들은 저장되지 않습니다!',
+                        icon : 'error',
+                        showConfirmButton: true
+                    }).then(function () {
+                        location.href = 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list';
+                    });
+                }
+                else{
+                    swal.fire({
+                        title : '서버에러',
+                        text : '다음에 다시 시도해주세요',
+                        icon : 'error',
+                        showConfirmButton: true
+                    });
+                }
+            }
+        })
     }
+    history.pushState(null, null, location.href);
+
+    window.onpopstate = function(event) { //뒤로가기 이벤트 발생시
+        history.go(1); //뒤로 가지 않고 현재 페이지에서 머물어 업로드 되지 못한 파일 삭제 후 리스트 페이지로 감
+        back();
+    };
 
     function formatDate(date) { //날짜를 yyyy-mm-dd 형식으로 반환
         var d = new Date(date),

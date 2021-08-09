@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import kr.ac.kyonggi.swaig.common.sql.Config;
 import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
+import kr.ac.kyonggi.swaig.handler.dto.settings.RegWriterFileDTO;
 import kr.ac.kyonggi.swaig.handler.dto.settings.RegisterDTO;
 import kr.ac.kyonggi.swaig.handler.dto.settings.UploadedFileDTO;
 import kr.ac.kyonggi.swaig.handler.dto.tutorial.TutorialDTO;
@@ -114,5 +115,19 @@ public class FileDAO {
         ArrayList<UploadedFileDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<UploadedFileDTO>>() {}.getType());
 //        System.out.println(selected);
         return selected;
+    }
+
+    public String deleteNotUploadedFile(String data) {
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn, "DELETE FROM uploadedfile WHERE folder=? AND uploaded=?", data, "false");
+        } catch (SQLException se) {
+            se.printStackTrace();
+            return "fail";
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
     }
 }
