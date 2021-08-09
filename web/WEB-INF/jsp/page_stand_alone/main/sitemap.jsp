@@ -59,7 +59,7 @@
             text +='<div class="col">'
             text +='<ul>';
             for(var j= count; pageMenu1[j].tab_id== pageTab1[i].tab_id; j++){
-                text +='<a href="'+pageMenu1[j].page_path+'?major='+major1+'&&num='+pageMenu1[j].page_id+'"><span><li class="widget-49-meeting-item"><h3>'+pageMenu1[j].page_title+'</h3></span></a></li>'
+                text +='<a href="'+pageMenu1[j].page_path+'?major='+major1+'&&num='+pageMenu1[j].page_id+'"><span><li class="widget-49-meeting-item"><h3>'+pageMenu1[j].page_title+'</h3></li></span></a>'
                 count +=1;
             }
             text +='</ul>'
@@ -82,7 +82,7 @@
         text +='<div class="col">'
         text +='<ul>';
         for (var i = 1; i < majorAllInfo.length; i++) {
-            text +='<a href="#"><span><li class="widget-49-meeting-item"><h3>'+majorAllInfo[i].major_name+'</h3></span></a></li>'
+            text +='<span><li onclick="makeMajorBBS('+i+')" class="widget-49-meeting-item"><h3>'+majorAllInfo[i].major_name+'</h3></li></span>'
         }
         text +='</ul>'
         text +='</div></div></section></div>';
@@ -90,31 +90,44 @@
         //5번째 섹션
         text+='<div class="col-md-4 py-4">'
         text +='<section id="sec">'
-        text +='<h2><i class="bi bi-'+pageTab1[4].tab_img+'"></i> '+pageTab1[4].tab_title+'</h2>'
+        text +='<h2 id="majorBBStitle">전공별메뉴</h2>'
         text +='<div class="row">'
         text +='<div class="col">'
-        text +='<ul>';
-        for (var i = 1; i < majorAllInfo.length; i++) {
-            text +='<a href="#"><span><li class="widget-49-meeting-item"><h3>'+majorAllInfo[i].major_name+'</h3></span></a></li>'
-        }
-        text +='</ul>'
+        text +='<ul id="majorBBSname"><li class="py-5">왼쪽에서 전공을 선택해주세요</li></ul>'
         text +='</div></div></section></div>';
 
-        //6번째 섹션
-        text+='<div class="col-md-4 py-4">'
-        text +='<section id="sec">'
-        text +='<h2><i class="bi bi-person"></i> 마이페이지</h2>'
-        text +='<div class="row">'
-        text +='<div class="col">'
-        text +='<ul>';
-        // for(var j= 0; pageMenu1[j].tab_id== pageTab1[i].tab_id; j++){
-        //     text +='<a href="'+pageMenu1[j].page_path+'?major='+major1+'&&num='+pageMenu1[j].page_id+'"><span><li class="widget-49-meeting-item"><h3>'+pageMenu1[j].page_title+'</h3></span></a></li>'
-        // }
-        text +='</ul>'
-        text +='</div></div></section></div>';
+        // //6번째 섹션
+        // text+='<div class="col-md-4 py-4">'
+        // text +='<section id="sec">'
+        // text +='<h2><i class="bi bi-person"></i> 마이페이지</h2>'
+        // text +='<div class="row">'
+        // text +='<div class="col">'
+        // text +='<ul>';
+        // // for(var j= 0; pageMenu1[j].tab_id== pageTab1[i].tab_id; j++){
+        // //     text +='<a href="'+pageMenu1[j].page_path+'?major='+major1+'&&num='+pageMenu1[j].page_id+'"><span><li class="widget-49-meeting-item"><h3>'+pageMenu1[j].page_title+'</h3></span></a></li>'
+        // // }
+        // text +='</ul>'
+        // text +='</div></div></section></div>';
 
 
         list.append(text);
+    }
+
+    function makeMajorBBS(i){
+        var menuPageList = <%=menuPageList%>;
+        var majorAllInfo = <%=majorAllInfo%>;
+        var major = majorAllInfo[i];
+        var majorBBStitle = $('#majorBBStitle');
+        majorBBStitle.html('<i class="bi bi-info-circle-fill"></i> '+major.major_name);
+        var list = $('#majorBBSname');
+        var text='';
+        for (var j=0; j<menuPageList.length; j++){
+            if (menuPageList[j].tab_id==5){
+                var url = menuPageList[j].page_path+'?major='+major.major_id+'&&num='+menuPageList[j].page_id;
+                text += '<span><li class="widget-49-meeting-item"><a href="'+url+'"><h3>'+menuPageList[j].page_title+'</h3></a></li></span>';
+            }
+        }
+        list.html(text);
     }
 </script>
 
