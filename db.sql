@@ -55,14 +55,14 @@ INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,mi
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('53', '5', '3', 'bbs.kgu', '자유게시판', '11', '0');
 
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('60', '6', '0', 'mypage.kgu', '마이페이지', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('61', '6', '1', 'changePwd.kgu', '비밀번호변경', '11', '0');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('62', '6', '2', 'whatIDoPage.kgu', '활동내역', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('61', '6', '1', 'whatIDoPage.kgu', '활동내역', '11', '0');
 
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('70', '7', '0', 'admin.kgu', '홈페이지관리', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('71', '7', '1', 'admin.kgu', '회원관리', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('72', '7', '2', 'admin.kgu', '메뉴관리', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('73', '7', '3', 'admin.kgu', '로그확인', '11', '0');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('74', '7', '4', 'admin.kgu', '엑셀관리', '11', '0');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title,max_level,min_level) VALUE('75', '7', '5', 'admin.kgu', '비밀번호변경', '11', '0');
 
 CREATE TABLE usertype(
     `type_name` varchar(45) NOT NULL,
