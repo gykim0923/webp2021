@@ -97,6 +97,7 @@
                 var list = $('#formButtons');
                 var text = '';
                 text += '<div class="my-2">'
+                text += '<div class="alert alert-warning d-flex align-items-center" role="alert"><i class="bi bi-exclamation-triangle-fill warning"></i><div>&nbsp;글을 저장하신 후에는 신청 폼을 수정할 수 없습니다. 신중하게 작성해주시기 바랍니다.</div> </div>'
                 text += '<button class="btn btn-secondary mx-1" id="q1" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ1Modal()">주관식</button>'
                 text += '<button class="btn btn-secondary mx-1" id="q2" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ2Modal()">단일객관식</button>'
                 text += '<button class="btn btn-secondary mx-1" id="q3" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ3Modal()">다중객관식</button>'
@@ -623,8 +624,12 @@
         }
 
         var data = writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+last_modified+"-/-/-"+text+"-/-/-"+starting_date+"-/-/-"+closing_date+"-/-/-"+level+"-/-/-"+for_who+"-/-/-"+question+"-/-/-"+type.board_level;
-
-
+        swal.fire({
+            title : '신청 글 추가하기',
+            text : '글을 추가하시겠습니까?',
+            icon : 'warning',
+            button : '확인'
+        }).then(function () {
             $.ajax({
                 url: 'ajax.kgu',
                 type: 'post',
@@ -635,24 +640,25 @@
                 success: function (data) {
                     if (data == 'success') {
                         swal.fire({
-                            title : '내용이 추가되었습니다.',
-                            icon : 'success',
+                            title: '내용이 추가되었습니다.',
+                            icon: 'success',
                             showConfirmButton: true
-                        }).then(function (){
+                        }).then(function () {
                             location.href = 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list';
                         });
 
                     } else
                         swal.fire({
-                            title : '서버에러',
-                            text : '다음에 다시 시도해주세요',
-                            icon : 'error',
+                            title: '서버에러',
+                            text: '다음에 다시 시도해주세요',
+                            icon: 'error',
                             showConfirmButton: true
 
                         });
                 }
             })
-        }
+        });
+    }
 
 
     function modifyReg(){
