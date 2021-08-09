@@ -58,7 +58,7 @@
                             </div>
                         </div>
 
-                        <div class="row align-items-md-start">
+                        <div class="row align-items-md-stretch">
 
                             <div class="col-xxl-2 col-lg-3 py-2">
                                 <div class=" h-100 p-0 border card" id="page_menu"></div>
