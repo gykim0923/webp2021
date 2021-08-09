@@ -56,6 +56,8 @@
     function setModify(){
         var getAllMajor=<%=getAllMajor%>;
         var text_sub_major = '';
+        var text_grade = '';
+        var text_state = '';
 
         var a = '<div id="panel">';
         a += '<div id="panel2" class="row"><div>안녕하세요 '+user.name+'님, 오늘은 가입한 지 <span style="color : red;">'+ (parseInt(betweenDay)+1) +'</span>일째입니다.</div><hr>';
@@ -66,22 +68,40 @@
         if(type.class_type == 'Student' || type.class_type == 'Professor'){
             a += '<div class="col-4 border-end">학과</div><div class="col-8">'+user.major+'</div>';
             a += '<div class="col-4 border-end">학번(교번)</div><div class="col-8">'+ user.per_id+'</div>';
-            a += '<div class="col-4 border-end">학년</div><div class="col-8">'+ user.grade+'</div>';
+            a += '<div class="col-4 border-end">학년</div><div class="col-8" id="grade_select"></div>';
             a += '<div class="col-4 border-end">부전공</div><div class="col-8" id="sub_major_select"></div>';
-            a += '<div class="col-4 border-end">상태</div><div class="col-8">'+ user.state+'</div>';
+            a += '<div class="col-4 border-end">상태</div><div class="col-8" id="state_select"></div>';
         }
         $('#text').empty();
         $('#text').append(a);
 
 
-        // text_sub_major+='<button type="button" class="btn btn-outline-secondary" onclick="deleteSubMajor()" style="height : 20px;">나의 부전공 초기화</button>'
+        // 학년 선택
+        text_grade+='<div><select class="form-select" aria-label="Default select example">';
+        text_grade+='<option selected>학년 선택</option>';
+        text_grade+='<option name="grade" value="1학년">1학년</option>';
+        text_grade+='<option name="grade" value="2학년">2학년</option>';
+        text_grade+='<option name="grade" value="3학년">3학년</option>';
+        text_grade+='<option name="grade" value="4학년">4학년</option>';
+        text_grade+='<option name="grade" value="초과학년">초과</option>';
+        text_grade+='</select></div>'
+        $('#grade_select').append(text_grade);
+
+        // 부전공 선택
         for(var i=0; i<getAllMajor.length; i++){
-            // var ID = "checkbox"+i;
             text_sub_major+='<div id="sub_major"><input class="form-check-input" id="checkbox'+i+'" type="checkbox" value="'+getAllMajor[i].major_name+'" name="checkbox">'+getAllMajor[i].major_name+'</div>';
-
         }
-
         $('#sub_major_select').append(text_sub_major);
+
+        // 상태 선택
+        text_state+='<div><select class="form-select" aria-label="Default select example">';
+        text_state+='<option selected>상태 선택</option>';
+        text_state+='<option name="state" value="재학">재학</option>';
+        text_state+='<option name="state" value="휴학">휴학</option>';
+        text_state+='<option name="state" value="퇴학">퇴학</option>';
+        text_state+='<option name="state" value="졸업">졸업</option>';
+        text_state+='</select></div>'
+        $('#state_select').append(text_state);
 
         $('#modify_button').empty();
         $('#modify_button').append('<button type="button" class="btn btn-outline-secondary" onclick="refresh()">취소</button>');
@@ -98,13 +118,15 @@
         var phone = $('[name = phone]').val();
         var birth = $('[name = birth]').val();
         var email = $('[name = email]').val();
+        var grade = $('[name = grade]').val();
+        var state = $('[name = state]').val();
 
         var checkboxValues = [];
         $("input[name='checkbox']:checked").each(function() {
             checkboxValues.push($(this).val());
         });
 
-        var userdata = id+"-/-/-"+phone+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+ checkboxValues;
+        var userdata = id+"-/-/-"+phone+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+grade+"-/-/-"+checkboxValues+"-/-/-"+state;
 
         $.ajax({
             url:"ajax.kgu",
