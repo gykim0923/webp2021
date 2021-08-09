@@ -398,12 +398,10 @@
             var it = questions[i];
             if($('input:text[name=answer'+i+']').val() != null)
                 if($('input:text[name=answer'+i+']').val().length >= 150){
-
                     swal.fire({
                         title : (i+1) + '번 문항의 답변이 너무 깁니다.',
                         icon : 'warning',
                         showConfirmButton: true
-
                     });
                     return;
                 }
@@ -755,12 +753,18 @@
         var list_button = $('#list_button');
         var listUrl = 'reg.kgu?major='+major+'&&num='+num+'&&mode=list';
         var modifyUrl = 'reg.kgu?major='+major+'&&num='+num+'&&mode=modify&&id='+id;
+        /**
+         * 작성자 : 본인이 작성한 글 수정 및 삭제 / 엑셀 다운
+         * 관리자 : 본인이 작성한 글 수정 및 삭제 + 남이 쓴 글 삭제 기능 / 엑셀 다운
+         * 교수 : 본인이 작성한 글 수정 및 삭제 + 보기 권한이 있는 글 엑셀 다운
+         * */
         var text = '';
-        if(type.board_level == 0 || type.board_level == 1){
+        if(user.id == getReg.writer_id || type.board_level == 0 || type.for_header == '교수'){
             text += '<a href="'+modifyUrl+'"><div class="btn btn-secondary">수정</div></a>'
                 + '<a onclick="deleteReg()"><div class="btn btn-secondary">삭제</div></a>'
-                + '<a onclick=""><div class="btn btn-secondary">엑셀</div></a>'
         }
+        if((getReg.for_who >= type.board_level && !type.for_header == '조교') ||user.id == getReg.writer_id)
+            text += '<a onclick=""><div class="btn btn-secondary">엑셀</div></a>'
         text+='<a href="'+listUrl+'"><div class="btn btn-secondary">목록</div></a>'
         list_button.append(text);
     }

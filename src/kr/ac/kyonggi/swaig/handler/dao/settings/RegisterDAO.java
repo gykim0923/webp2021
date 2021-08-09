@@ -198,7 +198,7 @@ public class RegisterDAO {
             }
             for (int j = answers.length ; j < Integer.valueOf(arr[7]) ; ++j) {
                 queryRunner.update(conn,
-                        "INSERT INTO bbs_reg_answer(writer_name, writer_id, writer_perId, writer_grade, writer_type, question_number,board_number, answer) VALUES(?,?,?,?,?,?,?,?);",
+                        "INSERT INTO bbs_reg_answer(writer_name, writer_id, writer_perId, writer_grade, writer_type, question_num, reg_id, answer) VALUES(?,?,?,?,?,?,?,?);",
                         arr[0], arr[1], arr[2], arr[3], arr[4], (j + 1), arr[5], "");
             }
             queryRunner.update(conn, "UPDATE bbs_reg SET `applicant_count`= `applicant_count`+1 WHERE `id` = ?;", arr[5]);
