@@ -23,16 +23,20 @@
         media="all" rel="stylesheet" type="text/css" />
 <div class="h3">글 작성하기</div>
 <%--ckeditor가 나와야 하는 자리--%>
-<div class="form-group mb-3" id="bbsTitleBox"><input class="form-control" id="bbsTitle" placeholder="제목을 입력하세요."></div>
+<div class="form-group mb-3" id="bbsTitleBox"><input class="form-control" id="bbsTitle" placeholder="제목을 입력하세요. (최대 200자)"></div>
 <textarea id="bbsUpdateContent"></textarea>
+<div class="file-loading">
+    <input id="kv-explorer" type="file" multiple>
+</div>
 <%--버튼이 나와야 하는 자리--%>
-<div id="write_post" class="d-grid gap-2 d-md-flex justify-content-md-end">
+<div id="write_post" class="mt-3 d-grid gap-2 d-flex justify-content-between">
+    <button type="button" class="btn btn-outline-danger" onclick="back()">뒤로</button>
 <c:choose>
     <c:when test="${jsp == '\"bbs_write\"'}">
-        <button type="button" class="btn btn-outline-secondary" onclick="insertBbs()">추가</button>
+        <button type="button" class="btn btn-outline-success" onclick="insertBbs()">추가</button>
     </c:when>
     <c:when test="${jsp == '\"bbs_modify\"'}">
-        <button type="button" class="btn btn-outline-secondary" onclick="modifyBbs()">수정</button>
+        <button type="button" class="btn btn-outline-primary" onclick="modifyBbs()">수정</button>
         <script>
             var content = $('#bbsUpdateContent');
             var getBBS = <%=getBBS%>;
@@ -41,14 +45,7 @@
         </script>
     </c:when>
 </c:choose>
-    <button type="button" class="btn btn-outline-secondary" onclick="back()">뒤로</button>
 </div>
-<div class="file-loading">
-    <input id="kv-explorer" type="file" multiple>
-</div>
-<c:if test="${bbs_type =='\"application\"'}">
-    <div>신청하기 폼은 여기에서 작성</div>
-</c:if>
 
 <script>
     var major = <%=major%>;

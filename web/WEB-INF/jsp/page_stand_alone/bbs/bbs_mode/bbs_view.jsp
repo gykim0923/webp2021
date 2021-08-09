@@ -34,7 +34,6 @@
     <hr>
   </c:if>
 
-<c:if test="${bbs_type !='\"application\"'}">
 <%--    댓글리스트--%>
     <div>
       <div class="list-group" id="comments">
@@ -54,13 +53,10 @@
   </c:if>
 
   <hr>
-  <div>
-    <div id="list_button"></div>
-    <div id="modify_button"></div>
-    <div id="delete_button"></div>
-  </div>
+
+  <div class="mt-3 d-grid gap-2 d-flex justify-content-between" id="view_buttons"></div>
+
 </div>
-</c:if>
 
   <!-- Modal -->
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -271,18 +267,25 @@
 
 
   function makeViewButtons() {
-    var list_button = $('#list_button');
+    var view_buttons = $('#view_buttons');
     var listUrl = 'bbs.kgu?major='+major+'&&num='+num+'&&mode=list';
     var modifyUrl = 'bbs.kgu?major='+major+'&&num='+num+'&&mode=modify&&id='+id;
     var text = '';
-    text+='<a href="'+listUrl+'"><div class="btn btn-secondary">목록</div></a>'
-    if(num == "20" || num == "21" || num == "22" || num == "23"){
-      if(type.board_level == 0 || type.board_level == 1){
-        text += '<a href="'+modifyUrl+'"><div class="btn btn-secondary">수정</div></a>'
-                + '<a onclick="deleteBbs()"><div class="btn btn-secondary">삭제</div></a>'
-      }
+    text+='<div><a href="'+listUrl+'"><div class="btn btn-secondary">목록</div></a></div>'
+    // if(num == "20" || num == "21" || num == "22" || num == "23"){
+    /**
+     * 작성자 : 본인이 작성한 글 수정 및 삭제
+     * 관리자 : 본인이 작성한 글 수정 및 삭제 + 남이 쓴 글 삭제 기능
+     * 으로 로직을 바꿔야 함.
+     * */
+    if(type.board_level == 0 || type.board_level == 1){
+      text += '<div>'
+              +'<a href="'+modifyUrl+'"><div class="btn btn-primary mx-1">수정</div></a>'
+              +'<a onclick="deleteBbs()"><div class="btn btn-danger mx-1">삭제</div></a>'
+              +'</div>'
     }
-    list_button.append(text);
+    // }
+    view_buttons.append(text);
   }
 
   function liked() {
