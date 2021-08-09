@@ -103,8 +103,8 @@
                  +'<div class="card-body text-center">'
                  +'<img src="'+professor[i].prof_img+'" style="height:130px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-pill border-0 mb-3">'
                  +'<h5 class="card-title">'+professor[i].prof_name+' 교수</h5>'
-                 +'<p class="text-secondary mb-1">이메일 : '+professor[i].prof_email+'</p>'
-                 +'<p class="text-muted font-size-sm">사무실 위치 : '+professor[i].prof_location+'</p>'
+                 +'<p class=" mb-1">이메일 : '+professor[i].prof_email+'</p>'
+                 +'<p class="font-size-sm">사무실 위치 : '+professor[i].prof_location+'</p>'
 
                  +'<div class ="call">연락처 : '+professor[i].prof_call+'</div>'
                  +'<div class ="lecture">담당과목 : '+professor[i].prof_lecture+'</div>'
@@ -136,17 +136,12 @@
       a += '<div>이메일 </div><input type="text" class="form-control" id="modify_pro_email" name="pro_email1" value="' + (professor1[i].prof_email) + '" placeholder="이메일">'
       a += '<div>담당과목 </div><input type="text" class="form-control" id="modify_pro_lecture" name="pro_lecture1" value="' + (professor1[i].prof_lecture) + '" placeholder="담당과목">'
       a += '<div>배경색상 </div><input type="color" class="form-control" id="modify_pro_color" name="pro_color1"  value="' + (professor1[i].prof_color) + '" placeholder="#777777">'
-
+      a+='<div>교수님 사진</div>'
       a+='<div id="fileUploadSection">'
       a+='<input type="file" name="uploadFile" id="uploadFile" accept="image/*">'
       a+='<button class="btn btn-secondary" onclick="uploadfile()"><i class="bi bi-upload"></i> 업로드</button>'
       a+='</div>'
-
-      // a += '<div><form style="display : inline-block" name="fileform" id="fileform" action="" method="post" enctype="multipart/form-data">'
-      // a += '<input type="text" name="ProfessorID" value="' + i.id + '" hidden>'
-      // a += '<input style="display : inline-block" type="file" name="uploadFile" id="uploadFile" accept=".jpg, .jpeg, .png">'
-      // a += '<button type="button" class="btn btn-secondary my-2" data-dismiss="modal" onclick="modifyImage()">사진 수정</button></form></div>'
-      // a += '<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="modifyProModal(' + professor1[i].id + ')">완료</button>';
+      a+='<mark>(다른 파일들과 동일한 비율의 사진을 넣어야 예쁘게 출력됩니다.)</mark>'
        a += '<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="modifyProModal('+i+')">완료</button>';
 
       list.html(a);
@@ -180,12 +175,13 @@
                else {
 
                   var fileLog=data.split("-/-/-");
+                  file_id=fileLog[0];
+                  file_folder=folder;
+                  file_path=folder+'/'+fileLog[1];
                   var a='';
                   a+='<div>파일제출</div><div>'+fileLog[1]+'</div>';
-                  a+='<div><a href="#"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드(미구현)</button></a>'
+                  a+='<div><a href="download.kgu?id='+file_id+'&&path='+file_folder+'"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드</button></a>'
                   a+='<button class="btn btn-danger" onclick="makeUploadSliderModal()"><i class="bi bi-x-circle-fill"></i> 첨부파일 수정하기</button></div>';
-                  file_id=fileLog[0];
-                  file_path=folder+'/'+fileLog[1];
                   $('#fileUploadSection').html(a);
                }
             }
@@ -363,15 +359,15 @@
                <div>배경색상 </div>
                <input type="color" class="form-control" id="add_pro_color" name="add_pro_color1"  value="#777777" placeholder="#777777">
 
-               <div>
-                  <div id="fileUploadSection">
-                     <input type="file" name="uploadFile" id="uploadFile" accept="image/*">
-                     <button class="btn btn-secondary" onclick="uploadfile()"><i class="bi bi-upload"></i> 업로드</button>
-                  </div>
+               <div>교수님 사진</div>
+               <div id="fileUploadSection">
+                  <input type="file" name="uploadFile" id="uploadFile" accept="image/*">
+                  <button class="btn btn-secondary" onclick="uploadfile()"><i class="bi bi-upload"></i> 업로드</button>
                </div>
+               <mark>(다른 파일들과 동일한 비율의 사진을 넣어야 예쁘게 출력됩니다.)</mark>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                  <button type="button" class="btn btn-secondary" aria-label="Close" onclick="insertProfessor()">추가</button>
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">취소</button>
+                  <button type="button" class="btn btn-success" aria-label="Close" onclick="insertProfessor()">추가</button>
                </div>
             </div>
          </div>
