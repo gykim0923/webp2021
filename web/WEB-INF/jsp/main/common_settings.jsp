@@ -52,3 +52,11 @@
 
   <script src="assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 </head>
+
+<script>
+  var agent = navigator.userAgent.toLowerCase();
+
+  if ( (navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1) ) {
+    alert('Internet Explorer는 호환되지 않는 브라우저 입니다.');
+  }
+</script>
