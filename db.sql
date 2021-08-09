@@ -310,7 +310,7 @@ CREATE TABLE comment(
   `writer_id` VARCHAR(50) NOT NULL,
   `writer_name` VARCHAR (50) NOT NULL,
   `comment` VARCHAR(200) NOT NULL,
-  `comment_date` DATE NOT NULL,
+  `comment_date` DATETIME NOT NULL,
   `bbs_id` INT(10) NOT NULL,
   PRIMARY KEY (`id`)
 );
