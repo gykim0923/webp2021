@@ -396,14 +396,18 @@ public class AjaxAction implements Action {
                 }
                 if (new Date().getTime() > (req_check.closing_date.getTime() + 60 * 60 * 1000 * 24) || new Date().getTime() < req_check.starting_date.getTime())
                     return "timeout";
-                data = (user.name + "-/-/-" + user.id + "-/-/-").concat(data);
+                data = (user.name + "-/-/-" + user.id + "-/-/-" + user.per_id + "-/-/-" + user.grade + "-/-/-" + user.type + "-/-/-").concat(data);
                 result = RegisterDAO.getInstance().modifyAnswer(data);
+                break;
+            case "modifyAnswerFile"://이미 "modifyAnswer"에서 권한 검사함
+                System.out.println("13");
+                result = RegisterDAO.getInstance().modifyAnswerFile(data);
                 break;
             case "deleteWhoAnswer":
                 data = data.concat("-/-/-" + user.name + "-/-/-" + user.per_id + "-/-/-" + user.grade + "-/-/-" + user.id);
-                //String deletePath = request.getSession().getServletContext().getRealPath("/uploadFile/reqBoards");
-                //String realDeletePath = deletePath + "/" + data.split("-/-/-")[0];
-                //data = data.concat("-/-/-" + realDeletePath);
+                String deletePath = request.getSession().getServletContext().getRealPath("/uploaded/bbs_reg/reg");
+                String realDeletePath = deletePath + data.split("-/-/-")[0];
+                data = data.concat("-/-/-" + realDeletePath);
                 result = RegisterDAO.getInstance().deleteWhoAnswer(data);
                 break;
 
