@@ -234,7 +234,7 @@ public class AjaxAction implements Action {
                     result=CurriculumDAO.getInstance().deleteCurriculum(data);
                 break;
             case "insertBbs":
-                if(type.board_level==0){
+                if(type.board_level<3){
                     System.out.println("data : "+ data);
                     result=BBSDAO.getInstance().insertBbs(data);
                     System.out.println("dd : "+result);

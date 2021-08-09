@@ -278,13 +278,17 @@
      * 관리자 : 본인이 작성한 글 수정 및 삭제 + 남이 쓴 글 삭제 기능
      * 으로 로직을 바꿔야 함.
      * */
-    if(type.board_level == 0 || type.board_level == 1){
+
+    if(user.id== getBBS.writer_id){
       text += '<div>'
               +'<a href="'+modifyUrl+'"><div class="btn btn-primary mx-1">수정</div></a>'
               +'<a onclick="deleteBbs()"><div class="btn btn-danger mx-1">삭제</div></a>'
               +'</div>'
+    } else if(type.board_level == 0){
+      text += '<div>'
+              +'<a onclick="deleteBbs()"><div class="btn btn-danger mx-1">삭제</div></a>'
+              +'</div>'
     }
-    // }
     view_buttons.append(text);
   }
 
