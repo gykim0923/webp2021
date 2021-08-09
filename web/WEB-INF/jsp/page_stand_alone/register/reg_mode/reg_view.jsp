@@ -130,7 +130,7 @@
                 return;
         }
         else if(getReg.for_who == 1){
-            if(type.for_header != "관리자" || type.for_header != "교수")
+            if(type.for_header != "관리자" && type.for_header != "교수")
                 return;
         }
         if(anotherAnswer.length > 0){
@@ -153,7 +153,7 @@
             AnotherPanel.append('<a onclick="doAllView()"><li class="list-group-item text-center">전체결과보기</li></a><div id ="moreViewAll" style="display : none; overflow:auto;">총 ' + (anotherAnswer.length / questions.length) + '명</div>');
             makeAllView();
         }
-        else if(type.for_header == '관리자' || getReg.writer_id == user.id ){
+        else if(type.for_header == '관리자' || getReg.writer_id == user.id || (getReg.for_who == 1 && type.for_header == '교수')){
             AnotherPanel.append('<li class="list-group-item text-center">※아직 신청자가 없습니다</li>');
         }
     }
@@ -384,12 +384,9 @@
                 title : '현재 참여하실 수 없습니다.',
                 icon : 'warning',
                 showConfirmButton: true
-
             }).then(function (){
                 location.href = 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list';
             });
-
-
         }
         var Answer = '';
         var board_number = getReg.id;
@@ -407,6 +404,14 @@
                 }
             if(it.question_type == '1'){
                 Answer += $('input:text[name=answer'+i+']').val();
+                if($('input:text[name=answer'+i+']').val().includes('-/@/-') || $('input:text[name=answer'+i+']').val().includes('-/-/-')){
+                    swal.fire({
+                        title : (i+1) + '번 문항의 답변에 \'-/@/-\'나 \'-/-/-\'을 제거해주시기 바랍니다.',
+                        icon : 'warning',
+                        showConfirmButton: true
+                    });
+                    return;
+                }
             }
             if(it.question_type == '2'){
                 if($('input:radio[name=answer'+i+']:checked').val() != undefined)
