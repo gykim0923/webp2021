@@ -78,7 +78,7 @@
 
         // 학년 선택
         text_grade+='<div><select class="form-select" aria-label="Default select example">';
-        text_grade+='<option selected>학년 선택</option>';
+        text_grade+='<option selected>'+user.grade+'</option>';
         text_grade+='<option name="grade" value="1학년">1학년</option>';
         text_grade+='<option name="grade" value="2학년">2학년</option>';
         text_grade+='<option name="grade" value="3학년">3학년</option>';
@@ -95,7 +95,7 @@
 
         // 상태 선택
         text_state+='<div><select class="form-select" aria-label="Default select example">';
-        text_state+='<option selected>상태 선택</option>';
+        text_state+='<option selected>'+user.state+'</option>';
         text_state+='<option name="state" value="재학">재학</option>';
         text_state+='<option name="state" value="휴학">휴학</option>';
         text_state+='<option name="state" value="퇴학">퇴학</option>';
