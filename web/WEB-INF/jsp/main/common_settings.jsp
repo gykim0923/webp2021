@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <head>
-  <title>경기대학교!</title>
+  <title>경기대학교 소프트웨어중심대학 K-WITH 융합교육원</title>
   <!-- content에 자신의 OAuth2.0 클라이언트ID를 넣습니다. -->
   <meta charset="UTF-8">
   <meta name ="google-signin-client_id" content="961716324050-r6i9dib682nsqjotloum1igkvf1jm0og.apps.googleusercontent.com">

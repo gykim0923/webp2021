@@ -65,8 +65,8 @@
                                     </div>
                                     <div class="title_text">
                                         <div>
-                                            <div class="d-sm-inline d-block px-1">경기대학교</div>
-                                            <div class="d-sm-inline px-1 d-none">소프트웨어중심대학</div>
+                                            <div class="d-sm-inline d-block">경기대학교</div>
+                                            <div class="d-sm-inline d-none">소프트웨어중심대학</div>
                                         </div>
                                         <div id="headerTitle"></div>
                                     </div>
@@ -126,8 +126,7 @@
                                                     </div>
                                                     <div class="morebtn">
                                                         <div class="py-2">
-                                                            <a id="more_link1" href="bbs.kgu?major=main&num=21"
-                                                               title="더보기"><i class="bi bi-plus-lg"></i></a>
+                                                            <a id="more_link1" href="bbs.kgu?major=main&num=21" data-bs-toggle="tooltip" data-bs-placement="top" title="더보기"><i class="bi bi-plus-lg"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -161,8 +160,7 @@
                                                     </div>
                                                     <div class="morebtn">
                                                         <div class="py-2">
-                                                            <a id="more_link2" href="reg.kgu?major=main&num=30"
-                                                               title="더보기"><i class="bi bi-plus-lg"></i></a>
+                                                            <a id="more_link2" href="reg.kgu?major=main&num=30" data-bs-toggle="tooltip" data-bs-placement="top"  title="더보기"><i class="bi bi-plus-lg"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -195,15 +193,13 @@
                                                 </div>
                                                 <div class="morebtn">
                                                     <div class="py-2">
-                                                        <a title="더보기"><i class="bi bi-plus-lg col-sm-2 text-end"
-                                                                          data-bs-toggle="modal"
-                                                                          data-bs-target="#exampleModal"
-                                                                          onclick="addSearchModal()"></i></a>
+                                                        <a data-bs-toggle="tooltip" data-bs-placement="top"  title="일정 보기">
+                                                            <i class="bi bi-plus-lg col-sm-2 text-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addSearchModal()"></i>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="tab-content" id="schContent" style=""></div>
-                                            <%--                                            <div class="tab-content" id="schContent"></div>--%>
                                         </div>
                                     </div>
                                 </div>
@@ -253,6 +249,12 @@
 <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/js/main.js"></script>
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>
 </body>
 
 </html>

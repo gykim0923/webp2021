@@ -15,7 +15,7 @@
     <div class="album">
         <div class="container">
             <label><h2><strong>서버 상태</strong></h2></label>
-            <h6 class="text-end">서버 용량이 부족한 경우 반드시 관리자에게 알려주세요.</h6>
+            <h6 class="text-end text-danger">서버 용량이 부족한 경우 반드시 관리자에게 알려주세요.</h6>
             <div class="mb-5" id="serverStatus"></div>
             <label class="mt-5"><h2><strong>로그 관리</strong></h2></label>
             <table class="boardtable" id="table" data-toggle="table"
@@ -92,7 +92,7 @@
             var free = getSpaceInfo[i].free.split('.')[0];
             var memoryPercent = parseInt(parseInt(used) /parseInt(total) * 100);
             text+='<div><h4>디스크 드라이브 (' + getSpaceInfo[i].disk + ')</h4></div>'
-            text+='<div class="progress progress-primary  mb-2">'
+            text+='<div class="progress progress-primary mt-3 mb-2">'
                 + '<div class="progress-bar progress-label" role="progressbar" style="width: '+memoryPercent+'%" aria-valuenow="'+memoryPercent+'" aria-valuemin="0" aria-valuemax="100"></div>'
                 + '</div>'
                 + '<div class="mb-4 text-end">전체 '+ total + 'GB | 사용 : '+ used + 'GB | 잔여 : '+ free + 'GB</div>'
