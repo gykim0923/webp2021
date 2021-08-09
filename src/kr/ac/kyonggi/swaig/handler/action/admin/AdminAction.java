@@ -3,6 +3,7 @@ package kr.ac.kyonggi.swaig.handler.action.admin;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import kr.ac.kyonggi.swaig.common.controller.CustomAction;
+import kr.ac.kyonggi.swaig.common.monitor.Monitor;
 import kr.ac.kyonggi.swaig.handler.dao.settings.AdminDAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.LogDAO;
@@ -49,7 +50,11 @@ public class AdminAction extends CustomAction {
             else if(num.equals("73")){
                 request.setAttribute("jsp", gson.toJson("admin_log")); //admin_log.jsp
                 request.setAttribute("getAllLog",gson.toJson(LogDAO.getInstance().getAllLog()));
-                List<Map<String, String>> spaceInfo = this.getSpaceInfo();
+                List<Map<String, String>> spaceInfo = Monitor.getInstance().getSpaceInfo();
+//                Monitor.getInstance().showMemory();
+//                Monitor.getInstance().showOSBean();
+//                Monitor.getInstance().systemMemory();
+//                Monitor.getInstance().showCPU(); //문제 있음.
                 System.out.println(spaceInfo);
                 ArrayList<MemoryDTO> selected = gson.fromJson(gson.toJson(spaceInfo), new TypeToken<List<MemoryDTO>>() {}.getType());
                 request.setAttribute("getSpaceInfo",gson.toJson(selected));
@@ -75,38 +80,4 @@ public class AdminAction extends CustomAction {
         return "RequestDispatcher:jsp/main/error.jsp";
     }
 
-    public static List<Map<String, String>> getSpaceInfo() {
-
-        List<Map<String, String>> listOfMaps = new ArrayList<Map<String, String>>();
-
-        String disk = "";
-        double total = 0;
-        double used = 0;
-        double free = 0;
-
-        File[] drives = File.listRoots();
-        for(File drive : drives) {
-            Map<String,String> result = new HashMap<String,String>();
-            disk = drive.getAbsolutePath();
-            total = drive.getTotalSpace() / Math.pow(1024, 3);
-            free = drive.getUsableSpace() / Math.pow(1024, 3);
-            used = total - free;
-            result.put("disk", disk);
-            result.put("total", String.valueOf(total));
-            result.put("used", String.valueOf(used));
-            result.put("free", String.valueOf(free));
-
-            listOfMaps.add(result);
-
-//            for(Map<String, String> strMap : listOfMaps){
-//                System.out.print(strMap.get("disk") + " ");
-//                System.out.print(strMap.get("total") + " ");
-//                System.out.print(strMap.get("used") + " ");
-//                System.out.print(strMap.get("free") + " ");
-//                System.out.println();
-//            }
-        }
-        return listOfMaps;
-
-    }
 }
