@@ -241,11 +241,11 @@ public class AjaxAction implements Action {
                 }
                 break;
             case "modifyBbs":
-                if(type.board_level==0)
+                if(type.board_level < 3)
                     result=BBSDAO.getInstance().modifyBbs(data);
                 break;
             case "deleteBbs":
-                if(type.board_level==0)
+                if(type.board_level< 3)
                     result=BBSDAO.getInstance().deleteBbs(data);
                 break;
             case "insertComment":
@@ -406,7 +406,7 @@ public class AjaxAction implements Action {
             case "delete_sub_major":
                 String userId = data;
                 if (userId.equals(user.id)){
-                    result=UserDAO.getInstance().deleteSubMajor(data);
+//                    result=UserDAO.getInstance().deleteSubMajor(data);
                 }
                 break;
         }
