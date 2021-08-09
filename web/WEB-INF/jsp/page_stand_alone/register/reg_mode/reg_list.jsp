@@ -76,7 +76,7 @@
                     lvlText = '<span>' + reg.title + '<span/>';
                     can = 'ⅹ';
                 }
-                if(start <= today && today <= close && (reg.level.indexOf(type.for_header) >= 0 || type.for_header == '관리자'))
+                if(start <= today && today <= close && (reg.level.indexOf(type.for_header) >= 0 || type.for_header == '관리자' || (reg.for_who == 1 && type.for_header == '교수')))
                     buttonText = '<a href="'+url+'" type="button" class="btn btn-primary">참가</a>';
                 else if(close <= today)
                     buttonText = '<button type="button" class="btn btn-secondary" disabled>만료</button>';
@@ -84,7 +84,7 @@
                     buttonText = '<button type="button" class="btn btn-warning" disabled>대기</button>';
                 else
                     buttonText = '<button type="button" class="btn btn-danger" disabled>불가</button>';
-                if(can == 'ⅹ'){
+                if(can == 'ⅹ' && type.for_header =='기타'){
                     rows.push({
                         id: '<span>'+reg.id+'</span>',
                         title: lvlText,

@@ -759,11 +759,11 @@
          * 교수 : 본인이 작성한 글 수정 및 삭제 + 보기 권한이 있는 글 엑셀 다운
          * */
         var text = '';
-        if(user.id == getReg.writer_id || type.board_level == 0 || type.for_header == '교수'){
+        if(user.id == getReg.writer_id || type.board_level == 0){
             text += '<a href="'+modifyUrl+'"><div class="btn btn-secondary">수정</div></a>'
                 + '<a onclick="deleteReg()"><div class="btn btn-secondary">삭제</div></a>'
         }
-        if((getReg.for_who >= type.board_level && !type.for_header == '조교') ||user.id == getReg.writer_id)
+        if((getReg.for_who == 1 && type.for_header == '교수') ||user.id == getReg.writer_id)
             text += '<a onclick=""><div class="btn btn-secondary">엑셀</div></a>'
         text+='<a href="'+listUrl+'"><div class="btn btn-secondary">목록</div></a>'
         list_button.append(text);

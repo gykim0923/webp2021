@@ -328,14 +328,14 @@ public class AjaxAction implements Action {
                 }
                 break;
             case "insertReg":
-                if(type.board_level==0) {
+                if(type.board_level==0 || type.for_header.equals("교수")) {
                     String reg_id = RegisterDAO.getInstance().insertReg(data);
                     result = RegisterDAO.getInstance().insertRegFile(FileDAO.getInstance().getFiles("/img/bbs_reg"), reg_id);
                 }
                 break;
             case "modifyReg":
                 String writer=data.split("-/-/-")[3];
-                if(user.id.equals(writer)){
+                if(user.id.equals(writer) || type.board_level==0){
                     result=RegisterDAO.getInstance().modifyReg(data);
                 }
                 break;
