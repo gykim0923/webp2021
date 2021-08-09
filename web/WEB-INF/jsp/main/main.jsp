@@ -153,7 +153,7 @@
                                         <div class=" p-3 border card m-0" style="height : 493px;">
                                             <div class="mb-2 d-flex justify-content-between border-bottom">
                                                 <div class="nav nav-tabs"  role="tablist">
-                                                    <button class="nav-link active" ><strong>일정</strong></button>
+                                                    <button class="nav-link active" ><strong>주요 일정</strong></button>
                                                 </div>
                                                 <div class="morebtn">
                                                     <div class="py-2">
@@ -454,14 +454,16 @@
         //     text +=' row"><div class="border-end col-xxl-5 col-lg-12 col-sm-5"><strong>'+formatDate2(date)+'</strong></div><div class="border-end col-xxl-7 col-lg-12 col-sm-7">'+scheduleAllInfo[i].content+'</div></div>';
         // }
         for (var i=0;i<scheduleAllInfo.length;i++){
-            if(i==5){
+            if(i==7){
                 break;
             }
             var date = new Date(scheduleAllInfo[i].date);
-            text+='<a href="#" class="list-group-item list-group-item-action py-4 lh-tight border-start-0 border-end-0">'
-                +'<div class="d-flex w-100 align-items-center justify-content-between">'
-                +'<p class="h3 m-0">['+formatDate2(date)+']'+scheduleAllInfo[i].content+'</p>'
-                +'<i class="h3 m-0 bi-stack"></i>'
+            text+='<a href="" class="list-group-item list-group-item-action py-3 lh-tight border-start-0 border-end-0">'
+                // +'<div class="d-flex w-100 align-items-center justify-content-between">'
+                +'<div class="d-flex w-100">'
+                +'<div class="border-end pe-2">'+formatDate2(date)+'</div>'
+                +'<div class="border-start ps-2 short_schedule">'+scheduleAllInfo[i].content+'</div>'
+                // +'<p class="h6 m-0">'+formatDate2(date)+' | '+scheduleAllInfo[i].content+'</p>'
                 +'</div>'
                 +'</a>';
         }
@@ -621,6 +623,15 @@
 
     .index_post_time {
         min-width: 92px;
+    }
+
+    .short_schedule{
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+        text-align: center;
+        border-right : none;
+        border-left : none;
     }
 
 </style>
