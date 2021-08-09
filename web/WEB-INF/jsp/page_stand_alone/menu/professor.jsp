@@ -103,11 +103,10 @@
                  +'<div class="card-body text-center">'
                  +'<img src="'+professor[i].prof_img+'" style="height:130px;margin-top:-65px" alt="User" class="img-fluid img-thumbnail rounded-pill border-0 mb-3">'
                  +'<h5 class="card-title">'+professor[i].prof_name+' 교수</h5>'
-                 +'<p class=" mb-1">이메일 : '+professor[i].prof_email+'</p>'
-                 +'<p class="font-size-sm">사무실 위치 : '+professor[i].prof_location+'</p>'
-
-                 +'<div class ="call">연락처 : '+professor[i].prof_call+'</div>'
-                 +'<div class ="lecture">담당과목 : '+professor[i].prof_lecture+'</div>'
+                 +'<p class="">이메일 : '+professor[i].prof_email+'</p>'
+                 +'<p class="">사무실 위치 : '+professor[i].prof_location+'</p>'
+                 +'<p class ="">연락처 : '+professor[i].prof_call+'</p>'
+                 +'<p class ="">담당과목 : '+professor[i].prof_lecture+'</p>'
                  +'</div>'
 
          if(typeForProfessor.for_header=='관리자') {
