@@ -39,6 +39,10 @@
     var anotherAnswer = <%=AnswerWhoDone%>;
     var getAllFile = <%=getAllFile%>;
 
+    var file_id; //나중에 파일 상세정보를 uploadedFile로부터 역참조 하고싶은 경우에 사용하라고 만들어둠 (다운로드에서 사용하는 기능)
+    var file_folder; //다운로드에서 쓸 경로
+    var file_path; //파일이 업로드된 상대경로
+
     var questions = null;
     var starting_date = getReg.starting_date;
     var start = new Date(starting_date).getTime();
@@ -182,69 +186,72 @@
             var it = questions[i];//타입 1 = 주관식 2 = 단일객관식 3 = 다중객관식 4 = 척도형 5 = 파일업로드형
             var done = doneQuestion[i];
 
-            if (it.question_type == '1') {
-                var text = '';
-                if (it.question_type == '1') {  //주관식
-                    var text = '<div class="mx-3">';
-                    if (done.answer != '')
-                        text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>' + (i + 1) + '.' + it.question_content + '</label><input type="text" class="form-control" name="answer' + i + '" value="' + done.answer + '" readonly></div>';
+            if (it.question_type == '1') {  //주관식
+                var text = '<div class="mx-3">';
+                if (done.answer != '')
+                    text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>' + (i + 1) + '.' + it.question_content + '</label><input type="text" class="form-control" name="answer' + i + '" value="' + done.answer + '" readonly></div>';
+                else
+                    text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>' + (i + 1) + '.' + it.question_content + '</label><input type="text" class="form-control" name="answer' + i + '" value="답변을 하지 않았습니다." readonly></div>';
+                panel.append(text + '</div>');
+            }
+            if (it.question_type == '2') {  //단일객관식
+                var text = '<div class="mx-3">';
+                var allAnswer = it.question_content;
+                var answers = allAnswer.split('-/@/-');
+                text += '<div class="form-group" id="question' + i + '"><label>' + (i + 1) + '.' + answers[0] + '</label><div id="allAnswers' + i + 'who' + index + '"></div>';
+                panel.append(text + '</div>');
+                var answerPanel = $('#allAnswers' + i + 'who' + index);
+                for (var j = 1; j < answers.length; ++j) {
+                    if (answers[j] == done.answer)
+                        var input = '<div class="radio disabled"><label><input type="radio" disabled checked="true" name="answer' + i + 'who' + index + '" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
                     else
-                        text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>' + (i + 1) + '.' + it.question_content + '</label><input type="text" class="form-control" name="answer' + i + '" value="답변을 하지 않았습니다." readonly></div>';
-                    panel.append(text + '</div>');
+                        var input = '<div class="radio disabled"><label><input type="radio" disabled name="answer' + i + 'who' + index + '" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
+                    answerPanel.append(input);
                 }
-                if (it.question_type == '2') {  //단일객관식
-                    var text = '<div class="mx-3">';
-                    var allAnswer = it.question_content;
-                    var answers = allAnswer.split('-/@/-');
-                    text += '<div class="form-group" id="question' + i + '"><label>' + (i + 1) + '.' + answers[0] + '</label><div id="allAnswers' + i + 'who' + index + '"></div>';
-                    panel.append(text + '</div>');
-                    var answerPanel = $('#allAnswers' + i + 'who' + index);
-                    for (var j = 1; j < answers.length; ++j) {
-                        if (answers[j] == done.answer)
-                            var input = '<div class="radio disabled"><label><input type="radio" disabled checked="true" name="answer' + i + 'who' + index + '" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
-                        else
-                            var input = '<div class="radio disabled"><label><input type="radio" disabled name="answer' + i + 'who' + index + '" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
-                        answerPanel.append(input);
-                    }
-                    if (done.answer == '')
-                        answerPanel.append('<span style="font-size : 14px; color : red">답변을 하지 않았습니다.</span>');
-                }
-                if (it.question_type == '3') {  //다중객관식
-                    var text = '<div class="mx-3">';
-                    var allAnswer = it.question_content;
-                    var answers = allAnswer.split('-/@/-');
-                    var myAnswer = done.answer.split('-/@/-');
-                    text += '<div class="form-group" id="question' + i + '"><label>' + (i + 1) + '.' + answers[0] + '<span style="color : gray; font-size : 12px">(다중 선택 가능 문항입니다)</span></label><div id="allAnswers' + i + 'who' + index + '"></div>';
-                    panel.append(text + '</div>');
-                    var answerPanel = $('#allAnswers' + i + 'who' + index);
-                    for (var j = 1; j < answers.length; ++j) {
-                        if (myAnswer.includes(answers[j]))
-                            var input = '<div class="checkbox disabled"><label><input type="checkbox" disabled checked="true" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
-                        else
-                            var input = '<div class="checkbox disabled"><label><input type="checkbox" disabled id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
-                        answerPanel.append(input);
-                    }
-                    if (done.answer == '')
-                        answerPanel.append('<span style="font-size : 14px; color : red">답변을 하지 않았습니다.</span>');
-                }
-                if (it.question_type == '4') {  //척도형
-                    var text = '<div class="mx-3">';
-                    var allAnswer = it.question_content;
-                    var answers = allAnswer.split('-/@/-');
-                    text += '<div class="form-group" id="question' + i + '"><label>' + (i + 1) + '.' + answers[0] + '</label><div class="for_slider" id="sliderPanel' + i + 'who' + index + '"></div>';
-                    panel.append(text + '</div>');
-                    var sliderPanel = $('#sliderPanel' + i + 'who' + index);
-                    var text = '<div class="d-flex justify-content-between align-items-center"><span>' + answers[1] + '&nbsp;</span><input type="range" class="form-range" id="range' + i + 'who' + index + '" min=' + answers[1] + ' max=' + answers[2] + ' value="' + done.answer + '" step=1 disabled> <span>&nbsp;' + answers[2] + '</span></div><span class="for4"> 선택값 : ' + done.answer + '</span>';
-                    sliderPanel.append(text);
-                }
-                if (it.question_type == '5') {  //파일업로드형
-                    var text = '<div class="mx-3">';
-                    if (done.answer != 'null')
-                        text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>' + (i + 1) + '.' + it.question_content + '</label><br><a href="req_board_download.do?id=' + done.answer + '"><img src="img/file_ico.png"></a></div>';
+                if (done.answer == '')
+                    answerPanel.append('<span style="font-size : 14px; color : red">답변을 하지 않았습니다.</span>');
+            }
+            if (it.question_type == '3') {  //다중객관식
+                var text = '<div class="mx-3">';
+                var allAnswer = it.question_content;
+                var answers = allAnswer.split('-/@/-');
+                var myAnswer = done.answer.split('-/@/-');
+                text += '<div class="form-group" id="question' + i + '"><label>' + (i + 1) + '.' + answers[0] + '<span style="color : gray; font-size : 12px">(다중 선택 가능 문항입니다)</span></label><div id="allAnswers' + i + 'who' + index + '"></div>';
+                panel.append(text + '</div>');
+                var answerPanel = $('#allAnswers' + i + 'who' + index);
+                for (var j = 1; j < answers.length; ++j) {
+                    if (myAnswer.includes(answers[j]))
+                        var input = '<div class="checkbox disabled"><label><input type="checkbox" disabled checked="true" id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
                     else
-                        text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>' + (i + 1) + '.' + it.question_content + '</label><br><span style="font-size : 14px; color : red">파일을 올리지 않았습니다.</span></div>';
-                    panel.append(text + '</div>');
+                        var input = '<div class="checkbox disabled"><label><input type="checkbox" disabled id="answer' + i + 'S' + j + '" value="' + answers[j] + '">' + answers[j] + '</label></div>';
+                    answerPanel.append(input);
                 }
+                if (done.answer == '')
+                    answerPanel.append('<span style="font-size : 14px; color : red">답변을 하지 않았습니다.</span>');
+            }
+            if (it.question_type == '4') {  //척도형
+                var text = '<div class="mx-3">';
+                var allAnswer = it.question_content;
+                var answers = allAnswer.split('-/@/-');
+                text += '<div class="form-group" id="question' + i + '"><label>' + (i + 1) + '.' + answers[0] + '</label><div class="for_slider" id="sliderPanel' + i + 'who' + index + '"></div>';
+                panel.append(text + '</div>');
+                var sliderPanel = $('#sliderPanel' + i + 'who' + index);
+                var text = '<div class="d-flex justify-content-between align-items-center"><span>' + answers[1] + '&nbsp;</span><input type="range" class="form-range" id="range' + i + 'who' + index + '" min=' + answers[1] + ' max=' + answers[2] + ' value="' + done.answer + '" step=1 disabled> <span>&nbsp;' + answers[2] + '</span></div><span class="for4"> 선택값 : ' + done.answer + '</span>';
+                sliderPanel.append(text);
+            }
+            if (it.question_type == '5') {  //파일업로드형
+                var filename = done.answer.split("_");
+                var fileOriginalName = filename[2];
+                for(var j=3; j<filename.length;j++)
+                    fileOriginalName += '_'+filename[j];
+                alert('path=/uploaded/bbs_reg/reg'+getReg.id+'/Q'+it.question_num)
+                alert(filename[0])
+                var text = '<div class="mx-3">';
+                if (done.answer != 'null')
+                    text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>' + (i + 1) + '.' + it.question_content + '</label><div class="input-group mb-3" id="fileUploadSection'+i+'"><input type="text" class="form-control" value="'+fileOriginalName+'" readonly><a class="btn btn-secondary" href="download.kgu?id='+filename[0]+'&&path=/uploaded/bbs_reg/reg'+getReg.id+'/Q'+it.question_num+'"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드</button></a></div></div>';
+                else
+                    text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>' + (i + 1) + '.' + it.question_content + '</label><br><span style="font-size : 14px; color : red">파일을 올리지 않았습니다.</span></div>';
+                panel.append(text + '</div>');
             }
         }
     }
@@ -369,12 +376,57 @@
                 }
                 if(it.question_type == '5'){
                     var text = '<div class="mx-3">';
-                    text += '<div class="form-group mt-3" id="question' + i + '"><label>'+ (i+1) + '.' + it.question_content + '</label><div><input type="file" name="answer' + i + '"></div></div>';
+                    text += '<div class="form-group mt-3" id="question' + i + '"><label>'+ (i+1) + '.' + it.question_content + '</label><div class="input-group mb-3" id="fileUploadSection'+i+'"><input type="file" class="form-control" name="answer' + i + '" id="answer' + i + '"><button class="btn btn-outline-secondary" type="button" onclick="uploadAnswerFile('+i+')">Upload</button></div></div>';
                     panel.append(text+"</div>");
                 }
             }
             $('#questions').append('<button class="btn btn-secondary mt-3" onclick="submitNewAnswer()">제출할래요</button></div>');
         }
+    }
+
+    function uploadAnswerFile(i){
+        var formData = new FormData();
+        var folder='/uploaded/bbs_reg/reg'+getReg.id+'/Q'+(i+1);
+        formData.append('file_data', $('input[name=answer' + i + ']')[0].files[0]);
+        formData.append("file_type", "null"); //전송하려는 파일 타입 설정 (제한이 없으려면 null로 한다.)
+        formData.append("board_level", "2"); // board_level 제한 (부정 업로드 방지용. 교수까지 하려면 1, 학생까지 하려면 2로 설정하면 됨.)
+        $.ajax({
+            url : 'upload.kgu?folder='+folder,
+            type : 'post',
+            data : formData,
+            processData : false,
+            contentType : false,
+            success : function(data){//데이터는 주소
+                if(data=='fail'){
+                    swal.fire({
+                        title : '실패',
+                        icon : 'error',
+                        showConfirmButton: true
+                    });
+                }
+                else {
+                    var fileLog=data.split("-/-/-");
+                    file_id=fileLog[0];
+                    file_folder=folder;
+                    file_path=folder+'/'+fileLog[1];
+                    var a='';
+                    a+='<span class="input-group-text">파일제출</span><input type="text" class="form-control" id="fileName'+i+'" value="'+fileLog[1]+'" readonly><input id="fileId'+i+'" value="'+fileLog[0]+'" hidden>';
+                    a+='<div><a href="download.kgu?id='+file_id+'&&path='+file_folder+'" type="button" target="_blank"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드</button></a>'
+                    a+='<button class="btn btn-danger" type="button" onclick="modifyAnswerFile('+i+')"><i class="bi bi-x-circle-fill"></i>첨부파일 수정하기</button></div>';
+                    $('#fileUploadSection'+i+'').html(a);
+                }
+            }
+        })
+    }
+
+    function modifyAnswerFile(i){
+        $.ajax({
+            url : 'bbsFileDelete.kgu?fileId='+file_id+'&&folder='+file_folder,
+            type : 'post',
+            success : function(data){//데이터는 주소
+                $('#fileUploadSection'+i+'').html('<input type="file" class="form-control" name="answer' + i + '" id="answer' + i + '"><button class="btn btn-outline-secondary" type="button" onclick="uploadAnswerFile('+i+')">Upload</button>');
+            }
+        })
     }
 
     function submitNewAnswer(){
@@ -389,6 +441,7 @@
             });
         }
         var Answer = '';
+        var AnswerFile = getReg.id+'-/-/-' + user.id+'-/-/-';
         var board_number = getReg.id;
         var fileSequence = 1;
         for(var i = 0 ; i < questions.length ; i ++){
@@ -432,35 +485,13 @@
             if(it.question_type == '4'){
                 Answer += $('#range'+i).val();
             }
-            <%--if(it.question_type == '5'){--%>
-            <%--    var formData = new FormData();--%>
-            <%--    formData.append('uploadFile', $('input[name=answer' + i + ']')[0].files[0]);--%>
-            <%--    formData.append('fileSequence',fileSequence);--%>
-            <%--    formData.append('userName',<%=user%>.name);--%>
-            <%--    formData.append('boardID',board_number);--%>
-            <%--    $.ajax({--%>
-            <%--        url : 'req_board_answer_upload.do',--%>
-            <%--        type : 'post',--%>
-            <%--        data : formData,--%>
-            <%--        processData : false,--%>
-            <%--        contentType : false,--%>
-            <%--        async : false,--%>
-            <%--        success : function(data) {--%>
-            <%--            if(data == 'not good file'){--%>
-            <%--                alert('파일 중 올릴 수 없는 확장자가 포함되어 있습니다.');--%>
-            <%--                return;--%>
-            <%--            }--%>
-            <%--            if(data != 'fail'){--%>
-            <%--                Answer += data;--%>
-            <%--                ++fileSequence;--%>
-            <%--            }--%>
-            <%--            else{--%>
-            <%--                alert('SERVER ERROR, Please try again later...');--%>
-            <%--                return;--%>
-            <%--            }--%>
-            <%--        }--%>
-            <%--    })--%>
-            <%--}--%>
+            if(it.question_type == '5'){
+                if($('#fileName'+i).val() != null)
+                    Answer += $('#fileId'+i).val()+'_'+$('#fileName'+i).val();
+                else
+                    Answer += '';
+                AnswerFile += $('#fileId'+i).val()+'-/-/-';
+            }
             if(i != questions.length)
                 Answer += '-/#/-';
         }
@@ -475,16 +506,39 @@
             },
             success : function(data){
                 if(data == 'success'){
-                    swal.fire({
-                        title : '신청 성공',
-                        icon : 'success',
-                        showConfirmButton: true
-                    });
-                    if(getReg.for_who == 1)
-                        window.location.href= 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list&&id=' + getReg.id;
-                    wasDone = 1;
-                    check();
-                    whatIDone();
+                    alert(AnswerFile)
+                    $.ajax({
+                        url : 'ajax.kgu',
+                        type : 'post',
+                        async :false,
+                        data : {
+                            req: 'insertAnswerFile',
+                            data: AnswerFile
+                        },
+                        success : function(data){//데이터는 주소
+                            if(data == 'success'){
+                                swal.fire({
+                                    title : '신청 성공',
+                                    icon : 'success',
+                                    showConfirmButton: true
+                                }).then(function (){
+                                    if(getReg.for_who == 1)
+                                        window.location.href= 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list&&id=' + getReg.id;
+                                    wasDone = 1;
+                                    check();
+                                    whatIDone();
+                                })
+                            }
+                            else {
+                                swal.fire({
+                                    title : '파일 업로드실패',
+                                    icon : 'error',
+                                    showConfirmButton: true
+                                });
+                                return;
+                            }
+                        }
+                    })
                 }
                 else if(data == 'fail'){
                     swal.fire({
@@ -633,28 +687,38 @@
                 Answer += $('#range'+i).val();
             }
             if(it.question_type == '5'){
-                <%--var formData = new FormData();--%>
-                <%--formData.append('uploadFile', $('input[name=answer' + i + ']')[0].files[0]);--%>
-                <%--formData.append('fileSequence',fileSequence);--%>
-                <%--formData.append('userName',<%=user%>.name);--%>
-                <%--formData.append('boardID',board_number);--%>
-                <%--$.ajax({--%>
-                <%--    url : 'req_board_answer_upload.do',--%>
-                <%--    type : 'post',--%>
-                <%--    data : formData,--%>
-                <%--    processData : false,--%>
-                <%--    contentType : false,--%>
-                <%--    async : false,--%>
-                <%--    success : function(data) {--%>
-                <%--        if(data != 'fail'){--%>
-                <%--            Answer += data;--%>
-                <%--            ++fileSequence;--%>
-                <%--        }--%>
-                <%--        else{--%>
-                <%--            alert('SERVER ERROR, Please try again later...');--%>
-                <%--        }--%>
-                <%--    }--%>
-                <%--})--%>
+                var formData = new FormData();
+                var folder='/uploaded/bbs_reg/reg'+getReg.id+'/Q'+i;
+                formData.append('file_data', $('input[name=answer' + i + ']')[0].files[0]);
+                formData.append("file_type", "null"); //전송하려는 파일 타입 설정 (제한이 없으려면 null로 한다.)
+                formData.append("board_level", "2"); // board_level 제한 (부정 업로드 방지용. 교수까지 하려면 1, 학생까지 하려면 2로 설정하면 됨.)
+                $.ajax({
+                    url : 'upload.kgu?folder='+folder,
+                    type : 'post',
+                    data : formData,
+                    processData : false,
+                    contentType : false,
+                    success : function(data){//데이터는 주소
+                        if(data=='fail'){
+                            swal.fire({
+                                title : '실패',
+                                icon : 'error',
+                                showConfirmButton: true
+                            });
+                        }
+                        else {
+                            var fileLog=data.split("-/-/-");
+                            file_id=fileLog[0];
+                            file_folder=folder;
+                            file_path=folder+'/'+fileLog[1];
+                            var a='';
+                            a+='<div>파일제출</div><div>'+fileLog[1]+'</div>';
+                            a+='<div><a href="download.kgu?id='+file_id+'&&path='+file_folder+'" target="_blank"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드</button></a>'
+                            a+='<a href="bbsFileDelete.kgu?fileId='+file_id+'&&folder='+file_folder+'" target="_blank"><button class="btn btn-danger" onclick="makeUploadSliderModal()"><i class="bi bi-x-circle-fill"></i> 첨부파일 수정하기</button></a></div>';
+                            $('#fileUploadSection').html(a);
+                        }
+                    }
+                })
             }
             if(i != questions.length)
                 Answer += '-/#/-';
@@ -828,7 +892,7 @@
             var it = getAllFile[i];
             if(user != null){
                 if(getReg.level.includes(type.for_header) || type.for_header == '관리자' || user.id == getReg.writer_id)
-                    a += '<a href="download.kgu?id='+it.id+'&&path=/img/bbs_reg">' + it.original_FileName + '</a>&nbsp&nbsp';
+                    a += '<a href="download.kgu?id='+it.id+'&&path=/uploaded/bbs_reg">' + it.original_FileName + '</a>&nbsp&nbsp';
                 else
                     a  += it.original_FileName + '&nbsp&nbsp';
             }

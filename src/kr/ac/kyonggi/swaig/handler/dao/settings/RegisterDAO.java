@@ -403,4 +403,43 @@ public class RegisterDAO {
         }
         return "success";
     }
+
+    public String insertAnswerFile(String data) {
+        String arr[] = data.split("-/-/-");// reg_id + '-/-/-' + user_id + '-/-/-' + 업로드한 파일 수만큼 fileId+'-/-/-'
+        Connection conn = Config.getInstance().sqlLogin();
+        boolean result = false;
+        List<Map<String, Object>> listOfMaps = null;
+        Gson gson = new Gson();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            for (int i = 2; i < arr.length; i++) {
+                listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_reg_answerfile WHERE reg_id=? AND id=?;",
+                        new MapListHandler(), arr[0], arr[i]);
+                ArrayList<RegAnswerFileDTO> lists = gson.fromJson(gson.toJson(listOfMaps),
+                        new TypeToken<List<RegAnswerFileDTO>>() {
+                        }.getType());
+                System.out.println(!listOfMaps.isEmpty());
+                if(!listOfMaps.isEmpty())
+                    continue;
+                UploadedFileDTO file = FileDAO.getInstance().getFile(arr[i]);
+                System.out.println(file.newFileName);
+                queryRunner.update(conn,
+                        "INSERT INTO bbs_reg_answerfile(id, reg_id, original_FileName, real_FileName, writer_id) VALUES(?,?,?,?,?);",
+                        arr[i], arr[0], file.uploadFile, file.newFileName, arr[1]);
+            }
+//            for (int j = answers.length ; j < Integer.valueOf(arr[7]) ; ++j) {
+//                queryRunner.update(conn,
+//                        "INSERT INTO bbs_reg_answer(writer_name, writer_id, writer_perId, writer_grade, writer_type, question_num, reg_id, answer) VALUES(?,?,?,?,?,?,?,?);",
+//                        arr[0], arr[1], arr[2], arr[3], arr[4], (j + 1), arr[5], "");
+//            }
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        if (result)
+            return "success";
+        else
+            return "fail";    }
 }

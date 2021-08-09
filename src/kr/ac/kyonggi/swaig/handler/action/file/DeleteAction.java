@@ -17,12 +17,13 @@ import java.io.File;
 public class DeleteAction implements Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String fileID = request.getParameter("fileId");
         String folder = request.getParameter("folder");
+        String fileID = request.getParameter("fileId");
         Gson gson = new Gson();
         String path = request.getSession().getServletContext().getRealPath(folder);
         FileDAO dao = FileDAO.getInstance();
         UploadedFileDTO it = dao.getFile(fileID);
+        System.out.println(it.newFileName);
         File deleteFile = new File(path, it.newFileName);
         deleteFile.delete();
         dao.deleteFileWithName(it.newFileName);

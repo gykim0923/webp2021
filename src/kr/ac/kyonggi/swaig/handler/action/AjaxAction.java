@@ -346,7 +346,7 @@ public class AjaxAction implements Action {
             case "insertReg":
                 if(type.board_level==0 || type.for_header.equals("교수")) {
                     String reg_id = RegisterDAO.getInstance().insertReg(data);
-                    result = RegisterDAO.getInstance().insertRegFile(FileDAO.getInstance().getFiles("/img/bbs_reg"), reg_id);
+                    result = RegisterDAO.getInstance().insertRegFile(FileDAO.getInstance().getFiles("/uploaded/bbs_reg"), reg_id);
                 }
                 break;
             case "modifyReg":
@@ -386,7 +386,9 @@ public class AjaxAction implements Action {
                 data = (user.name + "-/-/-" + user.id + "-/-/-" + user.per_id + "-/-/-" + user.grade + "-/-/-" + user.type + "-/-/-").concat(data);
                 result = RegisterDAO.getInstance().insertAnswers(data);
                 break;
-
+            case "insertAnswerFile": //이미 "insertAnswer"에서 권한 검사함
+                result = RegisterDAO.getInstance().insertAnswerFile(data);
+                break;
             case "modifyAnswer":
                 RegisterDTO req_check = RegisterDAO.getInstance().getReg(data.split("-/-/-")[0]);
                 if (!req_check.level.contains(type.for_header)){

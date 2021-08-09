@@ -759,7 +759,7 @@
             type: "post", //post 방식으로
             data: {
                 req: "deleteNotUploadedFile", //이 메소드를 찾아서
-                data: '/img/bbs_reg' //이 데이터를 파라미터로 넘겨줍니다.
+                data: '/uploaded/bbs_reg' //이 데이터를 파라미터로 넘겨줍니다.
             },
             success: function (data) { //성공 시
                 if(data=='success'){
@@ -802,7 +802,7 @@
         return [year, month, day].join('-');
     }
 
-    var upload_folder = '/img/bbs_reg';
+    var upload_folder = '/uploaded/bbs_reg';
 
     $("#regFile").fileinput({
         'uploadUrl': 'upload.kgu?folder='+upload_folder,
