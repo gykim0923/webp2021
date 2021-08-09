@@ -7,12 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <style>
-  #deletebtn{
-    float: left;
-  }
-  #completebtn{
-    float: right;
-  }
 </style>
 <div class="">
   <label><h2><strong>부전공 관리</strong></h2></label>

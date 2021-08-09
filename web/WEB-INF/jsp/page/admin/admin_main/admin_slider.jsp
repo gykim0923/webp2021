@@ -90,36 +90,47 @@
             formData.append("file_type", "image"); //전송하려는 파일 타입 설정 (제한이 없으려면 null로 한다.)
             formData.append("board_level", "0"); // board_level 제한 (부정 업로드 방지용. 교수까지 하려면 1, 학생까지 하려면 2로 설정하면 됨.)
 
-            $.ajax({
-                url : 'upload.kgu?folder='+folder,
-                type : "post",
-                async:false,
-                data : formData,
-                processData : false,
-                contentType : false,
-                success : function(data){//데이터는 주소
-                    if(data=='fail'){
-                        swal.fire({
-                            title : '실패',
-                            icon : 'error',
-                            showConfirmButton: true
+            swal.fire({
+                title: '이미지 해상도를 통일해주셨나요?',
+                icon: 'warning',
+                showConfirmButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url : 'upload.kgu?folder='+folder,
+                        type : "post",
+                        async:false,
+                        data : formData,
+                        processData : false,
+                        contentType : false,
 
-                        });
-                    }
-                    else {
-                        var fileLog=data.split("-/-/-");
-                        file_id=fileLog[0];
-                        file_folder=folder;
-                        file_path=folder+'/'+fileLog[1];
-                        var a='';
-                        a+='<div>파일제출</div><div>'+fileLog[1]+'</div>';
-                        a+='<div><a href="download.kgu?id='+file_id+'&&path='+file_folder+'" target="_blank"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드</button></a>'
-                        a+='<button class="btn btn-danger" onclick="makeUploadSliderModal()"><i class="bi bi-x-circle-fill"></i> 첨부파일 수정하기</button></div>';
-                        $('#fileUploadSection').html(a);
-                    }
+
+                        success : function(data){//데이터는 주소
+                            if(data=='fail'){
+                                swal.fire({
+                                    title : '실패',
+                                    icon : 'error',
+                                    showConfirmButton: true
+
+                                });
+                            }
+                            else {
+                                var fileLog=data.split("-/-/-");
+                                file_id=fileLog[0];
+                                file_folder=folder;
+                                file_path=folder+'/'+fileLog[1];
+                                var a='';
+                                a+='<div>파일제출</div><div>'+fileLog[1]+'</div>';
+                                a+='<div><a href="download.kgu?id='+file_id+'&&path='+file_folder+'" target="_blank"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드</button></a>'
+                                a+='<button class="btn btn-danger" onclick="makeUploadSliderModal()"><i class="bi bi-x-circle-fill"></i> 첨부파일 수정하기</button></div>';
+                                $('#fileUploadSection').html(a);
+                            }
+                        }
+
+                    })
                 }
-            })
-        }else{
+            }
+        )} else{
             swal.fire({
                 title : '파일을 등록해주세요.',
                 icon : 'warning',
