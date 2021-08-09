@@ -161,7 +161,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="tab-content" id="schContent"></div>
+                                            <div class="tab-content" id="schContent" style=""></div>
+<%--                                            <div class="tab-content" id="schContent"></div>--%>
                                         </div>
                                     </div>
                                 </div>
@@ -434,23 +435,35 @@
         var text='';
         var size = scheduleAllInfo.length;
         var today = new Date();
-        for(var i = 0; i < size; i++){
+        // for(var i = 0; i < size; i++){
+        //     if(i==5){
+        //         break;
+        //     }
+        //     var date = new Date(scheduleAllInfo[i].date);
+        //     text += '<div class="py-xxl-4 p-md-3 p-2 bd-callout ';
+        //     var diffDay = (date.getTime() - today.getTime()) / (24 * 60 * 60 * 1000);
+        //     if(diffDay < 0){
+        //         text += 'bd-callout-end';
+        //     }
+        //     else if(diffDay < 10){
+        //         text += 'bd-callout-warning';
+        //     }
+        //     else{
+        //         text += 'bd-callout-info';
+        //     }
+        //     text +=' row"><div class="border-end col-xxl-5 col-lg-12 col-sm-5"><strong>'+formatDate2(date)+'</strong></div><div class="border-end col-xxl-7 col-lg-12 col-sm-7">'+scheduleAllInfo[i].content+'</div></div>';
+        // }
+        for (var i=0;i<scheduleAllInfo.length;i++){
             if(i==5){
                 break;
             }
             var date = new Date(scheduleAllInfo[i].date);
-            text += '<div class="py-xxl-4 p-md-3 p-2 bd-callout ';
-            var diffDay = (date.getTime() - today.getTime()) / (24 * 60 * 60 * 1000);
-            if(diffDay < 0){
-                text += 'bd-callout-end';
-            }
-            else if(diffDay < 10){
-                text += 'bd-callout-warning';
-            }
-            else{
-                text += 'bd-callout-info';
-            }
-            text +=' row"><div class="border-end col-xxl-5 col-lg-12 col-sm-5"><strong>'+formatDate2(date)+'</strong></div><div class="border-end col-xxl-7 col-lg-12 col-sm-7">'+scheduleAllInfo[i].content+'</div></div>';
+            text+='<a href="#" class="list-group-item list-group-item-action py-4 lh-tight border-start-0 border-end-0">'
+                +'<div class="d-flex w-100 align-items-center justify-content-between">'
+                +'<p class="h3 m-0">['+formatDate2(date)+']'+scheduleAllInfo[i].content+'</p>'
+                +'<i class="h3 m-0 bi-stack"></i>'
+                +'</div>'
+                +'</a>';
         }
         schedule.html(text);
     }
