@@ -73,8 +73,12 @@
         $('#text').empty();
         $('#text').append(a);
 
+
+        // text_sub_major+='<button type="button" class="btn btn-outline-secondary" onclick="deleteSubMajor()" style="height : 20px;">나의 부전공 초기화</button>'
         for(var i=0; i<getAllMajor.length; i++){
-            text_sub_major+='<div id="sub_major"><input class="form-check-input" type="checkbox" value="'+getAllMajor[i].major_name+'" name="checkbox">'+getAllMajor[i].major_name+'</div>';
+            // var ID = "checkbox"+i;
+            text_sub_major+='<div id="sub_major"><input class="form-check-input" id="checkbox'+i+'" type="checkbox" value="'+getAllMajor[i].major_name+'" name="checkbox">'+getAllMajor[i].major_name+'</div>';
+
         }
 
         $('#sub_major_select').append(text_sub_major);
@@ -180,5 +184,42 @@
         })
     }
 
+    // function deleteSubMajor() {
+    //     var id = user.id;
+    //     swal.fire({
+    //         title: '정말로 초기화하시나요?',
+    //         icon: 'warning',
+    //         showConfirmButton: true,
+    //         showCancelButton: true
+    //
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             $.ajax({
+    //                 url: "ajax.kgu",
+    //                 type: "post",
+    //                 data: {
+    //                     req: "delete_sub_major",
+    //                     data: id
+    //                 },
+    //                 success: function (data) {
+    //                     if (data == 'fail') {
+    //                         swal.fire({
+    //                             title: '실패.',
+    //                             icon: 'warning',
+    //                             showConfirmButton: true
+    //                         });
+    //                         return;
+    //                     }
+    //                     swal.fire({
+    //                         title: '초기화가 완료되었습니다.',
+    //                         icon: 'success',
+    //                         showConfirmButton: true
+    //
+    //                     });
+    //                 }
+    //             });
+    //         }
+    //     })
+    // }
 
 </script>

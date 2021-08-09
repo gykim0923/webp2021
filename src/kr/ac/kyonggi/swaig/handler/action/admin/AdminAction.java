@@ -60,6 +60,14 @@ public class AdminAction extends CustomAction {
                 request.setAttribute("getAllUser", gson.toJson(UserDAO.getInstance().getAllUser()));
                 return "RequestDispatcher:jsp/page/page.jsp";
             }
+            else if(num.equals("75")){
+                //        if(!type.equals("홈페이지관리자")){
+                //            request.setAttribute("error", "구글 아이디는 비밀번호 변경이 불가능합니다.");
+                //            return "RequestDispatcher:jsp/main/error.jsp";
+                //        }
+                request.setAttribute("jsp", gson.toJson("changePwd")); //changePwd.jsp
+                return "RequestDispatcher:jsp/page/page.jsp";
+            }
             else {
                 return "RequestDispatcher:jsp/main/error.jsp";
             }
