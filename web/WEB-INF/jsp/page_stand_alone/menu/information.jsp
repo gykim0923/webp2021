@@ -31,7 +31,7 @@
 
             if(typeForInformation.for_header=='관리자'){
                 var button = $('#modify_button');
-                button.append('<button onclick="modify()">수정</button>');
+                button.append('<button class="btn btn-primary" onclick="modify()">수정</button>');
             }
 
             data.append(text);
@@ -44,8 +44,10 @@
         var a='';
         modify_button.empty();
         a+='<textarea id="editor">'+information.content+'</textarea>';
-        a+='<div id="write_post" class="col-xs-13 text-right"><button type="button" class="btn btn-default" style = "margin : 2px;" onclick="modifyText()">수정</button>';
-        a+='<button type="button" class="btn btn-default" style = "margin : 2px;" onclick="back()">뒤로</button></div></div>';
+        a+='<div id="write_post" class="my-4 col-xs-13 text-right d-flex justify-content-between">'
+        a+='<button type="button" class="btn btn-secondary" style = "margin : 2px;" onclick="back()">뒤로</button>'
+        a+='<button type="button" class="btn btn-primary" style = "margin : 2px;" onclick="modifyText()">수정</button>';
+        a+='</div>';
         $('#information_content').html(a);
         CKEDITOR.replace('editor', {
             allowedContent: true,
@@ -58,7 +60,7 @@
         var a='';
         a+=information.content;
         $('#information_content').html(a);
-        var b='<div id="write_post" class="col-xs-13 text-right" style = "margin : 2px;"><button type="button" class="btn btn-default" onclick="modify()">수정</button></div>';
+        var b='<div id="write_post" class="col-xs-13 text-right" style = "margin : 2px;"><button type="button" class="btn btn-primary" onclick="modify()">수정</button></div>';
         $('#modify_button').html(b);
     }
     function modifyText(){
@@ -97,3 +99,12 @@
 
 
 </script>
+
+<style>
+    #information_content img {
+        max-width:100%;
+        width: 100% !important;
+        height: auto !important;
+        object-fit:cover;
+    }
+</style>
