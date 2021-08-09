@@ -104,13 +104,13 @@
 
 
     function modifyBbs(){
-        var id = getBBS.id;
+        var bbs_id = getBBS.id;
         var title = $('#bbsTitle').val();
         var text = CKEDITOR.instances.bbsUpdateContent.getData();
         var writer_id = user.id;
         var writer_name = type.for_header;
         var last_modified = formatDate(new Date());
-        var data = id+"-/-/-"+major+"-/-/-"+writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+num+"-/-/-"+last_modified+"-/-/-"+text;
+        var data = bbs_id+"-/-/-"+major+"-/-/-"+writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+num+"-/-/-"+last_modified+"-/-/-"+text;
 
         $.ajax({
             url: "ajax.kgu", //AjaxAction에서
@@ -126,7 +126,7 @@
                         icon : 'success',
                         showConfirmButton: true
                     });
-                    back();
+                    window.location.href = 'bbs.kgu?major='+major+'&&num='+num+'&&mode=view&&id='+id;
                 }
                 else{
                     swal.fire({
@@ -141,7 +141,7 @@
     }
 
     function back(){
-        window.location.href = 'bbs.kgu?major='+major+'&&num='+num+'&&mode=view&&id='+id;
+        window.location.href = 'bbs.kgu?major='+major+'&&num='+num+'&&mode=list';
     }
 
     function formatDate(date) { //날짜를 yyyy-mm-dd 형식으로 반환
