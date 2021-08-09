@@ -73,7 +73,10 @@
                     can = '○';
                 }
                 else{
-                    lvlText = '<span>' + reg.title + '<span/>';
+                    if(type.for_header == '기타')
+                        lvlText = '<span>' + reg.title + '<span/>';
+                    else
+                        lvlText = '<a href="'+url+'">'+reg.title+'</a>';
                     can = 'ⅹ';
                 }
                 if(start <= today && today <= close && (reg.level.indexOf(type.for_header) >= 0 || type.for_header == '관리자' || (reg.for_who == 1 && type.for_header == '교수')))

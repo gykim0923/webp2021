@@ -14,7 +14,7 @@
 <div>
     <div class="album">
         <div class="container">
-<%--            전공 관리--%>
+<%--           부전공 관리--%>
             <%@include file="/WEB-INF/jsp/page/admin/admin_main/admin_major.jsp"%>
             <hr>
 <%--                일정 관리 --%>

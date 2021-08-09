@@ -97,7 +97,7 @@
                 var list = $('#formButtons');
                 var text = '';
                 text += '<div class="my-2">'
-                text += '<div class="alert alert-warning d-flex align-items-center" role="alert"><i class="bi bi-exclamation-triangle-fill warning"></i><div>&nbsp;글을 저장하신 후에는 신청 폼을 수정할 수 없습니다. 신중하게 작성해주시기 바랍니다.</div> </div>'
+                text += '<div class="alert alert-warning d-flex align-items-center" role="alert"><i class="bi bi-exclamation-triangle-fill warning"></i><div>&nbsp;글을 저장하신 후에는 신청 폼을 수정할 수 없습니다. 신중하게 작성해주시기 바랍니다. 또한 질문과 답변에 \'-/-/-\'과 \'-/@/-\'은 포함시키지 말아주세요.</div> </div>'
                 text += '<button class="btn btn-secondary mx-1" id="q1" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ1Modal()">주관식</button>'
                 text += '<button class="btn btn-secondary mx-1" id="q2" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ2Modal()">단일객관식</button>'
                 text += '<button class="btn btn-secondary mx-1" id="q3" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ3Modal()">다중객관식</button>'
@@ -328,12 +328,20 @@
     function submitQ1(index){
         a='';
         var text = $('#InputQ1').val();
-        if(text == null){
+        alert(text);
+        if(text.length == 0){
             swal.fire({
                 title : '질문을 만들어 주세요.',
                 icon : 'warning',
                 showConfirmButton: true
-
+            });
+            return;
+        }
+        if(text.includes('-/@/-') || text.includes('-/-/-')){
+            swal.fire({
+                title : '질문에 \'-/@/-\'또는 \'-/-/-\'을 제거해주시기 바랍니다.',
+                icon : 'warning',
+                showConfirmButton: true
             });
             return;
         }
@@ -348,12 +356,19 @@
         a='';
         var answerLength = $('.count').length;
         var text = $('#InputQ2').val();
-        if(text == null){
+        if(text.length == 0){
             swal.fire({
                 title : '질문을 만들어 주세요.',
                 icon : 'warning',
                 showConfirmButton: true
-
+            });
+            return;
+        }
+        if(text.includes('-/@/-') || text.includes('-/-/-')) {
+            swal.fire({
+                title: '질문에 \'-/@/-\'또는 \'-/-/-\'을 제거해주시기 바랍니다.',
+                icon: 'warning',
+                showConfirmButton: true
             });
             return;
         }
@@ -374,12 +389,19 @@
         a = '';
         var answerLength = $('.count').length;
         var text = $('#InputQ3').val();
-        if(text == null){
+        if(text.length == 0){
             swal.fire({
                 title : '질문을 만들어 주세요.',
                 icon : 'warning',
                 showConfirmButton: true
-
+            });
+            return;
+        }
+        if(text.includes('-/@/-') || text.includes('-/-/-')) {
+            swal.fire({
+                title: '질문에 \'-/@/-\'또는 \'-/-/-\'을 제거해주시기 바랍니다.',
+                icon: 'warning',
+                showConfirmButton: true
             });
             return;
         }
@@ -402,12 +424,19 @@
         var min = $('#InputMin').val() + '';
         var max = $('#InputMax').val() + '';
         var avg = Number(max) + Number(min);
-        if(text == null){
+        if(text.length == 0){
             swal.fire({
                 title : '질문을 만들어 주세요.',
                 icon : 'warning',
                 showConfirmButton: true
-
+            });
+            return;
+        }
+        if(text.includes('-/@/-') || text.includes('-/-/-')) {
+            swal.fire({
+                title: '질문에 \'-/@/-\'또는 \'-/-/-\'을 제거해주시기 바랍니다.',
+                icon: 'warning',
+                showConfirmButton: true
             });
             return;
         }
@@ -456,10 +485,18 @@
     function submitQ5(index){
         a = '';
         var text = $('#InputQ5').val();
-        if(text == null){
+        if(text.length == 0){
             swal.fire({
                 title : '질문을 만들어 주세요',
                 icon : 'warning',
+                showConfirmButton: true
+            });
+            return;
+        }
+        if(text.includes('-/@/-') || text.includes('-/-/-')) {
+            swal.fire({
+                title: '질문에 \'-/@/-\'또는 \'-/-/-\'을 제거해주시기 바랍니다.',
+                icon: 'warning',
                 showConfirmButton: true
             });
             return;
@@ -481,12 +518,20 @@
     var answerIndex = 1;
     function makeAnswer(){
         var text = $('#newAnswer').val();
-        if(text == ''){
+        if(text.length == 0){
             swal.fire({
                 title : '칸을 입력해주세요',
                 icon : 'warning',
                 showConfirmButton: true
             });;
+            return;
+        }
+        if(text.includes('-/@/-') || text.includes('-/-/-')) {
+            swal.fire({
+                title: '선택지에 \'-/@/-\'또는 \'-/-/-\'을 제거해주시기 바랍니다.',
+                icon: 'warning',
+                showConfirmButton: true
+            });
             return;
         }
         $('#newAnswer').val('');
