@@ -88,7 +88,7 @@
             + '<i class="bi bi-stack"></i>'
             + '<span>' + menuTabList[3].tab_title + '</span>'
             + '</a>';
-        for (var i = 0; i < majorAllInfo.length; i++) {
+        for (var i = 1; i < majorAllInfo.length; i++) {
             text += '<ul class="submenu active" style="display: block;" >'
                 +'<li class="submenu-item">'
                 +'<a data-bs-toggle="collapse" href="#collapseExample'+i+'" role="button" aria-expanded="false" aria-controls="collapseExample" onclick="display('+i+')">'+majorAllInfo[i].major_name+'</a>'
