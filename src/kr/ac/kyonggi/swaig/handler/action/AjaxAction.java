@@ -129,6 +129,15 @@ public class AjaxAction implements Action {
                 LogDAO.getInstance().insertLog(user.id, user.name, user.type, new Date(),"회원정보수정");
                 break;
 
+            case "modifySubMajor":
+                String arrdata[] = data.split("-/-/-");//0:id 1:phone 2:birth 3:email 4:sub_major
+                if (!arrdata[0].equals(user.id))
+                    return "fail";
+                result = UserDAO.getInstance().modifySubMajor(data);
+                session.setAttribute("user", gson.toJson(UserDAO.getInstance().getUser(arrdata[0])));
+                LogDAO.getInstance().insertLog(user.id, user.name, user.type, new Date(),"회원정보수정");
+                break;
+
             case "addMajor":
                 if (type.board_level != 0){
                     return "fail";
@@ -402,6 +411,10 @@ public class AjaxAction implements Action {
                 }
                 result=AdminDAO.getInstance().addKguMajor(data);
                 break;
+            case "delete_major":
+                if (type.board_level == 0)
+                    result=AdminDAO.getInstance().deleteMajor(data);
+                break;
             case "delete_kgu_major":
                 if (type.board_level == 0)
                     result=AdminDAO.getInstance().deleteKguMajor(data);
@@ -409,7 +422,7 @@ public class AjaxAction implements Action {
             case "delete_sub_major":
                 String userId = data;
                 if (userId.equals(user.id)){
-//                    result=UserDAO.getInstance().deleteSubMajor(data);
+                    result=UserDAO.getInstance().deleteSubMajor(data);
                 }
                 break;
         }

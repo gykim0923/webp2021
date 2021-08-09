@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="">
-  <label><h2><strong>전공 관리</strong></h2></label>
+  <label><h2><strong>부전공 관리</strong></h2></label>
   <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
   <table class="boardtable" id="table1"  data-toggle="table"
          data-pagination="true" data-toolbar="#toolbar"
@@ -72,6 +72,7 @@
             +'<div>학과연락처</div><input type="text" class="form-control" id="major_contact" name="new_table" value="'+(major[i].major_contact)+'" placeholder="major_contact">';
 
     var modal_footer = '';
+    modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" onclick="deleteMajor('+i+')">부전공삭제</button>';
     modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
     modal_footer += '<button type="button" class="btn btn-secondary pull-right" data-dismiss="modal" aria-label="Close" onclick="modifyMajor('+i+')">완료</button>';
 
@@ -180,4 +181,27 @@
       })
     }
 
+  function deleteMajor(i){
+    var major = <%=getAllMajor%>;
+    var check = confirm("정말 삭제하시겠습니까?");
+    var target_oid=major[i].oid;
+    if(check){
+      $.ajax({
+        url : "ajax.kgu",
+        type : "post",
+        data : {
+          req : "delete_major",
+          data : target_oid
+        },
+        success : function(data) {
+          if(data == 'fail'){
+            alert('fail');
+            return;
+          }
+          alert("삭제가 완료되었습니다");
+          location.reload();
+        }
+      });
+    }
+  }
 </script>

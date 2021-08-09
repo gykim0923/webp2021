@@ -89,7 +89,7 @@
 
         // 부전공 선택
         for(var i=0; i<getAllMajor.length; i++){
-            text_sub_major+='<div id="sub_major"><input class="form-check-input" id="checkbox'+i+'" type="checkbox" value="'+getAllMajor[i].major_name+'" name="checkbox">'+getAllMajor[i].major_name+'</div>';
+            text_sub_major+='<div id="sub_major"><input class="form-check-input" id="checkbox'+i+'" type="checkbox" value="'+(i+1)+'" name="checkbox">'+getAllMajor[i].major_name+'</div>';
         }
         $('#sub_major_select').append(text_sub_major);
 
@@ -113,6 +113,35 @@
         window.location.reload();
     }
 
+    function modifySubMajor(){
+        var id = user.id;
+        var checkboxValues = [];
+        $("input[name='checkbox']:checked").each(function() {
+            checkboxValues.push($(this).val());
+        });
+
+        var userdata = id+"-/-/-"+checkboxValues;
+
+        $.ajax({
+            url:"ajax.kgu",
+            type:"post",
+            data :{
+                req:"modifySubMajor",
+                data:userdata
+            },
+            success : function(data){
+                swal.fire({
+                    title : '수정이 완료되었습니다.',
+                    icon : 'success',
+                    showConfirmButton: true
+
+                }).then(function (){
+                    location.reload();
+                });
+            }
+        })
+    }
+
     function modify(){  //개인정보 수정
         var id = user.id;
         var phone = $('[name = phone]').val();
@@ -120,13 +149,10 @@
         var email = $('[name = email]').val();
         var grade = $('[name = grade]').val();
         var state = $('[name = state]').val();
+        modifySubMajor();
 
-        var checkboxValues = [];
-        $("input[name='checkbox']:checked").each(function() {
-            checkboxValues.push($(this).val());
-        });
 
-        var userdata = id+"-/-/-"+phone+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+grade+"-/-/-"+checkboxValues+"-/-/-"+state;
+        var userdata = id+"-/-/-"+phone+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+grade+"-/-/-"+state;
 
         $.ajax({
             url:"ajax.kgu",
