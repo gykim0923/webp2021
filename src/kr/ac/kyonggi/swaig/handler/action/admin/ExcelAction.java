@@ -23,7 +23,6 @@ public class ExcelAction extends CustomAction {
    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
       String writeorread=request.getParameter("writeorread");
-      String type=request.getParameter("type");//user(엑셀이용)
       String data=request.getParameter("data");
       String address=request.getParameter("address");
       String result=null;

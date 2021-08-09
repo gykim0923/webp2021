@@ -34,7 +34,7 @@
     </div>
     <div class="col-md-4 form-group" id="cDate">
         <label for="InputFinishDate">마감일</label>
-        <input type="date" class="form-control" name="finishDate" id="InputFinishDate" >
+        <input type="date" class="form-control" name="finishDate" id="InputFinishDate">
     </div>
     <div class="col-md-4">
         <label for="forWho">신청현황공개</label>

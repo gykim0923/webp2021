@@ -241,13 +241,12 @@ public class HomeDAO {
 
     public String insertMenu(String data) {                  //Static_Page 추가
         List<Map<String, Object>> listOfMaps1 = null;
-        String arr[]=data.split("-/-/-"); //0=title 1=tab_id
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            listOfMaps1=queryRunner.query(conn, "SELECT * FROM swaig.menu_pages WHERE `tab_id`=?",new MapListHandler(),Integer.parseInt(arr[1]));
-            queryRunner.update(conn,"INSERT INTO `menu_pages` (`page_id`,`page_path`, `page_title`, `tab_id`, `orderNum`) VALUES(?,?,?,?,?);",(Integer.parseInt(arr[1])*10)+listOfMaps1.size(),"information.kgu",arr[0],Integer.parseInt(arr[1]),listOfMaps1.size());
-            queryRunner.update(conn,"INSERT INTO `text` (`id`,`major`,`content`) VALUES(?,?,?)",(Integer.parseInt(arr[1])*10)+listOfMaps1.size(),"main","내용을 입력해주세요");
+            listOfMaps1=queryRunner.query(conn, "SELECT * FROM swaig.menu_pages WHERE `tab_id`=?",new MapListHandler(),1);
+            queryRunner.update(conn,"INSERT INTO `menu_pages` (`page_id`,`page_path`, `page_title`, `tab_id`, `orderNum`) VALUES(?,?,?,?,?);",10+listOfMaps1.size(),"information.kgu",data,1,listOfMaps1.size());
+            queryRunner.update(conn,"INSERT INTO `text` (`id`,`major`,`content`) VALUES(?,?,?)",10+listOfMaps1.size(),"main","내용을 입력해주세요");
         }catch(SQLException se) {
             se.printStackTrace();
         } finally {
@@ -258,13 +257,28 @@ public class HomeDAO {
 
     public String insertNoticeMenu(String data) {            //게시판 추가
         List<Map<String, Object>> listOfMaps = null;
-        String arr[]=data.split("-/-/-");//0=title
+        Connection conn = Config.getInstance().sqlLogin();
+        Gson gson= new Gson();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps=queryRunner.query(conn, "SELECT * FROM swaig.menu_pages WHERE `tab_id`=?",new MapListHandler(),2);
+            queryRunner.update(conn,"INSERT INTO `menu_pages` (`page_id`,`page_path`, `page_title`, `tab_id`, `orderNum`) VALUES(?,?,?,?,?);",20+listOfMaps.size(),"bbs.kgu",data,2,listOfMaps.size());
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "";
+    }
+
+    public String insertIndependent(String data) {            //세부전공 메뉴 추가
+        List<Map<String, Object>> listOfMaps = null;
         Connection conn = Config.getInstance().sqlLogin();
         Gson gson= new Gson();
         try {
             QueryRunner queryRunner = new QueryRunner();
             listOfMaps=queryRunner.query(conn, "SELECT * FROM swaig.menu_pages WHERE `tab_id`=?",new MapListHandler(),5);
-            queryRunner.update(conn,"INSERT INTO `menu_pages` (`page_id`,`page_path`, `page_title`, `tab_id`, `orderNum`) VALUES(?,?,?,?,?);",50+listOfMaps.size(),"bbs.kgu",arr[0],5,listOfMaps.size());
+            queryRunner.update(conn,"INSERT INTO `menu_pages` (`page_id`,`page_path`, `page_title`, `tab_id`, `orderNum`) VALUES(?,?,?,?,?);",50+listOfMaps.size(),"bbs.kgu",data,5,listOfMaps.size());
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {

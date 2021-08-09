@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import kr.ac.kyonggi.swaig.common.sql.Config;
 import kr.ac.kyonggi.swaig.handler.dao.settings.LogDAO;
+import kr.ac.kyonggi.swaig.handler.dto.settings.MajorDTO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserTypeDTO;
 import org.apache.commons.dbutils.DbUtils;
@@ -78,6 +79,7 @@ public class UserDAO {
 
         return selected;
     }
+    
 
     public UserDTO getUser(String id) {
         List<Map<String, Object>> listOfMaps = null;
@@ -85,6 +87,7 @@ public class UserDAO {
         try {
             QueryRunner queryRunner = new QueryRunner();
             listOfMaps = queryRunner.query(conn,"SELECT * FROM user WHERE id = ?;", new MapListHandler(), id);
+
 //            System.out.println(listOfMaps);
         } catch(SQLException se) {
             se.printStackTrace();
@@ -322,11 +325,41 @@ public class UserDAO {
 }
 
     public String modifydata(String data) {
-        String arr[] = data.split("-/-/-");//0:id 1:phone 2:birth 3:email 4:sub_major
+        String arr[] = data.split("-/-/-");//0:id 1:phone 2:birth 3:email 4:grade 5: state
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn,"UPDATE user SET phone=?,birth=?,email=?,sub_major=? WHERE id = ?;",arr[1],arr[2],arr[3],arr[4],arr[0]);
+            queryRunner.update(conn,"UPDATE user SET phone=?,birth=?,email=?,grade=?,state=? WHERE id = ?;",arr[1],arr[2],arr[3],arr[4],arr[5],arr[0]);
+        }catch(SQLException se) {
+            se.printStackTrace();
+        }finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "";
+    }
+
+    public String modifySubMajor(String data) { // user의 sub_major 수정
+        String arr[] = data.split("-/-/-");//sub_major_id
+        String sub_id[] = arr[1].split(",");
+        Gson gson = new Gson();
+        Connection conn = Config.getInstance().sqlLogin();
+        List<Map<String, Object>> listOfMaps = null;
+        String sub_major="";
+        String black = "-";
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            if(sub_id[0].equals("부전공 없음")){
+                queryRunner.update(conn,"UPDATE user SET sub_major=? WHERE id = ?;",black, arr[0]);
+            } else {
+                for (int i = 0; i < sub_id.length; i++) {
+                    listOfMaps = queryRunner.query(conn, "SELECT major_name FROM major WHERE oid = ?;", new MapListHandler(), sub_id[i]);
+                    ArrayList<MajorDTO> results = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<MajorDTO>>() {
+                    }.getType());
+                    sub_major += results.get(0).major_name + "<br>";
+                }
+//                System.out.println(sub_major + ",");
+                queryRunner.update(conn, "UPDATE user SET sub_major=? WHERE id = ?;", sub_major, arr[0]);
+            }
         }catch(SQLException se) {
             se.printStackTrace();
         }finally {
@@ -565,6 +598,22 @@ public class UserDAO {
         } finally {
             DbUtils.closeQuietly(conn);
         }
+        return "success";
+    }
+
+    public String deleteSubMajor(String data) {
+        String id = data;
+        Connection conn = Config.getInstance().sqlLogin();
+
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,"UPDATE user SET sub_major=? WHERE id=?",'-',id);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+
         return "success";
     }
 }

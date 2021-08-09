@@ -106,4 +106,5 @@ public class BulletinBoardServiceAction extends CustomAction {
 
         return "RequestDispatcher:jsp/page_stand_alone/page_stand_alone.jsp";
     }
+
 }

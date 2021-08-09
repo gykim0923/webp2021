@@ -77,8 +77,8 @@
 
 
         // 학년 선택
-        text_grade+='<div><select class="form-select" aria-label="Default select example">';
-        text_grade+='<option selected>'+user.grade+'</option>';
+        text_grade+='<div><select class="form-select" aria-label="Default select example" data-value='+user.grade+'>';
+        // text_grade+='<option selected>'+user.grade+'</option>';
         text_grade+='<option name="grade" value="1학년">1학년</option>';
         text_grade+='<option name="grade" value="2학년">2학년</option>';
         text_grade+='<option name="grade" value="3학년">3학년</option>';
@@ -89,13 +89,26 @@
 
         // 부전공 선택
         for(var i=0; i<getAllMajor.length; i++){
-            text_sub_major+='<div id="sub_major"><input class="form-check-input" id="checkbox'+i+'" type="checkbox" value="'+(i+1)+'" name="checkbox">'+getAllMajor[i].major_name+'</div>';
+            if(getAllMajor[i].major_name !== getAllMajor[0].major_name) {
+                text_sub_major += '<div id="sub_major"><input class="form-check-input" name="checkbox" id="checkbox' + i + '" type="checkbox" value="' + (i + 1) + '"/>' + getAllMajor[i].major_name + '</div>';
+            }
         }
+
         $('#sub_major_select').append(text_sub_major);
+
+        var usersub_major = user.sub_major.split('<br>');
+
+        for(var j=0; j<usersub_major.length; j++){
+            for(var i=0; i<getAllMajor.length; i++) {
+                    if (getAllMajor[i].major_name == usersub_major[j]) {
+                        $('#checkbox'+i).prop('checked', true);
+                    }
+            }
+        }
+
 
         // 상태 선택
         text_state+='<div><select class="form-select" aria-label="Default select example">';
-        text_state+='<option selected>'+user.state+'</option>';
         text_state+='<option name="state" value="재학">재학</option>';
         text_state+='<option name="state" value="휴학">휴학</option>';
         text_state+='<option name="state" value="퇴학">퇴학</option>';
@@ -114,11 +127,24 @@
     }
 
     function modifySubMajor(){
+        var getAllMajor=<%=getAllMajor%>;
         var id = user.id;
         var checkboxValues = [];
-        $("input[name='checkbox']:checked").each(function() {
-            checkboxValues.push($(this).val());
-        });
+        var count=0;
+        for(var i=0; i<getAllMajor.length; i++){
+            if($('#checkbox'+i).is(":checked")==true){
+                count++;
+            }
+        }
+        console.log(count)
+        if(count == 0){
+            checkboxValues.push('부전공 없음');
+            console.log(checkboxValues);
+        } else {
+            $("input[name='checkbox']:checked").each(function() {
+                checkboxValues.push($(this).val());
+            });
+        }
 
         var userdata = id+"-/-/-"+checkboxValues;
 
@@ -147,10 +173,12 @@
         var phone = $('[name = phone]').val();
         var birth = $('[name = birth]').val();
         var email = $('[name = email]').val();
-        var grade = $('[name = grade]').val();
-        var state = $('[name = state]').val();
-        modifySubMajor();
+        // var grade = $('[name = grade]').val();
+        // var state = $('[name = state]').val();
+        var grade = $('[name = grade]:selected').val();
+        var state = $('[name = state]:selected').val();
 
+        modifySubMajor();
 
         var userdata = id+"-/-/-"+phone+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+grade+"-/-/-"+state;
 

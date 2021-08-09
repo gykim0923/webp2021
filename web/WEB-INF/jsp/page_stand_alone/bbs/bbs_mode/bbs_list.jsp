@@ -79,9 +79,6 @@
         var button =$('#write_button');
         var bbsnum;
         for(var i=0; i<10; i++){
-
-        }
-        for(var i=0; i<10; i++){
             var bbsnum2 = "2"+i
             if(num==bbsnum || num==bbsnum2){
                 if (type.board_level == 0 || type.board_level == 1) {
