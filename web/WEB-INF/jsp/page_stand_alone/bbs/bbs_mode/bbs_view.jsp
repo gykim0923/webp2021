@@ -107,13 +107,13 @@
       for(var i=0;i< commentsList.length;i++){
         var comment = commentsList[i];
         text+='<a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">'
-        +'<img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">'
+        +'<h3 class="my-2"><i class="bi bi-person-circle"></i></h3>'
         +'<div class="d-flex gap-2 w-100 justify-content-between">'
         +'<div>'
         +'<h6 class="mb-0">'+comment.writer_name+'</h6>'
         +'<p class="mb-0 opacity-75">'+comment.comment+'</p>'
         +'</div>'
-        +'<small class="text-nowrap">'+comment.comment_date+'</small>'
+        +'<small class="text-nowrap">'+ formatDate(commentsList[i].comment_date)+'</small>'
         +'</div>'
         if(user!=null){
           if(user.id == commentsList[i].writer_id){

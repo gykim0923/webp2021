@@ -126,7 +126,7 @@
                         icon : 'success',
                         showConfirmButton: true
                     });
-                    window.location.href = 'bbs.kgu?major='+major+'&&num='+num+'&&mode=view&&id='+id;
+
                 }
                 else{
                     swal.fire({
@@ -136,6 +136,7 @@
 
                     });
                 }
+                window.location.href = 'bbs.kgu?major='+major+'&&num='+num+'&&mode=view&&id='+id;
             }
         })
     }
