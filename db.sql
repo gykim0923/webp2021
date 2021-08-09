@@ -122,8 +122,8 @@ CREATE TABLE major(
 
 INSERT INTO major(oid,major_id,major_name,major_location,major_contact) VALUE('1','main','K-WITH 융합교육원','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
 INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major1','문화재관리학융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
--- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major2','형사사법학융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
--- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major3','심리상담융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major2','형사사법학융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major3','심리상담융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
 -- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major4','관광스포츠산업융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
 -- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major5','창업합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
 -- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major6','커뮤니티공공안전융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
