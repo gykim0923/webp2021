@@ -22,14 +22,14 @@
                 <thead>
                 <tr>
                     <th data-field="action">설정</th>
-                    <th data-field="slider_img">slider_img</th>
+                    <th data-field="slider_img">슬라이드 이미지</th>
                 </tr>
                 </thead>
             </table>
         </div>
 
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeUploadSliderModal()">대문 사진 추가</button>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeUploadSliderModal()">대문 사진 추가</button>
 
 </div>
 
@@ -71,7 +71,7 @@
 
         var modal_footer = '';
         modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-        modal_footer += '<button type="button" class="btn btn-secondary pull-right" data-dismiss="modal" aria-label="Close" onclick="insertSlider()">추가하기</button>';
+        modal_footer += '<button type="button" class="btn btn-success pull-right" data-dismiss="modal" aria-label="Close" onclick="insertSlider()">추가하기</button>';
 
         header.html(modal_header);
         body.html(modal_body);

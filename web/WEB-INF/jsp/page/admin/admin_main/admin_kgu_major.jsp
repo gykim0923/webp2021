@@ -25,7 +25,7 @@
 </div>
 <div>
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeAddKguMajorModal()">본전공 추가</button>
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeAddKguMajorModal()">본전공 추가</button>
 </div>
 <script>
     $(document).ready(function(){
@@ -45,7 +45,7 @@
                 campus: kgu_major.campus,
                 college: kgu_major.college,
                 major: kgu_major.major,
-                action : '<button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyKguMajorModal('+i+')">수정</button>'
+                action : '<button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyKguMajorModal('+i+')">수정</button><br><button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick="deleteKguMajor('+i+')">삭제</button>'
             });
         }
         // alert(rows);
@@ -65,7 +65,6 @@
             +'<div>학과</div><input type="text" class="form-control" id="major" name="new_table" value="'+(major[i].major)+'" placeholder="major">';
 
         var modal_footer = '';
-        modal_footer += '<button type="button" class="btn btn-outline-secondary"data-bs-dismiss="modal" onclick="deleteKguMajor('+i+')">본전공삭제</button>';
         modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
         modal_footer += '<button type="button" class="btn btn-secondary pull-right" data-dismiss="modal" aria-label="Close" onclick="modifyKguMajor('+major[i].id+')">완료</button>';
 
@@ -114,7 +113,7 @@
     function makeAddKguMajorModal(){
         var modal_header = '';
         modal_header += '<h5 class="modal-title" id="staticBackdropLabel">본전공 추가하기</h5>';
-        modal_header += '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
+        modal_header += '<button type="button" class="btn-success" data-bs-dismiss="modal" aria-label="Close"></button>';
 
         var modal_body = '';
         modal_body += '<div>캠퍼스</div><input type="text" class="form-control" id="add_campus" name="new_table" value="" placeholder="캠퍼스이름을 입력해주세요">'
@@ -123,7 +122,7 @@
 
         var modal_footer = '';
         modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-        modal_footer += '<button type="button" class="btn btn-secondary" onclick="addKguMajor()">추가</button>';
+        modal_footer += '<button type="button" class="btn btn-btn-success" onclick="addKguMajor()">추가</button>';
 
         header.html(modal_header);
         body.html(modal_body);

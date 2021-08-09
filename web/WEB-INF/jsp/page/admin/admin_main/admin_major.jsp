@@ -6,6 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<style>
+  #deletebtn{
+    float: left;
+  }
+  #completebtn{
+    float: right;
+  }
+</style>
 <div class="">
   <label><h2><strong>부전공 관리</strong></h2></label>
   <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
@@ -26,7 +34,7 @@
 </div>
 <div>
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeAddMajorModal()">전공 추가</button>
+  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeAddMajorModal()">전공 추가</button>
 </div>
 <script>
   $(document).ready(function(){
@@ -47,7 +55,7 @@
         major_name: major.major_name,
         major_location: major.major_location,
         major_contact: major.major_contact,
-        action : '<button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyMajorModal('+i+')">수정</button>'
+        action : '<button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyMajorModal('+i+')">수정</button><br><button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="deleteMajor('+i+')">삭제</button></div>'
       });
     }
     // alert(rows);
@@ -72,7 +80,6 @@
             +'<div>학과연락처</div><input type="text" class="form-control" id="major_contact" name="new_table" value="'+(major[i].major_contact)+'" placeholder="major_contact">';
 
     var modal_footer = '';
-    modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" onclick="deleteMajor('+i+')">부전공삭제</button>';
     modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
     modal_footer += '<button type="button" class="btn btn-secondary pull-right" data-dismiss="modal" aria-label="Close" onclick="modifyMajor('+i+')">완료</button>';
 

@@ -23,7 +23,7 @@
     </thead>
   </table>
   <div class="d-grid gap-2 d-md-flex justify-content-md-end"> <div class="col-md-10"></div>
-    <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-secondary" onclick="insertSch()">추가</button>
+    <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-success" onclick="insertSch()">추가</button>
     <button type="button" class="btn btn-secondary" onclick="updateSch()">갱신</button>
   </div>
 </div>
