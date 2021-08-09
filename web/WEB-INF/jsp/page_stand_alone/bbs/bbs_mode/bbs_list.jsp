@@ -87,8 +87,14 @@
                 }
             }
         }
-        if(num == "21" || num == "22" || num == "23" || num == "30" || num=="31" || num=="52" || num=="53") {
+        if(num == "21" || num == "22" || num == "23" || num == "30" || num=="31" || num=="52") {
             if (type.board_level == 0 || type.board_level == 1) {
+                var text = '<a href = "bbs.kgu?major=' + major + '&&num=' + num + '&&mode=write"><div class="btn btn-success">글쓰기</div></a>';
+                button.append(text);
+            }
+        }
+        else if(num=="53"){
+            if(type.board_level < 3){
                 var text = '<a href = "bbs.kgu?major=' + major + '&&num=' + num + '&&mode=write"><div class="btn btn-success">글쓰기</div></a>';
                 button.append(text);
             }
