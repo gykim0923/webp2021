@@ -176,6 +176,7 @@ public class RegisterDAO {
     }
 
     public String insertAnswers(String data) {
+        System.out.println(data);
         String arr[] = data.split("-/-/-");// 0= userName 1=userid 2=per_id 3=grade 4=type 5=board_number 6=answers 7= question개수
         String answers[] = arr[6].split("-/#/-"); // answer별 구분자 -/#/- 다중객관식은 그냥 answer에 구분자쨰로 넣음.
         if(arr[2].equals("null"))
@@ -192,6 +193,7 @@ public class RegisterDAO {
             if (listOfMaps.size() > 0)
                 return "already";
             for (int i = 0; i < answers.length; i++) {
+                System.out.println(answers[i]);
                 queryRunner.update(conn,
                         "INSERT INTO bbs_reg_answer(writer_name, writer_id, writer_perId, writer_grade, writer_type, question_num, reg_id, answer) VALUES(?,?,?,?,?,?,?,?);",
                         arr[0], arr[1], arr[2], arr[3], arr[4], (i + 1), arr[5], answers[i]);
@@ -215,17 +217,26 @@ public class RegisterDAO {
     }
 
     public String modifyAnswer(String data) {
-        String arr[] = data.split("-/-/-");// 0= userName 1=userid 2=reg_id 3=answers 4=question개수
-        String answers[] = arr[3].split("-/#/-"); // answer별 구분자 -/#/- 다중객관식은 그냥 answer에 구분자쨰로 넣음.
+        System.out.println(data);
+        String arr[] = data.split("-/-/-");// 0= userName 1=userid 2=per_id 3=grade 4=type 5=board_number 6=answers 7= question개수
+        String answers[] = arr[6].split("-/#/-"); // answer별 구분자 -/#/- 다중객관식은 그냥 answer에 구분자쨰로 넣음.
         Connection conn = Config.getInstance().sqlLogin();
         boolean result = false;
         List<Map<String, Object>> listOfMaps = null;
         try {
             QueryRunner queryRunner = new QueryRunner();
+            queryRunner.update(conn,
+                    "DELETE FROM bbs_reg_answer WHERE writer_id = ? AND reg_id = ?;", arr[1], arr[5]);
             for (int i = 0; i < answers.length; i++) {
                 queryRunner.update(conn,
-                        "UPDATE bbs_reg_answer SET answer=? WHERE writer_id = ? AND reg_id = ? AND question_num = ?;",
-                        answers[i], arr[1], arr[2], (i + 1));
+                        "INSERT INTO bbs_reg_answer(writer_name, writer_id, writer_perId, writer_grade, writer_type, question_num, reg_id, answer) VALUES(?,?,?,?,?,?,?,?);",
+                        arr[0], arr[1], arr[2], arr[3], arr[4], (i + 1), arr[5], answers[i]);
+            }
+            for (int j = answers.length ; j < Integer.valueOf(arr[7]) ; ++j) {
+                System.out.println("222");
+                queryRunner.update(conn,
+                        "INSERT INTO bbs_reg_answer(writer_name, writer_id, writer_perId, writer_grade, writer_type, question_num, reg_id, answer) VALUES(?,?,?,?,?,?,?,?);",
+                        arr[0], arr[1], arr[2], arr[3], arr[4], (j + 1), arr[5], "");
             }
             result = true;
         } catch (SQLException e) {
@@ -262,27 +273,37 @@ public class RegisterDAO {
 
     public String deleteWhoAnswer(String data) {
         String arr[] = data.split("-/-/-");// 0= reg_id 1= user_name 2=user_per_id 3=user_grade 4 = user_id
-        // realPath 아직 안 넣음
+        // realPath +\Q+question_num 해야함
         Connection conn = Config.getInstance().sqlLogin();
         Gson gson = new Gson();
         List<Map<String, Object>> listOfMaps = null;
         try {
             QueryRunner queryRunner = new QueryRunner();
             listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_reg_answer WHERE reg_id=? AND writer_id=?", new MapListHandler(), arr[0],arr[4]);
-            ArrayList<RegAnswerDTO> reqList = gson.fromJson(gson.toJson(listOfMaps),new TypeToken<List<RegAnswerDTO>>() {}.getType());
-            if (!reqList.get(0).writer_id.equals(arr[4])) //본인이 삭제하는지 검사
+            ArrayList<RegAnswerDTO> ansList = gson.fromJson(gson.toJson(listOfMaps),new TypeToken<List<RegAnswerDTO>>() {}.getType());
+            if (!ansList.get(0).writer_id.equals(arr[4])) //본인이 삭제하는지 검사
                 return null;
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_regquestion WHERE reg_id=?", new MapListHandler(), arr[0]);
+            ArrayList<RegQuestionDTO> reqList = gson.fromJson(gson.toJson(listOfMaps),new TypeToken<List<RegQuestionDTO>>() {}.getType());
+            int que_size = reqList.size();
+            System.out.println(que_size);
             queryRunner.update(conn, "DELETE FROM bbs_reg_answer WHERE reg_id=? AND writer_id=?;", arr[0], arr[4]);
-//            listOfMaps = queryRunner.query(conn, "SELECT * FROM req_answer_files WHERE board_id=? AND user_id=?;",
-//                    new MapListHandler(), arr[0], arr[4]);
-//            ArrayList<req_AnswerFileBean> files = gson.fromJson(gson.toJson(listOfMaps),
-//                    new TypeToken<List<req_AnswerFileBean>>() {}.getType());
-//            for (int i = 0; i < files.size(); ++i) {
-//                req_AnswerFileBean it = files.get(i);
-//                File deleteFile = new File(arr[5], it.real_name);
-//                deleteFile.delete();
-//                queryRunner.update(conn, "DELETE FROM req_answer_files WHERE board_id=? AND user_id=?;", arr[0], arr[1]);
-//            }
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_reg_answerfile WHERE reg_id=? AND writer_id=?;",
+                    new MapListHandler(), arr[0], arr[4]);
+            ArrayList<RegAnswerFileDTO> files = gson.fromJson(gson.toJson(listOfMaps),
+                    new TypeToken<List<RegAnswerFileDTO>>() {}.getType());
+//            for (int j = 0; j < files.size(); ++j){
+            for (int i = 0; i < que_size; i++) {
+                if(reqList.get(i).question_type == 5){
+                    String folder = arr[5]+"\\Q"+(i+1);
+                    for (int j = 0; j < files.size(); ++j){
+                        RegAnswerFileDTO it = files.get(j);
+                        File deleteFile = new File(folder, it.real_FileName);
+                        deleteFile.delete();
+                        queryRunner.update(conn, "DELETE FROM bbs_reg_answerfile WHERE reg_id=? AND writer_id=?;", arr[0], arr[4]);
+                    }
+                }
+            }
             queryRunner.update(conn, "UPDATE bbs_reg SET `applicant_count`=`applicant_count`-1 WHERE `id` = ?;", arr[0]);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -361,7 +382,7 @@ public class RegisterDAO {
         try {
             QueryRunner queryRunner = new QueryRunner();
             for(UploadedFileDTO ud : files){
-                queryRunner.query(conn, "INSERT `bbs_reg_writerfile` SET id=?, reg_id=?, original_FileName=?, real_FileName=?", new MapListHandler(),
+                queryRunner.update(conn, "INSERT `bbs_reg_writerfile` SET id=?, reg_id=?, original_FileName=?, real_FileName=?",
                         ud.id, reg_id, ud.uploadFile, ud.newFileName);
             }
         } catch (SQLException se) {
@@ -394,7 +415,7 @@ public class RegisterDAO {
             RegisterDTO reg = lists2.get(0);
             if (!reg.writer_id.equals(arr[1]) && !arr[2].equals("관리자"))
                 return "fail";
-            queryRunner.update(conn, "DELETE FROM bbs_reg_writerfile WHERE id=?", arr[0]);
+            queryRunner.update(conn, "DELETE FROM bbs_reg_writerfile WHERE id=?;", arr[0]);
         } catch (SQLException se) {
             se.printStackTrace();
             return "fail";
@@ -412,26 +433,20 @@ public class RegisterDAO {
         Gson gson = new Gson();
         try {
             QueryRunner queryRunner = new QueryRunner();
+            System.out.println(arr.length);
             for (int i = 2; i < arr.length; i++) {
                 listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_reg_answerfile WHERE reg_id=? AND id=?;",
                         new MapListHandler(), arr[0], arr[i]);
                 ArrayList<RegAnswerFileDTO> lists = gson.fromJson(gson.toJson(listOfMaps),
                         new TypeToken<List<RegAnswerFileDTO>>() {
                         }.getType());
-                System.out.println(!listOfMaps.isEmpty());
                 if(!listOfMaps.isEmpty())
                     continue;
                 UploadedFileDTO file = FileDAO.getInstance().getFile(arr[i]);
-                System.out.println(file.newFileName);
                 queryRunner.update(conn,
                         "INSERT INTO bbs_reg_answerfile(id, reg_id, original_FileName, real_FileName, writer_id) VALUES(?,?,?,?,?);",
                         arr[i], arr[0], file.uploadFile, file.newFileName, arr[1]);
             }
-//            for (int j = answers.length ; j < Integer.valueOf(arr[7]) ; ++j) {
-//                queryRunner.update(conn,
-//                        "INSERT INTO bbs_reg_answer(writer_name, writer_id, writer_perId, writer_grade, writer_type, question_num, reg_id, answer) VALUES(?,?,?,?,?,?,?,?);",
-//                        arr[0], arr[1], arr[2], arr[3], arr[4], (j + 1), arr[5], "");
-//            }
             result = true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -441,5 +456,36 @@ public class RegisterDAO {
         if (result)
             return "success";
         else
-            return "fail";    }
+            return "fail";
+    }
+
+    public String modifyAnswerFile(String data) {
+        String arr[] = data.split("-/-/-");// reg_id + '-/-/-' + user_id + '-/-/-' + 업로드한 파일 수만큼 fileId+'-/-/-'
+        Connection conn = Config.getInstance().sqlLogin();
+        boolean result = false;
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            System.out.println("123");
+            queryRunner.update(conn, "DELETE FROM `bbs_reg_answerfile` WHERE `reg_id`=? AND `writer_id`=?;" ,arr[0], arr[1]);
+            System.out.println(arr.length);
+            for (int i = 2; i < arr.length; i++) {
+                System.out.println("1"+arr[i]);
+                if(arr[1].equals("undefined"))
+                    continue;
+                UploadedFileDTO file = FileDAO.getInstance().getFile(arr[i]);
+                queryRunner.update(conn,
+                        "INSERT INTO bbs_reg_answerfile(id, reg_id, original_FileName, real_FileName, writer_id) VALUES(?,?,?,?,?);",
+                        arr[i], arr[0], file.uploadFile, file.newFileName, arr[1]);
+            }
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        if (result)
+            return "success";
+        else
+            return "fail";
+    }
 }

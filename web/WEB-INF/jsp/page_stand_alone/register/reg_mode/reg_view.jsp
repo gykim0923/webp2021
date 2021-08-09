@@ -244,11 +244,9 @@
                 var fileOriginalName = filename[2];
                 for(var j=3; j<filename.length;j++)
                     fileOriginalName += '_'+filename[j];
-                alert('path=/uploaded/bbs_reg/reg'+getReg.id+'/Q'+it.question_num)
-                alert(filename[0])
                 var text = '<div class="mx-3">';
-                if (done.answer != 'null')
-                    text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>' + (i + 1) + '.' + it.question_content + '</label><div class="input-group mb-3" id="fileUploadSection'+i+'"><input type="text" class="form-control" value="'+fileOriginalName+'" readonly><a class="btn btn-secondary" href="download.kgu?id='+filename[0]+'&&path=/uploaded/bbs_reg/reg'+getReg.id+'/Q'+it.question_num+'"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드</button></a></div></div>';
+                if (done.answer.length != 0)
+                    text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>' + (i + 1) + '.' + it.question_content + '</label><div class="input-group mb-3" id="fileUploadSection'+i+'"><input type="text" class="form-control" value="'+fileOriginalName+'" readonly><a class="btn btn-secondary" href="download.kgu?id='+filename[0]+'&&path=/uploaded/bbs_reg/reg'+getReg.id+'/Q'+it.question_num+'"><i class="bi bi-download"></i> 다운로드</a></div></div>';
                 else
                     text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>' + (i + 1) + '.' + it.question_content + '</label><br><span style="font-size : 14px; color : red">파일을 올리지 않았습니다.</span></div>';
                 panel.append(text + '</div>');
@@ -410,7 +408,7 @@
                     file_folder=folder;
                     file_path=folder+'/'+fileLog[1];
                     var a='';
-                    a+='<span class="input-group-text">파일제출</span><input type="text" class="form-control" id="fileName'+i+'" value="'+fileLog[1]+'" readonly><input id="fileId'+i+'" value="'+fileLog[0]+'" hidden>';
+                    a+='<span class="input-group-text">파일제출</span><input type="text" class="form-control" id="answer'+i+'" value="'+fileLog[1]+'" readonly><input id="fileId'+i+'" value="'+fileLog[0]+'" hidden>';
                     a+='<div><a href="download.kgu?id='+file_id+'&&path='+file_folder+'" type="button" target="_blank"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드</button></a>'
                     a+='<button class="btn btn-danger" type="button" onclick="modifyAnswerFile('+i+')"><i class="bi bi-x-circle-fill"></i>첨부파일 수정하기</button></div>';
                     $('#fileUploadSection'+i+'').html(a);
@@ -486,17 +484,18 @@
                 Answer += $('#range'+i).val();
             }
             if(it.question_type == '5'){
-                if($('#fileName'+i).val() != null)
-                    Answer += $('#fileId'+i).val()+'_'+$('#fileName'+i).val();
-                else
-                    Answer += '';
-                AnswerFile += $('#fileId'+i).val()+'-/-/-';
+                if($('#answer'+i).val()){
+                    Answer += $('#fileId'+i).val()+'_'+$('#answer'+i).val();
+                    AnswerFile += $('#fileId'+i).val()+'-/-/-';
+                }
+
             }
             if(i != questions.length)
                 Answer += '-/#/-';
         }
 
         var data = board_number + "-/-/-" + Answer + "-/-/-" + questions.length;
+        alert(Answer);
         $.ajax({
             url : 'ajax.kgu',
             type : 'post',
@@ -506,7 +505,6 @@
             },
             success : function(data){
                 if(data == 'success'){
-                    alert(AnswerFile)
                     $.ajax({
                         url : 'ajax.kgu',
                         type : 'post',
@@ -640,12 +638,25 @@
                 sliderPanel.append(text);
             }
             if(it.question_type == '5'){
+                var filename = done.answer.split("_");
+                var fileOriginalName = filename[1];
+                for(var j=2; j<filename.length;j++)
+                    fileOriginalName += '_'+filename[j];
                 var text = '<div class="mx-3">';
-                text += '<div id="question' + i + '"><label>'+ (i+1) + '.' + it.question_content + '</label><span style="color : gray; font-size : 12px">(파일은 다시 올려주셔야합니다!)</span><input type="file" name="answer' + i + '"></div>';
-                panel.append(text+'</div>');
+                if (done.answer.length != 0)
+                    text += '<div class="form-group" id="question' + i +'"><label>' + (i + 1) + '.' + it.question_content + '</label><div class="input-group mb-3" id="fileUploadSection'+i+'"><input type="text" id="answer'+i+'" class="form-control" value="'+fileOriginalName+'" readonly><input id="fileId'+i+'" value="'+filename[0]+'" hidden><button class="btn btn-secondary" onclick="reUploadFile('+i+','+filename[0]+')"><i class="bi bi-file-earmark-arrow-up-fill"></i> 재업로드</button></div></div>';
+                else
+                    text += '<div class="form-group mt-3" id="question' + i + '"><label>'+ (i+1) + '.' + it.question_content + '</label><div class="input-group mb-3" id="fileUploadSection'+i+'"><input type="file" class="form-control" name="answer' + i + '" id="answer' + i + '"><button class="btn btn-outline-secondary" type="button" onclick="uploadAnswerFile('+i+')">Upload</button></div></div>';
+                panel.append(text + '</div>');
             }
         }
         $('#questions').append('<button class="btn btn-secondary" onclick="submitModifyAnswer()">수정할래요</button></div>');
+    }
+
+    function reUploadFile(i, fileId){
+        file_id = fileId;
+        file_folder = '/uploaded/bbs_reg/reg'+getReg.id+'/Q'+(i+1);
+        modifyAnswerFile(i);
     }
 
     function submitModifyAnswer(){
@@ -661,10 +672,10 @@
         }
 
         var reg = getReg;
-        var data = reg.id;
         var Answer = '';
         var board_number = getReg.id;
         var fileSequence = 1;
+        var modifyAnswerFile = reg.id+'-/-/-' + user.id+'-/-/-';
         for(var i = 0 ; i < questions.length ; i ++){
             var it = questions[i];
             if(it.question_type == '1'){
@@ -687,43 +698,16 @@
                 Answer += $('#range'+i).val();
             }
             if(it.question_type == '5'){
-                var formData = new FormData();
-                var folder='/uploaded/bbs_reg/reg'+getReg.id+'/Q'+i;
-                formData.append('file_data', $('input[name=answer' + i + ']')[0].files[0]);
-                formData.append("file_type", "null"); //전송하려는 파일 타입 설정 (제한이 없으려면 null로 한다.)
-                formData.append("board_level", "2"); // board_level 제한 (부정 업로드 방지용. 교수까지 하려면 1, 학생까지 하려면 2로 설정하면 됨.)
-                $.ajax({
-                    url : 'upload.kgu?folder='+folder,
-                    type : 'post',
-                    data : formData,
-                    processData : false,
-                    contentType : false,
-                    success : function(data){//데이터는 주소
-                        if(data=='fail'){
-                            swal.fire({
-                                title : '실패',
-                                icon : 'error',
-                                showConfirmButton: true
-                            });
-                        }
-                        else {
-                            var fileLog=data.split("-/-/-");
-                            file_id=fileLog[0];
-                            file_folder=folder;
-                            file_path=folder+'/'+fileLog[1];
-                            var a='';
-                            a+='<div>파일제출</div><div>'+fileLog[1]+'</div>';
-                            a+='<div><a href="download.kgu?id='+file_id+'&&path='+file_folder+'" target="_blank"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드</button></a>'
-                            a+='<a href="bbsFileDelete.kgu?fileId='+file_id+'&&folder='+file_folder+'" target="_blank"><button class="btn btn-danger" onclick="makeUploadSliderModal()"><i class="bi bi-x-circle-fill"></i> 첨부파일 수정하기</button></a></div>';
-                            $('#fileUploadSection').html(a);
-                        }
-                    }
-                })
+                if($('#answer'+i).val()){
+                    Answer += $('#fileId'+i).val()+'_'+$('#answer'+i).val();
+                    modifyAnswerFile += $('#fileId'+i).val()+'-/-/-';
+                }
             }
             if(i != questions.length)
                 Answer += '-/#/-';
         }
         var data = board_number + "-/-/-" + Answer + "-/-/-" + questions.length;
+        alert(data);
         $.ajax({
             url : 'ajax.kgu',
             type : 'post',
@@ -733,15 +717,38 @@
             },
             success : function(data){
                 if(data == 'success'){
-                    swal.fire({
-                        title : '수정을 성공하였습니다.',
-                        icon : 'success',
-                        showConfirmButton: true
-                    });
-                    if(getReg.for_who == 1)
-                        window.location.href= 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=view&&id=' + getReg.id;
-                    check();
-                    whatIDone();
+                    alert(modifyAnswerFile)
+                    $.ajax({
+                        url : 'ajax.kgu',
+                        type : 'post',
+                        data : {
+                            req: 'modifyAnswerFile',
+                            data: modifyAnswerFile
+                        },
+                        success : function(data){//데이터는 주소
+                            if(data == 'success'){
+                                swal.fire({
+                                    title : '신청 성공',
+                                    icon : 'success',
+                                    showConfirmButton: true
+                                }).then(function (){
+                                    if(getReg.for_who == 1)
+                                        window.location.href= 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list&&id=' + getReg.id;
+                                    wasDone = 1;
+                                    check();
+                                    whatIDone();
+                                })
+                            }
+                            else {
+                                swal.fire({
+                                    title : '파일 업로드실패',
+                                    icon : 'error',
+                                    showConfirmButton: true
+                                });
+                                return;
+                            }
+                        }
+                    })
                 }
                 else if(data == 'fail'){
                     swal.fire({

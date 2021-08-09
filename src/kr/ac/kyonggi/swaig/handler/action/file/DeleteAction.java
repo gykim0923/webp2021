@@ -23,7 +23,6 @@ public class DeleteAction implements Action {
         String path = request.getSession().getServletContext().getRealPath(folder);
         FileDAO dao = FileDAO.getInstance();
         UploadedFileDTO it = dao.getFile(fileID);
-        System.out.println(it.newFileName);
         File deleteFile = new File(path, it.newFileName);
         deleteFile.delete();
         dao.deleteFileWithName(it.newFileName);
