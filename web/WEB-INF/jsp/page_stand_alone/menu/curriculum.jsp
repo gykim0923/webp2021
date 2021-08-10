@@ -237,7 +237,7 @@
     var curriculumFile_folder; //파일이 업로드된 상대경로
     function uploadCurriculum(){
         var formData = new FormData();
-        var folder='/img/curriculum';//업로드 된 파일 folder 경로 설정은 여기에서 해줍니다. (마지막에 /가 오면 절대 안됩니다.)
+        var folder='/uploaded/curriculum';//업로드 된 파일 folder 경로 설정은 여기에서 해줍니다. (마지막에 /가 오면 절대 안됩니다.)
         if($('input[name=curriculumFile]')[0].files[0]!=null){
             formData.append("file_data",$('input[name=curriculumFile]')[0].files[0]);
             formData.append("file_type", "image"); //전송하려는 파일 타입 설정 (제한이 없으려면 null로 한다.)
@@ -263,11 +263,11 @@
 
                         var fileLog=data.split("-/-/-");
                         var a='';
-                        curriculumFlie_id=fileLog[0];
+                        curriculumFile_id=fileLog[0];
                         curriculumFile_path=folder+'/'+fileLog[1];
                         curriculumFile_folder=folder;
                         a+='<div>파일제출</div><div>'+fileLog[1]+'</div>';
-                        a+='<div><a href="download.kgu?id='+curriculumFlie_id+'&&path='+curriculumFile_folder+'" target="_blank"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드</button></a>'
+                        a+='<div><a href="download.kgu?id='+curriculumFile_id+'&&path='+curriculumFile_folder+'" target="_blank"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드</button></a>'
                         a+='<button class="btn btn-danger" onclick="modifyCurriculumFile(\'curriculum\')"><i class="bi bi-x-circle-fill"></i> 첨부파일 수정하기</button></div>';
                         $('#curriculumUpload').html(a);
                     }
@@ -290,7 +290,7 @@
 
     function uploadEdu(){
         var formData = new FormData();
-        var folder='/img/curriculum';//업로드 된 파일 folder 경로 설정은 여기에서 해줍니다. (마지막에 /가 오면 절대 안됩니다.)
+        var folder='/uploaded/curriculum';//업로드 된 파일 folder 경로 설정은 여기에서 해줍니다. (마지막에 /가 오면 절대 안됩니다.)
         if($('input[name=eduFile]')[0].files[0]!=null){
             formData.append("file_data",$('input[name=eduFile]')[0].files[0]);
             formData.append("file_type", "image"); //전송하려는 파일 타입 설정 (제한이 없으려면 null로 한다.)
@@ -313,7 +313,6 @@
                         });
                     }
                     else {
-
                         var fileLog=data.split("-/-/-");
                         var a='';
                         eduFile_id=fileLog[0];
@@ -372,11 +371,25 @@
     }
 
     function modifyCurriculumFile(type){
+        var file_id;
+        var file_folder;
+        var text = '';
         if(type == 'curriculum'){
-            $('#curriculumUpload').html('<label for="curriculumFile" class="form-label">커리큘럼 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" name="curriculumFile" id="curriculumFile" accept="image/*"><button class="btn btn-outline-secondary" type="button" onclick="uploadCurriculum()">Upload</button></div>');
+            file_id = curriculumFile_id;
+            file_folder = curriculumFile_folder;
+            text = '<label for="curriculumFile" class="form-label">커리큘럼 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" name="curriculumFile" id="curriculumFile" accept="image/*"><button class="btn btn-secondary" type="button" onclick="uploadCurriculum()">Upload</button></div>';
         }
         else if(type == 'edu'){
-            $('#eduUpload').html('<label for="eduFile" class="form-label">이수체계도 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="eduFile" name="eduFile" accept="image/*"><button class="btn btn-outline-secondary" type="button" onclick="uploadEdu()">Upload</button></div>');
+            file_id = eduFile_id;
+            file_folder = eduFile_folder;
+            text = '<label for="eduFile" class="form-label">이수체계도 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="eduFile" name="eduFile" accept="image/*"><button class="btn btn-secondary" type="button" onclick="uploadEdu()">Upload</button></div>';
         }
+        $.ajax({
+            url: 'delete.kgu?fileId=' + file_id + '&&folder=' + file_folder,
+            type: 'post',
+            success: function (data) {//데이터는 주소
+                $('#'+type+'Upload').html(text);
+            }
+        })
     }
 </script>
