@@ -244,12 +244,22 @@ public class AjaxAction implements Action {
                 break;
             case "insertBbs":
                 if(type.board_level<3){
-                    result=BBSDAO.getInstance().insertBbs(data);
+                    String bbs_id = BBSDAO.getInstance().insertBbs(data);
+                    System.out.println(bbs_id);
+                    result = BBSDAO.getInstance().insertBbsFile(FileDAO.getInstance().getFiles("/uploaded/bbs"), bbs_id);
                 }
                 break;
             case "modifyBbs":
                 if(type.board_level < 3)
                     result=BBSDAO.getInstance().modifyBbs(data);
+                if(result.equals("success")){
+                    result = BBSDAO.getInstance().insertBbsFile(FileDAO.getInstance().getFiles("/uploaded/bbs"), data.split("-/-/-")[0]);
+                }
+                break;
+            case "deleteBbsAlreadyFile":
+                String forAlreadyFile = "-/-/-" + user.id + "-/-/-" + type.for_header;
+                data = data.concat(forAlreadyFile);
+                result = BBSDAO.getInstance().deleteAlreadyFile(data);
                 break;
             case "deleteBbs":
                 if(type.board_level< 3)
@@ -351,6 +361,9 @@ public class AjaxAction implements Action {
                 String writer=data.split("-/-/-")[3];
                 if(user.id.equals(writer) || type.board_level==0){
                     result=RegisterDAO.getInstance().modifyReg(data);
+                }
+                if(result.equals("success")){
+                    result = RegisterDAO.getInstance().insertRegFile(FileDAO.getInstance().getFiles("/uploaded/bbs_reg"), data.split("-/-/-")[0]);
                 }
                 break;
             case "deleteRegAlreadyFile":

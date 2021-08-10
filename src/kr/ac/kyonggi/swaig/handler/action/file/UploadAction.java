@@ -158,10 +158,10 @@ public class UploadAction implements Action {
                 forArray.add(intoArray);
                 forFinish.add("initialPreviewConfig", forArray);
                 JsonArray forArray2 = new JsonArray();
-                forArray2.add("<span style='font-size : 14px; font-family : NanumSquare ;'>" + uploadFile + " 업로드 성공</span>");
+                forArray2.add("<img src=\""+folder+'/'+newFileName+"\" class=\"kv-preview-data file-preview-image file-zoom-detail\">");
                 forFinish.add("initialPreview", forArray2);
                 System.out.println(forFinish);
-                forFinish.addProperty("previewZoom", "<img src=\""+folder+'/'+newFileName+"\" class=\"kv-preview-data file-preview-image file-zoom-detail\">"); // 상세보기를 누르면 나올 이미지
+//                forFinish.addProperty("previewZoom", "<img src=\""+folder+'/'+newFileName+"\" class=\"kv-preview-data file-preview-image file-zoom-detail\">"); // 상세보기를 누르면 나올 이미지
                 Gson gson2 = new GsonBuilder().disableHtmlEscaping().create();
                 return gson2.toJson(forFinish);
             }

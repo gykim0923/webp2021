@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.CustomAction;
 import kr.ac.kyonggi.swaig.handler.dao.settings.BBSDAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
+import kr.ac.kyonggi.swaig.handler.dao.settings.RegisterDAO;
 import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
 
 import javax.servlet.http.HttpServletRequest;
@@ -99,6 +100,7 @@ public class BulletinBoardServiceAction extends CustomAction {
             request.setAttribute("id", id); //다시 JSP로 보내줌 (재활용을 위해), 게시글 아이디
             request.setAttribute("getBBS", gson.toJson(BBSDAO.getInstance().getBBS(id)));
             request.setAttribute("getComments",gson.toJson(BBSDAO.getInstance().getCommentsList(id)));
+            request.setAttribute("bbsFiles", gson.toJson(BBSDAO.getInstance().getBbsFiles(id)));
         }
 
         String bbs_mode = "bbs_"+mode;

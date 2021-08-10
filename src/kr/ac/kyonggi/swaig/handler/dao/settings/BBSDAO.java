@@ -3,10 +3,7 @@ package kr.ac.kyonggi.swaig.handler.dao.settings;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import kr.ac.kyonggi.swaig.common.sql.Config;
-import kr.ac.kyonggi.swaig.handler.dto.settings.BBSDTO;
-import kr.ac.kyonggi.swaig.handler.dto.settings.BBSFileDTO;
-import kr.ac.kyonggi.swaig.handler.dto.settings.CommentDTO;
-import kr.ac.kyonggi.swaig.handler.dto.settings.TextDTO;
+import kr.ac.kyonggi.swaig.handler.dto.settings.*;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
@@ -138,7 +135,7 @@ public class BBSDAO {
     }
 
     public String insertBbs(String data) {
-        String arr[] = data.split("-/-/-"); // major+"-/-/-"+writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+num+"-/-/-"+last_modified+"-/-/-"+text+"-/-/-"+uploadedFiles
+        String arr[] = data.split("-/-/-"); // major+"-/-/-"+writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+num+"-/-/-"+last_modified+"-/-/-"+text
         String major = arr[0];
         String writer_id = arr[1];
         String writer_name = arr[2];
@@ -146,18 +143,28 @@ public class BBSDAO {
         String category = arr[4];
         String last_modified = arr[5];
         String text = arr[6];
-        String uploadedFiles = arr[7];
+        String bbs_id = null;
+        Gson gson = new Gson();
+        List<Map<String, Object>> listOfMaps = null;
         Connection conn = Config.getInstance().sqlLogin();
         try {
             System.out.println(data);
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn,"INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text, uploadedFiles) VALUE(?,?,?,?,?,?,?,?);", major,writer_id,writer_name, title, category, last_modified, text, uploadedFiles);
+            queryRunner.update(conn,"INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE(?,?,?,?,?,?,?);", major,writer_id,writer_name, title, category, last_modified, text);
+            listOfMaps = queryRunner.query(conn,
+                    "SELECT * FROM bbs WHERE major =? AND writer_id=? AND title=? AND text=? AND category=?;",
+                    new MapListHandler(), major, writer_id, title, text, category);
+            ArrayList<BBSDTO> array = gson.fromJson(gson.toJson(listOfMaps),
+                    new TypeToken<List<BBSDTO>>() {
+                    }.getType());
+            BBSDTO it = array.get(0);
+            bbs_id = it.id;
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {
             DbUtils.closeQuietly(conn);
         }
-        return "success";
+        return bbs_id;
     }
 
     public String modifyBbs(String data) {
@@ -386,24 +393,24 @@ public class BBSDAO {
 
 
 
-    public String deleteAlreadyFile(String data) {
-        String arr[] = data.split("-/-/-"); // 0 = file id 1= user id 2= user type name
-        Connection conn=Config.getInstance().sqlLogin();
-        BBSFileDTO file = getFile(arr[0]);
-        if(!file.writer.equals(arr[1]) && !arr[2].equals("관리자")&&!arr[2].equals("홈페이지관리자"))
-            return "error";
-        try {
-            QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn, "UPDATE notice_file SET board_id = -1 WHERE id=?;",arr[0]);
-        }
-        catch (SQLException se) {
-            se.printStackTrace();
-        } finally {
-            DbUtils.closeQuietly(conn);
-        }
-
-        return "success";
-    }
+//    public String deleteAlreadyFile(String data) {
+//        String arr[] = data.split("-/-/-"); // 0 = file id 1= user id 2= user type name
+//        Connection conn=Config.getInstance().sqlLogin();
+//        BBSFileDTO file = getFile(arr[0]);
+//        if(!file.writer.equals(arr[1]) && !arr[2].equals("관리자")&&!arr[2].equals("홈페이지관리자"))
+//            return "error";
+//        try {
+//            QueryRunner queryRunner = new QueryRunner();
+//            queryRunner.update(conn, "UPDATE notice_file SET board_id = -1 WHERE id=?;",arr[0]);
+//        }
+//        catch (SQLException se) {
+//            se.printStackTrace();
+//        } finally {
+//            DbUtils.closeQuietly(conn);
+//        }
+//
+//        return "success";
+//    }
 
     public String alreadyFileDone(String data) {
         String arr[] = data.split("-/-/-"); // 0 = board_id 1=writer_id
@@ -442,5 +449,69 @@ public class BBSDAO {
 
     public Object getDownloadList(String id) {
         return null;
+    }
+
+    public String insertBbsFile(ArrayList<UploadedFileDTO> files, String bbs_id) {
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            for(UploadedFileDTO ud : files){
+                queryRunner.update(conn, "INSERT INTO `bbs_file`(id, bbs_id, original_FileName, real_FileName) VALUE(?,?,?,?);",
+                        ud.id, bbs_id, ud.uploadFile, ud.newFileName);
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+            return "fail";
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
+    }
+
+    public ArrayList<BBSFileDTO> getBbsFiles(String id) {
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn,"SELECT * FROM bbs_file WHERE bbs_id = ? ORDER BY id DESC;", new MapListHandler(), id);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<BBSFileDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<BBSFileDTO>>() {}.getType());
+        return selected;
+    }
+
+    public String deleteAlreadyFile(String data) {
+        String arr[] = data.split("-/-/-"); // 0 data 1 id 2 type.type_name
+        List<Map<String, Object>> listOfMaps = null;
+        List<Map<String, Object>> listOfMaps2 = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        Gson gson = new Gson();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_file WHERE id=?;", new MapListHandler(),
+                    arr[0]);
+            ArrayList<BBSFileDTO> lists = gson.fromJson(gson.toJson(listOfMaps),
+                    new TypeToken<List<BBSFileDTO>>() {
+                    }.getType());
+            BBSFileDTO it = lists.get(0);
+            listOfMaps2 = queryRunner.query(conn, "SELECT * FROM bbs WHERE id=?;", new MapListHandler(), it.bbs_id);
+            ArrayList<BBSDTO> lists2 = gson.fromJson(gson.toJson(listOfMaps2),
+                    new TypeToken<List<BBSDTO>>() {
+                    }.getType());
+            BBSDTO reg = lists2.get(0);
+            if (!reg.writer_id.equals(arr[1]) && !arr[2].equals("관리자"))
+                return "fail";
+            queryRunner.update(conn, "DELETE FROM bbs_file WHERE id=?;", arr[0]);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            return "fail";
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return "success";
     }
 }

@@ -9,6 +9,7 @@
 <%
   String getBBS = (String) request.getAttribute("getBBS");
   String getComment = (String) request.getAttribute("getComments");
+  String getAllFile = (String) request.getAttribute("bbsFiles");
 %>
 <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <div>
@@ -22,9 +23,9 @@
     </div>
   </div>
   <hr>
-  <div id="view_content"></div>
-  <hr>
   <div id="view_download"></div>
+  <hr>
+  <div id="view_content"></div>
   <hr>
 
   <c:if test="${bbs_type =='\"free\"' && user.type != null}">
@@ -134,6 +135,20 @@
   function makeDownloads() {
     // view_download
     var view_download = $('#view_download');
+    var getAllFile = <%=getAllFile%>;
+    var a = '';
+    if(getAllFile.length > 0)
+      a += '첨부파일: ';
+    if(getAllFile.length == 0)
+      view_download.remove();
+    for(var i = 0 ; i < getAllFile.length ; i++){
+      var it = getAllFile[i];
+      if(type.for_header == '기타')
+        a  += it.original_FileName + '&nbsp&nbsp';
+      else
+        a += '<a href="download.kgu?id='+it.id+'&&path=/uploaded/bbs">' + it.original_FileName + '</a>&nbsp&nbsp';
+    }
+    view_download.append(a);
   }
 
   var major = <%=major%>;

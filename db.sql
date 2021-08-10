@@ -291,7 +291,6 @@ CREATE TABLE bbs(
     `comments_count` INT(10) DEFAULT 0 ,
     `likes` INT(10) DEFAULT 0,
     `already_like` varchar(3000) NOT NULL DEFAULT '',
-    `uploadedFiles` varchar(3000) NOT NULL DEFAULT '',
     PRIMARY KEY(`id`)
 );
 
@@ -431,15 +430,14 @@ INSERT INTO favorite_menu(name, url) VALUE ('수강신청', 'http://sugang.kyong
 INSERT INTO favorite_menu(name, url) VALUE ('KUTIS', 'https://kutis.kyonggi.ac.kr/webkutis/view/indexWeb.jsp');
 INSERT INTO favorite_menu(name, url) VALUE ('LMS', 'https://lms.kyonggi.ac.kr/login.php');
 INSERT INTO favorite_menu(name, url) VALUE ('경기대 입학처', 'http://enter.kyonggi.ac.kr/intro.do');
---
--- CREATE TABLE bbs_file(
---                         `id` VARCHAR NOT NULL ,
---                         `boare_id` VARCHAR(50) NOT NULL,
---                         `writer_name` VARCHAR (50) NOT NULL,
---                         `comment` VARCHAR(200) NOT NULL,
---                         `comment_date` DATE NOT NULL,
---                         `bbs_id` INT(10) NOT NULL,
--- );
+
+CREATE TABLE bbs_file(
+                         `id` INT NOT NULL ,
+                         `bbs_id` Int(10) not null,
+                         `original_FileName` varchar(200) not null,
+                         `real_FileName` varchar(200) not null,
+                         PRIMARY KEY (`id`)
+);
 
 CREATE TABLE log(
     `id` INT Auto_Increment,
