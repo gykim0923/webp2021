@@ -419,7 +419,7 @@
 
     function modifyAnswerFile(i){
         $.ajax({
-            url : 'bbsFileDelete.kgu?fileId='+file_id+'&&folder='+file_folder,
+            url : 'delete.kgu?fileId='+file_id+'&&folder='+file_folder,
             type : 'post',
             success : function(data){//데이터는 주소
                 $('#fileUploadSection'+i+'').html('<input type="file" class="form-control" name="answer' + i + '" id="answer' + i + '"><button class="btn btn-outline-secondary" type="button" onclick="uploadAnswerFile('+i+')">Upload</button>');

@@ -59,23 +59,28 @@
 
     function makeUploadSliderModal(){
         var majorList=<%=getAllMajor%>;
+        $.ajax({
+            url : 'delete.kgu?fileId='+file_id+'&&folder='+file_folder,
+            type : 'post',
+            success : function(data){//데이터는 주소
+                var modal_header = '';
+                modal_header += '<h5 class="modal-title" id="staticBackdropLabel">대문 사진 업로드하기</h5>';
+                modal_header += '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
 
-        var modal_header = '';
-        modal_header += '<h5 class="modal-title" id="staticBackdropLabel">대문 사진 업로드하기</h5>';
-        modal_header += '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
+                var modal_body = '<div id="fileUploadSection">'
+                    +'<input type="file" name="uploadFile" id="uploadFile" accept="image/*">'
+                    +'<button class="btn btn-secondary" onclick="uploadfile()"><i class="bi bi-upload"></i> 업로드</button>'
+                    +'</div>';
 
-        var modal_body = '<div id="fileUploadSection">'
-            +'<input type="file" name="uploadFile" id="uploadFile" accept="image/*">'
-            +'<button class="btn btn-secondary" onclick="uploadfile()"><i class="bi bi-upload"></i> 업로드</button>'
-            +'</div>';
+                var modal_footer = '';
+                modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                modal_footer += '<button type="button" class="btn btn-success pull-right" data-dismiss="modal" aria-label="Close" onclick="insertSlider()">추가하기</button>';
 
-        var modal_footer = '';
-        modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-        modal_footer += '<button type="button" class="btn btn-success pull-right" data-dismiss="modal" aria-label="Close" onclick="insertSlider()">추가하기</button>';
-
-        header.html(modal_header);
-        body.html(modal_body);
-        footer.html(modal_footer);
+                header.html(modal_header);
+                body.html(modal_body);
+                footer.html(modal_footer);
+            }
+        })
     }
 
     var file_id; //나중에 파일 상세정보를 uploadedFile로부터 역참조 하고싶은 경우에 사용하라고 만들어둠 (다운로드에서 사용하는 기능)
