@@ -42,8 +42,8 @@
 <html>
 <%@include file="/WEB-INF/jsp/main/common_settings.jsp"%>
 <body>
-<div id="app">
-    <%@include file="/WEB-INF/jsp/main/aside_v2.jsp"%>
+<%--<div id="app">--%>
+    <%@include file="/WEB-INF/jsp/main/aside_v3.jsp"%>
     <div id="main" class='layout-navbar'>
         <%@include file="/WEB-INF/jsp/main/header_v3.jsp"%>
         <div id="main-content">
@@ -110,7 +110,7 @@
             <%@include file="/WEB-INF/jsp/main/footer.jsp"%>
         </div>
     </div>
-</div>
+<%--</div>--%>
 <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <%--<script src="/assets/js/bootstrap.bundle.min.js"></script>--%>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

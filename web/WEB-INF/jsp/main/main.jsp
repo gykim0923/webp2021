@@ -46,228 +46,216 @@
 <html>
 <%@include file="common_settings.jsp" %>
 <body>
-<%--<p>--%>
-<%--    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">--%>
-<%--        Toggle width collapse--%>
-<%--    </button>--%>
-<%--</p>--%>
-<%--<div style="min-height: 120px;">--%>
-<%--    <div class="collapse collapse-horizontal" id="collapseWidthExample">--%>
-<%--        <div class="card card-body" style="width: 300px;">--%>
-<%--            This is some placeholder content for a horizontal collapse. It's hidden by default and shown when triggered.--%>
-<%--        </div>--%>
-<%--    </div>--%>
+<%--<div class="collapse collapse-horizontal" id="collapseWidthExample">--%>
+<%--    <%@include file="aside_v3.jsp" %>--%>
 <%--</div>--%>
-<div id="app">
-    <%@include file="aside_v2.jsp" %>
-    <div id="main" class='layout-navbar'>
-        <%@include file="header_v3.jsp" %>
-        <div id="main-content">
-            <div class="page-heading">
-                <%--Main 영역 start--%>
+<%--<div id="app">--%>
 
-                <main class="">
-                    <%--                    container start--%>
-                    <div class="container">
-                        <div class="row align-items-md-stretch">
-                            <div class="col-12 mb-3">
-                                <div class="h1 header_title">
-                                    <div class="title_logo px-3">
-                                        <img src="/img/logo/kgu_logo(500x300).png" height="100" width="auto">
+<%@include file="aside_v3.jsp" %>
+<div id="main" class='layout-navbar'>
+    <%@include file="header_v3.jsp" %>
+    <div id="main-content">
+        <div class="page-heading">
+            <%--Main 영역 start--%>
+
+            <main class="">
+                <%--                    container start--%>
+                <div class="container">
+                    <div class="row align-items-md-stretch">
+                        <div class="col-12 mb-3">
+                            <div class="h1 header_title">
+                                <div class="title_logo px-3">
+                                    <img src="/img/logo/kgu_logo(500x300).png" height="100" width="auto">
+                                </div>
+                                <div class="title_text">
+                                    <div>
+                                        <div class="d-sm-inline d-block">경기대학교</div>
+                                        <div class="d-sm-inline d-none">소프트웨어중심대학</div>
                                     </div>
-                                    <div class="title_text">
-                                        <div>
-                                            <div class="d-sm-inline d-block">경기대학교</div>
-                                            <div class="d-sm-inline d-none">소프트웨어중심대학</div>
-                                        </div>
-                                        <div id="headerTitle"></div>
-                                    </div>
+                                    <div id="headerTitle"></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <strong>주의!</strong> 아직 개발 중인 홈페이지입니다.
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        <div class="row align-items-md-stretch">
-                            <%--                            left side start--%>
-                            <div class="col-xxl-9" id="main1_left">
-                                <div class="py-2 col-12">
-                                    <%--                                    carousel start--%>
-                                    <div id="myCarousel" class="h-100 carousel slide card border border-primary"
-                                         data-bs-ride="carousel" style="margin-bottom : 0px; height:399px;">
-                                        <div class="carousel-indicators" id="carouselButton">
-                                            <%--   슬라이더 사진 개수와 동일한 버트 만들어 줘야함 makecarouselCard에 있음--%>
-                                        </div>
-                                        <div class="carousel-inner h-100 " id="carouselCard">
-                                            <%--     makecarouselCard에 있음--%>
-                                        </div>
-                                        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel"
-                                                data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Previous</span>
-                                        </button>
-                                        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel"
-                                                data-bs-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Next</span>
-                                        </button>
+                    </div>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>주의!</strong> 아직 개발 중인 홈페이지입니다.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <div class="row align-items-md-stretch">
+                        <%--                            left side start--%>
+                        <div class="col-xxl-9" id="main1_left">
+                            <div class="py-2 col-12">
+                                <%--                                    carousel start--%>
+                                <div id="myCarousel" class="h-100 carousel slide card border border-primary"
+                                     data-bs-ride="carousel" style="margin-bottom : 0px; height:399px;">
+                                    <div class="carousel-indicators" id="carouselButton">
+                                        <%--   슬라이더 사진 개수와 동일한 버트 만들어 줘야함 makecarouselCard에 있음--%>
                                     </div>
-                                    <%--                                    carousel end--%>
+                                    <div class="carousel-inner h-100 " id="carouselCard">
+                                        <%--     makecarouselCard에 있음--%>
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel"
+                                            data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel"
+                                            data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
                                 </div>
-                                <%--                                bbs and reg start--%>
-                                <div class="row">
-                                    <div class="col-xl-6 py-2 " id="main2_left">
-                                        <div class=" p-3 card border border-primary m-0" style="height : 493px;">
-                                            <div class="">
-                                                <div class="mb-2 d-flex justify-content-between border-bottom">
-                                                    <div class="nav nav-tabs " id="nav-tab" role="tablist">
-                                                        <button class="nav-link active" id="nav-21-tab"
-                                                                data-bs-toggle="tab" data-bs-target="#nav-21"
-                                                                type="button" role="tab" aria-controls="nav-home"
-                                                                aria-selected="true"
-                                                                onclick="clickBBS('more_link1', 21)"></button>
-                                                        <button class="nav-link" id="nav-22-tab" data-bs-toggle="tab"
-                                                                data-bs-target="#nav-22" type="button" role="tab"
-                                                                aria-controls="nav-profile" aria-selected="false"
-                                                                onclick="clickBBS('more_link1', 22)"></button>
-                                                        <button class="nav-link" id="nav-23-tab" data-bs-toggle="tab"
-                                                                data-bs-target="#nav-23" type="button" role="tab"
-                                                                aria-controls="nav-contact" aria-selected="false"
-                                                                onclick="clickBBS('more_link1', 23)"></button>
-                                                    </div>
-                                                    <div class="morebtn">
-                                                        <div class="py-2">
-                                                            <a id="more_link1" href="bbs.kgu?major=main&num=21" data-bs-toggle="tooltip" data-bs-placement="top" title="더보기"><i class="bi bi-plus-lg"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tab-content" id="nav-tabContent">
-                                                <div class="tab-pane fade show active" id="nav-21" role="tabpanel"
-                                                     aria-labelledby="nav-21-tab"></div>
-                                                <div class="tab-pane fade" id="nav-22" role="tabpanel"
-                                                     aria-labelledby="nav-22-tab"></div>
-                                                <div class="tab-pane fade" id="nav-23" role="tabpanel"
-                                                     aria-labelledby="nav-23-tab"></div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xl-6 py-2 " id="main2_center">
-                                        <div class=" p-3 border border-primary card m-0" style="height : 493px;">
-                                            <div>
-                                                <div class="mb-2 d-flex justify-content-between border-bottom">
-                                                    <div class="nav nav-tabs" id="nav-tab2" role="tablist">
-                                                        <button class="nav-link active" id="nav-30-tab"
-                                                                data-bs-toggle="tab" data-bs-target="#nav-30"
-                                                                type="button" role="tab" aria-controls="nav-home"
-                                                                aria-selected="true"
-                                                                onclick="clickNoticeReg('more_link2', 30)"></button>
-                                                        <button class="nav-link" id="nav-31-tab" data-bs-toggle="tab"
-                                                                data-bs-target="#nav-31" type="button" role="tab"
-                                                                aria-controls="nav-profile" aria-selected="false"
-                                                                onclick="clickBBS('more_link2', 31)"></button>
-                                                    </div>
-                                                    <div class="morebtn">
-                                                        <div class="py-2">
-                                                            <a id="more_link2" href="reg.kgu?major=main&num=30" data-bs-toggle="tooltip" data-bs-placement="top"  title="더보기"><i class="bi bi-plus-lg"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tab-content" id="nav-tabContent2">
-                                                <div class="tab-pane fade show active" id="nav-30" role="tabpanel"
-                                                     aria-labelledby="nav-30-tab"></div>
-                                                <div class="tab-pane fade" id="nav-31" role="tabpanel"
-                                                     aria-labelledby="nav-31-tab"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <%-- bbs and reg end--%>
+                                <%--                                    carousel end--%>
                             </div>
-                            <%--                            left side end--%>
-
-
-                            <%--                            right side start--%>
-                            <div class="col-xxl-3" id="main1_right">
-                                <div class="row">
-                                    <div class="py-2 col-xxl-12 col-sm-6">
-                                        <div class=" h-100 border border-primary card m-0" id="favorite_menu" style=""></div>
-                                    </div>
-                                    <div class="py-2 col-xxl-12 col-sm-6">
-                                        <div class=" p-3 border border-primary card m-0" style="height : 493px;">
+                            <%--                                bbs and reg start--%>
+                            <div class="row">
+                                <div class="col-xl-6 py-2 " id="main2_left">
+                                    <div class=" p-3 card border border-primary m-0" style="height : 493px;">
+                                        <div class="">
                                             <div class="mb-2 d-flex justify-content-between border-bottom">
-                                                <div class="nav nav-tabs" role="tablist">
-                                                    <button class="nav-link active"><strong>주요 일정</strong></button>
+                                                <div class="nav nav-tabs " id="nav-tab" role="tablist">
+                                                    <button class="nav-link active" id="nav-21-tab"
+                                                            data-bs-toggle="tab" data-bs-target="#nav-21"
+                                                            type="button" role="tab" aria-controls="nav-home"
+                                                            aria-selected="true"
+                                                            onclick="clickBBS('more_link1', 21)"></button>
+                                                    <button class="nav-link" id="nav-22-tab" data-bs-toggle="tab"
+                                                            data-bs-target="#nav-22" type="button" role="tab"
+                                                            aria-controls="nav-profile" aria-selected="false"
+                                                            onclick="clickBBS('more_link1', 22)"></button>
+                                                    <button class="nav-link" id="nav-23-tab" data-bs-toggle="tab"
+                                                            data-bs-target="#nav-23" type="button" role="tab"
+                                                            aria-controls="nav-contact" aria-selected="false"
+                                                            onclick="clickBBS('more_link1', 23)"></button>
                                                 </div>
                                                 <div class="morebtn">
                                                     <div class="py-2">
-                                                        <a data-bs-toggle="tooltip" data-bs-placement="top"  title="일정 보기">
-                                                            <i class="bi bi-plus-lg col-sm-2 text-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addSearchModal()"></i>
-                                                        </a>
+                                                        <a id="more_link1" href="bbs.kgu?major=main&num=21" data-bs-toggle="tooltip" data-bs-placement="top" title="더보기"><i class="bi bi-plus-lg"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="tab-content" id="schContent" style=""></div>
+                                        </div>
+                                        <div class="tab-content" id="nav-tabContent">
+                                            <div class="tab-pane fade show active" id="nav-21" role="tabpanel"
+                                                 aria-labelledby="nav-21-tab"></div>
+                                            <div class="tab-pane fade" id="nav-22" role="tabpanel"
+                                                 aria-labelledby="nav-22-tab"></div>
+                                            <div class="tab-pane fade" id="nav-23" role="tabpanel"
+                                                 aria-labelledby="nav-23-tab"></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6 py-2 " id="main2_center">
+                                    <div class=" p-3 border border-primary card m-0" style="height : 493px;">
+                                        <div>
+                                            <div class="mb-2 d-flex justify-content-between border-bottom">
+                                                <div class="nav nav-tabs" id="nav-tab2" role="tablist">
+                                                    <button class="nav-link active" id="nav-30-tab"
+                                                            data-bs-toggle="tab" data-bs-target="#nav-30"
+                                                            type="button" role="tab" aria-controls="nav-home"
+                                                            aria-selected="true"
+                                                            onclick="clickNoticeReg('more_link2', 30)"></button>
+                                                    <button class="nav-link" id="nav-31-tab" data-bs-toggle="tab"
+                                                            data-bs-target="#nav-31" type="button" role="tab"
+                                                            aria-controls="nav-profile" aria-selected="false"
+                                                            onclick="clickBBS('more_link2', 31)"></button>
+                                                </div>
+                                                <div class="morebtn">
+                                                    <div class="py-2">
+                                                        <a id="more_link2" href="reg.kgu?major=main&num=30" data-bs-toggle="tooltip" data-bs-placement="top"  title="더보기"><i class="bi bi-plus-lg"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-content" id="nav-tabContent2">
+                                            <div class="tab-pane fade show active" id="nav-30" role="tabpanel"
+                                                 aria-labelledby="nav-30-tab"></div>
+                                            <div class="tab-pane fade" id="nav-31" role="tabpanel"
+                                                 aria-labelledby="nav-31-tab"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <%--                            left side end--%>
+                            <%-- bbs and reg end--%>
                         </div>
+                        <%--                            left side end--%>
 
-                    </div>
-                    <%--                    container end--%>
 
-                    <!-- search schedule Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">주요 일정</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                        <%--                            right side start--%>
+                        <div class="col-xxl-3" id="main1_right">
+                            <div class="row">
+                                <div class="py-2 col-xxl-12 col-sm-6">
+                                    <div class=" h-100 border border-primary card m-0" id="favorite_menu" style=""></div>
                                 </div>
-                                <div class="modal-body" id="modalBody">
-                                    <table class="boardtable" id="schTable" data-toggle="table"
-                                           data-pagination="true" data-toolbar="#toolbar"
-                                           data-search="true" data-side-pagination="true" data-click-to-select="true"
-                                           data-page-list="[10]">
-                                        <thead>
-                                        <tr>
-                                            <th data-field="date" data-sortable="true">날짜</th>
-                                            <th data-field="content" data-sortable="true">내용</th>
-                                        </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                <div class="py-2 col-xxl-12 col-sm-6">
+                                    <div class=" p-3 border border-primary card m-0" style="height : 493px;">
+                                        <div class="mb-2 d-flex justify-content-between border-bottom">
+                                            <div class="nav nav-tabs" role="tablist">
+                                                <button class="nav-link active"><strong>주요 일정</strong></button>
+                                            </div>
+                                            <div class="morebtn">
+                                                <div class="py-2">
+                                                    <a data-bs-toggle="tooltip" data-bs-placement="top"  title="일정 보기">
+                                                        <i class="bi bi-plus-lg col-sm-2 text-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addSearchModal()"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-content" id="schContent" style=""></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <%--                            left side end--%>
                     </div>
-                </main>
-                <%--Main end--%>
-            </div>
-            <%@include file="footer.jsp" %>
+
+                </div>
+                <%--                    container end--%>
+
+                <!-- search schedule Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">주요 일정</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="modalBody">
+                                <table class="boardtable" id="schTable" data-toggle="table"
+                                       data-pagination="true" data-toolbar="#toolbar"
+                                       data-search="true" data-side-pagination="true" data-click-to-select="true"
+                                       data-page-list="[10]">
+                                    <thead>
+                                    <tr>
+                                        <th data-field="date" data-sortable="true">날짜</th>
+                                        <th data-field="content" data-sortable="true">내용</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <%--Main end--%>
         </div>
+        <%@include file="footer.jsp" %>
     </div>
 </div>
 <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <%--<script src="/assets/js/bootstrap.bundle.min.js"></script>--%>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="/assets/js/main.js"></script>
-<script>
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
-</script>
+<%--<script>--%>
+
+<%--</script>--%>
 </body>
 
 </html>
@@ -296,6 +284,7 @@
         var nav31 = $('#nav-31');
         var registerAllInfo = <%=registerAllInfo%>;
         var bbs31 =<%=bbs31%>;
+        var type = <%=type%>;
 
         var text30 = '<ul class="list-group">';
         if (registerAllInfo != null) {
@@ -303,7 +292,13 @@
                 if (i == 9) {
                     break;
                 }
-                var url30 = 'reg.kgu?major=main&num=30&mode=view&id=' + registerAllInfo[i].id;
+                var url30 = '';
+                if (type.for_header=='기타'){
+                    url30 = '';
+                }
+                else {
+                    url30 = 'reg.kgu?major=main&num=30&mode=view&id=' + registerAllInfo[i].id;
+                }
                 text30 += '<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
                     + '<a href="' + url30 + '"><span class="index_post_link">' + registerAllInfo[i].title + '</span></a>'
                     + '<a href="' + url30 + '"><span class="index_post_time">' + formatDate(registerAllInfo[i].last_modified) + '</span></a>'

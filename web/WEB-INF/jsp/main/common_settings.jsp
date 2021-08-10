@@ -60,3 +60,31 @@
     alert('Internet Explorer는 호환되지 않는 브라우저 입니다.');
   }
 </script>
+
+<style>
+  .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    transition: 0.5s;
+    /*padding-top: 60px;*/
+  }
+
+  /*.sidebar .closebtn2 {*/
+  /*  position: absolute;*/
+  /*  top: 0;*/
+  /*  right: 25px;*/
+  /*  font-size: 36px;*/
+  /*  margin-left: 50px;*/
+  /*}*/
+
+  #main {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+</style>

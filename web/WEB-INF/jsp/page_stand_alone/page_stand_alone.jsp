@@ -47,80 +47,78 @@
 <html>
 <%@include file="/WEB-INF/jsp/main/common_settings.jsp"%>
 <body>
-<div id="app">
-    <%@include file="/WEB-INF/jsp/main/aside_v2.jsp"%>
-    <div id="main" class='layout-navbar'>
-        <%@include file="/WEB-INF/jsp/main/header_v3.jsp"%>
-        <div id="main-content">
+<%@include file="/WEB-INF/jsp/main/aside_v3.jsp"%>
+<div id="main" class='layout-navbar'>
+    <%@include file="/WEB-INF/jsp/main/header_v3.jsp"%>
+    <div id="main-content">
 
-            <div class="page-heading">
-                <main class="">
-                    <div class="container py-4">
+        <div class="page-heading">
+            <main class="">
+                <div class="container py-4">
 
-                        <div class="row align-items-md-stretch">
-                            <div class="col-lg-12 py-2">
-                                <div class=" h-100 p-5 m-0 border border-primary card" id="page_title"></div>
-                            </div>
+                    <div class="row align-items-md-stretch">
+                        <div class="col-lg-12 py-2">
+                            <div class=" h-100 p-5 m-0 border border-primary card" id="page_title"></div>
                         </div>
+                    </div>
 
-                        <div class="row align-items-md-stretch">
+                    <div class="row align-items-md-stretch">
 
-                            <div class="col-lg-12 py-2">
-                                <div class=" h-100 p-xxl-5 p-xl-4 p-3 m-0 border border-primary card">
-                                    <c:choose>
-                                        <%--            menu--%>
-                                        <c:when test="${jsp == '\"information\"'}">
-                                            <%@include file="/WEB-INF/jsp/page_stand_alone/menu/information.jsp" %>
-                                        </c:when>
-                                        <c:when test="${jsp == '\"contact\"'}">
-                                            <%@include file="/WEB-INF/jsp/page_stand_alone/menu/contact.jsp" %>
-                                        </c:when>
-                                        <c:when test="${jsp == '\"curriculum\"'}">
-                                            <%@include file="/WEB-INF/jsp/page_stand_alone/menu/curriculum.jsp" %>
-                                        </c:when>
-                                        <c:when test="${jsp == '\"club\"'}">
-                                            <%@include file="/WEB-INF/jsp/page_stand_alone/menu/club.jsp" %>
-                                        </c:when>
-                                        <c:when test="${jsp == '\"professor\"'}">
-                                            <%@include file="/WEB-INF/jsp/page_stand_alone/menu/professor.jsp" %>
-                                        </c:when>
+                        <div class="col-lg-12 py-2">
+                            <div class=" h-100 p-xxl-5 p-xl-4 p-3 m-0 border border-primary card">
+                                <c:choose>
+                                    <%--            menu--%>
+                                    <c:when test="${jsp == '\"information\"'}">
+                                        <%@include file="/WEB-INF/jsp/page_stand_alone/menu/information.jsp" %>
+                                    </c:when>
+                                    <c:when test="${jsp == '\"contact\"'}">
+                                        <%@include file="/WEB-INF/jsp/page_stand_alone/menu/contact.jsp" %>
+                                    </c:when>
+                                    <c:when test="${jsp == '\"curriculum\"'}">
+                                        <%@include file="/WEB-INF/jsp/page_stand_alone/menu/curriculum.jsp" %>
+                                    </c:when>
+                                    <c:when test="${jsp == '\"club\"'}">
+                                        <%@include file="/WEB-INF/jsp/page_stand_alone/menu/club.jsp" %>
+                                    </c:when>
+                                    <c:when test="${jsp == '\"professor\"'}">
+                                        <%@include file="/WEB-INF/jsp/page_stand_alone/menu/professor.jsp" %>
+                                    </c:when>
 
-                                        <%--            bbs--%>
-                                        <c:when test="${jsp == '\"bbs_list\"' || jsp == '\"bbs_view\"' || jsp == '\"bbs_write\"' || jsp == '\"bbs_modify\"'}">
-                                            <%@include file="/WEB-INF/jsp/page_stand_alone/bbs/bbs.jsp" %>
-                                        </c:when>
-                                        <%--            registerBbs--%>
-                                        <c:when test="${jsp == '\"reg_list\"' || jsp == '\"reg_view\"' || jsp == '\"reg_write\"' || jsp == '\"reg_modify\"'}">
+                                    <%--            bbs--%>
+                                    <c:when test="${jsp == '\"bbs_list\"' || jsp == '\"bbs_view\"' || jsp == '\"bbs_write\"' || jsp == '\"bbs_modify\"'}">
+                                        <%@include file="/WEB-INF/jsp/page_stand_alone/bbs/bbs.jsp" %>
+                                    </c:when>
+                                    <%--            registerBbs--%>
+                                    <c:when test="${jsp == '\"reg_list\"' || jsp == '\"reg_view\"' || jsp == '\"reg_write\"' || jsp == '\"reg_modify\"'}">
 <%--                                           <%System.out.println("페이지스탠드어론");%>--%>
-                                            <%@include file="/WEB-INF/jsp/page_stand_alone/register/register.jsp" %>
-                                        </c:when>
+                                        <%@include file="/WEB-INF/jsp/page_stand_alone/register/register.jsp" %>
+                                    </c:when>
 
-                                        <%--              etc--%>
-                                        <c:when test="${jsp == '\"madeby\"'}">
-                                            <%@include file="/WEB-INF/jsp/page_stand_alone/main/madeby.jsp"%>
-                                        </c:when>
-                                        <c:when test="${jsp == '\"sitemap\"'}">
-                                            <%@include file="/WEB-INF/jsp/page_stand_alone/main/sitemap.jsp"%>
-                                        </c:when>
-                                        <c:when test="${jsp == '\"location\"'}">
-                                            <%@include file="/WEB-INF/jsp/page_stand_alone/main/location.jsp"%>
-                                        </c:when>
+                                    <%--              etc--%>
+                                    <c:when test="${jsp == '\"madeby\"'}">
+                                        <%@include file="/WEB-INF/jsp/page_stand_alone/main/madeby.jsp"%>
+                                    </c:when>
+                                    <c:when test="${jsp == '\"sitemap\"'}">
+                                        <%@include file="/WEB-INF/jsp/page_stand_alone/main/sitemap.jsp"%>
+                                    </c:when>
+                                    <c:when test="${jsp == '\"location\"'}">
+                                        <%@include file="/WEB-INF/jsp/page_stand_alone/main/location.jsp"%>
+                                    </c:when>
 
-                                        <c:otherwise>
-                                            <div>잘못된 jsp 변수가 넘어왔습니다.</div>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </div>
+                                    <c:otherwise>
+                                        <div>잘못된 jsp 변수가 넘어왔습니다.</div>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
-
                         </div>
-
 
                     </div>
-                </main>
-            </div>
-            <%@include file="/WEB-INF/jsp/main/footer.jsp"%>
+
+
+                </div>
+            </main>
         </div>
+        <%@include file="/WEB-INF/jsp/main/footer.jsp"%>
     </div>
 </div>
 <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
