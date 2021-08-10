@@ -13,6 +13,15 @@ public class BBSDTO {
     public String text;
     public String comments_count;
 
+    public String getLikes() {
+        return likes;
+    }
+
+    public void setLikes(String likes) {
+        this.likes = likes;
+    }
+
+    public String likes;
     public String already_like;
     public String uploadedFiles;
 

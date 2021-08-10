@@ -1,7 +1,17 @@
 package kr.ac.kyonggi.swaig.handler.dto.settings;
 
 public class CommentDTO {
-    String id, writer_id, writer_name, comment, comment_date, bbs_id;
+    String id, writer_id, writer_name, comment, comment_date;
+
+    public String getBbs_id() {
+        return bbs_id;
+    }
+
+    public void setBbs_id(String bbs_id) {
+        this.bbs_id = bbs_id;
+    }
+
+    public String bbs_id;
 
     public String getId() {
         return id;
@@ -43,11 +53,5 @@ public class CommentDTO {
         this.comment_date = comment_date;
     }
 
-    public String getBbs_id() {
-        return bbs_id;
-    }
 
-    public void setBbs_id(String bbs_id) {
-        this.bbs_id = bbs_id;
-    }
 }

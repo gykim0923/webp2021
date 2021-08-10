@@ -1,8 +1,18 @@
 package kr.ac.kyonggi.swaig.handler.dto.settings;
 
 public class RegAnswerDTO {
-    public int id, reg_id, question_num;
+    public int id, question_num;
     public String answer, writer_name, writer_id, writer_grade, writer_type, writer_perId;
+
+    public String getReg_id() {
+        return reg_id;
+    }
+
+    public void setReg_id(String reg_id) {
+        this.reg_id = reg_id;
+    }
+
+    public String reg_id;
 
     public int getId() {
         return id;
@@ -10,14 +20,6 @@ public class RegAnswerDTO {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getReg_id() {
-        return reg_id;
-    }
-
-    public void setReg_id(int reg_id) {
-        this.reg_id = reg_id;
     }
 
     public int getQuestion_num() {

@@ -5,7 +5,25 @@ import java.util.Date;
 public class RegisterDTO {
     public int id, views, applicant_count;
     public String writer_id, writer_name, title, text, level, for_who;
-    public Date last_modified, starting_date, closing_date;
+    public Date last_modified;
+
+    public Date getStarting_date() {
+        return starting_date;
+    }
+
+    public void setStarting_date(Date starting_date) {
+        this.starting_date = starting_date;
+    }
+
+    public Date getClosing_date() {
+        return closing_date;
+    }
+
+    public void setClosing_date(Date closing_date) {
+        this.closing_date = closing_date;
+    }
+
+    public Date starting_date, closing_date;
 
     public int getId() {
         return id;
@@ -85,21 +103,5 @@ public class RegisterDTO {
 
     public void setLast_modified(Date last_modified) {
         this.last_modified = last_modified;
-    }
-
-    public Date getStarting_date() {
-        return starting_date;
-    }
-
-    public void setStarting_date(Date starting_date) {
-        this.starting_date = starting_date;
-    }
-
-    public Date getClosing_date() {
-        return closing_date;
-    }
-
-    public void setClosing_date(Date closing_date) {
-        this.closing_date = closing_date;
     }
 }

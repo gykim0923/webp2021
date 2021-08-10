@@ -514,4 +514,57 @@ public class BBSDAO {
         }
         return "success";
     }
+    public ArrayList<BBSDTO> getBoardsFromWho(String id) {
+        Connection conn = Config.getInstance().sqlLogin();
+        List<Map<String, Object>> listOfMaps = null;
+        Gson gson = new Gson();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs WHERE writer_id=?;",new MapListHandler(), id);
+        } catch(SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        ArrayList<BBSDTO> lists = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<BBSDTO>>() {}.getType());
+        return lists;
+    }
+
+    public ArrayList<BBSDTO> getCommentsFromWho(String id) {
+        Connection conn = Config.getInstance().sqlLogin();
+        List<Map<String, Object>> listOfMaps = null;
+        Gson gson = new Gson();
+        ArrayList<BBSDTO> results = new ArrayList<>();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM comment WHERE writer_id=?;",new MapListHandler(), id);
+            ArrayList<CommentDTO> lists = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<CommentDTO>>() {}.getType());
+            for(int i = 0 ; i < lists.size() ; ++i) {
+                BBSDTO thing = it.getBBS(lists.get(i).bbs_id);
+                results.add(thing);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return results;
+    }
+
+    public ArrayList<BBSDTO> getLikesFromWho(String id) {
+        Connection conn = Config.getInstance().sqlLogin();
+        List<Map<String, Object>> listOfMaps = null;
+        Gson gson = new Gson();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            String keyword = "%|" + id + "|%";
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs WHERE already_like LIKE ?",new MapListHandler(), keyword);
+        } catch(SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        ArrayList<BBSDTO> lists = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<BBSDTO>>() {}.getType());
+        return lists;
+    }
 }

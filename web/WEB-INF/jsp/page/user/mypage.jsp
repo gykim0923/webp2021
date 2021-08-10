@@ -96,7 +96,9 @@
 
         $('#sub_major_select').append(text_sub_major);
 
-        var usersub_major = user.sub_major.split('<br>');
+        var usersub_major = user.sub_major.split("<br>");
+
+        console.log(usersub_major)
 
         for(var j=0; j<usersub_major.length; j++){
             for(var i=0; i<getAllMajor.length; i++) {

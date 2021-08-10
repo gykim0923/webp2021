@@ -66,6 +66,24 @@ public class RegisterDAO {
             return null;
     }
 
+    public RegisterDTO getRegRead(String id) {
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn,"SELECT * FROM bbs_reg WHERE id=?;", new MapListHandler(),id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<RegisterDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<RegisterDTO>>() {}.getType());
+        selected.get(0).title = getRemoveHtmlText(selected.get(0).title);
+        selected.get(0).text = getRemoveHtmlText(selected.get(0).text);
+        return selected.get(0);
+    }
+
     public String modifyReg(String data){
         String arr[] = data.split("-/-/-"); //id+"-/-/-"+ title +"-/-/-"+ text +"-/-/-"+writer_id+"-/-/-"+for_who+"-/-/-"+level +"-/-/-"+startingDate +"-/-/-" +closingDate+"-/-/-"+writer_name+"-/-/-"+last_modified;
 
@@ -504,5 +522,26 @@ public class RegisterDAO {
         Gson gson = new Gson();
         ArrayList<RegAnswerDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<RegAnswerDTO>>() {}.getType());
         return selected;
+    }
+
+    public ArrayList<RegisterDTO> getBoardsWhatIDone(String id) {
+        Connection conn = Config.getInstance().sqlLogin();
+        List<Map<String, Object>> listOfMaps = null;
+        ArrayList<RegisterDTO> lists = new ArrayList<>();
+        Gson gson = new Gson();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn, "SELECT DISTINCT reg_id FROM bbs_reg_answer WHERE writer_id=?", new MapListHandler(), id);
+            ArrayList<RegAnswerDTO> answers = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<RegAnswerDTO>>() {}.getType());
+            for(int i = 0 ; i < answers.size() ; ++i) {
+                RegisterDTO thing = getRegRead(answers.get(i).reg_id);
+                lists.add(thing);
+            }
+        }catch(SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        return lists;
     }
 }
