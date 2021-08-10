@@ -31,26 +31,26 @@
 
     function setdata(){
         var a ='<div class="row" id="panel">';
-        a +='<div class="py-4 col-lg-4 d-flex justify-content-center" id="panel1"><img src="'+user.google_img+'" onerror="this.src=\'http://placehold.it/200x200\'" style="height: 200px" class="rounded-circle img-responsive"></div>';
+        a +='<div class="py-lg-5 py-4 col-lg-4 d-flex justify-content-center" id="panel1"><img src="'+user.google_img+'" onerror="this.src=\'http://placehold.it/200x200\'" style="height: 200px" class="rounded-circle img-responsive my-lg-5"></div>';
         a +='<div class="py-4 col-lg-8">'
         a += '<div id="panel2" class="row"><div>안녕하세요 '+user.name+'님, 오늘은 가입한 지 <span style="color : red;">'+ (parseInt(betweenDay)+1) +'</span>일째입니다.</div><hr>';
-        a += '<div class="col-4 border-end">전화번호</div><div class="col-8">'+ user.phone+'</div>';
-        a += '<div class="col-4 border-end">생년월일</div><div class="col-8">'+ user.birth+'</div>';
-        a += '<div class="col-4 border-end">이메일</div><div class="col-8">'+ user.email+'</div>';
-        a += '<div class="col-4 border-end">구분</div><div class="col-8">'+ user.type+'</div>';
+        a += '<div class="col-4 border-end py-2">전화번호</div><div class="col-8 py-2">'+ user.phone+'</div>';
+        a += '<div class="col-4 border-end py-2">생년월일</div><div class="col-8 py-2">'+ user.birth+'</div>';
+        a += '<div class="col-4 border-end py-2">이메일</div><div class="col-8 py-2">'+ user.email+'</div>';
+        a += '<div class="col-4 border-end py-2">구분</div><div class="col-8 py-2">'+ user.type+'</div>';
         if(type.class_type == 'Student' || type.class_type == 'Professor'){
-            a += '<div class="col-4 border-end">학과</div><div class="col-8">'+user.major+'</div>';
-            a += '<div class="col-4 border-end">학번(교번)</div><div class="col-8">'+ user.per_id+'</div>';
-            a += '<div class="col-4 border-end">학년</div><div class="col-8">'+ user.grade+'</div>';
-            a += '<div class="col-4 border-end">부전공</div><div class="col-8">'+ user.sub_major+'</div>';
-            a += '<div class="col-4 border-end">상태</div><div class="col-8">'+ user.state+'</div>';
+            a += '<div class="col-4 border-end py-2">학과</div><div class="col-8 py-2">'+user.major+'</div>';
+            a += '<div class="col-4 border-end py-2">학번(교번)</div><div class="col-8 py-2">'+ user.per_id+'</div>';
+            a += '<div class="col-4 border-end py-2">학년</div><div class="col-8 py-2">'+ user.grade+'</div>';
+            a += '<div class="col-4 border-end py-2">부전공</div><div class="col-8 py-2">'+ user.sub_major+'</div>';
+            a += '<div class="col-4 border-end py-2">상태</div><div class="col-8 py-2">'+ user.state+'</div>';
         }
         a +='</div>'
         $('#text').empty();
         $('#text').append(a);
         $('#modify_button').empty();
-        $('#modify_button').append('<button type="button" class="btn btn-outline-secondary" onclick="setModify()">수정</button>');
-        $('#modify_button').append('<button type="button" class="btn btn-outline-secondary" onclick="deleteUser()">탈퇴</button>');
+        $('#modify_button').append('<button type="button" class="btn btn-outline-danger" onclick="deleteUser()">탈퇴</button>');
+        $('#modify_button').append('<button type="button" class="btn btn-outline-primary" onclick="setModify()">수정</button>');
     }
 
     function setModify(){
@@ -61,16 +61,16 @@
 
         var a = '<div id="panel">';
         a += '<div id="panel2" class="row"><div>안녕하세요 '+user.name+'님, 오늘은 가입한 지 <span style="color : red;">'+ (parseInt(betweenDay)+1) +'</span>일째입니다.</div><hr>';
-        a += '<div class="col-4 border-end">전화번호</div><div class="col-8"><input class="form-control" type="text" name = "phone" placeholder="변경할 번호를 입력해주세요" value="' + user.phone + '"></div>';
-        a += '<div class="col-4 border-end">생년월일</div><div class="col-8"><input class="form-control" type="date" name="birth" value="' + formatDate(user.birth) + '"></div>';
-        a += '<div class="col-4 border-end">이메일</div><div class="col-8"><input class="form-control" type="text" name = "email" readonly placeholder="변경할 이메일을 입력해주세요" value="' + user.email + '"></div>';
-        a += '<div class="col-4 border-end">구분</div><div class="col-8">'+ user.type+'</div>';
+        a += '<div class="col-4 border-end py-2">전화번호</div><div class="col-8 py-2"><input class="form-control" type="text" name = "phone" placeholder="변경할 번호를 입력해주세요" value="' + user.phone + '"></div>';
+        a += '<div class="col-4 border-end py-2">생년월일</div><div class="col-8 py-2"><input class="form-control" type="date" name="birth" value="' + formatDate(user.birth) + '"></div>';
+        a += '<div class="col-4 border-end py-2">이메일</div><div class="col-8 py-2"><input class="form-control" type="text" name = "email" readonly placeholder="변경할 이메일을 입력해주세요" value="' + user.email + '"></div>';
+        a += '<div class="col-4 border-end py-2">구분</div><div class="col-8 py-2">'+ user.type+'</div>';
         if(type.class_type == 'Student' || type.class_type == 'Professor'){
-            a += '<div class="col-4 border-end">학과</div><div class="col-8">'+user.major+'</div>';
-            a += '<div class="col-4 border-end">학번(교번)</div><div class="col-8">'+ user.per_id+'</div>';
-            a += '<div class="col-4 border-end">학년</div><div class="col-8" id="grade_select"></div>';
-            a += '<div class="col-4 border-end">부전공</div><div class="col-8" id="sub_major_select"></div>';
-            a += '<div class="col-4 border-end">상태</div><div class="col-8" id="state_select"></div>';
+            a += '<div class="col-4 border-end py-2">학과</div><div class="col-8 py-2">'+user.major+'</div>';
+            a += '<div class="col-4 border-end py-2">학번(교번)</div><div class="col-8 py-2">'+ user.per_id+'</div>';
+            a += '<div class="col-4 border-end py-2">학년</div><div class="col-8 py-2" id="grade_select"></div>';
+            a += '<div class="col-4 border-end py-2">부전공</div><div class="col-8 py-2" id="sub_major_select"></div>';
+            a += '<div class="col-4 border-end py-2">상태</div><div class="col-8 py-2" id="state_select"></div>';
         }
         $('#text').empty();
         $('#text').append(a);
@@ -117,8 +117,8 @@
         $('#state_select').append(text_state);
 
         $('#modify_button').empty();
-        $('#modify_button').append('<button type="button" class="btn btn-outline-secondary" onclick="refresh()">취소</button>');
-        $('#modify_button').append('<button type="button" class="btn btn-outline-secondary" onclick="modify()">완료</button>');
+        $('#modify_button').append('<button type="button" class="btn btn-outline-danger" onclick="refresh()">취소</button>');
+        $('#modify_button').append('<button type="button" class="btn btn-outline-primary" onclick="modify()">완료</button>');
 
     }
 
