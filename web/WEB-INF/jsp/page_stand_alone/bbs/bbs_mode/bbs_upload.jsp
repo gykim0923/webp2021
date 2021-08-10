@@ -202,7 +202,7 @@
             return;
         }
         var writer_id = user.id;
-        var writer_name = type.for_header;
+        var writer_name = user.name;
         var last_modified = formatDate(new Date());
         var data = bbs_id+"-/-/-"+major+"-/-/-"+writer_id+"-/-/-"+writer_name+"-/-/-"+title+"-/-/-"+num+"-/-/-"+last_modified+"-/-/-"+text;
 

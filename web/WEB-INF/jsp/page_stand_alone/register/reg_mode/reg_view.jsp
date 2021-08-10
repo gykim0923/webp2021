@@ -901,10 +901,10 @@
                 if(getReg.level.includes(type.for_header) || type.for_header == '관리자' || user.id == getReg.writer_id)
                     a += '<a href="download.kgu?id='+it.id+'&&path=/uploaded/bbs_reg">' + it.original_FileName + '</a>&nbsp&nbsp';
                 else
-                    a  += it.original_FileName + '&nbsp&nbsp';
+                    a  += '<span>'+it.original_FileName + '&nbsp&nbsp</span>';
             }
             else
-                a  += it.original_FileName + '&nbsp&nbsp';
+                a  += '<span>'+it.original_FileName + '&nbsp&nbsp</span>';
         }
         postbox.append(a);
     }

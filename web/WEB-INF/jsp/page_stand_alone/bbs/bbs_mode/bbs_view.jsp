@@ -144,7 +144,7 @@
     for(var i = 0 ; i < getAllFile.length ; i++){
       var it = getAllFile[i];
       if(type.for_header == '기타')
-        a  += it.original_FileName + '&nbsp&nbsp';
+        a  += '<span>'+it.original_FileName + '&nbsp&nbsp </span>';
       else
         a += '<a href="download.kgu?id='+it.id+'&&path=/uploaded/bbs">' + it.original_FileName + '</a>&nbsp&nbsp';
     }
@@ -294,17 +294,20 @@
      * 으로 로직을 바꿔야 함.
      * */
 
-    if(user.id== getBBS.writer_id){
-      text += '<div>'
-              +'<a href="'+modifyUrl+'"><div class="btn btn-primary mx-1">수정</div></a>'
-              +'<a onclick="deleteBbs()"><div class="btn btn-danger mx-1">삭제</div></a>'
-              +'</div>'
-    } else if(type.board_level == 0){
-      text += '<div>'
-              +'<a onclick="deleteBbs()"><div class="btn btn-danger mx-1">삭제</div></a>'
-              +'</div>'
+    if(user != null){
+      if(user.id== getBBS.writer_id){
+        text += '<div>'
+                +'<a href="'+modifyUrl+'"><div class="btn btn-primary mx-1">수정</div></a>'
+                +'<a onclick="deleteBbs()"><div class="btn btn-danger mx-1">삭제</div></a>'
+                +'</div>'
+      } else if(type.board_level == 0){
+        text += '<div>'
+                +'<a onclick="deleteBbs()"><div class="btn btn-danger mx-1">삭제</div></a>'
+                +'</div>'
+      }
+      view_buttons.append(text);
     }
-    view_buttons.append(text);
+
   }
 
   function liked() {
