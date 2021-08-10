@@ -140,7 +140,7 @@
         modalHeader.html('<h5 class="modal-title" id="staticBackdropLabel">추가하기</h5>'
             +'<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>');
         modalBody.html('<div class="row g-3"><div class="col-md-6"><label for="major" class="form-label">전공</label><input class="form-control" id="major" value="'+major+'" readonly></div>'
-            +'<div class="col-md-6"><label for="year" class="form-label">연도</label><input class="form-control" id="year" placeholder="ex)2021"></div>'
+            +'<div class="col-md-6"><label for="year" class="form-label">연도</label><input class="form-control" id="year" type="number" placeholder="ex)2021"></div>'
             +'<div class="col-12" id="curriculumUpload"><label for="curriculumFile" class="form-label">커리큘럼 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="curriculumFile" name="curriculumFile" accept="image/*"><label class="btn btn-secondary" for="curriculumFile" onclick="uploadCurriculum()">Upload</label></div></div>'
             +'<div class="col-12" id="eduUpload"><label for="eduFile" class="form-label">이수체계도 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="eduFile" name="eduFile" accept="image/*"><label class="btn btn-secondary" for="eduFile" onclick="uploadEdu()">Upload</label></div></div>');
         modalFooter.html('<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button><button type="button" class="btn btn-primary" onclick="addCurriculum()">추가하기</button>');
@@ -151,6 +151,14 @@
         var edu_img = eduFile_path;
         var major = $('#major').val();
         var year = $('#year').val();
+        if(year.length != 4){
+            swal.fire({
+                title : '해당 연도를 4자리로 입력해주시기 바랍니다.',
+                icon : 'warning',
+                showConfirmButton: true
+            });
+            return;
+        }
         if (curriculum_img == null)
             curriculum_img = "#";
         if (edu_img == null)
