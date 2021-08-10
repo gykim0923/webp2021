@@ -126,7 +126,9 @@
 </script>
 
 <style>
-
+    .fixed-table-border, .fixed-table-container{
+        border: 0 !important;
+    }
     .boardtable > thead > tr > th, .boardtable > tbody > tr > td{
         overflow:hidden;
         text-overflow:ellipsis;
@@ -143,21 +145,100 @@
         max-width: 56px;
         width: 56px;
     }
-    /*.boardtable > thead > tr > th:nth-child(3), .boardtable > tbody > tr > td:nth-child(3) {*/
-    /*    min-width: 75px;*/
-    /*    max-width: 75px;*/
-    /*    width: 75px;*/
-    /*}*/
-    .boardtable > thead > tr > th:nth-child(4), .boardtable > tbody > tr > td:nth-child(4) {
-        min-width: 110px;
-        max-width:110px;
-        width: 110px;
+    .boardtable > thead > tr > th:nth-child(3), .boardtable > tbody > tr > td:nth-child(3) {
+        min-width: 230px;
+        max-width: 230px;
+        width: 230px;
     }
-
-    .boardtable > thead > tr > th:nth-child(5), .boardtable > tbody > tr > td:nth-child(5) {
+    .boardtable > thead > tr > th:nth-child(4), .boardtable > tbody > tr > td:nth-child(4) {
         min-width: 75px;
         max-width: 75px;
         width: 75px;
     }
 
+    .boardtable > thead > tr > th:nth-child(5), .boardtable > tbody > tr > td:nth-child(5) {
+        min-width: 50px;
+        max-width: 50px;
+        width: 50px;
+    }
+    .boardtable > thead > tr > th:nth-child(5), .boardtable > tbody > tr > td:nth-child(6) {
+        min-width: 75px;
+        max-width: 75px;
+        width: 75px;
+    }
+
+    @media (min-width: 50px) {
+        th:nth-of-type(3) { display: none; }
+        td:nth-of-type(3) { display: none; }
+        th:nth-of-type(4) { display: none; }
+        td:nth-of-type(4) { display: none; }
+        th:nth-of-type(5) { display: none; }
+        td:nth-of-type(5) { display: none; }
+    }
+    @media (min-width: 280px) {
+        .boardtable > thead > tr > th:nth-child(2), .boardtable > tbody > tr > td:nth-child(2) {
+            max-width: 40px;
+        }
+    }
+    @media (min-width: 320px) {
+        .boardtable > thead > tr > th:nth-child(2), .boardtable > tbody > tr > td:nth-child(2) {
+            max-width: 80px;
+        }
+    }
+    @media (min-width: 360px) {
+        .boardtable > thead > tr > th:nth-child(2), .boardtable > tbody > tr > td:nth-child(2) {
+            max-width: 120px;
+        }
+    }
+    @media (min-width: 400px) {
+        .boardtable > thead > tr > th:nth-child(2), .boardtable > tbody > tr > td:nth-child(2) {
+            max-width: 160px;
+        }
+    }
+    @media (min-width: 450px) {
+        .boardtable > thead > tr > th:nth-child(2), .boardtable > tbody > tr > td:nth-child(2) {
+            max-width: 210px;
+        }
+
+    }
+    @media (min-width: 576px) {
+        .boardtable > thead > tr > th:nth-child(2), .boardtable > tbody > tr > td:nth-child(2) {
+            max-width: 340px;
+        }
+    }
+    @media (min-width: 768px) {
+        .boardtable > thead > tr > th:nth-child(2), .boardtable > tbody > tr > td:nth-child(2) {
+            max-width: 380px;
+        }
+        th:nth-of-type(1) { display: table-cell; }
+        td:nth-of-type(1) { display: table-cell; }
+        th:nth-of-type(2) { display: table-cell; }
+        td:nth-of-type(2) { display: table-cell; }
+        th:nth-of-type(4) { display: table-cell; }
+        td:nth-of-type(4) { display: table-cell; }
+        th:nth-of-type(5) { display: table-cell; }
+        td:nth-of-type(5) { display: table-cell; }
+    }
+    @media (min-width: 992px) {
+        .boardtable > thead > tr > th:nth-child(2), .boardtable > tbody > tr > td:nth-child(2) {
+            max-width: 360px;
+        }
+        th:nth-of-type(3) { display: table-cell; }
+        td:nth-of-type(3) { display: table-cell; }
+    }
+    @media (min-width: 1200px) {
+        .boardtable > thead > tr > th:nth-child(2), .boardtable > tbody > tr > td:nth-child(2) {
+            max-width: 270px;
+        }
+    }
+    @media (min-width: 1400px) {
+        .boardtable > thead > tr > th:nth-child(2), .boardtable > tbody > tr > td:nth-child(2) {
+            max-width: 470px;
+        }
+    }
+    @media (min-width: 1600px) {
+        .boardtable > thead > tr > th:nth-child(2), .boardtable > tbody > tr > td:nth-child(2) {
+            max-width: 660px;
+        }
+    }
 </style>
