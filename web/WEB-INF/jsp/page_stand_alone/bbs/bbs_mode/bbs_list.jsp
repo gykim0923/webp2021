@@ -146,12 +146,12 @@
     }
 
     @media (min-width: 50px) {
-        /*th:nth-of-type(3) { display: none; }*/
-        /*td:nth-of-type(3) { display: none; }*/
-        /*th:nth-of-type(4) { display: none; }*/
-        /*td:nth-of-type(4) { display: none; }*/
-        /*th:nth-of-type(5) { display: none; }*/
-        /*td:nth-of-type(5) { display: none; }*/
+        th:nth-of-type(3) { display: none; }
+        td:nth-of-type(3) { display: none; }
+        th:nth-of-type(4) { display: none; }
+        td:nth-of-type(4) { display: none; }
+        th:nth-of-type(5) { display: none; }
+        td:nth-of-type(5) { display: none; }
     }
     @media (min-width: 280px) {
         .boardtable > thead > tr > th:nth-child(2), .boardtable > tbody > tr > td:nth-child(2) {
@@ -183,21 +183,21 @@
         .boardtable > thead > tr > th:nth-child(2), .boardtable > tbody > tr > td:nth-child(2) {
             max-width: 100px;
         }
-        /*th:nth-of-type(4) { display: inline-block; }*/
-        /*td:nth-of-type(4) { display: inline-block; }*/
+        th:nth-of-type(4) { display: table-cell; }
+        td:nth-of-type(4) { display: table-cell; }
     }
     @media (min-width: 768px) {
         .boardtable > thead > tr > th:nth-child(2), .boardtable > tbody > tr > td:nth-child(2) {
             max-width: 320px;
         }
-        /*th:nth-of-type(1) { display: inline-block; }*/
-        /*td:nth-of-type(1) { display: inline-block; }*/
-        /*th:nth-of-type(2) { display: inline-block; }*/
-        /*td:nth-of-type(2) { display: inline-block; }*/
-        /*th:nth-of-type(3) { display: inline-block; }*/
-        /*td:nth-of-type(3) { display: inline-block; }*/
-        /*th:nth-of-type(5) { display: inline-block; }*/
-        /*td:nth-of-type(5) { display: inline-block; }*/
+        th:nth-of-type(1) { display: table-cell; }
+        td:nth-of-type(1) { display: table-cell; }
+        th:nth-of-type(2) { display: table-cell; }
+        td:nth-of-type(2) { display: table-cell; }
+        th:nth-of-type(3) { display: table-cell; }
+        td:nth-of-type(3) { display: table-cell; }
+        th:nth-of-type(5) { display: table-cell; }
+        td:nth-of-type(5) { display: table-cell; }
     }
     @media (min-width: 992px) {
         .boardtable > thead > tr > th:nth-child(2), .boardtable > tbody > tr > td:nth-child(2) {
