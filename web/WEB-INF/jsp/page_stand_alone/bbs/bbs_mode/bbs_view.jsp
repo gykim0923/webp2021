@@ -137,10 +137,9 @@
     var view_download = $('#view_download');
     var getAllFile = <%=getAllFile%>;
     var a = '';
-    if(getAllFile.length > 0)
-      a += '첨부파일: ';
     if(getAllFile.length == 0)
       view_download.remove();
+    a += '첨부파일: ';
     for(var i = 0 ; i < getAllFile.length ; i++){
       var it = getAllFile[i];
       if(type.for_header == '기타')
