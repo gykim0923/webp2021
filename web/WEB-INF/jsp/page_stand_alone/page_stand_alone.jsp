@@ -36,6 +36,8 @@
      * 즉, Header나 Admin처럼 비슷한 메뉴끼리 묶여있지 않는 페이지들은 페이지 메뉴가 필요없기에 이 레이아웃 사용이 더욱 자연스럽습니다.
      * page와 근본적으로 같은 역할을 하고 있지만, 레이아웃이 약간 달라 스탠드얼론(Stand-Alone)이라는 이름을 붙였습니다.
      * page.jsp와 다르게 페이지 메뉴가 없고, 대신 페이지 타이틀을 직접 받아와야 합니다.
+     *
+     * 참고로 이 페이지는 원래 비주류 레이아웃이었는데, 테마를 입히는 과정에서 주로 사용되는 레이아웃이 되었습니다.
      * */
 
     String jsp=(String)request.getAttribute("jsp");
@@ -57,14 +59,14 @@
 
                         <div class="row align-items-md-stretch">
                             <div class="col-lg-12 py-2">
-                                <div class=" h-100 p-5 m-0 border card" id="page_title"></div>
+                                <div class=" h-100 p-5 m-0 border border-primary card" id="page_title"></div>
                             </div>
                         </div>
 
                         <div class="row align-items-md-stretch">
 
                             <div class="col-lg-12 py-2">
-                                <div class=" h-100 p-xxl-5 p-xl-4 p-3 m-0 border card">
+                                <div class=" h-100 p-xxl-5 p-xl-4 p-3 m-0 border border-primary card">
                                     <c:choose>
                                         <%--            menu--%>
                                         <c:when test="${jsp == '\"information\"'}">

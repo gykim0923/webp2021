@@ -82,7 +82,7 @@
                             <div class="col-xxl-9" id="main1_left">
                                 <div class="py-2 col-12">
                                     <%--                                    carousel start--%>
-                                    <div id="myCarousel" class="h-100 carousel slide card border"
+                                    <div id="myCarousel" class="h-100 carousel slide card border border-primary"
                                          data-bs-ride="carousel" style="margin-bottom : 0px; height:399px;">
                                         <div class="carousel-indicators" id="carouselButton">
                                             <%--   슬라이더 사진 개수와 동일한 버트 만들어 줘야함 makecarouselCard에 있음--%>
@@ -106,7 +106,7 @@
                                 <%--                                bbs and reg start--%>
                                 <div class="row">
                                     <div class="col-xl-6 py-2 " id="main2_left">
-                                        <div class=" p-3 border card m-0" style="height : 493px;">
+                                        <div class=" p-3 card border border-primary m-0" style="height : 493px;">
                                             <div class="">
                                                 <div class="mb-2 d-flex justify-content-between border-bottom">
                                                     <div class="nav nav-tabs " id="nav-tab" role="tablist">
@@ -144,7 +144,7 @@
                                     </div>
 
                                     <div class="col-xl-6 py-2 " id="main2_center">
-                                        <div class=" p-3 border card m-0" style="height : 493px;">
+                                        <div class=" p-3 border border-primary card m-0" style="height : 493px;">
                                             <div>
                                                 <div class="mb-2 d-flex justify-content-between border-bottom">
                                                     <div class="nav nav-tabs" id="nav-tab2" role="tablist">
@@ -183,10 +183,10 @@
                             <div class="col-xxl-3" id="main1_right">
                                 <div class="row">
                                     <div class="py-2 col-xxl-12 col-sm-6">
-                                        <div class=" h-100 border card m-0" id="favorite_menu" style=""></div>
+                                        <div class=" h-100 border border-primary card m-0" id="favorite_menu" style=""></div>
                                     </div>
                                     <div class="py-2 col-xxl-12 col-sm-6">
-                                        <div class=" p-3 border card m-0" style="height : 493px;">
+                                        <div class=" p-3 border border-primary card m-0" style="height : 493px;">
                                             <div class="mb-2 d-flex justify-content-between border-bottom">
                                                 <div class="nav nav-tabs" role="tablist">
                                                     <button class="nav-link active"><strong>주요 일정</strong></button>
@@ -446,7 +446,7 @@
             text2 += '<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button>'
             text += '<div class="h-100 carousel-item active">';
             text += '<svg class="carousel-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg>'
-            text += '<div class="container"> <div class="carousel-caption"> <h1>등록된 대문이 없습니다.</h1> <p>관리자 모드에서 대문을 추가해주시기 바랍니다.</p> </div> </div>'
+            text += '<div class="container"> <div class="carousel-caption"> <h1 class="text-white">등록된 대문이 없습니다.</h1> <p>관리자 모드에서 대문을 추가해주시기 바랍니다.</p> </div> </div>'
             text += '</div>';
         }
 
