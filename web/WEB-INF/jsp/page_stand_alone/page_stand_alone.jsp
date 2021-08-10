@@ -136,9 +136,13 @@
 
     function makePageTitle() {
         var num = <%=num%>;
+        var major = <%=major%>;
+        var majorInfo = <%=majorInfo%>;
         var list = $('#page_title');
         var pageMenu = <%=pageMenu%>;
         var page_title = '';
+        var majorTitle='';
+        var text='';
         for (var i = 0; i < pageMenu.length; i++) {
             if (pageMenu[i].page_id == num) {
                 page_title = pageMenu[i].page_title;
@@ -146,7 +150,18 @@
             }
         }
         if(page_title!=''){
-            var text = '<h2><i class="bi bi-info-circle-fill"></i><strong>  ' + page_title + '</strong></h2>';
+            if(major=='main'){
+                text = '<h2><i class="bi bi-info-circle-fill"></i><strong>  '+ page_title + '</strong></h2>';
+            }
+            else {
+                for (var j = 0 ; j < majorInfo.length; j++){
+                    if(majorInfo[j].major_id==major){
+                        majorTitle = majorInfo[j].major_name;
+                        break;
+                    }
+                }
+                text = '<h2><i class="bi bi-info-circle-fill"></i><strong>  '+majorTitle+' : ' + page_title + '</strong></h2>';
+            }
             list.append(text);
         }
     }
