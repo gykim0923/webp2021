@@ -62,9 +62,33 @@
 
     function insertBbs(){
         var title = $('#bbsTitle').val();
+        if(title.length == 0){
+            swal.fire({
+                title : '제목을 입력해주세요',
+                icon : 'warning',
+                showConfirmButton: true
+            });
+            return;
+        }
+        if(title.length > 200){
+            swal.fire({
+                title : '제목은 200자 이하로 작성하여 주시기바랍니다.',
+                icon : 'warning',
+                showConfirmButton: true
+            });
+            return;
+        }
         var text = CKEDITOR.instances.bbsUpdateContent.getData();
+        if(text.length == 0){
+            swal.fire({
+                title : '내용을 입력해주세요',
+                icon : 'warning',
+                showConfirmButton: true
+            });
+            return;
+        }
         var writer_id = user.id;
-        var writer_name = type.for_header;
+        var writer_name = user.name;
         var last_modified = formatDate(new Date());
         if(uploadedFiles==''){
             uploadedFiles='null';
@@ -106,7 +130,31 @@
     function modifyBbs(){
         var bbs_id = getBBS.id;
         var title = $('#bbsTitle').val();
+        if(title.length == 0){
+            swal.fire({
+                title : '제목을 입력해주세요',
+                icon : 'warning',
+                showConfirmButton: true
+            });
+            return;
+        }
+        if(title.length > 200){
+            swal.fire({
+                title : '제목은 200자 이하로 작성하여 주시기바랍니다.',
+                icon : 'warning',
+                showConfirmButton: true
+            });
+            return;
+        }
         var text = CKEDITOR.instances.bbsUpdateContent.getData();
+        if(text.length == 0){
+            swal.fire({
+                title : '내용을 입력해주세요',
+                icon : 'warning',
+                showConfirmButton: true
+            });
+            return;
+        }
         var writer_id = user.id;
         var writer_name = type.for_header;
         var last_modified = formatDate(new Date());

@@ -244,9 +244,7 @@ public class AjaxAction implements Action {
                 break;
             case "insertBbs":
                 if(type.board_level<3){
-                    System.out.println("data : "+ data);
                     result=BBSDAO.getInstance().insertBbs(data);
-                    System.out.println("dd : "+result);
                 }
                 break;
             case "modifyBbs":

@@ -571,7 +571,7 @@
 
     function insertReg(){
         var writer_id = user.id;
-        var writer_name = type.for_header;
+        var writer_name = user.name;
         var title = $('#bbsTitle').val();
         if(title.length == 0){
             swal.fire({
