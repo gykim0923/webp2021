@@ -71,6 +71,7 @@
                 + '</a>';
             for (var j = 0; j < menuPageList.length; j++) {
                 if (menuTabList[i].tab_id == menuPageList[j].tab_id) {
+                    // text += '<ul class="submenu active" style="display: block;">'
                     text += '<ul class="submenu active" style="display: block;">'
                         + '<li class="submenu-item ">'
                         + '<a href="' + menuPageList[j].page_path + '?major=main&&num=' + menuPageList[j].page_id + '">' + menuPageList[j].page_title + '</a>'
@@ -91,8 +92,10 @@
         for (var i = 1; i < majorAllInfo.length; i++) {
             text += '<ul class="submenu active" style="display: block;" >'
                 +'<li class="submenu-item">'
-                +'<a data-bs-toggle="collapse" href="#collapseExample'+i+'" role="button" aria-expanded="false" aria-controls="collapseExample" onclick="display('+i+')">'+majorAllInfo[i].major_name+'</a>'
-                +'<div class="collapse" id="collapseExample'+i+'" style="display: none;">';
+                // +'<a data-bs-toggle="collapse" href="#collapseExample'+i+'" role="button" aria-expanded="false" aria-controls="collapseExample" onclick="display('+i+')">'+majorAllInfo[i].major_name+'</a>'
+                +'<a data-bs-toggle="collapse" href="#collapseExample'+i+'" role="button" aria-expanded="false" aria-controls="collapseExample">'+majorAllInfo[i].major_name+'</a>'
+                // +'<div class="collapse" id="collapseExample'+i+'" style="display: none;">';
+                +'<div class="collapse" id="collapseExample'+i+'">';
             for(var j=tab5start; j<tab5end; j++){
                 var url = menuPageList[j].page_path+'?major='+majorAllInfo[i].major_id+'&&num='+menuPageList[j].page_id;
                 text += '<div class="ms-3"><a href="'+url+'">○ ' + menuPageList[j].page_title + '</a></div>';
@@ -104,15 +107,15 @@
 
         list.append(text);
     }
-    function display(i){
-        var id = "collapseExample"+i;
-        var value = document.getElementById(id);
-
-        if(window.getComputedStyle(value,null).getPropertyValue("display")==='none'){
-            value.style.display = 'block'
-        } else {
-            value.style.display = 'none';
-        }
-    }
+    // function display(i){
+        // var id = "collapseExample"+i;
+        // var value = document.getElementById(id);
+        //
+        // if(window.getComputedStyle(value,null).getPropertyValue("display")==='none'){
+        //     value.style.display = 'block'
+        // } else {
+        //     value.style.display = 'none';
+        // }
+    // }
 
 </script>
