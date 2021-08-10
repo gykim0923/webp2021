@@ -6,11 +6,13 @@ import kr.ac.kyonggi.swaig.handler.dao.settings.RegisterDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class RegisterAction extends CustomAction {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         super.execute(request, response);
+        HttpSession session = request.getSession();
         Gson gson = new Gson();
         /**
          * num은 페이지 고유번호로, 같은 모드/타입의 다른 게시판을 지원하게 해줌
@@ -64,6 +66,10 @@ public class RegisterAction extends CustomAction {
             request.setAttribute("regFiles", gson.toJson(RegisterDAO.getInstance().getRegFiles(id)));
         }
         if(mode.equals("view")){ //해당 신청하기에 신청한 사람을 보내준다.
+            if(session.getAttribute("user") == null){
+                request.setAttribute("error", "로그인을 하셔야 볼 수 있습니다.");
+                return "RequestDispatcher:jsp/main/error.jsp";
+            }
             String id = request.getParameter("id");
             request.setAttribute("AnswerWhoDone",gson.toJson(RegisterDAO.getInstance().getResult(id)));
         }

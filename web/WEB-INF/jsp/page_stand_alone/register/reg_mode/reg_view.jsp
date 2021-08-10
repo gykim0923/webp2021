@@ -21,7 +21,6 @@
     <div class="row" id="view_info"></div>
     <hr>
     <div id="post_box"></div>
-    <hr>
     <div id="view_content"></div>
     <hr>
     <div id="questions" class="card"></div>
@@ -56,6 +55,8 @@
     }
 
     $(document).ready(function(){
+        if(user == null)
+            return;
         check();
         makeViewTitle();
         makeViewInfo();
@@ -890,11 +891,10 @@
 
     function makeViewPost(){ //첨부파일 표시
         var postbox = $('#post_box');
-        var a = '';
-        if(getAllFile.length > 0)
-            a += '첨부파일: ';
+        var a = '<div>';
         if(getAllFile.length == 0)
             $('#post_box').remove();
+        a += '첨부파일: ';
         for(var i = 0 ; i < getAllFile.length ; i++){
             var it = getAllFile[i];
             if(user != null){
@@ -906,6 +906,7 @@
             else
                 a  += '<span>'+it.original_FileName + '&nbsp&nbsp</span>';
         }
+        a += '</div><hr>'
         postbox.append(a);
     }
 </script>
