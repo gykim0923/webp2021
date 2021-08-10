@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import kr.ac.kyonggi.swaig.common.sql.Config;
 import kr.ac.kyonggi.swaig.handler.dto.settings.*;
+import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
@@ -487,5 +488,21 @@ public class RegisterDAO {
             return "success";
         else
             return "fail";
+    }
+
+    public ArrayList<RegAnswerDTO> getAnswerList(String id) {
+        List<Map<String, Object>> listOfMaps = null;
+        Connection conn = Config.getInstance().sqlLogin();
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn,"SELECT * FROM bbs_reg_answer WHERE reg_id=? ORDER BY writer_id DESC;", new MapListHandler(), id);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(conn);
+        }
+        Gson gson = new Gson();
+        ArrayList<RegAnswerDTO> selected = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<RegAnswerDTO>>() {}.getType());
+        return selected;
     }
 }

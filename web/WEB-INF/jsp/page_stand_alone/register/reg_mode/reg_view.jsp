@@ -841,7 +841,7 @@
                 + '<a onclick="deleteReg()"><div class="btn btn-secondary">삭제</div></a>'
         }
         if((getReg.for_who == 1 && type.for_header == '교수') ||user.id == getReg.writer_id)
-            text += '<a onclick=""><div class="btn btn-secondary">엑셀</div></a>'
+            text += '<a href="regExcel.kgu?id='+getReg.id+'"><div class="btn btn-secondary">엑셀</div></a>'
         text+='<a href="'+listUrl+'"><div class="btn btn-secondary">목록</div></a>'
         list_button.append(text);
     }
