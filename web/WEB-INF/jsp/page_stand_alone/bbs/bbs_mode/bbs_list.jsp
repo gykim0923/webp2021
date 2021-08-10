@@ -109,8 +109,8 @@
 </script>
 
 <style>
-    .bootstrap-table  > fixed-table-body, .bootstrap-table  > fixed-table-border{
-        border: 0;
+    .fixed-table-border, .fixed-table-container{
+        border: 0 !important;
     }
     .boardtable > thead > tr > th, .boardtable > tbody > tr > td{
         overflow:hidden;
