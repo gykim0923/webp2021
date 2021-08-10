@@ -840,8 +840,11 @@
             text += '<a href="'+modifyUrl+'"><div class="btn btn-secondary">수정</div></a>'
                 + '<a onclick="deleteReg()"><div class="btn btn-secondary">삭제</div></a>'
         }
-        if((getReg.for_who == 1 && type.for_header == '교수') ||user.id == getReg.writer_id)
-            text += '<a href="regExcel.kgu?id='+getReg.id+'"><div class="btn btn-secondary">엑셀</div></a>'
+        if((getReg.for_who == 1 && type.for_header == '교수') ||user.id == getReg.writer_id) {
+            text += '<a href="regExcel.kgu?id=' + getReg.id + '"><div class="btn btn-secondary">엑셀</div></a>'
+                + '<a onclick="compressFile()"><div class="btn btn-secondary">압축파일</div></a>'
+            // href="regCompress.kgu?id=' + getReg.id + '"
+        }
         text+='<a href="'+listUrl+'"><div class="btn btn-secondary">목록</div></a>'
         list_button.append(text);
     }
@@ -867,20 +870,53 @@
                         req: "deleteReg", //이 메소드를 찾아서
                         data: data //이 데이터를 파라미터로 넘겨줍니다.
                     },
+                    dataType : "json",
                     success: function (data) { //성공 시
                         if (data == 'success') {
                             swal.fire({
                                 title: '해당 내용이 삭제되었습니다.',
                                 icon: 'success',
                                 showConfirmButton: true
-                            }).then(function () {
-                                location.href = 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list';
                             });
                         } else {
                             swal.fire({
                                 title: '권한이 부족합니다.',
                                 icon: 'error',
                                 showConfirmButton: true
+                            });
+                        }
+                    }
+                })
+            }
+        })
+    }
+
+    function compressFile(){
+        swal.fire({
+            title: '답변 파일들을 다운받으겠습니까?',
+            icon: 'warning',
+            showConfirmButton: true,
+            showCancelButton: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url : 'regCompress.kgu?id=' + getReg.id,
+                    type : 'post',
+                    success : function(data){
+                        if(data == "fail"){
+                            swal.fire({
+                                title: '파일 다운로드를 실패했습니다.',
+                                icon: 'error',
+                                showConfirmButton: true,
+                                showCancelButton: true
+                            });
+                        }
+                        else{
+                            swal.fire({
+                                title: '성공',
+                                icon: 'success',
+                                showConfirmButton: true,
+                                showCancelButton: true
                             });
                         }
                     }
