@@ -31,10 +31,13 @@ public class AdminDAO {
         String major_name = arr[1];
         String major_location = arr[2];
         String major_contact = arr[3];
+        String nullText = "수정을 해주세요";
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
             queryRunner.update(conn,"INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE(?,?,?,?);", major_id,major_name,major_location,major_contact);
+            queryRunner.update(conn,"INSERT INTO text(id,major,content) VALUE(?,?,?);", 50,major_id,nullText);
+            queryRunner.update(conn,"INSERT INTO curriculum(major,year,curriculum_img,edu_u VALUE(?,?,?);", 50,major_id,nullText);
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {
