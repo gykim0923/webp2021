@@ -89,7 +89,7 @@ public class FileDAO {
         Connection conn=Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn, "DELETE FROM uploadedfile WHERE newFileName=?;", newFileName);
+            queryRunner.update(conn, "DELETE FROM uploadedFile WHERE newFileName=?;", newFileName);
         }
         catch (SQLException se) {
             se.printStackTrace();
@@ -103,8 +103,8 @@ public class FileDAO {
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            listOfMaps = queryRunner.query(conn,"SELECT * FROM uploadedfile WHERE folder=? AND uploaded=? ORDER BY id DESC;", new MapListHandler(), folder, "false");
-            queryRunner.update(conn, "UPDATE uploadedfile SET `uploaded`=? WHERE `folder` = ? AND uploaded=?;", "true", folder, "false");
+            listOfMaps = queryRunner.query(conn,"SELECT * FROM uploadedFile WHERE folder=? AND uploaded=? ORDER BY id DESC;", new MapListHandler(), folder, "false");
+            queryRunner.update(conn, "UPDATE uploadedFile SET `uploaded`=? WHERE `folder` = ? AND uploaded=?;", "true", folder, "false");
 //            System.out.println(listOfMaps);
         } catch(SQLException se) {
             se.printStackTrace();
@@ -121,7 +121,7 @@ public class FileDAO {
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn, "DELETE FROM uploadedfile WHERE folder=? AND uploaded=?", data, "false");
+            queryRunner.update(conn, "DELETE FROM uploadedFile WHERE folder=? AND uploaded=?", data, "false");
         } catch (SQLException se) {
             se.printStackTrace();
             return "fail";
