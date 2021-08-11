@@ -32,12 +32,16 @@ public class AdminDAO {
         String major_location = arr[2];
         String major_contact = arr[3];
         String nullText = "수정을 해주세요";
+        int nullYear = 0;
+        String nullCurriImg = "비어있는 이미지";
+        String nullEduImg = "비어있는 이미지";
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
             queryRunner.update(conn,"INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE(?,?,?,?);", major_id,major_name,major_location,major_contact);
             queryRunner.update(conn,"INSERT INTO text(id,major,content) VALUE(?,?,?);", 50,major_id,nullText);
-            queryRunner.update(conn,"INSERT INTO curriculum(major,year,curriculum_img,edu_u VALUE(?,?,?);", 50,major_id,nullText);
+//            System.out.println(major_id);
+            queryRunner.update(conn,"INSERT INTO curriculum(major,year,curriculum_img,edu_img) VALUE(?,?,?,?);", major_id,nullYear,nullCurriImg,nullEduImg);
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {
