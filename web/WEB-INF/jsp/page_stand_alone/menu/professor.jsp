@@ -237,6 +237,8 @@
 
 
    function deleteProfessor(i) {
+      var professor3 = <%=getProfessorList%>;
+      var id = professor3[i].id;
       swal.fire({
          title: '정말로 삭제하시나요?',
          text: '다시 되돌릴 수 없습니다.',
@@ -251,7 +253,7 @@
                type: "post",
                data: {
                   req: "deleteProfessor",
-                  data: i
+                  data: id
                },
                success: function (data) {
                   swal.fire({
