@@ -103,7 +103,7 @@ CREATE TABLE user(
     PRIMARY KEY (`id`)
 );
 
-INSERT INTO user(google_id,id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state) VALUE('100350954658560464139','201713919', '6ab7108f5c8ab980a584f1e2b98b2991b087af4907864575e6905edf2b759ae8', '윤주현', '남', '1996-03-25', '학부생', 'gabrielyoon7@gmail.com','010-0000-0001','2021-07-05','-','2021-07-05','main','201713919','-','-');
+INSERT INTO user(google_id,id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state) VALUE('102261805363448965606','201713919', '6ab7108f5c8ab980a584f1e2b98b2991b087af4907864575e6905edf2b759ae8', '윤주현', '남', '1996-03-25', '학부생', 'gabrielyoon7@kyonggi.ac.kr','010-0000-0001','2021-07-05','-','2021-07-05','main','201713919','-','-');
 INSERT INTO user(id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state) VALUE('admin', '112b16f5f7b04cecda94c345900574686e5ed35803e2b7e9702fa4b46810a2d4', '관리자테스트', '-', '2021-01-01', '홈페이지관리자', 'admin@kyonggi.ac.kr','010-0000-0000','2021-07-05','-','2021-07-05','main','-','-','-');
 INSERT INTO user(id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state) VALUE('professor', '1f9d870484301db50342aa184bd9f3f891195090030ad56cbbc9d0f0b996a567', '교수테스트', '-', '2021-01-01', '교수', 'professor@kyonggi.ac.kr','010-0000-0000','2021-07-05','-','2021-07-05','main','-','-','-');
 INSERT INTO user(id,password,name,gender,birth,type,email,phone,last_login,hope_type,reg_date,major,per_id,grade,state) VALUE('202100000', '9f50515645763c0b8704f8114c81da0fddd2b4bdc9240de158e905884d8cb840', '학생테스트', '-', '2021-01-01', '학부생', 'student@test.com','010-0000-0001','2021-07-05','-','2021-07-05','main','201713919','-','-');
@@ -121,9 +121,9 @@ CREATE TABLE major(
 );
 
 INSERT INTO major(oid,major_id,major_name,major_location,major_contact) VALUE('1','main','K-WITH 융합교육원','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
-INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major1','문화재관리학융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
-INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major2','형사사법학융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
-INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major3','심리상담융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+-- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major1','문화재관리학융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+-- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major2','형사사법학융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+-- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major3','심리상담융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
 -- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major4','관광스포츠산업융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
 -- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major5','창업합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
 -- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major6','커뮤니티공공안전융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
@@ -217,8 +217,8 @@ CREATE TABLE professor(
     PRIMARY KEY (`id`)
 );
 
-INSERT INTO professor(id, prof_img,prof_name, prof_email,prof_lecture,prof_location,prof_call) VALUE(1,'img/professor/professor1.jpeg','권기현','khkwon@kyonggi.ac.kr','이산수학','8209호',' 031-249-9666');
-INSERT INTO professor(id, prof_img,prof_name, prof_email,prof_lecture,prof_location,prof_call) VALUE(2,'img/professor/professor1.jpeg','권기현','khkwon@kyonggi.ac.kr','이산수학','8209호',' 031-249-9666');
+-- INSERT INTO professor(id, prof_img,prof_name, prof_email,prof_lecture,prof_location,prof_call) VALUE(1,'img/professor/professor1.jpeg','권기현','khkwon@kyonggi.ac.kr','이산수학','8209호',' 031-249-9666');
+-- INSERT INTO professor(id, prof_img,prof_name, prof_email,prof_lecture,prof_location,prof_call) VALUE(2,'img/professor/professor1.jpeg','권기현','khkwon@kyonggi.ac.kr','이산수학','8209호',' 031-249-9666');
 
 CREATE TABLE curriculum(
     `major` VARCHAR(50) NOT NULL,
@@ -228,9 +228,9 @@ CREATE TABLE curriculum(
     PRIMARY KEY (`major`, `year`)
 );
 
-INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('main',2020,'/img/cs_logo.png','#');
-INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('main',2021,'#','/img/cs_logo.png');
-INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('major1',2021,'/img/cs_logo.png','#');
+-- INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('main',2020,'/img/cs_logo.png','#');
+-- INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('main',2021,'#','/img/cs_logo.png');
+-- INSERT INTO curriculum(major, year, curriculum_img, edu_img) VALUE('major1',2021,'/img/cs_logo.png','#');
 
 
 CREATE TABLE schedule(
@@ -239,7 +239,7 @@ CREATE TABLE schedule(
                            `content` VARCHAR(100) NOT NULL,
                            PRIMARY KEY (`id`)
 );
-INSERT INTO schedule(id, date, content) VALUE ('0', '2021-08-01', '프로젝트 마감');
+-- INSERT INTO schedule(id, date, content) VALUE ('0', '2021-08-01', '프로젝트 마감');
 
 CREATE TABLE uploadedFile(
                        `id` INT(10) NOT NULL AUTO_INCREMENT,
@@ -267,7 +267,7 @@ CREATE TABLE developer(
     `end_date` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`id`)
 );
-INSERT INTO developer(id, team_name, members, start_date, end_date) VALUE (1, '웹 6기', '17학번 윤주현---19학번 김가영 박선애 박소영 박의진', '2021-07-05', '2021-08-31');
+-- INSERT INTO developer(id, team_name, members, start_date, end_date) VALUE (1, '웹 6기', '17학번 윤주현---19학번 김가영 박선애 박소영 박의진', '2021-07-05', '2021-08-31');
 
 CREATE TABLE location(
     `id` INT(10) NOT NULL,
@@ -294,14 +294,14 @@ CREATE TABLE bbs(
     PRIMARY KEY(`id`)
 );
 
-INSERT INTO bbs(id, major, writer_id, writer_name, title, category, last_modified, text) VALUE('0', 'main','admin','관리자','제목1',21,'2021-01-01','<p>컨텐츠내용1</p>');
-INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목2',22,'2021-01-01','<p>컨텐츠내2용</p>');
-INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목3',23,'2021-01-01','<p>컨텐츠내용3</p>');
-INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목22332',21,'2021-01-01','<p>컨텐츠내2용4</p>');
-INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목2323232',21,'2021-01-01','<p>컨텐츠내2용5</p>');
-INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목23232',23,'2021-01-01','<p>컨텐츠내2용6</p>');
-INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목4552',21,'2021-01-01','<p>컨텐츠내2용7</p>');
-INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','44444',31,'2021-01-01','<p>컨텐츠내2용7</p>');
+-- INSERT INTO bbs(id, major, writer_id, writer_name, title, category, last_modified, text) VALUE('0', 'main','admin','관리자','제목1',21,'2021-01-01','<p>컨텐츠내용1</p>');
+-- INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목2',22,'2021-01-01','<p>컨텐츠내2용</p>');
+-- INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목3',23,'2021-01-01','<p>컨텐츠내용3</p>');
+-- INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목22332',21,'2021-01-01','<p>컨텐츠내2용4</p>');
+-- INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목2323232',21,'2021-01-01','<p>컨텐츠내2용5</p>');
+-- INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목23232',23,'2021-01-01','<p>컨텐츠내2용6</p>');
+-- INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','제목4552',21,'2021-01-01','<p>컨텐츠내2용7</p>');
+-- INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE('main','admin','관리자','44444',31,'2021-01-01','<p>컨텐츠내2용7</p>');
 
 
 CREATE TABLE comment(
@@ -314,7 +314,7 @@ CREATE TABLE comment(
   PRIMARY KEY (`id`)
 );
 
-INSERT INTO comment(id, writer_id,writer_name, comment,comment_date,bbs_id) VALUE ('1','admin','관리자','이것은 test 댓글 입니다.','2021-01-01','1');
+-- INSERT INTO comment(id, writer_id,writer_name, comment,comment_date,bbs_id) VALUE ('1','admin','관리자','이것은 test 댓글 입니다.','2021-01-01','1');
 
 CREATE TABLE kgu_major(
     `id` INT(10) NOT NULL AUTO_INCREMENT,
@@ -517,5 +517,5 @@ CREATE TABLE bbs_reg(
                         PRIMARY KEY(`id`)
 );
 
-INSERT INTO bbs_reg(id,writer_id,writer_name,title,last_modified,text,starting_date,closing_date,level,for_who) VALUE (1,'admin','관리자','test','2021-07-05','testtest','2021-07-05','2021-08-05','학생',0);
-INSERT INTO bbs_reg(writer_id,writer_name,title,last_modified,text,starting_date,closing_date,level,for_who) VALUE ('admin','관리자','test','2021-07-05','test123','2021-07-05','2021-07-15','학생',1);
+-- INSERT INTO bbs_reg(id,writer_id,writer_name,title,last_modified,text,starting_date,closing_date,level,for_who) VALUE (1,'admin','관리자','test','2021-07-05','testtest','2021-07-05','2021-08-05','학생',0);
+-- INSERT INTO bbs_reg(writer_id,writer_name,title,last_modified,text,starting_date,closing_date,level,for_who) VALUE ('admin','관리자','test','2021-07-05','test123','2021-07-05','2021-07-15','학생',1);
