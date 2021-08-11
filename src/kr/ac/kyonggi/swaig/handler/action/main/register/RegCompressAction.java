@@ -23,26 +23,31 @@ public class RegCompressAction implements Action {
         CompressZip compressZip = new CompressZip();
         try{
             if (!compressZip.compress(path, unZipPath, unZipFile)){
+                System.out.println("123");
                 return "fail";
             }
         } catch (Throwable e){
             e.printStackTrace();
         }
 
-        OutputStream out = null;
-        InputStream in = null;
-        String fileName = unZipFile+".zip";
+        String savePath = unZipPath;
+        // 서버에 실제 저장된 파일명
+        String filename = unZipFile+".zip";
+
         // 실제 내보낼 파일명
-        String orgfilename = unZipFile+"파일.zip";
+        String orgfilename = unZipFile+"답변.zip";
+
+        InputStream in = null;
+        OutputStream os = null;
+        File file = null;
         boolean skip = false;
         String client = "";
-        File zipFile = null;
 
         try{
             // 파일을 읽어 스트림에 담기
             try{
-                zipFile = new File(unZipPath, fileName);
-                in = new FileInputStream(zipFile);
+                file = new File(savePath, filename);
+                in = new FileInputStream(file);
             }catch(FileNotFoundException fe){
                 skip = true;
             }
@@ -50,9 +55,10 @@ public class RegCompressAction implements Action {
             client = request.getHeader("User-Agent");
 
             // 파일 다운로드 헤더 지정
-            response.reset();
+            response.reset() ;
             response.setContentType("application/octet-stream");
             response.setHeader("Content-Description", "JSP Generated Data");
+
             if(!skip){
                 // IE
                 if(client.indexOf("MSIE") != -1){
@@ -60,25 +66,36 @@ public class RegCompressAction implements Action {
                 }else{
                     // 한글 파일명 처리
                     orgfilename = new String(orgfilename.getBytes("utf-8"),"iso-8859-1");
+
                     response.setHeader("Content-Disposition", ("attachment; filename=\"" + orgfilename + "\""));
                     response.setHeader("Content-Type", "application/octet-stream;charset=utf-8");
                 }
 
-                response.setHeader ("Content-Length", ""+zipFile.length());
+                response.setHeader ("Content-Length", ""+file.length());
 
-                out = response.getOutputStream();
-                byte b[] = new byte[(int)zipFile.length()];
+                os = response.getOutputStream();
+                byte b[] = new byte[(int)file.length()];
                 int leng = 0;
+
                 while( (leng = in.read(b)) > 0 ){
-                    out.write(b,0,leng);
+                    os.write(b,0,leng);
                 }
+
             }
+
             in.close();
-            out.close();
+            os.close();
+
         }catch(Exception e){
             e.printStackTrace();
-            return "fail";
         }
-        return "success";
+        try {
+            File deleteFile = new File(savePath, filename);
+            deleteFile.delete();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
