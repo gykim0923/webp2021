@@ -235,7 +235,7 @@ public class AdminDAO {
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn,"DELETE FROM kgu_major WHERE major=?" ,data);
+            queryRunner.update(conn,"DELETE FROM kgu_major WHERE id=?" ,data);
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {

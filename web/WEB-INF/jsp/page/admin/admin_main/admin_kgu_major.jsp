@@ -45,7 +45,7 @@
                 campus: kgu_major.campus,
                 college: kgu_major.college,
                 major: kgu_major.major,
-                action : '<button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyKguMajorModal('+i+')">수정</button><br><button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick="deleteKguMajor('+i+')">삭제</button>'
+                action : '<button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyKguMajorModal('+i+')">수정</button><br><button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick="deleteKguMajor('+kgu_major.id+')">삭제</button>'
             });
         }
         // alert(rows);
@@ -165,16 +165,16 @@
         })
     }
 
-    function deleteKguMajor(i){
+    function deleteKguMajor(id){
         var check = confirm("정말 삭제하시겠습니까?");
-        var kgumajor = $('#major').val();
+        // var kgumajor = $('#major').val();
         if(check){
             $.ajax({
                 url : "ajax.kgu",
                 type : "post",
                 data : {
                     req : "delete_kgu_major",
-                    data : kgumajor
+                    data : id
                 },
                 success : function(data) {
                     if(data == 'fail'){
