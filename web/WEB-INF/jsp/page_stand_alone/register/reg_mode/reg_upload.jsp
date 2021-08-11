@@ -328,7 +328,7 @@
     function submitQ1(index){
         a='';
         var text = $('#InputQ1').val();
-        alert(text);
+        // alert(text);
         if(text.length == 0){
             swal.fire({
                 title : '질문을 만들어 주세요.',

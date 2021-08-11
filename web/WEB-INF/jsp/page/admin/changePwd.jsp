@@ -89,7 +89,7 @@
         }
         else{
             $('#warning').text("빈 칸을 입력해주세요.");
-            alert($('#password').value() + " " + $('#newPassword').value()+" "+$('#newPasswordCheck').value())
+            // alert($('#password').value() + " " + $('#newPassword').value()+" "+$('#newPasswordCheck').value())
             $('#warning').css("color", "red");
         }
     }

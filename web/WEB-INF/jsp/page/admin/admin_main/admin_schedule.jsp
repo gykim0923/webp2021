@@ -56,7 +56,7 @@
   function modifyScheduleModal(i){
     var getSchedule = <%=getSchedule%>;
     var schedule = getSchedule[i];
-    alert(schedule.date +" "+schedule.content);
+    // alert(schedule.date +" "+schedule.content);
 
     var h = '';
     h += '<h5 class="modal-title" id="staticBackdropLabel">수정하기</h5>';

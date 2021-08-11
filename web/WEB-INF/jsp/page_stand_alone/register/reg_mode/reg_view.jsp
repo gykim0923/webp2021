@@ -496,7 +496,7 @@
         }
 
         var data = board_number + "-/-/-" + Answer + "-/-/-" + questions.length;
-        alert(Answer);
+        // alert(Answer);
         $.ajax({
             url : 'ajax.kgu',
             type : 'post',
@@ -708,7 +708,7 @@
                 Answer += '-/#/-';
         }
         var data = board_number + "-/-/-" + Answer + "-/-/-" + questions.length;
-        alert(data);
+        // alert(data);
         $.ajax({
             url : 'ajax.kgu',
             type : 'post',
