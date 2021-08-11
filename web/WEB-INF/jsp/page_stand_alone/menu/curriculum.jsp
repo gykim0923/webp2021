@@ -55,11 +55,17 @@
             }
 
             var yearCount = curriculumList.length;
-            for(var i = 0; i<yearCount; i++){
-                yearButton.append('<button type="button" class="btn btn-outline-secondary me-2" onclick="viewImages('+i+')">'+curriculumList[i].year+'년 교육과정</button>');
+            if(yearCount==0){
+                yearButton.remove();
+                $('#curriculum_view').remove();
             }
+            else{
+                for(var i = 0; i<yearCount; i++){
+                    yearButton.append('<button type="button" class="btn btn-outline-secondary me-2" onclick="viewImages('+i+')">'+curriculumList[i].year+'년 교육과정</button>');
+                }
 
-            viewImages(yearCount-1);
+                viewImages(yearCount-1);
+            }
         }
         data.append(text);
     }

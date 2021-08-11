@@ -15,13 +15,11 @@
 <div>
   <div class="h2" id="view_title"></div>
   <hr>
-  <div class="container">
     <div class="row">
-      <div class=" col" id="view_writer"></div>
+      <div class="col" id="view_writer"></div>
       <div class="col-auto" id="view_count"><span>조회수:</span></div>
       <div class="col-auto" id="view_lastModified"><span>작성일:</span></div>
     </div>
-  </div>
   <hr>
   <div id="view_download"></div>
   <div id="view_content"></div>

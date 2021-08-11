@@ -219,8 +219,9 @@
                         title : '해당 내용이 수정되었습니다.',
                         icon : 'success',
                         showConfirmButton: true
+                    }).then(function (){
+                        window.location.href = 'bbs.kgu?major='+major+'&&num='+num+'&&mode=view&&id='+id;
                     });
-
                 }
                 else{
                     swal.fire({
@@ -230,7 +231,6 @@
 
                     });
                 }
-                window.location.href = 'bbs.kgu?major='+major+'&&num='+num+'&&mode=view&&id='+id;
             }
         })
     }

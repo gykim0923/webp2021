@@ -33,7 +33,7 @@
             <p class="lead text-center">오류로 인해 접속이 제한됩니다. </p>
             <p id="errorMessage" class="lead text-center">사유 : <%=error%></p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" onclick="window.open('main.kgu')">홈으로 돌아가기</button>
+                <button type="button" class="btn btn-primary btn-lg px-4 me-md-2" onclick="window.location.href='main.kgu'">홈으로 돌아가기</button>
 <%--                <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>--%>
             </div>
         </div>
