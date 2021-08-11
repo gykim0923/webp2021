@@ -152,59 +152,58 @@ INSERT INTO text(id, major, content) VALUE('10','main','<ul>
 
 ');
 INSERT INTO text(id, major, content) VALUE('50','main','50-main');
-
-INSERT INTO text(id, major, content) VALUE('50','major1','<p>▣ 문화재관리학융합전공(Management of Cultural Properties)</p>
-
-<p>- 참여학과: 건축학과, 문헌정보학과, 사학과, 미술경영전공</p>
-
-<p>- 이수학점: 42학점</p>
-<p>- 학위명: 문화재학사</p>
-<p>&nbsp;</p>
-
-<p>▣ 교육목표</p>
-
-<p>- 문화재에 대한 애정과 관심을 고취시키고 이론과 실제를 겸비한 인재양성 문화재관리를 위한 종합적이고 체계적인 지식과 실무능력을 갖춘 전문가 양성</p>
-<p>&nbsp;</p>
-<p>▣ 취업분야</p>
-<p>- 문화재 행정직 및 학예직 공무원 - 문화재 전시 및 문화교육 분야 전문가 - 문화재관리 및 문화경영 분야 단체 및 기업 담당자</p>
-
-
-');
-INSERT INTO text(id, major, content) VALUE('50','major2','<p>▣ 형사사법학융합전공(Criminal Justice)</p>
-
-<p>- 참여학과: 공공안전학부, 범죄교정전공, 경찰행정전공, 시큐리티매니지먼트학과</p>
-
-<p>- 이수학점: 42학점</p>
-<p>- 학위명: 법학사</p>
-<p>&nbsp;</p>
-
-<p>▣ 교육목표</p>
-
-<p>- 현대사회의 범죄 원인 분석과 대책마련에 필요한 기본지식 함양 - 실무지식 습득을 통한 범죄 위험에 효과적으로 대처할 수 있는 전문인력 양성</p>
-<p>&nbsp;</p>
-<p>▣ 취업분야</p>
-<p>- 문화재 행정직 및 학예직 공무원 - 문화재 전시 및 문화교육 분야 전문가 - 문화재관리 및 문화경영 분야 단체 및 기업 담당자</p>
-');
-INSERT INTO text(id, major, content) VALUE('50','major3','<p>▣ 형사사법학융합전공(Criminal Justice)</p>
-
-<p>- 참여학과: 공공안전학부, 범죄교정전공, 경찰행정전공, 시큐리티매니지먼트학과</p>
-
-<p>- 이수학점: 42학점</p>
-<p>- 학위명: 법학사</p>
-<p>&nbsp;</p>
-
-<p>▣ 교육목표</p>
-
-<p>- 현대사회의 범죄 원인 분석과 대책마련에 필요한 기본지식 함양 - 실무지식 습득을 통한 범죄 위험에 효과적으로 대처할 수 있는 전문인력 양성</p>
-<p>&nbsp;</p>
-<p>▣ 취업분야</p>
-<p>- 문화재 행정직 및 학예직 공무원 - 문화재 전시 및 문화교육 분야 전문가 - 문화재관리 및 문화경영 분야 단체 및 기업 담당자</p>
-');
-
-
-INSERT INTO text(id, major, content) VALUE('51','main','51-main');
-INSERT INTO text(id, major, content) VALUE('51','major1','51-major1');
-
+-- 
+-- INSERT INTO text(id, major, content) VALUE('50','major1','<p>▣ 문화재관리학융합전공(Management of Cultural Properties)</p>
+-- 
+-- <p>- 참여학과: 건축학과, 문헌정보학과, 사학과, 미술경영전공</p>
+-- 
+-- <p>- 이수학점: 42학점</p>
+-- <p>- 학위명: 문화재학사</p>
+-- <p>&nbsp;</p>
+-- 
+-- <p>▣ 교육목표</p>
+-- 
+-- <p>- 문화재에 대한 애정과 관심을 고취시키고 이론과 실제를 겸비한 인재양성 문화재관리를 위한 종합적이고 체계적인 지식과 실무능력을 갖춘 전문가 양성</p>
+-- <p>&nbsp;</p>
+-- <p>▣ 취업분야</p>
+-- <p>- 문화재 행정직 및 학예직 공무원 - 문화재 전시 및 문화교육 분야 전문가 - 문화재관리 및 문화경영 분야 단체 및 기업 담당자</p>
+-- 
+-- 
+-- ');
+-- INSERT INTO text(id, major, content) VALUE('50','major2','<p>▣ 형사사법학융합전공(Criminal Justice)</p>
+-- 
+-- <p>- 참여학과: 공공안전학부, 범죄교정전공, 경찰행정전공, 시큐리티매니지먼트학과</p>
+-- 
+-- <p>- 이수학점: 42학점</p>
+-- <p>- 학위명: 법학사</p>
+-- <p>&nbsp;</p>
+-- 
+-- <p>▣ 교육목표</p>
+-- 
+-- <p>- 현대사회의 범죄 원인 분석과 대책마련에 필요한 기본지식 함양 - 실무지식 습득을 통한 범죄 위험에 효과적으로 대처할 수 있는 전문인력 양성</p>
+-- <p>&nbsp;</p>
+-- <p>▣ 취업분야</p>
+-- <p>- 문화재 행정직 및 학예직 공무원 - 문화재 전시 및 문화교육 분야 전문가 - 문화재관리 및 문화경영 분야 단체 및 기업 담당자</p>
+-- ');
+-- INSERT INTO text(id, major, content) VALUE('50','major3','<p>▣ 형사사법학융합전공(Criminal Justice)</p>
+-- 
+-- <p>- 참여학과: 공공안전학부, 범죄교정전공, 경찰행정전공, 시큐리티매니지먼트학과</p>
+-- 
+-- <p>- 이수학점: 42학점</p>
+-- <p>- 학위명: 법학사</p>
+-- <p>&nbsp;</p>
+-- 
+-- <p>▣ 교육목표</p>
+-- 
+-- <p>- 현대사회의 범죄 원인 분석과 대책마련에 필요한 기본지식 함양 - 실무지식 습득을 통한 범죄 위험에 효과적으로 대처할 수 있는 전문인력 양성</p>
+-- <p>&nbsp;</p>
+-- <p>▣ 취업분야</p>
+-- <p>- 문화재 행정직 및 학예직 공무원 - 문화재 전시 및 문화교육 분야 전문가 - 문화재관리 및 문화경영 분야 단체 및 기업 담당자</p>
+-- ');
+-- 
+-- INSERT INTO text(id, major, content) VALUE('51','main','51-main');
+-- INSERT INTO text(id, major, content) VALUE('51','major1','51-major1');
+-- 
 CREATE TABLE professor(
     `id` int(50) NOT NULL AUTO_INCREMENT,
     `prof_img` VARCHAR (100) NOT NULL,
