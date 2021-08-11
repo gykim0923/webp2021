@@ -279,19 +279,37 @@
             $('<td></td>').text(value.name).appendTo(oneTr);
             $('<td></td>').text(value.per_id).appendTo(oneTr);
             $('<td></td>').text(value.grade).appendTo(oneTr);
-            for(var j = 0 ; j < questions.length ; ++j)
-                if(questions[j].question_type == 5){
-                    if(value['AnswerAnother' + j] != 'null')
-                        $('<td></td>').html('<a href="req_board_download.do?id=' + value['AnswerAnother' + j] + '"><img src="img/file_ico.png"></a>').appendTo(oneTr);
-                    else
+            for(var j = 0 ; j < questions.length; ++j) {
+                var url = '/uploaded/bbs_reg/reg' + getReg.id + '/Q' + questions[j].question_num;
+                if (questions[j].question_type == 5) {
+                    if (value['AnswerAnother' + j] != 'null') {
+                        var ans = value['AnswerAnother' + j];
+                        var filename = ans.split("_");
+                        var fileOriginalName = filename[2];
+                        for (var k = 3; k < filename.length; k++)
+                            fileOriginalName += '_' + filename[k];
+                        $('<td></td>').html('<a href="download.kgu?id=' + filename[0] + '&&path='+url+'">' + fileOriginalName + '</a>').appendTo(oneTr);
+                    } else
                         $('<td></td>').html('<span style="font-size : 14px; color : red">미제출<span>').appendTo(oneTr);
-                }
-                else{
-                    if(value['AnswerAnother' + j] != '')
+                } else if (questions[j].question_type == 3) {
+                    if (value['AnswerAnother' + j] != ''){
+                        var ans = value['AnswerAnother' + j];
+                        var selected = ans.split("-/@/-");
+                        var sel = selected[0];
+                        for (var k = 1; k < selected.length-1; k++)
+                            sel += ', ' + selected[k];
+                        alert(sel);
+                        $('<td></td>').text(sel).appendTo(oneTr);
+                    }
+                    else
+                        $('<td></td>').html('<span style="color : red; font-size : 14px;">미답변</span>').appendTo(oneTr);
+                } else {
+                    if (value['AnswerAnother' + j] != '')
                         $('<td></td>').text(value['AnswerAnother' + j]).appendTo(oneTr);
                     else
                         $('<td></td>').html('<span style="color : red; font-size : 14px;">미답변</span>').appendTo(oneTr);
                 }
+            }
         }
     }
 
