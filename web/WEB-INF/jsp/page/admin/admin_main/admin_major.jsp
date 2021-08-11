@@ -185,14 +185,14 @@
   function deleteMajor(i){
     var major = <%=getAllMajor%>;
     var check = confirm("정말 삭제하시겠습니까?");
-    var target_oid=major[i].oid;
+    var target_id=major[i].major_id;
     if(check){
       $.ajax({
         url : "ajax.kgu",
         type : "post",
         data : {
           req : "delete_major",
-          data : target_oid
+          data : target_id
         },
         success : function(data) {
           if(data == 'fail'){

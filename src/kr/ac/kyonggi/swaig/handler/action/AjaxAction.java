@@ -244,16 +244,19 @@ public class AjaxAction implements Action {
                 break;
             case "insertBbs":
                 if(type.board_level<3){
+                    String major1 = data.split("-/-/-")[0];
                     String bbs_id = BBSDAO.getInstance().insertBbs(data);
 //                    System.out.println(bbs_id);
-                    result = BBSDAO.getInstance().insertBbsFile(FileDAO.getInstance().getFiles("/uploaded/bbs"), bbs_id);
+                    result = BBSDAO.getInstance().insertBbsFile(FileDAO.getInstance().getFiles("/uploaded/bbs"), bbs_id, major1);
                 }
                 break;
             case "modifyBbs":
-                if(type.board_level < 3)
+                String major1 = data.split("-/-/-")[1];
+                if(type.board_level < 3){
                     result=BBSDAO.getInstance().modifyBbs(data);
+                }
                 if(result.equals("success")){
-                    result = BBSDAO.getInstance().insertBbsFile(FileDAO.getInstance().getFiles("/uploaded/bbs"), data.split("-/-/-")[0]);
+                    result = BBSDAO.getInstance().insertBbsFile(FileDAO.getInstance().getFiles("/uploaded/bbs"), data.split("-/-/-")[0],major1);
                 }
                 break;
             case "deleteBbsAlreadyFile":

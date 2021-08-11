@@ -433,6 +433,7 @@ INSERT INTO favorite_menu(name, url) VALUE ('경기대 입학처', 'http://enter
 
 CREATE TABLE bbs_file(
                          `id` INT NOT NULL ,
+                         `major` varchar(100) null,
                          `bbs_id` Int(10) not null,
                          `original_FileName` varchar(200) not null,
                          `real_FileName` varchar(200) not null,

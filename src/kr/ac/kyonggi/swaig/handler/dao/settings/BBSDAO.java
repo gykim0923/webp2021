@@ -451,13 +451,13 @@ public class BBSDAO {
         return null;
     }
 
-    public String insertBbsFile(ArrayList<UploadedFileDTO> files, String bbs_id) {
+    public String insertBbsFile(ArrayList<UploadedFileDTO> files, String bbs_id, String major1) {
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
             for(UploadedFileDTO ud : files){
-                queryRunner.update(conn, "INSERT INTO `bbs_file`(id, bbs_id, original_FileName, real_FileName) VALUE(?,?,?,?);",
-                        ud.id, bbs_id, ud.uploadFile, ud.newFileName);
+                queryRunner.update(conn, "INSERT INTO `bbs_file`(id, bbs_id, original_FileName, real_FileName, major) VALUE(?,?,?,?,?);",
+                        ud.id, bbs_id, ud.uploadFile, ud.newFileName, major1);
             }
         } catch (SQLException se) {
             se.printStackTrace();

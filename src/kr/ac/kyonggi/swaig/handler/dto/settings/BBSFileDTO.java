@@ -1,8 +1,16 @@
 package kr.ac.kyonggi.swaig.handler.dto.settings;
 
 public class BBSFileDTO {
-    public String original_FileName, real_FileName;
+    public String original_FileName, real_FileName , major;
     public int id, bbs_id;
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
 
     public String getOriginal_FileName() {
         return original_FileName;

@@ -231,7 +231,7 @@ public class AdminDAO {
         return "success";
     }
 
-    public String deleteKguMajor(String data) {
+    public String deleteKguMajor(String data) { // 전공 삭제 메소드
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
@@ -244,11 +244,15 @@ public class AdminDAO {
         return "success";
     }
 
-    public String deleteMajor(String data) {
+    public String deleteMajor(String data) { // 부전공 삭제 메소드
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn,"DELETE FROM major WHERE oid=?" ,data);
+            queryRunner.update(conn,"DELETE FROM major WHERE major_id=?" ,data);
+            queryRunner.update(conn,"DELETE FROM text WHERE major=?" ,data);
+            queryRunner.update(conn,"DELETE FROM curriculum WHERE major=?" ,data);
+            queryRunner.update(conn,"DELETE FROM bbs WHERE major=?" ,data);
+            queryRunner.update(conn,"DELETE FROM bbs_file WHERE major=?" ,data);
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {
