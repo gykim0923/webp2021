@@ -83,19 +83,22 @@ $(document).ready(function () {
 //        transition: 0.5s;
 })
 
-var isNavOpened = 0
-
+var isNavOpened = 0;
+var mainWidth = 0;
 function openNav() {
     if (isNavOpened == 0) {
         var screenWidth = "300px";
+        mainWidth=document.getElementById("main").offsetWidth
         if (window.innerWidth < 1200) {
             screenWidth = window.innerWidth + "px";
+            document.getElementById("main").style.display = "none";
         }
         document.getElementById("sidebar2").style.transition = "0.5s";
         document.getElementById("main").style.transition = "0.5s";
         document.getElementById("sidebar2").style.width = screenWidth;
         document.getElementById("main").style.marginLeft = screenWidth;
         isNavOpened = 1;
+        console.log(mainWidth);
     } else {
         closeNav();
     }
@@ -106,6 +109,9 @@ function closeNav() {
     document.getElementById("main").style.transition = "0.5s";
     document.getElementById("sidebar2").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
+    // if (window.innerWidth < 1200) {
+        document.getElementById("main").style.display = "block";
+    // }
     isNavOpened = 0;
 }
 
