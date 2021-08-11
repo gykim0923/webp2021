@@ -34,9 +34,9 @@
     <link rel="stylesheet" href="/assets/css/app.css">
     <link rel="stylesheet" href="/assets/css/pages/auth.css">
     <style>
-        .my-2 {
+        /*.my-2 {*/
 
-        }
+        /*}*/
     </style>
 </head>
 <body>

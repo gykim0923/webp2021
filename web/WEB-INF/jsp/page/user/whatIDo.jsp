@@ -7,8 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    String typeForMyPage = (String)session.getAttribute("type");
-    String userForMyPage = (String)session.getAttribute("user");
     String notice_notes = (String) request.getAttribute("notice_notes");
     String notice_comments = (String) request.getAttribute("notice_comments");
     String answers = (String) request.getAttribute("answers");

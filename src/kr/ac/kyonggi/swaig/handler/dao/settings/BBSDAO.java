@@ -148,7 +148,7 @@ public class BBSDAO {
         List<Map<String, Object>> listOfMaps = null;
         Connection conn = Config.getInstance().sqlLogin();
         try {
-            System.out.println(data);
+//            System.out.println(data);
             QueryRunner queryRunner = new QueryRunner();
             queryRunner.update(conn,"INSERT INTO bbs(major, writer_id, writer_name, title, category, last_modified, text) VALUE(?,?,?,?,?,?,?);", major,writer_id,writer_name, title, category, last_modified, text);
             listOfMaps = queryRunner.query(conn,

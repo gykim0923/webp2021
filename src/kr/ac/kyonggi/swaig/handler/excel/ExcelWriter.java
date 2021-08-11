@@ -16,9 +16,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 public class ExcelWriter {
-
-
-
    public String xlsWriter(ArrayList<UserDTO> arraylist, String path) throws IOException, NoSuchAlgorithmException {
        //DB조회후 데이터를 담았다는 가상의 데이터
        ArrayList<ArrayList<String>> array=new ArrayList<>();

@@ -245,7 +245,7 @@ public class AjaxAction implements Action {
             case "insertBbs":
                 if(type.board_level<3){
                     String bbs_id = BBSDAO.getInstance().insertBbs(data);
-                    System.out.println(bbs_id);
+//                    System.out.println(bbs_id);
                     result = BBSDAO.getInstance().insertBbsFile(FileDAO.getInstance().getFiles("/uploaded/bbs"), bbs_id);
                 }
                 break;
@@ -411,7 +411,7 @@ public class AjaxAction implements Action {
                 result = RegisterDAO.getInstance().modifyAnswer(data);
                 break;
             case "modifyAnswerFile"://이미 "modifyAnswer"에서 권한 검사함
-                System.out.println("13");
+//                System.out.println("13");
                 result = RegisterDAO.getInstance().modifyAnswerFile(data);
                 break;
             case "deleteWhoAnswer":
