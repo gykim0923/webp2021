@@ -272,13 +272,14 @@
 
    function insertProfessor() { //교수님 정보 추가
       var prof_img = file_path;
+      var major = <%=major%>;
       var name1 = $('#add_pro_name').val();
       var location2= $('#add_pro_location').val();
       var call2= $('#add_pro_call').val();
       var email2= $('#add_pro_email').val();
       var lecture2= $('#add_pro_lecture').val();
       var color2 = $('#add_pro_color').val();
-      var data2 =prof_img+'-/-/-'+name1+'-/-/-'+location2+'-/-/-'+call2+'-/-/-'+email2+'-/-/-'+lecture2+'-/-/-'+color2;
+      var data2 =prof_img+'-/-/-'+name1+'-/-/-'+location2+'-/-/-'+call2+'-/-/-'+email2+'-/-/-'+lecture2+'-/-/-'+color2+'-/-/-'+major;
 
 
          $.ajax({

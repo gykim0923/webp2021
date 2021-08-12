@@ -3,6 +3,16 @@ package kr.ac.kyonggi.swaig.handler.dto.settings;
 public class ProfessorDTO {
     public int id;
 
+    public String prof_major;
+
+    public String getProf_major() {
+        return prof_major;
+    }
+
+    public void setProf_major(String prof_major) {
+        this.prof_major = prof_major;
+    }
+
     public int getId() {
         return id;
     }

@@ -95,16 +95,16 @@ public class ProfessorDAO {
 
    public String insertProfessor(String data) {
       Connection conn = Config.getInstance().sqlLogin();
-      String arr[]=data.split("-/-/-");//0=img 1=name 2=location  3=call 4=email 5:lecture 6: color
+      String arr[]=data.split("-/-/-");//0=img 1=name 2=location  3=call 4=email 5:lecture 6: color 7: major
 
       List<Map<String, Object>> listOfMaps = null;
       try {
          QueryRunner queryRunner = new QueryRunner();
          if(arr[0]!=null) {
-            queryRunner.update(conn, "INSERT INTO professor(prof_img,prof_name,prof_location,prof_call,prof_email,prof_lecture,prof_color) VALUES(?,?,?,?,?,?,?);", arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6]);
+            queryRunner.update(conn, "INSERT INTO professor(prof_img,prof_name,prof_location,prof_call,prof_email,prof_lecture,prof_color,prof_major) VALUES(?,?,?,?,?,?,?,?);", arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6], arr[7]);
          }
          else {
-            queryRunner.update(conn, "INSERT INTO professor(prof_img,prof_name,prof_location,prof_call,prof_email,prof_lecture,prof_color) VALUES('#',?,?,?,?,?,?);", arr[1], arr[2], arr[3], arr[4], arr[5], arr[6]);
+            queryRunner.update(conn, "INSERT INTO professor(prof_img,prof_name,prof_location,prof_call,prof_email,prof_lecture,prof_color,prof_major) VALUES('#',?,?,?,?,?,?,?);", arr[1], arr[2], arr[3], arr[4], arr[5], arr[6], arr[7]);
          }
          //listOfMaps=queryRunner.query(conn,"SELECT * FROM professor WHERE prof_name=? and prof_call=?",new MapListHandler(),arr[0],arr[2]);
       } catch(SQLException se) {
