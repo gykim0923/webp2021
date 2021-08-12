@@ -2,6 +2,7 @@ package kr.ac.kyonggi.swaig.handler.dao.user;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import kr.ac.kyonggi.swaig.common.controller.LoginManager;
 import kr.ac.kyonggi.swaig.common.sql.Config;
 import kr.ac.kyonggi.swaig.handler.dao.settings.LogDAO;
 import kr.ac.kyonggi.swaig.handler.dto.settings.MajorDTO;
@@ -315,6 +316,10 @@ public class UserDAO {
             QueryRunner queryRunner = new QueryRunner();
             queryRunner.query(conn, "DELETE FROM `user` WHERE id=? AND name=?", new MapListHandler(), id, name);
 //            System.out.println(id+" "+name);
+            LoginManager manager = LoginManager.getInstance();
+            if (manager.isUsing(id)) { //접속중이라면
+                manager.removeSession(id); //접속중인 세션 제거
+            }
         } catch (SQLException se) {
             se.printStackTrace();
         } finally {

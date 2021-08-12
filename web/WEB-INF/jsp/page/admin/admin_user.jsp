@@ -33,7 +33,7 @@
                 </thead>
             </table>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="button" class="btn btn-secondary" onclick="modifyType()" data-bs-toggle="modal" data-bs-target="#modifyTypeModal">권한 수정</button>
+                <button type="button" class="btn btn-primary" onclick="modifyType()" data-bs-toggle="modal" data-bs-target="#modifyTypeModal">권한 수정</button>
             </div>
         </div>
     </div>
@@ -69,29 +69,24 @@
         for(var i=0;i<makeUserAll.length;i++){
             var user=makeUserAll[i];
             if(user.type!="홈페이지관리자"){
-                var user_id = user.id;
-                var user_name = user.name;
-                var user_type = user.type;
                 var user_email = user.email;
-                var user_birth = user.birth;
-                var user_phone = user.phone;
-                var user_hope_type = user.hope_type;
-                if (user_type == "-"){
-                    user_type = '<strong class="bg-danger text-white">미승인</strong>'
+                var action = '<button class="btn btn-danger" type="button" onclick="deleteUser('+i+')">삭제</button>'
+                if (user.type == "-"){
+                    action += '<div class="btn btn-warning"><i class="bi bi-exclamation-circle-fill"></i> 미승인</div>'
                 }
-                if(user_email.split('@')[1]=='kyonggi.ac.kr' || user_email.split('@')[1]=='kgu.ac.kr'){
-                    user_email='<mark class="text-primary"><i class="bi bi-google"></i> 구글인증계정</mark><br>'+user_email;
+                if(user.email.split('@')[1]=='kyonggi.ac.kr' || user.email.split('@')[1]=='kgu.ac.kr'){
+                    user_email='<div class="btn btn-success"><i class="bi bi-google"></i> Google Verified</div>'+user_email
                 }
                 if(user.email)
                 rows.push({
-                    id: user_id,
-                    name: user_name,
-                    birth: user_birth,
+                    id: user.id,
+                    name: user.name,
+                    birth: user.birth,
                     email: user_email,
-                    phone: user_phone,
-                    type: user_type,
-                    hope_type: user_hope_type,
-                    action : '<button class="btn btn-danger" type="button" onclick="deleteUser('+i+')">삭제</button>'
+                    phone: user.phone,
+                    type: user.type,
+                    hope_type: user.hope_type,
+                    action : action
                 });
             }
         }
