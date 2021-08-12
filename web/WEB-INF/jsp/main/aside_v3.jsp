@@ -6,31 +6,24 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<div id="sidebar" class="sidebar">--%>
-<%--    <a href="javascript:void(0)" class="closebtn2" onclick="closeNav()">×</a>--%>
-<%--</div>--%>
 <div id="sidebar2" class="sidebar">
     <div class="sidebar-wrapper">
         <div class="sidebar-header">
             <div class="d-flex justify-content-between">
                 <div class="logo">
                     <a href="main.kgu">
-                        <%--<img src="/img/logo/kgu_logo(500x300).png" alt="Logo" srcset="" style="height: auto">--%>
-                            <i class="bi bi-house-fill"></i> HOME
+                        <i class="bi bi-house-fill"></i> HOME
                     </a>
                 </div>
                 <div class="toggler">
-                    <a href="javascript:void(0)" class="closebtn2 d-block" onclick="closeNav()"><i class="bi bi-x bi-middle"></i></a>
+                    <a href="javascript:void(0)" class="closebtn2 d-block" onclick="closeNav()"><i
+                            class="bi bi-x bi-middle"></i></a>
                 </div>
             </div>
         </div>
-
-
         <div class="sidebar-menu">
             <ul class="menu" id="asideMenu"></ul>
         </div>
-
-
         <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
     </div>
 </div>
@@ -40,7 +33,6 @@
     $(document).ready(function () {
         makeAsideMenu(); //Aside Menu 제작
     })
-
     function makeAsideMenu() {
         var menuTabList = <%=menuTabList%>;
         var menuPageList = <%=menuPageList%>;
@@ -48,17 +40,17 @@
         var major =<%=major%>;
         var list = $('#asideMenu');
 
-        var tab5start=0;
-        for(var a=0 ; a<menuPageList.length; a++){
-            if(menuPageList[a].tab_id == 5){
-                tab5start=a;
+        var tab5start = 0;
+        for (var a = 0; a < menuPageList.length; a++) {
+            if (menuPageList[a].tab_id == 5) {
+                tab5start = a;
                 break;
             }
         }
-        var tab5end=0;
-        for(var a=0 ; a<menuPageList.length; a++){
-            if(menuPageList[a].tab_id == 6){
-                tab5end=a;
+        var tab5end = 0;
+        for (var a = 0; a < menuPageList.length; a++) {
+            if (menuPageList[a].tab_id == 6) {
+                tab5end = a;
                 break;
             }
         }
@@ -69,7 +61,7 @@
         for (var i = 0; i < 3; i++) {
             text += '<li class="sidebar-item has-sub">'
                 + '<a href="#" class="sidebar-link">'
-                + '<div class="py-2"><i class="bi bi-'+menuTabList[i].tab_img+'"></i></div>'
+                + '<div class="py-2"><i class="bi bi-' + menuTabList[i].tab_img + '"></i></div>'
                 + '<div class="py-2"><span>' + menuTabList[i].tab_title + '</span></div>'
                 + '</a>';
             for (var j = 0; j < menuPageList.length; j++) {
@@ -94,31 +86,31 @@
             + '</a>';
         for (var i = 1; i < majorAllInfo.length; i++) {
             text += '<ul class="submenu active" style="display: block;" >'
-                +'<li class="submenu-item">'
+                + '<li class="submenu-item">'
                 // +'<a data-bs-toggle="collapse" href="#collapseExample'+i+'" role="button" aria-expanded="false" aria-controls="collapseExample" onclick="display('+i+')">'+majorAllInfo[i].major_name+'</a>'
-                +'<a data-bs-toggle="collapse" href="#collapseExample'+i+'" role="button" aria-expanded="false" aria-controls="collapseExample">'+majorAllInfo[i].major_name+'</a>'
+                + '<a data-bs-toggle="collapse" href="#collapseExample' + i + '" role="button" aria-expanded="false" aria-controls="collapseExample">' + majorAllInfo[i].major_name + '</a>'
                 // +'<div class="collapse" id="collapseExample'+i+'" style="display: none;">';
-                +'<div class="collapse" id="collapseExample'+i+'">';
-            for(var j=tab5start; j<tab5end; j++){
-                var url = menuPageList[j].page_path+'?major='+majorAllInfo[i].major_id+'&&num='+menuPageList[j].page_id;
-                text += '<div class="ms-3"><a href="'+url+'">○ ' + menuPageList[j].page_title + '</a></div>';
+                + '<div class="collapse" id="collapseExample' + i + '">';
+            for (var j = tab5start; j < tab5end; j++) {
+                var url = menuPageList[j].page_path + '?major=' + majorAllInfo[i].major_id + '&&num=' + menuPageList[j].page_id;
+                text += '<div class="ms-3"><a href="' + url + '">○ ' + menuPageList[j].page_title + '</a></div>';
             }
-            text+='</div>'
+            text += '</div>'
                 + '</li></ul>';
         }
         text += '</li>';
 
         list.append(text);
     }
-    // function display(i){
-        // var id = "collapseExample"+i;
-        // var value = document.getElementById(id);
-        //
-        // if(window.getComputedStyle(value,null).getPropertyValue("display")==='none'){
-        //     value.style.display = 'block'
-        // } else {
-        //     value.style.display = 'none';
-        // }
-    // }
 
 </script>
+
+<style>
+    .sidebar {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+    .sidebar::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera*/
+    }
+</style>
