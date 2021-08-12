@@ -89,25 +89,26 @@
 
 <div id="questionYouMade"></div>
 
-<div id="write_post" class="d-grid gap-2 d-md-flex justify-content-md-end">
+<div id="write_post" class="mt-3 d-grid gap-2 d-flex justify-content-between">
+    <button type="button" class="btn btn-outline-danger" onclick="back()">뒤로</button>
     <c:choose>
         <c:when test="${jsp == '\"reg_write\"'}">
-            <button type="button" class="btn btn-outline-secondary" onclick="insertReg()">추가</button>
+            <button type="button" class="btn btn-outline-success" onclick="insertReg()">추가</button>
             <script>
                 var list = $('#formButtons');
                 var text = '';
-                text += '<div class="my-2">'
                 text += '<div class="alert alert-warning d-flex align-items-center" role="alert"><i class="bi bi-exclamation-triangle-fill warning"></i><div>&nbsp;글을 저장하신 후에는 신청 폼을 수정할 수 없습니다. 신중하게 작성해주시기 바랍니다. 또한 질문과 답변에 \'-/-/-\'과 \'-/@/-\'은 포함시키지 말아주세요.</div> </div>'
-                text += '<button class="btn btn-secondary mx-1" id="q1" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ1Modal()">주관식</button>'
-                text += '<button class="btn btn-secondary mx-1" id="q2" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ2Modal()">단일객관식</button>'
-                text += '<button class="btn btn-secondary mx-1" id="q3" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ3Modal()">다중객관식</button>'
-                text += '<button class="btn btn-secondary mx-1" id="q4" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ4Modal()">척도형</button>'
-                text += '<button class="btn btn-secondary mx-1" id="q5" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ5Modal()">파일업로드형</button> </div>'
+                text += '<div class="btn-group" role="group" aria-label="Basic outlined example">'
+                text += '<button class="btn btn-outline-success" id="q1" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ1Modal()">주관식</button>'
+                text += '<button class="btn btn-outline-success" id="q2" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ2Modal()">단일객관식</button>'
+                text += '<button class="btn btn-outline-success" id="q3" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ3Modal()">다중객관식</button>'
+                text += '<button class="btn btn-outline-success" id="q4" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ4Modal()">척도형</button>'
+                text += '<button class="btn btn-outline-success" id="q5" type="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeQ5Modal()">파일업로드형</button> </div>'
                 list.html(text);
             </script>
         </c:when>
         <c:when test="${jsp == '\"reg_modify\"'}">
-            <button type="button" class="btn btn-outline-secondary" onclick="modifyReg()">수정</button>
+            <button type="button" class="btn btn-outline-primary" onclick="modifyReg()">수정</button>
             <script>
                 function formatDate(date) { //날짜를 yyyy-mm-dd 형식으로 반환
                     var d = new Date(date),
@@ -204,7 +205,6 @@
             </script>
         </c:when>
     </c:choose>
-    <button type="button" class="btn btn-outline-secondary" onclick="back()">뒤로</button>
 </div>
 
 <script>

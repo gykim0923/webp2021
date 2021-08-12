@@ -26,7 +26,7 @@
     <div id="questions" class="card"></div>
     <ul class="list-group" id="anotherDone"></ul>
 </div>
-<div class="mt-3 d-grid gap-2 d-md-flex justify-content-md-end" id="list_button"></div>
+<div class="mt-3 d-grid gap-2 d-flex justify-content-between" id="list_button"></div>
 
 <script>
     var major = <%=major%>;
@@ -850,17 +850,16 @@
          * 교수 : 본인이 작성한 글 수정 및 삭제 + 보기 권한이 있는 글 엑셀 다운
          * */
         var text = '';
-        if(user.id == getReg.writer_id || type.board_level == 0){
-            text += '<a href="'+modifyUrl+'"><div class="btn btn-secondary">수정</div></a>'
-                + '<a onclick="deleteReg()"><div class="btn btn-secondary">삭제</div></a>'
-        }
+        text+='<div><a href="'+listUrl+'" class="btn btn-secondary">목록</a></div><div>'
         if((getReg.for_who == 1 && type.for_header == '교수') ||user.id == getReg.writer_id) {
-            text += '<a href="regExcel.kgu?id=' + getReg.id + '"><div class="btn btn-secondary">엑셀</div></a>'
-                + '<a href="regCompress.kgu?id=' + getReg.id+'"><div class="btn btn-secondary">압축파일</div></a>'
-            // href="regCompress.kgu?id=' + getReg.id + '"
+            text += '<a href="regExcel.kgu?id=' + getReg.id + '"><div class="btn btn-outline-success mx-1">엑셀파일</div></a>'
+                + '<a href="regCompress.kgu?id=' + getReg.id+'"><div class="btn btn-outline-warning mx-1">압축폴더</div></a>'
         }
-        text+='<a href="'+listUrl+'"><div class="btn btn-secondary">목록</div></a>'
-        list_button.append(text);
+        if(user.id == getReg.writer_id || type.board_level == 0){
+            text += '<a href="'+modifyUrl+'"><div class="btn btn-primary mx-1">수정</div></a>'
+                + '<a onclick="deleteReg()"><div class="btn btn-danger mx-1">삭제</div></a>'
+        }
+        list_button.append(text+"</div>");
     }
 
     function deleteReg() {

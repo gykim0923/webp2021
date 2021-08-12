@@ -27,7 +27,7 @@
         </thead>
     </table>
 </div>
-<div id="write_button"></div>
+<div id="write_button" class="text-end"></div>
 
 <script>
     $(document).ready(function(){
@@ -46,7 +46,7 @@
     function makeWriteButton(){
         var button = $('#write_button')
         if (type.for_header == '관리자' || type.for_header == '교수'){
-            var text = '<a href = "reg.kgu?major=' + major + '&&num=' + num + '&&mode=write"><div class="btn btn-secondary">글쓰기</div></a>';
+            var text = '<a href = "reg.kgu?major=' + major + '&&num=' + num + '&&mode=write" class="btn btn-success mt-3">글쓰기</a>';
             button.append(text);
         }
     }

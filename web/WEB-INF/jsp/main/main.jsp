@@ -293,16 +293,18 @@
                     break;
                 }
                 var url30 = '';
+                url30 = 'reg.kgu?major=main&num=30&mode=view&id=' + registerAllInfo[i].id;
                 if (type.for_header=='기타'){
-                    url30 = '';
+                    text30 += '<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+                        + '<span class="index_post_link">' + registerAllInfo[i].title + '</span>'
+                        + '<span class="index_post_time" disabled="true">' + formatDate(registerAllInfo[i].last_modified) + '</span>'
+                        + '</li>';
                 }
                 else {
-                    url30 = 'reg.kgu?major=main&num=30&mode=view&id=' + registerAllInfo[i].id;
-                }
-                text30 += '<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
-                    + '<a href="' + url30 + '"><span class="index_post_link">' + registerAllInfo[i].title + '</span></a>'
-                    + '<a href="' + url30 + '"><span class="index_post_time">' + formatDate(registerAllInfo[i].last_modified) + '</span></a>'
-                    + '</li>';
+                    text30 += '<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+                        + '<a href="' + url30 + '"><span class="index_post_link">' + registerAllInfo[i].title + '</span></a>'
+                        + '<a href="' + url30 + '"><span class="index_post_time">' + formatDate(registerAllInfo[i].last_modified) + '</span></a>'
+                        + '</li>';                }
             }
             text30 += '</ul>';
         }
