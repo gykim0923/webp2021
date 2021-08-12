@@ -136,10 +136,10 @@
       a += '<div>담당과목 </div><input type="text" class="form-control" id="modify_pro_lecture" name="pro_lecture1" value="' + (professor1[i].prof_lecture) + '" placeholder="담당과목">'
       a += '<div>배경색상 </div><input type="color" class="form-control" id="modify_pro_color" name="pro_color1"  value="' + (professor1[i].prof_color) + '" placeholder="#777777">'
       a+='<div>교수님 사진</div>'
-      a+='<div id="fileUploadSection">'
-      a+='<input type="file" name="uploadFile" id="uploadFile" accept="image/*">'
-      a+='<button class="btn btn-secondary" onclick="uploadfile()"><i class="bi bi-upload"></i> 업로드</button>'
-      a+='</div>'
+      a+='<div id="fileUploadSection"><div class="input-group">'
+      a+='<input type="file" class="form-control" name="uploadFile" id="uploadFile" accept="image/*">'
+      a+='<button class="btn btn-secondary" class="input-group-text" onclick="uploadfile()"><i class="bi bi-upload"></i> 업로드</button>'
+      a+='</div></div>'
       a+='<mark>(다른 파일들과 동일한 비율의 사진을 넣어야 예쁘게 출력됩니다.)</mark>'
        a += '<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="modifyProModal('+i+')">완료</button>';
 
@@ -149,7 +149,8 @@
    var file_path; //파일이 업로드된 상대경로
    function uploadfile(){
       var formData = new FormData();
-      var folder='/img/professor';//업로드 된 파일 folder 경로 설정은 여기에서 해줍니다. (마지막에 /가 오면 절대 안됩니다.)
+      var folder='/uploaded/professor';//업로드 된 파일 folder 경로 설정은 여기에서 해줍니다. (마지막에 /가 오면 절대 안됩니다.)
+      alert($('input[name=uploadFile]')[0].files[0])
       if($('input[name=uploadFile]')[0].files[0]!=null){
          formData.append("file_data",$('input[name=uploadFile]')[0].files[0]);
          formData.append("file_type", "image"); //전송하려는 파일 타입 설정 (제한이 없으려면 null로 한다.)
@@ -172,15 +173,14 @@
                   });
                }
                else {
-
                   var fileLog=data.split("-/-/-");
                   file_id=fileLog[0];
                   file_folder=folder;
                   file_path=folder+'/'+fileLog[1];
                   var a='';
-                  a+='<div>파일제출</div><div>'+fileLog[1]+'</div>';
-                  a+='<div><a href="download.kgu?id='+file_id+'&&path='+file_folder+'"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드</button></a>'
-                  a+='<button class="btn btn-danger" onclick="makeUploadSliderModal()"><i class="bi bi-x-circle-fill"></i> 첨부파일 수정하기</button></div>';
+                  a+='<div class="input-group"><span class="input-group-text">파일제출</span><input type="text" class="form-control" value="'+fileLog[1]+'" readonly></div>';
+                  a+='<div class="input-group"><a href="download.kgu?id='+file_id+'&&path='+file_folder+'"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드</button></a>'
+                  a+='<button class="btn btn-danger" onclick="modifyProfessorFile()"><i class="bi bi-x-circle-fill"></i> 첨부파일 수정하기</button></div>';
                   $('#fileUploadSection').html(a);
                }
             }
@@ -281,7 +281,6 @@
       var data2 =prof_img+'-/-/-'+name1+'-/-/-'+location2+'-/-/-'+call2+'-/-/-'+email2+'-/-/-'+lecture2+'-/-/-'+color2;
 
 
-
          $.ajax({
             url : "ajax.kgu",
             type : "post",
@@ -311,9 +310,17 @@
             }
 
          })
-      }
+   }
 
-
+   function modifyProfessorFile(){
+      $.ajax({
+         url: 'delete.kgu?fileId=' + file_id + '&&folder=' + file_folder,
+         type: 'post',
+         success: function (data) {//데이터는 주소
+            $('#fileUploadSection').html('<div class="input-group"><input type="file" class="form-control" name="uploadFile" id="uploadFile" accept="image/*"><button class="btn btn-secondary" class="input-group-text" onclick="uploadfile()"><i class="bi bi-upload"></i> 업로드</button></div>');
+         }
+      })
+   }
 </script>
 
 <div>
@@ -362,10 +369,12 @@
 
                <div>교수님 사진</div>
                <div id="fileUploadSection">
-                  <input type="file" name="uploadFile" id="uploadFile" accept="image/*">
-                  <button class="btn btn-secondary" onclick="uploadfile()"><i class="bi bi-upload"></i> 업로드</button>
+                  <div class="input-group">
+                     <input type="file" class="form-control" name="uploadFile" id="uploadFile" accept="image/*">
+                     <button class="btn btn-secondary" class="input-group-text" onclick="uploadfile()"><i class="bi bi-upload"></i> 업로드</button>
+                  </div>
+                  <mark>(다른 파일들과 동일한 비율의 사진을 넣어야 예쁘게 출력됩니다.)</mark>
                </div>
-               <mark>(다른 파일들과 동일한 비율의 사진을 넣어야 예쁘게 출력됩니다.)</mark>
                <div class="modal-footer">
                   <button type="button" class="btn btn-danger" data-bs-dismiss="modal">취소</button>
                   <button type="button" class="btn btn-success" aria-label="Close" onclick="insertProfessor()">추가</button>
