@@ -184,25 +184,43 @@
 
   function deleteMajor(i){
     var major = <%=getAllMajor%>;
-    var check = confirm("정말 삭제하시겠습니까?");
-    var target_id=major[i].major_id;
-    if(check){
-      $.ajax({
-        url : "ajax.kgu",
-        type : "post",
-        data : {
-          req : "delete_major",
-          data : target_id
-        },
-        success : function(data) {
-          if(data == 'fail'){
-            alert('fail');
-            return;
-          }
-          alert("삭제가 완료되었습니다");
-          location.reload();
-        }
+
+    if(major[i].major_id == 'main') {
+      swal.fire({
+        title: '권한이 부족합니다.',
+        icon: 'warning',
+        showConfirmButton: true
       });
+    } else{
+      var target_id=major[i].major_id;
+      swal.fire({
+        title: "정말 삭제하시겠습니까?",
+        icon: 'warning',
+        showConfirmButton: true,
+        showCancelButton: true
+      }).then(function(){
+          $.ajax({
+            url : "ajax.kgu",
+            type : "post",
+            data : {
+              req : "delete_major",
+              data : target_id
+            },
+            success : function(data) {
+              if(data == 'fail'){
+                alert('fail');
+                return;
+              }
+              swal.fire({
+                title : '삭제가 완료되었습니다.',
+                icon : 'success',
+                showConfirmButton: true
+              }).then(function () {
+                location.reload();
+              });
+            }
+          });
+      })
     }
   }
 </script>
