@@ -78,30 +78,30 @@
     function makeWriteButton(){
         var button =$('#write_button');
         var bbsnum;
-        for(var i=0; i<10; i++){
+        for(var i=1; i<10; i++){
             var bbsnum2 = "2"+i
             if(num==bbsnum || num==bbsnum2){
                 if (type.board_level == 0 || type.board_level == 1) {
-                    var text = '<a href = "bbs.kgu?major=' + major + '&&num=' + num + '&&mode=write"><div class="btn btn-success">글쓰기</div></a>';
+                    var text = '<a href = "bbs.kgu?major=' + major + '&&num=' + num + '&&mode=write" class="btn btn-success mt-3">글쓰기</a>';
                     button.append(text);
                 }
             }
         }
 
-        if(num == "30" || num=="31") {
+        if(num=="31") {
             if (type.board_level == 0 || type.board_level == 1) {
-                var text = '<a href = "bbs.kgu?major=' + major + '&&num=' + num + '&&mode=write"><div class="btn btn-success">글쓰기</div></a>';
+                var text = '<a href = "bbs.kgu?major=' + major + '&&num=' + num + '&&mode=write" class="btn btn-success mt-3">글쓰기</a>';
                 button.append(text);
             }
         }
         else if(num=="53"){
             if(type.board_level < 3){
-                var text = '<a href = "bbs.kgu?major=' + major + '&&num=' + num + '&&mode=write"><div class="btn btn-success">글쓰기</div></a>';
+                var text = '<a href = "bbs.kgu?major=' + major + '&&num=' + num + '&&mode=write" class="btn btn-success mt-3">글쓰기</a>';
                 button.append(text);
             }
         } else if(num=="50" || num=="51" || num=="52"|| num=="54"|| num=="55"|| num=="56"|| num=="57"|| num=="58"|| num=="59"){
             if (type.board_level == 0 || type.board_level == 1) {
-                var text = '<a href = "bbs.kgu?major=' + major + '&&num=' + num + '&&mode=write"><div class="btn btn-success">글쓰기</div></a>';
+                var text = '<a href = "bbs.kgu?major=' + major + '&&num=' + num + '&&mode=write" class="btn btn-success mt-3">글쓰기</a>';
                 button.append(text);
             }
         }
