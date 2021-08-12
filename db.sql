@@ -50,8 +50,9 @@ INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title) VALUE('31',
 
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title) VALUE('50', '5', '0', 'information.kgu', '전공소개');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title) VALUE('51', '5', '1', 'curriculum.kgu', '교육과정');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title) VALUE('52', '5', '2', 'bbs.kgu', '전공게시판');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title) VALUE('53', '5', '3', 'bbs.kgu', '자유게시판');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title) VALUE('52', '5', '2', 'professor.kgu', '교수진');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title) VALUE('53', '5', '3', 'bbs.kgu', '전공게시판');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title) VALUE('54', '5', '4', 'bbs.kgu', '자유게시판');
 
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title) VALUE('60', '6', '0', 'mypage.kgu', '마이페이지');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title) VALUE('61', '6', '1', 'whatIDoPage.kgu', '활동내역');

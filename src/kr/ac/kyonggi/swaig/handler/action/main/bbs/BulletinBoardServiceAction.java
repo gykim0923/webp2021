@@ -39,14 +39,11 @@ public class BulletinBoardServiceAction extends CustomAction {
         * ------------------------------------------------
         * */
         String bbs_type = ""; // (notice/free) 중 하나
-        if (num.equals("20")||num.equals("21")||num.equals("22")||num.equals("23")||num.equals("31")||num.equals("52")){
-            bbs_type="notice";
-        }
-        else if (num.equals("53")){
+        if (num.equals("54")){
             bbs_type="free";
         }
-        else { //num이 없는 경우 오류 메시지 출력용
-            bbs_type="error";
+        else { //자유게시판이 아닌 경우 공지 게시판으로 통일시킴
+            bbs_type="notice";
         }
         request.setAttribute("bbs_type", gson.toJson(bbs_type));
 
@@ -64,7 +61,7 @@ public class BulletinBoardServiceAction extends CustomAction {
                 String [] numbers = {"21","22","23"}; //여기에 들어있는 num들의 DB를 모두 불러와서 반환한다.
                 request.setAttribute("getBBSList", gson.toJson(BBSDAO.getInstance().getAllBBSList(numbers)));
             }
-            else if(num.equals("52")||num.equals("53")){ //전공에 따른 게시판 분리가 필요한 경우
+            else if(num.equals("53")||num.equals("54")){ //전공에 따른 게시판 분리가 필요한 경우
                 String major = request.getParameter("major");
                 request.setAttribute("getBBSList", gson.toJson(BBSDAO.getInstance().getMajorBBSList(major, num)));
             }
@@ -79,7 +76,6 @@ public class BulletinBoardServiceAction extends CustomAction {
              * 게시글 확인 시 조회수 작업을 해줘야 하는데, 조회수는 세션당 1회 증가하도록 검사한다.
              * */
             String whatISeen= (String)request.getSession().getAttribute("whatISeen");
-//      String arr[] = whatISeen.split("-/-/-");
 
             String check = id +"-/-/-";
             if(whatISeen == null) {
@@ -103,6 +99,7 @@ public class BulletinBoardServiceAction extends CustomAction {
             request.setAttribute("bbsFiles", gson.toJson(BBSDAO.getInstance().getBbsFiles(id)));
         }
 
+        //mode에 따라서 출력하는 jsp를 달리해줌
         String bbs_mode = "bbs_"+mode;
         request.setAttribute("jsp", gson.toJson(bbs_mode)); //bbs_*.jsp
 
