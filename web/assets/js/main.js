@@ -45,11 +45,27 @@ window.addEventListener('DOMContentLoaded', (event) => {
 });
 window.addEventListener('resize', (event) => {
     var w = window.innerWidth;
-    if(w < 1200) {
-        closeNav();
-    }else{
-        openNav();
+    if(isTouch==0){
+        if(w < 1200) {
+            closeNav();
+        }else{
+            openNav();
+        }
     }
+});
+
+var isTouch=0;
+window.addEventListener('touchstart', (event) => {
+    isTouch=1;
+    // console.log('touchstart'+isTouch);
+});
+window.addEventListener('touchmove', (event) => {
+    isTouch=1;
+    // console.log('touchmove'+isTouch);
+});
+window.addEventListener('touchend', (event) => {
+    isTouch=0;
+    // console.log('touchend'+isTouch);
 });
 
 // document.querySelector('.burger-btn').addEventListener('click', () => {
@@ -98,7 +114,7 @@ function openNav() {
         document.getElementById("sidebar2").style.width = screenWidth;
         document.getElementById("main").style.marginLeft = screenWidth;
         isNavOpened = 1;
-        console.log(mainWidth);
+        // console.log(mainWidth);
     } else {
         closeNav();
     }
