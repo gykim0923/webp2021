@@ -225,9 +225,14 @@
             id +=ids[i]+"-/-/-"
         }
         var modify= type+"-/-/-"+id;
+        var typeName;
+        if(type == '학부생')
+            typeName = type + "으로";
+        else
+            typeName = type + "로"
 
             swal.fire({
-                title: '사용자 권한을 '+type+'으로 수정하시겠습니까?',
+                title: '사용자 권한을 '+typeName+' 수정하시겠습니까?',
                 icon: 'warning',
                 showConfirmButton: true,
                 showCancelButton: true
