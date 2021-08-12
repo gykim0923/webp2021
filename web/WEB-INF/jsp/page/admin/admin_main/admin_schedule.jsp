@@ -16,9 +16,9 @@
          data-page-list="[10]">
     <thead>
     <tr>
-      <th data-field="action">설정</th>
-      <th data-field="date" data-sortable="true">date</th>
-      <th data-field="content" data-sortable="true">content</th>
+      <th class="col-2" data-field="action">설정</th>
+      <th class="col-4" data-field="date" data-sortable="true">일정날짜</th>
+      <th class="col-6" data-field="content" data-sortable="true">일정내용</th>
     </tr>
     </thead>
   </table>
