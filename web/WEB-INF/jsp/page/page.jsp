@@ -150,7 +150,7 @@
                 continue;
             }
             text+='<a href="' + pageMenu[i].page_path + '?major=' + major + '&&num=' + pageMenu[i].page_id + '" class="list-group-item list-group-item-action">'
-                +'<div class="d-flex w-100 ">'
+                +'<div class="d-flex w-100 py-2">'
                 +'<h5 class="mb-1">● ' + pageMenu[i].page_title + '</h5>'
                 +'</div></a>';
             // text += '<div><span class="deco_dot">●</span><a href="' + pageMenu[i].page_path + '?major=' + major + '&&num=' + pageMenu[i].page_id + '">' + pageMenu[i].page_title + '</div>';

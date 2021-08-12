@@ -11,9 +11,11 @@ import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
 import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
 import kr.ac.kyonggi.swaig.handler.dto.settings.LogDTO;
 import kr.ac.kyonggi.swaig.handler.dto.settings.MemoryDTO;
+import kr.ac.kyonggi.swaig.handler.dto.user.UserTypeDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +28,9 @@ public class AdminAction extends CustomAction {
         super.execute(request,response);
         Gson gson = new Gson();
         String num= request.getParameter("num");
-        if(num!=null){
+        HttpSession session = request.getSession();
+        UserTypeDTO type = gson.fromJson((String)session.getAttribute("type"), UserTypeDTO.class);
+        if(num!=null && type.board_level==0){
             if(num.equals("70")){
                 request.setAttribute("jsp", gson.toJson("admin_main")); //admin_main.jsp
                 request.setAttribute("getAllMajor", gson.toJson(HomeDAO.getInstance().getAllMajor()));
@@ -70,9 +74,11 @@ public class AdminAction extends CustomAction {
                 return "RequestDispatcher:jsp/page/page.jsp";
             }
             else {
+                request.setAttribute("error", "올바른 요청이 아닙니다.");
                 return "RequestDispatcher:jsp/main/error.jsp";
             }
         }
+        request.setAttribute("error", "권한이 없습니다.");
         return "RequestDispatcher:jsp/main/error.jsp";
     }
 

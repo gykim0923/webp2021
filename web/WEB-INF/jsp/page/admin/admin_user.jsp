@@ -16,19 +16,19 @@
         <div class="container">
             <table class="boardtable" id="table1"  data-toggle="table"
                    data-pagination="true" data-toolbar="#toolbar"
-                   data-search="true" data-side-pagination="true" data-click-to-select="true" data-height="460"
-                   data-page-list="[10]">
+                   data-search="true" data-side-pagination="true" data-click-to-select="true" data-height="960"
+                   data-page-list="[10,20,30,50,100,200]">
                 <thead>
                 <tr>
                     <th data-field="state" data-checkbox="true"></th>
                     <th data-field="action">설정</th>
-                    <th data-field="id" data-sortable="true">id</th>
-                    <th data-field="name" data-sortable="true">name</th>
-                    <th data-field="birth" data-sortable="true">birth</th>
-                    <th data-field="email" data-sortable="true">email</th>
-                    <th data-field="phone" data-sortable="true">phone</th>
-                    <th data-field="type" data-sortable="true">type</th>
-                    <th data-field="hope_type" data-sortable="true">hope_type</th>
+                    <th data-field="id" data-sortable="true">아이디</th>
+                    <th data-field="name" data-sortable="true">이름</th>
+                    <th data-field="birth" data-sortable="true">생년월일</th>
+                    <th data-field="email" data-sortable="true">이메일</th>
+                    <th data-field="phone" data-sortable="true">전화번호</th>
+                    <th data-field="type" data-sortable="true">구분</th>
+                    <th data-field="hope_type" data-sortable="true">희망구분</th>
                 </tr>
                 </thead>
             </table>
@@ -61,26 +61,40 @@
         // $('#table1').bootstrapTable('append',data());
         $('#table1').bootstrapTable('refresh');
     }
+
     function tableData(){
         var makeUserAll = <%=getAllUser%>;
         var rows = [];
 
         for(var i=0;i<makeUserAll.length;i++){
             var user=makeUserAll[i];
-            if(user.id!="admin"){
+            if(user.type!="홈페이지관리자"){
+                var user_id = user.id;
+                var user_name = user.name;
+                var user_type = user.type;
+                var user_email = user.email;
+                var user_birth = user.birth;
+                var user_phone = user.phone;
+                var user_hope_type = user.hope_type;
+                if (user_type == "-"){
+                    user_type = '<strong class="bg-danger text-white">미승인</strong>'
+                }
+                if(user_email.split('@')[1]=='kyonggi.ac.kr' || user_email.split('@')[1]=='kgu.ac.kr'){
+                    user_email='<mark class="text-primary"><i class="bi bi-google"></i> 구글인증계정</mark><br>'+user_email;
+                }
+                if(user.email)
                 rows.push({
-                    id: user.id,
-                    name: user.name,
-                    birth: user.birth,
-                    email: user.email,
-                    phone: user.phone,
-                    type: user.type,
-                    hope_type: user.hope_type,
+                    id: user_id,
+                    name: user_name,
+                    birth: user_birth,
+                    email: user_email,
+                    phone: user_phone,
+                    type: user_type,
+                    hope_type: user_hope_type,
                     action : '<button class="btn btn-danger" type="button" onclick="deleteUser('+i+')">삭제</button>'
                 });
             }
         }
-        // alert(rows);
         return rows;
     }
 
