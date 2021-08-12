@@ -150,7 +150,7 @@
    function uploadfile(){
       var formData = new FormData();
       var folder='/uploaded/professor';//업로드 된 파일 folder 경로 설정은 여기에서 해줍니다. (마지막에 /가 오면 절대 안됩니다.)
-      alert($('input[name=uploadFile]')[0].files[0])
+      // alert($('input[name=uploadFile]')[0].files[0])
       if($('input[name=uploadFile]')[0].files[0]!=null){
          formData.append("file_data",$('input[name=uploadFile]')[0].files[0]);
          formData.append("file_type", "image"); //전송하려는 파일 타입 설정 (제한이 없으려면 null로 한다.)

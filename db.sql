@@ -20,8 +20,8 @@ CREATE TABLE menu_tabs(
     `tab_url` VARCHAR(50) NOT NULL,
     `orderNum` INT(10) NOT NULL, PRIMARY KEY(`tab_id`)
 );
-INSERT INTO menu_tabs(tab_id, tab_title, tab_level, tab_img, tab_url, orderNum) VALUES('1', 'K-WITH 소개', '4', 'info-circle-fill', 'information.kgu', '1');
-INSERT INTO menu_tabs(tab_id, tab_title, tab_level, tab_img, tab_url, orderNum) VALUES('2', 'K-WITH 알림', '4', 'bootstrap-fill', 'bbs.kgu', '2');
+INSERT INTO menu_tabs(tab_id, tab_title, tab_level, tab_img, tab_url, orderNum) VALUES('1', 'SWAIG 소개', '4', 'info-circle-fill', 'information.kgu', '1');
+INSERT INTO menu_tabs(tab_id, tab_title, tab_level, tab_img, tab_url, orderNum) VALUES('2', 'SWAIG 알림', '4', 'bootstrap-fill', 'bbs.kgu', '2');
 INSERT INTO menu_tabs(tab_id, tab_title, tab_level, tab_img, tab_url, orderNum) VALUES('3', '신청하기', '4', 'check-circle-fill', 'bbs.kgu', '3');
 INSERT INTO menu_tabs(tab_id, tab_title, tab_level, tab_img, tab_url, orderNum) VALUES('4', '전공보기', '4', 'pencil-fill', '#', '4');
 INSERT INTO menu_tabs(tab_id, tab_title, tab_level, tab_img, tab_url, orderNum) VALUES('5', '세부전공', '4', 'bookmark-star-fill', 'information.kgu', '5');
@@ -36,12 +36,11 @@ CREATE TABLE menu_pages(
 	  PRIMARY KEY(`page_id`)
 );
 
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title) VALUE('10', '1', '0', 'information.kgu', '학부소개');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title) VALUE('11', '1', '1', 'professor.kgu', '교수진');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title) VALUE('12', '1', '2', 'contact.kgu', '위치 및 연락처');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title) VALUE('10', '1', '0', 'information.kgu', 'SWAIG소개');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title) VALUE('11', '1', '1', 'contact.kgu', '위치 및 연락처');
 
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title) VALUE('20', '2', '0', 'bbs.kgu', '전체공지');
-INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title) VALUE('21', '2', '1', 'bbs.kgu', 'K-WITH 공지');
+INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title) VALUE('21', '2', '1', 'bbs.kgu', 'SWAIG 공지');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title) VALUE('22', '2', '2', 'bbs.kgu', '수업공지');
 INSERT INTO menu_pages(page_id,tab_id,orderNum,page_path,page_title) VALUE('23', '2', '3', 'bbs.kgu', '취업공지');
 
@@ -120,7 +119,7 @@ CREATE TABLE major(
      PRIMARY KEY (`oid`)
 );
 
-INSERT INTO major(oid,major_id,major_name,major_location,major_contact) VALUE('1','main','K-WITH 융합교육원','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
+INSERT INTO major(oid,major_id,major_name,major_location,major_contact) VALUE('1','main','융합교육원 SWAIG','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
 INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major1','문화재관리학융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
 INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major2','형사사법학융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');
 -- INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE('major3','심리상담융합전공','수원캠퍼스 예지관(4강의동) 4002호', '031-249-9288');

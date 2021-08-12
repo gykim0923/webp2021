@@ -15,7 +15,7 @@ public class ProfessorAction extends CustomAction  {
 		String major=request.getParameter("major");
 		String num=request.getParameter("num");
 
-	    request.setAttribute("getProfessorlist", gson.toJson(ProfessorDAO.getInstance().getProfessor()));
+	    request.setAttribute("getProfessorlist", gson.toJson(ProfessorDAO.getInstance().getProfessor(major)));
 
 		request.setAttribute("jsp", gson.toJson("professor")); //information.jsp
 		return "RequestDispatcher:jsp/page_stand_alone/page_stand_alone.jsp";

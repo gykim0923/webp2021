@@ -246,6 +246,9 @@ public class AdminDAO {
 
     public String deleteMajor(String data) { // 부전공 삭제 메소드
         Connection conn = Config.getInstance().sqlLogin();
+        if(data.equals("main")){ //메인 전공 삭제 못하게 2중 검사
+            return "fail";
+        }
         try {
             QueryRunner queryRunner = new QueryRunner();
             queryRunner.update(conn,"DELETE FROM major WHERE major_id=?" ,data);
@@ -253,6 +256,8 @@ public class AdminDAO {
             queryRunner.update(conn,"DELETE FROM curriculum WHERE major=?" ,data);
             queryRunner.update(conn,"DELETE FROM bbs WHERE major=?" ,data);
             queryRunner.update(conn,"DELETE FROM bbs_file WHERE major=?" ,data);
+            queryRunner.update(conn,"DELETE FROM professor WHERE prof_major=?" ,data);
+
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {

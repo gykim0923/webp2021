@@ -23,12 +23,12 @@ public class ProfessorDAO {
 		return it;
 	}
 	
-   public ArrayList<ProfessorDTO> getProfessor() {
+   public ArrayList<ProfessorDTO> getProfessor(String major) {
       List<Map<String, Object>> listOfMaps = null;
       Connection conn = Config.getInstance().sqlLogin();
       try {
          QueryRunner queryRunner = new QueryRunner();
-         listOfMaps = queryRunner.query(conn,"SELECT * FROM professor;", new MapListHandler());
+         listOfMaps = queryRunner.query(conn,"SELECT * FROM professor WHERE prof_major=?;", new MapListHandler(), major);
       } catch(SQLException se) {
          se.printStackTrace();
       } finally {
@@ -43,21 +43,21 @@ public class ProfessorDAO {
       }
       return selected;
    }
-   public ProfessorDTO getOneProfessor(String data) {
-      List<Map<String, Object>> listOfMaps = null;
-      Connection conn = Config.getInstance().sqlLogin();
-      try {
-         QueryRunner queryRunner = new QueryRunner();
-         listOfMaps = queryRunner.query(conn,"SELECT * FROM professor WHERE id=?", new MapListHandler(), Integer.parseInt(data));
-      } catch(SQLException se) {
-         se.printStackTrace();
-      } finally {
-         DbUtils.closeQuietly(conn);
-      }
-      Gson gson = new Gson();
-      ArrayList<ProfessorDTO> results = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<ProfessorDTO>>() {}.getType());
-      return results.get(0);
-   }
+//   public ProfessorDTO getOneProfessor(String data) {
+//      List<Map<String, Object>> listOfMaps = null;
+//      Connection conn = Config.getInstance().sqlLogin();
+//      try {
+//         QueryRunner queryRunner = new QueryRunner();
+//         listOfMaps = queryRunner.query(conn,"SELECT * FROM professor WHERE id=?", new MapListHandler(), Integer.parseInt(data));
+//      } catch(SQLException se) {
+//         se.printStackTrace();
+//      } finally {
+//         DbUtils.closeQuietly(conn);
+//      }
+//      Gson gson = new Gson();
+//      ArrayList<ProfessorDTO> results = gson.fromJson(gson.toJson(listOfMaps), new TypeToken<List<ProfessorDTO>>() {}.getType());
+//      return results.get(0);
+//   }
    public String modifyProfessor(String data) {
       String arr[]=data.split("-/-/-");//0=img 1=name 2=location  3=call 4=email 5:lecture 6:id 7:color
       Connection conn = Config.getInstance().sqlLogin();
