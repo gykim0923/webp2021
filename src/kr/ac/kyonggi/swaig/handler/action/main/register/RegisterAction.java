@@ -19,7 +19,6 @@ public class RegisterAction extends CustomAction {
          * */
         String num = request.getParameter("num"); //페이지 고유번호
         request.setAttribute("num",num); //다시 JSP로 보내줌 (재활용을 위해)
-//        System.out.println(num);
 
         /**
          * bbs_type은 일반게시판, 신청게시판, 웹진게시판 인지 타입을 나타내는 것임.
@@ -64,12 +63,12 @@ public class RegisterAction extends CustomAction {
             request.setAttribute("id", id); //다시 JSP로 보내줌 (재활용을 위해), 게시글 아이디
             request.setAttribute("getReg", gson.toJson(RegisterDAO.getInstance().getReg(id)));
             request.setAttribute("regFiles", gson.toJson(RegisterDAO.getInstance().getRegFiles(id)));
-        }
-        if(mode.equals("view")){ //해당 신청하기에 신청한 사람을 보내준다.
             if(session.getAttribute("user") == null){
                 request.setAttribute("error", "로그인을 하셔야 볼 수 있습니다.");
                 return "RequestDispatcher:jsp/main/error.jsp";
             }
+        }
+        if(mode.equals("view")){ //해당 신청하기에 신청한 사람을 보내준다.
             String id = request.getParameter("id");
             request.setAttribute("AnswerWhoDone",gson.toJson(RegisterDAO.getInstance().getResult(id)));
         }

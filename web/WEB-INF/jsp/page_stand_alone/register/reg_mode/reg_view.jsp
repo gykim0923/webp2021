@@ -298,7 +298,6 @@
                         var sel = selected[0];
                         for (var k = 1; k < selected.length-1; k++)
                             sel += ', ' + selected[k];
-                        alert(sel);
                         $('<td></td>').text(sel).appendTo(oneTr);
                     }
                     else
@@ -514,7 +513,6 @@
         }
 
         var data = board_number + "-/-/-" + Answer + "-/-/-" + questions.length;
-        // alert(Answer);
         $.ajax({
             url : 'ajax.kgu',
             type : 'post',
@@ -726,7 +724,6 @@
                 Answer += '-/#/-';
         }
         var data = board_number + "-/-/-" + Answer + "-/-/-" + questions.length;
-        // alert(data);
         $.ajax({
             url : 'ajax.kgu',
             type : 'post',
@@ -736,7 +733,6 @@
             },
             success : function(data){
                 if(data == 'success'){
-                    alert(modifyAnswerFile)
                     $.ajax({
                         url : 'ajax.kgu',
                         type : 'post',
@@ -745,7 +741,6 @@
                             data: modifyAnswerFile
                         },
                         success : function(data){//데이터는 주소
-                            alert(data);
                             if(data == 'success'){
                                 swal.fire({
                                     title : '신청 성공',
