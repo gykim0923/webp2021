@@ -45,7 +45,7 @@
                 campus: kgu_major.campus,
                 college: kgu_major.college,
                 major: kgu_major.major,
-                action : '<button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyKguMajorModal('+i+')">수정</button><br><button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick="deleteKguMajor('+kgu_major.id+')">삭제</button>'
+                action : '<button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyKguMajorModal('+i+')">수정</button><br><button type="button" class="btn btn-danger"data-bs-dismiss="modal" onclick="deleteKguMajor('+kgu_major.id+')">삭제</button>'
             });
         }
         // alert(rows);
@@ -65,7 +65,7 @@
             +'<div>학과</div><input type="text" class="form-control" id="major" name="new_table" value="'+(major[i].major)+'" placeholder="major">';
 
         var modal_footer = '';
-        modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+        modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';
         modal_footer += '<button type="button" class="btn btn-secondary pull-right" data-dismiss="modal" aria-label="Close" onclick="modifyKguMajor('+major[i].id+')">완료</button>';
 
         header.html(modal_header);
@@ -121,7 +121,7 @@
             + '<div>학과</div><input type="text" class="form-control" id="add_major" name="new_table" value="" placeholder="학과이름을 입력해주세요">';
 
         var modal_footer = '';
-        modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+        modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>';
         modal_footer += '<button type="button" class="btn btn-btn-success" onclick="addKguMajor()">추가</button>';
 
         header.html(modal_header);
