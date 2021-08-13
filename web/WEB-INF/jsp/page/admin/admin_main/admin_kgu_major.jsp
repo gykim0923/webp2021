@@ -23,7 +23,7 @@
         </thead>
     </table>
 </div>
-<div>
+<div class="py-2 d-flex justify-content-end">
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeAddKguMajorModal()">본전공 추가</button>
 </div>

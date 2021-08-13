@@ -12,6 +12,7 @@
     String getAllKGUMajor = (String)request.getAttribute("getAllKGUMajor");
 %>
 <div>
+    <div class="text-danger text-end">이 페이지는 가로 길이 800px 이상의 화면에서 최적화 되어있습니다.</div>
     <div class="album">
         <div class="container">
 <%--           부전공 관리--%>
@@ -34,15 +35,9 @@
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header" id="myModalHeader">
-<%--                    <h5 class="modal-title" id="staticBackdropLabel">수정하기</h5>--%>
-<%--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
-                </div>
+                <div class="modal-header" id="myModalHeader"></div>
                 <div class="modal-body" id = "myModalBody"></div>
-                <div class="modal-footer" id="myModalFooter">
-<%--                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>--%>
-<%--                        <button type="button" class="btn btn-primary">추가하기</button>--%>
-                </div>
+                <div class="modal-footer" id="myModalFooter"></div>
             </div>
         </div>
     </div>

@@ -22,9 +22,9 @@
     </tr>
     </thead>
   </table>
-  <div class="d-grid gap-2 d-md-flex justify-content-md-end"> <div class="col-md-10"></div>
+  <div class="py-2 d-grid gap-2 d-md-flex justify-content-between">
+    <button type="button" class="btn btn-danger" onclick="updateSch()">지난일정 일괄삭제</button>
     <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-success" onclick="insertSch()">추가</button>
-    <button type="button" class="btn btn-secondary" onclick="updateSch()">갱신</button>
   </div>
 </div>
 
@@ -46,8 +46,8 @@
         id: schedule.id,
         date: formatDate(schedule.date),
         content: schedule.content,
-        action : '<button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="modifyScheduleModal('+i+')">수정</button> ' +
-                '<button class="btn btn-dark" type="button" onclick="deleteSchedule('+i+')">삭제</button>'
+        action : '<button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="modifyScheduleModal('+i+')">수정</button> ' +
+                '<button class="btn btn-danger" type="button" onclick="deleteSchedule('+i+')">삭제</button>'
       });
     }
     return rows;
@@ -67,8 +67,8 @@
     b += '<br><div><input class="form-control" id="newSchContent" name="newSchContent" value="'+schedule.content+'"></div>';
 
     var f = '';
-    f += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>';
-    f += '<button type="button" class="btn btn-secondary" onclick="modifySchedule('+i+')">완료</button>';
+    f += '<button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">취소</button>';
+    f += '<button type="button" class="btn btn-primary" onclick="modifySchedule('+i+')">완료</button>';
 
     header.html(h);
     body.html(b);
@@ -127,7 +127,7 @@
 
     var f = '';
     f += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>';
-    f += '<button type="button" class="btn btn-secondary" onclick="addSchedule()">완료</button>';
+    f += '<button type="button" class="btn btn-success" onclick="addSchedule()">완료</button>';
 
     header.html(h);
     body.html(b);

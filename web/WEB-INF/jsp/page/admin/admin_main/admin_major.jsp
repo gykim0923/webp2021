@@ -9,7 +9,7 @@
 <style>
 </style>
 <div class="">
-  <label><h2><strong>부전공 관리</strong></h2></label>
+  <label><h2><strong>부전공 관리 (홈페이지 하위 전공 관련)</strong></h2></label>
   <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
   <table class="boardtable" id="table1"  data-toggle="table"
          data-pagination="true" data-toolbar="#toolbar"
@@ -26,7 +26,7 @@
     </thead>
   </table>
 </div>
-<div>
+<div class="py-2 d-flex justify-content-end">
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeAddMajorModal()">전공 추가</button>
 </div>
@@ -49,7 +49,7 @@
         major_name: major.major_name,
         major_location: major.major_location,
         major_contact: major.major_contact,
-        action : '<button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyMajorModal('+i+')">수정</button><br><button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="deleteMajor('+i+')">삭제</button></div>'
+        action : '<button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeModifyMajorModal('+i+')">수정</button><br><button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="deleteMajor('+i+')">삭제</button></div>'
       });
     }
     // alert(rows);
@@ -75,7 +75,7 @@
 
     var modal_footer = '';
     modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-    modal_footer += '<button type="button" class="btn btn-secondary pull-right" data-dismiss="modal" aria-label="Close" onclick="modifyMajor('+i+')">완료</button>';
+    modal_footer += '<button type="button" class="btn btn-primary pull-right" data-dismiss="modal" aria-label="Close" onclick="modifyMajor('+i+')">완료</button>';
 
     header.html(modal_header);
     body.html(modal_body);
@@ -137,7 +137,7 @@
 
     var modal_footer = '';
     modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-    modal_footer += '<button type="button" class="btn btn-secondary" onclick="addMajor()">추가</button>';
+    modal_footer += '<button type="button" class="btn btn-success" onclick="addMajor()">추가</button>';
 
     header.html(modal_header);
     body.html(modal_body);

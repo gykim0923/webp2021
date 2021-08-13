@@ -72,10 +72,10 @@
                 var user_email = user.email;
                 var action = '<button class="btn btn-danger" type="button" onclick="deleteUser('+i+')">삭제</button>'
                 if (user.type == "-"){
-                    action += '<div class="btn btn-warning"><i class="bi bi-exclamation-circle-fill"></i> 미승인</div>'
+                    action += '<div class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="권한 수정이 필요한 (신규)회원입니다."><i class="bi bi-exclamation-circle-fill"></i> 미승인</div>'
                 }
                 if(user.email.split('@')[1]=='kyonggi.ac.kr' || user.email.split('@')[1]=='kgu.ac.kr'){
-                    user_email='<div class="btn btn-success"><i class="bi bi-google"></i> Google Verified</div>'+user_email
+                    user_email='<div class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="학교 메일로 가입한 계정입니다."><i class="bi bi-google"></i> Google Verified</div>'+user_email
                 }
                 if(user.email)
                 rows.push({

@@ -14,63 +14,68 @@
     <%--대문 관리--%>
 
     <label><h2><strong>대문 관리</strong></h2></label>
-        <div>
-            <table class="boardtable" id="table3"  data-toggle="table"
-                   data-pagination="true" data-toolbar="#toolbar"
-                   data-search="true" data-side-pagination="true" data-click-to-select="true" data-height="460"
-                   data-page-list="[10]">
-                <thead>
-                <tr>
-                    <th data-field="action">설정</th>
-                    <th data-field="slider_img">슬라이드 이미지</th>
-                </tr>
-                </thead>
-            </table>
-        </div>
-
+    <div>
+        <table class="boardtable" id="table3" data-toggle="table"
+               data-pagination="true" data-toolbar="#toolbar"
+               data-search="true" data-side-pagination="true" data-click-to-select="true" data-height="460"
+               data-page-list="[10]">
+            <thead>
+            <tr>
+                <th data-field="action">설정</th>
+                <th data-field="slider_img">슬라이드 이미지</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="py-2 d-flex justify-content-end">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="makeUploadSliderModal()">대문 사진 추가</button>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                onclick="makeUploadSliderModal()">대문 사진 추가
+        </button>
+    </div>
 
 </div>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         callSetupTableView3();
     })
-    function callSetupTableView3(){
-        $('#table3').bootstrapTable('load',tableData3());
+
+    function callSetupTableView3() {
+        $('#table3').bootstrapTable('load', tableData3());
         $('#table3').bootstrapTable('refresh');
     }
-    function tableData3(){
+
+    function tableData3() {
         var getSlider = <%=getSlider%>;
         var rows = [];
         var image = null;
-        for(var i=0;i<getSlider.length;i++){
-            var slider=getSlider[i];
+        for (var i = 0; i < getSlider.length; i++) {
+            var slider = getSlider[i];
             rows.push({
                 id: slider.id,
-                slider_img: '<a href="image_viewer.kgu?image_path='+slider.slider_img+'" target="_blank">사진 보기</a>',
-                action : '<button class="btn btn-dark" type="button" onclick="deleteSlider('+i+')">삭제</button>'
+                slider_img: '<a href="image_viewer.kgu?image_path=' + slider.slider_img + '" target="_blank">사진 보기</a>',
+                action: '<button class="btn btn-dark" type="button" onclick="deleteSlider(' + i + ')">삭제</button>'
             });
         }
         return rows;
     }
 
 
-    function makeUploadSliderModal(){
-        var majorList=<%=getAllMajor%>;
+    function makeUploadSliderModal() {
+        var majorList =<%=getAllMajor%>;
         $.ajax({
-            url : 'delete.kgu?fileId='+file_id+'&&folder='+file_folder,
-            type : 'post',
-            success : function(data){//데이터는 주소
+            url: 'delete.kgu?fileId=' + file_id + '&&folder=' + file_folder,
+            type: 'post',
+            success: function (data) {//데이터는 주소
                 var modal_header = '';
                 modal_header += '<h5 class="modal-title" id="staticBackdropLabel">대문 사진 업로드하기</h5>';
                 modal_header += '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
 
                 var modal_body = '<div id="fileUploadSection">'
-                    +'<input type="file" name="uploadFile" id="uploadFile" accept="image/*">'
-                    +'<button class="btn btn-secondary" onclick="uploadfile()"><i class="bi bi-upload"></i> 업로드</button>'
-                    +'</div>';
+                    + '<input type="file" name="uploadFile" id="uploadFile" accept="image/*">'
+                    + '<button class="btn btn-secondary" onclick="uploadfile()"><i class="bi bi-upload"></i> 업로드</button>'
+                    + '</div>';
 
                 var modal_footer = '';
                 modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
@@ -87,11 +92,11 @@
     var file_folder; //다운로드에서 쓸 경로
     var file_path; //파일이 업로드된 상대경로
 
-    function uploadfile(){
+    function uploadfile() {
         var formData = new FormData();
-        var folder='/img/slider';//업로드 된 파일 folder 경로 설정은 여기에서 해줍니다. (마지막에 /가 오면 절대 안됩니다.)
-        if($('input[name=uploadFile]')[0].files[0]!=null){
-            formData.append("file_data",$('input[name=uploadFile]')[0].files[0]);
+        var folder = '/img/slider';//업로드 된 파일 folder 경로 설정은 여기에서 해줍니다. (마지막에 /가 오면 절대 안됩니다.)
+        if ($('input[name=uploadFile]')[0].files[0] != null) {
+            formData.append("file_data", $('input[name=uploadFile]')[0].files[0]);
             formData.append("file_type", "image"); //전송하려는 파일 타입 설정 (제한이 없으려면 null로 한다.)
             formData.append("board_level", "0"); // board_level 제한 (부정 업로드 방지용. 교수까지 하려면 1, 학생까지 하려면 2로 설정하면 됨.)
 
@@ -100,45 +105,45 @@
                 icon: 'warning',
                 showConfirmButton: true
             }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url : 'upload.kgu?folder='+folder,
-                        type : "post",
-                        async:false,
-                        data : formData,
-                        processData : false,
-                        contentType : false,
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: 'upload.kgu?folder=' + folder,
+                            type: "post",
+                            async: false,
+                            data: formData,
+                            processData: false,
+                            contentType: false,
 
 
-                        success : function(data){//데이터는 주소
-                            if(data=='fail'){
-                                swal.fire({
-                                    title : '실패',
-                                    icon : 'error',
-                                    showConfirmButton: true
+                            success: function (data) {//데이터는 주소
+                                if (data == 'fail') {
+                                    swal.fire({
+                                        title: '실패',
+                                        icon: 'error',
+                                        showConfirmButton: true
 
-                                });
+                                    });
+                                } else {
+                                    var fileLog = data.split("-/-/-");
+                                    file_id = fileLog[0];
+                                    file_folder = folder;
+                                    file_path = folder + '/' + fileLog[1];
+                                    var a = '';
+                                    a += '<div>파일제출</div><div>' + fileLog[1] + '</div>';
+                                    a += '<div><a href="download.kgu?id=' + file_id + '&&path=' + file_folder + '" target="_blank"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드</button></a>'
+                                    a += '<button class="btn btn-danger" onclick="makeUploadSliderModal()"><i class="bi bi-x-circle-fill"></i> 첨부파일 수정하기</button></div>';
+                                    $('#fileUploadSection').html(a);
+                                }
                             }
-                            else {
-                                var fileLog=data.split("-/-/-");
-                                file_id=fileLog[0];
-                                file_folder=folder;
-                                file_path=folder+'/'+fileLog[1];
-                                var a='';
-                                a+='<div>파일제출</div><div>'+fileLog[1]+'</div>';
-                                a+='<div><a href="download.kgu?id='+file_id+'&&path='+file_folder+'" target="_blank"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드</button></a>'
-                                a+='<button class="btn btn-danger" onclick="makeUploadSliderModal()"><i class="bi bi-x-circle-fill"></i> 첨부파일 수정하기</button></div>';
-                                $('#fileUploadSection').html(a);
-                            }
-                        }
 
-                    })
+                        })
+                    }
                 }
-            }
-        )} else{
+            )
+        } else {
             swal.fire({
-                title : '파일을 등록해주세요.',
-                icon : 'warning',
+                title: '파일을 등록해주세요.',
+                icon: 'warning',
                 showConfirmButton: true
 
             });
@@ -146,30 +151,30 @@
         // return address;
     }
 
-    function insertSlider(){
+    function insertSlider() {
         var slider_img = file_path;
 
-            $.ajax({
-                url: "ajax.kgu", //AjaxAction에서
-                type: "post",
-                data: {
-                    req: "insertSlider", //이 메소드를 찾아서
-                    data: slider_img //이 데이터를 파라미터로 넘겨줍니다.
-                },
-                success: function (data) { //성공 시
-                    swal.fire({
-                        title : '대문이 정상적으로 추가되었습니다.',
-                        icon : 'success',
-                        showConfirmButton: true
+        $.ajax({
+            url: "ajax.kgu", //AjaxAction에서
+            type: "post",
+            data: {
+                req: "insertSlider", //이 메소드를 찾아서
+                data: slider_img //이 데이터를 파라미터로 넘겨줍니다.
+            },
+            success: function (data) { //성공 시
+                swal.fire({
+                    title: '대문이 정상적으로 추가되었습니다.',
+                    icon: 'success',
+                    showConfirmButton: true
 
-                    }).then(function (){
-                        location.reload();
-                    });
-                }
-            })
+                }).then(function () {
+                    location.reload();
+                });
+            }
+        })
     }
 
-    function deleteSlider(i){
+    function deleteSlider(i) {
         var getSlider = <%=getSlider%>;
         var slider = getSlider[i];
         var slider_id = slider.id;
@@ -217,8 +222,6 @@
         });
 
     }
-
-
 
 
 </script>
