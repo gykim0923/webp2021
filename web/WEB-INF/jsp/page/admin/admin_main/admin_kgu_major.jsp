@@ -66,7 +66,7 @@
 
         var modal_footer = '';
         modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';
-        modal_footer += '<button type="button" class="btn btn-secondary pull-right" data-dismiss="modal" aria-label="Close" onclick="modifyKguMajor('+major[i].id+')">완료</button>';
+        modal_footer += '<button type="button" class="btn btn-primary pull-right" data-dismiss="modal" aria-label="Close" onclick="modifyKguMajor('+major[i].id+')">완료</button>';
 
         header.html(modal_header);
         body.html(modal_body);
