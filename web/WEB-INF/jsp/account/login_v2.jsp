@@ -49,16 +49,15 @@
                 <%--        구글 로그인 버튼 --%>
                 <div class="g-signin2 d-flex justify-content-center" data-onsuccess="onSignIn"></div>
                 <%--구글 로그인 버튼 끝--%>
-<%--                로딩 버튼--%>
+                <%--                로딩 버튼--%>
                 <div class="py-3 d-flex justify-content-center" id="loading"></div>
-<%--                로딩 버튼 끝--%>
+                <%--                로딩 버튼 끝--%>
                 <div class="text-center mt-5 text-lg fs-4">
-                    <a href="https://sites.google.com/kyonggi.ac.kr/help/" class="font-bold"><span>학교 구글 계정이 없으신가요? </span></a><br>
+                    <a href="https://sites.google.com/kyonggi.ac.kr/help/"
+                       class="font-bold"><span>학교 구글 계정이 없으신가요? </span></a><br>
                     <!-- Button trigger for scrollbar modal -->
-                    <button type="button" class="btn font-bold" data-bs-toggle="modal"
-                            data-bs-target="#exampleModalLong">
-                        로그인 에러가 나요.
-                    </button>
+                    <a class="font-bold" data-bs-toggle="modal" href="#exampleModalToggle" role="button">로그인에 문제가
+                        있어요.</a>
                 </div>
             </div>
         </div>
@@ -69,27 +68,33 @@
 </div>
 
 <!--scrollbar Modal start-->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+     tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">자주 발생하는 에러</h5>
-                <button type="button" class="close" data-bs-dismiss="modal"
-                        aria-label="Close">
-                    <i data-feather="x"></i>
-                </button>
+                <h5 class="modal-title" id="exampleModalToggleLabel">주요 오류 원인</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h5>dd</h5><br>
-                <p>구글 보안정책 상 학교 계정이 아닌 구글 계정(ex. gmail)으로는 로그인이 불가능 합니다. Chrome 이외의 환경에서 오류가 발생할 수 있으며, 쿠키가 허용되지 않는 환경(ex. 크롬 시크릿 모드, 일부 모바일 어플의 내장 브라우저 등)에서는 로그인이 불가능합니다.</p>
+                <h5>403 에러가 떠요.</h5><br>
+                <p>구글 보안정책 상 학교 계정(ex. @kyonggi.ac.kr)이 아닌 구글 계정(ex. @gmail.com)으로는 로그인이 불가능 합니다.</p><br><br>
+                <h5>로그인 버튼을 눌러도 반응이 없어요.</h5><br>
+                <p>Chrome 이외의 환경에서 오류가 발생할 수 있으며, 쿠키가 허용되지 않는 환경(ex. 크롬 시크릿 모드, 일부 모바일 어플의 내장 브라우저 등)에서는 로그인이 불가능합니다.</p><br><br>
+                <h5>이메일 변경이 감지 됐대요.</h5><br>
+                <p>이 사이트에 회원 가입 이후, 구글에서 이메일을 임의로 변경하는 경우 로그인을 허용하지 않습니다. 이메일 주소를 원복하거나 계정 삭제 후 재가입 하셔야 합니다. (1인 1계정 원칙)</p><br><br>
+                <h5>잘못된 토큰 값 요청이래요.</h5><br>
+                <p>구글 서버로 부터 브라우저로 전달받은 1회성 토큰을 이용하여 구글 서버에 진위 여부를 검증하는 단계에서 오류가 발생하는 경우 입니다. 브라우저의 캐시비우기 등을 한 이후, 재시도 바랍니다. 이후에도 해결이 되지 않는다면 관리자에게 연락 바랍니다.</p><br><br>
             </div>
         </div>
     </div>
 </div>
 <!--scrollbar Modal end-->
-
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </html>
 
 <script>
@@ -105,21 +110,17 @@
 
     function makeLoadingButton(mode) {
         var button = $('#loading');
-        var text='';
-        if(mode=='check'){
-            text='<button class="btn btn-secondary" type="button" disabled><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>DB 조회 중 ...</button>';
-        }
-        else if(mode=='success'){
-            text='<button class="btn btn-success" type="button" disabled><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>인증 성공</button>';
-        }
-        else if(mode=='success_but_wrong_email'){
-            text='<button class="btn btn-warning" type="button" disabled><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>계정정보 변경감지</button>';
-        }
-        else if(mode=='register'){
-            text='<button class="btn btn-primary" type="button" disabled><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>인증 성공</button>';
-        }
-        else if(mode=='failure'){
-            text='<button class="btn btn-danger" type="button" disabled><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>인증 실패</button>';
+        var text = '';
+        if (mode == 'check') {
+            text = '<button class="btn btn-secondary" type="button" disabled><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>DB 조회 중 ...</button>';
+        } else if (mode == 'success') {
+            text = '<button class="btn btn-success" type="button" disabled><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>인증 성공</button>';
+        } else if (mode == 'success_but_wrong_email') {
+            text = '<button class="btn btn-warning" type="button" disabled><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>계정정보 변경감지</button>';
+        } else if (mode == 'register') {
+            text = '<button class="btn btn-primary" type="button" disabled><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>인증 성공</button>';
+        } else if (mode == 'failure') {
+            text = '<button class="btn btn-danger" type="button" disabled><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>인증 실패</button>';
         }
         button.html(text);
     }
@@ -163,7 +164,7 @@
                     icon: 'error',
                     title: '잘못된 토큰 값 요청',
                     text: '잘못된 토큰 값을 요청하였습니다.',
-                    footer: '<a href="">Why do I have this issue?</a>'
+                    footer: '<a href="">관리자에게 문의 바랍니다.</a>'
                 })
             }
         };
