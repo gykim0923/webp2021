@@ -12,6 +12,7 @@
 %>
 <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <div>
+    <div class="text-danger text-end mb-3">이 페이지는 가로 길이 800px 이상의 화면에서 최적화 되어있습니다.</div>
     <div class="album">
         <div class="container">
             <label><h2><strong>메뉴 관리</strong></h2></label>
@@ -30,9 +31,9 @@
                 </tr>
                 </thead>
             </table>
-            <div class="col-md-11"></div>
+            <div class="py-2 d-flex justify-content-end"></div>
                 <div id="inoutbtn">
-                    <button class="btn btn-secondary mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="insertMenu()">메뉴 추가</button>
+                    <button class="btn btn-success mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="insertMenu()">메뉴 추가</button>
                 </div>
             </div>
         </div>
@@ -98,7 +99,7 @@
                         page_title: value.page_title,
                         type: typeName,
                         tab_title: headvalue.tab_title,
-                        show_detail: '<button class="btn btn-secondary mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="detailModal('+i+')">수정</button>&nbsp<button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close" onclick="deleteProModal('+menulist[i].page_id+')">삭제</button>'
+                        show_detail: '<button class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="detailModal('+i+')">수정</button>&nbsp<button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close" onclick="deleteProModal('+menulist[i].page_id+')">삭제</button>'
                     });
                     indexID++;
             }
@@ -111,7 +112,7 @@
         var a = '';
         a+='<div class="form-group"><span>메뉴 이름 </span><input style="display : inline-block; width:200px;" type="text" class="form-control" name = "title" value="'+(menulist[i].page_title)+'"></div><br>';
 
-        a += '<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="modifyProModal('+menulist[i].page_id+')">완료</button>';
+        a += '<button type="button" class="btn btn-primary pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="modifyProModal('+menulist[i].page_id+')">완료</button>';
         list.html(a);
     }
 
@@ -267,15 +268,15 @@
         var a = '';
         if(val=='static'){
             a += '<div class="form-group"><span>메뉴 이름 </span><input style="display : inline-block; width:200px;" type="text" class="form-control" name = "title"></div><br>'
-            a+='<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="insertMenuFinish()">완료</button>';
+            a+='<button type="button" class="btn btn-success pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="insertMenuFinish()">완료</button>';
             list.html(a);
         }else if(val=='independent'){
         a += '<div class="form-group"><span>메뉴 이름 </span><input style="display : inline-block; width:200px;" type="text" class="form-control" name = "title"></div><br>'
-        a+='<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="insertIndependent()">완료</button>';
+        a+='<button type="button" class="btn btn-success pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="insertIndependent()">완료</button>';
         list.html(a);
      }else if(val=='bbs') {
             a += '<div class="form-group"><span>메뉴 이름 </span><input style="display : inline-block; width:200px;" type="text" class="form-control" name = "title"></div><br>'
-            a += '<button type="button" class="btn btn-dark pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="insertBBSFinish()">완료</button>';
+            a += '<button type="button" class="btn btn-success pull-right my-2" data-dismiss="modal" aria-label="Close" onclick="insertBBSFinish()">완료</button>';
             list.html(a);
         }
     }

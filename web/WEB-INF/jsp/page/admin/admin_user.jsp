@@ -12,6 +12,7 @@
 <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <script src='js/sha256.js'></script>
 <div>
+    <div class="text-danger text-end mb-3">이 페이지는 (사이드바 열림 기준) 가로 길이 1400px 이상의 화면에서 최적화 되어있습니다.</div>
     <div class="album">
         <div class="container">
             <table class="boardtable" id="table1"  data-toggle="table"

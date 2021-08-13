@@ -12,6 +12,7 @@
 %>
 
 <div>
+    <div class="text-danger text-end mb-3">이 페이지는 가로 길이 800px 이상의 화면에서 최적화 되어있습니다.</div>
     <div class="album">
         <div class="container">
             <label><h2><strong>서버 상태</strong></h2></label>

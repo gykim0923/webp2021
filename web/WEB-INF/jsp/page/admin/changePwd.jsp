@@ -12,7 +12,7 @@
 %>
 <script src='js/sha256.js'></script>
 <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
-<div id="content" class="row px-md-5 justify-content-md-center"></div>
+<div id="content" class="row px-5 justify-content-md-center"></div>
 <div id="change_btn" class="d-grid col-md-6 mx-auto"></div>
 
 <script>

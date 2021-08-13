@@ -12,7 +12,7 @@
     String getAllKGUMajor = (String)request.getAttribute("getAllKGUMajor");
 %>
 <div>
-    <div class="text-danger text-end">이 페이지는 가로 길이 800px 이상의 화면에서 최적화 되어있습니다.</div>
+    <div class="text-danger text-end mb-3">이 페이지는 가로 길이 800px 이상의 화면에서 최적화 되어있습니다.</div>
     <div class="album">
         <div class="container">
 <%--           부전공 관리--%>

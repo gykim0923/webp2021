@@ -51,7 +51,9 @@
 <%--                <div class="col-md-6">--%>
 <%--                    <input type="file" name="uploadFile" id="uploadFile"accept=".xls, .xlsx">--%>
 <%--                </div>--%>
-                <a href="excel.kgu?writeorread=write" class="btn btn-primary col-md-2">Excel로 보내기</a>
+                <div class="py-2 d-flex justify-content-end">
+                    <a href="excel.kgu?writeorread=write" class="btn btn-primary col-md-2">Excel로 보내기</a>
+                </div>
 <%--                <a href="#myModal" data-toggle="modal" onclick="insertexcelreader()" class="btn btn-default col-md-2">일괄 추가</a>--%>
 <%--                <a href="#myModal2" data-toggle="modal" onclick="modifyexcelreader()" class="btn btn-default col-md-2">일괄 수정</a>--%>
             </div>
