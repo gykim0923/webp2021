@@ -342,6 +342,8 @@ public class RegisterDAO {
             queryRunner.update(conn,"DELETE FROM `bbs_reg` WHERE `id`=?;", id);
             queryRunner.update(conn,"DELETE FROM `bbs_reg_answer` WHERE `reg_id`=?;", id);
             queryRunner.update(conn,"DELETE FROM `bbs_regQuestion` WHERE `reg_id`=?;", id);
+            queryRunner.update(conn,"DELETE FROM `bbs_reg_answerFile` WHERE `reg_id`=?;", id);
+            queryRunner.update(conn,"DELETE FROM `bbs_reg_writerFile` WHERE `reg_id`=?;", id);
             //파일 삭제 추가
         } catch (SQLException se) {
             se.printStackTrace();

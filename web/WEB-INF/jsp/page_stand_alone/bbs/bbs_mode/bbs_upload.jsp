@@ -64,33 +64,37 @@
                     icon: 'warning',
                     showConfirmButton: true,
                     showCancelButton: true
-                }).then(function () {
-                    $.ajax({
-                        url: 'ajax.kgu',
-                        type: 'post',
-                        data: {
-                            req: "deleteBbsAlreadyFile",
-                            data: value.id
-                        },
-                        success: function (data) {
-                            if (data == "success") {
-                                $('#alreadyFileDiv' + index).remove();
-                                swal.fire({
-                                    title: '파일이 삭제되었습니다.',
-                                    icon: 'success',
-                                    showConfirmButton: true
-                                })
-                            } else {
-                                swal.fire({
-                                    title: '서버에러',
-                                    text: '다음에 다시 시도해주세요',
-                                    icon: 'error',
-                                    showConfirmButton: true
-                                });
-                                return;
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: 'ajax.kgu',
+                            type: 'post',
+                            data: {
+                                req: "deleteBbsAlreadyFile",
+                                data: value.id
+                            },
+                            success: function (data) {
+                                if (data == "success") {
+                                    $('#alreadyFileDiv' + index).remove();
+                                    swal.fire({
+                                        title: '파일이 삭제되었습니다.',
+                                        icon: 'success',
+                                        showConfirmButton: true
+                                    }).then(function (){
+                                        location.href = 'bbs.kgu?major=' + major + '&&num=' + num + '&&mode=list';
+                                    });
+                                } else {
+                                    swal.fire({
+                                        title: '서버에러',
+                                        text: '다음에 다시 시도해주세요',
+                                        icon: 'error',
+                                        showConfirmButton: true
+                                    });
+                                    return;
+                                }
                             }
-                        }
-                    })
+                        })
+                    }
                 });
             }
         </script>

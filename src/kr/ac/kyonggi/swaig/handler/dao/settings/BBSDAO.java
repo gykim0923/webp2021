@@ -196,6 +196,7 @@ public class BBSDAO {
         try {
             QueryRunner queryRunner = new QueryRunner();
             queryRunner.update(conn,"DELETE FROM `bbs` WHERE `id`=?;", id);
+            queryRunner.update(conn,"DELETE FROM `bbs_file` WHERE `bbs_id`=?;", id);
             deleteComment(id);
         } catch (SQLException se) {
             se.printStackTrace();
