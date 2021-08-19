@@ -161,7 +161,7 @@ public class UploadAction implements Action {
                 JsonArray forArray2 = new JsonArray();
 //                forArray2.add("<img src=\""+folder+'/'+newFileName+"\" class=\"kv-preview-data file-preview-image file-zoom-detail\">");
                 forFinish.add("initialPreview", forArray2);
-                forFinish.addProperty("previewZoom", "<img src=\""+folder+'/'+newFileName+"\" class=\"kv-preview-data file-preview-image file-zoom-detail\">"); // 상세보기를 누르면 나올 이미지
+//                forFinish.addProperty("previewZoom", "<img src=\""+folder+'/'+newFileName+"\" class=\"kv-preview-data file-preview-image file-zoom-detail\">"); // 상세보기를 누르면 나올 이미지
                 Gson gson2 = new GsonBuilder().disableHtmlEscaping().create();
                 return gson2.toJson(forFinish);
             }

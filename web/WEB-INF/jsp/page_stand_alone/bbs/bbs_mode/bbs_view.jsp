@@ -142,7 +142,7 @@
       if(type.for_header == '기타')
         a  += '<span>'+it.original_FileName + '&nbsp&nbsp </span>';
       else
-        a += '<a href="download.kgu?id='+it.id+'&&path=/uploaded/bbs">' + it.original_FileName + '</a>&nbsp&nbsp';
+        a += '<a href="download.kgu?id='+it.id+'&&path=/uploaded/bbs">' + it.original_FileName + '</a>&emsp;&nbsp;';
     }
     a += '</div><hr>'
     view_download.append(a);

@@ -302,6 +302,9 @@
                 board_level : '1',
                 upload_mode : 'bbs',
         },
+        showUpload : false, // 일괄 업로드버튼 숨김
+        showRemove : false, // 일괄 삭제 버튼 숨김
+        fileActionSettings : {showZoom: false}, // 줌 못보게 막음(모달이 안닫히는 오류가 있어서)
         overwriteInitial : false,
         preferIconicPreview: true,
         previewFileIconSettings: { // configure your icon file extensions
@@ -355,22 +358,4 @@
             showConfirmButton: true
         })
     });
-    // $("#bbsFile").fileinput({
-    //     'theme': 'explorer-fa',
-    //     'uploadUrl': 'upload.kgu?folder='+upload_folder,
-    //     showRemove : false,
-    //     showUpload : false,
-    //     overwriteInitial : false,
-    //     uploadExtraData:{
-    //         file_type : 'null',
-    //         board_level : '0',
-    //         upload_mode : 'bbs'
-    //     }
-    // }).on('fileuploaded', function(event, previewId, index, fileId) {
-    //     console.log('File Uploaded', 'ID: ' + fileId + ', Thumb ID: ' + previewId);
-    // }).on('fileuploaderror', function(event, data, msg) {
-    //     console.log('File Upload Error', 'ID: ' + data.fileId + ', Thumb ID: ' + data.previewId);
-    // }).on('filebatchuploadcomplete', function(event, preview, config, tags, extraData) {
-    //     console.log('File Batch Uploaded', preview, config, tags, extraData);
-    // });
 </script>
