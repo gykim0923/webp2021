@@ -67,7 +67,7 @@
     b += '<br><div><input class="form-control" id="newSchContent" name="newSchContent" value="'+schedule.content+'"></div>';
 
     var f = '';
-    f += '<button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">취소</button>';
+    f += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';
     f += '<button type="button" class="btn btn-primary" onclick="modifySchedule('+i+')">완료</button>';
 
     header.html(h);
@@ -127,7 +127,7 @@
 
     var f = '';
     f += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>';
-    f += '<button type="button" class="btn btn-success" onclick="addSchedule()">완료</button>';
+    f += '<button type="button" class="btn btn-success" onclick="addSchedule()">추가</button>';
 
     header.html(h);
     body.html(b);

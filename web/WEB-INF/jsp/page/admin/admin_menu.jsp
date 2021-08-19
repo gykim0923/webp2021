@@ -173,47 +173,59 @@
 
 
     function deleteProModal(id) {
-        swal.fire({
-            title: '정말로 삭제하시나요?',
-            text: '다시 되돌릴 수 없습니다.',
-            icon: 'warning',
-            showConfirmButton: true,
-            showCancelButton: true
+        if (id == 20) {
+            var menu = <%=getPageMenu%>;
+            var menu2 = menu[2].page_title;
+            swal.fire({
+                title: menu2+'는 삭제할 수 없습니다.',
+                icon: 'error',
+                showConfirmButton: true
 
-        }).then((result) => {
-            if (result.isConfirmed) {
+            });
+            return;
+        } else {
+            swal.fire({
+                title: '정말로 삭제하시나요?',
+                text: '다시 되돌릴 수 없습니다.',
+                icon: 'warning',
+                showConfirmButton: true,
+                showCancelButton: true
 
-                $.ajax({
-                    url: "ajax.kgu",
-                    type: "post",
-                    data: {
-                        req: "delete_menu",
-                        data: id
-                    },
-                    success: function (data) {
-                        if (data == 'fail') {
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        url: "ajax.kgu",
+                        type: "post",
+                        data: {
+                            req: "delete_menu",
+                            data: id
+                        },
+                        success: function (data) {
+                            if (data == 'fail') {
+
+                                swal.fire({
+                                    title: '하나 밖에 존재하지 않는 메뉴에요. 아껴주세요.',
+                                    icon: 'warning',
+                                    showConfirmButton: true
+
+                                });
+                                return;
+                            }
 
                             swal.fire({
-                                title: '하나 밖에 존재하지 않는 메뉴에요. 아껴주세요.',
-                                icon: 'warning',
+                                title: '삭제가 완료되었습니다.',
+                                icon: 'success',
                                 showConfirmButton: true
 
+                            }).then(function () {
+                                location.reload();
                             });
-                            return;
                         }
-
-                        swal.fire({
-                            title: '삭제가 완료되었습니다.',
-                            icon: 'success',
-                            showConfirmButton: true
-
-                        }).then(function () {
-                            location.reload();
-                        });
-                    }
-                });
-            }
-        })
+                    });
+                }
+            })
+        }
     }
 
     //     var check = confirm("정말 삭제하시겠습니까?");

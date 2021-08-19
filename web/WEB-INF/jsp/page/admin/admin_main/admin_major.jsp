@@ -187,7 +187,7 @@
 
     if(major[i].major_id == 'main') {
       swal.fire({
-        title: '권한이 부족합니다.',
+        title: 'main은 삭제할 수 없습니다.',
         icon: 'warning',
         showConfirmButton: true
       });

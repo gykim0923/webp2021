@@ -55,7 +55,7 @@
             rows.push({
                 id: slider.id,
                 slider_img: '<a href="image_viewer.kgu?image_path=' + slider.slider_img + '" target="_blank">사진 보기</a>',
-                action: '<button class="btn btn-dark" type="button" onclick="deleteSlider(' + i + ')">삭제</button>'
+                action: '<button class="btn btn-danger" type="button" onclick="deleteSlider(' + i + ')">삭제</button>'
             });
         }
         return rows;
@@ -78,8 +78,8 @@
                     + '</div>';
 
                 var modal_footer = '';
-                modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-                modal_footer += '<button type="button" class="btn btn-success pull-right" data-dismiss="modal" aria-label="Close" onclick="insertSlider()">추가하기</button>';
+                modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>';  //<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                modal_footer += '<button type="button" class="btn btn-success pull-right" data-dismiss="modal" aria-label="Close" onclick="insertSlider()">추가</button>';
 
                 header.html(modal_header);
                 body.html(modal_body);

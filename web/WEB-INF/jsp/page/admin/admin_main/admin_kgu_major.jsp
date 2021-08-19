@@ -113,8 +113,7 @@
     function makeAddKguMajorModal(){
         var modal_header = '';
         modal_header += '<h5 class="modal-title" id="staticBackdropLabel">본전공 추가하기</h5>';
-        modal_header += '<button type="button" class="btn-success" data-bs-dismiss="modal" aria-label="Close"></button>';
-
+        modal_header += '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
         var modal_body = '';
         modal_body += '<div>캠퍼스</div><input type="text" class="form-control" id="add_campus" name="new_table" value="" placeholder="캠퍼스이름을 입력해주세요">'
             + '<div>대학</div><input type="text" class="form-control" id="add_college" name="new_table" value="" placeholder="대학을 입력해주세요">'
@@ -122,7 +121,7 @@
 
         var modal_footer = '';
         modal_footer += '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>';
-        modal_footer += '<button type="button" class="btn btn-btn-success" onclick="addKguMajor()">추가</button>';
+        modal_footer += '<button type="button" class="btn btn-success" onclick="addKguMajor()">추가</button>';
 
         header.html(modal_header);
         body.html(modal_body);
@@ -165,27 +164,69 @@
         })
     }
 
-    function deleteKguMajor(id){
-        var check = confirm("정말 삭제하시겠습니까?");
-        // var kgumajor = $('#major').val();
-        if(check){
-            $.ajax({
-                url : "ajax.kgu",
-                type : "post",
-                data : {
-                    req : "delete_kgu_major",
-                    data : id
-                },
-                success : function(data) {
-                    if(data == 'fail'){
-                        alert('fail');
-                        return;
+    function deleteKguMajor(id) {
+        swal.fire({
+            title: '정말로 삭제하시나요?',
+            text: '다시 되돌릴 수 없습니다.',
+            icon: 'warning',
+            showConfirmButton: true,
+            showCancelButton: true
+
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                    $.ajax({
+                        url : "ajax.kgu",
+                        type : "post",
+                        data : {
+                            req : "delete_kgu_major",
+                            data : id
+                    },
+                    success: function (data) { //성공 시
+                        if (data == 'success') {
+
+                            swal.fire({
+                                title: '해당 일정이 삭제되었습니다.',
+                                icon: 'success',
+                                showConfirmButton: true
+
+                            }).then(function () {
+                                location.reload();
+                            });
+                        } else {
+                            swal.fire({
+                                title: '권한이 부족합니다.',
+                                icon: 'warning',
+                                showConfirmButton: true
+
+                            });
+                        }
                     }
-                    alert("삭제가 완료되었습니다");
-                    location.reload();
-                }
-            });
-        }
+                })
+            }
+
+        });
     }
+    //     var check = confirm("정말 삭제하시겠습니까?");
+    //     // var kgumajor = $('#major').val();
+    //     if(check){
+    //         $.ajax({
+    //             url : "ajax.kgu",
+    //             type : "post",
+    //             data : {
+    //                 req : "delete_kgu_major",
+    //                 data : id
+    //             },
+    //             success : function(data) {
+    //                 if(data == 'fail'){
+    //                     alert('fail');
+    //                     return;
+    //                 }
+    //                 alert("삭제가 완료되었습니다");
+    //                 location.reload();
+    //             }
+    //         });
+    //     }
+    // }
 
 </script>
