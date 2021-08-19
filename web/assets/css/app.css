@@ -601,6 +601,11 @@
     font-size: 1.2rem
 }
 
+.form-select.form-select-xl {
+    padding: .85rem 1rem;
+    font-size: 1.2rem
+}
+
 .form-check .form-check-input[class*=bg-] {
     border: 0
 }

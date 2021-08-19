@@ -39,7 +39,7 @@
 <div id="auth">
 
     <div class="row h-100">
-        <div class="col-lg-5 col-12">
+        <div class="col-xxl-5 col-12">
             <div id="auth-left">
                 <div class="auth-logo">
                     <div class="row py-5"></div>
@@ -52,7 +52,7 @@
                 <%--                로딩 버튼--%>
                 <div class="py-3 d-flex justify-content-center" id="loading"></div>
                 <%--                로딩 버튼 끝--%>
-                <div class="text-center mt-5 text-lg fs-4">
+                <div class="text-center mt-5 text-lg h4">
                     <a href="https://sites.google.com/kyonggi.ac.kr/help/"
                        class="font-bold"><span>학교 구글 계정이 없으신가요? </span></a><br>
                     <!-- Button trigger for scrollbar modal -->
@@ -61,7 +61,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-7 d-none d-lg-block">
+        <div class="col-xxl-7 d-none d-lg-block">
             <div id="auth-right"></div>
         </div>
     </div>
