@@ -13,7 +13,7 @@
 <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 
 <div class="container py-4" id="information_content"></div>
-<div id="modify_button"></div>
+<div class="text-end" id="modify_button"></div>
 <script>
 
     $(document).ready(function(){
@@ -57,11 +57,14 @@
     }
 
     function back(){
-        var a='';
-        a+=information.content;
-        $('#information_content').html(a);
-        var b='<div id="write_post" class="col-xs-13 text-right" style = "margin : 2px;"><button type="button" class="btn btn-primary" onclick="modify()">수정</button></div>';
-        $('#modify_button').html(b);
+         swal.fire({
+            title : '뒤로가기',
+            text : '수정한 글과 파일들은 저장되지 않습니다!',
+            icon : 'error',
+            showConfirmButton: true
+            }).then(function () {
+                 window.location.href = 'information.kgu?major=main&&num=10';
+            });
     }
     function modifyText(){
         var content = CKEDITOR.instances.editor.getData();
