@@ -732,13 +732,13 @@
             },
             success: function (data) { //성공 시
                 if(data=='success'){
-
                     swal.fire({
                         title : '해당 내용이 수정되었습니다.',
                         icon : 'success',
                         showConfirmButton: true
-                    })
-                    window.location.href = 'reg.kgu?major='+major+'&&num='+num+'&&mode=list';
+                    }).then(function (){
+                        window.location.href = 'reg.kgu?major='+major+'&&num='+num+'&&mode=list';
+                    });
                 }
                 else{
                     swal.fire({
