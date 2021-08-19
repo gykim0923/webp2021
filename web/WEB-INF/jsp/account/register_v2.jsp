@@ -254,7 +254,7 @@
         var id = $('#id').val();
 
 
-        if (id != null) {
+        if (id.length != 0) {
             $.ajax({
                 url: "ajax.kgu",
                 type: "post",
