@@ -23,7 +23,11 @@
     var type = <%=typeForMyPage%>;
     var today = new Date();
     var reg_day = new Date(user.reg_date);
-    var betweenDay = (today.getTime() - reg_day.getTime())/24/1000/60/60;
+    // var betweenDay = (today.getTime() - reg_day.getTime())/24/1000/60/60;
+    var betweenDay = (today.getTime() - reg_day.getTime())/(24 * 60 * 60 * 1000);
+
+    console.log(today.getTime())
+    console.log(reg_day.getTime())
 
     $(document).ready(function(){
         setdata();

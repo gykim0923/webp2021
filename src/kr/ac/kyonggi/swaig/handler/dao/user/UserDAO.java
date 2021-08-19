@@ -224,7 +224,7 @@ public class UserDAO {
     public String registerGoogleID(String text) {
 //        System.out.println(text);
         String arr[] = text.split("-/-/-");
-//        google_id+"-/-/-"+google_img+"-/-/-"+id+"-/-/-"+password+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+phone+"-/-/-"+hope_type+"-/-/-"+major+"-/-/-"+per_id;
+//        google_id+"-/-/-"+google_img+"-/-/-"+id+"-/-/-"+password+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+phone+"-/-/-"+hope_type+"-/-/-"+major+"-/-/-"+per_id+"-/-/-"+reg_date;
         if(!checking(text))
             return "fail";
         boolean result = false;
@@ -240,13 +240,14 @@ public class UserDAO {
         String hope_type = arr[9];
         String major = arr[10];
         String per_id = arr[11];
+        String reg_date = arr[12];
 
 
         Connection conn = Config.getInstance().sqlLogin();
         try {
 //            System.out.println("dd");
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn,"INSERT INTO user(google_id,google_img,id,password,name,gender,birth,email,phone,hope_type,major,per_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);", google_id,google_img,id,password,name,gender,birth,email,phone,hope_type,major,per_id);
+            queryRunner.update(conn,"INSERT INTO user(google_id,google_img,id,password,name,gender,birth,email,phone,hope_type,major,per_id,reg_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);", google_id,google_img,id,password,name,gender,birth,email,phone,hope_type,major,per_id,reg_date);
             result = true;
         } catch(SQLException se) {
             se.printStackTrace();

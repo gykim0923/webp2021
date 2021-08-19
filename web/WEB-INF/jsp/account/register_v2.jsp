@@ -290,9 +290,13 @@
             var hopetype = $('#hope_type').val();
             var major = $('#major').val();
             var perID = id;
+            var reg_date_year = new Date().getFullYear();
+            var reg_date_month = new Date().getMonth()+1;
+            var reg_date_day = new Date().getDate();
+            var reg_date = reg_date_year+"-"+reg_date_month+"-"+reg_date_day;
 
             if (name != '' && gender != '' && birth != '' && phone != '') {
-                var update = id+"-/-/-"+perID+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+hopetype+"-/-/-"+phone+"-/-/-"+major;
+                var update = id+"-/-/-"+perID+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+hopetype+"-/-/-"+phone+"-/-/-"+major+"-/-/-"+reg_date;
 
                 $.ajax({
                     url: "ajax.kgu",

@@ -90,9 +90,10 @@ public class AjaxAction implements Action {
                 String hope_type= google[5];
                 String major= google[7];
                 String per_id = google[1];
+                String reg_date = google[8];
 
                 if (UserDAO.getInstance().checkID(google[0])){
-                    String new_data = google_id+"-/-/-"+google_img+"-/-/-"+id+"-/-/-"+password+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+phone+"-/-/-"+hope_type+"-/-/-"+major+"-/-/-"+per_id;
+                    String new_data = google_id+"-/-/-"+google_img+"-/-/-"+id+"-/-/-"+password+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+email+"-/-/-"+phone+"-/-/-"+hope_type+"-/-/-"+major+"-/-/-"+per_id+"-/-/-"+reg_date;
 //                    System.out.println(new_data);
                     result = UserDAO.getInstance().registerGoogleID(new_data);
                 }
