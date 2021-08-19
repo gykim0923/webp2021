@@ -61,7 +61,7 @@ public class AdminAction extends CustomAction {
 
                 //
 
-                Monitor.getInstance().showMemory();
+                Monitor.getInstance().getHeapMemory();
 
 
                 // 운영체제 정보
@@ -72,8 +72,6 @@ public class AdminAction extends CustomAction {
 
 
                 Monitor.getInstance().systemMemory();
-
-                //Monitor.getInstance().showCPU(); //문제 있음. 활성화 금지
 
                 return "RequestDispatcher:jsp/page/page.jsp";
             }

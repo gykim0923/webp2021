@@ -59,7 +59,7 @@ public class Monitor {
         return listOfMaps;
     }
 
-    public void showMemory(){
+    public void getHeapMemory(){
 
         //자바 힙메모리 크기 확인하는 코드
         MemoryMXBean membean = (MemoryMXBean) ManagementFactory.getMemoryMXBean( );
@@ -68,23 +68,6 @@ public class Monitor {
         MemoryUsage nonheap = membean.getNonHeapMemoryUsage();
         System.out.println( "NonHeap Memory: " + nonheap.getUsed()/mb+"MB");
     }
-
-//    public void showCPU() {
-//
-//        //현재 cpu 사용량 확인하는 코드 이것만은 실시간으로 출력되게 만들었습니다
-//
-//        final OperatingSystemMXBean osBean = (com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean();
-//        double load;
-//        while(true){
-//            load = osBean.getSystemCpuLoad();
-//            System.out.println("CPU Usage : "+load*100.0+"%");
-//            try {
-//                Thread.sleep(5000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
 
     public void systemMemory () {
         //시스템 메모리
