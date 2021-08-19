@@ -104,7 +104,7 @@
     else {
       for(var i=0;i< commentsList.length;i++){
         var comment = commentsList[i];
-        text+='<a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">'
+        text+='<a class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">'
         +'<h3 class="my-2"><i class="bi bi-person-circle"></i></h3>'
         +'<div class="d-flex gap-2 w-100 justify-content-between">'
         +'<div>'
