@@ -59,11 +59,13 @@ public class CompressZip {
         if (file.isDirectory()) { // 디렉토리일 경우 재탐색(재귀)
             File[] files = file.listFiles();
             for (File f : files) {
+                System.out.println("directory: " + f.getPath());
                 searchDirectory(f, root, zos);
             }
         } else {
             // 파일일 경우 압축을 한다.
             try {
+                System.out.println("file : "+file.getPath());
                 compressZip(file, root, zos);
             } catch (Throwable e) {
                 e.printStackTrace();
@@ -83,7 +85,7 @@ public class CompressZip {
         try {
             // 파일을 읽어드림
             fis = new FileInputStream(file);
-            String zipName = file.getPath().replace(root + "\\", "");
+            String zipName = file.getPath().replace(root + "/", ""); // 로컬(윈도우)에서 사용할 때는 root + "\\"로 변경해야 함
             // Zip엔트리 생성(한글 깨짐 버그)
             ZipEntry zipentry = new ZipEntry(zipName);
             // 스트림에 밀어넣기(자동 오픈)

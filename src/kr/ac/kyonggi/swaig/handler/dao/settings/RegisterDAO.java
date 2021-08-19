@@ -343,7 +343,7 @@ public class RegisterDAO {
             queryRunner.update(conn,"DELETE FROM `bbs_reg_answer` WHERE `reg_id`=?;", id);
             queryRunner.update(conn,"DELETE FROM `bbs_regQuestion` WHERE `reg_id`=?;", id);
             queryRunner.update(conn,"DELETE FROM `bbs_reg_answerFile` WHERE `reg_id`=?;", id);
-            queryRunner.update(conn,"DELETE FROM `bbs_reg_writerFile` WHERE `reg_id`=?;", id);
+            queryRunner.update(conn,"DELETE FROM `bbs_reg_WriterFile` WHERE `reg_id`=?;", id);
             //파일 삭제 추가
         } catch (SQLException se) {
             se.printStackTrace();
@@ -454,7 +454,6 @@ public class RegisterDAO {
         Gson gson = new Gson();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            System.out.println(arr.length);
             for (int i = 2; i < arr.length; i++) {
                 listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_reg_answerFile WHERE reg_id=? AND id=?;",
                         new MapListHandler(), arr[0], arr[i]);
@@ -486,11 +485,8 @@ public class RegisterDAO {
         boolean result = false;
         try {
             QueryRunner queryRunner = new QueryRunner();
-            System.out.println("123");
             queryRunner.update(conn, "DELETE FROM `bbs_reg_answerFile` WHERE `reg_id`=? AND `writer_id`=?;" ,arr[0], arr[1]);
-            System.out.println(arr.length);
             for (int i = 2; i < arr.length; i++) {
-                System.out.println("1"+arr[i]);
                 if(arr[1].equals("undefined"))
                     continue;
                 UploadedFileDTO file = FileDAO.getInstance().getFile(arr[i]);

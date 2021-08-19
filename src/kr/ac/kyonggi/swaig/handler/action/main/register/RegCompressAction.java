@@ -13,17 +13,16 @@ public class RegCompressAction implements Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String boardId = request.getParameter("id");
-        String path = request.getServletContext().getRealPath("/uploaded/bbs_reg/reg"+boardId); // 압축할 파일이 저장된 위치
+        String path = request.getSession().getServletContext().getRealPath("/uploaded/bbs_reg/reg"+boardId); // 압축할 파일이 저장된 위치
         RegisterDAO dao = RegisterDAO.getInstance();
         RegisterDTO checkReg = dao.getReg(boardId);
-        String unZipPath = request.getServletContext().getRealPath("/uploadFile/"); // 압축할 파일 저장할 위치
+        String unZipPath = request.getSession().getServletContext().getRealPath("/uploadFile/"); // 압축할 파일 저장할 위치
         String unZipFile = checkReg.title; //압축할 파일 이름
 
         //압축하기
         CompressZip compressZip = new CompressZip();
         try{
             if (!compressZip.compress(path, unZipPath, unZipFile)){
-                System.out.println("123");
                 return "fail";
             }
         } catch (Throwable e){
@@ -35,7 +34,7 @@ public class RegCompressAction implements Action {
         String filename = unZipFile+".zip";
 
         // 실제 내보낼 파일명
-        String orgfilename = unZipFile+"답변.zip";
+        String orgfilename = unZipFile+"파일답변.zip";
 
         InputStream in = null;
         OutputStream os = null;
