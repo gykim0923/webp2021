@@ -1,6 +1,6 @@
-package kr.ac.kyonggi.swaig.handler.dto.settings;
+package kr.ac.kyonggi.swaig.handler.dto.monitor;
 
-public class MemoryDTO {
+public class DiskDTO {
     public String disk;
     public String total;
     public String free;

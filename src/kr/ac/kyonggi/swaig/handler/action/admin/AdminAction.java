@@ -7,18 +7,15 @@ import kr.ac.kyonggi.swaig.common.monitor.Monitor;
 import kr.ac.kyonggi.swaig.handler.dao.settings.AdminDAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.LogDAO;
-import kr.ac.kyonggi.swaig.handler.dao.tutorial.TutorialDAO;
 import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
-import kr.ac.kyonggi.swaig.handler.dto.settings.LogDTO;
-import kr.ac.kyonggi.swaig.handler.dto.settings.MemoryDTO;
+import kr.ac.kyonggi.swaig.handler.dto.monitor.DiskDTO;
+import kr.ac.kyonggi.swaig.handler.dto.monitor.OSDTO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserTypeDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,15 +50,31 @@ public class AdminAction extends CustomAction {
             }
             else if(num.equals("73")){
                 request.setAttribute("jsp", gson.toJson("admin_log")); //admin_log.jsp
+
+                // 로그
                 request.setAttribute("getAllLog",gson.toJson(LogDAO.getInstance().getAllLog()));
+
+                // 저장공간 정보
                 List<Map<String, String>> spaceInfo = Monitor.getInstance().getSpaceInfo();
-//                Monitor.getInstance().showMemory();
-//                Monitor.getInstance().showOSBean();
-//                Monitor.getInstance().systemMemory();
-//                Monitor.getInstance().showCPU(); //문제 있음.
-//                System.out.println(spaceInfo);
-                ArrayList<MemoryDTO> selected = gson.fromJson(gson.toJson(spaceInfo), new TypeToken<List<MemoryDTO>>() {}.getType());
-                request.setAttribute("getSpaceInfo",gson.toJson(selected));
+                ArrayList<DiskDTO> getSpaceInfo = gson.fromJson(gson.toJson(spaceInfo), new TypeToken<List<DiskDTO>>() {}.getType());
+                request.setAttribute("getSpaceInfo",gson.toJson(getSpaceInfo));
+
+                //
+
+                Monitor.getInstance().showMemory();
+
+
+                // 운영체제 정보
+                List<Map<String, String>> osInfo = Monitor.getInstance().getOSInfo();
+                ArrayList<OSDTO> getOSInfo = gson.fromJson(gson.toJson(osInfo), new TypeToken<List<OSDTO>>() {}.getType());
+                request.setAttribute("getOSInfo",gson.toJson(getOSInfo));
+
+
+
+                Monitor.getInstance().systemMemory();
+
+                //Monitor.getInstance().showCPU(); //문제 있음. 활성화 금지
+
                 return "RequestDispatcher:jsp/page/page.jsp";
             }
             else if(num.equals("74")){

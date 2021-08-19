@@ -33,27 +33,30 @@ public class Monitor {
         double free = 0;
         File[] drives = File.listRoots();
         for(File drive : drives) {
-            Map<String,String> result = new HashMap<String,String>();
+            Map<String,String> map = new HashMap<String,String>();
             disk = drive.getAbsolutePath();
             total = drive.getTotalSpace() / Math.pow(1024, 3);
             free = drive.getUsableSpace() / Math.pow(1024, 3);
             used = total - free;
-            result.put("disk", disk);
-            result.put("total", String.valueOf(total));
-            result.put("used", String.valueOf(used));
-            result.put("free", String.valueOf(free));
-            listOfMaps.add(result);
+            map.put("disk", disk);
+            map.put("total", String.valueOf(total));
+            map.put("used", String.valueOf(used));
+            map.put("free", String.valueOf(free));
+            listOfMaps.add(map);
         }
         return listOfMaps;
     }
 
-    public void showOSBean( ){
-
-        //OS 설정 확인하는 코드
-        OperatingSystemMXBean osbean = ( OperatingSystemMXBean ) ManagementFactory.getOperatingSystemMXBean( );
-        System.out.println( "OS Name: " + osbean.getName( ) );
-        System.out.println( "OS Arch: " + osbean.getArch( ) );
-        System.out.println( "Available Processors: " + osbean.getAvailableProcessors( ) );
+    public List<Map<String, String>> getOSInfo( ){
+        List<Map<String, String>> listOfMaps = new ArrayList<Map<String, String>>();
+        Map<String,String> map = new HashMap<String,String>();
+        OperatingSystemMXBean os = ( OperatingSystemMXBean ) ManagementFactory.getOperatingSystemMXBean( );
+        map.put("name", os.getName( ));
+        map.put("arch", os.getArch( ));
+        map.put("core", os.getAvailableProcessors( )+"");
+        map.put("load", (os.getSystemCpuLoad()*100.0) +"");
+        listOfMaps.add(map);
+        return listOfMaps;
     }
 
     public void showMemory(){
@@ -66,22 +69,22 @@ public class Monitor {
         System.out.println( "NonHeap Memory: " + nonheap.getUsed()/mb+"MB");
     }
 
-    public void showCPU() {
-
-        //현재 cpu 사용량 확인하는 코드 이것만은 실시간으로 출력되게 만들었습니다
-
-        final OperatingSystemMXBean osBean = (com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean();
-        double load;
-        while(true){
-            load = osBean.getSystemCpuLoad();
-            System.out.println("CPU Usage : "+load*100.0+"%");
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+//    public void showCPU() {
+//
+//        //현재 cpu 사용량 확인하는 코드 이것만은 실시간으로 출력되게 만들었습니다
+//
+//        final OperatingSystemMXBean osBean = (com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean();
+//        double load;
+//        while(true){
+//            load = osBean.getSystemCpuLoad();
+//            System.out.println("CPU Usage : "+load*100.0+"%");
+//            try {
+//                Thread.sleep(5000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
     public void systemMemory () {
         //시스템 메모리

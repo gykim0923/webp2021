@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String getSpaceInfo = (String) request.getAttribute("getSpaceInfo");
+    String getOSInfo = (String) request.getAttribute("getOSInfo");
     String getAllLog = (String) request.getAttribute("getAllLog");
 %>
 
@@ -42,6 +43,7 @@
 <script>
     $(document).ready(function(){
         callSetupTableView();
+        getOSInfo();
         getSpaceInfo();
     })
     var $table = $('#table');
@@ -83,10 +85,22 @@
         return [ year, month, day ].join('-');
     }
 
+
+    var serverStatus = $('#serverStatus');
+    function getOSInfo(){
+        var text = '';
+        var getOSInfo = <%=getOSInfo%>;
+        text+='<div class="py-4"><div><h4>서버 정보</h4></div>'
+            +'<div>운영체제 : '+getOSInfo[0].name+'</div>'
+            +'<div>아키텍쳐 : '+getOSInfo[0].arch+'</div>'
+            +'<div>가용 프로세서 수 : '+getOSInfo[0].core+'</div>'
+            +'<div>실시간 CPU 사용량 : '+getOSInfo[0].load+'%</div></div>'
+        serverStatus.append(text);
+    }
     function getSpaceInfo(){
         var text = '';
-        var serverStatus = $('#serverStatus');
         var getSpaceInfo = <%=getSpaceInfo%>;
+        text+='<div class="py-4">';
         for (var i = 0 ; i<getSpaceInfo.length; i++){
             var total = getSpaceInfo[i].total.split('.')[0];
             var used = getSpaceInfo[i].used.split('.')[0];
@@ -96,8 +110,10 @@
             text+='<div class="progress progress-primary mt-3 mb-2">'
                 + '<div class="progress-bar progress-label" role="progressbar" style="width: '+memoryPercent+'%" aria-valuenow="'+memoryPercent+'" aria-valuemin="0" aria-valuemax="100"></div>'
                 + '</div>'
-                + '<div class="mb-4 text-end">전체 '+ total + 'GB | 사용 : '+ used + 'GB | 잔여 : '+ free + 'GB</div>'
+                + '<div class="mb-3 text-end">전체 '+ total + 'GB | 사용 : '+ used + 'GB | 잔여 : '+ free + 'GB</div>'
         }
+        text+='</div>'
         serverStatus.append(text);
     }
+
 </script>
