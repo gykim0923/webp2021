@@ -153,7 +153,7 @@
             } else if (xhr.responseText == 'register') {
                 swal.fire({
                     title: '회원가입',
-                    text: '구글 로그인에 성공했지만 홈페이지 DB에 회원정보가 존재하지 않습니다. 회원가입 페이지로 이동합니다.',
+                    html: '구글 로그인에 성공했지만 홈페이지에<br> 회원정보가 존재하지 않습니다.<br> 회원가입 페이지로 이동합니다.',
                     icon: 'warning',
                     button: '확인'
                 }).then(function () {

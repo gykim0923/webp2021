@@ -71,7 +71,7 @@
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
-                            <button type="submit" class="btn btn-secondary" onclick="checkID()">중복확인</button>
+                            <button type="submit" class="btn btn-secondary"   onclick="checkID()">중복확인</button>
                         </div>
                         <span id="warningID"></span>
                         <div class="invalid-feedback">
@@ -144,8 +144,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLongTitle">이용약관</h5>
-                                    <button type="button" class="close" data-bs-dismiss="modal"
-                                            aria-label="Close">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                         <i data-feather="x"></i>
                                     </button>
                                 </div>
@@ -251,93 +250,132 @@
     var ischeckID = 0;
 
     function checkID() { //중복확인
-        var id = $('#id').val();
-        $.ajax({
-            url: "ajax.kgu",
-            type: "post",
-            data: {
-                req: "checkId",
-                data: id
-            },
-            success: function (data) {
-                var result = data;
-                if (data == 'dup') {
-                    ischeckID = 0;
-                    $('#warningID').html('*중복된 ID입니다');
-                    $('#warningID').css('color', 'red');
-                    $('#warningID').css('font-size', '11px');
-                    $('#warningID').css('margin-left', '10px');
 
-                } else {
-                    ischeckID = 1;
-                    $('#warningID').html('*사용가능한 ID입니다');
-                    $('#warningID').css('color', 'blue');
-                    $('#warningID').css('font-size', '11px');
-                    $('#warningID').css('margin-left', '10px');
+        var id = $('#id').val();
+
+
+        if (id != null) {
+            $.ajax({
+                url: "ajax.kgu",
+                type: "post",
+                data: {
+                    req: "checkId",
+                    data: id
+                },
+                success: function (data) {
+
+                    var result = data;
+                    if (data == 'dup') {
+                        ischeckID = 0;
+                        $('#warningID').html('*중복된 ID입니다');
+                        $('#warningID').css('color', 'red');
+                        $('#warningID').css('font-size', '11px');
+                        $('#warningID').css('margin-left', '10px');
+
+                    } else if (data == 'non') {
+                        ischeckID = 0;
+                        $('#warningID').html('*학번 혹은 교번을 입력해주세요');
+                        $('#warningID').css('color', 'red');
+                        $('#warningID').css('font-size', '11px');
+                        $('#warningID').css('margin-left', '10px');
+
+                    } else {
+                        ischeckID = 1;
+                        $('#warningID').html('*사용가능한 ID입니다');
+                        $('#warningID').css('color', 'blue');
+                        $('#warningID').css('font-size', '11px');
+                        $('#warningID').css('margin-left', '10px');
+                    }
                 }
-            }
-        })
+            })
+        } else {
+
+            swal.fire({
+                title: '학번 혹은 교번을 입력해주세요',
+                icon: 'warning',
+                showConfirmButton: true
+            });
+        }
     }
 
 
-    function LetsRegisterGoogle() { //여기서부터 작업
-        if (ischeckID == 1) {
-            var name = $('#name').val();
-            var id = $('#id').val();
-            var gender = $('input[name=gender]:checked').val();
-            var birth = $('#birth').val();
-            var phone = $('#phone').val();
-            var hopetype = $('#hope_type').val();
-            var major = $('#major').val();
-            var perID = id;
-            var reg_date_year = new Date().getFullYear();
-            var reg_date_month = new Date().getMonth()+1;
-            var reg_date_day = new Date().getDate();
-            var reg_date = reg_date_year+"-"+reg_date_month+"-"+reg_date_day;
+        function LetsRegisterGoogle() { //여기서부터 작업
+            if ($('#flexCheckDefault').is(":checked") == true) {
 
-            if (name != '' && gender != '' && birth != '' && phone != '') {
-                var update = id+"-/-/-"+perID+"-/-/-"+name+"-/-/-"+gender+"-/-/-"+birth+"-/-/-"+hopetype+"-/-/-"+phone+"-/-/-"+major+"-/-/-"+reg_date;
 
-                $.ajax({
-                    url: "ajax.kgu",
-                    type: "post",
-                    data: {
-                        req: "registerGoogle",
-                        data: update
-                    },
-                    success: function (data) {
-                        if (data == 'success') {
+
+                    if (ischeckID == 1) {
+                        var name = $('#name').val();
+                        var id = $('#id').val();
+                        var gender = $('input[name=gender]:checked').val();
+                        var birth = $('#birth').val();
+                        var phone = $('#phone').val();
+                        var hopetype = $('#hope_type').val();
+                        var major = $('#major').val();
+                        var perID = id;
+                        var reg_date_year = new Date().getFullYear();
+                        var reg_date_month = new Date().getMonth() + 1;
+                        var reg_date_day = new Date().getDate();
+                        var reg_date = reg_date_year + "-" + reg_date_month + "-" + reg_date_day;
+
+                        if (name != '' && gender != '' && birth != '' && phone != '') {
+                            var update = id + "-/-/-" + perID + "-/-/-" + name + "-/-/-" + gender + "-/-/-" + birth + "-/-/-" + hopetype + "-/-/-" + phone + "-/-/-" + major;
+                            if (name != '' && gender != '' && birth != '' && phone != '') {
+                                var update = id + "-/-/-" + perID + "-/-/-" + name + "-/-/-" + gender + "-/-/-" + birth + "-/-/-" + hopetype + "-/-/-" + phone + "-/-/-" + major + "-/-/-" + reg_date;
+
+                                $.ajax({
+                                    url: "ajax.kgu",
+                                    type: "post",
+                                    data: {
+                                        req: "registerGoogle",
+                                        data: update
+                                    },
+                                    success: function (data) {
+                                        if (data == 'success') {
+                                            swal.fire({
+                                                title: '회원가입 성공',
+                                                icon: 'success',
+                                                showConfirmButton: true
+                                            }).then(function () {
+                                                window.location.href = 'main.kgu';
+                                            });
+                                        } else
+
+                                            swal.fire({
+                                                title: '서버에러, 다음에 시도해주세요',
+                                                icon: 'error',
+                                                showConfirmButton: true
+                                            });
+                                    }
+                                })
+                            }
+                        }
+                        else {
                             swal.fire({
-                                title : '회원가입 성공',
-                                icon : 'success',
+                                title: '빈칸을 입력해주세요',
+                                icon: 'warning',
                                 showConfirmButton: true
-                            }).then(function (){
-                                window.location.href='main.kgu';
                             });
-                        } else
 
+                        }
+                    }
+                    else {
                         swal.fire({
-                            title : '서버에러, 다음에 시도해주세요',
-                            icon : 'error',
+                            title: '아이디 중복확인을 해주세요',
+                            icon: 'warning',
                             showConfirmButton: true
                         });
                     }
-                })
-            } else {
+            }
+            else
                 swal.fire({
-                    title : '빈칸을 입력해주세요',
-                    icon : 'warning',
+                    title: '이용약관 및 개인정보\n 처리방침에 동의해주세요',
+                    icon: 'warning',
                     showConfirmButton: true
                 });
 
-            }
-        } else
-            swal.fire({
-                title : '아이디 중복확인을 해주세요',
-                icon : 'warning',
-                showConfirmButton: true
-            });
-    }
+        }
+
 
 </script>
 
