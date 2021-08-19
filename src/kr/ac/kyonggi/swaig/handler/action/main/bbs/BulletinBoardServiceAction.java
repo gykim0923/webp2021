@@ -9,6 +9,8 @@ import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BulletinBoardServiceAction extends CustomAction {
 
@@ -58,8 +60,16 @@ public class BulletinBoardServiceAction extends CustomAction {
         //mode에 따라 필요한 DB가 다르다.
         if(mode.equals("list")){ //리스트인 경우
             if(num.equals("20")){ // 여러 게시판을 한번에 요청 시
-                String [] numbers = {"21","22","23"}; //여기에 들어있는 num들의 DB를 모두 불러와서 반환한다.
+//                String [] numbers = {"21","22","23"}; //여기에 들어있는 num들의 DB를 모두 불러와서 반환한다.
+                String [] numbers = new String[9]; //여기에 들어있는 num들의 DB를 모두 불러와서 반환한다.
+                for(int i=0; i<9; i++) {
+                    numbers[i]=String.valueOf(i+21);
+                }
                 request.setAttribute("getBBSList", gson.toJson(BBSDAO.getInstance().getAllBBSList(numbers)));
+
+//                for(int i=21; i<30; i++){
+//                    request.setAttribute(String.valueOf(i), gson.toJson(BBSDAO.getInstance().getBBSList(String.valueOf(i))));
+//                }
             }
             else if(num.equals("53")||num.equals("54")){ //전공에 따른 게시판 분리가 필요한 경우
                 String major = request.getParameter("major");
