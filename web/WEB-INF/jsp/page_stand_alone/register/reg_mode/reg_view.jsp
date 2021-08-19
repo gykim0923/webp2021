@@ -49,6 +49,7 @@
     var close = new Date(closing_date).getTime();
     var current = new Date().getTime();
     var isAvailable = 0; // 신청이 가능한지 검사하는 변수
+    var isFileExist = false //파일이 존재하는지 검사하는 변수 파일이 있어야 압축 버튼 생김
     var wasDone = 0; //예전에 제출한 것이 있는지 검사하는 변수
     if(start <= current && current <= close){
         isAvailable = 1;
@@ -246,8 +247,10 @@
                 for(var j=3; j<filename.length;j++)
                     fileOriginalName += '_'+filename[j];
                 var text = '<div class="mx-3">';
-                if (done.answer.length != 0)
+                if (done.answer.length != 0){
                     text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>' + (i + 1) + '.' + it.question_content + '</label><div class="input-group mb-3" id="fileUploadSection'+i+'"><input type="text" class="form-control" value="'+fileOriginalName+'" readonly><a class="btn btn-secondary" href="download.kgu?id='+filename[0]+'&&path=/uploaded/bbs_reg/reg'+getReg.id+'/Q'+it.question_num+'"><i class="bi bi-download"></i> 다운로드</a></div></div>';
+                    isFileExist = true;
+                }
                 else
                     text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>' + (i + 1) + '.' + it.question_content + '</label><br><span style="font-size : 14px; color : red">파일을 올리지 않았습니다.</span></div>';
                 panel.append(text + '</div>');
@@ -846,14 +849,16 @@
         var modifyUrl = 'reg.kgu?major='+major+'&&num='+num+'&&mode=modify&&id='+id;
         /**
          * 작성자 : 본인이 작성한 글 수정 및 삭제 / 엑셀 다운
-         * 관리자 : 본인이 작성한 글 수정 및 삭제 + 남이 쓴 글 삭제 기능 / 엑셀 다운
-         * 교수 : 본인이 작성한 글 수정 및 삭제 + 보기 권한이 있는 글 엑셀 다운
+         * 관리자 : 본인이 작성한 글 수정 및 삭제 + 남이 쓴 글 삭제 기능 / 엑셀, 압축파일 다운
+         * 교수 : 본인이 작성한 글 수정 및 삭제 + 보기 권한이 있는 글 엑셀, 압축파일 다운
+         * 압축파일은 파일형 질문이 존재하고 업로드된 답변이 있을 떄만 볼 수 있음
          * */
         var text = '';
         text+='<div><a href="'+listUrl+'" class="btn btn-secondary">목록</a></div><div>'
         if((getReg.for_who == 1 && type.for_header == '교수') ||user.id == getReg.writer_id) {
             text += '<a href="regExcel.kgu?id=' + getReg.id + '"><div class="btn btn-outline-success mx-1">엑셀파일</div></a>'
-                + '<a href="regCompress.kgu?id=' + getReg.id+'"><div class="btn btn-outline-warning mx-1">압축폴더</div></a>'
+            if(isFileExist == true)
+                text += '<a href="regCompress.kgu?id=' + getReg.id+'"><div class="btn btn-outline-warning mx-1">파일답변 압축파일</div></a>'
         }
         if(user.id == getReg.writer_id || type.board_level == 0){
             text += '<a href="'+modifyUrl+'"><div class="btn btn-primary mx-1">수정</div></a>'
@@ -914,12 +919,12 @@
             var it = getAllFile[i];
             if(user != null){
                 if(getReg.level.includes(type.for_header) || type.for_header == '관리자' || user.id == getReg.writer_id)
-                    a += '<a href="download.kgu?id='+it.id+'&&path=/uploaded/bbs_reg">' + it.original_FileName + '</a>&nbsp&nbsp';
+                    a += '<a href="download.kgu?id='+it.id+'&&path=/uploaded/bbs_reg">' + it.original_FileName + '</a>&emsp;&nbsp;';
                 else
-                    a  += '<span>'+it.original_FileName + '&nbsp&nbsp</span>';
+                    a  += '<span>'+it.original_FileName + '&emsp;&nbsp;</span>';
             }
             else
-                a  += '<span>'+it.original_FileName + '&nbsp&nbsp</span>';
+                a  += '<span>'+it.original_FileName + '&emsp;&nbsp;</span>';
         }
         a += '</div><hr>'
         postbox.append(a);

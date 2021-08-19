@@ -811,9 +811,12 @@
             board_level : '1',
             upload_mode : 'bbs',
         },
+        showUpload : false, // 일괄 업로드버튼 숨김
+        showRemove : false, // 일괄 삭제 버튼 숨김
+        fileActionSettings : {showZoom: false}, // 줌 못보게 막음(모달이 안닫히는 오류가 있어서)
         overwriteInitial : false,
         preferIconicPreview: true,
-        previewFileIconSettings: { // configure your icon file extensions
+        previewFileIconSettings: { // 확장자별 이미지 정의
             'doc': '<i class="bi bi-file-earmark-word-fill text-primary"></i>',
             'hwp': '<i class="bi bi-file-earmark-richtext-fill text-primary"></i>',
             'xls': '<i class="bi bi-file-earmark-excel-fill text-success"></i>',
@@ -828,7 +831,7 @@
             'gif': '<i class="bi bi-file-earmark-image-fill text-muted"></i>',
             'png': '<i class="bi bi-file-earmark-image-fill text-primary"></i>'
         },
-        previewFileExtSettings: { // configure the logic for determining icon file extensions
+        previewFileExtSettings: { // 확장자 구분
             'doc': function(ext) {
                 return ext.match(/(doc|docx)$/i);
             },
@@ -857,8 +860,6 @@
                 return ext.match(/(mp3|wav)$/i);
             }
         }
-    // }).on('fileuploaded', function() {
-        //파일이 삭제되었습니다 추가?
     }).on('filedeleted', function() {
         swal.fire({
             title : '파일이 삭제되었습니다.',
