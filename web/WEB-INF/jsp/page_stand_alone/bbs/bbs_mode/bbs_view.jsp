@@ -411,6 +411,13 @@
   #view_content{
     min-height: 500px;
   }
+
+   #view_content img {
+     max-width:100%;
+     width: 100% !important;
+     height: auto !important;
+     object-fit:cover;
+   }
 </style>
 
 

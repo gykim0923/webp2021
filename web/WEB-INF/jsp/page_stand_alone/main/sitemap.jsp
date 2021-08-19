@@ -133,11 +133,34 @@
 
 <div>
     <div class="container">
-        <div class="row align-items-md-stretch" id="">
-            <p class="h3"><a href="loginPage_v2.kgu">로그인(구글)</a></p>
-            <p class="h3"><a href="loginPage.kgu">로그인(구버전)</a></p>
-        </div>
         <div class="row align-items-md-stretch" id="siteMapCard1"></div>
         <div class="row align-items-md-stretch" id="siteMapCard2"></div>
+        <hr>
+        <div class="row align-items-md-stretch py-4">
+            <p class="col-md-4 h3"><a href="main.kgu">메 인</a></p>
+            <p class="col-md-4 h3"><a href="loginPage_v2.kgu">로그인(Google)</a></p>
+            <p class="col-md-4 h3"><a href="loginPage.kgu" class="text-secondary">로그인(구버전)</a></p>
+        </div>
+        <div class="row align-items-md-stretch py-4">
+            <p class="col-md-4 h3"><a href="https://sites.google.com/kyonggi.ac.kr/k-with">K-WITH 융합교육원</a></p>
+            <p class="col-md-4 h3"><a href="location.kgu">연락처 및 오시는 길</a></p>
+            <p class="col-md-4 h3"><a href="sitemap.kgu">사이트맵</a></p>
+        </div>
+        <div class="row align-items-md-stretch py-4">
+            <p class="col-md-4 h3"><a href="http://www.kyonggi.ac.kr/webService.kgu?menuCode=K00M0502">개인정보 처리방침</a></p>
+            <p class="col-md-4 h3"><a href="mypage.kgu">마이페이지</a></p>
+            <p class="col-md-4 h3"><a href="whatIDoPage.kgu">활동내역</a></p>
+        </div>
+        <hr>
+<%--        <h1>Family Sites</h1>--%>
+        <div class="row align-items-md-stretch py-4">
+            <p class="col-md-4 h3"><a href="http://www.kyonggi.ac.kr/KyonggiUp.kgu">경기대학교</a></p>
+            <p class="col-md-4 h3"><a href="https://kutis.kyonggi.ac.kr/webkutis/view/indexWeb.jsp">KUTIS</a></p>
+            <p class="col-md-4 h3"><a href="https://lms.kyonggi.ac.kr/login.php">LMS</a></p>
+        </div>
+        <div class="row align-items-md-stretch py-4">
+            <p class="col-md-4 h3"><a href="http://sugang.kyonggi.ac.kr/">수강신청</a></p>
+            <p class="col-md-4 h3"><a href="https://grade.kyonggi.ac.kr/">성적확인</a></p>
+        </div>
     </div>
 </div>
