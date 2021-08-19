@@ -226,7 +226,6 @@
             icon: 'warning',
             showConfirmButton: true,
             showCancelButton: true
-
         }).then((result) => {
             if (result.isConfirmed) {
 

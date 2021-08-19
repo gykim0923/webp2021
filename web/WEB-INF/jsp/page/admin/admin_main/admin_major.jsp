@@ -152,34 +152,32 @@
     var data=major_id+'-/-/-'+major_name+'-/-/-'+major_location+'-/-/-'+major_contact;
 
       $.ajax({
-        url: "ajax.kgu", //AjaxAction에서
-        type: "post", //post 방식으로
-        data: {
-          req: "addMajor", //이 메소드를 찾아서
-          data: data //이 데이터를 파라미터로 넘겨줍니다.
-        },
-        success: function (data) { //성공 시
-          if(data=='success'){
-            swal.fire({
-              title : '해당 전공이 추가되었습니다.',
-              icon : 'success',
-              showConfirmButton: true
+          url: "ajax.kgu", //AjaxAction에서
+          type: "post", //post 방식으로
+          data: {
+            req: "addMajor", //이 메소드를 찾아서
+            data: data //이 데이터를 파라미터로 넘겨줍니다.
+          },
+          success: function (data) { //성공 시
+            if(data=='success'){
+              swal.fire({
+                title : '해당 전공이 추가되었습니다.',
+                icon : 'success',
+                showConfirmButton: true
 
-            }).then(function (){
-              location.reload();
-            });
+              }).then(function (){
+                location.reload();
+              });
+            }
+            else{
+              swal.fire({
+                title : '아이디가 중복됩니다.',
+                icon : 'warning',
+                showConfirmButton: true
+              });
+            }
           }
-
-          else{
-            swal.fire({
-              title : '권한이 부족합니다.',
-              icon : 'warning',
-              showConfirmButton: true
-
-            });
-          }
-        }
-      })
+        })
     }
 
   function deleteMajor(i){
@@ -198,28 +196,30 @@
         icon: 'warning',
         showConfirmButton: true,
         showCancelButton: true
-      }).then(function(){
-          $.ajax({
-            url : "ajax.kgu",
-            type : "post",
-            data : {
-              req : "delete_major",
-              data : target_id
-            },
-            success : function(data) {
-              if(data == 'fail'){
-                alert('fail');
-                return;
-              }
-              swal.fire({
-                title : '삭제가 완료되었습니다.',
-                icon : 'success',
-                showConfirmButton: true
-              }).then(function () {
-                location.reload();
-              });
+      }).then((result) => {
+        if (result.isConfirmed) {
+        $.ajax({
+          url: "ajax.kgu",
+          type: "post",
+          data: {
+            req: "delete_major",
+            data: target_id
+          },
+          success: function (data) {
+            if (data == 'fail') {
+              alert('fail');
+              return;
             }
-          });
+            swal.fire({
+              title: '삭제가 완료되었습니다.',
+              icon: 'success',
+              showConfirmButton: true
+            }).then(function () {
+              location.reload();
+            });
+          }
+        });
+        }
       })
     }
   }

@@ -144,9 +144,6 @@ public class AjaxAction implements Action {
                 }
                 result=AdminDAO.getInstance().addMajor(data);
                 break;
-
-
-
             case "modifyMajor":
                 if (type.board_level != 0){
                     return "fail";

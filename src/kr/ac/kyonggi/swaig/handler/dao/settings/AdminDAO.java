@@ -8,6 +8,7 @@ import kr.ac.kyonggi.swaig.handler.dto.settings.SliderDTO;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
+import org.apache.poi.util.SystemOutLogger;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -32,18 +33,33 @@ public class AdminDAO {
         String major_location = arr[2];
         String major_contact = arr[3];
         String nullText = "수정을 해주세요";
+        String majorId;
         Connection conn = Config.getInstance().sqlLogin();
+        List<Map<String, Object>> listOfMaps = null;
+        boolean result = false;
         try {
             QueryRunner queryRunner = new QueryRunner();
+            listOfMaps = queryRunner.query(conn, "SELECT major_id FROM major;", new MapListHandler());
+
+            for(int i=0; i<listOfMaps.size(); i++) {
+                majorId = String.valueOf(listOfMaps.get(i).get("major_id"));
+                if (majorId.equals(major_id)) {
+                    return "fail";
+                }
+            }
             queryRunner.update(conn,"INSERT INTO major(major_id,major_name,major_location,major_contact) VALUE(?,?,?,?);", major_id,major_name,major_location,major_contact);
             queryRunner.update(conn,"INSERT INTO text(id,major,content) VALUE(?,?,?);", 50,major_id,nullText);
             queryRunner.update(conn,"INSERT INTO text(id,major,content) VALUE(?,?,?);", 51,major_id,nullText);
+            result = true;
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {
             DbUtils.closeQuietly(conn);
         }
-        return "success";
+        if(result)
+            return "success";
+        else
+            return "fail";
     }
 
     public String modifyMajor(String data) {
