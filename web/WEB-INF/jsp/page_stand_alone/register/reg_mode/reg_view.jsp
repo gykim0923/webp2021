@@ -541,7 +541,7 @@
                                     showConfirmButton: true
                                 }).then(function (){
                                     if(getReg.for_who == 1)
-                                        window.location.href= 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list&&id=' + getReg.id;
+                                        window.location.href= 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=view&&id=' + getReg.id;
                                     wasDone = 1;
                                     check();
                                     whatIDone();
@@ -746,12 +746,12 @@
                         success : function(data){//데이터는 주소
                             if(data == 'success'){
                                 swal.fire({
-                                    title : '신청 성공',
+                                    title : '수정 성공',
                                     icon : 'success',
                                     showConfirmButton: true
                                 }).then(function (){
                                     if(getReg.for_who == 1)
-                                        window.location.href= 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list&&id=' + getReg.id;
+                                        window.location.href= 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=view&&id=' + getReg.id;
                                     wasDone = 1;
                                     check();
                                     whatIDone();
@@ -895,7 +895,9 @@
                                 title: '해당 내용이 삭제되었습니다.',
                                 icon: 'success',
                                 showConfirmButton: true
-                            });
+                            }).then(function (){
+                                location.href = 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list'
+                            })
                         } else {
                             swal.fire({
                                 title: '권한이 부족합니다.',
