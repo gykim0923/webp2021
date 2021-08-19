@@ -46,7 +46,7 @@
     var starting_date = getReg.starting_date;
     var start = new Date(starting_date).getTime();
     var closing_date = getReg.closing_date;
-    var close = new Date(closing_date).getTime();
+    var close = new Date(closing_date).getTime() + 1000*60*60*24;
     var current = new Date().getTime();
     var isAvailable = 0; // 신청이 가능한지 검사하는 변수
     var isFileExist = false //파일이 존재하는지 검사하는 변수 파일이 있어야 압축 버튼 생김
