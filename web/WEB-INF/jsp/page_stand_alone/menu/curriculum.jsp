@@ -50,8 +50,8 @@
 
             if(type.for_header=='관리자'){
                 var button = $('#modify_button');
-                button.append('<button type="button" class="btn btn-outline-secondary" onclick="modify()">내용 수정</button>'
-                    +'<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="addCurriculumModal()">이미지 추가</button>');
+                button.append('<button type="button" class="btn btn-outline-primary" onclick="modify()">내용 수정</button>'
+                    +'<button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="addCurriculumModal()">이미지 추가</button>');
             }
 
             var yearCount = curriculumList.length;
@@ -61,7 +61,7 @@
             }
             else{
                 for(var i = 0; i<yearCount; i++){
-                    yearButton.append('<button type="button" class="btn btn-outline-secondary me-2" onclick="viewImages('+i+')">'+curriculumList[i].year+'년 교육과정</button>');
+                    yearButton.append('<button type="button" class="btn btn-outline-primary me-2" onclick="viewImages('+i+')">'+curriculumList[i].year+'년 교육과정</button>');
                 }
 
                 viewImages(yearCount-1);
@@ -75,7 +75,7 @@
         var a='';
         modify_button.empty();
         a+='<textarea id="editor">'+curriculum.content+'</textarea>';
-        a+='<div id="write_post" class="d-grid gap-2 d-md-flex justify-content-md-end"><button type="button" class="btn btn-outline-secondary" onclick="modifyText()">수정</button>';
+        a+='<div id="write_post" class="d-grid gap-2 d-md-flex justify-content-md-end"><button type="button" class="btn btn-outline-primary" onclick="modifyText()">수정</button>';
         a+='<button type="button" class="btn btn-outline-secondary" onclick="back()">뒤로</button></div></div>';
         $('#curriculum_content').html(a);
         CKEDITOR.replace('editor', {
@@ -133,8 +133,8 @@
             +'<img src="'+curriculumList[num].edu_img+'" id="edu_'+curriculumList[num].year+'" onerror="this.src=\'http://placehold.it/300x300\'" class="img-fluid">');
         if(type.for_header == '관리자')
             list.append('<div class="d-grid gap-2 d-md-flex justify-content-md-end">'
-                +'<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="modifyCurriculumModal('+num+')">수정</button>'
-                +'<button type="button" class="btn btn-outline-secondary" onclick="deleteCurriculum('+num+')">삭제</button></div>');
+                +'<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="modifyCurriculumModal('+num+')">수정</button>'
+                +'<button type="button" class="btn btn-outline-danger" onclick="deleteCurriculum('+num+')">삭제</button></div>');
     }
 
     function addCurriculumModal(){
@@ -149,7 +149,7 @@
             +'<div class="col-md-6"><label for="year" class="form-label">연도</label><input class="form-control" id="year" type="number" placeholder="ex)2021"></div>'
             +'<div class="col-12" id="curriculumUpload"><label for="curriculumFile" class="form-label">커리큘럼 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="curriculumFile" name="curriculumFile" accept="image/*"><label class="btn btn-secondary" for="curriculumFile" onclick="uploadCurriculum()">Upload</label></div></div>'
             +'<div class="col-12" id="eduUpload"><label for="eduFile" class="form-label">이수체계도 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="eduFile" name="eduFile" accept="image/*"><label class="btn btn-secondary" for="eduFile" onclick="uploadEdu()">Upload</label></div></div>');
-        modalFooter.html('<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button><button type="button" class="btn btn-primary" onclick="addCurriculum()">추가하기</button>');
+        modalFooter.html('<button type="button" class="btn btn-success" data-bs-dismiss="modal">취소</button><button type="button" class="btn btn-primary" onclick="addCurriculum()">추가하기</button>');
     }
 
     function addCurriculum(){
@@ -204,7 +204,7 @@
                     +'<div class="col-md-6"><label for="year" class="form-label">연도</label><input class="form-control" id="year" value="'+curriculumList[num].year+'" readonly></div>'
                     +'<div class="col-12" id="curriculumUpload"><label for="curriculumFile" class="form-label">커리큘럼 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" name="curriculumFile" id="curriculumFile" accept="image/*"><button class="btn btn-outline-secondary" type="button" onclick="uploadCurriculum()">Upload</button></div></div>'
                     +'<div class="col-12" id="eduUpload"><label for="eduFile" class="form-label">이수체계도 이미지</label><div class="input-group mb-3"><input type="file" class="form-control" id="eduFile" name="eduFile" accept="image/*"><button class="btn btn-outline-secondary" type="button" onclick="uploadEdu()">Upload</button></div></div>');
-        modalFooter.html('<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button><button type="button" class="btn btn-primary" onclick="modifyCurriculum('+num+')">수정하기</button>');
+        modalFooter.html('<button type="button" class="btn btn-primary" data-bs-dismiss="modal">취소</button><button type="button" class="btn btn-primary" onclick="modifyCurriculum('+num+')">수정하기</button>');
     }
 
     function modifyCurriculum(num){
