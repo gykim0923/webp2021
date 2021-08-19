@@ -123,7 +123,7 @@
         var text='';
         for (var j=0; j<menuPageList.length; j++){
             if (menuPageList[j].tab_id==5){
-                var url = menuPageList[j].page_path+'?major='+major.major_id+'&&num='+menuPageList[j].page_id;
+                var url = menuPageList[j].page_path+'?major='+major.major_id+'&num='+menuPageList[j].page_id;
                 text += '<span><li class="widget-49-meeting-item"><a href="'+url+'"><h3>'+menuPageList[j].page_title+'</h3></a></li></span>';
             }
         }
@@ -148,8 +148,8 @@
         </div>
         <div class="row align-items-md-stretch py-4">
             <p class="col-md-4 h3"><a href="http://www.kyonggi.ac.kr/webService.kgu?menuCode=K00M0502">개인정보 처리방침</a></p>
-            <p class="col-md-4 h3"><a href="mypage.kgu">마이페이지</a></p>
-            <p class="col-md-4 h3"><a href="whatIDoPage.kgu">활동내역</a></p>
+            <p class="col-md-4 h3"><a href="mypage.kgu?num=60">마이페이지</a></p>
+            <p class="col-md-4 h3"><a href="whatIDoPage.kgu?num=61">활동내역</a></p>
         </div>
         <hr>
 <%--        <h1>Family Sites</h1>--%>
