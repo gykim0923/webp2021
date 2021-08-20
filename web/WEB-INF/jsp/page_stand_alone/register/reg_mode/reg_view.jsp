@@ -860,9 +860,10 @@
             if(isFileExist == true)
                 text += '<a href="regCompress.kgu?id=' + getReg.id+'"><div class="btn btn-outline-warning mx-1">파일답변 압축파일</div></a>'
         }
-        if(user.id == getReg.writer_id || type.board_level == 0){
+        if(user.id == getReg.writer_id)
             text += '<a href="'+modifyUrl+'"><div class="btn btn-primary mx-1">수정</div></a>'
-                + '<a onclick="deleteReg()"><div class="btn btn-danger mx-1">삭제</div></a>'
+        if(user.id == getReg.writer_id || type.board_level == 0){
+            text += '<a onclick="deleteReg()"><div class="btn btn-danger mx-1">삭제</div></a>'
         }
         list_button.append(text+"</div>");
     }

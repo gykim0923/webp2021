@@ -35,7 +35,7 @@ public class ExcelAction extends CustomAction {
          UserTypeDTO type1 = gson.fromJson((String)request.getSession().getAttribute("type"), UserTypeDTO.class);
          if(type1.board_level>0)
             return null;
-         String savePath = request.getServletContext().getRealPath("/uploadFile"); //저장경로
+         String savePath = request.getSession().getServletContext().getRealPath("/uploadFile"); //저장경로
 
           //폴더가 없다면 생성
           File dircheck = new File(savePath);

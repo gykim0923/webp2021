@@ -22,7 +22,7 @@ public class RegisterExcelAction implements Action {
         UserTypeDTO type = gson.fromJson((String)request.getSession().getAttribute("type"), UserTypeDTO.class);
         if(type.type_name.equals("기타"))
             return "RequestDispatcher:jsp/main/error.jsp";
-        String path = request.getServletContext().getRealPath("/uploadFile");
+        String path = request.getSession().getServletContext().getRealPath("/uploadFile");
         String boardId = request.getParameter("id");
         RegisterDAO dao = RegisterDAO.getInstance();
         RegisterDTO checkReg = dao.getReg(boardId);
