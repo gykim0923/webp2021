@@ -195,7 +195,7 @@ public class RegisterDAO {
     }
 
     public String insertAnswers(String data) {
-        System.out.println(data);
+//        System.out.println(data);
         String arr[] = data.split("-/-/-");// 0= userName 1=userid 2=per_id 3=grade 4=type 5=board_number 6=answers 7= question개수
         String answers[] = arr[6].split("-/#/-"); // answer별 구분자 -/#/- 다중객관식은 그냥 answer에 구분자쨰로 넣음.
         if(arr[2].equals("null"))
@@ -212,7 +212,7 @@ public class RegisterDAO {
             if (listOfMaps.size() > 0)
                 return "already";
             for (int i = 0; i < answers.length; i++) {
-                System.out.println(answers[i]);
+//                System.out.println(answers[i]);
                 queryRunner.update(conn,
                         "INSERT INTO bbs_reg_answer(writer_name, writer_id, writer_perId, writer_grade, writer_type, question_num, reg_id, answer) VALUES(?,?,?,?,?,?,?,?);",
                         arr[0], arr[1], arr[2], arr[3], arr[4], (i + 1), arr[5], answers[i]);
@@ -236,7 +236,7 @@ public class RegisterDAO {
     }
 
     public String modifyAnswer(String data) {
-        System.out.println(data);
+//        System.out.println(data);
         String arr[] = data.split("-/-/-");// 0= userName 1=userid 2=per_id 3=grade 4=type 5=board_number 6=answers 7= question개수
         String answers[] = arr[6].split("-/#/-"); // answer별 구분자 -/#/- 다중객관식은 그냥 answer에 구분자쨰로 넣음.
         Connection conn = Config.getInstance().sqlLogin();
@@ -252,7 +252,7 @@ public class RegisterDAO {
                         arr[0], arr[1], arr[2], arr[3], arr[4], (i + 1), arr[5], answers[i]);
             }
             for (int j = answers.length ; j < Integer.valueOf(arr[7]) ; ++j) {
-                System.out.println("222");
+//                System.out.println("222");
                 queryRunner.update(conn,
                         "INSERT INTO bbs_reg_answer(writer_name, writer_id, writer_perId, writer_grade, writer_type, question_num, reg_id, answer) VALUES(?,?,?,?,?,?,?,?);",
                         arr[0], arr[1], arr[2], arr[3], arr[4], (j + 1), arr[5], "");
@@ -305,7 +305,7 @@ public class RegisterDAO {
             listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_reg_question WHERE reg_id=?", new MapListHandler(), arr[0]);
             ArrayList<RegQuestionDTO> reqList = gson.fromJson(gson.toJson(listOfMaps),new TypeToken<List<RegQuestionDTO>>() {}.getType());
             int que_size = reqList.size();
-            System.out.println(que_size);
+//            System.out.println(que_size);
             queryRunner.update(conn, "DELETE FROM bbs_reg_answer WHERE reg_id=? AND writer_id=?;", arr[0], arr[4]);
             listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_reg_answer_file WHERE reg_id=? AND writer_id=?;",
                     new MapListHandler(), arr[0], arr[4]);

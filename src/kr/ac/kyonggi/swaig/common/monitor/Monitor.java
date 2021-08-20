@@ -59,26 +59,35 @@ public class Monitor {
         return listOfMaps;
     }
 
-    public void getHeapMemory(){
+    public List<Map<String, String>> getMemoryInfo() {
+        List<Map<String, String>> listOfMaps = new ArrayList<Map<String, String>>();
+        Map<String,String> map = new HashMap<String,String>();
 
         //자바 힙메모리 크기 확인하는 코드
-        MemoryMXBean membean = (MemoryMXBean) ManagementFactory.getMemoryMXBean( );
-        MemoryUsage heap = membean.getHeapMemoryUsage();
-        System.out.println( "Heap Memory: " + heap.getUsed()/mb+"MB");
-        MemoryUsage nonheap = membean.getNonHeapMemoryUsage();
-        System.out.println( "NonHeap Memory: " + nonheap.getUsed()/mb+"MB");
-    }
+        MemoryMXBean memory = (MemoryMXBean) ManagementFactory.getMemoryMXBean( );
 
-    public void systemMemory () {
+        MemoryUsage heap = memory.getHeapMemoryUsage();
+        map.put("heapMemory", heap.getUsed()/mb+"");
+//        System.out.println( "Heap Memory: " + heap.getUsed()/mb+"MB");
+
+        MemoryUsage nonheap = memory.getNonHeapMemoryUsage();
+        map.put("nonHeapMemory", nonheap.getUsed()/mb+"");
+//        System.out.println( "NonHeap Memory: " + nonheap.getUsed()/mb+"MB");
+
+
         //시스템 메모리
         Runtime runtime = Runtime.getRuntime();
         int total = (int)(runtime.totalMemory()/mb);
         int free = (int)(runtime.freeMemory()/mb);
-        int used = total - free;
+//        int used = total - free;
+        map.put("total", total+"");
+//        System.out.println("전체 메모리" + total+"MB");
+//        System.out.println("사용중인 메모리" + used +"MB");
+        map.put("free", free+"");
+//        System.out.println("사용가능한 메모리"+free +"MB");
 
-        System.out.println("전체 메모리" + total+"MB");
-        System.out.println("사용중인 메모리" + free +"MB");
-        System.out.println("사용가능한 메모리"+used +"MB");
 
+        listOfMaps.add(map);
+        return listOfMaps;
     }
 }

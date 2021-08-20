@@ -9,6 +9,7 @@ import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.LogDAO;
 import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
 import kr.ac.kyonggi.swaig.handler.dto.monitor.DiskDTO;
+import kr.ac.kyonggi.swaig.handler.dto.monitor.MemoryDTO;
 import kr.ac.kyonggi.swaig.handler.dto.monitor.OSDTO;
 import kr.ac.kyonggi.swaig.handler.dto.user.UserTypeDTO;
 
@@ -59,10 +60,6 @@ public class AdminAction extends CustomAction {
                 ArrayList<DiskDTO> getSpaceInfo = gson.fromJson(gson.toJson(spaceInfo), new TypeToken<List<DiskDTO>>() {}.getType());
                 request.setAttribute("getSpaceInfo",gson.toJson(getSpaceInfo));
 
-                //
-
-                Monitor.getInstance().getHeapMemory();
-
 
                 // 운영체제 정보
                 List<Map<String, String>> osInfo = Monitor.getInstance().getOSInfo();
@@ -70,8 +67,10 @@ public class AdminAction extends CustomAction {
                 request.setAttribute("getOSInfo",gson.toJson(getOSInfo));
 
 
-
-                Monitor.getInstance().systemMemory();
+                // 메모리 정보
+                List<Map<String, String>> memoryInfo = Monitor.getInstance().getMemoryInfo();
+                ArrayList<MemoryDTO> getMemoryInfo = gson.fromJson(gson.toJson(memoryInfo), new TypeToken<List<MemoryDTO>>() {}.getType());
+                request.setAttribute("getMemoryInfo",gson.toJson(getMemoryInfo));
 
                 return "RequestDispatcher:jsp/page/page.jsp";
             }

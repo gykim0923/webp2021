@@ -317,7 +317,7 @@ INSERT INTO kgu_major(id, campus, college, major) VALUE (78,'서울캠퍼스', '
 INSERT INTO kgu_major(id, campus, college, major) VALUE (79,'서울캠퍼스', '관광문화대학', '애니메이션학과');
 INSERT INTO kgu_major(id, campus, college, major) VALUE (80,'서울캠퍼스', '관광문화대학', '실용음악학과');
 INSERT INTO kgu_major(id, campus, college, major) VALUE (81,'서울캠퍼스', '관광문화대학', '미디어영상학과');
-INSERT INTO kgu_major(id, campus, college, major) VALUE (82,'서울캠퍼스', '관광문화대학', '관광학부 ');
+INSERT INTO kgu_major(id, campus, college, major) VALUE (82,'서울캠퍼스', '관광문화대학', '관광학부');
 
 
 

@@ -59,13 +59,13 @@ public class CompressZip {
         if (file.isDirectory()) { // 디렉토리일 경우 재탐색(재귀)
             File[] files = file.listFiles();
             for (File f : files) {
-                System.out.println("directory: " + f.getPath());
+//                System.out.println("directory: " + f.getPath());
                 searchDirectory(f, root, zos);
             }
         } else {
             // 파일일 경우 압축을 한다.
             try {
-                System.out.println("file : "+file.getPath());
+//                System.out.println("file : "+file.getPath());
                 compressZip(file, root, zos);
             } catch (Throwable e) {
                 e.printStackTrace();
