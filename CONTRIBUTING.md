@@ -193,7 +193,7 @@ Contributing Rules
 - ㅇㅇ
 
 ---
-#Ubuntu Server
+# Ubuntu Server
 ## Tomcat
 - 서버를 중지하고 WAR 파일을 날립니다.
 - 날리기 전에 첨부파일 백업은 필수입니다.
