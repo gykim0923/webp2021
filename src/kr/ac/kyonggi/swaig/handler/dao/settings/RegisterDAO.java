@@ -131,11 +131,11 @@ public class RegisterDAO {
                 String type = text[0];
                 String content = text[1];
                 queryRunner.update(conn,
-                        "INSERT INTO bbs_regQuestion(reg_id, question_num, question_content, question_type) VALUES (?,?,?,?);",
+                        "INSERT INTO bbs_reg_question(reg_id, question_num, question_content, question_type) VALUES (?,?,?,?);",
                         it.id, i + 1, content, Integer.valueOf(type));
 //                System.out.println(i);
             }
-//            queryRunner.update(conn, "UPDATE bbs_reg_WriterFile SET board_id=? WHERE board_id=0 AND writer_id=?", id,
+//            queryRunner.update(conn, "UPDATE bbs_reg_writer_file SET board_id=? WHERE board_id=0 AND writer_id=?", id,
 //                    arr[0]);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -182,7 +182,7 @@ public class RegisterDAO {
                     }.getType());
             if (!reqList.get(0).writer_id.equals(arr[2]) && !reqList.get(0).level.contains(arr[1]) && Integer.valueOf(arr[3]) != 0) //권한 확인 (작성지인지, 신청 대상인지, 관리자인지 확인)
                 return null;
-            listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_regQuestion WHERE reg_id=? ORDER BY question_num;", new MapListHandler(), arr[0]);
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_reg_question WHERE reg_id=? ORDER BY question_num;", new MapListHandler(), arr[0]);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -302,12 +302,12 @@ public class RegisterDAO {
             ArrayList<RegAnswerDTO> ansList = gson.fromJson(gson.toJson(listOfMaps),new TypeToken<List<RegAnswerDTO>>() {}.getType());
             if (!ansList.get(0).writer_id.equals(arr[4])) //본인이 삭제하는지 검사
                 return null;
-            listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_regQuestion WHERE reg_id=?", new MapListHandler(), arr[0]);
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_reg_question WHERE reg_id=?", new MapListHandler(), arr[0]);
             ArrayList<RegQuestionDTO> reqList = gson.fromJson(gson.toJson(listOfMaps),new TypeToken<List<RegQuestionDTO>>() {}.getType());
             int que_size = reqList.size();
             System.out.println(que_size);
             queryRunner.update(conn, "DELETE FROM bbs_reg_answer WHERE reg_id=? AND writer_id=?;", arr[0], arr[4]);
-            listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_reg_answerFile WHERE reg_id=? AND writer_id=?;",
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_reg_answer_file WHERE reg_id=? AND writer_id=?;",
                     new MapListHandler(), arr[0], arr[4]);
             ArrayList<RegAnswerFileDTO> files = gson.fromJson(gson.toJson(listOfMaps),
                     new TypeToken<List<RegAnswerFileDTO>>() {}.getType());
@@ -319,7 +319,7 @@ public class RegisterDAO {
                         RegAnswerFileDTO it = files.get(j);
                         File deleteFile = new File(folder, it.real_FileName);
                         deleteFile.delete();
-                        queryRunner.update(conn, "DELETE FROM bbs_reg_answerFile WHERE reg_id=? AND writer_id=?;", arr[0], arr[4]);
+                        queryRunner.update(conn, "DELETE FROM bbs_reg_answer_file WHERE reg_id=? AND writer_id=?;", arr[0], arr[4]);
                     }
                 }
             }
@@ -341,9 +341,9 @@ public class RegisterDAO {
             QueryRunner queryRunner = new QueryRunner();
             queryRunner.update(conn,"DELETE FROM `bbs_reg` WHERE `id`=?;", id);
             queryRunner.update(conn,"DELETE FROM `bbs_reg_answer` WHERE `reg_id`=?;", id);
-            queryRunner.update(conn,"DELETE FROM `bbs_regQuestion` WHERE `reg_id`=?;", id);
-            queryRunner.update(conn,"DELETE FROM `bbs_reg_answerFile` WHERE `reg_id`=?;", id);
-            queryRunner.update(conn,"DELETE FROM `bbs_reg_WriterFile` WHERE `reg_id`=?;", id);
+            queryRunner.update(conn,"DELETE FROM `bbs_reg_question` WHERE `reg_id`=?;", id);
+            queryRunner.update(conn,"DELETE FROM `bbs_reg_answer_file` WHERE `reg_id`=?;", id);
+            queryRunner.update(conn,"DELETE FROM `bbs_reg_writer_file` WHERE `reg_id`=?;", id);
             //파일 삭제 추가
         } catch (SQLException se) {
             se.printStackTrace();
@@ -387,7 +387,7 @@ public class RegisterDAO {
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            listOfMaps = queryRunner.query(conn,"SELECT * FROM bbs_reg_WriterFile WHERE reg_id = ? ORDER BY id DESC;", new MapListHandler(), id);
+            listOfMaps = queryRunner.query(conn,"SELECT * FROM bbs_reg_writer_file WHERE reg_id = ? ORDER BY id DESC;", new MapListHandler(), id);
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {
@@ -403,7 +403,7 @@ public class RegisterDAO {
         try {
             QueryRunner queryRunner = new QueryRunner();
             for(UploadedFileDTO ud : files){
-                queryRunner.update(conn, "INSERT `bbs_reg_WriterFile` SET id=?, reg_id=?, original_FileName=?, real_FileName=?",
+                queryRunner.update(conn, "INSERT `bbs_reg_writer_file` SET id=?, reg_id=?, original_FileName=?, real_FileName=?",
                         ud.id, reg_id, ud.uploadFile, ud.newFileName);
             }
         } catch (SQLException se) {
@@ -423,7 +423,7 @@ public class RegisterDAO {
         Gson gson = new Gson();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_reg_WriterFile WHERE id=?;", new MapListHandler(),
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_reg_writer_file WHERE id=?;", new MapListHandler(),
                     arr[0]);
             ArrayList<RegWriterFileDTO> lists = gson.fromJson(gson.toJson(listOfMaps),
                     new TypeToken<List<RegWriterFileDTO>>() {
@@ -436,7 +436,7 @@ public class RegisterDAO {
             RegisterDTO reg = lists2.get(0);
             if (!reg.writer_id.equals(arr[1]) && !arr[2].equals("관리자"))
                 return "fail";
-            queryRunner.update(conn, "DELETE FROM bbs_reg_WriterFile WHERE id=?;", arr[0]);
+            queryRunner.update(conn, "DELETE FROM bbs_reg_writer_file WHERE id=?;", arr[0]);
         } catch (SQLException se) {
             se.printStackTrace();
             return "fail";
@@ -455,7 +455,7 @@ public class RegisterDAO {
         try {
             QueryRunner queryRunner = new QueryRunner();
             for (int i = 2; i < arr.length; i++) {
-                listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_reg_answerFile WHERE reg_id=? AND id=?;",
+                listOfMaps = queryRunner.query(conn, "SELECT * FROM bbs_reg_answer_file WHERE reg_id=? AND id=?;",
                         new MapListHandler(), arr[0], arr[i]);
                 ArrayList<RegAnswerFileDTO> lists = gson.fromJson(gson.toJson(listOfMaps),
                         new TypeToken<List<RegAnswerFileDTO>>() {
@@ -464,7 +464,7 @@ public class RegisterDAO {
                     continue;
                 UploadedFileDTO file = FileDAO.getInstance().getFile(arr[i]);
                 queryRunner.update(conn,
-                        "INSERT INTO bbs_reg_answerFile(id, reg_id, original_FileName, real_FileName, writer_id) VALUES(?,?,?,?,?);",
+                        "INSERT INTO bbs_reg_answer_file(id, reg_id, original_FileName, real_FileName, writer_id) VALUES(?,?,?,?,?);",
                         arr[i], arr[0], file.uploadFile, file.newFileName, arr[1]);
             }
             result = true;
@@ -485,13 +485,13 @@ public class RegisterDAO {
         boolean result = false;
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn, "DELETE FROM `bbs_reg_answerFile` WHERE `reg_id`=? AND `writer_id`=?;" ,arr[0], arr[1]);
+            queryRunner.update(conn, "DELETE FROM `bbs_reg_answer_file` WHERE `reg_id`=? AND `writer_id`=?;" ,arr[0], arr[1]);
             for (int i = 2; i < arr.length; i++) {
                 if(arr[1].equals("undefined"))
                     continue;
                 UploadedFileDTO file = FileDAO.getInstance().getFile(arr[i]);
                 queryRunner.update(conn,
-                        "INSERT INTO bbs_reg_answerFile(id, reg_id, original_FileName, real_FileName, writer_id) VALUES(?,?,?,?,?);",
+                        "INSERT INTO bbs_reg_answer_file(id, reg_id, original_FileName, real_FileName, writer_id) VALUES(?,?,?,?,?);",
                         arr[i], arr[0], file.uploadFile, file.newFileName, arr[1]);
             }
             result = true;

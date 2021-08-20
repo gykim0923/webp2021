@@ -368,7 +368,7 @@ CREATE TABLE bbs_reg_answer(
 
 );
 
-CREATE TABLE bbs_reg_answerFile(
+CREATE TABLE bbs_reg_answer_file(
     `id` INT Auto_Increment,
     `reg_id` INT(10) NOT NULL,
     `original_FileName` varchar(300) not null,
@@ -377,7 +377,7 @@ CREATE TABLE bbs_reg_answerFile(
     PRIMARY KEY(`id`)
 );
 
-CREATE TABLE bbs_regQuestion(
+CREATE TABLE bbs_reg_question(
     `id` INT Auto_Increment,
     `reg_id` INT(10) NOT NULL,
     `question_num` int(10) not null,
@@ -386,7 +386,7 @@ CREATE TABLE bbs_regQuestion(
     PRIMARY KEY (`id`)
 );
 
-CREATE TABLE bbs_reg_WriterFile(
+CREATE TABLE bbs_reg_writer_file(
     `id` INT NOT NULL ,
     `reg_id` Int(10) not null,
     `original_FileName` varchar(200) not null,
