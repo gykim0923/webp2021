@@ -1,38 +1,54 @@
----
-name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: ''
-assignees: ''
+부전공관리
+- 취소해도 삭제됨 ---> 완료
+- 이름 중복되도 추가됨 -> db 덮어써짐 ---> 완료
 
----
+메인페이지
+- 날짜 테이블 간격조절 --> 완료
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+본전공관리
+- 추가하기 버튼 디자인 ---> 완료
+- 삭제 alert 바꾸기  ---> 완료
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+메뉴관리
+- 전체공지 삭제 막기 alert으로 ---> 완료
+- 공지 메뉴 추가했을 때 작성한 글이 전체 공지에 안뜸 ---> 완료
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+엑셀관리
+- 버튼 디자인 ---> ?
+- 파일이름 수정하기 ---> 완료
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+infomation
+- 뒤로했을때 저장이 '안됩니다' alert 띄우기 =>완료
+- 수정 버튼 위치 수정 => 완료
+- 이모지 쓰면 오류남 --> 완료
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+공지
+- 테이블 글쓴이 컬럼 크기 늘리기
+- ckEditor 이미지가 절대값으로 적용 --> 완료
+- 댓글 클릭하면 화면이 위로 올라감 =>완료
+- 파일 삭제하겠습니까?에서 취소해도 삭제됨 ---> 완료
+- 파일 미리보기 후 x 안눌림 ---> 완료..?
+- 추천을 하고 다시 들어오면 추천을 했는지 알 수 없음(뷰 문제) -->완료
+- 추천수 띄우기 -->완료
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+신청하기
+- 압축파일 파일 없을때 다운 막기 ---> 완료
+- 압축파일 다운이 안됨....->파일 업로드가 안된듯 ---> 완료
+- 수정 후 알림창 바로 사라짐 ---> 완료
+- ckEditor 이미지가 절대값으로 적용 --> 완료
+- 글 삭제 시 관련 파일 삭제 안됨 ---> 완료
+- 글 삭제 시 리스트 화면으로 돌아가지 않음 ---> 완료
 
-**Additional context**
-Add any other context about the problem here.
+커리큘럼
+- ckEditor 이미지가 절대값으로 적용 --> 완료
+- 버튼 색상 -->완료
+
+마이페이지
+- 가입한지 며칠째인지가 천단위로 나옴  ---> 완료 (확실히 확인하기 위해 12시 넘어서 다시 확인하겠음 -> 확인 완료)
+- 부전공 안뜸 ---> 완료(?)
+
+회원가입
+- 빈칸 입력해도 사용가능 뜸 ---> 완료
+- 디자인 조정 (해상도가 낮아지면 옹졸해짐) ---> 완료
+- 이용약관 체크 안해도 회원가입됨 ---> 완료
+- 이용약과 x안보임 ---> 완료
