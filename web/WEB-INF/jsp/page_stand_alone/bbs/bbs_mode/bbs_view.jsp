@@ -10,6 +10,7 @@
   String getBBS = (String) request.getAttribute("getBBS");
   String getComment = (String) request.getAttribute("getComments");
   String getAllFile = (String) request.getAttribute("bbsFiles");
+  String bbs_type = (String) request.getAttribute("bbs_type");
 %>
 <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <div>
@@ -26,9 +27,8 @@
   <hr>
 
   <c:if test="${bbs_type =='\"free\"' && user.type != null}">
-    <div class="d-flex justify-content-center" id="view_likes">
-      <h1><i class="bi bi-hand-thumbs-up" onclick="liked()"></i></h1>
-    </div>
+    <div class="mt-2 mb-5 h3">추천</div>
+    <div class="d-flex justify-content-center" id="view_likes"></div>
     <hr>
   </c:if>
 
@@ -90,6 +90,7 @@
     makeViewButtons();
     makeViewComments();
     makeDownloads();
+    makeLikeButton();
     // makeCommentButton();
   })
 
@@ -284,12 +285,6 @@
     var modifyUrl = 'bbs.kgu?major='+major+'&&num='+num+'&&mode=modify&&id='+id;
     var text = '';
     text+='<div><a href="'+listUrl+'"><div class="btn btn-secondary">목록</div></a></div>'
-    // if(num == "20" || num == "21" || num == "22" || num == "23"){
-    /**
-     * 작성자 : 본인이 작성한 글 수정 및 삭제
-     * 관리자 : 본인이 작성한 글 수정 및 삭제 + 남이 쓴 글 삭제 기능
-     * 으로 로직을 바꿔야 함.
-     * */
 
     if(user != null){
       if(user.id== getBBS.writer_id){
@@ -305,6 +300,26 @@
       view_buttons.append(text);
     }
 
+  }
+
+  function makeLikeButton(){
+    var bbs_type = <%=bbs_type%>;
+    if(bbs_type=='free'){
+      var view_likes = $('#view_likes');
+      var text = '';
+      var already_like = getBBS.already_like;
+      text+='<button type="button" class="btn border position-relative">'
+      if (already_like.indexOf(user.id) != -1) {
+        text+='<h1><i class="bi bi-hand-thumbs-up-fill"></i></h1>';
+      }
+      else {
+        text+='<h1><i class="bi bi-hand-thumbs-up" onclick="liked()"></i></h1>';
+      }
+      text+='<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">+'
+              +getBBS.likes
+              +'<span class="visually-hidden">unread messages</span></span></button>'
+      view_likes.html(text);
+    }
   }
 
   function liked() {
@@ -324,7 +339,7 @@
       },
       success: function (data) {
         if (data == 'success') {
-          text += '<i class="bi bi-hand-thumbs-up-fill"></i>'
+          text += '<h1><i class="bi bi-hand-thumbs-up-fill"></i></h1>'
           view_likes.html(text)
           swal.fire({
             title: '추천 성공!',
