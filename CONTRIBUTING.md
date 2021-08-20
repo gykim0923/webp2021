@@ -40,6 +40,7 @@ Contributing Rules
 ## Java
 ### Global
 - 모든 클래스의 이름은 대문자로 시작합니다.
+- 모든 메소드는 반드시 소문자로 시작합니다.
 - 메소드가 여러 개인 클래스에서는 singleton 메소드가 반드시 있어야 합니다.
   - 대표적으로 *DAO 클래스에 있는 getInstance 메소드는 싱글톤을 위한 메소드입니다.
     - ```java
