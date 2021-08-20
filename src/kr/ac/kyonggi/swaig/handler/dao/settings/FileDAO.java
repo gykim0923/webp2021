@@ -43,9 +43,9 @@ public class FileDAO {
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.query(conn, "INSERT `uploadedFile` SET user_id=?, uploadFile=?, newFileName=?, upload_time=?, savePath=?, folder=?", new MapListHandler(),
+            queryRunner.query(conn, "INSERT `uploaded_file` SET user_id=?, uploadFile=?, newFileName=?, upload_time=?, savePath=?, folder=?", new MapListHandler(),
                     user_id, uploadFile, newFileName, upload_time, savePath, folder);
-            listOfMaps = queryRunner.query(conn, "SELECT * FROM `uploadedFile` WHERE user_id=? AND newFileName=?", new MapListHandler(),
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM `uploaded_file` WHERE user_id=? AND newFileName=?", new MapListHandler(),
                     user_id, newFileName);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -71,7 +71,7 @@ public class FileDAO {
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            listOfMaps = queryRunner.query(conn, "SELECT * FROM uploadedFile WHERE id=?", new MapListHandler(), id);
+            listOfMaps = queryRunner.query(conn, "SELECT * FROM uploaded_file WHERE id=?", new MapListHandler(), id);
         } catch (SQLException se) {
             se.printStackTrace();
         } finally {
@@ -89,7 +89,7 @@ public class FileDAO {
         Connection conn=Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn, "DELETE FROM uploadedFile WHERE newFileName=?;", newFileName);
+            queryRunner.update(conn, "DELETE FROM uploaded_file WHERE newFileName=?;", newFileName);
         }
         catch (SQLException se) {
             se.printStackTrace();
@@ -103,8 +103,8 @@ public class FileDAO {
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            listOfMaps = queryRunner.query(conn,"SELECT * FROM uploadedFile WHERE folder=? AND uploaded=? ORDER BY id DESC;", new MapListHandler(), folder, "false");
-            queryRunner.update(conn, "UPDATE uploadedFile SET `uploaded`=? WHERE `folder` = ? AND uploaded=?;", "true", folder, "false");
+            listOfMaps = queryRunner.query(conn,"SELECT * FROM uploaded_file WHERE folder=? AND uploaded=? ORDER BY id DESC;", new MapListHandler(), folder, "false");
+            queryRunner.update(conn, "UPDATE uploaded_file SET `uploaded`=? WHERE `folder` = ? AND uploaded=?;", "true", folder, "false");
 //            System.out.println(listOfMaps);
         } catch(SQLException se) {
             se.printStackTrace();
@@ -121,7 +121,7 @@ public class FileDAO {
         Connection conn = Config.getInstance().sqlLogin();
         try {
             QueryRunner queryRunner = new QueryRunner();
-            queryRunner.update(conn, "DELETE FROM uploadedFile WHERE folder=? AND uploaded=?", data, "false");
+            queryRunner.update(conn, "DELETE FROM uploaded_file WHERE folder=? AND uploaded=?", data, "false");
         } catch (SQLException se) {
             se.printStackTrace();
             return "fail";

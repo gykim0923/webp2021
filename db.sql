@@ -157,7 +157,7 @@ CREATE TABLE schedule(
 	   PRIMARY KEY (`id`)
 );
 
-CREATE TABLE uploadedfile(
+CREATE TABLE uploaded_file(
 	  `id` INT(10) NOT NULL AUTO_INCREMENT,
 	  `user_id` VARCHAR(100) NOT NULL,
 	  `uploadFile` VARCHAR(100) NOT NULL,
