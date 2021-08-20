@@ -14,20 +14,20 @@
 %>
 <script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 <div>
-  <div class="h2" id="view_title"></div>
+  <div class="h2 px-2" id="view_title"></div>
   <hr>
     <div class="row">
-      <div class="col" id="view_writer"></div>
+      <div class="col ps-4" id="view_writer"></div>
       <div class="col-auto" id="view_count"><span>조회수:</span></div>
-      <div class="col-auto" id="view_lastModified"><span>작성일:</span></div>
+      <div class="col-auto pe-4" id="view_lastModified"><span>작성일:</span></div>
     </div>
   <hr>
-  <div id="view_download"></div>
-  <div id="view_content"></div>
+  <div class="px-2" id="view_download"></div>
+  <div class="" id="view_content"></div>
   <hr>
 
   <c:if test="${bbs_type =='\"free\"' && user.type != null}">
-    <div class="mt-2 mb-5 h3">추천</div>
+    <div class="px-2 mt-2 mb-5 h3">추천</div>
     <div class="d-flex justify-content-center" id="view_likes"></div>
     <hr>
   </c:if>
@@ -35,14 +35,14 @@
 <%--    댓글리스트--%>
     <div>
       <div class="list-group" id="comments">
-        <div class="mt-2 mb-5 h3">댓글</div>
+        <div class="px-2 mt-2 mb-5 h3">댓글</div>
       </div>
     </div>
 
 <%--  댓글 입력 창--%>
   <c:if test="${user != null}">
     <hr>
-    <div class="my-2">댓글 쓰기</div>
+    <div class="px-2 my-2">댓글 쓰기</div>
     <div class="input-group mb-3">
     <input type="text" class="form-control" id="commentInput" placeholder="comment" aria-label="comment" aria-describedby="button-addon2">
     <div class="input-group-append">
