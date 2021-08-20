@@ -295,13 +295,13 @@
                 var url30 = '';
                 url30 = 'reg.kgu?major=main&num=30&mode=view&id=' + registerAllInfo[i].id;
                 if (type.for_header=='기타'){
-                    text30 += '<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+                    text30 += '<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between">'
                         + '<span class="index_post_link">' + registerAllInfo[i].title + '</span>'
                         + '<span class="index_post_time">' + formatDate(registerAllInfo[i].last_modified) + '</span>'
                         + '</li>';
                 }
                 else {
-                    text30 += '<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+                    text30 += '<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between">'
                         + '<a href="' + url30 + '"><span class="index_post_link">' + registerAllInfo[i].title + '</span></a>'
                         + '<a href="' + url30 + '"><span class="index_post_time">' + formatDate(registerAllInfo[i].last_modified) + '</span></a>'
                         + '</li>';                }
@@ -317,7 +317,7 @@
                     break;
                 }
                 var url31 = 'bbs.kgu?major=main&num=31&mode=view&id=' + bbs31[i].id;
-                text31 += '<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+                text31 += '<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between">'
                     + '<a href="' + url31 + '"><span class="index_post_link">' + bbs31[i].title + '</span></a>'
                     + '<a href="' + url31 + '"><span class="index_post_time">' + formatDate(bbs31[i].last_modified) + '</span></a>'
                     + '</li>';
@@ -359,7 +359,7 @@
                     break;
                 }
                 var url21 = 'bbs.kgu?major=main&num=21&mode=view&id=' + bbs21[i].id;
-                text21 += '<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+                text21 += '<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between">'
                     + '<a href="' + url21 + '"><span class="index_post_link">' + bbs21[i].title + '</span></a>'
                     + '<a href="' + url21 + '"><span class="index_post_time">' + formatDate(bbs21[i].last_modified) + '</span></a>'
                     + '</li>';
@@ -377,7 +377,7 @@
                     break;
                 }
                 var url22 = 'bbs.kgu?major=main&num=22&mode=view&id=' + bbs22[i].id;
-                text22 += '<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+                text22 += '<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between">'
                     + '<a href="' + url22 + '"><span class="index_post_link">' + bbs22[i].title + '</span></a>'
                     + '<a href="' + url22 + '"><span class="index_post_time">' + formatDate(bbs22[i].last_modified) + '</span></a>'
                     + '</li>';
@@ -394,7 +394,7 @@
                     break;
                 }
                 var url23 = 'bbs.kgu?major=main&num=23&mode=view&id=' + bbs23[i].id;
-                text23 += '<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center">'
+                text23 += '<li class="py-2 px-0 border-0 list-group-item list-group-item-action d-flex justify-content-between">'
                     + '<a href="' + url23 + '"><span class="index_post_link">' + bbs23[i].title + '</span></a>'
                     + '<a href="' + url23 + '"><span class="index_post_time">' + formatDate(bbs23[i].last_modified) + '</span></a>'
                     + '</li>';
