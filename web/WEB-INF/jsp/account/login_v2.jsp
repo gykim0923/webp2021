@@ -98,6 +98,12 @@
 </html>
 
 <script>
+    //뒤로가기로 로그인 페이지 접근할 수 없도록 막음
+    window.history.forward();
+    function noBack() {
+        window.history.forward();
+    }
+
     $(document).ready(function () {
         makeMajorTitle();
     })

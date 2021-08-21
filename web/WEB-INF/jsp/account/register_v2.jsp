@@ -218,6 +218,11 @@
 </body>
 </html>
 <script>
+    //뒤로가기로 회원가입 페이지 접근할 수 없도록 막음
+    window.history.forward();
+    function noBack() {
+        window.history.forward();
+    }
 
     $(document).ready(function(){
         makeTypeList();
