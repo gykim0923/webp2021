@@ -3,6 +3,9 @@ package kr.ac.kyonggi.swaig.handler.action.main.register;
 import com.google.gson.Gson;
 import kr.ac.kyonggi.swaig.common.controller.CustomAction;
 import kr.ac.kyonggi.swaig.handler.dao.settings.RegisterDAO;
+import kr.ac.kyonggi.swaig.handler.dto.settings.RegisterDTO;
+import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
+import kr.ac.kyonggi.swaig.handler.dto.user.UserTypeDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,7 +62,21 @@ public class RegisterAction extends CustomAction {
 //            System.out.println(RegisterDAO.getInstance().getRegisterList());
         }
         else { //리스트를 제외한 모든 모드에서는 게시글 1개를 가지고 작업하기 때문에 다음과 같이 게시글 1개만 불러주는 작업을 한다.
+            UserTypeDTO type = gson.fromJson((String)request.getSession().getAttribute("type"), UserTypeDTO.class);
+            UserDTO user = gson.fromJson((String)request.getSession().getAttribute("user"), UserDTO.class);
+            if(mode.equals("write") || mode.equals("modify")){
+                if (!(type.for_header.equals("교수") || type.for_header.equals("관리자"))){
+                    request.setAttribute("error", "접근 권한이 없습니다.");
+                    return "RequestDispatcher:jsp/main/error.jsp";
+                }
+            }
             String id = request.getParameter("id"); //게시글 고유 번호
+            RegisterDAO dao = RegisterDAO.getInstance();
+            RegisterDTO checkReg = dao.getReg(id);
+            if(mode.equals("modify") && !checkReg.writer_id.equals(user.id)){
+                request.setAttribute("error", "접근 권한이 없습니다.");
+                return "RequestDispatcher:jsp/main/error.jsp";
+            }
             request.setAttribute("id", id); //다시 JSP로 보내줌 (재활용을 위해), 게시글 아이디
             request.setAttribute("getReg", gson.toJson(RegisterDAO.getInstance().getReg(id)));
             request.setAttribute("regFiles", gson.toJson(RegisterDAO.getInstance().getRegFiles(id)));
