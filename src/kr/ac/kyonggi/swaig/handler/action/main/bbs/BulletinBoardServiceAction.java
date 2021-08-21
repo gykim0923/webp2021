@@ -6,6 +6,10 @@ import kr.ac.kyonggi.swaig.handler.dao.settings.BBSDAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.HomeDAO;
 import kr.ac.kyonggi.swaig.handler.dao.settings.RegisterDAO;
 import kr.ac.kyonggi.swaig.handler.dao.user.UserDAO;
+import kr.ac.kyonggi.swaig.handler.dto.settings.BBSDTO;
+import kr.ac.kyonggi.swaig.handler.dto.settings.RegisterDTO;
+import kr.ac.kyonggi.swaig.handler.dto.user.UserDTO;
+import kr.ac.kyonggi.swaig.handler.dto.user.UserTypeDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -80,7 +84,27 @@ public class BulletinBoardServiceAction extends CustomAction {
             }
         }
         else { //리스트를 제외한 모든 모드에서는 게시글 1개를 가지고 작업하기 때문에 다음과 같이 게시글 1개만 불러주는 작업을 한다.
+            UserTypeDTO type = gson.fromJson((String)request.getSession().getAttribute("type"), UserTypeDTO.class);
+            UserDTO user = gson.fromJson((String)request.getSession().getAttribute("user"), UserDTO.class);
             String id = request.getParameter("id"); //게시글 고유 번호
+
+            if(mode.equals("write") || mode.equals("modify")){
+                if (type.for_header.equals("기타")){
+                    request.setAttribute("error", "접근 권한이 없습니다.");
+                    return "RequestDispatcher:jsp/main/error.jsp";
+                }
+                else if (!num.equals("54") && type.for_header.equals("학생")){
+                    request.setAttribute("error", "접근 권한이 없습니다.");
+                    return "RequestDispatcher:jsp/main/error.jsp";
+                }
+            }
+
+            BBSDAO dao = BBSDAO.getInstance();
+            BBSDTO checkBBS = dao.getBBS(id);
+            if(mode.equals("modify") && !checkBBS.writer_id.equals(user.id)){
+                request.setAttribute("error", "접근 권한이 없습니다.");
+                return "RequestDispatcher:jsp/main/error.jsp";
+            }
 
             //조회수 기능 시작
             /**
