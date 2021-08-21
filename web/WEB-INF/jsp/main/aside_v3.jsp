@@ -69,7 +69,7 @@
                     // text += '<ul class="submenu active" style="display: block;">'
                     text += '<ul class="submenu active" style="display: block;">'
                         + '<li class="submenu-item ">'
-                        + '<a href="' + menuPageList[j].page_path + '?major=main&&num=' + menuPageList[j].page_id + '">' + menuPageList[j].page_title + '</a>'
+                        + '<a href="' + menuPageList[j].page_path + '?major=main&num=' + menuPageList[j].page_id + '">' + menuPageList[j].page_title + '</a>'
                         + '</li>'
                         + '</ul>';
                 }
@@ -92,7 +92,7 @@
                 // +'<div class="collapse" id="collapseExample'+i+'" style="display: none;">';
                 + '<div class="collapse" id="collapseExample' + i + '">';
             for (var j = tab5start; j < tab5end; j++) {
-                var url = menuPageList[j].page_path + '?major=' + majorAllInfo[i].major_id + '&&num=' + menuPageList[j].page_id;
+                var url = menuPageList[j].page_path + '?major=' + majorAllInfo[i].major_id + '&num=' + menuPageList[j].page_id;
                 text += '<div class="ms-3"><a href="' + url + '">○ ' + menuPageList[j].page_title + '</a></div>';
             }
             text += '</div>'

@@ -101,7 +101,7 @@
                 +'';
             for(var j=0; j<menuPageList.length; j++){
                 if(menuTabList[i].tab_id==menuPageList[j].tab_id){
-                    text+='<li><a href="'+menuPageList[j].page_path+'?major=main&&num='+menuPageList[j].page_id+'" class="text-dark">'+menuPageList[j].page_title+'</a></li>'
+                    text+='<li><a href="'+menuPageList[j].page_path+'?major=main&num='+menuPageList[j].page_id+'" class="text-dark">'+menuPageList[j].page_title+'</a></li>'
                 }
             }
             text+='</ul></div>';
@@ -139,7 +139,7 @@
         var text='';
         for (var j=0; j<menuPageList.length; j++){
             if (menuPageList[j].tab_id==5){
-                var url = menuPageList[j].page_path+'?major='+major.major_id+'&&num='+menuPageList[j].page_id;
+                var url = menuPageList[j].page_path+'?major='+major.major_id+'&num='+menuPageList[j].page_id;
                 text += '<li><a href="'+url+'">'+menuPageList[j].page_title+'</a></li>';
             }
         }
@@ -167,7 +167,7 @@
                 text +='<a href="admin.kgu?num=70" class="text-white"> 관리페이지 </a> '
             }
             else{
-                text +=' <a href="mypage.kgu?major='+major+'&&num=60" class="text-white">마이페이지</a> ';
+                text +=' <a href="mypage.kgu?major='+major+'&num=60" class="text-white">마이페이지</a> ';
             }
             text +='<a href="#" onclick="signOut();" class="text-white" >LOGOUT(with Google)</a>';
         }

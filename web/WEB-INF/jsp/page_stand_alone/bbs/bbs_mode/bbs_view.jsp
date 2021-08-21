@@ -16,10 +16,10 @@
 <div>
   <div class="h2 px-2" id="view_title"></div>
   <hr>
-    <div class="row">
-      <div class="col ps-4" id="view_writer"></div>
-      <div class="col-auto" id="view_count"><span>조회수:</span></div>
-      <div class="col-auto pe-4" id="view_lastModified"><span>작성일:</span></div>
+    <div class="row px-md-2">
+      <div class="col-md" id="view_writer"></div>
+      <div class="col-md-auto" id="view_count"></div>
+      <div class="col-md-auto" id="view_lastModified"></div>
     </div>
   <hr>
   <div class="px-2" id="view_download"></div>
@@ -44,7 +44,7 @@
     <hr>
     <div class="px-2 my-2">댓글 쓰기</div>
     <div class="input-group mb-3">
-    <input type="text" class="form-control" id="commentInput" placeholder="comment" aria-label="comment" aria-describedby="button-addon2">
+    <input type="text" class="form-control" id="commentInput" placeholder="댓글은 최대 200자 까지 작성 가능합니다." aria-label="comment" aria-describedby="button-addon2">
     <div class="input-group-append">
     <button class="btn btn-outline-secondary" type="button" id="commentButton" onClick="insertComment()"> 쓰기 </button>
     </div></div>
@@ -154,7 +154,7 @@
   var id = <%=id%>;
   var type = <%=type%>;
   var user = <%=user%>;
-
+  var getBBS = <%=getBBS%>;
 
   function formatDate(date) {  //주어진 날짜를 yyyy-mm-dd 형식으로 반환해주는 함수
     var d = new Date(date),
@@ -187,7 +187,7 @@
       })
   }
 
-  var getBBS = <%=getBBS%>;
+
   function makeViewTitle() {
     var content = $('#view_title');
     content.append(getBBS.title);
@@ -196,19 +196,18 @@
     var content = $('#view_content');
     content.append(getBBS.text);
   }
-
   function makeViewWriter(){
     var content = $('#view_writer');
-    content.append(getBBS.writer_name);
+    content.append('<span>작성자 : '+getBBS.writer_name+'</span>');
   }
   function makeViewCount(){
     var content = $('#view_count');
-     content.append(getBBS.views);
+     content.append('<span>조회수 : '+getBBS.views+'</span>');
   }
   function makeViewLastModified(){
     var content = $('#view_lastModified');
     var date = formatDate(getBBS.last_modified);
-    content.append(date);
+    content.append('<span>작성일 : '+date+'</span>');
   }
 
   function deleteComment(i){
@@ -309,7 +308,7 @@
       var text = '';
       var already_like = getBBS.already_like;
       text+='<button type="button" class="btn border position-relative">'
-      if (already_like.indexOf(user.id) != -1) {
+      if (user==null || already_like.indexOf(user.id) != -1) {
         text+='<h1><i class="bi bi-hand-thumbs-up-fill"></i></h1>';
       }
       else {

@@ -18,7 +18,7 @@
 <div>
     <div class="h2 px-2" id="view_title"></div>
     <hr>
-    <div class="row" id="view_info"></div>
+    <div class="row px-md-2" id="view_info"></div>
     <hr>
     <div class="px-2" id="post_box"></div>
     <div id="view_content"></div>
@@ -90,7 +90,7 @@
     }
     function makeViewInfo(){
         var content = $('#view_info');
-        content.append('<div class="col ps-4">'+getReg.writer_name+'</div><div class="col-md-auto">참여자 수 : '+getReg.applicant_count+'</div><div class="col-md-auto pe-4">참여기간 : '+formatDate(getReg.starting_date)+'~'+formatDate(getReg.closing_date)+'</div>');
+        content.append('<div class="col-md">작성자 : '+getReg.writer_name+'</div><div class="col-md-auto">참여자 수 : '+getReg.applicant_count+'</div><div class="col-md-auto">참여기간 : '+formatDate(getReg.starting_date)+'~'+formatDate(getReg.closing_date)+'</div>');
     }
     function makeViewContent() {
         var content = $('#view_content');

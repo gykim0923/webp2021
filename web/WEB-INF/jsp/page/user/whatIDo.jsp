@@ -13,26 +13,24 @@
     String likeNotes = (String) request.getAttribute("likeNotes");
 %>
 <div>
-    <ul>
-        <li id="maintext" style="margin-bottom: 5px;">
-            <div id="maintitle" class="contenttitle"><label><h2><strong>활동 내역</strong></h2></label></div>
-            <ul id="text1">
-            </ul>
-        </li>
-    </ul><hr>
+    <div id="maintext" style="margin-bottom: 5px;">
+        <div id="maintitle" class="contenttitle"><label><h2><strong>활동 내역</strong></h2></label></div>
+        <div id="text1"></div>
+    </div>
+    <hr>
     <div class="whatIdo">
-        <div class="container">
+        <div class="">
             <%--           작성글--%>
-            <%@include file="/WEB-INF/jsp/page/user/whatIDo/writed.jsp"%>
+            <%@include file="/WEB-INF/jsp/page/user/whatIDo/writed.jsp" %>
             <hr>
-                <%--           추천한 글--%>
-                <%@include file="/WEB-INF/jsp/page/user/whatIDo/like.jsp"%>
-                <hr>
+            <%--           추천한 글--%>
+            <%@include file="/WEB-INF/jsp/page/user/whatIDo/like.jsp" %>
+            <hr>
             <%--                작성 댓글 --%>
-                <%@include file="/WEB-INF/jsp/page/user/whatIDo/writed_comment.jsp"%>
+            <%@include file="/WEB-INF/jsp/page/user/whatIDo/writed_comment.jsp" %>
             <hr>
             <%--                신청 내역--%>
-                <%@include file="/WEB-INF/jsp/page/user/whatIDo/apply.jsp"%>
+            <%@include file="/WEB-INF/jsp/page/user/whatIDo/apply.jsp" %>
             <hr>
         </div>
     </div>

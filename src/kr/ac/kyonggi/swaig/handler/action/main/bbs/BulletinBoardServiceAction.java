@@ -81,7 +81,8 @@ public class BulletinBoardServiceAction extends CustomAction {
         }
         else { //리스트를 제외한 모든 모드에서는 게시글 1개를 가지고 작업하기 때문에 다음과 같이 게시글 1개만 불러주는 작업을 한다.
             String id = request.getParameter("id"); //게시글 고유 번호
-//조회수 기능 시작
+
+            //조회수 기능 시작
             /**
              * 게시글 확인 시 조회수 작업을 해줘야 하는데, 조회수는 세션당 1회 증가하도록 검사한다.
              * */

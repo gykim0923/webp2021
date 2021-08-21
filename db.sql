@@ -128,7 +128,8 @@ CREATE TABLE text(
     `content` TEXT NOT NULL,
     PRIMARY KEY(`id`,`major`)
 );
- 
+INSERT INTO text(id, major, content) VALUE('10','main','관리자 모드에서 내용을 수정해주세요.');
+
 CREATE TABLE professor(
     `id` int(50) NOT NULL AUTO_INCREMENT,
     `prof_major` VARCHAR(100) NOT NULL,
