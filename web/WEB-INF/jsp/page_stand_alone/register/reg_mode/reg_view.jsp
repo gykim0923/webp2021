@@ -248,7 +248,7 @@
                     fileOriginalName += '_'+filename[j];
                 var text = '<div class="mx-3">';
                 if (done.answer.length != 0){
-                    text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>' + (i + 1) + '.' + it.question_content + '</label><div class="input-group mb-3" id="fileUploadSection'+i+'"><input type="text" class="form-control" value="'+fileOriginalName+'" readonly><a class="btn btn-secondary" href="download.kgu?id='+filename[0]+'&&path=/uploaded/bbs_reg/reg'+getReg.id+'/Q'+it.question_num+'"><i class="bi bi-download"></i> 다운로드</a></div></div>';
+                    text += '<div class="form-group" id="question' + i + 'who' + index + '"><label>' + (i + 1) + '.' + it.question_content + '</label><div class="input-group mb-3" id="fileUploadSection'+i+'"><input type="text" class="form-control" value="'+fileOriginalName+'" readonly><a class="btn btn-secondary" href="download.kgu?id='+filename[0]+'&path=/uploaded/bbs_reg/reg'+getReg.id+'/Q'+it.question_num+'"><i class="bi bi-download"></i> 다운로드</a></div></div>';
                     isFileExist = true;
                 }
                 else
@@ -291,7 +291,7 @@
                         var fileOriginalName = filename[2];
                         for (var k = 3; k < filename.length; k++)
                             fileOriginalName += '_' + filename[k];
-                        $('<td></td>').html('<a href="download.kgu?id=' + filename[0] + '&&path='+url+'">' + fileOriginalName + '</a>').appendTo(oneTr);
+                        $('<td></td>').html('<a href="download.kgu?id=' + filename[0] + '&path='+url+'">' + fileOriginalName + '</a>').appendTo(oneTr);
                     } else
                         $('<td></td>').html('<span style="font-size : 14px; color : red">미제출<span>').appendTo(oneTr);
                 } else if (questions[j].question_type == 3) {
@@ -430,7 +430,7 @@
                     file_path=folder+'/'+fileLog[1];
                     var a='';
                     a+='<span class="input-group-text">파일제출</span><input type="text" class="form-control" id="answer'+i+'" value="'+fileLog[1]+'" readonly><input id="fileId'+i+'" value="'+fileLog[0]+'" hidden>';
-                    a+='<div><a href="download.kgu?id='+file_id+'&&path='+file_folder+'" type="button" target="_blank"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드</button></a>'
+                    a+='<div><a href="download.kgu?id='+file_id+'&path='+file_folder+'" type="button" target="_blank"><button class="btn btn-secondary"><i class="bi bi-download"></i> 다운로드</button></a>'
                     a+='<button class="btn btn-danger" type="button" onclick="modifyAnswerFile('+i+')"><i class="bi bi-x-circle-fill"></i>첨부파일 수정하기</button></div>';
                     $('#fileUploadSection'+i+'').html(a);
                 }
@@ -440,7 +440,7 @@
 
     function modifyAnswerFile(i){
         $.ajax({
-            url : 'delete.kgu?fileId='+file_id+'&&folder='+file_folder,
+            url : 'delete.kgu?fileId='+file_id+'&folder='+file_folder,
             type : 'post',
             success : function(data){//데이터는 주소
                 $('#fileUploadSection'+i+'').html('<input type="file" class="form-control" name="answer' + i + '" id="answer' + i + '"><button class="btn btn-outline-secondary" type="button" onclick="uploadAnswerFile('+i+')">Upload</button>');
@@ -456,7 +456,7 @@
                 icon : 'warning',
                 showConfirmButton: true
             }).then(function (){
-                location.href = 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list';
+                location.href = 'reg.kgu?major=' + major + '&num=' + num + '&mode=list';
             });
         }
         var Answer = '';
@@ -541,7 +541,7 @@
                                     showConfirmButton: true
                                 }).then(function (){
                                     if(getReg.for_who == 1)
-                                        window.location.href= 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=view&&id=' + getReg.id;
+                                        window.location.href= 'reg.kgu?major=' + major + '&num=' + num + '&mode=view&id=' + getReg.id;
                                     wasDone = 1;
                                     check();
                                     whatIDone();
@@ -751,7 +751,7 @@
                                     showConfirmButton: true
                                 }).then(function (){
                                     if(getReg.for_who == 1)
-                                        window.location.href= 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=view&&id=' + getReg.id;
+                                        window.location.href= 'reg.kgu?major=' + major + '&num=' + num + '&mode=view&id=' + getReg.id;
                                     wasDone = 1;
                                     check();
                                     whatIDone();
@@ -845,8 +845,8 @@
 
     function makeViewButtons() {
         var list_button = $('#list_button');
-        var listUrl = 'reg.kgu?major='+major+'&&num='+num+'&&mode=list';
-        var modifyUrl = 'reg.kgu?major='+major+'&&num='+num+'&&mode=modify&&id='+id;
+        var listUrl = 'reg.kgu?major='+major+'&num='+num+'&mode=list';
+        var modifyUrl = 'reg.kgu?major='+major+'&num='+num+'&mode=modify&id='+id;
         /**
          * 작성자 : 본인이 작성한 글 수정 및 삭제 / 엑셀 다운
          * 관리자 : 본인이 작성한 글 수정 및 삭제 + 남이 쓴 글 삭제 기능 / 엑셀, 압축파일 다운
@@ -897,7 +897,7 @@
                                 icon: 'success',
                                 showConfirmButton: true
                             }).then(function (){
-                                location.href = 'reg.kgu?major=' + major + '&&num=' + num + '&&mode=list'
+                                location.href = 'reg.kgu?major=' + major + '&num=' + num + '&mode=list'
                             })
                         } else {
                             swal.fire({
@@ -922,7 +922,7 @@
             var it = getAllFile[i];
             if(user != null){
                 if(getReg.level.includes(type.for_header) || type.for_header == '관리자' || user.id == getReg.writer_id)
-                    a += '<a href="download.kgu?id='+it.id+'&&path=/uploaded/bbs_reg">' + it.original_FileName + '</a>&emsp;&nbsp;';
+                    a += '<a href="download.kgu?id='+it.id+'&path=/uploaded/bbs_reg">' + it.original_FileName + '</a>&emsp;&nbsp;';
                 else
                     a  += '<span>'+it.original_FileName + '&emsp;&nbsp;</span>';
             }

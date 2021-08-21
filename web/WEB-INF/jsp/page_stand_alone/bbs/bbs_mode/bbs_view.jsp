@@ -143,7 +143,7 @@
       if(type.for_header == '기타')
         a  += '<span>'+it.original_FileName + '&nbsp&nbsp </span>';
       else
-        a += '<a href="download.kgu?id='+it.id+'&&path=/uploaded/bbs">' + it.original_FileName + '</a>&emsp;&nbsp;';
+        a += '<a href="download.kgu?id='+it.id+'&path=/uploaded/bbs">' + it.original_FileName + '</a>&emsp;&nbsp;';
     }
     a += '</div><hr>'
     view_download.append(a);
@@ -280,8 +280,8 @@
 
   function makeViewButtons() {
     var view_buttons = $('#view_buttons');
-    var listUrl = 'bbs.kgu?major='+major+'&&num='+num+'&&mode=list';
-    var modifyUrl = 'bbs.kgu?major='+major+'&&num='+num+'&&mode=modify&&id='+id;
+    var listUrl = 'bbs.kgu?major='+major+'&num='+num+'&mode=list';
+    var modifyUrl = 'bbs.kgu?major='+major+'&num='+num+'&mode=modify&id='+id;
     var text = '';
     text+='<div><a href="'+listUrl+'"><div class="btn btn-secondary">목록</div></a></div>'
 
@@ -403,7 +403,7 @@
                 showConfirmButton: true
 
               }).then(function (){
-                location.href = 'bbs.kgu?major=' + major + '&&num=' + num + '&&mode=list';
+                location.href = 'bbs.kgu?major=' + major + '&num=' + num + '&mode=list';
               });
             } else {
               swal.fire({
