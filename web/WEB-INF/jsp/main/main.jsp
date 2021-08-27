@@ -77,10 +77,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>주의!</strong> 아직 개발 중인 홈페이지입니다.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+<%--                    <div class="alert alert-warning alert-dismissible fade show" role="alert">--%>
+<%--                        <strong>주의!</strong> 아직 개발 중인 홈페이지입니다.--%>
+<%--                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>--%>
+<%--                    </div>--%>
                     <div class="row align-items-md-stretch">
                         <%--                            left side start--%>
                         <div class="col-xxl-9" id="main1_left">
