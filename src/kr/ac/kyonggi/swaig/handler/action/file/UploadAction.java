@@ -105,6 +105,8 @@ public class UploadAction implements Action {
              * */
 
             newFileName = simDf.format(new Date(currentTime)) + "_" + uploadFile;
+            newFileName=newFileName.replace(" ", "_");
+
             // 업로드된 파일 객체 생성
             File oldFile = new File(savePath, uploadFile);
 
